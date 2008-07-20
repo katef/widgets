@@ -3,6 +3,7 @@
 body {
 	background-color: white;
 	font-family: bitstream vera sans, verdana;
+	line-height: 150%;
 }
 
 pre, code {
@@ -19,5 +20,15 @@ hr {
 	border: none;
 	height: 1px;
 	background-color: #eee;
+	margin-top: 4em;
+}
+
+ul li {
+	list-style-type: none;
+}
+
+h1 {
+	font-weight: normal;
+	margin: 2ex 0 3ex 0;
 }
 
