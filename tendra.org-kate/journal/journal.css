@@ -10,18 +10,25 @@ span.date {
 }
 
 div.entry {
-	margin-left: 8em;
-	margin-right: 20em;
+	margin: 0 15em 1.5em 8em;
 }
 
-table.cal {
+div.cal {
 	float: right;
 	position: relative;
 	top: -1em;
 }
 
-table.cal th,
-table.cal td {
+div.cal table {
+	margin: 0;
+}
+
+div.cal table th,
+div.cal table td {
 	text-align: center;
+}
+
+div.cal hr {
+	margin-top: 0;
 }
 
