@@ -1,0 +1,27 @@
+/* $Id$ */
+
+span.date {
+	color: #aaa;
+
+	display: block;
+	width: 7em;
+	float: left;
+	text-align: right;
+}
+
+div.entry {
+	margin-left: 8em;
+	margin-right: 20em;
+}
+
+table.cal {
+	float: right;
+	position: relative;
+	top: -1em;
+}
+
+table.cal th,
+table.cal td {
+	text-align: center;
+}
+
