@@ -1,0 +1,7 @@
+/* $Id$ */
+
+table td:first-child {
+	padding-right: 2em;
+	text-align: right;
+}
+

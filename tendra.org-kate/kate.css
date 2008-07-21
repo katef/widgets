@@ -4,6 +4,7 @@ body {
 	background-color: white;
 	font-family: bitstream vera sans, verdana;
 	line-height: 150%;
+	margin: 3em 5em 5em 2em;
 }
 
 pre, code {
@@ -21,6 +22,7 @@ hr {
 	height: 1px;
 	background-color: #eee;
 	margin-top: 4em;
+	clear: both;
 }
 
 ul li {
@@ -30,5 +32,13 @@ ul li {
 h1 {
 	font-weight: normal;
 	margin: 2ex 0 3ex 0;
+}
+
+h2 {
+	font-weight: normal;
+}
+
+table {
+	margin: 1em;
 }
 
