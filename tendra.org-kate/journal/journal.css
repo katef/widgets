@@ -17,6 +17,7 @@ div.cal {
 	float: right;
 	position: relative;
 	top: -1em;
+	width: 12em;
 }
 
 div.cal table {
@@ -30,5 +31,10 @@ div.cal table td {
 
 div.cal hr {
 	margin-top: 0;
+}
+
+div.prose p {
+	text-indent: 2em;
+	margin: 0;
 }
 

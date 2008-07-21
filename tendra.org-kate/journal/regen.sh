@@ -32,13 +32,15 @@ contents() {
 
 entry() {
 	dir=` echo $1 | cut -d/ -f 2-5 | sed 's/.html$//'`
+	m=` echo $1 | cut -d/ -f 3`
+	y=` echo $1 | cut -d/ -f 2`
 	file="$dir/index.sxhtml"
 
 	mkdir -p "$dir"
 
 	echo '<!--#include virtual="../../../../entry.inc" -->' > "$file"
-	echo '<!--#include virtual="../../../../cal.inc" -->' >> "$file"
 
+	gencal "$file" $y $m
 	contents "$file" "$1"
 
 	echo '<!--#include virtual="../../../../footer.inc" -->' >> "$file"
@@ -52,6 +54,7 @@ year() {
 
 	echo '<!--#include virtual="../year.inc" -->' > "$file"
 
+	gencal "$file" $y
 	iterate 20 "src/$dir/??/??/*.html" "$file"
 
 	echo '<!--#include virtual="../footer.inc" -->' >> "$file"
@@ -72,35 +75,68 @@ gettoplist() {
 # $2 - glob
 # $3 - file
 iterate() {
+	x="$IFS"
 	IFS='|'
 	for i in `gettoplist $1 "$2" \
 		| tr '\n' '|'`; do
 		contents "$3" "$i"
 	done
+	IFS="$x"
 }
 
-date_year=`date +%Y`
-date_mon=`date +%B`
-date_day="`date +%e`"
+mostrecent() {
+	file=index.sxhtml
+	y=`date +%Y`
+	m=`date +%m`
 
-# Calendar
-echo '<div class="cal">' > cal.inc
-echo '<table>' >> cal.inc
-echo "<tr><th>&lt;</th><th colspan='5'>$date_mon</th><th>&gt;</th></tr>" >> cal.inc
-cal \
-	| grep -v $date_year \
-	| sed -E 's,(..)( |$),<td>\1</td>,g; s,$,</td></tr>,; s,^,<tr>,' \
-	| sed -E "s,$date_day,<em>&</em>," \
-	>> cal.inc
-echo '</table>' >> cal.inc
-echo '<hr/>' >> cal.inc
+	echo '<!--#include virtual="recent.inc" -->' > "$file"
 
-for i in `ls -1d src/???? | cut -f 2 -d / | sort -n`; do
-	yy=`echo $i | cut -c 3-`
-	echo "<a href=\"$i\">&rsquo;$yy</a> " >> cal.inc
-done
+	gencal "$file" $y $m
+	iterate 20 'src/????/??/??/*.html' "$file"
 
-echo '</div>' >> cal.inc
+	echo '<!--#include virtual="footer.inc" -->' >> "$file"
+}
+
+# $1 - file
+# $2 - year
+# $3 - month (optional)
+gencal() {
+	y=`date +%y`
+
+	echo '<div class="cal">' >> "$1"
+
+	if [ ! -z $3 ]; then
+		# XXX: month name should come from $3
+		mn=`date +%B`
+		yy=`echo $2 | cut -c 3-`
+
+		echo '<table>' >> "$1"
+		echo "<tr><th>&lt;</th><th colspan='5'>$mn &rsquo;$yy</th><th>&gt;</th></tr>" >> "$1"
+
+		caltxt="`cal $3 $2 \
+			| grep -v $y \
+			| sed -E 's,(..)( |$),<td>\1</td>,g; s,$,</td></tr>,; s,^,<tr>,'`"
+
+		if [ $2 -eq `date +%m` -a $3 -eq `date +%y` ]; then
+			d=`date +%d`
+			caltxt="`echo $caltxt | sed -E 's,$d,<em>&</em>,'`"
+		fi
+
+		echo $caltxt >> "$1"
+
+		echo '</table>' >> "$1"
+		echo '<hr/>' >> "$1"
+
+	fi
+
+	# Year list
+	for i in `ls -1d src/???? | cut -f 2 -d / | sort -n`; do
+		yy=`echo $i | cut -c 3-`
+		echo "<a href=\"$i\">&rsquo;$yy</a> " >> "$1"
+	done
+
+	echo '</div>' >> "$1"
+}
 
 # Single entries
 for i in src/????/??/??/*.html; do
@@ -112,14 +148,6 @@ for i in src/????/??/??/*.html; do
 	year "$i"
 done
 
-
 # Most recent
-file=index.sxhtml
-
-echo '<!--#include virtual="recent.inc" -->' > "$file"
-echo '<!--#include virtual="cal.inc" -->' >> "$file"
-
-iterate 20 'src/????/??/??/*.html' "$file"
-
-echo '<!--#include virtual="footer.inc" -->' >> "$file"
+mostrecent
 
