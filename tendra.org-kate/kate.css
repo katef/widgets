@@ -37,10 +37,6 @@ hr.footer {
 	margin-top: 4em;
 }
 
-ul li {
-	list-style-type: none;
-}
-
 h1 {
 	font-weight: normal;
 	margin: 2ex 0 3ex 0;
@@ -57,5 +53,9 @@ table {
 em {
 	font-weight: bold;
 	font-style: normal;
+}
+
+ul {
+	padding-left: 2em;
 }
 
