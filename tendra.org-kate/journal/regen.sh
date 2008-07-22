@@ -16,6 +16,7 @@ contents() {
 
 	title="`echo $src | cut -d/ -f 5 | sed 's/.html$//'`"
 
+	# TODO: prettify date
 	echo "<span class=\"date\">$date</span>" >> "$file"
 
 	echo -n '<div class="entry">' >> "$file"
@@ -54,6 +55,7 @@ year() {
 
 	echo '<!--#include virtual="../year.inc" -->' > "$file"
 
+	# TODO show calendar for the current date here
 	gencal "$file" $y
 	iterate 20 "src/$dir/??/??/*.html" "$file"
 
@@ -70,7 +72,7 @@ gettoplist() {
 		| sed -E 's,^([0-9]{4})([0-9]{2})([0-9]{2})/(.+)$,src/\1/\2/\3/\4.html,'
 }
 
-# Iterate through a list, calling a callback for each
+# Iterate through a list
 # $1 - number of items
 # $2 - glob
 # $3 - file
