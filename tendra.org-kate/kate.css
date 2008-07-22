@@ -2,9 +2,9 @@
 
 body {
 	background-color: white;
-	font-family: bitstream vera sans, verdana;
+	font-family: georgia, times, serif;
 	line-height: 1.5em;
-	margin: 3em 5em 5em 2em;
+	margin: 3em 3em 5em 2em;
 	text-align: justify;
 }
 
@@ -17,7 +17,7 @@ a:hover {
 }
 
 pre, code {
-	font-family: bitstream vera sans mono, courier;
+	font-family: andale mono, bitstream vera sans mono, courier;
 }
 
 pre {
@@ -52,5 +52,10 @@ table {
 
 ul {
 	padding-left: 2em;
+}
+
+acronym {
+	font-variant: small-caps;
+	text-transform: lowercase;
 }
 
