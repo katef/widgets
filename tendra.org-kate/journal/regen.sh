@@ -27,7 +27,9 @@ contents() {
 		echo "<h2>$title</h2>" >> "$file"
 	fi
 
-	cat "$src" >> "$file"
+	# This is a bit enthusiastic
+	cat "$src" | sed -E 's,([A-Z][A-Z]+),<acronym>&</acronym>,g' \
+		>> "$file"
 	echo '</div>' >> "$file"
 }
 
