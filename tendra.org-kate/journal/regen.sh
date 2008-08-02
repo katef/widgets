@@ -3,17 +3,76 @@
 
 # Regnerate journal entries
 
+# $1 - number
+monthname() {
+	case $1 in
+	01)
+		echo Jan
+		;;
+	02)
+		echo Feb
+		;;
+	03)
+		echo Mar
+		;;
+	04)
+		echo Apr
+		;;
+	05)
+		echo May
+		;;
+	06)
+		echo Jun
+		;;
+	07)
+		echo Jul
+		;;
+	08)
+		echo Aug
+		;;
+	09)
+		echo Sep
+		;;
+	10)
+		echo Oct
+		;;
+	11)
+		echo Nov
+		;;
+	12)
+		echo Dec
+		;;
+	esac
+}
+
+# $1 - daydir: 2007/06/12
+# $2 - filec: a number
+#
+# 2007 -> 06/12
+# 2007/06 -> 12
+# 2007/07/12 ->
+# 2007/07/12/0 -> ../
+relimg() {
+	p=`echo $1 | cut -d / -f $2-`
+	if [ -z $p ]; then
+		echo ..
+	else
+		echo $p
+	fi
+}
+
 # $1 - dest
 # $2 - src
 contents() {
 	file="$1"
 	src="$2"
 
-	y="`echo $src | cut -d/ -f 2`"
+	y="`echo $src | cut -d/ -f 2 | cut -c 3-`"
 	m="`echo $src | cut -d/ -f 3`"
-	d="`echo $src | cut -d/ -f 4`"
-	date="$d/$m/$y"
+	d="`echo $src | cut -d/ -f 4 | sed 's/^0//'`"
+	date="`monthname $m` <span class=\"day\">$d</span> &rsquo;$y"
 
+	daydir="`echo $src | cut -f 2- -d/ | rev | cut -f 2- -d/ | rev`"
 	title="`echo $src | cut -d/ -f 5 | sed 's/.html$//'`"
 
 	# TODO: prettify date
@@ -27,8 +86,16 @@ contents() {
 		echo "<h2>$title</h2>" >> "$file"
 	fi
 
+	content="`cat \"$src\"`"
+	# Makeshift image stuff
+	filec=`echo $file | sed 's/[^/]//g' | wc -c`
+	relimgpath=`relimg $daydir $filec`
+	content="`echo "$content" \
+		| sed 's,<?img *\(.*\):\(.*\) *?>,<a href="'$relimgpath'/\2" title="\1"><img alt="\1" src="'$relimgpath'/thumb-\2"/></a>,g' \
+		| sed 's/y/x/'`"
+
 	# This is a bit enthusiastic
-	cat "$src" | sed -E 's,([A-Z][A-Z]+),<acronym>&</acronym>,g' \
+	echo "$content" | sed -E 's,([A-Z][A-Z]+),<acronym>&</acronym>,g' \
 		>> "$file"
 	echo '</div>' >> "$file"
 }
@@ -115,10 +182,12 @@ gencal() {
 		yy=`echo $2 | cut -c 3-`
 
 		echo '<table>' >> "$1"
-		echo "<tr><th>&lt;</th><th colspan='5'>$mn &rsquo;$yy</th><th>&gt;</th></tr>" >> "$1"
+		echo "<tr><th>&#x25C0;</th><th colspan='5'>$mn &rsquo;$yy</th><th>&#x25B6;</th></tr>" >> "$1"
+		echo "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>" >> "$1"
 
 		caltxt="`cal $3 $2 \
 			| grep -v $y \
+			| grep -v Tu \
 			| sed -E 's,(..)( |$),<td>\1</td>,g; s,$,</td></tr>,; s,^,<tr>,'`"
 
 		if [ $2 -eq `date +%m` -a $3 -eq `date +%y` ]; then
@@ -154,4 +223,12 @@ done
 
 # Most recent
 mostrecent
+
+# image stuff, kept in single entry locations
+for img in `ls -1 src/????/??/??/*.jpeg src/????/??/??/*.jpg ????/??/??/*.png 2> /dev/null`; do
+	file="`basename $img`"
+	dstdir="`echo $img | rev | cut -f2- -d/ | rev | cut -f2- -d/`"
+	install -m 644 $img $dstdir/$file
+	convert -thumbnail x200 $img $dstdir/thumb-$file
+done
 
