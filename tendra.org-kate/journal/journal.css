@@ -55,3 +55,11 @@ div.prose p:first-child {
 	margin-top: 1em;
 }
 
+div.imglist img {
+	height: 100px;
+}
+
+div.imglist {
+	text-align: left;
+}
+
