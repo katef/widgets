@@ -92,10 +92,11 @@ contents() {
 	relimgpath=`relimg $daydir $filec`
 	content="`echo "$content" \
 		| sed 's,<?img *\(.*\):\(.*\) *?>,<a href="'$relimgpath'/\2" title="\1"><img alt="\1" src="'$relimgpath'/thumb-\2"/></a>,g' \
-		| sed 's/y/x/'`"
+		| sed 's,<?img *\(.*\) *?>,<a href="'$relimgpath'/\1"><img src="'$relimgpath'/thumb-\1"/></a>,g' \
+		`"
 
 	# This is a bit enthusiastic
-	echo "$content" | sed -E 's,([A-Z][A-Z]+),<acronym>&</acronym>,g' \
+	echo "$content" | sed -E 's,([A-Z][A-Z]+)[ \n],<acronym>&</acronym>,g' \
 		>> "$file"
 	echo '</div>' >> "$file"
 }
