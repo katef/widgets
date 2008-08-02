@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" [
+	<!ENTITY gcd '<acronym title="Greatest Common Denominator">GCD</acronym>'>
+	<!ENTITY lcm '<acronym title="Lowest Common Multiple">LCM</acronym>'>
+]>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
@@ -51,7 +54,7 @@
 			<tr>
 				<td><a href="lcm.c"><code>lcm.c</code></a></td>
 
-				<td>the LCM and GCD of two numbers.</td>
+				<td>the &lcm; and &gcd; of two numbers.</td>
 			</tr>
 
 			<tr>
@@ -66,7 +69,6 @@
 
 				<td>Dealing with bits, which I am also bad at getting
 					right.</td>
-
 			</tr>
 
 			<tr>
@@ -74,16 +76,12 @@
 
 				<td>Support routines for creating temporary tables in
 					PL/pgSQL, with their OID being cached.</td>
-
 			</tr>
 
 			<tr>
-				<td>
-			<a href="sprintf.sql"><code>sprintf.sql</code></a>
-				</td>
+				<td><a href="sprintf.sql"><code>sprintf.sql</code></a></td>
 
 				<td>A minimal <code>sprintf()</code> for PL/pgSQL.</td>
-
 			</tr>
 
 			<tr>
