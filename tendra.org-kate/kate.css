@@ -61,3 +61,7 @@ acronym {
 	text-transform: lowercase;
 }
 
+img {
+	border: solid 1px;
+}
+
