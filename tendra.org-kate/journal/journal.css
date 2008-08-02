@@ -7,10 +7,15 @@ span.date {
 	width: 7em;
 	float: left;
 	text-align: right;
+	font-variant: small-caps;
+}
+
+span.date span.day {
+	font-weight: bold;
 }
 
 div.entry {
-	margin: 0 13em 1.5em 8em;
+	margin: 0 16em 1.5em 8em;
 }
 
 div.cal {
@@ -26,6 +31,14 @@ div.cal table {
 div.cal table th,
 div.cal table td {
 	text-align: center;
+}
+
+div.cal table th {
+	font-weight: normal;
+}
+
+div.cal table td {
+	color: #999;
 }
 
 div.cal hr {

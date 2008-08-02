@@ -2,14 +2,16 @@
 
 body {
 	background-color: white;
-	font-family: georgia, times, serif;
+	font-family: trebuchet ms, sans serif;
 	line-height: 1.5em;
 	margin: 3em 3em 5em 2em;
 	text-align: justify;
 }
 
 a, a:link, a:visited {
-	color: #00f;
+	color: #4a0;
+	color: #059;
+	text-decoration: none;
 }
 
 a:hover {
