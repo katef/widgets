@@ -96,6 +96,7 @@ contents() {
 		`"
 
 	# This is a bit enthusiastic
+	# TODO: it needs to not modify things inside URLs, or inside <pre>, <code> etc
 	echo "$content" | sed -E 's,([A-Z][A-Z]+)[ \n],<acronym>&</acronym>,g' \
 		>> "$file"
 	echo '</div>' >> "$file"
@@ -226,10 +227,11 @@ done
 mostrecent
 
 # image stuff, kept in single entry locations
+# TODO: for thumbnails, crop down to 80%
 for img in `ls -1 src/????/??/??/*.jpeg src/????/??/??/*.jpg ????/??/??/*.png 2> /dev/null`; do
 	file="`basename $img`"
 	dstdir="`echo $img | rev | cut -f2- -d/ | rev | cut -f2- -d/`"
 	install -m 644 $img $dstdir/$file
-	convert -thumbnail x200 $img $dstdir/thumb-$file
+	convert -thumbnail x200 -shave '10%' $img $dstdir/thumb-$file
 done
 
