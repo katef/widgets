@@ -27,6 +27,7 @@ pre {
 	border: solid 1px #eee;
 	padding: 1ex;
 	margin: 1em;
+	overflow-x: auto;
 }
 
 hr {
