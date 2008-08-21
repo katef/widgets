@@ -2,15 +2,14 @@
 
 body {
 	background-color: white;
-	font-family: trebuchet ms, sans serif;
+	font-family: verdana;
 	line-height: 1.5em;
 	margin: 3em 3em 5em 2em;
 	text-align: justify;
 }
 
 a, a:link, a:visited {
-	color: #4a0;
-	color: #059;
+	color: #00f;
 	text-decoration: none;
 }
 
@@ -42,12 +41,18 @@ hr.footer {
 }
 
 h1 {
+	font-family: trebuchet ms, sans serif;
+}
+
+h1 {
 	font-weight: normal;
 	margin: 2ex 0 3ex 0;
 }
 
 h2 {
 	font-weight: normal;
+	font-size: inherit;
+	font-weight: bold;
 }
 
 table {
