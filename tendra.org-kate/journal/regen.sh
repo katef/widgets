@@ -70,13 +70,12 @@ contents() {
 	y="`echo $src | cut -d/ -f 2 | cut -c 3-`"
 	m="`echo $src | cut -d/ -f 3`"
 	d="`echo $src | cut -d/ -f 4 | sed 's/^0//'`"
-	date="`monthname $m` <span class=\"day\">$d</span> &rsquo;$y"
+	date="$d `monthname $m` &rsquo;$y"
 
 	daydir="`echo $src | cut -f 2- -d/ | rev | cut -f 2- -d/ | rev`"
 	title="`echo $src | cut -d/ -f 5 | sed 's/.html$//'`"
 
-	# TODO: prettify date
-	echo "<span class=\"date\">$date</span>" >> "$file"
+	echo "<span class=\"date\"><a href=\"TODO\">$date</a></span>" >> "$file"
 
 	echo -n '<div class="entry">' >> "$file"
 
@@ -184,7 +183,7 @@ gencal() {
 		yy=`echo $2 | cut -c 3-`
 
 		echo '<table>' >> "$1"
-		echo "<tr><th>&#x25C0;</th><th colspan='5'>$mn &rsquo;$yy</th><th>&#x25B6;</th></tr>" >> "$1"
+		echo "<tr><th><a href="TODO">&#x25C0;</a></th><th colspan='5'>$mn &rsquo;$yy</th><th><a href="TODO">&#x25B6;</a></th></tr>" >> "$1"
 		echo "<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>" >> "$1"
 
 		caltxt="`cal $3 $2 \
@@ -197,7 +196,8 @@ gencal() {
 			caltxt="`echo $caltxt | sed -E 's,$d,<em>&</em>,'`"
 		fi
 
-		echo $caltxt >> "$1"
+		# TODO: placeholder link
+		echo $caltxt | sed 's/10/<a href="TODO">10<\/a>/' >> "$1"
 
 		echo '</table>' >> "$1"
 		echo '<hr/>' >> "$1"

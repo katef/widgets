@@ -1,21 +1,14 @@
 /* $Id$ */
 
 span.date {
-	color: #aaa;
-
 	display: block;
 	width: 7em;
 	float: left;
 	text-align: right;
-	font-variant: small-caps;
-}
-
-span.date span.day {
-	font-weight: bold;
 }
 
 div.entry {
-	margin: 0 16em 1.5em 8em;
+	margin: 0 18em 1.5em 8em;
 }
 
 div.cal {
@@ -38,7 +31,7 @@ div.cal table th {
 }
 
 div.cal table td {
-	color: #999;
+	color: #bbb;
 }
 
 div.cal hr {
@@ -61,5 +54,13 @@ div.imglist img {
 
 div.imglist {
 	text-align: left;
+}
+
+h2 {
+	font-weight: normal;
+}
+
+h2:after {
+	content: ".";
 }
 
