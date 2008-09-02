@@ -3,6 +3,7 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" [
 	<!ENTITY gcd '<acronym title="Greatest Common Denominator">GCD</acronym>'>
 	<!ENTITY lcm '<acronym title="Lowest Common Multiple">LCM</acronym>'>
+	<!ENTITY uri '<acronym title="Uniform Resource Identifier">URI</acronym>'>
 ]>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -88,6 +89,15 @@
 				<td><a href="xmalloc.c"><code>xmalloc.c</code></a></td>
 
 				<td><code>xmalloc()</code> and friends.</td>
+			</tr>
+
+			<tr>
+				<td><a href="dburi.c"><code>dburi.c</code></a></td>
+
+				<td>Database &uri; parsing for <a href="http://libdbi.sourceforge.net/">libdbi</a>,
+					written in C99.  This provides a URI scheme similar to
+					<a href="http://trac.edgewall.org/wiki/TracEnvironment#DatabaseConnectionStrings">Trac's Database Connection Strings</a>.
+					Its <a href="dburitest.c">unit tests</a> are separate.</td>
 			</tr>
 		</table>
 
