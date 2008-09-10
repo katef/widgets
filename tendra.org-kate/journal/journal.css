@@ -11,6 +11,11 @@ div.entry {
 	margin: 0 18em 1.5em 8em;
 }
 
+div.entry ul.dotless li {
+	list-style-type: none;
+	margin-bottom: 1em;
+}
+
 div.cal {
 	float: right;
 	position: relative;
