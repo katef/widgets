@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" [
+]>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Kate&rsquo;s Programming Snippits</title>
+
+		<link rel="stylesheet" href="../kate.css"/>
+		<link rel="stylesheet" href="snippets.css"/>
+		<meta name="description" content="Kate's Programming Snippets"/>
+		<meta name="keywords" content="kate,programming,snippets"/>
+	</head>
+
+	<body>
+		<h1>Kate&rsquo;s Small C Programs</h1>
+
+		<p>Small C programs. These are single C files; usually
+			<q><code>make <i>filename</i></code></q> (without the <code>.c</code>
+			extension) is enough to compile them.</p>
+
+		<table>
+			<tr>
+				<td><a href="rawdump.c"><code>rawdump.c</code></a></td>
+
+				<td>Convert an arbitary binary file into an array suitable
+					for including as a C header. <code>xxd -i</code> does a
+					similar job.</td>
+			</tr>
+
+			<tr>
+				<td><a href="life.c"><code>life.c</code></a></td>
+
+				<td>John Conway's
+					<a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Game
+					of Life</a>, written in C99 for POSIX using Curses. It can read
+					files written in the widely-used
+					<a href="http://www.mirwoj.opus.chelm.pl/ca/ca_files_formats.html">RLE</a> format.</td>
+			</tr>
+		</table>
+
+	<hr class="footer"/>
+
+	<p><code>$Id$</code></p>
+
+	</body>
+</html>
+
