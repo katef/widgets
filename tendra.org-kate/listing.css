@@ -1,6 +1,6 @@
 /* $Id$ */
 
-table td:first-child {
+table.listing td:first-child {
 	padding-right: 2em;
 	text-align: right;
 }
