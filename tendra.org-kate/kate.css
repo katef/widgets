@@ -59,6 +59,11 @@ table {
 	margin: 1em;
 }
 
+table td,
+table th {
+	vertical-align: top;
+}
+
 ul {
 	padding-left: 2em;
 }
