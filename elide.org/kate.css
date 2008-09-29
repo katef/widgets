@@ -59,6 +59,10 @@ table {
 	margin: 1em;
 }
 
+table td {
+	vertical-align: top;
+}
+
 ul {
 	padding-left: 2em;
 }
