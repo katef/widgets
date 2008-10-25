@@ -1,0 +1,115 @@
+<html>
+<head>
+<style>
+
+body {
+	background-color: #888;
+	color: white;
+	font-family: sans-serif;
+}
+
+ul.gallery {
+	list-style-type: none;
+}
+
+ul.gallery a {
+	display: block;
+	margin: 10px;
+	float: left;
+}
+
+ul.gallery div {
+	display: none;
+}
+
+ul.gallery img {
+	max-height: 180px;
+	padding: 20px;
+	border: solid 1px black;
+	background-color: white;
+}
+
+ul.gallery a:focus,
+ul.gallery a.focus {
+	cursor: default;
+
+	position: fixed;
+	top:    0;
+	bottom: 0;
+	left:   0;
+	right:  0;
+
+	margin: 0;
+	padding: 10%;
+
+	text-decoration: none;
+	color: white;
+
+	background-color: #888;
+	text-align: center;
+}
+
+ul.gallery a:focus img,
+ul.gallery a.focus img {
+	cursor: none;
+
+	margin: -20px;
+
+	max-height: 100%;
+	max-width: 100%;
+}
+
+ul.gallery a:focus div,
+ul.gallery a.focus div {
+	display: block;
+
+	margin: 20px;
+	padding-top: 1em;
+}
+
+</style>
+<script>
+
+function f(a) {
+	/* TODO: IE shows thumbnails large? */
+	/* TODO: IE distorts portait images when zoomed? */
+	/* TODO: can't tab through in safari? (use onfocus=?) */
+	/* Changing class is for Safari, which does not appear to support a:focus */
+	/* Calling a.blur() is for Opera, which does not blur links on re-clicking */
+	if (a.focused) {
+		a.focused = false;
+		a.style.class = null;
+		a.blur();
+	} else {
+		a.focused = true;
+		a.style.class = "focused";
+	}
+
+	return false;
+}
+
+</script>
+</head>
+
+<body>
+<ul class="gallery">
+	<li><a onclick="return f(this)" href="p1120053.jpg"><img src="p1120053.jpg"/>
+		<div><p>This is a photo of some cheese.</p></div></a></li>
+	<li><a onclick="return f(this)" href="p1120054.jpg"><img src="p1120054.jpg"/>
+		<div><p>This is some liquid cheese.</p> <p>I took this photo with my camera.</p></div></a></li>
+	<li><a onclick="return f(this)" href="p1120056.jpg"><img src="p1120056.jpg"/>
+		<div><p>Some blurb <b>about stuff</b>.</p></div></a></li>
+	<li><a onclick="return f(this)" href="p1120063.jpg"><img src="p1120063.jpg"/>
+		<div><p>Some blurb about stuff.</p> <p>More blurb.</p></div></a></li>
+	<li><a onclick="return f(this)" href="p1120064.jpg"><img src="p1120064.jpg"/>
+		<div><p>Some blurb about stuff.</p> <p>More blurb.</p></div></a></li>
+	<li><a onclick="return f(this)" href="p1120065.jpg"><img src="p1120065.jpg"/>
+		<div><p>Some blurb about stuff.</p> <p>More blurb.</p></div></a></li>
+	<li><a onclick="return f(this)" href="p1120066.jpg"><img src="p1120066.jpg"/>
+		<div><p>Some blurb about stuff.</p> <p>More blurb.</p></div></a></li>
+	<li><a onclick="return f(this)" href="p1120067.jpg"><img src="p1120067.jpg"/>
+		<div><p>Some blurb about stuff.</p> <p>More blurb.</p></div></a></li>
+</ul>
+</body>
+</html>
+
