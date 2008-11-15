@@ -1,0 +1,136 @@
+<html>
+<head>
+<style>
+
+	body {
+		background-color: gray;
+	}
+
+
+	ul.gallery li > a:active {
+		color: inherit;
+	}
+
+	ul.gallery li {
+		list-style-type: none;
+		display: block;
+		float: left;
+		padding: 1ex;
+		background-color: gray;
+	}
+
+	ul.gallery img {
+		max-height: 180px;
+		border: solid 5px white;
+	}
+
+	ul.gallery li div.caption {
+		display: none;
+	}
+
+	ul.gallery li.click {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+		padding: 0;
+		padding-top: 4em;
+		padding-left: 10%;
+		padding-right: 10%;
+	}
+
+	ul.gallery li.click img {
+		cursor: none;
+
+		border-width: 10px;
+
+		max-height: 80%;
+		max-width: 100%;
+
+		/* TODO: center <img> without destroying max-width */
+	}
+
+	ul.gallery li.click div.caption {
+		display: block;
+
+		border: 10px solid transparent;	/* alignment with the image border */
+
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+</style>
+<script>
+
+function f(a) {
+	li = a.parentNode;
+
+	if (li.getAttribute('class') == 'click') {
+		li.removeAttribute('class');
+	} else {
+		li.setAttribute('class', 'click');
+	}
+
+	a.blur();
+
+	return false;
+}
+
+</script>
+</head>
+
+<body>
+	<ul class="gallery">
+		<li>
+			<a onclick="return f(this)" href="p1120060.jpg"><img src="p1120060.jpg"/></a>
+			<div class="caption">
+				<p>Caption abc</p>
+				<p>More caption <a href="...">and a link</a>.</p>
+			</div>
+		</li>
+
+		<li>
+			<a onclick="return f(this)" href="p1120061.jpg"><img src="p1120061.jpg"/></a>
+			<div class="caption">
+				<p>Caption abc</p>
+				<p>More caption <a href="...">and a link</a>.</p>
+			</div>
+		</li>
+
+		<li>
+			<a onclick="return f(this)" href="p1120053.jpg"><img src="p1120053.jpg"/></a>
+			<div class="caption">
+				<p>Caption abc</p>
+				<p>More caption <a href="...">and a link</a>.</p>
+			</div>
+		</li>
+
+		<li>
+			<a onclick="return f(this)" href="p1120062.jpg"><img src="p1120062.jpg"/></a>
+			<div class="caption">
+				<p>Caption abc</p>
+				<p>More caption <a href="...">and a link</a>.</p>
+			</div>
+		</li>
+
+		<li>
+			<a onclick="return f(this)" href="p1120063.jpg"><img src="p1120063.jpg"/></a>
+			<div class="caption">
+				<p>Caption abc</p>
+				<p>More caption <a href="...">and a link</a>.</p>
+			</div>
+		</li>
+
+		<li>
+			<a onclick="return f(this)" href="p1120064.jpg"><img src="p1120064.jpg"/></a>
+			<div class="caption">
+				<p>Caption abc</p>
+				<p>More caption <a href="...">and a link</a>.</p>
+			</div>
+		</li>
+	</ul>
+</body>
+</html>
+
