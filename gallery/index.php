@@ -5,26 +5,27 @@
 	<script type="text/javascript" src="gallery.js"></script>
 </head>
 
-<body onload="g(unescape(self.document.location.hash.substring(1)))">
+<body onload="g(unescape(self.document.location.hash.substring(1))); p('sample_gallery')">
 <?php
 require_once('lib.php');
 $d = 'sample_gallery';
 
 ?>
-	<ul class="gallery">
+	<ul class="gallery" id="<?php echo $d ?>">
 		<?php
 
 
 			$a = globdir(dirname($_SERVER['SCRIPT_FILENAME']) . "/$d", '*');
 			foreach ($a as $f) {
 				printf('<li>');
-				printf('<a onclick="return f(this)" href="%s" id="%s" name="%s">', $f, $f, $f);
+				printf('<a onclick="return f(this)" href="%s" id="%s" name="%s">', "$d/$f", $f, $f);
 				printf('<center><img src="thumbnail.php?gallery=%s&filename=%s"/></center>', $d, $f);
 				printf('</a>');
 				printf('<div class="caption">%s</div>', 'Prague, 2006');
 				printf("</li>\n");
 			}
 
+			/* TODO: g()-calling script inlined here */
 		?>
 	</ul>
 </body>
