@@ -92,7 +92,6 @@ function g(id) {
 		return;
 	}
 
-	/* TODO: this needs to happen before thumbnails are loaded, instead. maybe execute script inline after the gallery HTML */
 	f(a);
 }
 

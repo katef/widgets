@@ -5,7 +5,7 @@
 	<script type="text/javascript" src="gallery.js"></script>
 </head>
 
-<body onload="g(unescape(self.document.location.hash.substring(1))); p('sample_gallery')">
+<body>
 <?php
 require_once('lib.php');
 $d = 'sample_gallery';
@@ -27,6 +27,14 @@ $d = 'sample_gallery';
 
 			/* TODO: g()-calling script inlined here */
 		?>
+
+		<script type="text/javascript">
+		<!--
+			/* TODO: wait for gallery.js to load? */
+			g(unescape(self.document.location.hash.substring(1)));
+			p('<?php echo $d ?>');
+		// -->
+		</script>
 	</ul>
 </body>
 </html>
