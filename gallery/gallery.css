@@ -1,0 +1,60 @@
+/* $Id$ */
+/* gallery7 */
+
+body {
+	background-color: gray;
+}
+
+
+ul.gallery li > a:active {
+	color: inherit;
+}
+
+ul.gallery li {
+	list-style-type: none;
+	display: block;
+	float: left;
+	padding: 1ex;
+	background-color: gray;
+}
+
+ul.gallery img {
+	max-height: 180px;
+	border: solid 5px white;
+}
+
+ul.gallery li div.caption {
+	display: none;
+}
+
+ul.gallery li.click {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	padding: 0;
+	padding-top: 4em;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+ul.gallery li.click img {
+	border-width: 10px;
+
+	max-height: 100%;
+	max-width: 100%;
+
+	padding-bottom: 2em;
+	background-color: white;
+}
+
+ul.gallery li.click div.caption {
+	display: block;
+	border: 10px solid transparent;	/* alignment with the image border */
+	position: relative;
+	margin-top: -3em;
+	text-align: center;
+}
+
