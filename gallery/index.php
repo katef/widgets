@@ -1,6 +1,3 @@
-<!DOCTYPE html
-	PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 	<title>Gallery</title>
@@ -9,15 +6,22 @@
 </head>
 
 <body onload="g(unescape(self.document.location.hash.substring(1)))">
+<?php
+require_once('lib.php');
+$d = '../sample_gallery';
+
+?>
 	<ul class="gallery">
 		<?php
 
-			$a = globdir(dirname($_SERVER['SCRIPT_FILENAME']) . 'Prague - Decadence and Decay'), '*');
+
+			$a = globdir(dirname($_SERVER['SCRIPT_FILENAME']) . "/$d", '*');
 			foreach ($a as $f) {
-				printf("<li>\n");
-				printf("\t<a onclick="return f(this)" href="%s" id="%s" name="%s">\n", $f, $f, $f);
-				printf("\t\t<center><img src="%s"/></center>\n", $f);
-				// printf("\t<div class="caption">%s</div>\n", '');
+				printf('<li>');
+				printf('<a onclick="return f(this)" href="%s" id="%s" name="%s">', $f, $f, $f);
+				printf('<center><img src="%s"/></center>', "$d/$f");
+				printf('</a>');
+				printf('<div class="caption">%s</div>', 'Prague, 2006');
 				printf("</li>\n");
 			}
 
