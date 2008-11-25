@@ -1,11 +1,31 @@
 /* $Id$ */
 
+function loading_and_zoomed(li) {
+	img = li.getElementsByTagName('img')[0];
+	if (!img) {
+		return;
+	}
+
+	if (img.getAttribute('class') == 'loading') {
+		/* if loading and already fullscreen, show thumbnails */
+		if (li.getAttribute('class') == 'click') {
+			clearothers(l, null);
+		}
+		return;
+	}
+}
+
 function f(a) {
 	a.blur();
 
 	li = a.parentNode;
 	ul = li.parentNode;
 	l = ul.getElementsByTagName('li');
+
+	if (loading_and_zoomed(li)) {
+		clearothers(l, null);
+		return;
+	}
 
 	/* TODO: illegible. probably better to store ul.end = next(a.id) */
 	if (li.getAttribute('start') == 'y') {
@@ -41,19 +61,24 @@ function f(a) {
 		}
 
 		li.setAttribute('class', 'click');
+		if (loading_and_zoomed(li)) {
+			clearothers(l, null);
+			return;
+		}
 		setimgsrc(li, true);
 		document.location.hash = a.id;
 	}
 
-	/* Clear others */
+	clearothers(l, li);
+}
+
+function clearothers(l, li) {
 	for (i = 0; i < l.length; i++) {
 		if (l[i] != li) {
 			l[i].removeAttribute('class');
 			setimgsrc(l[i], false);
 		}
 	}
-
-	return false;
 }
 
 /*
@@ -118,8 +143,29 @@ function p(gid) {
 			continue;
 		}
 
-		img = new Image();
-		img.src = a.href;
+		img = a.getElementsByTagName('img')[0];
+		if (!img) {
+			continue;
+		}
+
+		img.setAttribute('class', 'loading');
+
+		pimg = new Image();
+		pimg.src = a.href;
+		pimg.aid = a.id;
+		pimg.onload = function(e) {
+			fa = document.getElementById(this.aid);
+			if (!fa) {
+				return;
+			}
+
+			fimg = fa.getElementsByTagName('img')[0];
+			if (!fimg) {
+				return;
+			}
+
+			fimg.removeAttribute('class');
+		}
 	}
 }
 

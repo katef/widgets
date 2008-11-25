@@ -18,7 +18,7 @@ $d = 'sample_gallery';
 			$a = globdir(dirname($_SERVER['SCRIPT_FILENAME']) . "/$d", '*');
 			foreach ($a as $f) {
 				printf('<li>');
-				printf('<a onclick="return f(this)" href="%s" id="%s" name="%s">', "$d/$f", $f, $f);
+				printf('<a onclick="f(this); return false" href="%s" id="%s" name="%s">', "$d/$f", $f, $f);
 				printf('<center><img src="thumbnail.php?gallery=%s&filename=%s"/></center>', $d, $f);
 				printf('</a>');
 				printf('<div class="caption">%s</div>', 'Prague, 2006');

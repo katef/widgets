@@ -20,8 +20,12 @@ ul.gallery li {
 }
 
 ul.gallery img {
-	max-height: 180px;
+	max-height: 162px;
 	border: solid 5px white;
+}
+
+ul.gallery img.loading {
+	opacity: 0.50; filter: alpha(opacity=50);
 }
 
 ul.gallery li div.caption {
@@ -29,6 +33,7 @@ ul.gallery li div.caption {
 }
 
 ul.gallery li.click {
+	z-index: 1;
 	position: fixed;
 	top: 0;
 	right: 0;
