@@ -8,7 +8,7 @@
 <body onload="g(unescape(self.document.location.hash.substring(1)))">
 <?php
 require_once('lib.php');
-$d = '../sample_gallery';
+$d = 'sample_gallery';
 
 ?>
 	<ul class="gallery">
@@ -19,7 +19,7 @@ $d = '../sample_gallery';
 			foreach ($a as $f) {
 				printf('<li>');
 				printf('<a onclick="return f(this)" href="%s" id="%s" name="%s">', $f, $f, $f);
-				printf('<center><img src="%s"/></center>', "$d/$f");
+				printf('<center><img src="thumbnail.php?gallery=%s&filename=%s"/></center>', $d, $f);
 				printf('</a>');
 				printf('<div class="caption">%s</div>', 'Prague, 2006');
 				printf("</li>\n");
