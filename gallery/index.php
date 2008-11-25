@@ -17,15 +17,30 @@ $d = 'sample_gallery';
 
 			$a = globdir(dirname($_SERVER['SCRIPT_FILENAME']) . "/$d", '*');
 			foreach ($a as $f) {
+				$thumb = exif_thumbnail("$d/$f", $width, $height);
+				if (!$thumb) {
+					continue;
+				}
+
+				$exif = exif_read_data("$d/$f");
+				if (!$exif) {
+					continue;
+				}
+
+				$year = substr($exif['DateTime'], 0, 4);
+				$comment = $exif['COMMENT'][0];
+
 				printf('<li>');
 				printf('<a onclick="f(this); return false" href="%s" id="%s" name="%s">', "$d/$f", $f, $f);
-				printf('<center><img src="thumbnail.php?gallery=%s&filename=%s"/></center>', $d, $f);
+				printf('<center><img width="%d" height="%d" src="thumbnail.php?gallery=%s&filename=%s"/></center>', $width, $height, $d, $f);
 				printf('</a>');
-				printf('<div class="caption">%s</div>', 'Prague, 2006');
-				printf("</li>\n");
+				printf('<div class="caption">%s', "Prague, $year");
+				if ($comment) {
+					printf(" &mdash; %s", $comment);
+				}
+				printf("</div></li>\n");
 			}
 
-			/* TODO: g()-calling script inlined here */
 		?>
 
 		<script type="text/javascript">

@@ -100,6 +100,10 @@ function setimgsrc(li, zoom) {
 		return;
 	}
 
+	/* These are just used for rapid page layout on initial load */
+	img.removeAttribute('height');
+	img.removeAttribute('width');
+
 	if (zoom) {
 		img.src = ul.id + '/' + a.id;
 	} else {
