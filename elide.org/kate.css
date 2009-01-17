@@ -3,13 +3,16 @@
 body {
 	background-color: white;
 	font-family: verdana;
+	margin: 30px 50px 20px 40px;
+	text-align: left;
+}
+
+body, td {
 	line-height: 1.5em;
-	margin: 3em 3em 5em 2em;
-	text-align: justify;
 }
 
 a, a:link, a:visited {
-	color: #00f;
+	color: #26478A;
 	text-decoration: none;
 }
 
@@ -41,18 +44,61 @@ hr.footer {
 }
 
 h1 {
-	font-family: trebuchet ms, sans serif;
+	letter-spacing: -1px;
+	color: white;
+	background-color: #26478A;
+	padding: 4ex 50px 0 50px;
+	margin: -30px -50px 0 -50px;
 }
 
-h1 {
+ul#contents {
+	padding: 1em 50px 10px 50px;
+	margin: 0 -50px 20px -50px;
+	background-color: #26478A;
+	display: block;
+}
+
+ul#contents li.current a {
+	color: white;
+}
+
+ul#contents li {
+	display: inline;
+}
+
+ul#contents li {
+	padding-right: 1ex;
+}
+
+ul#contents li:last-child {
+	border-right: none;
+}
+
+ul#contents li a {
+	color: #bbb;
+}
+
+ul#contents li a:hover {
+	color: white;
+}
+
+h1, h2, h3 {
 	font-weight: normal;
-	margin: 2ex 0 3ex 0;
+	font-family: trebuchet ms, sans serif;
+	font-size: 18pt;
 }
 
 h2 {
-	font-weight: normal;
-	font-size: inherit;
-	font-weight: bold;
+	color: #26478A;
+	font-size: 16pt;
+	margin: 40px 0 20px 0;
+	letter-spacing: -1px;
+}
+
+h3 {
+	color: #888;
+	font-size: 12pt;
+	margin: 30px 0 20px 0;
 }
 
 table {
@@ -74,5 +120,22 @@ acronym {
 
 img {
 	border: solid 1px;
+}
+
+ul, ol {
+	margin: 0;
+	padding: 0 30px;
+}
+
+li {
+	margin: 1ex auto;
+}
+
+ol li {
+	list-style-type: roman;
+}
+
+ul li {
+	list-style-type: disc;
 }
 
