@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Kate&rsquo;s Amazing Web Page</title>
+
+		<link rel="stylesheet" href="kate.css"/>
+		<style>
+			div.about {
+				margin-left: 15em;
+				width: 50%;
+				border-left: solid 1px #ccc;
+				padding-left: 1em;
+				margin-bottom: 3em;
+			}
+
+			div p {
+				margin-top: 0;
+			}
+
+			div.index {
+				float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1 id="title">Kate&rsquo;s Amazing Web Page</h1>
+		<!--#include virtual="contents.inc"-->
+
+<!-- TODO:
+C guide
+Projects
+Articles I've written
+SVN timeline aggregate
+Studies of things (wotw, aow, etc)
+K&R answers
+-->
+
+		<div class="index">
+			<p><a href="snippets">Snippets of code</a>.</p>
+
+			<p><a href="small">Small C Programs</a>.</p>
+
+			<p><a href="journal">My journal</a>.</p>
+
+			<p><a href="dreams">My Dreams</a>.</p>
+		</div>
+
+		<div class="about">
+			<p>This website is just a collection of a few bits and
+				pieces, mostly to do with programming in C, which I
+				think might possibly be of interest
+				to somebody. I tend to be pretty bad at getting
+				things done, so I'm using this to help prompt me
+				into finishing off things enough that I can put
+				them here.</p>
+
+			<p>I favour small, simple implementations. I try to write
+				portable code. I like lexing, parsing, compilers,
+				standards compliance, and I especially enjoy writing
+				those tidy little functions which seem to suit C so
+				nicely.</p>
+
+			<p>You can find me on <a href="http://www.freenode.net/">irc.freenode.net</a> as <code>kate`</code>.</p>
+		</div>
+
+		<hr class="footer"/>
+
+		<p><code>$Id$</code></p>
+	</body>
+</html>
+
