@@ -43,7 +43,7 @@ hr.footer {
 	margin-top: 4em;
 }
 
-h1 {
+h1#title {
 	letter-spacing: -1px;
 	color: white;
 	background-color: #26478A;
@@ -75,7 +75,7 @@ ul#contents li:last-child {
 }
 
 ul#contents li a {
-	color: #bbb;
+	color: #aaa;
 }
 
 ul#contents li a:hover {
@@ -129,13 +129,5 @@ ul, ol {
 
 li {
 	margin: 1ex auto;
-}
-
-ol li {
-	list-style-type: roman;
-}
-
-ul li {
-	list-style-type: disc;
 }
 
