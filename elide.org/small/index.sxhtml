@@ -5,20 +5,22 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<title>Kate&rsquo;s Programming Snippits</title>
+		<title>Kate&rsquo;s Small Programs</title>
 
 		<link rel="stylesheet" href="../kate.css"/>
 		<link rel="stylesheet" href="../listing.css"/>
-		<meta name="description" content="Kate's Programming Snippets"/>
-		<meta name="keywords" content="kate,programming,snippets"/>
+		<meta name="description" content="Kate's Small Programs"/>
+		<meta name="keywords" content="kate,small,programs"/>
 	</head>
 
 	<body>
-		<h1>Kate&rsquo;s Small C Programs</h1>
+		<h1 id="title">Kate&rsquo;s Small Programs</h1>
+		<!--#include virtual="../contents.inc"-->
 
-		<p>Small C programs. These are single C files; usually
+		<p>Small programs, mostly written in C. These are single files; usually
 			<q><code>make <i>filename</i></code></q> (without the <code>.c</code>
-			extension) is enough to compile them.</p>
+			extension) is enough to compile them. You might need a library
+			or two; see the source code.</p>
 
 		<table class="listing">
 			<tr>
