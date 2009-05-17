@@ -224,7 +224,7 @@ ol span:after	{ margin-left: 1ex; content: "........";   } /* spot the hack */</
 
 	<hr class="footer"/>
 
-	<p><code>$Id: index.sxhtml 441 2009-05-17 11:10:46Z kate $</code></p>
+	<p><code>$Id$</code></p>
 
 	</body>
 </html>
