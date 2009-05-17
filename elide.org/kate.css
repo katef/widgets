@@ -1,7 +1,10 @@
 /* $Id$ */
 
+@import url('/libfsm/chrome/common/css/trac.css');
+
 body {
 	background-color: white;
+	color: #444;
 	font-family: verdana;
 	margin: 30px 50px 20px 40px;
 	text-align: left;
@@ -9,26 +12,30 @@ body {
 
 body, td {
 	line-height: 1.5em;
+	font-size: inherit;
 }
 
-a, a:link, a:visited {
-	color: #26478A;
+a, a:link, a:visited, a code {
+	color: #26478A ! important;
 	text-decoration: none;
+	border-bottom: none;
 }
 
-a:hover {
-	color: #000;
+a:hover, a:hover code {
+	color: #000 ! important;
 	text-decoration: underline;
+	background-color: inherit ! important;
 }
 
-pre, code {
+pre, code, tt {
+	color: #000;
 	font-family: andale mono, bitstream vera sans mono, courier;
 }
 
 pre {
-	border: solid 1px #eee;
-	padding: 1ex;
-	margin: 1em;
+	border: solid 1px #eee ! important;
+	padding: 1ex ! important;
+	margin: 1em ! important;
 	overflow-x: auto;
 }
 
@@ -59,7 +66,7 @@ ul#contents {
 }
 
 ul#contents li.current a {
-	color: white;
+	color: white ! important;
 }
 
 ul#contents li {
@@ -75,11 +82,11 @@ ul#contents li:last-child {
 }
 
 ul#contents li a {
-	color: #aaa;
+	color: #aaa ! important;
 }
 
 ul#contents li a:hover {
-	color: white;
+	color: white ! important;
 }
 
 h1, h2, h3 {
@@ -103,6 +110,7 @@ h3 {
 
 table {
 	margin: 1em;
+	clear: none ! important;
 }
 
 table td {
