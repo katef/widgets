@@ -5,3 +5,11 @@ table.listing td:first-child {
 	text-align: right;
 }
 
+table.listing {
+	border: none;
+}
+
+table.listing td:first-child {
+	width: 8em;
+}
+
