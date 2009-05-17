@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Kate&rsquo;s Projects</title>
+
+		<link rel="stylesheet" href="../kate.css"/>
+		<link rel="stylesheet" href="../listing.css"/>
+		<meta name="description" content="Kate's Projects"/>
+		<meta name="keywords" content="kate,programming,projects"/>
+	</head>
+
+	<body>
+		<h1 id="title">Kate&rsquo;s Projects</h1>
+		<!--#include virtual="../contents.inc"-->
+
+		<p>Some of my programing outside of work.</p>
+<!-- TOOD:
+
+style guide:
+
+no "standard" idomatic macros used for all source (e.g. defining UNUSED and such)
+. it's all just plain C
+C90. "int" is used for booleans
+
+Generally targeting POSIX.
+
+no use of locale
+
+I'm not going out of my way to make sure things have unique names. There is most
+probably another "libfsm" in the world, for instance.
+
+-->
+
+
+
+		<table class="listing">
+			<tr>
+				<td><a href="/libfsm/">libfsm</a></td>
+
+				<td>A library for manipulating Finite State Machines.</td>
+			</tr>
+
+			<tr>
+				<td><a href="/libre/">libre</a></td>
+
+				<td>A library for compiling and executing regular expressions.</td>
+			</tr>
+
+			<tr>
+				<td><a href="/lx/">lx</a></td>
+
+				<td>A lexer generator</td>
+			</tr>
+		</table>
+
+<!--
+		<p>I keep a couple of things elsewhere:</p>
+
+		<table class="listing">
+			<tr>
+				<td><a href="http://www.tendra.org/">TenDRA</a></td>
+
+				<td>A compiler which goes to great lengths to
+					assure your code is portable, and conforms to
+					the standardised APIs you claim.</td>
+			</tr>
+
+			<tr>
+				<td><a href="http://water-powered.com/libgreat">libgreat</a></td>
+
+				<td>Standards-compliant explosions.</td>
+			</tr>
+
+			<tr>
+				<td><a href="http://water-powered.com/doctools">Doctools</a></td>
+
+				<td>Documentation processing tools.</td>
+			</tr>
+		</table>
+-->
+
+<!-- TODO
+		<p>And some database-related things:</p>
+
+		kmircd, pgTree, UGP, types, et
+
+		<p>I also write a reasonable amount of documents, mainly on the
+			topic of specific bits of software. Here are a few I'm
+			particularly pleased with:</p>
+
+-->
+
+		<p>These are placed in the
+			<a href="http://creativecommons.org/licenses/publicdomain/">Public Domain</a>.
+			I know I haven't done the legal stuff properly. I'll do it later.
+			If you're using something, please let me know. Everybody likes feedback!</p>
+
+	<hr class="footer"/>
+
+	<p><code>$Id$</code></p>
+
+	</body>
+</html>
+
