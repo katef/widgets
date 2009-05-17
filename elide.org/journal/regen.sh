@@ -110,6 +110,7 @@ entry() {
 	mkdir -p "$dir"
 
 	echo '<!--#include virtual="../../../../entry.inc" -->' > "$file"
+	echo '<!--#include virtual="../../../../../contents.inc" -->' >> "$file"
 
 	gencal "$file" $y $m
 	contents "$file" "$1"
@@ -124,6 +125,7 @@ year() {
 	mkdir -p "$dir"
 
 	echo '<!--#include virtual="../year.inc" -->' > "$file"
+	echo '<!--#include virtual="../../contents.inc" -->' >> "$file"
 
 	# TODO show calendar for the current date here
 	gencal "$file" $y
@@ -162,6 +164,7 @@ mostrecent() {
 	m=`date +%m`
 
 	echo '<!--#include virtual="recent.inc" -->' > "$file"
+	echo '<!--#include virtual="../contents.inc" -->' >> "$file"
 
 	gencal "$file" $y $m
 	iterate 20 'src/????/??/??/*.html' "$file"
