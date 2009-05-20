@@ -85,10 +85,20 @@ pre .lines {
 			<dt>Why not use <code>:before { content: '123'; }</code> for the numbering?</dt>
 			<dd>I tried that; the end effect is identical to simply outputting
 				numbers as text.</dd>
+
+			<dt>Why not generate the line-number <code>&lt;div&gt;</code> server-side?</dt>
+			<dd>Because of my first design constraint.</dd>
 		</dl>
 
 		<p>This was adapted from <a href="http://meddle.dzygn.com/eng/weblog/line.numbers/">somebody
 			else's attempt</a> at the same thing.</p>
+
+		<p>One place this sees use is in conjuction with my
+			<a href="http://trac-hacks.org/wiki/PreCodeBrowserPlugin">PreCodeBrowserPlugin</a>
+			for Trac. Together, they give selectable code for Trac's source
+			code browser. Additionally, the line numbering is great for Trac's
+			<code>{{{ ... }}}</code> wiki syntax used for snippets of code on
+			wiki pages and in blog entries.</p>
 	</div>
 
 	<hr class="footer"/>
