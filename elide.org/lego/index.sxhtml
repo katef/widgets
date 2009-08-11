@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Kate&rsquo;s Projects</title>
+
+		<link rel="stylesheet" href="../kate.css"/>
+		<link rel="stylesheet" href="../listing.css"/>
+		<meta name="description" content="Kate's Projects"/>
+		<meta name="keywords" content="kate,lego"/>
+	</head>
+
+	<body>
+		<h1 id="title">Kate&rsquo;s Lego Stuff</h1>
+		<!--#include virtual="../contents.inc"-->
+
+		<p>Some experiments in Lego.</p>
+
+		<table class="listing">
+			<tr>
+				<td><a href="/lego/torsen/">Torsen&nbsp;differentials</a></td>
+
+				<td>Searching for a workable torsen differential.</td>
+			</tr>
+		</table>
+
+	<hr class="footer"/>
+
+	<p><code>$Id: index.sxhtml 441 2009-05-17 11:10:46Z kate $</code></p>
+
+	</body>
+</html>
+

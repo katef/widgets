@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Kate&rsquo;s Lego Stuff &mdash; Torsen differentials</title>
+
+		<link rel="stylesheet" href="../../kate.css"/>
+		<meta name="description" content="Kate's Lego Stuff"/>
+		<meta name="keywords" content="kate,lego,torsen,torsen diff,differential,torsen differential"/>
+	</head>
+
+	<body>
+		<h1 id="title">Kate&rsquo;s Lego Stuff &mdash; Torsen differentials</h1>
+		<!--#include virtual="../../contents.inc"-->
+
+		<p>Some things Lego just isn't very good at. Making compact mechanical
+			things which aren't in the supplied set of special-purpose pieces
+			is one of those things (dare I say it, I think Mechano wins,
+			there). The supplied differentials are special-purpose pieces which
+			form a straightforward
+			<a href="http://en.wikipedia.org/wiki/Open_differential">open differential</a>.
+			These will spin one wheel freely, if it is lifted in the air,
+			providing no torque to the wheel on the ground. Typically this
+			happens when a car is stuck in mud, and one wheel has nothing to
+			push against. I don't know. I'm not really interested in cars.</p>
+
+		<p>There are a few ways around this problem; one is to
+			<a href="http://en.wikipedia.org/wiki/Locking_differential">lock the
+			differential</a> temporarily, turning it into a solid axle, thus
+			driving both wheels with equal torque. That's usually done by some
+			external device physically intervening to jam the gears.</p>
+
+		<p>Another approach is the
+			<a href="http://en.wikipedia.org/wiki/Torsen_differential">torque
+			sensing differential</a>, which has the same effect as locking, but
+			automatically: lifting a wheel will cause the differential to lock;
+			dropping it back down will cause it to behave as a normal open
+			differential again. I won't describe how they work here; you can
+			find plenty of detailed descriptions elsewhere.</p>
+
+		<p>Building a torsen differential in Lego is not easy; the locking has
+			a tendency to pull itself apart, since Lego joints hold together
+			with less force than it takes to turn an axle. Google around;
+			you'll find lots of attempts. Here's mine.</p>
+
+		<h2>Axial</h2>
+
+		<p>My first two attempts were the usual axial approach. The problem
+			here is how to offset the axles to the wheels, so that they can
+			connect to the worm drives, which need to be spaced wide enough for
+			an idler gear to go between them. Much of the bulk in these (the
+			red bits) is responsible for this offsetting.</p>
+
+		<p>Here's a schematic. Everything inside the grey box rotates:</p>
+
+		<center>
+			<img src="torsen-axial.png" class="noborder"/>
+		</center>
+
+		<p>And here're two attempts to implement that in Lego:</p>
+
+		<center>
+			<a href="torsen1.jpeg">
+				<img src="torsen1-small.jpeg"/>
+			</a>
+
+			<a href="torsen2.jpeg">
+				<img src="torsen2-small.jpeg"/>
+			</a>
+		</center>
+
+		<p>These are relatively weak, because the axles going to the wheels are
+			not connected to much. Perhaps the second one would be a little
+			more stable with some planetary idler gears holding the two large
+			40-tooth gears in place. I think they're inelegant, anyhow.</p>
+
+		<p>Note that the one on the left lacks a driving gear for input,
+			to turn the whole thing.</p>
+
+		<h2>Epicyclic</h2>
+
+		<p>So, I thought I'd try a different approach; there seems to be no
+			need to keep everything inline axially. Instead, the drives to the
+			wheels could be offset, which leaves the axial axle free to be
+			fixed to the body of the differential, giving it more strength.</p>
+
+		<p>Here's a schematic. Again, everything inside the grey box
+			rotates:</p>
+
+		<center>
+			<img src="torsen-epicyclic.png" class="noborder"/>
+		</center>
+
+		<p>And here's how it looks in Lego:</p>
+
+		<center>
+			<a href="torsen3.jpeg">
+				<img src="torsen3-small.jpeg"/>
+			</a>
+		</center>
+
+		<p>No supporting red bits!</p>
+
+		<p>The dark grey gears are attached to each other, but are not attached
+			to the axle; they're free to spin. Everything else is as it was in
+			the other attempts.</p>
+
+		<p>This feels <i>much</i> stronger. The mode of failure is less damaging,
+			too. It is a little susceptible to torsion, but that can be helped
+			by simply adding a few axles through the unused holes in the
+			large 40-tooth gears, for rigidity.</p>
+
+	<hr class="footer"/>
+
+	<p><code>$Id: index.sxhtml 441 2009-05-17 11:10:46Z kate $</code></p>
+
+	</body>
+</html>
+
