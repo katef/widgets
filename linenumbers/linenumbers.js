@@ -7,8 +7,13 @@ function init_linenumbers() {
 	}
 
 	for (var i = 0; i < pre.length; i++) {
-		pre[i].innerHTML = pre[i].innerHTML.replace(/\n+$/g, '');
-		pre[i].innerHTML = pre[i].innerHTML.replace(/\t/g, '    ');
+		var count;
+		var content;
+
+		content = pre[i].innerHTML;
+		content = content.replace(/\n+$/g, '');
+		content = content.replace(/\t/g, '    ');
+		pre[i].innerHTML = content;
 
 		/* IE replaces '\n' by a space; this degrades to match nothing. */
 		var matches = pre[i].innerHTML.match(/\n/mg);
@@ -18,10 +23,11 @@ function init_linenumbers() {
 			count = matches.length + 1;
 		}
 
-		var numbers = "";
+		var numbers = [];
 		for (var n = 1; n <= count; n++) {
-			numbers += n +"\n";
+			numbers.push(n);
 		}
+		numbers = numbers.join("\n");
 
 		var div = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
 		div.appendChild(document.createTextNode(numbers));
