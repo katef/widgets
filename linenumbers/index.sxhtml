@@ -18,19 +18,6 @@
 	<h1 id="title">Kate&rsquo;s Web Widgets &mdash; Non-selectable Line Numbers</h1>
 	<!--#include virtual="../../contents.inc"-->
 
-	<style>
-pre .lines {
-	background-color: #f7f7f7;
-	padding: 1ex ! important;
-	padding-right: 1.5ex ! important;
-	color: #aaa;
-	border-right: 1px solid #eee;
-	float: left;
-	margin: -1ex;
-	margin-right: 1ex;
-}
-	</style>
-
 	<div id="main">
 		<p>Line numbers alongside blocks of code are handy; you can refer to
 			them by number instead of saying things like &ldquo;the second
