@@ -11,6 +11,7 @@
  * - deal with something modifying the table, and reinitialise it
  * - <td> columns reorderable by drag & drop for their higest <th>
  * - <tr> reorderable by drag and drop
+ * - use the column type to infer left/right/centre alignment
  */
 
 /*
@@ -34,6 +35,7 @@
  * TODO: refactor to avoid repeated xpath queries
  * TODO: make it scale (cache column type, cache widths)
  * TODO: make it work with HTML namespaces, too
+ * TODO: when flipping, if the class is set, we can assume the column is already sorted
  */
 
 
@@ -126,6 +128,23 @@ function table_generateid(prefix) {
 
 		table_uniqueid++;
 	}
+}
+
+/*
+ * Floor of the binary logarithm of i.
+ * This is equivalent to Math.floor(Math.log(i) / Math.log(2));
+ * Given a power of 2, this returns the 0-based index of that bit.
+ */
+function table_ilog2(i) {
+	var l;
+
+	l = 0;
+
+	while (i >>= 1) {
+		l++;
+	}
+
+	return l;
 }
 
 function table_hasclass(node, class) {
@@ -407,8 +426,7 @@ function table_guesstypecolumn(t, rowindex, i) {
 	}
 
 	/* TODO: explain this is the index of the bit set. */
-	/* TODO: if this is a bottleneck, find the index by, e.g. looping through bits */
-	return Math.log(mask) / Math.log(2);
+	return table_ilog2(mask);
 }
 
 /*
