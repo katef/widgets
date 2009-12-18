@@ -40,6 +40,8 @@ K&R answers
 -->
 
 		<div class="index">
+			<p>Imagine something here.</p>
+<!--
 			<p><a href="snippets">Snippets of code</a>.</p>
 
 			<p><a href="small">Small C Programs</a>.</p>
@@ -47,6 +49,7 @@ K&R answers
 			<p><a href="journal">My journal</a>.</p>
 
 			<p><a href="dreams">My Dreams</a>.</p>
+-->
 		</div>
 
 		<div class="about">
@@ -64,7 +67,7 @@ K&R answers
 				those tidy little functions which seem to suit C so
 				nicely.</p>
 
-			<p>You can find me on <a href="http://www.freenode.net/">irc.freenode.net</a> as <code>kate`</code>.</p>
+			<p>You can find me on <a href="http://www.freenode.net/">irc.freenode.net</a> as <code>kate`</code>  and (possibly) email me as <tt>kate@</tt> this domain name.</p>
 		</div>
 
 		<hr class="footer"/>
