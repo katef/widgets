@@ -58,9 +58,6 @@
 		</tbody>
 		</table>
 
-		<p>(Please note I have not provided a date type yet, so that column is
-			being sorted lexographically.)</p>
-
 		<p>Sorting a table requires understanding the type of data; strings should be
 			sorted lexographically (that is, by each letter: Aaron, Adam, Adele, Adrian, Anna). Sorting
 			numbers makes no sense if done lexographically (01, 1.0, 10, 101, 12). So a
