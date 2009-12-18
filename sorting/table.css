@@ -1,0 +1,49 @@
+/* $Id$ */
+
+table { border: solid 1px #ddd; }
+table th { background-color: #eee; }
+
+table td, table th {
+	padding: 0.5ex 1ex;
+	font-size: 80%;
+	border: solid 1px #ddd;
+}
+
+table th.table-sortable:hover {
+	cursor: pointer;
+	background-color: #d7dde7;
+	border-color: #8697ca;
+}
+
+table th.table-sortable {
+	border-color: #b7bbcd;
+	background-color: #e7eef7;
+}
+
+table th.table-sortable:after {
+	content: "\A0";
+	min-width: 1em;
+	text-align: right;
+}
+
+table th.table-descending:after {
+	content: "\25B2";
+}
+
+table th.table-ascending:after {
+	content: "\25BC";
+}
+
+table th.table-sortable:after {
+	padding-left: 1em;
+	color: #b7bbcd;
+	display: block;
+	float: right;
+	cursor: pointer;
+}
+
+table td.table-sorted {
+	background-color: #eee;
+	border: solid 1px #ddd;
+}
+

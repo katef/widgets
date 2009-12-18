@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Kate&rsquo;s Web Widgets &mdash; Sortable Tables</title>
+		<link rel="stylesheet" href="../../kate.css"/>
+		<link rel="stylesheet" href="../../article.css"/>
+		<meta name="keywords" content="kate,css,tutorial,guide,overview,widget,tables,automatically,sorting,sortable,tables,javascript,dhtml"/>
+
+		<link rel="stylesheet" href="table.css"/>
+		<script src="table.js" type="text/javascript"></script>
+		<script src="javascript-xpath-cmp.js" type="text/javascript"></script>
+		<script src="../linenumbers/linenumbers.js" type="text/javascript"></script>
+	</head>
+
+	<body onload="table_init(); init_linenumbers()">
+	<h1 id="title">Kate&rsquo;s Web Widgets &mdash; Sortable Tables</h1>
+	<!--#include virtual="../../contents.inc"-->
+
+	<div id="main">
+		<p>I'd like the tables in my documents to be sortable by clicking on each
+			column. This helps when using tables as a reference; I find them more
+			convenient to read when sorted by whatever it is I'm looking for.</p>
+
+		<p>Click on the blue bits:</p>
+
+		<table>
+			<thead>
+				<tr><td/><th colspan="2">Name</th><td/><td/></tr>
+				<tr><th>Date</th> <th>Fore</th> <th>Surname</th> <th>Price</th> <th>IP Address</th></tr>
+			</thead>
+			<tfoot>
+				<tr><td/><td/><td/><th class="numeric">$160.91</th><td/></tr>
+			</tfoot>
+		<tbody>
+			<tr><td>21/01/2006</td><td>Neil</td><td>Crosby</td><td>$1.96</td><td>192.168.1.1</td></tr>
+			<tr><td>01/02/2006</td><td>Nigel</td><td>Courtley</td><td>$23.95</td><td>192.167.2.1</td></tr>
+			<tr><td>17/11/2004</td><td>David</td><td>Freidman-Jones</td><td>$14.00</td><td>192.168.2.1</td></tr>
+			<tr><td>22/02/2006</td><td colspan="2">Madonna</td><td>$2.95</td><td>192.168.1.2</td></tr>
+			<tr><td>17/10/2004</td><td>Annabel</td><td>Tyler</td><td>$104.00</td><td>192.168.2.17</td></tr>
+			<tr><td>17/11/2005</td><td>Carl</td><td>Conway</td><td>$17.00</td><td>192.168.02.13</td></tr>
+		</tbody>
+		</table>
+
+		<p>(Please note I have not provided a date type yet, so that column is
+			being sorted lexographically.)</p>
+
+		<p>Sorting a table requires understanding the type of data; strings should be
+			sorted lexographically (that is, by each letter: Alice, Bob, Kate). Sorting
+			numbers makes no sense if done lexographically (01, 1.0, 10, 101, 12). So a
+			mechanism needs to be in place to sort per-type. Javascript's Array.sort()
+			takes a comparison function as an argument for this reason.</p>
+
+		<p>I've tried to make this easily extensible to support new types; see the
+			global <code>table_types</code> array.</p>
+
+		<p>I don't want to modify all of these various sources of HTML to be aware of
+			how tables ought to be sortable; I'd rather the HTML were as simple as it
+			possibly can be, and Javascript interrogates it to figure out which types
+			of data each table contains.</p>
+
+		<p>This can cope reasonably with some pretty silly tables, and does what seems
+			to look sensible (or at least, not surprising).</p>
+
+		<p><a href="table.js">Here's the code</a>, and some minimal CSS:</p>
+
+		<pre><![CDATA[table th.table-descending:after {
+    content: "\25B2";
+}
+
+table th.table-ascending:after {
+    content: "\25BC";
+}]]></pre>
+
+		<p>This uses <a href="http://www.w3.org/TR/xpath">XPath</a> as provided
+			to Javascript by the <a href="http://www.w3.org/TR/DOM-Level-3-XPath/xpath.html#XPathEvaluator-evaluate">DOM Level 3 XPath</a>
+			interface. That interface can be provided with a
+			<a href="http://coderepos.org/share/wiki/JavaScript-XPath">Javascript implementation of XPath</a>
+			for browsers which do not support it natively.</p>
+
+
+		<h2>Features</h2>
+			<p>My requirements are:</p>
+
+		<ul>
+			<li>Tables are automatically found, and column types are automatically
+				identified (number, text, date, etc).</li>
+
+			<li>Rows are reorderable by clicking on column headers.</li>
+
+			<li>An arrow (or some similar visual aid) may be shown for the currently
+				sorted column only (by CSS; Javascript is not to modify DOM text).</li>
+
+			<li>Cope with complex tables, having <code>&lt;thead&gt;</code>, <code>&lt;tfoot&gt;</code>, etc.</li>
+
+			<li>Dealing with <code>@colspan</code> for <code>&lt;td&gt;</code>s; a multi-column cell is considered to be
+				present in all columns it covers.</li>
+		</ul>
+
+
+		<p>Features I'm purposefully not implementing:</p>
+
+		<ul>
+			<li>Multi-column sort (as <a href="http://www.allmyscripts.com/Table_Sort/index.html">here</a>);
+				this is overkill for the tables I typically have.</li>
+			<li><code>@rowspan > 1</code>; tables containing that are considered unsortable.</li>
+		</ul>
+
+		<h2>Other implementations</h2>
+		<ul>
+			<li><a href="http://www.kryogenix.org/code/browser/sorttable/">http://www.kryogenix.org/code/browser/sorttable/</a></li>
+			<li><a href="http://www.workingwith.me.uk/articles/scripting/standardista_table_sorting">http://www.workingwith.me.uk/articles/scripting/standardista_table
+_sorting</a></li>
+			<li><a href="http://www.frequency-decoder.com/2006/09/16/unobtrusive-table-sort-script-revisited">http://www.frequency-decoder.com/2006/09/16/unobtrusive-table-sort
+-script-revisited</a></li>
+			<li><a href="http://www.brainjar.com/dhtml/tablesort/default5.asp">http://www.brainjar.com/dhtml/tablesort/default5.asp</a></li>
+		</ul>
+	</div>
+
+	<hr class="footer"/>
+
+	<p><code>$Id$</code></p>
+
+	</body>
+</html>
+

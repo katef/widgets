@@ -42,6 +42,14 @@
 					elements, which are non-selectable during cut &amp;
 					paste.</td>
 			</tr>
+
+			<tr>
+				<td><a href="/widgets/sorting/">Sortable Tables</a></td>
+
+				<td>Automated sortability for <code>&lt;table&gt;</code>
+				elements, with data types for columns identified
+				automatically.</td>
+			</tr>
 		</table>
 
 		<p>Generally I only try things out on Firefox. I'd be surprised if
