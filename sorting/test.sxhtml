@@ -5,10 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		<title>Kate&rsquo;s Web Widgets &mdash; Sortable Tables</title>
-<!--
 		<link rel="stylesheet" href="../../kate.css"/>
 		<link rel="stylesheet" href="../../article.css"/>
--->
 		<meta name="keywords" content="kate,css,tutorial,guide,overview,widget,tables,automatically,sorting,sortable,tables,javascript,dhtml"/>
 
 		<link rel="stylesheet" href="table.css"/>
@@ -25,12 +23,12 @@
 
 <p>Supported types:</p>
 <table border="1">
-<tr><th>Currency</th> <th>DD/MM/YYYY</th> <th>MM/DD/YYYY</th> <th>Numeric</th>     </tr>
-<tr><td>$3.23</td>    <td>21/08/1981</td> <td>08/21/1981</td> <td>23'000.53</td>   </tr>
-<tr><td>$1.01c</td>   <td>20/8/1981</td>  <td>8/20/1981</td>  <td>23'0005.2e-1</td></tr>
-<tr><td>32c</td>      <td>12/12/1909</td> <td>12/12/1909</td> <td>22'000</td>      </tr>
-<tr><td>$3</td>       <td>1/1/2009</td>   <td>1/1/2009</td>   <td>24,123</td>      </tr>
-<tr><td>$3</td>       <td>2/2/2009</td>   <td>2/2/2009</td>   <td>20,999e0</td>    </tr>
+<tr><th>Currency</th>    <th>DD/MM/YYYY</th> <th>MM/DD/YYYY</th> <th>Numeric</th>     </tr>
+<tr><td>&pound;3.23</td> <td>21/08/1981</td> <td>08/21/1981</td> <td>23'000.53</td>   </tr>
+<tr><td>&pound;1.01</td> <td>20/8/1981</td>  <td>8/20/1981</td>  <td>23'0005.2e-1</td></tr>
+<tr><td>32p</td>         <td>12/12/1909</td> <td>12/12/1909</td> <td>22'000</td>      </tr>
+<tr><td>&pound;3</td>    <td>1/1/2009</td>   <td>1/1/2009</td>   <td>24,123</td>      </tr>
+<tr><td>&pound;3</td>    <td>2/2/2009</td>   <td>2/2/2009</td>   <td>20,999e0</td>    </tr>
 </table>
 
 <p>Unsupported types:</p>

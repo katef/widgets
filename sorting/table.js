@@ -91,7 +91,7 @@ const table_types = [
 
 	/* currency */ {
 		/* TODO: add more, \uxxxx */
-		re:  /^[$]?[0-9.,']+(\.[0-9,']+[cp]?)?$/,
+		re:  /^[$\uA3]?[0-9.,']+(\.[0-9,']+[cp]?)?$/,
 		cmp: function (a, b) {
 			/* TODO: "32c" needs to become "0.32" */
 			a = a.replace(/[,'$cp]/g, '');
@@ -125,7 +125,7 @@ const table_types = [
 	},
 
 	/* string */ {
-		re:  /^.*$/,
+		re:  /./,
 		cmp: function (a, b) {
 			a = a.toLowerCase();
 			b = b.toLowerCase();
