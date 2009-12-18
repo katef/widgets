@@ -32,6 +32,7 @@
 /*
  * TODO: omit diagonal <th>s
  * TODO: nested tables
+ * TODO: serialse <input>s etc
  * TODO: permit empty <td>.innerHTML's during the sort(cmp) function, centralised
  * TODO: refactor to avoid repeated xpath queries
  * TODO: make it scale (cache column type, cache widths)
@@ -90,13 +91,13 @@ const table_types = [
 	},
 
 	/* currency */ {
-		/* TODO: add more, \uxxxx */
-		re:  /^[$\uA3]?[0-9.,']+(\.[0-9,']+[cp]?)?$/,
+		re:  /^[#$\uA3]?[0-9.,']*\.?[0-9,]+([cp$]|UKP|GBP|USD)?$/i,
 		cmp: function (a, b) {
-			/* TODO: "32c" needs to become "0.32" */
-			a = a.replace(/[,'$cp]/g, '');
-			b = b.replace(/[,'$cp]/g, '');
-			return Number(a) - Number(b);
+			var ad = /[0-9][cp]$/i.test(a) ? 100 : 1;
+			var bd = /[0-9][cp]$/i.test(b) ? 100 : 1;
+			a = a.replace(/[^0-9.]/g, '');
+			b = b.replace(/[^0-9.]/g, '');
+			return Number(a) / ad - Number(b) / bd;
 		}
 	},
 
