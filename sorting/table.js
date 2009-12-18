@@ -32,10 +32,13 @@
 /*
  * TODO: omit diagonal <th>s
  * TODO: nested tables
+ * TODO: permit empty <td>.innerHTML's during the sort(cmp) function, centralised
  * TODO: refactor to avoid repeated xpath queries
  * TODO: make it scale (cache column type, cache widths)
  * TODO: make it work with HTML namespaces, too
  * TODO: when flipping, if the class is set, we can assume the column is already sorted
+ * TODO: cache column on first <th> click; this avoids needing to count @colspan each time
+ * TODO: when masking, eliminate discounted indexes on-the-fly (pass a running mask through to each <td>)
  */
 
 
@@ -61,6 +64,7 @@ var table_uniqueid = 0;	/* see table_generateid */
  * - date/time (ISO 8601 and friends)
  * - scientific notation
  * - filesize (1kb etc)
+ * - Si magnitudes (1k3 3M 2da etc)
  *
  * See also: http://www.frequency-decoder.com/demo/table-sort-revisited/custom-sort-functions/
  */
@@ -76,15 +80,8 @@ const table_types = [
 		}
 	},
 
-	/* float */ {
-		re:  /^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/,
-		cmp: function (a, b) {
-			return Number(a) - Number(b);
-		}
-	},
-
-	/* number (with separators) */ {
-		re:  /^[0-9.,']+(\.[0-9,']+)?$/,
+	/* float (with separators) */ {
+		re:  /^[-+]?[0-9,']*\.?[0-9,]+([eE][-+]?[0-9]+)?$/,
 		cmp: function (a, b) {
 			a = a.replace(/[,']/g, '');
 			b = b.replace(/[,']/g, '');
@@ -100,6 +97,30 @@ const table_types = [
 			a = a.replace(/[,'$cp]/g, '');
 			b = b.replace(/[,'$cp]/g, '');
 			return Number(a) - Number(b);
+		}
+	},
+
+	/* DD/MM/YYYY */ {
+		re:  /^[0123]?[0-9]\/(10|11|12|0?[0-9])\/\d\d(\d\d)?$/,
+		cmp: function (a, b) {
+			var re = /^(\d+)\/(\d+)\/(\d+)$/;
+			a = a.match(re);
+			b = b.match(re);
+			a = new Date(a[3], Number(a[2]) - 1, a[1]);
+			b = new Date(b[3], Number(b[2]) - 1, b[1]);
+			return (a > b) - (a < b);
+		}
+	},
+
+	/* MM/DD/YYYY */ {
+		re:  /^(10|11|12|0?[0-9])\/[0123]?[0-9]\/\d\d(\d\d)?$/,
+		cmp: function (a, b) {
+			var re = /^(\d+)\/(\d+)\/(\d+)$/;
+			a = a.match(re);
+			b = b.match(re);
+			a = new Date(a[3], Number(a[2]) - 1, a[1]);
+			b = new Date(b[3], Number(b[2]) - 1, b[1]);
+			return (a > b) - (a < b);
 		}
 	},
 
@@ -417,15 +438,15 @@ function table_guesstypecolumn(t, rowindex, i) {
 		mask &= table_guesstypetd(v[w]);
 	}
 
-	/* Pick the first bit (i.e. the highest precidence) */
-	mask &= ~(mask - 1);
-
-	/* TODO: no type matched */
+	/* no type matched */
 	if (mask == 0) {
 		return -1;
 	}
 
-	/* TODO: explain this is the index of the bit set. */
+	/* pick the first bit (i.e. the highest precidence) */
+	mask &= ~(mask - 1);
+
+	/* the index of the bit set (i.e. the index into table_types[]) */
 	return table_ilog2(mask);
 }
 
