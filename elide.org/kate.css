@@ -130,6 +130,10 @@ img {
 	border: solid 1px;
 }
 
+img.noborder {
+	border: none;
+}
+
 ul, ol {
 	margin: 0;
 	padding: 0 30px;
@@ -137,5 +141,20 @@ ul, ol {
 
 li {
 	margin: 1ex auto;
+}
+
+pre .lines {
+	background-color: #f7f7f7;
+	padding: 1ex ! important;
+	padding-right: 1.5ex ! important;
+	color: #aaa;
+	border-right: 1px solid #eee;
+	float: left;
+	margin: -1ex;
+	margin-right: 1ex;
+}
+
+ul.list li {
+	list-style-type: none;
 }
 
