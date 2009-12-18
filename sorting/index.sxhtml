@@ -24,6 +24,20 @@
 			column. This helps when using tables as a reference; I find them more
 			convenient to read when sorted by whatever it is I'm looking for.</p>
 
+		<p>Features at a glance:</p>
+
+		<ul>
+			<li>Finds your <code>&lt;table&gt;</code>s automatically: no need
+				modify any HTML.</li>
+			<li>Automatically figures out different data types per-column. New
+				types are straightforward to add.</li>
+			<li>Handles <code>@colspan</code>, <code>&lt;thead&gt;</code> and
+				<code>&lt;tfoot&gt;</code> sensibly.</li>
+			<li>Avoids tables with things it cannot deal with
+				(<code>&lt;td&gt;</code> cells with
+				<code>@rowspan > 1</code>, for example).</li>
+		</ul>
+
 		<p>Click on the blue bits:</p>
 
 		<table>
@@ -48,9 +62,9 @@
 			being sorted lexographically.)</p>
 
 		<p>Sorting a table requires understanding the type of data; strings should be
-			sorted lexographically (that is, by each letter: Alice, Bob, Kate). Sorting
+			sorted lexographically (that is, by each letter: Aaron, Adam, Adele, Adrian, Anna). Sorting
 			numbers makes no sense if done lexographically (01, 1.0, 10, 101, 12). So a
-			mechanism needs to be in place to sort per-type. Javascript's Array.sort()
+			mechanism needs to be in place to sort per-type. Javascript's <code>Array.sort()</code>
 			takes a comparison function as an argument for this reason.</p>
 
 		<p>I've tried to make this easily extensible to support new types; see the
@@ -81,7 +95,7 @@ table th.table-ascending:after {
 			for browsers which do not support it natively.</p>
 
 
-		<h2>Features</h2>
+		<h2>Requirements</h2>
 			<p>My requirements are:</p>
 
 		<ul>
