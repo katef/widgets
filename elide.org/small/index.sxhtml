@@ -52,7 +52,17 @@
 				<td><a href="caesar.c"><code>caesar.c</code></a></td>
 
 				<td>A straightforward implementation of
-					<a href="http://wikipedia.org/wiki/Caesar_cipher">Caesar's cipher</a>.</td>
+					<a href="http://wikipedia.org/wiki/Caesar_cipher">Caesar's cipher</a>.
+					Somebody in <a href="irc://irc.freenode.org/##c">##c</a>
+					wrote <a href="http://www.calltopower.de/blog/?p=901">a Qt
+					frontend</a> to this.</td>
+			</tr>
+
+			<tr>
+				<td><a href="rpn.c"><code>rpn.c</code></a></td>
+
+				<td>A reverse polish notation calculator. Arguments are
+					consumed from the command line.</td>
 			</tr>
 		</table>
 
