@@ -31,6 +31,7 @@
 
 /*
  * TODO: omit diagonal <th>s
+ * TODO: omtimise for the typical special case of no @colspan
  * TODO: nested tables
  * TODO: serialse <input>s etc
  * TODO: permit empty <td>.innerHTML's during the sort(cmp) function, centralised
@@ -39,7 +40,6 @@
  * TODO: make it work with HTML namespaces, too
  * TODO: when flipping, if the class is set, we can assume the column is already sorted
  * TODO: cache column on first <th> click; this avoids needing to count @colspan each time
- * TODO: when masking, eliminate discounted indexes on-the-fly (pass a running mask through to each <td>)
  */
 
 
@@ -401,14 +401,23 @@ function table_countcols(t) {
 }
 
 /* TODO: explain this returns a mask of table_type[] indexes */
-function table_guesstypetd(td) {
+/* TODO: explain that runningmask is used to eliminate types we know we cannot consider */
+function table_guesstypetd(runningmask, td) {
 	var mask;
 
 	mask = 0;
 
 	for (var i in table_types) {
+		var j;
+
+		j = 1 << i;
+
+		if ((runningmask & j) == 0) {
+			continue;
+		}
+
 		if (table_types[i].re.test(td.innerHTML)) {
-			mask |= 1 << i;
+			mask |= j;
 		}
 	}
 
@@ -436,7 +445,7 @@ function table_guesstypecolumn(t, rowindex, i) {
 	for (var w in v) {
 		/* TODO: identify cell type */
 		/* TODO: & together all masks. Array.map(function() { &= }) perhaps */
-		mask &= table_guesstypetd(v[w]);
+		mask &= table_guesstypetd(mask, v[w]);
 	}
 
 	/* no type matched */
