@@ -21,14 +21,14 @@
 	<div id="main">
 		<p>Test tables for <a href="http://elide.org/widgets/sorting/">sortable tables</a>.</p>
 
-<p>Supported types:</p>
+<p>Supported types (these are sort types, not data types):</p>
 <table border="1">
-<tr><th>Currency</th>    <th>DD/MM/YYYY</th> <th>MM/DD/YYYY</th> <th>Numeric</th>     </tr>
-<tr><td>&pound;3.23</td> <td>21/08/1981</td> <td>08/21/1981</td> <td>23'000.53</td>   </tr>
-<tr><td>&pound;1.01</td> <td>20/8/1981</td>  <td>8/20/1981</td>  <td>23'0005.2e-1</td></tr>
-<tr><td>32p</td>         <td>12/12/1909</td> <td>12/12/1909</td> <td>22'000</td>      </tr>
-<tr><td>301p</td>    <td>1/1/2009</td>   <td>1/1/2009</td>   <td>24,123</td>      </tr>
-<tr><td>&pound;3UKP</td>    <td>2/2/2009</td>   <td>2/2/2009</td>   <td>20,999e0</td>    </tr>
+<tr><th>Lexographic</th> <th>Currency</th>    <th>DD/MM/YYYY</th> <th>MM/DD/YYYY</th> <th>Numeric</th>     </tr>
+<tr><td>7</td>           <td>&pound;3.23</td> <td>21/08/1981</td> <td>08/21/1981</td> <td>23'000.53</td>   </tr>
+<tr><td>Surprises</td>   <td>&pound;1.01</td> <td>20/8/1981</td>  <td>8/20/1981</td>  <td>23'0005.2e-1</td></tr>
+<tr><td>Scorpions</td>   <td>32p</td>         <td>12/12/1909</td> <td>12/12/1909</td> <td>22'000</td>      </tr>
+<tr><td>Sasuages</td>    <td>301p</td>        <td>1/1/2009</td>   <td>1/1/2009</td>   <td>24,123</td>      </tr>
+<tr><td>Spanners</td>    <td>&pound;3UKP</td> <td>2/2/2009</td>   <td>2/2/2009</td>   <td>20,999e0</td>    </tr>
 </table>
 
 <p>Unsupported types:</p>
