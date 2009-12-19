@@ -512,10 +512,6 @@ function table_sortcolumntd(t, v, lowest, cmp) {
 
 	for (var w in v) {
 		table_addclass(v[w], "table-sorted");
-
-		/*
-		 * TODO: Humongous bottleneck; 75% of the entire runtime is spent here.
-		 */
 		body.appendChild(v[w].parentNode);
 	}
 }
@@ -525,8 +521,7 @@ function table_sortcolumntd(t, v, lowest, cmp) {
  * a column to be sorted.
  */
 function table_sort(th, rowindex, i) {
-	var typeindex;
-	var tr, t, v;
+	var tr, t;
 
 	if (th.parentNode.localName != 'tr') {
 		return;
@@ -542,18 +537,48 @@ function table_sort(th, rowindex, i) {
 		return;
 	}
 
-	v = table_getcolumntd(t, rowindex, i);
-	if (v.length == 0) {
-		return;
-	}
+	/*
+	 * This little dance is an optimisation for speed; all the DOM modification
+	 * is performed with the table node taken out of the document. This stops a
+	 * browser from attempting to reflow the page layout every time a <tr> is
+	 * added or removed.
+	 *
+	 * After the modifications are done, the table is swapped back in to the
+	 * document. A placeholder node is used to conveniently hold its position.
+	 */
+	{
+		var parent;
+		var placeholder;
+		var typeindex;
+		var v;
 
-	typeindex = table_guesstypecolumn(v);
-	if (typeindex == -1) {
-		/* TODO: no type matched */
-		return;
-	}
+		parent = t.parentNode;
+		if (parent == null) {
+			return;
+		}
 
-	table_sortcolumntd(t, v, th, table_types[typeindex].cmp);
+		placeholder = document.createComment('placeholder');
+		if (placeholder == null) {
+			return;
+		}
+
+		parent.replaceChild(placeholder, t);
+
+		v = table_getcolumntd(t, rowindex, i);
+		if (v.length == 0) {
+			return;
+		}
+
+		typeindex = table_guesstypecolumn(v);
+		if (typeindex == -1) {
+			/* TODO: no type matched */
+			return;
+		}
+
+		table_sortcolumntd(t, v, th, table_types[typeindex].cmp);
+
+		parent.replaceChild(t, placeholder);
+	}
 }
 
 /*
