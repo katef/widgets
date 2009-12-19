@@ -43,8 +43,6 @@
  */
 
 
-var table_uniqueid = 0;	/* see table_generateid */
-
 /*
  * This array determines how to sort each data type. Types are identified by
  * regexp applied to each <td>'s .innerHTML in a column. Since cells are
@@ -134,23 +132,6 @@ const table_types = [
 		}
 	}
 ];
-
-/*
- * Generate a unique ID suitable for use in @id attributes.
- */
-function table_generateid(prefix) {
-	for (;;) {
-		var s;
-
-		s = prefix + table_uniqueid.toString(16);
-
-		if (!document.getElementById(s)) {
-			return s;
-		}
-
-		table_uniqueid++;
-	}
-}
 
 /*
  * Floor of the binary logarithm of i.
@@ -427,10 +408,9 @@ function table_guesstypetd(runningmask, td) {
 /*
  * TODO: returns type ID's index or -1
  */
-function table_guesstypecolumn(t, rowindex, i) {
+function table_guesstypecolumn(v) {
 	var typeindex;
 	var mask;
-	var v;
 
 	/*
 	 * For each regex that matches against a cell, add that type to a set. Then
@@ -441,7 +421,6 @@ function table_guesstypecolumn(t, rowindex, i) {
 
 	mask = ~0;
 
-	v = table_getcolumntd(t, rowindex, i);
 	for (var w in v) {
 		/* TODO: identify cell type */
 		/* TODO: & together all masks. Array.map(function() { &= }) perhaps */
@@ -466,18 +445,13 @@ function table_guesstypecolumn(t, rowindex, i) {
  *
  * Returns true if the column is to be sorted in descending order.
  */
-function table_flipdir(t, i) {
+function table_flipdir(t, lowest) {
 	var lowest;
 	var v;
 
 	/* TODO: explain goal: */
 	/* TODO: only reverse on clicking on the *same* th again; so store state in the <th> */
 	/* TODO: explain we're getting the th to store state; state is in the class */
-
-	lowest = table_getcolumnth(t, i).pop();
-	if (lowest == null) {
-		return;
-	}
 
 	/* TODO: grab dir here and invert it */
 	dir = table_hasclass(lowest, 'table-ascending')
@@ -504,18 +478,17 @@ function table_flipdir(t, i) {
 	return dir == 'table-descending';
 }
 
-function table_sortcolumntd(t, rowindex, i, cmp) {
+function table_sortcolumntd(t, v, lowest, cmp) {
 	var tr, body;
-	var v;
 
-	v = table_getcolumntd(t, rowindex, i);
+	/* TODO: interrogate 'lowest', to find if it's already sorted (and if so, which direction) */
 
 	v.sort(function (a, b) {
 			/* TODO: serialisation of more complex tags goes here */
 			return cmp(a.innerHTML, b.innerHTML);
 		});
 
-	if (table_flipdir(t, i)) {
+	if (table_flipdir(t, lowest)) {
 		v.reverse();
 	}
 
@@ -539,14 +512,9 @@ function table_sortcolumntd(t, rowindex, i, cmp) {
  * This is the callback from the <th>.onclick events; the entry point to cause
  * a column to be sorted.
  */
-function table_sort(id, rowindex, i) {
+function table_sort(th, rowindex, i) {
 	var typeindex;
-	var th, tr, t;
-
-	th = document.getElementById(id);
-	if (th == null) {
-		return;
-	}
+	var tr, t, v;
 
 	if (th.parentNode.localName != 'tr') {
 		return;
@@ -562,17 +530,18 @@ function table_sort(id, rowindex, i) {
 		return;
 	}
 
-	typeindex = table_guesstypecolumn(t, rowindex, i);
+	v = table_getcolumntd(t, rowindex, i);
+	if (v.length == 0) {
+		return;
+	}
+
+	typeindex = table_guesstypecolumn(v);
 	if (typeindex == -1) {
 		/* TODO: no type matched */
 		return;
 	}
 
-	/*
-	 * TODO: if we get this column here, just pass it to
-	 * table_guesstypecolumn() to save getting it again.
-	 */
-	table_sortcolumntd(t, rowindex, i, table_types[typeindex].cmp);
+	table_sortcolumntd(t, v, th, table_types[typeindex].cmp);
 }
 
 /*
@@ -622,10 +591,6 @@ function table_inittable(t) {
 		 * table (i.e. no diagonal <th>s; they'd be moved around when sorting)
 		 */
 
-		if (!lowest.id) {
-			lowest.id = table_generateid('table-th-');
-		}
-
 		/*
 		 * TODO: should probably wrap the <th> in an <a>, for UI consistency
 		 * wrt accidentally selecting text.
@@ -633,7 +598,7 @@ function table_inittable(t) {
 
 		table_addclass(lowest, "table-sortable");
 		lowest.setAttribute("onclick",
-			"table_sort(this.id, " + rowindex + ", " + i + "); false");
+			"table_sort(this, " + rowindex + ", " + i + "); false");
 
 		/* TODO: make this lowest.onclick = function (event) { ... }; instead */
 	}
