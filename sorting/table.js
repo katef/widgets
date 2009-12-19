@@ -150,6 +150,14 @@ function table_ilog2(i) {
 	return l;
 }
 
+function table_serialise(node) {
+	if (!node.table_serialised) {
+		node.table_serialised = node.innerHTML;
+	}
+
+	return node.table_serialised;
+}
+
 function table_hasclass(node, class) {
 	var a, c;
 
@@ -200,7 +208,7 @@ function table_addclass(node, class) {
 
 	c = node.getAttribute('class');
 	if (c != null) {
-		a = a.concat(c.split(/\s/));
+		a = c.split(/\s/);
 	}
 
 	for (var i = 0; i < a.length; i++) {
@@ -397,7 +405,7 @@ function table_guesstypetd(runningmask, td) {
 			continue;
 		}
 
-		if (table_types[i].re.test(td.innerHTML)) {
+		if (table_types[i].re.test(table_serialise(td))) {
 			mask |= j;
 		}
 	}
@@ -448,6 +456,7 @@ function table_guesstypecolumn(v) {
 function table_flipdir(t, lowest) {
 	var lowest;
 	var v;
+	var dir;
 
 	/* TODO: explain goal: */
 	/* TODO: only reverse on clicking on the *same* th again; so store state in the <th> */
@@ -484,8 +493,7 @@ function table_sortcolumntd(t, v, lowest, cmp) {
 	/* TODO: interrogate 'lowest', to find if it's already sorted (and if so, which direction) */
 
 	v.sort(function (a, b) {
-			/* TODO: serialisation of more complex tags goes here */
-			return cmp(a.innerHTML, b.innerHTML);
+			return cmp(table_serialise(a), table_serialise(b));
 		});
 
 	if (table_flipdir(t, lowest)) {
@@ -504,7 +512,11 @@ function table_sortcolumntd(t, v, lowest, cmp) {
 
 	for (var w in v) {
 		table_addclass(v[w], "table-sorted");
-		body.appendChild(body.removeChild(v[w].parentNode));
+
+		/*
+		 * TODO: Humongous bottleneck; 75% of the entire runtime is spent here.
+		 */
+		body.appendChild(v[w].parentNode);
 	}
 }
 
