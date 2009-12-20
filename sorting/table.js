@@ -34,11 +34,11 @@
  * TODO: omtimise for the typical special case of no @colspan
  * TODO: nested tables
  * TODO: serialse <input>s etc
+ * TODO: add a "table-sorting" class to <th>, for UI feedback
  * TODO: permit empty <td>.innerHTML's during the sort(cmp) function, centralised
  * TODO: refactor to avoid repeated xpath queries
  * TODO: make it scale (cache column type, cache widths)
  * TODO: make it work with HTML namespaces, too
- * TODO: when flipping, if the class is set, we can assume the column is already sorted
  * TODO: cache column on first <th> click; this avoids needing to count @colspan each time
  */
 
@@ -447,73 +447,114 @@ function table_guesstypecolumn(v) {
 	return table_ilog2(mask);
 }
 
-/*
- * Reset the sortedness state of all columns, and set the sortedness state for
- * the given column, which is flipped in direction if neccessary.
- *
- * Returns true if the column is to be sorted in descending order.
- */
-function table_flipdir(t, lowest) {
-	var lowest;
-	var v;
+/* TODO: explain this function orders data, not UI */
+/* TODO: explain goal: */
+/* TODO: only reverse on clicking on the *same* th again; so store state in the <th> */
+/* TODO: explain we're getting the th to store state; state is in the class */
+/* TODO: explain two mutually exlusive operations: sort, or reverse */
+/* TODO: interrogate 'th', to find if it's already sorted (and if so, which direction) */
+function table_ordercolumn(th, cmp, v) {
 	var dir;
 
-	/* TODO: explain goal: */
-	/* TODO: only reverse on clicking on the *same* th again; so store state in the <th> */
-	/* TODO: explain we're getting the th to store state; state is in the class */
+	if (table_hasclass(th, "table-sorted")) {
+		v.reverse();
 
-	/* TODO: grab dir here and invert it */
-	dir = table_hasclass(lowest, 'table-ascending')
-		? 'table-descending'
-		: 'table-ascending';
+		dir = table_hasclass(th, 'table-ascending')
+			? 'table-descending'
+			: 'table-ascending';
+	} else {
+		v.sort(function (a, b) {
+				a = table_serialise(a);
+				b = table_serialise(b);
 
-	/* Reset classes for all other columns' data */
-	v = table_xpath(t, "h:tbody/h:tr/h:td|h:tr/h:td");
-	for (var w in v) {
-		table_removeclass(v[w], "table-sorted");
+				/* TODO: test for empty a/b */
+
+				return cmp(a, b);
+			});
+
+		dir = 'table-ascending';
 	}
 
-	/* Reset direction for all other columns' headers */
-	v = table_xpath(t, "h:thead/h:tr/h:th|h:tr/h:th");
-	for (var w in v) {
-		table_removeclass(v[w], "table-ascending");
-		table_removeclass(v[w], "table-descending");
-		table_removeclass(v[w], "table-sorted");
-	}
-
-	table_addclass(lowest, dir);
-	table_addclass(lowest, "table-sorted");
-
-	return dir == 'table-descending';
+	return dir;
 }
 
-function table_sortcolumntd(t, v, lowest, cmp) {
-	var tr, body;
+/* TODO: explain this function makes the UI match the data */
+function table_renderorder(t, th, dir, v) {
+	/*
+	 * Reset the sortedness state of all columns, and set the sortedness state
+	 * for the given column, which is flipped in direction if neccessary.
+	 */
+	/* TODO: do classes last */
+	{
+		var o;
 
-	/* TODO: interrogate 'lowest', to find if it's already sorted (and if so, which direction) */
+		/* Reset classes for all other columns' data */
+		o = table_xpath(t, "h:tbody/h:tr/h:td|h:tr/h:td");
+		for (var w in o) {
+			table_removeclass(o[w], "table-sorted");
+		}
 
-	v.sort(function (a, b) {
-			return cmp(table_serialise(a), table_serialise(b));
-		});
+		/* Reset direction for all other columns' headers */
+		o = table_xpath(t, "h:thead/h:tr/h:th|h:tr/h:th");
+		for (var w in o) {
+			table_removeclass(o[w], "table-ascending");
+			table_removeclass(o[w], "table-descending");
+			table_removeclass(o[w], "table-sorted");
+		}
 
-	if (table_flipdir(t, lowest)) {
-		v.reverse();
+		table_addclass(th, dir);
+		table_addclass(th, "table-sorted");
 	}
 
-	tr = v[0].parentNode;
-	if (tr.localName != 'tr') {
+	/* TODO: reorder rows */
+	{
+		var body, tr;
+
+		tr = v[0].parentNode;
+		if (tr.localName != 'tr') {
+			return;
+		}
+
+		body = tr.parentNode;
+		if (body.localName != 'table' && body.localName != 'tbody') {
+			return;
+		}
+
+		for (var w in v) {
+			table_addclass(v[w], "table-sorted");
+			body.appendChild(v[w].parentNode);
+		}
+	}
+}
+
+/*
+ * This little dance is an optimisation for speed; all the DOM modification is
+ * performed with the table node taken out of the document. This stops a
+ * browser from attempting to reflow the page layout every time a <tr> is added
+ * or removed.
+ *
+ * After the modifications are done, the table is swapped back in to the
+ * document. A placeholder node is used to conveniently hold its position.
+ */
+function table_replacenode(node, f) {
+	var parent;
+	var placeholder;
+
+	parent = node.parentNode;
+	if (parent == null) {
 		return;
 	}
 
-	body = tr.parentNode;
-	if (body.localName != 'table' && body.localName != 'tbody') {
+	placeholder = document.createComment('placeholder');
+	if (placeholder == null) {
 		return;
 	}
 
-	for (var w in v) {
-		table_addclass(v[w], "table-sorted");
-		body.appendChild(v[w].parentNode);
-	}
+	parent.replaceChild(placeholder, node);
+
+	f();
+
+	parent.replaceChild(node, placeholder);
 }
 
 /*
@@ -521,64 +562,46 @@ function table_sortcolumntd(t, v, lowest, cmp) {
  * a column to be sorted.
  */
 function table_sort(th, rowindex, i) {
-	var tr, t;
+	var t;
 
-	if (th.parentNode.localName != 'tr') {
-		return;
-	}
-
-	tr = th.parentNode;
-
-	if (tr.parentNode.localName == 'table') {
-		t = tr.parentNode;
-	} else if (tr.parentNode.localName == 'thead') {
-		t = tr.parentNode.parentNode;
-	} else {
-		return;
-	}
-
-	/*
-	 * This little dance is an optimisation for speed; all the DOM modification
-	 * is performed with the table node taken out of the document. This stops a
-	 * browser from attempting to reflow the page layout every time a <tr> is
-	 * added or removed.
-	 *
-	 * After the modifications are done, the table is swapped back in to the
-	 * document. A placeholder node is used to conveniently hold its position.
-	 */
 	{
-		var parent;
-		var placeholder;
-		var typeindex;
-		var v;
+		var tr;
 
-		parent = t.parentNode;
-		if (parent == null) {
+		if (th.parentNode.localName != 'tr') {
 			return;
 		}
 
-		placeholder = document.createComment('placeholder');
-		if (placeholder == null) {
+		tr = th.parentNode;
+
+		if (tr.parentNode.localName == 'table') {
+			t = tr.parentNode;
+		} else if (tr.parentNode.localName == 'thead') {
+			t = tr.parentNode.parentNode;
+		} else {
 			return;
 		}
-
-		parent.replaceChild(placeholder, t);
-
-		v = table_getcolumntd(t, rowindex, i);
-		if (v.length == 0) {
-			return;
-		}
-
-		typeindex = table_guesstypecolumn(v);
-		if (typeindex == -1) {
-			/* TODO: no type matched */
-			return;
-		}
-
-		table_sortcolumntd(t, v, th, table_types[typeindex].cmp);
-
-		parent.replaceChild(t, placeholder);
 	}
+
+	table_replacenode(t, function () {
+			var typeindex;
+			var v;
+			var dir;
+	
+			v = table_getcolumntd(t, rowindex, i);
+			if (v.length == 0) {
+				return;
+			}
+	
+			typeindex = table_guesstypecolumn(v);
+			if (typeindex == -1) {
+				/* TODO: no type matched */
+				return;
+			}
+	
+			dir = table_ordercolumn(th, table_types[typeindex].cmp, v);
+	
+			table_renderorder(t, th, dir, v);
+		});
 }
 
 /*
