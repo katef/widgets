@@ -39,7 +39,7 @@
  * TODO: refactor to avoid repeated xpath queries
  * TODO: make it scale (cache column type, cache widths)
  * TODO: make it work with HTML namespaces, too
- * TODO: cache column on first <th> click; this avoids needing to count @colspan each time
+ * TODO: alternate approach: pre-render entire <tables> sorted for each column. clicking to sort just swaps them in
  */
 
 
@@ -586,21 +586,28 @@ function table_sort(th, rowindex, i) {
 			var typeindex;
 			var v;
 			var dir;
-	
-			v = table_getcolumntd(t, rowindex, i);
-			if (v.length == 0) {
+
+			if (th.table_v == null) {
+				th.table_v = table_getcolumntd(t, rowindex, i);
+			}
+
+			if (th.table_v.length == 0) {
 				return;
 			}
-	
-			typeindex = table_guesstypecolumn(v);
-			if (typeindex == -1) {
+
+			if (th.table_typeindex == null) {
+				th.table_typeindex = table_guesstypecolumn(th.table_v);
+			}
+
+			if (th.table_typeindex == -1) {
 				/* TODO: no type matched */
 				return;
 			}
-	
-			dir = table_ordercolumn(th, table_types[typeindex].cmp, v);
-	
-			table_renderorder(t, th, dir, v);
+
+			dir = table_ordercolumn(th, table_types[th.table_typeindex].cmp,
+				th.table_v);
+
+			table_renderorder(t, th, dir, th.table_v);
 		});
 }
 
