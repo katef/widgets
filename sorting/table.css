@@ -20,6 +20,11 @@ table th.table-sortable {
 	background-color: #e7eef7;
 }
 
+table th.table-notype {
+	border-color: darkred;
+	background-color: pink;
+}
+
 table th.table-sortable:after {
 	content: "\A0";
 	min-width: 1em;

@@ -35,7 +35,6 @@
  * TODO: nested tables
  * TODO: serialse <input>s etc
  * TODO: add a "table-sorting" class to <th>, for UI feedback
- * TODO: permit empty <td>.innerHTML's during the sort(cmp) function, centralised
  * TODO: refactor to avoid repeated xpath queries
  * TODO: make it scale (cache column type, cache widths)
  * TODO: make it work with HTML namespaces, too
@@ -45,15 +44,17 @@
 
 /*
  * This array determines how to sort each data type. Types are identified by
- * regexp applied to each <td>'s .innerHTML in a column. Since cells are
- * frequently empty, each regexp should also be able to match an empty cell.
+ * regexp applied to each <td>'s .innerHTML in a column. Since empty cells are
+ * handled by the calling function, these regexps are never passed (and hence
+ * need not match) an empty string.
  *
  * Each entry here is ordered by precidence; the highest types in this array
  * have higher precidence. The lowest entry is a "catch-all" type.
  *
  * The comparison functions used for sorting should return positive, negative,
  * or 0, as per Array.sort(). They are passed string values, from two <td>'s
- * .innerHTML values to compare.
+ * .innerHTML values to compare. Empty cells are handled by the calling
+ * function, and so the .cmp() callbacks are never be passed an empty string.
  *
  * The intention is that this array should be straightforward to extend with
  * additional types in the future.
@@ -151,8 +152,8 @@ function table_ilog2(i) {
 }
 
 function table_serialise(node) {
-	if (!node.table_serialised) {
-		node.table_serialised = node.innerHTML;
+	if (node.table_serialised == null) {
+		node.table_serialised = node.innerHTML.replace(/\s+/g, " ").trim();
 	}
 
 	return node.table_serialised;
@@ -294,34 +295,29 @@ function table_findthrow(t, th) {
 	return null;
 }
 
-/*
- * Returns an array of <th>s in the header for a table.
- *
- * colindex - 0-based column index of the column we're interested in.
- */
-/* TODO: remove table_getcolumn */
-function table_getcolumnth(t, colindex) {
-	var a, c;
+function table_getcolumn(rows, colindex, localname) {
+	var c;
 
 	c = [ ];
 
-	/* TODO: algorithim: for each row, loop through until we get to the desired colindex */
-	/* TODO: unfortunately I don't think javascript implementations provide variable binding */
-	/* TODO: better to count using the DOM API, i think; can more easily deal with colspan then */
-	a = table_xpath(t, "h:tr|h:thead/h:tr");
-	for (var i in a) {
-		var b, q;
+	/*
+	 * For each row, loop through its cells until the desired colindex is
+	 * reached. I would love to do this in XPath, but unfortunately I don't
+	 * think Javascript's API provides variable binding. So, counting here is
+	 * done using the DOM API instead.
+	 */
+	for (var i in rows) {
+		var cells, q;
 
 		q = 0;
 
-		/* TODO: loop through a[i] until we get to the desired colindex */
-		b = a[i].cells;
-		for (var j = 0; j < b.length; j++) {
-			q += table_cellcolspan(b[j]);
+		cells = rows[i].cells;
+		for (var j in cells) {
+			q += table_cellcolspan(cells[j]);
 
 			if (q > colindex) {
-				if (b[j].localName == 'th') {
-					c.push(b[j]);
+				if (cells[j].localName == localname) {
+					c.push(cells[j]);
 				}
 				break;
 			}
@@ -338,35 +334,27 @@ function table_getcolumnth(t, colindex) {
  * rowindex - 0-based row index of the row we're interested cells below.
  */
 function table_getcolumntd(t, rowindex, colindex) {
-	var a, c;
-
-	c = [ ];
+	var a;
 
 	rowindex++;
 
-	/* TODO: algorithim: same as for table_getcolumnth */
-	/* TODO: we only want <td>s below a given <th> */
-	a = table_xpath(t, "h:tr[position() > " + rowindex + "]|h:tbody/h:tr[position() > " + rowindex + "]");
-	for (var i in a) {
-		var b, q;
+	a = table_xpath(t, "h:tr[position() > " + rowindex + "]"
+	        + "|h:tbody/h:tr[position() > " + rowindex + "]");
 
-		q = 0;
+	return table_getcolumn(a, colindex, "td");
+}
 
-		/* TODO: loop through a[i] until we get to the desired colindex */
-		b = a[i].cells;
-		for (var j = 0; j < b.length; j++) {
-			q += table_cellcolspan(b[j]);
+/*
+ * Returns an array of <th>s in the header for a table.
+ *
+ * colindex - 0-based column index of the column we're interested in.
+ */
+function table_getcolumnth(t, colindex) {
+	var a;
 
-			if (q > colindex) {
-				if (b[j].localName == 'td') {
-					c.push(b[j]);
-				}
-				break;
-			}
-		}
-	}
+	a = table_xpath(t, "h:tr|h:thead/h:tr");
 
-	return c;
+	return table_getcolumn(a, colindex, "th");
 }
 
 function table_countcols(t) {
@@ -389,9 +377,12 @@ function table_countcols(t) {
 	return cols;
 }
 
-/* TODO: explain this returns a mask of table_type[] indexes */
-/* TODO: explain that runningmask is used to eliminate types we know we cannot consider */
-function table_guesstypetd(runningmask, td) {
+/*
+ * Return a mask of all table_type[] indexes which match the given string.
+ * Only indexes present in the 'runningmask' argument are considered for
+ * matching, and so it may be used to eliminate testing for irrelevant types.
+ */
+function table_guesstypetd(runningmask, s) {
 	var mask;
 
 	mask = 0;
@@ -405,7 +396,7 @@ function table_guesstypetd(runningmask, td) {
 			continue;
 		}
 
-		if (table_types[i].re.test(table_serialise(td))) {
+		if (s == "" || table_types[i].re.test(s)) {
 			mask |= j;
 		}
 	}
@@ -414,7 +405,8 @@ function table_guesstypetd(runningmask, td) {
 }
 
 /*
- * TODO: returns type ID's index or -1
+ * Return the 0-based index of the highest precidence type matching all cells
+ * in the given column, or -1 if no type matches.
  */
 function table_guesstypecolumn(v) {
 	var typeindex;
@@ -430,9 +422,7 @@ function table_guesstypecolumn(v) {
 	mask = ~0;
 
 	for (var w in v) {
-		/* TODO: identify cell type */
-		/* TODO: & together all masks. Array.map(function() { &= }) perhaps */
-		mask &= table_guesstypetd(mask, v[w]);
+		mask &= table_guesstypetd(mask, table_serialise(v[w]));
 	}
 
 	/* no type matched */
@@ -447,12 +437,19 @@ function table_guesstypecolumn(v) {
 	return table_ilog2(mask);
 }
 
-/* TODO: explain this function orders data, not UI */
-/* TODO: explain goal: */
-/* TODO: only reverse on clicking on the *same* th again; so store state in the <th> */
-/* TODO: explain we're getting the th to store state; state is in the class */
-/* TODO: explain two mutually exlusive operations: sort, or reverse */
-/* TODO: interrogate 'th', to find if it's already sorted (and if so, which direction) */
+/*
+ * This function reorders a column of data; this does not affect the page
+ * layout - it is the array order which is modified, not the DOM tree.
+ *
+ * This function provides two mutually exclusive operations:
+ *
+ *  - Sorting unordered data; this happens on the first click.
+ *  - Reversing sorted data; this happens on subsequent clicks.
+ *
+ * Descision-making for when to reorder, and in what direction depends on the
+ * state of the current data. State is maintained in the @class list of the
+ * <th> associated with that column.
+ */
 function table_ordercolumn(th, cmp, v) {
 	var dir;
 
@@ -467,7 +464,8 @@ function table_ordercolumn(th, cmp, v) {
 				a = table_serialise(a);
 				b = table_serialise(b);
 
-				/* TODO: test for empty a/b */
+				if (a == "") return +1;
+				if (b == "") return -1;
 
 				return cmp(a, b);
 			});
@@ -478,17 +476,20 @@ function table_ordercolumn(th, cmp, v) {
 	return dir;
 }
 
-/* TODO: explain this function makes the UI match the data */
+/*
+ * Update the DOM tree to reflect the order of a given column.
+ * @class attributes are also updated accordingly.
+ */
 function table_renderorder(t, th, dir, v) {
 	/*
 	 * Reset the sortedness state of all columns, and set the sortedness state
-	 * for the given column, which is flipped in direction if neccessary.
+	 * for the given column.
 	 */
-	/* TODO: do classes last */
 	{
 		var o;
 
 		/* Reset classes for all other columns' data */
+		/* TODO: only if this isn't our column; deal with that separately */
 		o = table_xpath(t, "h:tbody/h:tr/h:td|h:tr/h:td");
 		for (var w in o) {
 			table_removeclass(o[w], "table-sorted");
@@ -499,14 +500,18 @@ function table_renderorder(t, th, dir, v) {
 		for (var w in o) {
 			table_removeclass(o[w], "table-ascending");
 			table_removeclass(o[w], "table-descending");
-			table_removeclass(o[w], "table-sorted");
+			if (o[w] != th) {
+				table_removeclass(o[w], "table-sorted");
+			}
 		}
 
 		table_addclass(th, dir);
 		table_addclass(th, "table-sorted");
 	}
 
-	/* TODO: reorder rows */
+	/*
+	 * Reorder rows.
+	 */
 	{
 		var body, tr;
 
@@ -600,7 +605,7 @@ function table_sort(th, rowindex, i) {
 			}
 
 			if (th.table_typeindex == -1) {
-				/* TODO: no type matched */
+				table_addclass(th, "table-notype");
 				return;
 			}
 
@@ -660,7 +665,7 @@ function table_inittable(t) {
 
 		/*
 		 * TODO: should probably wrap the <th> in an <a>, for UI consistency
-		 * wrt accidentally selecting text.
+		 * wrt accidentally selecting text. If so, .blur() it onclick?
 		 */
 
 		table_addclass(lowest, "table-sortable");
