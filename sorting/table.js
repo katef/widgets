@@ -75,8 +75,9 @@ const table_types = [
 			var re = /^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/;
 			a = a.match(re);
 			b = b.match(re);
-			return (a[1] << 3 | a[2] << 2 | a[3] << 1 | a[4] << 0)
-			     - (a[1] << 3 | b[2] << 2 | b[3] << 1 | b[4] << 0);
+			/* XXX: bitwise, not bytes */
+			return (a[1] << 24 | a[2] << 16 | a[3] << 8 | a[4] << 0)
+			     - (a[1] << 24 | b[2] << 16 | b[3] << 8 | b[4] << 0);
 		}
 	},
 
@@ -108,7 +109,7 @@ const table_types = [
 			b = b.match(re);
 			a = new Date(a[3], Number(a[2]) - 1, a[1]);
 			b = new Date(b[3], Number(b[2]) - 1, b[1]);
-			return (a > b) - (a < b);
+			return a - b;
 		}
 	},
 
