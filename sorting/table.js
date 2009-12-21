@@ -75,7 +75,6 @@ const table_types = [
 			var re = /^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/;
 			a = a.match(re);
 			b = b.match(re);
-			/* XXX: bitwise, not bytes */
 			return (a[1] << 24 | a[2] << 16 | a[3] << 8 | a[4] << 0)
 			     - (a[1] << 24 | b[2] << 16 | b[3] << 8 | b[4] << 0);
 		}
