@@ -158,6 +158,13 @@
 <tr><td>7</td> <td>8</td> <td>9</td> <td>c</td></tr>
 </table>
 
+<table border="1" style="float: left; margin-right: 2em;">
+<tr><th>A</th> <th>B</th> <th>C</th> <th>D</th></tr>
+<tr><td>1</td> <td> </td> <td>3</td> <td>a</td></tr>
+<tr><td> </td> <td>5</td> <td>6</td> <td>b</td></tr>
+<tr><td>7</td> <td>8</td> <td> </td> <td> </td></tr>
+</table>
+
 <table border="1">
 <tr><td>A</td> <th colspan="1">B</th> <td>C</td> <th>D</th></tr>
 <tr><th>1</th> <td>2</td> <td>3</td> <td>a</td></tr>
