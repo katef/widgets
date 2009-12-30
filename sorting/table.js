@@ -39,6 +39,8 @@
  * TODO: make it scale (cache column type, cache widths)
  * TODO: make it work with HTML namespaces, too
  * TODO: alternate approach: pre-render entire <tables> sorted for each column. clicking to sort just swaps them in
+ * TODO: encapsulate in an object; keep functions private
+ * TODO: convention to prefix variables $ for DOM objects
  */
 
 
