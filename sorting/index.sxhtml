@@ -75,7 +75,10 @@
 		<p>This can cope reasonably with some pretty silly tables, and does what seems
 			to look sensible (or at least, not surprising).</p>
 
-		<p><a href="table.js">Here's the code</a>, and some minimal CSS:</p>
+		<h2>Getting it</h2>
+
+		<p><a href="table.js">Here's the code</a>, <a href="test.sxhtml">some
+			test cases</a>, and some minimal CSS:</p>
 
 		<pre><![CDATA[table th.table-descending:after {
     content: "\25B2";
