@@ -17,6 +17,7 @@
  * TODO: interpret to DOM expressions on-the-fly
  * TODO: probably better to split the XPath implementation (with a native API) from the DOM3 XPath interface
  * TODO: tests: take all examples from spec
+ * TODO: check const
  */
 
 XPath = new (function () {
@@ -164,6 +165,9 @@ XPath = new (function () {
 			case tok.RELOP:
 			case tok.ADDOP:
 			case tok.MULOP:
+			case tok.ANDOP:
+			case tok.ADDOP:
+			case tok.OROP:
 				break;
 
 			default:
@@ -210,6 +214,7 @@ XPath = new (function () {
 		return mask;
 	}
 
+	/* TODO: explain usage */
 	function getnexttoken(s, prev) {
 		var mask;
 		var longest;
@@ -252,15 +257,81 @@ XPath = new (function () {
 			}
 		}
 
+		longest.s = s.substring(longest.m[0].length, s.length);
+
 		return longest;
 	}
 
-	// XXX: remove
-	this.skipwhitespace = skipwhitespace;
-	this.unabbreviate   = unabbreviate;
-	this.specialcases   = specialcases;
-	this.getnexttoken   = getnexttoken;
-	this.tok = tok;
+	/* TODO: explain returns an array, terminated by EOF or ERROR */
+	function lex(s) {
+		var a;
+		var prev;
+
+		a = [ ];
+
+		prev = null;
+
+		do {
+			var t;
+
+			t = getnexttoken(s, prev);
+
+			a.push({
+					tok: t.l.tok,
+					m:   t.m
+				});
+
+			s = t.s;
+
+			prev = t.l.tok;
+		} while (t.l.tok != tok.ERROR && t.l.tok != tok.EOF);
+
+		return a;
+	}
+
+	this.debug = {
+		dump_lex: function (s) {
+			var a;
+
+			a = lex(s);
+
+			for (var i in a) {
+				const n = [
+					{ tok: tok.EOF,        n: 'EOF'        },
+					{ tok: tok.ERROR,      n: 'ERROR'      },
+					{ tok: tok.NUMBER,     n: 'NUMBER'     },
+					{ tok: tok.LITERAL,    n: 'LITERAL'    },
+					{ tok: tok.COMMA,      n: 'COMMA'      },
+					{ tok: tok.AXISSEP,    n: 'AXISSEP'    },
+					{ tok: tok.OPENPRED,   n: 'OPENPRED'   },
+					{ tok: tok.CLOSEPRED,  n: 'CLOSEPRED'  },
+					{ tok: tok.OPENGROUP,  n: 'OPENGROUP'  },
+					{ tok: tok.CLOSEGROUP, n: 'CLOSEGROUP' },
+					{ tok: tok.OROP,       n: 'OROP'       },
+					{ tok: tok.ADDOP,      n: 'ADDOP'      },
+					{ tok: tok.MULOP,      n: 'MULOP'      },
+					{ tok: tok.ANDOP,      n: 'ANDOP'      },
+					{ tok: tok.EQUOP,      n: 'EQUOP'      },
+					{ tok: tok.RELOP,      n: 'RELOP'      },
+					{ tok: tok.SEQOP,      n: 'SEQOP'      },
+					{ tok: tok.SETOP,      n: 'SETOP'      },
+					{ tok: tok.NODETYPE,   n: 'NODETYPE'   },
+					{ tok: tok.FUNCTION,   n: 'FUNCTION'   },
+					{ tok: tok.NAMETEST,   n: 'NAMETEST'   },
+					{ tok: tok.AXISNAME,   n: 'AXISNAME'   },
+					{ tok: tok.VARIABLE,   n: 'VARIABLE'   },
+					{ tok: a[i].tok,       n: '?'          }
+				];
+
+				for (var j in n) {
+					if (a[i].tok == n[j].tok) {
+						console.log(" <" + n[j].n + " '" + a[i].m[0] + "'>");
+						break;
+					}
+				}
+			}
+		}
+	}
 
 	this.setresolver = function (TODO) {
 		/* TODO: NS resolver same as DOM XPath interface */
