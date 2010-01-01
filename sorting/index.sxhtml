@@ -15,7 +15,7 @@
 		<script src="../linenumbers/linenumbers.js" type="text/javascript"></script>
 	</head>
 
-	<body onload="table_init(); init_linenumbers()">
+	<body onload="Table.init(); init_linenumbers()">
 	<h1 id="title">Kate&rsquo;s Web Widgets &mdash; Sortable Tables</h1>
 	<!--#include virtual="../../contents.inc"-->
 
