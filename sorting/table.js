@@ -44,7 +44,7 @@
  */
 
 
-const Table = new (function () {
+var Table = new (function () {
 	/*
 	 * This array determines how to sort each data type. Types are identified by
 	 * regexp applied to each <td>'s .innerHTML in a column. Since empty cells are
@@ -71,7 +71,7 @@ const Table = new (function () {
 	 *
 	 * See also: http://www.frequency-decoder.com/demo/table-sort-revisited/custom-sort-functions/
 	 */
-	const types = [
+	var types = [
 		/* IP address */ {
 			re:  /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/,
 			cmp: function (a, b) {
@@ -242,7 +242,7 @@ const Table = new (function () {
 	 * xpath(document.documentElement, "//h:h1[1]")[0].style.color = 'red';
 	 */
 	function xpath(root, query) {
-		const type = XPathResult.ORDERED_NODE_ITERATOR_TYPE;
+		var type = XPathResult.ORDERED_NODE_ITERATOR_TYPE;
 		var resolver;
 		var a, r, n;
 
