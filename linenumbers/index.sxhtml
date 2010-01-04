@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="linenumbers.css"/>
 	</head>
 
-	<body onload="init_linenumbers()">
+	<body onload="Linenumbers.init(document.documentElement)">
 	<h1 id="title">Kate&rsquo;s Web Widgets &mdash; Non-selectable Line Numbers</h1>
 	<!--#include virtual="../../contents.inc"-->
 
