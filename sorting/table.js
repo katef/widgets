@@ -681,7 +681,7 @@ var Table = new (function () {
 
 
 	/* TODO: there is probably a way to automate calling this */
-	this.init = function () {
+	this.init = function (root) {
 		var a;
 
 		/*
@@ -689,9 +689,8 @@ var Table = new (function () {
 		 * their unsortabilty.
 		 */
 
-		a = xpath(document.documentElement,
-			  "//h:table[not(h:tbody/h:tr/h:td[@rowspan > 1]) "
-			+ "              and not(h:tr/h:td[@rowspan > 1])]");
+		a = xpath(root, "//h:table[not(h:tbody/h:tr/h:td[@rowspan > 1]) "
+		              + "              and not(h:tr/h:td[@rowspan > 1])]");
 		for (var i in a) {
 			inittable(a[i]);
 		}
