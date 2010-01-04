@@ -1,0 +1,520 @@
+/* $Id$ */
+
+/*
+ * TODO: explain This file is written in a format suitable for use by LLAnalyzer.
+ * See: http://www.cs.cornell.edu/courses/cs412/2001sp/resources/llanalyze.html
+ * TODO: s/Arguments_body/ArgumentsBody/g
+ */
+
+%start Expr
+
+	%token NUMBER
+	%token LITERAL
+
+	%token COMMA
+	%token AXISSEP
+	%token OPENPRED
+	%token CLOSEPRED
+	%token OPENGROUP
+	%token CLOSEGROUP
+
+	%token OROP
+	%token ADDOP
+	%token SUBOP
+	%token MULOP
+	%token ANDOP
+	%token EQUOP
+	%token RELOP
+	%token SEQOP
+	%token SETOP
+
+	%token NODETYPE
+	%token PINODE
+	%token FUNCTION
+	%token NAMETEST
+	%token AXISNAME
+	%token VARIABLE
+
+%%
+
+	/* 1 */ LocationPath
+		: RelativeLocationPath	
+		| SEQOP AbsoluteLocationList
+		;
+
+	AbsoluteLocationList
+		: RelativeLocationPath
+		|
+		;
+
+	RelativeLocationList
+		: SEQOP RelativeLocationPath
+		|
+		;
+
+	/* 3 */ RelativeLocationPath
+		: Step RelativeLocationList
+		;
+
+	Predicates
+		: Predicate Predicates
+		|
+		;
+
+	/* 4 */ Step
+		: AXISNAME AXISSEP NodeTest Predicates
+		| NodeTest Predicates
+		;
+
+	/* 6 */
+
+	/* 7 */ NodeTest
+		: NAMETEST
+		| NODETYPE OPENGROUP CLOSEGROUP
+		| PINODE OPENGROUP LITERAL CLOSEGROUP
+		;
+
+	/* 8 */ Predicate
+		: OPENPRED Expr CLOSEPRED
+		;
+
+	/* 10..13 */
+
+	/* 15 */ PrimaryExpr
+		: VARIABLE
+		| OPENGROUP Expr CLOSEGROUP
+		| LITERAL
+		| NUMBER
+		| FUNCTION OPENGROUP Arguments CLOSEGROUP
+		;
+
+	Arguments_body
+		: COMMA Expr Arguments_body
+		|
+		;
+
+	Arguments
+		: Expr Arguments_body
+		|
+		;
+
+	/* 19 */ PathExpr
+		: LocationPath
+		| PrimaryExpr FilterExpr RelativeLocationPath
+		;
+
+	/* 20 */ FilterExpr
+		: Predicate FilterExpr
+		|
+		;
+
+	/* 18 */ UnionExpr
+		: SETOP PathExpr UnionExpr
+		|
+		;
+
+	/* 21 */ OrExpr
+		: OROP Expr
+		|
+		;
+
+	/* 22 */ AndExpr
+		: ANDOP EqualityExprGlue AndExpr
+		|
+		;
+
+	/* 23 */ EqualityExpr
+		: EQUOP EqualityExprGlue
+		|
+		;
+
+	/* 24 */ RelationalExpr
+		: RELOP AdditiveExprGlue
+		|
+		;
+
+	/* 25 */ AdditiveExpr
+		: ADDOP MultiplicativeExprGlue
+		| SUBOP MultiplicativeExprGlue
+		|
+		;
+
+	/* 26 */ MultiplicativeExpr
+		: MULOP UnaryExpr MultiplicativeExpr
+		|
+		;
+
+	/* 27 */ UnaryExpr
+		: SUBOP UnaryExpr
+		| PathExpr UnionExpr
+		;
+
+	/* 14 */ Expr
+		: EqualityExprGlue AndExpr OrExpr
+		;
+
+	EqualityExprGlue
+		: AdditiveExprGlue EqualityExpr
+		;
+
+	AdditiveExprGlue
+		: MultiplicativeExprGlue RelationalExpr
+		;
+
+	MultiplicativeExprGlue
+		: UnaryExpr MultiplicativeExpr AdditiveExpr
+		;
+
+
+/*
+
+
+Dumping grammar...
+----------------------------------------------------------------
+LocationPath : RelativeLocationPath ;
+LocationPath : SEQOP AbsoluteLocationList ;
+AbsoluteLocationList : RelativeLocationPath ;
+AbsoluteLocationList : ;
+RelativeLocationList : SEQOP RelativeLocationPath ;
+RelativeLocationList : ;
+RelativeLocationPath : Step RelativeLocationList ;
+Predicates : Predicate Predicates ;
+Predicates : ;
+Step : AXISNAME AXISSEP NodeTest Predicates ;
+Step : NodeTest Predicates ;
+NodeTest : NAMETEST ;
+NodeTest : NODETYPE OPENGROUP CLOSEGROUP ;
+NodeTest : PINODE OPENGROUP LITERAL CLOSEGROUP ;
+Predicate : OPENPRED Expr CLOSEPRED ;
+PrimaryExpr : VARIABLE ;
+PrimaryExpr : OPENGROUP Expr CLOSEGROUP ;
+PrimaryExpr : LITERAL ;
+PrimaryExpr : NUMBER ;
+PrimaryExpr : FUNCTION OPENGROUP Arguments CLOSEGROUP ;
+Arguments_body : COMMA Expr Arguments_body ;
+Arguments_body : ;
+Arguments : Expr Arguments_body ;
+Arguments : ;
+PathExpr : LocationPath ;
+PathExpr : PrimaryExpr FilterExpr RelativeLocationPath ;
+FilterExpr : Predicate FilterExpr ;
+FilterExpr : ;
+UnionExpr : SETOP PathExpr UnionExpr ;
+UnionExpr : ;
+OrExpr : OROP Expr ;
+OrExpr : ;
+AndExpr : ANDOP EqualityExprGlue AndExpr ;
+AndExpr : ;
+EqualityExpr : EQUOP EqualityExprGlue ;
+EqualityExpr : ;
+RelationalExpr : RELOP AdditiveExprGlue ;
+RelationalExpr : ;
+AdditiveExpr : ADDOP MultiplicativeExprGlue ;
+AdditiveExpr : SUBOP MultiplicativeExprGlue ;
+AdditiveExpr : ;
+MultiplicativeExpr : MULOP UnaryExpr MultiplicativeExpr ;
+MultiplicativeExpr : ;
+UnaryExpr : SUBOP UnaryExpr ;
+UnaryExpr : PathExpr UnionExpr ;
+Expr : EqualityExprGlue AndExpr OrExpr ;
+EqualityExprGlue : AdditiveExprGlue EqualityExpr ;
+AdditiveExprGlue : MultiplicativeExprGlue RelationalExpr ;
+MultiplicativeExprGlue : UnaryExpr MultiplicativeExpr AdditiveExpr ;
+
+
+Dumping FIRST sets...
+----------------------------------------------------------------
+FIRST(MultiplicativeExpr) = [MULOP]
+FIRST(PathExpr) = [NAMETEST, VARIABLE, NODETYPE, SEQOP, AXISNAME, FUNCTION, OPENGROUP, NUMBER, PINODE, LITERAL]
+FIRST(FilterExpr) = [OPENPRED]
+FIRST(AndExpr) = [ANDOP]
+FIRST(UnionExpr) = [SETOP]
+FIRST(OrExpr) = [OROP]
+FIRST(RelativeLocationPath) = [NAMETEST, NODETYPE, AXISNAME, PINODE]
+FIRST(LocationPath) = [NAMETEST, NODETYPE, SEQOP, AXISNAME, PINODE]
+FIRST(PrimaryExpr) = [VARIABLE, FUNCTION, OPENGROUP, NUMBER, LITERAL]
+FIRST(EqualityExprGlue) = [SUBOP, NAMETEST, VARIABLE, NODETYPE, SEQOP, AXISNAME, FUNCTION, OPENGROUP, NUMBER, PINODE, LITERAL]
+FIRST(Arguments) = [SUBOP, NAMETEST, VARIABLE, NODETYPE, SEQOP, AXISNAME, FUNCTION, OPENGROUP, NUMBER, PINODE, LITERAL]
+FIRST(EqualityExpr) = [EQUOP]
+FIRST(AdditiveExpr) = [SUBOP, ADDOP]
+FIRST(RelativeLocationList) = [SEQOP]
+FIRST(Expr) = [SUBOP, NAMETEST, VARIABLE, NODETYPE, SEQOP, AXISNAME, FUNCTION, OPENGROUP, NUMBER, PINODE, LITERAL]
+FIRST(Predicates) = [OPENPRED]
+FIRST(AdditiveExprGlue) = [SUBOP, NAMETEST, VARIABLE, NODETYPE, SEQOP, AXISNAME, FUNCTION, OPENGROUP, NUMBER, PINODE, LITERAL]
+FIRST(AbsoluteLocationList) = [NAMETEST, NODETYPE, AXISNAME, PINODE]
+FIRST(Arguments_body) = [COMMA]
+FIRST(MultiplicativeExprGlue) = [SUBOP, NAMETEST, VARIABLE, NODETYPE, SEQOP, AXISNAME, FUNCTION, OPENGROUP, NUMBER, PINODE, LITERAL]
+FIRST(NodeTest) = [NAMETEST, NODETYPE, PINODE]
+FIRST(RelationalExpr) = [RELOP]
+FIRST(Predicate) = [OPENPRED]
+FIRST(UnaryExpr) = [SUBOP, NAMETEST, VARIABLE, NODETYPE, SEQOP, AXISNAME, FUNCTION, OPENGROUP, NUMBER, PINODE, LITERAL]
+FIRST(Step) = [NAMETEST, NODETYPE, AXISNAME, PINODE]
+
+
+Dumping FOLLOW sets...
+----------------------------------------------------------------
+FOLLOW(MultiplicativeExpr) = [SUBOP, OROP, EQUOP, ANDOP, COMMA, CLOSEPRED, ADDOP, RELOP, $, CLOSEGROUP]
+FOLLOW(PathExpr) = [SUBOP, OROP, EQUOP, SETOP, ANDOP, COMMA, CLOSEPRED, MULOP, ADDOP, RELOP, $, CLOSEGROUP]
+FOLLOW(FilterExpr) = [NAMETEST, NODETYPE, AXISNAME, PINODE]
+FOLLOW(AndExpr) = [OROP, COMMA, CLOSEPRED, $, CLOSEGROUP]
+FOLLOW(UnionExpr) = [SUBOP, OROP, EQUOP, ANDOP, COMMA, CLOSEPRED, MULOP, ADDOP, RELOP, $, CLOSEGROUP]
+FOLLOW(OrExpr) = [COMMA, CLOSEPRED, $, CLOSEGROUP]
+FOLLOW(RelativeLocationPath) = [SUBOP, OROP, EQUOP, SETOP, ANDOP, COMMA, CLOSEPRED, MULOP, ADDOP, RELOP, $, CLOSEGROUP]
+FOLLOW(LocationPath) = [SUBOP, OROP, EQUOP, SETOP, ANDOP, COMMA, CLOSEPRED, MULOP, ADDOP, RELOP, $, CLOSEGROUP]
+FOLLOW(PrimaryExpr) = [NAMETEST, NODETYPE, AXISNAME, OPENPRED, PINODE]
+FOLLOW(EqualityExprGlue) = [OROP, ANDOP, COMMA, CLOSEPRED, $, CLOSEGROUP]
+FOLLOW(Arguments) = [CLOSEGROUP]
+FOLLOW(EqualityExpr) = [OROP, ANDOP, COMMA, CLOSEPRED, $, CLOSEGROUP]
+FOLLOW(AdditiveExpr) = [OROP, EQUOP, ANDOP, COMMA, CLOSEPRED, RELOP, $, CLOSEGROUP]
+FOLLOW(RelativeLocationList) = [SUBOP, OROP, EQUOP, SETOP, ANDOP, COMMA, CLOSEPRED, MULOP, ADDOP, RELOP, $, CLOSEGROUP]
+FOLLOW(Expr) = [COMMA, CLOSEPRED, $, CLOSEGROUP]
+FOLLOW(Predicates) = [OROP, SETOP, EQUOP, ANDOP, MULOP, COMMA, CLOSEPRED, RELOP, SUBOP, SEQOP, ADDOP, $, CLOSEGROUP]
+FOLLOW(AdditiveExprGlue) = [OROP, EQUOP, ANDOP, COMMA, CLOSEPRED, $, CLOSEGROUP]
+FOLLOW(AbsoluteLocationList) = [SUBOP, OROP, EQUOP, SETOP, ANDOP, COMMA, CLOSEPRED, MULOP, ADDOP, RELOP, $, CLOSEGROUP]
+FOLLOW(Arguments_body) = [CLOSEGROUP]
+FOLLOW(MultiplicativeExprGlue) = [OROP, EQUOP, ANDOP, COMMA, CLOSEPRED, RELOP, $, CLOSEGROUP]
+FOLLOW(NodeTest) = [OROP, SETOP, EQUOP, ANDOP, MULOP, COMMA, CLOSEPRED, RELOP, SUBOP, SEQOP, ADDOP, OPENPRED, $, CLOSEGROUP]
+FOLLOW(RelationalExpr) = [OROP, EQUOP, ANDOP, COMMA, CLOSEPRED, $, CLOSEGROUP]
+FOLLOW(Predicate) = [OROP, SETOP, EQUOP, ANDOP, MULOP, COMMA, CLOSEPRED, RELOP, SUBOP, NAMETEST, NODETYPE, SEQOP, AXISNAME, ADDOP, $, OPENPRED, CLOSEGROUP, PINODE]
+FOLLOW(UnaryExpr) = [SUBOP, OROP, EQUOP, ANDOP, COMMA, CLOSEPRED, MULOP, ADDOP, RELOP, $, CLOSEGROUP]
+FOLLOW(Step) = [OROP, SETOP, EQUOP, ANDOP, MULOP, COMMA, CLOSEPRED, RELOP, SUBOP, SEQOP, ADDOP, $, CLOSEGROUP]
+
+
+Dumping NULLABLE flags...
+----------------------------------------------------------------
+NULLABLE(MultiplicativeExpr) = true
+NULLABLE(PathExpr) = false
+NULLABLE(FilterExpr) = true
+NULLABLE(AndExpr) = true
+NULLABLE(UnionExpr) = true
+NULLABLE(OrExpr) = true
+NULLABLE(RelativeLocationPath) = false
+NULLABLE(LocationPath) = false
+NULLABLE(PrimaryExpr) = false
+NULLABLE(EqualityExprGlue) = false
+NULLABLE(Arguments) = true
+NULLABLE(EqualityExpr) = true
+NULLABLE(AdditiveExpr) = true
+NULLABLE(RelativeLocationList) = true
+NULLABLE(Expr) = false
+NULLABLE(Predicates) = true
+NULLABLE(AdditiveExprGlue) = false
+NULLABLE(AbsoluteLocationList) = true
+NULLABLE(Arguments_body) = true
+NULLABLE(MultiplicativeExprGlue) = false
+NULLABLE(NodeTest) = false
+NULLABLE(RelationalExpr) = true
+NULLABLE(Predicate) = false
+NULLABLE(UnaryExpr) = false
+NULLABLE(Step) = false
+
+
+
+
+
+/* TODO: probably only need to store RHSs here, which means we can combine together a few rules */
+/* TODO: what to do about epsilons here? */
+R0  = "MultiplicativeExpr : MULOP UnaryExpr MultiplicativeExpr ;";
+R1  = "MultiplicativeExpr : ;"
+R2  = "PathExpr : LocationPath ;"
+R3  = "PathExpr : PrimaryExpr FilterExpr RelativeLocationPath ;"
+R4  = "FilterExpr : Predicate FilterExpr ;"
+R5  = "FilterExpr : ;"
+R6  = "AndExpr : ANDOP EqualityExprGlue AndExpr ;"
+R7  = "AndExpr : ;"
+R8  = "UnionExpr : SETOP PathExpr UnionExpr ;"
+R9  = "UnionExpr : ;"
+R10 = "OrExpr : OROP Expr ;"
+R11 = "OrExpr : ;"
+R12 = "RelativeLocationPath : Step RelativeLocationList ;"
+R13 = "LocationPath : RelativeLocationPath ;"
+R14 = "LocationPath : SEQOP AbsoluteLocationList ;"
+R15 = "PrimaryExpr : VARIABLE ;"
+R16 = "PrimaryExpr : OPENGROUP Expr CLOSEGROUP ;"
+R17 = "PrimaryExpr : LITERAL ;"
+R18 = "PrimaryExpr : NUMBER ;"
+R19 = "PrimaryExpr : FUNCTION OPENGROUP Arguments CLOSEGROUP ;"
+R20 = "EqualityExprGlue : AdditiveExprGlue EqualityExpr ;"
+R21 = "Arguments : Expr Arguments_body ;"
+R22 = "Arguments : ;"
+R23 = "EqualityExpr : EQUOP EqualityExprGlue ;"
+R24 = "EqualityExpr : ;"
+R25 = "AdditiveExpr : ADDOP MultiplicativeExprGlue ;"
+R26 = "AdditiveExpr : SUBOP MultiplicativeExprGlue ;"
+R27 = "AdditiveExpr : ;"
+R28 = "RelativeLocationList : SEQOP RelativeLocationPath ;"
+R29 = "RelativeLocationList : ;"
+R30 = "Expr : EqualityExprGlue AndExpr OrExpr ;"
+R31 = "Predicates : Predicate Predicates ;"
+R32 = "Predicates : ;"
+R33 = "AdditiveExprGlue : MultiplicativeExprGlue RelationalExpr ;"
+R34 = "AbsoluteLocationList : RelativeLocationPath ;"
+R35 = "AbsoluteLocationList : ;"
+R36 = "Arguments_body : COMMA Expr Arguments_body ;"
+R37 = "Arguments_body : ;"
+R38 = "MultiplicativeExprGlue : UnaryExpr MultiplicativeExpr AdditiveExpr ;"
+R39 = "NodeTest : NAMETEST ;"
+R40 = "NodeTest : NODETYPE OPENGROUP CLOSEGROUP ;"
+R41 = "NodeTest : PINODE OPENGROUP LITERAL CLOSEGROUP ;"
+R42 = "RelationalExpr : RELOP AdditiveExprGlue ;"
+R43 = "RelationalExpr : ;"
+R44 = "Predicate : OPENPRED Expr CLOSEPRED ;"
+R45 = "UnaryExpr : SUBOP UnaryExpr ;"
+R46 = "UnaryExpr : PathExpr UnionExpr ;"
+R47 = "Step : AXISNAME AXISSEP NodeTest Predicates ;"
+R48 = "Step : NodeTest Predicates ;"
+
+
+
+FIRST(UnaryExpr) = [SUBOP, NAMETEST, VARIABLE, NODETYPE, SEQOP, AXISNAME, FUNCTION, OPENGROUP, NUMBER, PINODE, LITERAL]
+FIRST(Step) = [NAMETEST, NODETYPE, AXISNAME, PINODE]
+
+
+
+
+                        NUMBER LITERAL COMMA AXISSEP OPENPRED CLOSEPRED OPENGROUP CLOSEGROUP OROP ADDOP SUBOP MULOP ANDOP EQUOP RELOP SEQOP SETOP NODETYPE PINODE FUNCTION NAMETEST AXISNAME VARIABLE $
+             Predicate                               R44
+            FilterExpr                               R4                                                                                           R5       R5              R5       R5
+  RelativeLocationPath                                                                                                                            R12      R12             R12      R12
+              NodeTest                                                                                                                            R40      R41             R39
+                  Step                                                                                                                            R48      R48             R48      R47
+          LocationPath                                                                                                                R14         R13      R13             R13      R13
+              PathExpr  R3     R3                                       R3                                                            R2          R2       R2     R3       R2       R2       R3
+      EqualityExprGlue  R20    R20                                      R20                             R20                           R20         R20      R20    R20      R20      R20      R20
+                  Expr  R30    R30                                      R30                             R30                           R30         R30      R30    R30      R30      R30      R30
+      AdditiveExprGlue  R33    R33                                      R33                             R33                           R33         R33      R33    R33      R33      R33      R33
+MultiplicativeExprGlue  R38    R38                                      R38                             R38                           R38         R38      R38    R38      R38      R38      R38
+             UnaryExpr  R46    R46                                      R46                             R45                           R46         R46             R46      R46      R46      R46      R46
+             Arguments  R21    R21                                      R21       R22                   R21                           R21         R21      R21    R21      R21      R21      R21
+           PrimaryExpr  R18    R17                                      R16                                                                                       R19                        R15
+               AndExpr                 R7                     R7                  R7         R7                     R6                                                                                R7
+                OrExpr                 R11                    R11                 R11        R10                                                                                                      R11
+          EqualityExpr                 R24                    R24                 R24        R24                    R24   R23                                                                         R24
+    MultiplicativeExpr                 R1                     R1                  R1              R1          R0    R1    R1    R1                                                                    R1
+             UnionExpr                 R9                     R9                  R9         R9   R9    R9    R9    R9    R9    R9          R8                                                        R9
+          AdditiveExpr                 R27                    R27                 R27        R27  R25   R26         R27   R27   R27                                                                   R27
+  RelativeLocationList                 R29                    R29                 R29        R29  R29   R29   R29   R29   R29   R29   R28   R29                                                       R29
+            Predicates                 R32           R31      R32                 R32        R32  R32   R32   R32   R32   R32   R32   R32   R32                                                       R32
+  AbsoluteLocationList                 R35                    R35                 R35        R35  R35   R35   R35   R35   R35   R35         R35   R34      R34             R34      R34               R35
+        RelationalExpr                 R43                    R43                 R43        R43                    R43   R43   R42                                                                   R43
+        Arguments_body                 R36                                        R37
+
+
+and again:
+
+                        NUMBER LITERAL COMMA AXISSEP OPENPRED CLOSEPRED OPENGROUP CLOSEGROUP OROP ADDOP SUBOP MULOP ANDOP EQUOP RELOP SEQOP SETOP NODETYPE PINODE FUNCTION NAMETEST AXISNAME VARIABLE $
+             Predicate  x      x       x     x       R44      x         x         x          x    x     x     x     x     x     x     x     x     x        x      x        x        x        x        x
+            FilterExpr  x      x       x     x       R4       x         x         x          x    x     x     x     x     x     x     x     x     R5       R5     x        R5       R5       x        x
+  RelativeLocationPath  x      x       x     x       x        x         x         x          x    x     x     x     x     x     x     x     x     R12      R12    x        R12      R12      x        x
+              NodeTest  x      x       x     x       x        x         x         x          x    x     x     x     x     x     x     x     x     R40      R41    x        R39      x        x        x
+                  Step  x      x       x     x       x        x         x         x          x    x     x     x     x     x     x     x     x     R48      R48    x        R48      R47      x        x
+          LocationPath  x      x       x     x       x        x         x         x          x    x     x     x     x     x     x     R14   x     R13      R13    x        R13      R13      x        x
+              PathExpr  R3     R3      x     x       x        x         R3        x          x    x     x     x     x     x     x     R2    x     R2       R2     R3       R2       R2       R3       x
+      EqualityExprGlue  R20    R20     x     x       x        x         R20       x          x    x     R20   x     x     x     x     R20   x     R20      R20    R20      R20      R20      R20      x
+                  Expr  R30    R30     x     x       x        x         R30       x          x    x     R30   x     x     x     x     R30   x     R30      R30    R30      R30      R30      R30      x
+      AdditiveExprGlue  R33    R33     x     x       x        x         R33       x          x    x     R33   x     x     x     x     R33   x     R33      R33    R33      R33      R33      R33      x
+MultiplicativeExprGlue  R38    R38     x     x       x        x         R38       x          x    x     R38   x     x     x     x     R38   x     R38      R38    R38      R38      R38      R38      x
+             UnaryExpr  R46    R46     x     x       x        x         R46       x          x    x     R45   x     x     x     x     R46   x     R46      x      R46      R46      R46      R46      R46
+             Arguments  R21    R21     x     x       x        x         R21       R22        x    x     R21   x     x     x     x     R21   x     R21      R21    R21      R21      R21      R21      x
+           PrimaryExpr  R18    R17     x     x       x        x         R16       x          x    x     x     x     x     x     x     x     x     x        x      R19      x        x        R15      x
+               AndExpr  x      x       R7    x       x        R7        x         R7         R7   x     x     x     R6    x     x     x     x     x        x      x        x        x        x        R7
+                OrExpr  x      x       R11   x       x        R11       x         R11        R10  x     x     x     x     x     x     x     x     x        x      x        x        x        x        R11
+          EqualityExpr  x      x       R24   x       x        R24       x         R24        R24  x     x     x     R24   R23   x     x     x     x        x      x        x        x        x        R24
+    MultiplicativeExpr  x      x       R1    x       x        R1        x         R1         x    R1    x     R0    R1    R1    R1    x     x     x        x      x        x        x        x        R1
+             UnionExpr  x      x       R9    x       x        R9        x         R9         R9   R9    R9    R9    R9    R9    R9    x     R8    x        x      x        x        x        x        R9
+          AdditiveExpr  x      x       R27   x       x        R27       x         R27        R27  R25   R26   x     R27   R27   R27   x     x     x        x      x        x        x        x        R27
+  RelativeLocationList  x      x       R29   x       x        R29       x         R29        R29  R29   R29   R29   R29   R29   R29   R28   R29   x        x      x        x        x        x        R29
+            Predicates  x      x       R32   x       R31      R32       x         R32        R32  R32   R32   R32   R32   R32   R32   R32   R32   x        x      x        x        x        x        R32
+  AbsoluteLocationList  x      x       R35   x       x        R35       x         R35        R35  R35   R35   R35   R35   R35   R35   x     R35   R34      R34    x        R34      R34      x        R35
+        RelationalExpr  x      x       R43   x       x        R43       x         R43        R43  x     x     x     R43   R43   R42   x     x     x        x      x        x        x        x        R43
+        Arguments_body  x      x       R36   x       x        x         x         R37        x    x     x     x     x     x     x     x     x     x        x      x        x        x        x        x
+
+
+
+
+
+and again:
+             Predicate
+            FilterExpr
+  RelativeLocationPath
+              NodeTest
+                  Step
+          LocationPath
+              PathExpr
+      EqualityExprGlue
+                  Expr
+      AdditiveExprGlue
+MultiplicativeExprGlue
+             UnaryExpr
+             Arguments
+           PrimaryExpr
+               AndExpr
+                OrExpr
+          EqualityExpr
+    MultiplicativeExpr
+             UnionExpr
+          AdditiveExpr
+  RelativeLocationList
+            Predicates
+  AbsoluteLocationList
+        RelationalExpr
+        Arguments_body
+
+NUMBER LITERAL COMMA AXISSEP OPENPRED CLOSEPRED OPENGROUP CLOSEGROUP OROP ADDOP SUBOP MULOP ANDOP EQUOP RELOP SEQOP SETOP NODETYPE PINODE FUNCTION NAMETEST AXISNAME VARIABLE $
+
+-1,    -1,     -1,   -1,     44,      -1,       -1,       -1,        -1,  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,      -1,    -1,      -1,      -1,      -1,      -1
+-1,    -1,     -1,   -1,      4,      -1,       -1,       -1,        -1,  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,    5,       5,    -1,       5,       5,      -1,      -1
+-1,    -1,     -1,   -1,     -1,      -1,       -1,       -1,        -1,  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   12,      12,    -1,      12,      12,      -1,      -1
+-1,    -1,     -1,   -1,     -1,      -1,       -1,       -1,        -1,  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   40,      41,    -1,      39,      -1,      -1,      -1
+-1,    -1,     -1,   -1,     -1,      -1,       -1,       -1,        -1,  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   48,      48,    -1,      48,      47,      -1,      -1
+-1,    -1,     -1,   -1,     -1,      -1,       -1,       -1,        -1,  -1,   -1,   -1,   -1,   -1,   -1,   14,   -1,   13,      13,    -1,      13,      13,      -1,      -1
+ 3,     3,     -1,   -1,     -1,      -1,        3,       -1,        -1,  -1,   -1,   -1,   -1,   -1,   -1,    2,   -1,    2,       2,     3,       2,       2,       3,      -1
+20,    20,     -1,   -1,     -1,      -1,       20,       -1,        -1,  -1,   20,   -1,   -1,   -1,   -1,   20,   -1,   20,      20,    20,      20,      20,      20,      -1
+30,    30,     -1,   -1,     -1,      -1,       30,       -1,        -1,  -1,   30,   -1,   -1,   -1,   -1,   30,   -1,   30,      30,    30,      30,      30,      30,      -1
+33,    33,     -1,   -1,     -1,      -1,       33,       -1,        -1,  -1,   33,   -1,   -1,   -1,   -1,   33,   -1,   33,      33,    33,      33,      33,      33,      -1
+38,    38,     -1,   -1,     -1,      -1,       38,       -1,        -1,  -1,   38,   -1,   -1,   -1,   -1,   38,   -1,   38,      38,    38,      38,      38,      38,      -1
+46,    46,     -1,   -1,     -1,      -1,       46,       -1,        -1,  -1,   45,   -1,   -1,   -1,   -1,   46,   -1,   46,      -1,    46,      46,      46,      46,      46
+21,    21,     -1,   -1,     -1,      -1,       21,       22,        -1,  -1,   21,   -1,   -1,   -1,   -1,   21,   -1,   21,      21,    21,      21,      21,      21,      -1
+18,    17,     -1,   -1,     -1,      -1,       16,       -1,        -1,  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,      -1,    19,      -1,      -1,      15,      -1
+-1,    -1,      7,   -1,     -1,       7,       -1,        7,         7,  -1,   -1,   -1,    6,   -1,   -1,   -1,   -1,   -1,      -1,    -1,      -1,      -1,      -1,       7
+-1,    -1,     11,   -1,     -1,      11,       -1,       11,        10,  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,      -1,    -1,      -1,      -1,      -1,      11
+-1,    -1,     24,   -1,     -1,      24,       -1,       24,        24,  -1,   -1,   -1,   24,   23,   -1,   -1,   -1,   -1,      -1,    -1,      -1,      -1,      -1,      24
+-1,    -1,      1,   -1,     -1,       1,       -1,        1,        -1,   1,   -1,    0,    1,    1,    1,   -1,   -1,   -1,      -1,    -1,      -1,      -1,      -1,       1
+-1,    -1,      9,   -1,     -1,       9,       -1,        9,         9,   9,    9,    9,    9,    9,    9,   -1,    8,   -1,      -1,    -1,      -1,      -1,      -1,       9
+-1,    -1,     27,   -1,     -1,      27,       -1,       27,        27,  25,   26,   -1,   27,   27,   27,   -1,   -1,   -1,      -1,    -1,      -1,      -1,      -1,      27
+-1,    -1,     29,   -1,     -1,      29,       -1,       29,        29,  29,   29,   29,   29,   29,   29,   28,   29,   -1,      -1,    -1,      -1,      -1,      -1,      29
+-1,    -1,     32,   -1,     31,      32,       -1,       32,        32,  32,   32,   32,   32,   32,   32,   32,   32,   -1,      -1,    -1,      -1,      -1,      -1,      32
+-1,    -1,     35,   -1,     -1,      35,       -1,       35,        35,  35,   35,   35,   35,   35,   35,   -1,   35,   34,      34,    -1,      34,      34,      -1,      35
+-1,    -1,     43,   -1,     -1,      43,       -1,       43,        43,  -1,   -1,   -1,   43,   43,   42,   -1,   -1,   -1,      -1,    -1,      -1,      -1,      -1,      43
+-1,    -1,     36,   -1,     -1,      -1,       -1,       37,        -1,  -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,      -1,    -1,      -1,      -1,      -1,      -1
+
+and again:
+
+[ -1, -1, -1, -1, 44, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+[ -1, -1, -1, -1,  4, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  5,  5, -1,  5,  5, -1, -1 ],
+[ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 12, 12, -1, 12, 12, -1, -1 ],
+[ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 40, 41, -1, 39, -1, -1, -1 ],
+[ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 48, 48, -1, 48, 47, -1, -1 ],
+[ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 14, -1, 13, 13, -1, 13, 13, -1, -1 ],
+[  3,  3, -1, -1, -1, -1,  3, -1, -1, -1, -1, -1, -1, -1, -1,  2, -1,  2,  2,  3,  2,  2,  3, -1 ],
+[ 20, 20, -1, -1, -1, -1, 20, -1, -1, -1, 20, -1, -1, -1, -1, 20, -1, 20, 20, 20, 20, 20, 20, -1 ],
+[ 30, 30, -1, -1, -1, -1, 30, -1, -1, -1, 30, -1, -1, -1, -1, 30, -1, 30, 30, 30, 30, 30, 30, -1 ],
+[ 33, 33, -1, -1, -1, -1, 33, -1, -1, -1, 33, -1, -1, -1, -1, 33, -1, 33, 33, 33, 33, 33, 33, -1 ],
+[ 38, 38, -1, -1, -1, -1, 38, -1, -1, -1, 38, -1, -1, -1, -1, 38, -1, 38, 38, 38, 38, 38, 38, -1 ],
+[ 46, 46, -1, -1, -1, -1, 46, -1, -1, -1, 45, -1, -1, -1, -1, 46, -1, 46, -1, 46, 46, 46, 46, 46 ],
+[ 21, 21, -1, -1, -1, -1, 21, 22, -1, -1, 21, -1, -1, -1, -1, 21, -1, 21, 21, 21, 21, 21, 21, -1 ],
+[ 18, 17, -1, -1, -1, -1, 16, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 19, -1, -1, 15, -1 ],
+[ -1, -1,  7, -1, -1,  7, -1,  7,  7, -1, -1, -1,  6, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  7 ],
+[ -1, -1, 11, -1, -1, 11, -1, 11, 10, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 11 ],
+[ -1, -1, 24, -1, -1, 24, -1, 24, 24, -1, -1, -1, 24, 23, -1, -1, -1, -1, -1, -1, -1, -1, -1, 24 ],
+[ -1, -1,  1, -1, -1,  1, -1,  1, -1,  1, -1,  0,  1,  1,  1, -1, -1, -1, -1, -1, -1, -1, -1,  1 ],
+[ -1, -1,  9, -1, -1,  9, -1,  9,  9,  9,  9,  9,  9,  9,  9, -1,  8, -1, -1, -1, -1, -1, -1,  9 ],
+[ -1, -1, 27, -1, -1, 27, -1, 27, 27, 25, 26, -1, 27, 27, 27, -1, -1, -1, -1, -1, -1, -1, -1, 27 ],
+[ -1, -1, 29, -1, -1, 29, -1, 29, 29, 29, 29, 29, 29, 29, 29, 28, 29, -1, -1, -1, -1, -1, -1, 29 ],
+[ -1, -1, 32, -1, 31, 32, -1, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, -1, -1, -1, -1, -1, -1, 32 ],
+[ -1, -1, 35, -1, -1, 35, -1, 35, 35, 35, 35, 35, 35, 35, 35, -1, 35, 34, 34, -1, 34, 34, -1, 35 ],
+[ -1, -1, 43, -1, -1, 43, -1, 43, 43, -1, -1, -1, 43, 43, 42, -1, -1, -1, -1, -1, -1, -1, -1, 43 ],
+[ -1, -1, 36, -1, -1, -1, -1, 37, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 ],
+
+*/
+
