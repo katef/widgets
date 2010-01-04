@@ -55,9 +55,10 @@ var Table = new (function () {
 	 * have higher precidence. The lowest entry is a "catch-all" type.
 	 *
 	 * The comparison functions used for sorting should return positive, negative,
-	 * or 0, as per Array.sort(). They are passed string values, from two <td>'s
-	 * .innerHTML values to compare. Empty cells are handled by the calling
-	 * function, and so the .cmp() callbacks are never be passed an empty string.
+	 * or 0, as per Array.sort(). They are passed the match arrays from their
+	 * respective regexp, matched against the two <td>'s .innerHTML values to
+	 * compare. Empty cells are handled by the calling function, and so the
+	 * .cmp() callbacks are never passed an array matched from an empty string.
 	 *
 	 * The intention is that this array should be straightforward to extend with
 	 * additional types in the future.
@@ -73,11 +74,8 @@ var Table = new (function () {
 	 */
 	var types = [
 		/* IP address */ {
-			re:  /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/,
+			re:  /^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/,
 			cmp: function (a, b) {
-				var re = /^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/;
-				a = a.match(re);
-				b = b.match(re);
 				return (a[1] << 24 | a[2] << 16 | a[3] << 8 | a[4] << 0)
 				     - (a[1] << 24 | b[2] << 16 | b[3] << 8 | b[4] << 0);
 			}
@@ -86,8 +84,8 @@ var Table = new (function () {
 		/* float (with separators) */ {
 			re:  /^[-+]?[0-9,']*\.?[0-9,]+([eE][-+]?[0-9]+)?$/,
 			cmp: function (a, b) {
-				a = a.replace(/[,']/g, '');
-				b = b.replace(/[,']/g, '');
+				a = a[0].replace(/[,']/g, '');
+				b = b[0].replace(/[,']/g, '');
 				return Number(a) - Number(b);
 			}
 		},
@@ -95,20 +93,17 @@ var Table = new (function () {
 		/* currency */ {
 			re:  /^[#$\uA3]?[0-9.,']*\.?[0-9,]+([cp$]|UKP|GBP|USD)?$/i,
 			cmp: function (a, b) {
-				var ad = /[0-9][cp]$/i.test(a) ? 100 : 1;
-				var bd = /[0-9][cp]$/i.test(b) ? 100 : 1;
-				a = a.replace(/[^0-9.]/g, '');
-				b = b.replace(/[^0-9.]/g, '');
+				var ad = /^[cp]$/i.test(a[1]) ? 100 : 1;
+				var bd = /^[cp]$/i.test(b[1]) ? 100 : 1;
+				a = a[0].replace(/[^0-9.]/g, '');
+				b = b[0].replace(/[^0-9.]/g, '');
 				return Number(a) / ad - Number(b) / bd;
 			}
 		},
 
 		/* DD/MM/YYYY */ {
-			re:  /^[0123]?[0-9]\/(10|11|12|0?[0-9])\/\d\d(\d\d)?$/,
+			re:  /^([0123]?[0-9])\/(10|11|12|0?[0-9])\/(\d\d(\d\d)?)$/,
 			cmp: function (a, b) {
-				var re = /^(\d+)\/(\d+)\/(\d+)$/;
-				a = a.match(re);
-				b = b.match(re);
 				a = new Date(a[3], Number(a[2]) - 1, a[1]);
 				b = new Date(b[3], Number(b[2]) - 1, b[1]);
 				return a - b;
@@ -116,22 +111,19 @@ var Table = new (function () {
 		},
 
 		/* MM/DD/YYYY */ {
-			re:  /^(10|11|12|0?[0-9])\/[0123]?[0-9]\/\d\d(\d\d)?$/,
+			re:  /^(10|11|12|0?[0-9])\/([0123]?[0-9])\/(\d\d(\d\d)?)$/,
 			cmp: function (a, b) {
-				var re = /^(\d+)\/(\d+)\/(\d+)$/;
-				a = a.match(re);
-				b = b.match(re);
-				a = new Date(a[3], Number(a[2]) - 1, a[1]);
-				b = new Date(b[3], Number(b[2]) - 1, b[1]);
-				return (a > b) - (a < b);
+				a = new Date(a[3], Number(a[1]) - 1, a[2]);
+				b = new Date(b[3], Number(b[1]) - 1, b[2]);
+				return a - b;
 			}
 		},
 
 		/* string */ {
-			re:  /./,
+			re:  /^.*$/,
 			cmp: function (a, b) {
-				a = a.toLowerCase();
-				b = b.toLowerCase();
+				a = a[0].toLowerCase();
+				b = b[0].toLowerCase();
 				return (a > b) - (a < b);
 			}
 		}
@@ -453,7 +445,7 @@ var Table = new (function () {
 	 * state of the current data. State is maintained in the @class list of the
 	 * <th> associated with that column.
 	 */
-	function ordercolumn(th, cmp, v) {
+	function ordercolumn(th, t, v) {
 		var dir;
 
 		if (hasclass(th, "table-sorted")) {
@@ -464,13 +456,16 @@ var Table = new (function () {
 				: 'table-ascending';
 		} else {
 			v.sort(function (a, b) {
-					a = serialise(a);
-					b = serialise(b);
+					var as = serialise(a);
+					var bs = serialise(b);
 
-					if (a == "") return +1;
-					if (b == "") return -1;
+					if (as == "") return +1;
+					if (bs == "") return -1;
 
-					return cmp(a, b);
+					if (a.table_m == null) a.table_m = as.match(t.re);
+					if (b.table_m == null) b.table_m = bs.match(t.re);
+
+					return t.cmp(a.table_m, b.table_m);
 				});
 
 			dir = 'table-ascending';
@@ -612,7 +607,7 @@ var Table = new (function () {
 					return;
 				}
 
-				dir = ordercolumn(th, types[th.table_typeindex].cmp,
+				dir = ordercolumn(th, types[th.table_typeindex],
 					th.table_v);
 
 				renderorder(t, th, dir, th.table_v);
