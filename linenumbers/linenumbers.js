@@ -1,6 +1,6 @@
 /* $Id$ */
 
-var Linenuumbers = new (function () {
+var Linenumbers = new (function () {
 
 	this.init = function(root) {
 		var pre = root.getElementsByTagName('pre'); 
