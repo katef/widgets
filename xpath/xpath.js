@@ -14,6 +14,7 @@
  */
 
 /*
+ * TODO: recompute LL(1) table; i don't trust it. have kgt produce this
  * TODO: interpret to DOM expressions on-the-fly
  * TODO: probably better to split the XPath implementation (with a native API) from the DOM3 XPath interface
  * TODO: tests: take all examples from spec
@@ -26,6 +27,17 @@ var XPath = new (function () {
 	 * Lexical Analysis
 	 */
 	lexing = new (function () {
+		this.Token = function(token, matches) {
+			this.tok = token;
+			this.m   = matches;
+
+			this.toString = function() {
+				return '<' + lexing.tokname(this.tok) + ' "' + this.m[0] + '">';
+			}
+
+			return this;
+		}
+
 		/*
 		 * Lexemes. See S3.7
 		 *
@@ -167,14 +179,6 @@ var XPath = new (function () {
 			return "?";
 		}
 
-		this.ppname = function(l) {
-			return '<' + lexing.tokname(l.tok) + ' "' + l.m[0] + '">';
-		}
-
-		this.pptok = function(t) {
-			return '<' + lexing.tokname(t) + '>';
-		}
-
 		/*
 		 * TODO: explain we mask out things we wish to exclude
 		 * TODO: explain this is equivalent to state or zones
@@ -187,7 +191,7 @@ var XPath = new (function () {
 			 * as a MultiplyOperator and an NCName must be recognised as an
 			 * OperatorName." */
 			if (prev !== null) {
-				switch (prev) {
+				switch (prev.tok) {
 				case tok.OPENGROUP:
 				case tok.OPENPRED:
 				case tok.AXISSEP:
@@ -283,42 +287,32 @@ var XPath = new (function () {
 				}
 
 				if (longest === null || m[0].length > longest.m[0].length) {
-					longest = {
-						l: l[w],
-						m: m
-					};
+					longest = new lexing.Token(l[w].tok, m);
 				}
 			}
 
-			/* XXX: longest can be null */
-			longest.s = s.substring(longest.m[0].length, s.length);
-
-			return longest;
+			return { t: longest, s: s.substring(longest.m[0].length, s.length) };
 		}
 
 		/* TODO: explain returns an array, terminated by EOF or ERROR */
 		this.lex = function (s) {
 			var a;
 			var prev;
+			var n;
 
 			a = [ ];
 
 			prev = null;
 
 			do {
-				var t;
+				n = getnexttoken(s, prev);
 
-				t = getnexttoken(s, prev);
+				a.push(n.t);
 
-				a.push({
-						tok: t.l.tok,
-						m:   t.m
-					});
+				s = n.s;
 
-				s = t.s;
-
-				prev = t.l.tok;
-			} while (t.l.tok != tok.ERROR && t.l.tok != tok.EOF);
+				prev = n.t;
+			} while (n.t.tok != tok.ERROR && n.t.tok != tok.EOF);
 
 			return a;
 		}
@@ -388,7 +382,7 @@ var XPath = new (function () {
 			switch (symboltype(s)) {
 			case "action":   return "TODO";	/* TODO: implement */
 			case "rule":     return rulename(s);
-			case "terminal": return lexing.pptok(s);
+			case "terminal": return '<' + lexing.tokname(s) + '>';
 			}
 		}
 
@@ -568,7 +562,7 @@ var XPath = new (function () {
 			var stack;
 			var curr;
 
-			a.reverse();	/* TODO: explain. it's a queue, see? */
+			a = [ ].concat(a).reverse();	/* TODO: explain. it's a queue, see? */
 
 			/* TOOD: explain this is the start symbol */
 			/* TODO: do we need EOF on here? probably if we don't check for trailing input tokens */
@@ -581,7 +575,7 @@ var XPath = new (function () {
 				var x;
 
 				if (curr.tok == tok.ERROR) {
-					throw 'Lexical error: Unrecognised token ' + lexing.ppname(curr);
+					throw 'Lexical error: Unrecognised token ' + curr;
 					return null;
 				}
 
@@ -616,7 +610,7 @@ var XPath = new (function () {
 						}
 
 						if (w.length == 0) {
-							/* TODO: an epislon; follow through */
+							/* TODO: explain this is an epislon; follow through */
 							w.push(stack.pop());
 						}
 
@@ -627,7 +621,7 @@ var XPath = new (function () {
 							m.push(symbolname(w[i]));
 						}
 
-						throw 'Syntax error: Unexpected ' + lexing.ppname(curr) + '; expected one of ' + m;
+						throw 'Syntax error: Unexpected ' + curr + '; expected one of ' + m;
 					}
 
 					/* TODO: explain this silly dance is to avoid r.reverse(), which would modify rules[] */
@@ -638,7 +632,7 @@ var XPath = new (function () {
 					if (x == curr.tok) {
 						curr = a.pop();
 					} else {
-						throw 'Syntax error: Unexpected ' + lexing.ppname(curr) + '; expected ' + symbolname(x);
+						throw 'Syntax error: Unexpected ' + curr + '; expected ' + symbolname(x);
 					}
 					break;
 				}
@@ -670,7 +664,7 @@ var XPath = new (function () {
 
 			/* TODO: maybe don't return an array of tokens; no need */
 			for (var i in a) {
-				console.log(' ' + lexing.ppname(a[i]));
+				console.log(' ' + a[i]);
 			}
 		}
 
