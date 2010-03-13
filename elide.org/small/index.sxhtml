@@ -64,6 +64,13 @@
 				<td>A reverse polish notation calculator. Arguments are
 					consumed from the command line.</td>
 			</tr>
+
+			<tr>
+				<td><a href="rpn-f.c"><code>rpn-f.c</code></a></td>
+
+				<td>A reverse polish notation calculator,
+					functional style.</td>
+			</tr>
 		</table>
 
 	<hr class="footer"/>
