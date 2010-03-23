@@ -1,0 +1,89 @@
+/* $Id$ */
+
+span.date {
+	display: block;
+	width: 7em;
+	float: left;
+	text-align: right;
+	margin-left: -8em;
+}
+
+div.entry {
+	margin: 0 20em 1.5em 8em;
+}
+
+div.entry ul.dotless li {
+	list-style-type: none;
+	margin-bottom: 1em;
+}
+
+div.cal-index {
+	float: right;
+	position: relative;
+}
+
+div.year-view {
+	margin-right: 170px;
+}
+
+div.year-view table.calendar {
+	float: left;
+	margin: 0 2em 0em 0;
+	min-height: 16em;	/* enough for 31 days */
+	display: block;
+}
+
+div.calendar hr {
+	margin: 1ex 0;
+}
+
+div.prose p {
+	text-indent: 2em;
+	margin: 0;
+}
+
+div.prose p:first-child {
+	text-indent: 0;
+	margin-top: 1em;
+}
+
+div.imglist img {
+	height: 100px;
+}
+
+div.imglist {
+	text-align: left;
+}
+
+div.entry h2 {
+	font-weight: normal;
+	font-size: inherit;
+	color: inherit;
+	font-family: verdana, sans-serif;
+	margin: 0;
+}
+
+h2:after {
+	content: ".";
+}
+
+ol.years {
+	margin: 0;
+	padding: 0;
+}
+
+ol.years li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ol.years a {
+	display: block;
+	padding: 0.5ex 1em;
+}
+
+ol.years li.current-year {
+	background-color: #f4f4f4;
+}
+
