@@ -15,6 +15,7 @@
 		TODO: hilight current day, month, year etc
 		TODO: search
 		TODO: interject with day/month changes
+		TODO: show >> instead of > if there's a gap
 		 XXX: clicking on a day goes to the wrong #
 		TODO: <img> URLs etc (and an image widget)
 	-->
@@ -235,7 +236,7 @@
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="/b:blog">
+	<xsl:template name="b:blog">
 		<xsl:variable name="date">
 			<xsl:choose>
 				<xsl:when test="$blog-month">
@@ -248,99 +249,85 @@
 			</xsl:choose>
 		</xsl:variable>
 
-		<html>
-			<head>
-				<title>
+		<h3>
+			<xsl:choose>
+				<xsl:when test="$blog-date">
+					<xsl:value-of select="$blog-date"/>
+				</xsl:when>
+
+				<xsl:otherwise>
 					<xsl:text>Blog</xsl:text>
-				</title>
+				</xsl:otherwise>
+			</xsl:choose>
+		</h3>
 
-				<link rel="stylesheet" href="/j3/blog.css"/>
-				<link rel="stylesheet" href="/j3/calendar.css"/>
-				<link rel="stylesheet" href="/kate.css"/>
-			</head>
+		<div class="cal-index">
+			<xsl:choose>
+				<xsl:when test="$blog-month">
+					<xsl:call-template name="cal:calendar">
+						<xsl:with-param name="date" select="$date"/>
+					</xsl:call-template>
+				</xsl:when>
 
-			<body>
-				<h3>
-					<xsl:choose>
-						<xsl:when test="$blog-date">
-							<xsl:value-of select="$blog-date"/>
-						</xsl:when>
+				<xsl:otherwise>
+					<xsl:call-template name="cal:calendar">
+						<xsl:with-param name="date" select="date:date()"/>
+					</xsl:call-template>
+				</xsl:otherwise>
+			</xsl:choose>
 
-						<xsl:otherwise>
-							<xsl:text>Blog</xsl:text>
-						</xsl:otherwise>
-					</xsl:choose>
-				</h3>
+			<hr/>
 
-				<div class="cal-index">
-					<xsl:choose>
-						<xsl:when test="$blog-month">
-							<xsl:call-template name="cal:calendar">
-								<xsl:with-param name="date" select="$date"/>
-							</xsl:call-template>
-						</xsl:when>
-
-						<xsl:otherwise>
-							<xsl:call-template name="cal:calendar">
-								<xsl:with-param name="date" select="date:date()"/>
-							</xsl:call-template>
-						</xsl:otherwise>
-					</xsl:choose>
-
-					<hr/>
-
-					<ol class="years">
-						<xsl:for-each select="b:entry/@date">
-							<xsl:sort data-type="number" select="@date"/>
-					
-							<xsl:variable name="year" select="substring(., 1, 4)"/>
-					
-							<xsl:if test="not(../preceding-sibling::b:entry[substring(@date, 1, 4) = $year])">
-								<li>
-									<xsl:if test="$date = $year">
-										<xsl:attribute name="class">
-											<xsl:text>current-year</xsl:text>
-										</xsl:attribute>
-									</xsl:if>
-
-									<a>
-										<xsl:call-template name="b:href">
-											<xsl:with-param name="date" select="$year"/>
-										</xsl:call-template>
-					
-										<xsl:value-of select="$year"/>
-									</a>
-								</li>
+			<ol class="years">
+				<xsl:for-each select="b:entry/@date">
+					<xsl:sort data-type="number" select="@date"/>
+			
+					<xsl:variable name="year" select="substring(., 1, 4)"/>
+			
+					<xsl:if test="not(../preceding-sibling::b:entry[substring(@date, 1, 4) = $year])">
+						<li>
+							<xsl:if test="$date = $year">
+								<xsl:attribute name="class">
+									<xsl:text>current-year</xsl:text>
+								</xsl:attribute>
 							</xsl:if>
-						</xsl:for-each>
-					</ol>
+
+							<a>
+								<xsl:call-template name="b:href">
+									<xsl:with-param name="date" select="$year"/>
+								</xsl:call-template>
+			
+								<xsl:value-of select="$year"/>
+							</a>
+						</li>
+					</xsl:if>
+				</xsl:for-each>
+			</ol>
+		</div>
+
+		<xsl:choose>
+			<xsl:when test="$blog-month">
+				<xsl:apply-templates select="b:entry[date:year(@date) = $blog-year
+					and date:month-in-year(@date) = $blog-month]"/>
+
+				<xsl:if test="not(b:entry[date:year(@date) = $blog-year
+					and date:month-in-year(@date) = $blog-month])">
+					<xsl:text>(no entries)</xsl:text>
+				</xsl:if>
+			</xsl:when>
+
+			<xsl:when test="$blog-year">
+				<div class="year-view">
+					<xsl:call-template name="b:year-view"/>
 				</div>
+			</xsl:when>
 
-				<xsl:choose>
-					<xsl:when test="$blog-month">
-						<xsl:apply-templates select="b:entry[date:year(@date) = $blog-year
-							and date:month-in-year(@date) = $blog-month]"/>
-
-						<xsl:if test="not(b:entry[date:year(@date) = $blog-year
-							and date:month-in-year(@date) = $blog-month])">
-							<xsl:text>(no entries)</xsl:text>
-						</xsl:if>
-					</xsl:when>
-
-					<xsl:when test="$blog-year">
-						<div class="year-view">
-							<xsl:call-template name="b:year-view"/>
-						</div>
-					</xsl:when>
-
-					<xsl:otherwise>
-						<!-- TODO: interject with month headings -->
-						<!-- TODO: pagnation -->
-						<xsl:apply-templates select="b:entry[position() >= last() - 20]"/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</body>
-		</html>
+			<xsl:otherwise>
+				<!-- TODO: interject with month headings -->
+				<!-- TODO: pagnation -->
+				<xsl:apply-templates select="b:entry[position() >= last() - 20]"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 </xsl:stylesheet>
