@@ -1,0 +1,35 @@
+/* $Id$ */
+
+table.calendar {
+	margin: 0;
+	min-width: 13em;
+}
+
+table.calendar th {
+	text-align: center;
+}
+
+table.calendar td {
+	text-align: right;
+}
+
+table.calendar th {
+	font-weight: normal;
+	font-size: 90%;
+	color: #888;
+}
+
+table.calendar td {
+	color: #ddd;
+	padding: 1px 3px;
+}
+
+table.calendar td.today {
+	background-color: #f4f4f4;
+	color: #ccc;
+}
+
+table.calendar a {
+	display: block;
+}
+
