@@ -15,8 +15,8 @@
 		TODO: hilight current day, month, year etc
 		TODO: search
 		TODO: interject with day/month changes
-		TODO: show >> instead of > if there's a gap
 		 XXX: clicking on a day goes to the wrong #
+		TODO: <img> URLs etc (and an image widget)
 	-->
 
 
@@ -81,12 +81,12 @@
 			<xsl:choose>
 				<xsl:when test="$blog-month or $year-index">
 					<th>
+						<xsl:variable name="date-delta" select="date:add($date, '-P1M')"/>
+
 						<!-- TODO: centralise somehow -->
 						<xsl:choose>
-							<xsl:when test="/b:blog/b:entry[starts-with(date:difference($date, @date), '-')]">
+							<xsl:when test="/b:blog/b:entry[starts-with(@date, $date-delta)]">
 								<a>
-									<xsl:variable name="date-delta" select="date:add($date, '-P1M')"/>
-
 									<xsl:call-template name="b:href">
 										<xsl:with-param name="date"
 											select="concat(date:year($date-delta), '-',
@@ -94,6 +94,24 @@
 									</xsl:call-template>
 
 									<xsl:text>&lt;</xsl:text>
+								</a>
+							</xsl:when>
+
+							<xsl:when test="/b:blog/b:entry[starts-with(date:difference($date, @date), '-')]">
+								<a>
+									<xsl:variable name="date-skip"
+										select="/b:blog/b:entry
+											[starts-with(date:difference($date, @date), '-')]
+											[position() = last()]/@date"/>
+
+									<!-- TODO: skip to next populated entry -->
+									<xsl:call-template name="b:href">
+										<xsl:with-param name="date"
+											select="concat(date:year($date-skip), '-',
+												str:align(date:month-in-year($date-skip), '00', 'right'))"/>
+									</xsl:call-template>
+
+									<xsl:text>&lt;&lt;</xsl:text>
 								</a>
 							</xsl:when>
 
@@ -125,11 +143,11 @@
 						</xsl:choose>
 					</th>
 					<th>
-						<xsl:choose>
-							<xsl:when test="/b:blog/b:entry[starts-with(date:difference(@date, $date), '-')]">
-								<a>
-									<xsl:variable name="date-delta" select="date:add($date, 'P1M')"/>
+						<xsl:variable name="date-delta" select="date:add($date, 'P1M')"/>
 
+						<xsl:choose>
+							<xsl:when test="/b:blog/b:entry[starts-with(@date, $date-delta)]">
+								<a>
 									<xsl:call-template name="b:href">
 										<xsl:with-param name="date"
 											select="concat(date:year($date-delta), '-',
@@ -137,6 +155,24 @@
 									</xsl:call-template>
 
 									<xsl:text>&gt;</xsl:text>
+								</a>
+							</xsl:when>
+
+							<xsl:when test="/b:blog/b:entry[starts-with(date:difference(@date, $date), '-')]">
+								<a>
+									<xsl:variable name="date-skip"
+										select="/b:blog/b:entry
+											[starts-with(date:difference(@date, $date), '-')]
+											[position() = 1]/@date"/>
+
+									<!-- TODO: skip to next populated entry -->
+									<xsl:call-template name="b:href">
+										<xsl:with-param name="date"
+											select="concat(date:year($date-skip), '-',
+												str:align(date:month-in-year($date-skip), '00', 'right'))"/>
+									</xsl:call-template>
+
+									<xsl:text>&gt;&gt;</xsl:text>
 								</a>
 							</xsl:when>
 
@@ -218,8 +254,8 @@
 					<xsl:text>Blog</xsl:text>
 				</title>
 
-				<link rel="stylesheet" href="blog.css"/>
-				<link rel="stylesheet" href="calendar.css"/>
+				<link rel="stylesheet" href="/j3/blog.css"/>
+				<link rel="stylesheet" href="/j3/calendar.css"/>
 				<link rel="stylesheet" href="/kate.css"/>
 			</head>
 
