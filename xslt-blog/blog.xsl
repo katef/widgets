@@ -239,9 +239,24 @@
 
 
 	<!--
-		Entry point
+		Title entry point
 	-->
-	<xsl:template name="b:blog">
+	<xsl:template name="b:title">
+		<xsl:choose>
+			<xsl:when test="$blog-date">
+				<xsl:value-of select="$blog-date"/>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<xsl:text>Blog</xsl:text>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<!--
+		Calendar entry point
+	-->
+	<xsl:template name="b:calendar">
 		<xsl:variable name="date">
 			<xsl:choose>
 				<xsl:when test="$blog-month">
@@ -254,62 +269,53 @@
 			</xsl:choose>
 		</xsl:variable>
 
-		<h3>
-			<xsl:choose>
-				<xsl:when test="$blog-date">
-					<xsl:value-of select="$blog-date"/>
-				</xsl:when>
+		<xsl:choose>
+			<xsl:when test="$blog-month">
+				<xsl:call-template name="cal:calendar">
+					<xsl:with-param name="date" select="$date"/>
+				</xsl:call-template>
+			</xsl:when>
 
-				<xsl:otherwise>
-					<xsl:text>Blog</xsl:text>
-				</xsl:otherwise>
-			</xsl:choose>
-		</h3>
+			<xsl:otherwise>
+				<xsl:call-template name="cal:calendar">
+					<xsl:with-param name="date" select="date:date()"/>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
 
-		<div class="cal-index">
-			<xsl:choose>
-				<xsl:when test="$blog-month">
-					<xsl:call-template name="cal:calendar">
-						<xsl:with-param name="date" select="$date"/>
-					</xsl:call-template>
-				</xsl:when>
+		<hr/>
 
-				<xsl:otherwise>
-					<xsl:call-template name="cal:calendar">
-						<xsl:with-param name="date" select="date:date()"/>
-					</xsl:call-template>
-				</xsl:otherwise>
-			</xsl:choose>
+		<ol class="years">
+			<xsl:for-each select="b:entry/@date">
+				<xsl:sort data-type="number" select="@date"/>
+		
+				<xsl:variable name="year" select="substring(., 1, 4)"/>
+		
+				<xsl:if test="not(../preceding-sibling::b:entry[substring(@date, 1, 4) = $year])">
+					<li>
+						<xsl:if test="$date = $year">
+							<xsl:attribute name="class">
+								<xsl:text>current-year</xsl:text>
+							</xsl:attribute>
+						</xsl:if>
 
-			<hr/>
+						<a>
+							<xsl:call-template name="b:href">
+								<xsl:with-param name="date" select="$year"/>
+							</xsl:call-template>
+		
+							<xsl:value-of select="$year"/>
+						</a>
+					</li>
+				</xsl:if>
+			</xsl:for-each>
+		</ol>
+	</xsl:template>
 
-			<ol class="years">
-				<xsl:for-each select="b:entry/@date">
-					<xsl:sort data-type="number" select="@date"/>
-			
-					<xsl:variable name="year" select="substring(., 1, 4)"/>
-			
-					<xsl:if test="not(../preceding-sibling::b:entry[substring(@date, 1, 4) = $year])">
-						<li>
-							<xsl:if test="$date = $year">
-								<xsl:attribute name="class">
-									<xsl:text>current-year</xsl:text>
-								</xsl:attribute>
-							</xsl:if>
-
-							<a>
-								<xsl:call-template name="b:href">
-									<xsl:with-param name="date" select="$year"/>
-								</xsl:call-template>
-			
-								<xsl:value-of select="$year"/>
-							</a>
-						</li>
-					</xsl:if>
-				</xsl:for-each>
-			</ol>
-		</div>
-
+	<!--
+		Content entry point
+	-->
+	<xsl:template name="b:content">
 		<xsl:choose>
 			<xsl:when test="$blog-month">
 				<xsl:apply-templates select="b:entry[date:year(@date) = $blog-year
@@ -333,6 +339,21 @@
 				<xsl:apply-templates select="b:entry[position() >= last() - 20]"/>
 			</xsl:otherwise>
 		</xsl:choose>
+	</xsl:template>
+
+	<!--
+		Convenience for all of the above
+	-->
+	<xsl:template name="b:blog">
+		<h3>
+			<xsl:call-template name="b:title"/>
+		</h3>
+
+		<div class="cal-index">
+			<xsl:call-template name="b:calendar"/>
+		</div>
+
+		<xsl:call-template name="b:content"/>
 	</xsl:template>
 
 </xsl:stylesheet>
