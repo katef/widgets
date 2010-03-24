@@ -20,11 +20,12 @@
 		TODO: <img> URLs etc (and an image widget)
 	-->
 
-
 	<xsl:import href="calendar.xsl"/>
 
+	<xsl:variable name="blog-date"  select="date:date()"/>
 	<xsl:variable name="blog-year"  select="date:year($blog-date)"/>
 	<xsl:variable name="blog-month" select="date:month-in-year($blog-date)"/>
+
 
 	<xsl:output indent="yes" method="xml" encoding="utf-8"
 		cdata-section-elements="script"
@@ -236,6 +237,10 @@
 		</xsl:if>
 	</xsl:template>
 
+
+	<!--
+		Entry point
+	-->
 	<xsl:template name="b:blog">
 		<xsl:variable name="date">
 			<xsl:choose>
