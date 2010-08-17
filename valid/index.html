@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:v="http://xml.elide.org/valid">
+	<head>
+		<title>Javascript form validation</title>
+		<link rel="stylesheet" type="text/css" media="screen" href="valid.css"/>
+		<script src="valid.js"></script>
+	</head>
+
+	<body onload="Valid.init(document.documentElement)">
+		<p>Everybody has javascript form validation.
+		<br/>
+		Here's mine.</p>
+
+		<form id="A">
+			<table>
+				<tr>
+					<td> <label for="aln" class="name">Something</label>
+					     <label for="aln" class="star"/> </td>
+					<td> <input type="text" name="aln" id="aln" v:regex="[a-z0-9]*"/> </td>
+					<td> <label for="aln" class="example">hello</label> </td>
+				</tr>
+				<tr>
+					<td> <label for="abc" class="name">Letters</label>
+					     <label for="abc" class="star"/> </td>
+					<td> <input type="text" name="abc" id="abc" v:regex="^[a-z]+$"/> </td>
+					<td> <label for="abc" class="example">abc</label> </td>
+				</tr>
+				<tr>
+					<td> <label for="123" class="name">Numbers</label>
+					     <label for="123" class="star"/> </td>
+					<td> <input type="text" name="123" id="123" v:regex="^[0-9]+$"/> </td>
+					<td> <label for="123" class="example">123</label> </td>
+				</tr>
+				<tr>
+					<td> <label for="postcode" class="name">Postcode</label>
+					     <label for="postcode" class="star"/> </td>
+					<td> <input type="text" name="postcode" id="postcode"
+						v:regex="^[A-PR-UWYZ][A-HK-Y0-9][A-HJKSTUW0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}$"/> </td>
+					<td> <label for="postcode" class="example">CV11 6JH</label> </td>
+				</tr>
+			</table>
+
+			<div class="msg error">
+				Something's wrong; please fix it and re-submit.<br/>
+				"*" indicates required fields which are missing.
+			</div>
+
+			<input type="submit"/>
+		</form>
+
+
+		<p>Adapted from <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.9.1">HTML 4.01</a>:</p>
+
+<FORM action="..." method="post" id="B">
+<LABEL>
+   First Name<br/>
+   <INPUT type="text" name="firstname">
+	<span class="example">28</span>
+</LABEL>
+<LABEL>
+   Last Name<br/>
+   <INPUT type="text" name="lastname">
+	<span class="example">Your family name, or something.<br/><br/>Smith, for example.</span>
+</LABEL>
+<label for="age">
+	Age<br/>
+	<input id="age" type="text" name="age" v:regex="^[1-9][0-9]*$"/>
+	<span class="example">Your age is required for blah blah blah reasons.<br/><br/>Valid ages are from 1 upwards, e.g. 28.</span>
+</label>
+<input type="submit"/>
+</FORM>
+
+	</body>
+</html>
+

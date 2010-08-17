@@ -1,0 +1,120 @@
+/* $Id$ */
+
+body {
+	font-family: verdana;
+	line-height: 150%;
+	padding: 2em 4em;
+	font-size: 10pt;
+}
+
+form input[type="submit"], form input[type="button"] {
+	margin-top: 2em;
+}
+
+form input[type="text"], form input[type="textarea"] {
+	border: solid 1px #ccc;
+	background-color: #fff;
+}
+
+form input[type="text"]:focus, form input[type="textarea"]:focus {
+	border-color: black;
+	background-color: #eee;
+}
+
+form {
+	margin: 2em;
+	max-width: 30em;
+	border: solid 1px #ccc;
+	background-color: #f8f8f8;
+	padding: 1em 2em;
+}
+
+form label.invalid {
+	color: #f88;
+}
+
+form input.invalid {
+	background-color: #fee;
+	border-color: #f88;
+}
+
+form input[type="text"].invalid:focus, form input[type="textarea"].invalid:focus {
+	background-color: #fdd;
+	border-color: #f44;
+}
+
+form div.error {
+	display: none;
+}
+
+form div.msg {
+	margin: 1em -1ex;
+	padding: 1ex;
+}
+
+form.invalid div.error {
+	display: block;
+	color: #f44;
+	background-color: #fee;
+	border: solid 2px #f88;
+}
+
+form#A.invalid label.star.invalid.required:after {
+	content: " *";
+}
+
+form#A label.example {
+	display: none;
+}
+
+form#A label.example.invalid {
+	display: block;
+}
+
+form#A label.example:before {
+	padding-left: 1ex;
+	content: "(for example \"";
+}
+
+form#A label.example:after {
+	content: "\")";
+}
+
+form#A input[type="text"], form input[type="textarea"] {
+	padding: 0.5ex;
+}
+
+form#A td:first-child {
+	padding-right: 1em;
+}
+
+form#B {
+	position: relative;
+}
+
+form#B label {
+	display: block;
+	padding: 1ex 1em;
+	margin: 0 -1em;
+}
+
+form#B label:hover {
+	background-color: #eee;
+}
+
+form#B label span.example {
+	display: none;
+}
+
+form#B label:hover span.example {
+	display: block;
+	width: 14em;
+	height: 10em;
+	position: absolute;
+	top: 2em;
+	left: 15em;
+	background-color: aliceblue;
+	border: solid 1px #acf;
+	padding: 1em;
+}
+
