@@ -41,6 +41,7 @@
  * TODO: alternate approach: pre-render entire <tables> sorted for each column. clicking to sort just swaps them in
  * TODO: convention to prefix variables $ for DOM objects
  * TODO: namespacing: what about within DOM nodes? make a table object there, too?
+ * TODO: when operating in HTML (not XHTML), the namespace needs to change
  */
 
 
@@ -154,7 +155,7 @@ var Table = new (function () {
 		return node.table_serialised;
 	}
 
-	function hasclass(node, class) {
+	function hasclass(node, klass) {
 		var a, c;
 
 		c = node.getAttribute('class');
@@ -165,7 +166,7 @@ var Table = new (function () {
 		a = c.split(/\s/);
 
 		for (var i in a) {
-			if (a[i] == class) {
+			if (a[i] == klass) {
 				return true;
 			}
 		}
@@ -173,7 +174,7 @@ var Table = new (function () {
 		return false;
 	}
 
-	function removeclass(node, class) {
+	function removeclass(node, klass) {
 		var a, c;
 
 		c = node.getAttribute('class');
@@ -184,7 +185,7 @@ var Table = new (function () {
 		a = c.split(/\s/);
 
 		for (var i = 0; i < a.length; i++) {
-			if (a[i] == class || a[i] == '') {
+			if (a[i] == klass || a[i] == '') {
 				a.splice(i, 1);
 				i--;
 			}
@@ -197,7 +198,7 @@ var Table = new (function () {
 		}
 	}
 
-	function addclass(node, class) {
+	function addclass(node, klass) {
 		var a, c;
 
 		a = [ ];
@@ -208,13 +209,13 @@ var Table = new (function () {
 		}
 
 		for (var i = 0; i < a.length; i++) {
-			if (a[i] == class || a[i] == '') {
+			if (a[i] == klass || a[i] == '') {
 				a.splice(i, 1);
 				i--;
 			}
 		}
 
-		a.push(class);
+		a.push(klass);
 
 		node.setAttribute('class', a.join(' '));
 	}
@@ -255,14 +256,6 @@ var Table = new (function () {
 		}
 
 		return a;
-	}
-
-	function cellcolspan(cell) {
-		var span;
-
-		span = cell.getAttribute('colspan');
-
-		return span == null ? 1 : Number(span);
 	}
 
 	/*
@@ -308,7 +301,7 @@ var Table = new (function () {
 
 			cells = rows[i].cells;
 			for (var j in cells) {
-				q += cellcolspan(cells[j]);
+				q += cells[j].colSpan || 1;
 
 				if (q > colindex) {
 					if (cells[j].localName == localname) {
@@ -366,7 +359,7 @@ var Table = new (function () {
 		a = xpath(t, "h:tr[1]/h:th|h:thead/h:tr[1]/h:th"
 		          + "|h:tr[1]/h:td|h:thead/h:tr[1]/h:td");
 		for (var i in a) {
-			cols += cellcolspan(a[i]);
+			cols += a[i].colSpan || 1;
 		}
 
 		return cols;
@@ -678,6 +671,13 @@ var Table = new (function () {
 	/* TODO: there is probably a way to automate calling this */
 	this.init = function (root) {
 		var a;
+
+		/* not provided on Camino */
+		if (!String.prototype.trim) {
+			String.prototype.trim = function () {
+				return this.replace(/^\s*/, "").replace(/\s*$/, "");
+			}
+		}
 
 		/*
 		 * Here we do not include tables which have cells of @rowspan > 1, due to
