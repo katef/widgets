@@ -284,7 +284,6 @@ var Table = new (function () {
 		return null;
 	}
 
-/* TODO: document */
 	function getcolumn(t, b, r, c, body, cell) {
 		var q;
 
