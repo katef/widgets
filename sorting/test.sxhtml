@@ -41,6 +41,14 @@
 <tr><td>2008-11-01T20:39:57.78-06:00</td> </tr>
 </table>
 
+		<p>Multiple <code>&lt;tbody/&gt;</code>s:</p>
+
+		<div class="table"><a xmlns:mb="http://xml.tendra.org/minidocbook" name="T6" id="T6"></a><table><col align="left" /><col align="left" /><col align="left" /><thead><tr><th rowspan="1" colspan="1"><acronym>API</acronym> Name</th><th rowspan="1" colspan="1">Type</th><th rowspan="1" colspan="1">Description</th></tr></thead><tbody><tr><td rowspan="1" colspan="1"><code>ansi</code></td><td rowspan="1" colspan="1">base (default)</td><td rowspan="1" colspan="1">ANSI X3.159</td></tr><tr><td rowspan="1" colspan="1"><code>iso</code></td><td rowspan="1" colspan="1">base</td><td rowspan="1" colspan="1">ISO MSE 9899:1990 (Ammendment 1:1993 (E))</td></tr><tr><td rowspan="1" colspan="1"><code>posix</code></td><td rowspan="1" colspan="1">base</td><td rowspan="1" colspan="1">POSIX 1003.1</td></tr><tr><td rowspan="1" colspan="1"><code>posix2</code></td><td rowspan="1" colspan="1">base</td><td rowspan="1" colspan="1">POSIX 1003.2</td></tr><tr><td rowspan="1" colspan="1"><code>xpg3</code></td><td rowspan="1" colspan="1">base</td><td rowspan="1" colspan="1">X/Open Portability Guide 3</td></tr><tr><td rowspan="1" colspan="1"><code>xpg4</code></td><td rowspan="1" colspan="1">base</td><td rowspan="1" colspan="1">X/Open Portability Guide 4</td></tr><tr><td rowspan="1" colspan="1"><code>cose</code>
+						</td><td rowspan="1" colspan="1">base</td><td rowspan="1" colspan="1">COSE 1170</td></tr><tr><td rowspan="1" colspan="1"><code>svid3</code></td><td rowspan="1" colspan="1">base</td><td rowspan="1" colspan="1">System V Interface Definition 3rd Edition</td></tr><tr><td rowspan="1" colspan="1"><code>aes</code></td><td rowspan="1" colspan="1">base</td><td rowspan="1" colspan="1">AES Revision A</td></tr></tbody><tbody class="sep"><tr><td colspan="3"></td></tr></tbody><tbody><tr><td rowspan="1" colspan="1"><code>bsd_extn</code>
+						</td><td rowspan="1" colspan="1">extension</td><td rowspan="1" colspan="1">BSD-like extension for use with POSIX etc.</td></tr><tr><td rowspan="1" colspan="1"><code>x5_lib</code></td><td rowspan="1" colspan="1">extension</td><td rowspan="1" colspan="1">X11 (Release 5) X Library</td></tr><tr><td rowspan="1" colspan="1"><code>x5_t</code>
+						</td><td rowspan="1" colspan="1">extension</td><td rowspan="1" colspan="1">X11 (Release 5) Intrinsics Toolkit</td></tr><tr><td rowspan="1" colspan="1"><code>x5_mu</code></td><td rowspan="1" colspan="1">extension</td><td rowspan="1" colspan="1">X11 (Release 5) Miscellaneous Utilities</td></tr><tr><td rowspan="1" colspan="1"><code>x5_aw</code></td><td rowspan="1" colspan="1">extension</td><td rowspan="1" colspan="1">X11 (Release 5) Athena Widgets</td></tr><tr><td rowspan="1" colspan="1"><code>x5_mit</code>
+						</td><td rowspan="1" colspan="1">extension</td><td rowspan="1" colspan="1">X11 (Release 5) MIT implementation</td></tr><tr><td rowspan="1" colspan="1"><code>x5_proto</code></td><td rowspan="1" colspan="1">extension</td><td rowspan="1" colspan="1">X11 (Release 5) Protocol Extension</td></tr><tr><td rowspan="1" colspan="1"><code>x5_ext</code></td><td rowspan="1" colspan="1">extension</td><td rowspan="1" colspan="1">X11 (Release 5) Extensions</td></tr><tr><td rowspan="1" colspan="1"><code>motif</code></td><td rowspan="1" colspan="1">extension</td><td rowspan="1" colspan="1">Motif 1.1</td></tr></tbody><tbody class="sep"><tr><td colspan="3"></td></tr></tbody><tbody><tr><td rowspan="1" colspan="1"><code>system</code></td><td rowspan="1" colspan="1" class="na">–</td><td rowspan="1" colspan="1">System headers as main <acronym>API</acronym></td></tr><tr><td rowspan="1" colspan="1"><code>system+</code></td><td rowspan="1" colspan="1" class="na">–</td><td rowspan="1" colspan="1">System headers as last resort extension <acronym>API</acronym></td></tr></tbody></table><b xmlns:mb="http://xml.tendra.org/minidocbook">Table 6. Supported <acronym>API</acronym>s</b></div>
+
 		<p>Somebody else's example, tweaked a bit:</p>
 
 		<table>
@@ -60,6 +68,195 @@
 			<tr><td>17/11/2005</td><td>Carl</td><td>Conway</td><td>$17.00</td><td>192.168.02.13</td></tr>
 		</tbody>
 		</table>
+
+<hr/>
+
+<table>
+<thead>
+	<tr>
+		<th>A</th>
+		<th>A</th>
+		<th>A</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>A</td>
+		<td>1</td>
+		<td>$2.00</td>
+	</tr>
+	<tr>
+		<td>C</td>
+		<td>2</td>
+		<td>$1.00</td>
+	</tr>
+	<tr>
+		<td>D</td>
+		<td>3</td>
+		<td>50c</td>
+	</tr>
+	<tr>
+		<td>B</td>
+		<td>4</td>
+		<td>70c</td>
+	</tr>
+</tbody>
+<tbody class="sep">
+<tr><td colspan="3"/></tr>
+</tbody>
+<tbody>
+	<tr>
+		<td>1.2</td>
+		<td>127.0.0.1</td>
+		<td>1/8/2010</td>
+	</tr>
+	<tr>
+		<td>.27</td>
+		<td>127.0.1.0</td>
+		<td>21/8/2010</td>
+	</tr>
+	<tr>
+		<td>0.2e10</td>
+		<td>127.0.0.2</td>
+		<td>2/9/2010</td>
+	</tr>
+	<tr>
+		<td>100e-10</td>
+		<td>127.0.2.2</td>
+		<td>3/9/2010</td>
+	</tr>
+</tbody>
+<tbody class="sep">
+<tr><td colspan="3"/></tr>
+</tbody>
+<tbody>
+	<tr>
+		<td>127.0.0.1</td>
+		<td>1/8/2010</td>
+		<td>1.2</td>
+	</tr>
+	<tr>
+		<td>127.0.1.0</td>
+		<td>21/8/2010</td>
+		<td>.27</td>
+	</tr>
+	<tr>
+		<td>127.0.0.2</td>
+		<td>2/9/2010</td>
+		<td>0.2e10</td>
+	</tr>
+	<tr>
+		<td>127.0.2.2</td>
+		<td>3/9/2010</td>
+		<td>100e-10</td>
+	</tr>
+</tbody>
+</table>
+
+
+
+
+<hr/>
+<style>
+table.y, table.y td, table.y th {
+    border: solid 1px #ccc;
+}
+table.y td { text-align: center; }
+</style>
+<table border="1" id="t1" class="y">
+<col span="2" width="90" valign="top" align="right"/>
+<col span="1" width="90" align="center"/>
+<col span="2" width="90" valign="bottom" align="left"/>
+<thead>
+<tr>
+    <th>A</th>
+    <th>B</th>
+    <th>center</th>
+    <th>C</th>
+    <th>D</th>
+</tr>
+</thead>
+<tbody>
+        <tr>
+                <td rowspan="1">A</td>
+                <td>Z</td>
+                <td>C</td>
+                <td>A</td>
+                <td>F</td>
+        </tr>
+        <tr>
+                <td colspan="1">A</td>
+                <td colspan="2">G</td>
+                <td rowspan="1">A</td>
+                <td>D</td>
+        </tr>
+        <tr>
+                <td colspan="2">C</td>
+                <td>A</td>
+                <td rowspan="1">D</td>
+                <td colspan="1">E</td>
+        </tr>
+        <tr>
+                <td colspan="2">E</td>
+                <td colspan="3">B</td>
+        </tr>
+        <tr>
+                <td colspan="1">F</td>
+                <td colspan="1">D</td>
+                <td colspan="1">D</td>
+                <td rowspan="1">C</td>
+                <td>C</td>
+        </tr>
+        <tr>
+                <td colspan="1">G</td>
+                <td colspan="1">X</td>
+                <td colspan="2">F</td>
+                <td>G</td>
+        </tr>
+</tbody>
+</table>
+<hr/>
+<table border="1" id="t1" class="y">
+<col span="2" width="90" valign="top" align="right"/>
+<col span="1" width="90" align="center"/>
+<col span="2" width="90" valign="bottom" align="left"/>
+<thead>
+<tr>
+    <th colspan="2">top right</th>
+    <th>center</th>
+    <th colspan="2">bottom left</th>
+</tr>
+</thead>
+<tbody>
+        <tr>
+                <td rowspan="1">abc</td>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+        </tr>
+        <tr>
+                <td rowspan="1">abc</td>
+                <td colspan="2">abc</td>
+                <td rowspan="1">abc</td>
+                <td>abc</td>
+        </tr>
+        <tr>
+                <td colspan="2">abc</td>
+                <td>abc</td>
+                <td rowspan="1">abc</td>
+                <td>abc</td>
+        </tr>
+        <tr>
+                <td>abc</td>
+                <td>abc</td>
+                <td>abc</td>
+                <td rowspan="1">abc</td>
+                <td>abc</td>
+        </tr>
+</tbody>
+</table>
+
 
 		<p>Side headings:</p>
 

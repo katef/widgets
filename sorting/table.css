@@ -47,7 +47,8 @@ table th.table-sortable:after {
 	cursor: pointer;
 }
 
-table td.table-sorted {
+table td.table-sorted,
+table tbody.sep td {
 	background-color: #eee;
 	border: solid 1px #ddd;
 }
