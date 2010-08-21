@@ -42,6 +42,7 @@
  * TODO: convention to prefix variables $ for DOM objects
  * TODO: namespacing: what about within DOM nodes? make a table object there, too?
  * TODO: when operating in HTML (not XHTML), the namespace needs to change
+ * TODO: support <th colspan="2"/>. possibly simply another dimension to the th's arrays
  */
 
 
@@ -237,7 +238,7 @@ var Table = new (function () {
 	function xpath(root, query) {
 		var type = XPathResult.ORDERED_NODE_ITERATOR_TYPE;
 		var resolver;
-		var a, r, n;
+		var a, x, n;
 
 		a = [ ];
 
@@ -248,10 +249,10 @@ var Table = new (function () {
 			}
 		}
 
-		r = document.evaluate(query, root, resolver, type, null);
+		x = document.evaluate(query, root, resolver, type, null);
 
 		/* constructing an array because modifying any node invalidates the iterator */
-		while ((n = r.iterateNext())) {
+		while ((n = x.iterateNext())) {
 			a.push(n);
 		}
 
@@ -283,66 +284,49 @@ var Table = new (function () {
 		return null;
 	}
 
-	function getcolumn(rows, colindex, localname) {
-		var c;
-
-		c = [ ];
+/* TODO: document */
+	function getcolumn(t, b, r, c, body, cell) {
+		var q;
 
 		/*
-		 * For each row, loop through its cells until the desired colindex is
-		 * reached. I would love to do this in XPath, but unfortunately I don't
-		 * think Javascript's API provides variable binding. So, counting here is
-		 * done using the DOM API instead.
+		 * These are the cells who's left edge's (preceding siblings)
+		 * column are < c and who's right edge's (self)
+		 * column are > c.
+		 * In other words, the cells which encompass the column index, c.
 		 */
-		for (var i in rows) {
-			var cells, q;
+		q = "(.|h:" + body + "[" + (b + 1) + "])"
+		  + "/h:tr[position() > " + r + "]"
+		  + "/h:" + cell + "["
+		  + "      sum(preceding-sibling::h:*/@colspan) + "
+		  + "    count(preceding-sibling::h:*[not(@colspan)])"
+		  + "    <= " + c
+		  + "]["
+		  + "      sum(preceding-sibling::h:*/@colspan) + "
+		  + "    count(preceding-sibling::h:*[not(@colspan)]) + "
+		  + "    number(count(@colspan) = 0) + sum(@colspan) > " + c
+		  + "]";
 
-			q = 0;
-
-			cells = rows[i].cells;
-			for (var j in cells) {
-				q += cells[j].colSpan || 1;
-
-				if (q > colindex) {
-					if (cells[j].localName == localname) {
-						c.push(cells[j]);
-					}
-					break;
-				}
-			}
-		}
-
-		return c;
+		return xpath(t, q);
 	}
 
 	/*
 	 * Returns an array of <td>s in the body for a table, after a given row.
 	 *
-	 * colindex - 0-based column index of the column we're interested in.
-	 * rowindex - 0-based row index of the row we're interested cells below.
+	 * b - 0-based tbody index of the table body we're interested in.
+	 * c - 0-based column index of the column we're interested in.
+	 * r - 0-based row index of the row we're interested in cells below.
 	 */
-	function getcolumntd(t, rowindex, colindex) {
-		var a;
-
-		rowindex++;
-
-		a = xpath(t, "h:tr[position() > " + rowindex + "]"
-		  + "|h:tbody/h:tr[position() > " + rowindex + "]");
-
-		return getcolumn(a, colindex, "td");
+	function getcolumntd(t, b, r, c) {
+		return getcolumn(t, b, r, c, "tbody", "td");
 	}
 
 	/*
 	 * Returns an array of <th>s in the header for a table.
 	 *
-	 * colindex - 0-based column index of the column we're interested in.
+	 * c - 0-based column index of the column we're interested in.
 	 */
-	function getcolumnth(t, colindex) {
-		var a;
-
-		a = xpath(t, "h:tr|h:thead/h:tr");
-
-		return getcolumn(a, colindex, "th");
+	function getcolumnth(t, c) {
+		return getcolumn(t, 0, 0, c, "thead", "th");
 	}
 
 	function countcols(t) {
@@ -358,8 +342,8 @@ var Table = new (function () {
 		 */
 		a = xpath(t, "h:tr[1]/h:th|h:thead/h:tr[1]/h:th"
 		          + "|h:tr[1]/h:td|h:thead/h:tr[1]/h:td");
-		for (var i in a) {
-			cols += a[i].colSpan || 1;
+		for (var c in a) {
+			cols += a[c].colSpan || 1;
 		}
 
 		return cols;
@@ -397,7 +381,6 @@ var Table = new (function () {
 	 * in the given column, or -1 if no type matches.
 	 */
 	function guesstypecolumn(v) {
-		var typeindex;
 		var mask;
 
 		/*
@@ -426,9 +409,6 @@ var Table = new (function () {
 	}
 
 	/*
-	 * This function reorders a column of data; this does not affect the page
-	 * layout - it is the array order which is modified, not the DOM tree.
-	 *
 	 * This function provides two mutually exclusive operations:
 	 *
 	 *  - Sorting unordered data; this happens on the first click.
@@ -437,89 +417,94 @@ var Table = new (function () {
 	 * Descision-making for when to reorder, and in what direction depends on the
 	 * state of the current data. State is maintained in the @class list of the
 	 * <th> associated with that column.
+	 *
+	 * The sort function reorders a column of data; this does not affect the
+	 * page layout - it is the array order which is modified, not the DOM tree.
+	 *
 	 */
-	function ordercolumn(th, t, v) {
-		var dir;
+	function ordercolumn(th) {
+		var o;
+
+		o = { };
 
 		if (hasclass(th, "table-sorted")) {
-			v.reverse();
+			o.sort = function (t, v) {
+					v.reverse();
+				};
 
-			dir = hasclass(th, 'table-ascending')
+			o.dir = hasclass(th, 'table-ascending')
 				? 'table-descending'
 				: 'table-ascending';
 		} else {
-			v.sort(function (a, b) {
-					var as = serialise(a);
-					var bs = serialise(b);
+			o.sort = function (t, v) {
+				v.sort(function (a, b) {
+						var as = serialise(a);
+						var bs = serialise(b);
 
-					if (as == "") return +1;
-					if (bs == "") return -1;
+						if (as == "") return +1;
+						if (bs == "") return -1;
 
-					if (a.table_m == null) a.table_m = as.match(t.re);
-					if (b.table_m == null) b.table_m = bs.match(t.re);
+						if (a.table_m == null) a.table_m = as.match(t.re);
+						if (b.table_m == null) b.table_m = bs.match(t.re);
 
-					return t.cmp(a.table_m, b.table_m);
-				});
+						return t.cmp(a.table_m, b.table_m);
+					});
+				};
 
-			dir = 'table-ascending';
+			o.dir = 'table-ascending';
 		}
 
-		return dir;
+		return o;
+	}
+
+	/*
+	 * Reset the sortedness state of all columns, and set the sortedness state
+	 * for the given column.
+	 */
+	function resetorder(t, th, dir) {
+		var o;
+
+		/* Reset classes for all other columns' data */
+		/* TODO: only if this isn't our column; deal with that separately */
+		o = xpath(t, "h:tbody/h:tr/h:td|h:tr/h:td");
+		for (var w in o) {
+			removeclass(o[w], "table-sorted");
+		}
+
+		/* Reset direction for all other columns' headers */
+		o = xpath(t, "h:thead/h:tr/h:th|h:tr/h:th");
+		for (var w in o) {
+			removeclass(o[w], "table-ascending");
+			removeclass(o[w], "table-descending");
+			if (o[w] != th) {
+				removeclass(o[w], "table-sorted");
+			}
+		}
+
+		addclass(th, dir);
+		addclass(th, "table-sorted");
 	}
 
 	/*
 	 * Update the DOM tree to reflect the order of a given column.
 	 * @class attributes are also updated accordingly.
 	 */
-	function renderorder(t, th, dir, v) {
-		/*
-		 * Reset the sortedness state of all columns, and set the sortedness state
-		 * for the given column.
-		 */
-		{
-			var o;
+	function renderorder(t, v) {
+		var body, tr;
 
-			/* Reset classes for all other columns' data */
-			/* TODO: only if this isn't our column; deal with that separately */
-			o = xpath(t, "h:tbody/h:tr/h:td|h:tr/h:td");
-			for (var w in o) {
-				removeclass(o[w], "table-sorted");
-			}
-
-			/* Reset direction for all other columns' headers */
-			o = xpath(t, "h:thead/h:tr/h:th|h:tr/h:th");
-			for (var w in o) {
-				removeclass(o[w], "table-ascending");
-				removeclass(o[w], "table-descending");
-				if (o[w] != th) {
-					removeclass(o[w], "table-sorted");
-				}
-			}
-
-			addclass(th, dir);
-			addclass(th, "table-sorted");
+		tr = v[0].parentNode;
+		if (tr.localName != 'tr') {
+			return;
 		}
 
-		/*
-		 * Reorder rows.
-		 */
-		{
-			var body, tr;
+		body = tr.parentNode;
+		if (body.localName != 'table' && body.localName != 'tbody') {
+			return;
+		}
 
-			tr = v[0].parentNode;
-			if (tr.localName != 'tr') {
-				return;
-			}
-
-			body = tr.parentNode;
-			if (body.localName != 'table' && body.localName != 'tbody') {
-				return;
-			}
-
-			for (var w in v) {
-				addclass(v[w], "table-sorted");
-				body.appendChild(v[w].parentNode);
-			}
+		for (var w in v) {
+			addclass(v[w], "table-sorted");
+			body.appendChild(v[w].parentNode);
 		}
 	}
 
@@ -557,54 +542,63 @@ var Table = new (function () {
 	 * This is the callback from the <th>.onclick events; the entry point to cause
 	 * a column to be sorted.
 	 */
-	this.sort = function (th, rowindex, i) {
-		var t;
+	this.sort = function (th, r, c) {
+		var t, o, b;
 
+		t = xpath(th, "ancestor::h:table[1]")[0];
+		if (!t) {
+			return;
+		}
+
+		/*
+		 * The sorted vector table_v, and its associated type table_p, are
+		 * cached to save recalculating these in the future. They are stored
+		 * in th, simply because that is a convenient place to store them.
+		 *
+		 * Both arrays are indexed by the index of their respective tbody,
+		 * which provides sorting separately for each tbody within a given
+		 * column. A side-effect of this is that the elements in one tbody
+		 * need not have the same type as elements in another tbody.
+		 */
 		{
-			var tr;
-
-			if (th.parentNode.localName != 'tr') {
-				return;
+			if (th.table_v == null) {
+				th.table_v = [ ];
 			}
 
-			tr = th.parentNode;
-
-			if (tr.parentNode.localName == 'table') {
-				t = tr.parentNode;
-			} else if (tr.parentNode.localName == 'thead') {
-				t = tr.parentNode.parentNode;
-			} else {
-				return;
+			if (th.table_p == null) {
+				th.table_p = [ ];
 			}
 		}
 
-		replacenode(t, function () {
-				var typeindex;
-				var v;
-				var dir;
+		o = ordercolumn(th);	/* TODO: rename ordercolumn() */
 
-				if (th.table_v == null) {
-					th.table_v = getcolumntd(t, rowindex, i);
-				}
+		resetorder(t, th, o.dir);
 
-				if (th.table_v.length == 0) {
-					return;
-				}
+		b = xpath(t, "h:tbody").length;
+		do {
+			if (th.table_v[b] == null) {
+				th.table_v[b] = getcolumntd(t, b, r, c);
+			}
 
-				if (th.table_typeindex == null) {
-					th.table_typeindex = guesstypecolumn(th.table_v);
-				}
+			if (th.table_v[b].length == 0) {
+				continue;
+			}
 
-				if (th.table_typeindex == -1) {
-					addclass(th, "table-notype");
-					return;
-				}
+			if (th.table_p[b] == null) {
+				th.table_p[b] = guesstypecolumn(th.table_v[b]);
+			}
 
-				dir = ordercolumn(th, types[th.table_typeindex],
-					th.table_v);
+			if (th.table_p[b] == -1) {
+				addclass(th, "table-notype");
+				continue;
+			}
 
-				renderorder(t, th, dir, th.table_v);
-			});
+			o.sort(types[th.table_p[b]], th.table_v[b]);
+
+			replacenode(t, function () {
+					renderorder(t, th.table_v[b]);
+				});
+		} while (b != null && b-- > 0);
 	}
 
 	/*
@@ -624,12 +618,12 @@ var Table = new (function () {
 		 * backwards to find the lowest th. then the tds below it are trivial to
 		 * find; just the remaining elements.
 		 */
-		for (var i = 0; i < cols; i++) {
+		for (var c = 0; c < cols; c++) {
 			var lowest;
-			var rowindex;
+			var r;
 
 			/* find the lowest-down <th> of all the <th>s in this column */
-			lowest = getcolumnth(t, i).pop();
+			lowest = getcolumnth(t, c).pop();
 			if (lowest == null) {
 				continue;
 			}
@@ -639,13 +633,13 @@ var Table = new (function () {
 				continue;
 			}
 
-			rowindex = findthrow(t, lowest);
-			if (rowindex == null) {
+			r = findthrow(t, lowest);
+			if (r == null) {
 				continue;
 			}
 
 			/* Skip <th>s with no <td>s below them */
-			if (getcolumntd(t, rowindex, i).length == 0) {
+			if (getcolumntd(t, null, r, c).length == 0) {
 				continue;
 			}
 
@@ -657,11 +651,12 @@ var Table = new (function () {
 			/*
 			 * TODO: should probably wrap the <th> in an <a>, for UI consistency
 			 * wrt accidentally selecting text. If so, .blur() it onclick?
+			 * TODO: on doubleclick maybe?
 			 */
 
 			addclass(lowest, "table-sortable");
 			lowest.setAttribute("onclick",
-				"Table.sort(this, " + rowindex + ", " + i + "); false");
+				"Table.sort(this, " + r + ", " + c + "); false");
 
 			/* TODO: make this lowest.onclick = function (event) { ... }; instead */
 		}
