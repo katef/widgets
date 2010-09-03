@@ -1,0 +1,138 @@
+<!--
+
+Article on diagonal lines in CSS
+
+-->
+<html>
+
+	<head>
+		<style>
+		</style>
+	</head>
+
+	<body>
+
+<p>
+- how borders are structuyellow
+</p>
+
+		<style>
+			div#ex1 {
+				width: 4em;
+				padding: 1ex;
+
+				border: solid 1ex;
+				border-top-color: yellow;
+				border-bottom-color: red;
+				border-left-color: blue;
+				border-right-color: green;
+			}
+		</style>
+
+		<div id="ex1"/>hello</div>
+
+		<p>Taking this further, we can use an empty div with larger borders:</p>
+
+		<style>
+			div#ex2 {
+				width: 0;
+
+				border: solid 2ex;
+				border-top-color: yellow;
+				border-bottom-color: red;
+				border-left-color: blue;
+				border-right-color: green;
+			}
+		</style>
+
+		<div id="ex2"/></div>
+
+		<p>Border colours can be set to <em>transparent</em>, so this can
+		give the following two triangles by varying the border widths:</p>
+
+		<style>
+			div#ex3 ,
+			div#ex4 ,
+			div#ex5 ,
+			div#ex6 {
+				width: 0;
+				height: 0;
+				border: solid 2em;
+				border-top-color: yellow;
+				border-bottom-color: red;
+				border-left-color: blue;
+				border-right-color: green;
+			}
+
+			div#ex3 {
+				border-top-width: 0;
+				border-left-color: #ccf;
+				border-right-color: #cfc;
+			}
+
+			div#ex4 {
+				border-right-width: 0;
+				border-top-width: 0;
+				border-left-color: #ccf;
+			}
+
+			div.expanded {
+				width: 1em;
+				height: 1em;
+				background-color: magneta;
+			}
+		</style>
+
+
+		<table>
+			<tr>
+				<td>
+					<div id="ex3"/>x</div>
+				</td>
+				<td>
+					<div id="ex3" class="expanded"/></div>
+				</td>
+				<td>Top border disabled, left and right borders transparent.</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="ex4"/>x</div>
+				</td>
+				<td>
+					<div id="ex4" class="expanded"/></div>
+				</td>
+				<td>Top and right borders disabled, left border transparent.</td>
+			</tr>
+		</table>
+
+		<p>And of course all four rotations of these, by using the other
+		borders.</p>
+
+
+
+<p>
+	tantec uses this in his CSS shapes
+</p>
+
+
+
+
+
+<p>
+- start with edges
+- examples
+</p>
+
+
+
+
+
+<p>
+- overlapping to make lines
+- examples
+</p>
+
+	</body>
+
+</html>
+
