@@ -60,7 +60,6 @@
 			<xsl:otherwise>
 				<xsl:call-template name="sz:size">
 					<xsl:with-param name="base"  select="$base"/>
-					<xsl:with-param name="obase" select="$obase"/>
 					<xsl:with-param name="sfd"   select="$sfd"/>
 					<xsl:with-param name="units" select="substring($units, 2, string-length($units))"/>
 					<xsl:with-param name="value" select="$value div $base"/>
