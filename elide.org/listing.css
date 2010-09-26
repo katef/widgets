@@ -13,3 +13,8 @@ table.listing td:first-child {
 	width: 8em;
 }
 
+table.listing td.meta {
+	padding-right: 1em;
+	text-align: right;
+}
+

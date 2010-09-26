@@ -1,0 +1,30 @@
+/* $Id$ */
+
+dl.qanda dt:before {
+	content: "Q.";
+}
+
+dl.qanda dd:before {
+	content: "A.";
+}
+
+dl.qanda dd:before,
+dl.qanda dt:before {
+	width: 26px;
+	padding-right: 9px;
+	margin-left: -36px;
+	display: block;
+	float: left;
+	text-align: right;
+	height: 0;
+}
+
+dl.qanda dd {
+	margin: 6px 0 18px 0;
+}
+
+dl.qanda {
+	margin: 0 36px;
+	margin-left: 64px;
+}
+

@@ -1,0 +1,164 @@
+/* $Id$ */
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	background: transparent;
+	list-style: none;
+	quotes: none;
+	content: none;
+	outline: 0;
+	text-decoration: none;
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-weight: normal;
+	font-style: normal;
+	
+	font-size: 10px;
+	line-height: 18px;
+	font-family: verdana;
+}
+
+h2, h3 {
+	font-family: trebuchet ms;
+	font-size: 18px;
+	margin: 18px 0;
+}
+
+h2 {
+	margin-left: 36px;
+}
+
+body, td {
+	color: #444;
+}
+
+a code, a, a:link, a:visited {
+	color: #26478A;
+}
+
+pre, code, tt {
+	color: #000;
+}
+
+h1#title {
+	padding-top: 36px;
+	line-height: 36px;
+	font-size: 20px;
+}
+
+ul#contents {
+	margin: 0;
+}
+
+ul#contents li {
+	margin: 0;
+}
+
+ul#contents, h1#title {
+	padding-left: 36px;
+}
+
+ul#contents li.current a {
+	color: #fff;
+}
+
+ul#contents li a {
+	color: #a6a7bA;
+}
+
+ul#contents li a:hover {
+	color: #fff;
+}
+
+table.listing td:first-child {
+	padding-right: 18px;
+	width: 108px;
+	text-align: right;
+}
+
+ul#contents {
+	background-color: #eef;
+	display: block;
+	padding-bottom: 9px;
+	margin-bottom: 9px;
+}
+
+ul#contents li {
+	display: inline;
+	margin-right: 9px;
+}
+
+h1#title, ul#contents, ul#contents a, ul#contents a:hover ul#contents a:visited {
+	color: #fff;
+	background-color: #26478A;
+}
+
+ul#contents {
+	margin-bottom: 18px;
+}
+
+body {
+	display: block;
+}
+
+table {
+	max-width: 684px;
+	margin-left: 36px;
+}
+
+p {
+	max-width: 684px;
+	margin: 18px;
+	margin-left: 36px;
+}
+
+hr {
+	height: 1px;
+	background-color: #ccc;
+	margin-left: 18px;
+	margin-right: 18px;
+	margin-top: 36px;
+	margin-bottom: 17px;
+}
+
+a:hover code, a:hover {
+	text-decoration: underline;
+	color: #000;
+}
+
+ul {
+	margin: 0 36px;
+	list-style-type: bullet;
+}
+
+ul li {
+	margin: 18px 18px;
+}
+
+pre {
+	margin: 0 54px;
+	border: solid 1px #eee;
+	background-color: #fff;
+	color: #444;
+	font-family: monospace;
+}
+
+pre .lines {
+	font-family: monospace;
+	border-right: solid 1px #eee;
+	background-color: #f7f7f7;
+	padding: 0 6px;
+	margin-right: 6px;
+	color: #ccc;
+	text-align: right;
+	float: left;
+}
+
+tt.rcsid {
+	color: #555;
+}
+
