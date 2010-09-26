@@ -1,0 +1,47 @@
+/* $Id$ */
+
+table.calendar {
+	margin-left: 60px;
+	border-collapse: collapse;
+}
+
+table.calendar caption,
+table.calendar td,
+table.calendar th {
+	border: solid 1px #eee;
+}
+
+table.calendar caption {
+	border-bottom: none;
+}
+
+table.calendar th {
+}
+
+table.calendar td.empty {
+	background-color: #f7f7f7;
+}
+
+table.calendar td.today {
+	font-weight: bold;
+}
+
+table.calendar td {
+	color: #444;
+}
+
+table.calendar td.empty:hover {
+	cursor: default;
+	background-color: #f7f7f7;
+}
+
+table.calendar td:hover {
+	background-color: #ddd;
+	cursor: pointer;
+	color: #000;
+}
+
+table.calendar td.today:hover {
+	color: #888;
+}
+

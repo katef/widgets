@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Kate&rsquo;s Web Widgets &mdash; XSLT Calendar</title>
+	</head>
+
+	<body>
+		<p>This is an XSLT implementation of a monthly calendar, which outputs
+			an XHTML table.</p>
+
+		<p><a href="http://svn.elide.org/xslt-calendar/trunk/calendar.xsl">Here's the code.</a></p>
+
+		<p>You call it thus:</p>
+
+		<pre><![CDATA[<xsl:import href="calendar.xsl"/>
+
+<xsl:call-template name="cal:calendar">
+	<xsl:with-param name="date" select="date:date()"/>
+</xsl:call-template>]]></pre>
+
+		<p>Where <code>$date</code> is a date as per
+			<a href="http://www.exslt.org/date/functions/date/index.html">EXSLT's
+			dates and times module</a>.</p>
+
+		<p>In order to get it to output something useful, you probably want to
+			override the following template, which is what does the gruntwork
+			of rendering each cell in the table where a day number is present:</p>
+
+		<pre><![CDATA[<xsl:template name="cal:content">
+	<xsl:param name="date"/>
+
+	<xsl:value-of select="date:day-in-month($date)"/>
+</xsl:template>]]></pre>
+
+		<p>This was adapted from <a href="http://neilang.com/entries/generating-a-calendar-using-xslt/">Neil
+			Ang's implementation</a>.</p>
+
+	<hr class="footer"/>
+
+	<p><code>$Id: index.xhtml 568 2013-06-27 03:49:21Z kate $</code></p>
+
+	</body>
+</html>
+
