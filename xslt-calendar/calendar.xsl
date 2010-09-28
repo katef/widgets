@@ -185,7 +185,7 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<td>
-					<xsl:if test="concat(substring($date, 1, 7), '-', str:align($day, '00', 'right')) = date:date()">
+					<xsl:if test="concat(substring($date, 1, 7), '-', str:align($day, '00', 'right')) = substring(date:date(), 1, 10)">
 						<xsl:attribute name="class">
 							<xsl:text>today</xsl:text>
 						</xsl:attribute>
