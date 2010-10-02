@@ -29,6 +29,7 @@ TODO: consider masking for prettification, something like http://zendold.lojcomm
 
 
 TODO: explain some of the usage intentions
+TODO: all my functions don't need to be prefixed form_*()...
 
 */
 
@@ -192,13 +193,31 @@ var Valid = new (function () {
 		}
 	}
 
-	function form_setlabels(form, state, id) {
+	function form_labelisfor(form, label, target) {
+		if (target.id && label.getAttribute('for') == target.id) {
+			return true;
+		}
+
+		return (function (form, label, target) {
+			if (target == form) {
+				return false;
+			}
+
+			if (target == label) {
+				return true;
+			}
+
+			return arguments.callee(form, label, target.parentNode);
+		})(form, label, target);
+	}
+
+	function form_setlabels(form, state, target) {
 		var labels;
 
 		labels = form.getElementsByTagName('label');
 
 		for (var i = 0; i < labels.length; i++) {
-			if (labels[i].getAttribute('for') != id) {
+			if (!form_labelisfor(form, labels[i], target)) {
 				continue;
 			}
 
@@ -211,13 +230,13 @@ var Valid = new (function () {
 	}
 
 	/* TODO: could merge the getElementsByTagName() with the other labels function; or make a callback or something */
-	function form_reqlabels(form, id) {
+	function form_reqlabels(form, target) {
 		var labels;
 
 		labels = form.getElementsByTagName('label');
 
 		for (var i = 0; i < labels.length; i++) {
-			if (labels[i].getAttribute('for') != id) {
+			if (!form_labelisfor(form, labels[i], target)) {
 				continue;
 			}
 
@@ -238,10 +257,7 @@ var Valid = new (function () {
 		if (!re.test('')) {
 			addclass(input, 'required');
 
-/* TODO: or find parent <label> */
-			if (input.id) {
-				form_reqlabels(form, input.id);
-			}
+			form_reqlabels(form, input);
 		}
 		
 		input.onchange = function (e) {
@@ -284,11 +300,15 @@ var Valid = new (function () {
 			}
 
 			/* TODO: find <label>s; centralise updating an input with updating a label? */
-/* TODO: or find parent <label> */
-			if (e.target.id) {
-				form_setlabels(e.target.form, state, e.target.id);
-			}
+			form_setlabels(e.target.form, state, e.target);
 		}
+	}
+
+	function form_validatabletype(type) {
+		return type == 'text'
+		    || type == 'textarea'
+		    || type == 'hidden'
+		    || type == 'password';
 	}
 
 	function initform(form) {
@@ -298,7 +318,6 @@ var Valid = new (function () {
 
 		for (var i = 0; i < inputs.length; i++) {
 			var regex;
-			var type;
 
 			/*
 			 * Looks like firefox screws up getAttributeNS(), so I'm doing this
@@ -310,8 +329,7 @@ var Valid = new (function () {
 				continue;
 			}
 
-			type = inputs[i].getAttribute('type');
-			if (type != 'text' && type != 'textarea' && type != 'hidden') {
+			if (!form_validatabletype(inputs[i].getAttribute('type'))) {
 				continue;
 			}
 

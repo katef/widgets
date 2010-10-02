@@ -7,16 +7,21 @@ body {
 	font-size: 10pt;
 }
 
-form input[type="submit"], form input[type="button"] {
+form input[type="submit"],
+form input[type="button"] {
 	margin-top: 2em;
 }
 
-form input[type="text"], form input[type="textarea"] {
+form input[type="text"],
+form input[type="password"],
+form input[type="textarea"] {
 	border: solid 1px #ccc;
 	background-color: #fff;
 }
 
-form input[type="text"]:focus, form input[type="textarea"]:focus {
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form input[type="textarea"]:focus {
 	border-color: black;
 	background-color: #eee;
 }
@@ -43,6 +48,7 @@ form input.missing {
 	border-color: #f88;
 }
 
+form input[type="password"].invalid:focus, form input[type="password"].missing:focus,
 form input[type="text"].invalid:focus, form input[type="textarea"].invalid:focus,
 form input[type="text"].missing:focus, form input[type="textarea"].missing:focus {
 	background-color: #fdd;
