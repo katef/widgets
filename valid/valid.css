@@ -94,6 +94,10 @@ form#A label.required.star:after {
 	color: #888;
 }
 
+form#A label.required.invalid.star:after {
+	color: #f44;
+}
+
 form#A.invalid label.star.missing:after {
 	content: "(required) *";
 	font-size: 90%;
