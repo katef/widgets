@@ -37,7 +37,7 @@ var Valid = new (function () {
 	var NS = "http://xml.elide.org/valid";
 
 	/* see http://elide.org/snippets/css.js */
-	function hasclass(node, class) {
+	function hasclass(node, klass) {
 		var a, c;
 
 		c = node.getAttribute('class');
@@ -48,7 +48,7 @@ var Valid = new (function () {
 		a = c.split(/\s/);
 
 		for (var i in a) {
-			if (a[i] == class) {
+			if (a[i] == klass) {
 				return true;
 			}
 		}
@@ -57,7 +57,7 @@ var Valid = new (function () {
 	}
 
 	/* see http://elide.org/snippets/css.js */
-	function removeclass(node, class) {
+	function removeclass(node, klass) {
 		var a, c;
 
 		c = node.getAttribute('class');
@@ -68,7 +68,7 @@ var Valid = new (function () {
 		a = c.split(/\s/);
 
 		for (var i = 0; i < a.length; i++) {
-			if (a[i] == class || a[i] == '') {
+			if (a[i] == klass || a[i] == '') {
 				a.splice(i, 1);
 				i--;
 			}
@@ -82,7 +82,7 @@ var Valid = new (function () {
 	}
 
 	/* see http://elide.org/snippets/css.js */
-	function addclass(node, class) {
+	function addclass(node, klass) {
 		var a, c;
 
 		a = [ ];
@@ -93,17 +93,16 @@ var Valid = new (function () {
 		}
 
 		for (var i = 0; i < a.length; i++) {
-			if (a[i] == class || a[i] == '') {
+			if (a[i] == klass || a[i] == '') {
 				a.splice(i, 1);
 				i--;
 			}
 		}
 
-		a.push(class);
+		a.push(klass);
 
 		node.setAttribute('class', a.join(' '));
 	}
-
 
 	/* see http://elide.org/snippets/events.js */
 	function fireevent(node, type) {
