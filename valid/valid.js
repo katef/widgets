@@ -20,7 +20,6 @@ TODO: cooperate with the pre-filled form text thingies; make a separate script w
 
 TODO: set form class onsubmit, and use display: none to hide a warning message
 
-TODO: identify required fields (set a "required" class on them and their labels) by testing v:regex against ''
 
 
 See also:
@@ -136,18 +135,44 @@ var Valid = new (function () {
 			if (hasclass(inputs[i], 'invalid')) {
 				return false;
 			}
+
+			if (hasclass(inputs[i], 'missing')) {
+				return false;
+			}
 		}
 
 		return true;
 	}
 
-	function form_setsubmittable(form, state) {
+	function form_hasmissing(form, state) {
+		var inputs;
+
+		inputs = form.getElementsByTagName('input');
+
+		for (var i = 0; i < inputs.length; i++) {
+			if (hasclass(inputs[i], 'missing')) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	function form_setmissing(form, missing) {
+		removeclass(form, 'missing');
+
+		if (missing) {
+			addclass(form, 'missing');
+		}
+	}
+
+	function form_setsubmittable(form, valid) {
 		var inputs;
 
 		removeclass(form, 'invalid');
 		removeclass(form, 'valid');
 
-		addclass(form, state == true ? 'valid' : 'invalid');
+		addclass(form, valid == true ? 'valid' : 'invalid');
 
 		inputs = form.getElementsByTagName('input');
 
@@ -159,7 +184,7 @@ var Valid = new (function () {
 				continue;
 			}
 
-			if (state == true) {
+			if (valid) {
 				inputs[i].removeAttribute('disabled');
 			} else {
 				inputs[i].setAttribute('disabled', 'disabled');
@@ -179,8 +204,9 @@ var Valid = new (function () {
 
 			removeclass(labels[i], 'valid');
 			removeclass(labels[i], 'invalid');
+			removeclass(labels[i], 'missing');
 
-			addclass(labels[i], state == true ? 'valid' : 'invalid');
+			addclass(labels[i], state);
 		}
 	}
 
@@ -212,34 +238,43 @@ var Valid = new (function () {
 		if (!re.test('')) {
 			addclass(input, 'required');
 
+/* TODO: or find parent <label> */
 			if (input.id) {
 				form_reqlabels(form, input.id);
 			}
-
-			/* TODO: add a "missing" class for fields which are reqired, but are missing */
 		}
 		
 		input.onchange = function (e) {
 			var state;
+			var missing;
 
 			if (e == null || e.type != 'change') {
 				return;
 			}
 
-			/* TODO: skip disabled inputs. do this here, for forms which dynamically disable things conditionally */
 			if (e.target.getAttribute('disabled')) {
 				return;
 			}
 
 			removeclass(e.target, 'valid');
 			removeclass(e.target, 'invalid');
+			removeclass(e.target, 'missing');
 
-			state = re.test(e.target.value);
+			if (e.target.value == '' && hasclass(e.target, 'required')) {
+				state = 'missing';
+			} else if (re.test(e.target.value)) {
+				state = 'valid';
+			} else {
+				state = 'invalid';
+			}
 
-			addclass(e.target, state == true ? 'valid' : 'invalid');
+			addclass(e.target, state);
 
-			if (state == true) {
-				form_setsubmittable(e.target.form, form_isvalid(e.target.form));
+			form_setmissing(e.target.form, form_hasmissing(e.target.form));
+
+			if (state == 'valid') {
+				form_setsubmittable(e.target.form,
+					form_isvalid(e.target.form));
 			}  else {
 				/*
 				 * Note that we do not disable the submit button here, because
@@ -249,6 +284,7 @@ var Valid = new (function () {
 			}
 
 			/* TODO: find <label>s; centralise updating an input with updating a label? */
+/* TODO: or find parent <label> */
 			if (e.target.id) {
 				form_setlabels(e.target.form, state, e.target.id);
 			}
@@ -282,11 +318,8 @@ var Valid = new (function () {
 			initinput(form, inputs[i], regex);
 		}
 
-		/* TODO: set form class? */
-
-		/* TODO: test for required fields */
-
 		/* for refresh auto-populating a form, after it was marked invalid.  TODO: explain this reenables the submit button */
+		form_setmissing(form, false);
 		form_setsubmittable(form, true);
 
 		form.onsubmit = function (e) {
@@ -303,6 +336,7 @@ var Valid = new (function () {
 				fireevent(inputs[i], 'change');
 			}
 
+			form_setmissing(e.target, form_hasmissing(e.target));
 			form_setsubmittable(e.target, form_isvalid(e.target));
 
 			return hasclass(e.target, 'valid');

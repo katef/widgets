@@ -23,33 +23,44 @@ form input[type="text"]:focus, form input[type="textarea"]:focus {
 
 form {
 	margin: 2em;
-	max-width: 30em;
 	border: solid 1px #ccc;
 	background-color: #f8f8f8;
 	padding: 1em 2em;
 }
 
-form label.invalid {
-	color: #f88;
+form fieldset {
+	border: solid 1px #ddd;
 }
 
-form input.invalid {
+form label.invalid,
+form label.missing {
+	color: #f44;
+}
+
+form input.invalid,
+form input.missing {
 	background-color: #fee;
 	border-color: #f88;
 }
 
-form input[type="text"].invalid:focus, form input[type="textarea"].invalid:focus {
+form input[type="text"].invalid:focus, form input[type="textarea"].invalid:focus,
+form input[type="text"].missing:focus, form input[type="textarea"].missing:focus {
 	background-color: #fdd;
 	border-color: #f44;
 }
 
-form div.error {
+form div.error,
+form div.error div.missing {
 	display: none;
 }
 
 form div.msg {
 	margin: 1em -1ex;
 	padding: 1ex;
+}
+
+form div.msg div.missing {
+	margin: 0;
 }
 
 form.invalid div.error {
@@ -59,12 +70,33 @@ form.invalid div.error {
 	border: solid 2px #f88;
 }
 
-form#A.invalid label.star.invalid.required:after {
-	content: " *";
+form.missing div.error div.missing {
+	display: block;
+}
+
+form#A {
+	max-width: 40em;
+}
+
+form#A td {
+	min-width: 12em;
+}
+
+form#A label.required.star:after {
+	content: "(required)";
+	font-size: 90%;
+	color: #888;
+}
+
+form#A.invalid label.star.missing:after {
+	content: "(required) *";
+	font-size: 90%;
+	color: #f44;
 }
 
 form#A label.example {
 	display: none;
+	min-width: 20em;
 }
 
 form#A label.example.invalid {
@@ -73,7 +105,7 @@ form#A label.example.invalid {
 
 form#A label.example:before {
 	padding-left: 1ex;
-	content: "(for example \"";
+	content: "(e.g. \"";
 }
 
 form#A label.example:after {
@@ -90,12 +122,28 @@ form#A td:first-child {
 
 form#B {
 	position: relative;
+	max-width: 30em;
 }
 
 form#B label {
 	display: block;
 	padding: 1ex 1em;
 	margin: 0 -1em;
+}
+
+form#B input {
+	display: block;
+}
+
+form#B label.required span.text:after {
+	content: " (required)";
+	font-size: 90%;
+	color: #888;
+}
+
+form#B label.missing span.text:after,
+form#B label.invalid span.text:after {
+	color: #f44;
 }
 
 form#B label:hover {
@@ -116,5 +164,23 @@ form#B label:hover span.example {
 	background-color: aliceblue;
 	border: solid 1px #acf;
 	padding: 1em;
+}
+
+form#B label.invalid:hover span.example,
+form#B label.missing:hover span.example {
+	color: #f44;
+	background-color: #fee;
+	border: solid 2px #f88;
+	margin: -1px;
+}
+
+form#C {
+	max-width: 60em;
+}
+
+form#C th {
+	text-align: left;
+	min-width: 8em;
+	font-weight: normal;
 }
 
