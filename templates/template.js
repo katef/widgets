@@ -8,9 +8,17 @@
  *  e   - A DOM Node containing a template. The parent element is ignored.
  *  ctx - Context passed to "this" when evaluating expressions.
  *
- * Expressions are processing instructions of the form <?js 1 + 2 ?>.
- * These may evaluate to a DOM Node (in which case the PI is replaced with that
- * Node), or otherwise the PI is substituted with a TextNode.
+ * Expressions are processing instructions of the form <?js 1 + 2 ?> or
+ * attributes of the form <a href="{ 1 + 2 }"/>.
+ *
+ * Expressions for PIs evaluate to a DOM Node (in which case the PI is replaced
+ * with that Node), or otherwise the PI is substituted with a TextNode.
+ * Expressions for attributes must evaluate to a type which may be implicitly
+ * converted to a string.
+ *
+ * During evaluation of an expression, properties from ctx are made available
+ * as local variables. The "this" object is bound to the DOM node for that PI
+ * or attribute node.
  *
  * Returns a DocumentFragment containing the expanded template.
  */
@@ -32,18 +40,38 @@ function Template(e, ctx) {
 		parent.replaceChild(newnode, oldnode);
 	}
 
-	function pivalue(expr) {
-		var s;
-
+	function exprvalue(node, expr) {
 		/*
-		 * Here I would say s = eval.apply(ctx, [ expr ]); but apparently
+		 * Here I would say s = eval.apply(node, [ expr ]); but apparently
 		 * eval() needs the global context.
 		 */
 		(function () {
-			s = eval(expr);
-		}).apply(ctx);
+			with (ctx) {
+				s = eval(expr);
+			}
+		}).apply(node);
+
+		return s;
+	}
+
+	function pivalue(node) {
+		var s;
+
+		s = exprvalue(node, node.nodeValue);
 
 		return s instanceof Node ? s : document.createTextNode(s);
+	}
+
+	function attrvalue(node) {
+		var a;
+
+		a = node.nodeValue.split('{');
+		for (var i = 1; i < a.length; i++) {
+			a[i] = a[i].split('}');
+			a[i] = exprvalue(node, a[i][0]) + a[i][1];
+		}
+
+		return a.join('');
 	}
 
 	/*
@@ -64,7 +92,11 @@ function Template(e, ctx) {
 	(function (node, parent) {
 		if (node.nodeType == document.PROCESSING_INSTRUCTION_NODE
 		 && node.nodeName == 'js') {
-			xreplacechild(parent, pivalue(node.nodeValue), node);
+			xreplacechild(parent, pivalue(node), node);
+		}
+
+		for (var i = 0; node.attributes && i < node.attributes.length; i++) {
+			node.attributes[i].nodeValue = attrvalue(node.attributes[i]);
 		}
 
 		for (var i = 0; i < node.childNodes.length; i++) {

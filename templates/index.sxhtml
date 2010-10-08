@@ -10,16 +10,13 @@
 <style>
 li { display: list-item; }	/* odd... firefox and chrome need this (otherwise the DOM-created LIs in eg2 are inline); opera does not. */
 </style>
-	</head>
-
-	<body>
 
 <script type="text/template" id="eg1">
     <div class="comment-preview">
         <span class="date"><?js 1 + 3 ?></span>
         <span class="fish"><?js 'abc' ?></span>
         <span class="name"><?js document.createTextNode('abc') ?></span>
-        <span class="road"><?js this.abc ?></span>
+        <span class="road"><?js abc ?></span>
     </div>
 </script>
 
@@ -30,12 +27,12 @@ li { display: list-item; }	/* odd... firefox and chrome need this (otherwise the
 			(function () {
 				var f = document.createDocumentFragment();
 
-				for (var i = 0; i < this.n; i++) {
+				for (var i = 0; i < n; i++) {
 					var e;
 
 					/* constructing DOM nodes by hand - see eg3 for using Template() for LIs instead */
 					e = document.createElement('li');
-					e.appendChild(document.createTextNode((i + 1) + ' of ' + this.n));
+					e.appendChild(document.createTextNode((i + 1) + ' of ' + n));
 					f.appendChild(e);
 				}
 
@@ -48,22 +45,45 @@ li { display: list-item; }	/* odd... firefox and chrome need this (otherwise the
 
 <script type="text/template" id="eg3-li">
 	<li>
-		<?js this.i + 1 ?> of <?js this.n ?>
+		<?js i + 1 ?> of <?js n ?>
 	</li>
 </script>
 
 <script type="text/template" id="eg3">
 	<ol>
 		<?js
-			for (this.i = 0; this.i < this.n; this.i++) {
-				this.f.appendChild(Template(this.l, this));
+			for (i = 0; i < n; i++) {
+				f.appendChild(Template(l, { i: i, n: n }));
 			}
 
-			this.f;
+			f;
 		?>
 		<li>def</li>
     </ol>
 </script>
+
+<script type="text/template" id="eg4">
+	<a href="{ url }-{ cheese }" name="xyz-{ cheese }" id="{ cheese }-id">
+		<?js name ?>
+	</a> |
+	<a name="xyz-{ cheese }" id="{ cheese }-id">
+		<?js this.parentNode.href = 'xyz'; ?>
+	</a> |
+	<a id="{ cheese }" href="{ this.nodeName }">
+		<?js cheese ?>
+	</a>
+	<pre>
+		<?js typeof (arguments.callee) ?>
+		<?js this.parentNode.insertBefore(document.createTextNode('xyz'), this); 'abc' ?>
+	</pre>
+	<pre>
+		<?js this.parentNode.innerHTML ?>
+	</pre>
+</script>
+
+	</head>
+
+	<body>
 
 
 <p id="xyz1"/>
@@ -71,6 +91,8 @@ li { display: list-item; }	/* odd... firefox and chrome need this (otherwise the
 <p id="xyz2"/>
 <hr/>
 <p id="xyz3"/>
+<hr/>
+<p id="xyz4"/>
 
 <script>
 <![CDATA[
@@ -93,7 +115,6 @@ li { display: list-item; }	/* odd... firefox and chrome need this (otherwise the
 
 
 
-
 	var e3 = document.getElementById('eg3');
 
 	var x3 = Template(e3, {
@@ -104,6 +125,17 @@ li { display: list-item; }	/* odd... firefox and chrome need this (otherwise the
 
 	document.getElementById('xyz3').appendChild(x3);
 
+
+
+	var e4 = document.getElementById('eg4');
+
+	var x4 = Template(e4, {
+			url:    'abc',
+			cheese: 'edam',
+			name:   'fish'
+		});
+
+	document.getElementById('xyz4').appendChild(x4);
 
 ]]>
 </script>
