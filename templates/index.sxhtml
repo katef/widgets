@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Kate&rsquo;s Web Widgets &mdash; Javascript Templates</title>
+
+		<script src="template.js" type="text/javascript"/>
+<style>
+li { display: list-item; }	/* odd... firefox and chrome need this (otherwise the DOM-created LIs in eg2 are inline); opera does not. */
+</style>
+	</head>
+
+	<body>
+
+<script type="text/template" id="eg1">
+    <div class="comment-preview">
+        <span class="date"><?js 1 + 3 ?></span>
+        <span class="fish"><?js 'abc' ?></span>
+        <span class="name"><?js document.createTextNode('abc') ?></span>
+        <span class="road"><?js this.abc ?></span>
+    </div>
+</script>
+
+<script type="text/template" id="eg2">
+	<ol>
+		<?js
+			/* using a function to return a value - but this is not neccessary; see eg3 */
+			(function () {
+				var f = document.createDocumentFragment();
+
+				for (var i = 0; i < this.n; i++) {
+					var e;
+
+					/* constructing DOM nodes by hand - see eg3 for using Template() for LIs instead */
+					e = document.createElement('li');
+					e.appendChild(document.createTextNode((i + 1) + ' of ' + this.n));
+					f.appendChild(e);
+				}
+
+				return f;
+			}).apply(this);
+		?>
+		<li>abc</li>
+    </ol>
+</script>
+
+<script type="text/template" id="eg3-li">
+	<li>
+		<?js this.i + 1 ?> of <?js this.n ?>
+	</li>
+</script>
+
+<script type="text/template" id="eg3">
+	<ol>
+		<?js
+			for (this.i = 0; this.i < this.n; this.i++) {
+				this.f.appendChild(Template(this.l, this));
+			}
+
+			this.f;
+		?>
+		<li>def</li>
+    </ol>
+</script>
+
+
+<p id="xyz1"/>
+<hr/>
+<p id="xyz2"/>
+<hr/>
+<p id="xyz3"/>
+
+<script>
+<![CDATA[
+
+
+	var e1 = document.getElementById('eg1');
+
+	var x1 = Template(e1, { abc: 'hello' });
+
+	document.getElementById('xyz1').appendChild(x1);
+
+
+
+
+	var e2 = document.getElementById('eg2');
+
+	var x2 = Template(e2, { n: 3 });
+
+	document.getElementById('xyz2').appendChild(x2);
+
+
+
+
+	var e3 = document.getElementById('eg3');
+
+	var x3 = Template(e3, {
+			n: 3,
+			l: document.getElementById('eg3-li'),
+			f: document.createDocumentFragment()
+		});
+
+	document.getElementById('xyz3').appendChild(x3);
+
+
+]]>
+</script>
+
+	</body>
+</html>
+
