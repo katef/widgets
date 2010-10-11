@@ -46,7 +46,7 @@ function Template(e, ctx) {
 		 * eval() needs the global context.
 		 */
 		(function () {
-			with (ctx) {
+			with (ctx || {}) {
 				s = eval(expr);
 			}
 		}).apply(node);
@@ -59,7 +59,18 @@ function Template(e, ctx) {
 
 		s = exprvalue(node, node.nodeValue);
 
-		return s instanceof Node ? s : document.createTextNode(s);
+		switch (true) {
+		case s === undefined:
+		case s === null:
+		case s === '':
+			return document.createTextNode('');
+
+		case s instanceof Node:
+			return s;
+
+		default:
+			return document.createTextNode(s);
+		}
 	}
 
 	function attrvalue(node) {
@@ -67,8 +78,14 @@ function Template(e, ctx) {
 
 		a = node.nodeValue.split('{');
 		for (var i = 1; i < a.length; i++) {
+			var v;
+
 			a[i] = a[i].split('}');
-			a[i] = exprvalue(node, a[i][0]) + a[i][1];
+			v = exprvalue(node, a[i][0]);
+			if (v == undefined || v == null) {
+				return undefined;
+			}
+			a[i] = v + a[i][1];
 		}
 
 		return a.join('');
@@ -96,7 +113,14 @@ function Template(e, ctx) {
 		}
 
 		for (var i = 0; node.attributes && i < node.attributes.length; i++) {
-			node.attributes[i].nodeValue = attrvalue(node.attributes[i]);
+			var v;
+
+			v = attrvalue(node.attributes[i]);
+			node.attributes[i].nodeValue = v;
+			if (v === undefined) {
+				node.removeAttribute(node.attributes[i].name);
+				i--;
+			}
 		}
 
 		for (var i = 0; i < node.childNodes.length; i++) {
