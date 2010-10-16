@@ -74,6 +74,9 @@
 			<a id="{ cheese }" href="{ this.nodeName }">
 				<?js cheese ?>
 			</a>
+			<a name="xxx-{ void(this.ownerElement.href = 'xxx') }">
+				<?js this.parentNode.id = 'xxx-xyz'; ?>
+			</a> |
 			<pre>
 				<?js typeof (arguments.callee) ?>
 				<?js this.parentNode.insertBefore(document.createTextNode('xyz'), this); 'abc' ?>
