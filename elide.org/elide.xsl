@@ -4,25 +4,45 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:kxslt="http://xml.elide.org/mod_kxslt"
+	xmlns:c="http://xml.elide.org/elide_contents"
 
-	exclude-result-prefixes="h">
+	exclude-result-prefixes="h kxslt c">
 
 	<xsl:output indent="yes" method="xml" encoding="utf-8"
-		cdata-section-elements="script"
 		media-type="application/xhtml+xml"
 
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"/>
 
+	<c:contents>
+		<c:category href="/snippets" name="Snippets"/>
+		<c:category href="/small"    name="Small Programs"/>
+		<c:category href="/projects" name="Projects"/>
+<!--
+		<c:category href="/journal"  name="Journal"/>
+		<c:category href="/drams"    name="Dreams"/>
+-->
+	</c:contents>
+
+	<xsl:variable name="istracpage" select="boolean(//h:a[@id = 'tracpowered'])"/>
+
 	<xsl:template name="contents">
 		<ul id="contents">
-			<li><a href="/snippets"><xsl:text>Snippets</xsl:text></a></li>
-			<li><a href="/small"><xsl:text>Small Programs</xsl:text></a></li>
-			<li><a href="/projects"><xsl:text>Projects</xsl:text></a></li>
-<!--
-			<li><a href="/journal"><xsl:text>Journal</xsl:text></a></li>
-			<li><a href="/dreams"><xsl:text>Dreams</xsl:text></a></li>
--->
+			<xsl:for-each select="document('')//c:contents/c:category">
+				<li>
+					<xsl:if test="starts-with(kxslt:getenv('REQUEST_URI'), @href)
+						or (@href = '/projects' and $istracpage)">
+						<xsl:attribute name="class">
+							<xsl:text>current</xsl:text>
+						</xsl:attribute>
+					</xsl:if>
+
+					<a href="{@href}">
+						<xsl:value-of select="@name"/>
+					</a>
+				</li>
+			</xsl:for-each>
 		</ul>
 	</xsl:template>
 
@@ -48,26 +68,12 @@
 		<link rel="stylesheet" href="/elide.css"/>
 
 		<script src="/widgets/linenumbers/linenumbers.js" type="text/javascript"/>
-
-		<!-- TODO: have xslt light this up instead, by kxslt:getenv() -->
-		<!-- TODO: assume trac is /projects -->
-		<script><![CDATA[
-			function contents() {
-				li = document.getElementById('contents').getElementsByTagName('li');
-				for (var i = 0; i < li.length; i++) {
-					a = li[i].getElementsByTagName('a')[0];
-					if (document.location.href.indexOf(a.href) == 0) {
-						li[i].setAttribute('class', 'current');
-					}
-				}
-			}
-		]]></script>
 	</xsl:template>
 
 	<xsl:template match="/h:html">
 		<html>
 			<xsl:choose>
-				<xsl:when test="//h:a[@id = 'tracpowered']">
+				<xsl:when test="$istracpage">
 					<head>
 						<title>
 							<xsl:text>Kate&#x2019;s Projects: </xsl:text>
@@ -112,14 +118,17 @@
 						<xsl:copy-of select="h:head/*"/>
 					</head>
 
-					<body onload="contents(); Linenumbers.init(document.documentElement)">
+					<body onload="contents();
+						Linenumbers.init(document.documentElement);
+						{h:body/@onload}">
+
 						<h1 id="title">
 							<xsl:apply-templates select="h:head/h:title"/>
 						</h1>
 
 						<xsl:call-template name="contents"/>
 
-						<xsl:copy-of select="h:body/*|text()"/>
+						<xsl:copy-of select="h:body/*|h:body/text()"/>
 
 						<xsl:call-template name="rcsid"/>
 					</body>
