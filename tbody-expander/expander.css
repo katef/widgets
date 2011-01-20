@@ -1,0 +1,35 @@
+/* $Id: expander.css 446 2009-05-17 23:09:47Z kate $ */
+
+dl.expandable {
+	padding-left: 2em;
+}
+
+dl.expandable dd {
+	margin-left: 0;
+}
+
+dl.expandable dt a {
+	cursor: pointer;
+}
+
+dl.expandable dt:before {
+	margin-left: -2em;
+	display: block;
+	height: 0;
+	text-align: right;
+	width: 1.5em;
+}
+
+dl.expandable.collapsed dt:before { content: "\21D2"; }
+dl.expandable.expanding dt:before { content: "\21D8"; }
+dl.expandable.expanded  dt:before { content: "\21D3"; }
+
+dl.expandable.expanding dd {
+	height: 0.5em;
+	overflow: hidden;
+}
+
+dl.expandable.collapsed dd {
+	display: none;
+}
+

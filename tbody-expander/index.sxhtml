@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Kate&rsquo;s Web Widgets &mdash; Collapsable Expander</title>
+		<link rel="stylesheet" href="../../kate.css"/>
+		<link rel="stylesheet" href="../../article.css"/>
+		<meta name="keywords" content="kate,css,tutorial,guide,overview,widget,expander,fold-down,collapsable"/>
+
+		<link rel="stylesheet" href="expander.css"/>
+		<script src="expander.js" type="text/javascript"></script>
+	</head>
+
+	<body onload="TbodyExpander.init(document.documentElement)">
+	<h1 id="title">Kate&rsquo;s Web Widgets &mdash; Collapsable Tbody Expander</h1>
+	<!--#include virtual="../../contents.inc"-->
+
+	<div id="main">
+		<p>Here you go, an expandable fold-out widget:</p>
+
+		<style>dl.somecustomclass { border-left: solid 4px #ddd; margin-left: -4px; }</style>
+
+		<table>
+			<tbody>
+				<tr>
+					<td class="expandable">Something <i>to</i> expand (implicitly collapsed by default)</td>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr>
+					<td>Expanded stuff</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<dl class="expandable expanded somecustomclass">
+			<dt>Something <i>to</i> expand (expanded by default)</dt>
+			<dd>Expanded stuff</dd>
+		</dl>
+
+		<dl class="expandable collapsed">
+			<dt>Something <i>to</i> expand (explicitly collapsed by default)</dt>
+			<dd>Expanded stuff</dd>
+		</dl>
+
+		<p>I've just used a unicode character to illustrate an arrow here; in
+			practice you'd probably use an image. Or you could format it quite
+			differently; for example i've seen &ldquo;<code>abc [expand]</code>&rdquo;
+			used (which would have something like
+			<code>dl.collapsed:after { content: "[expand]"; }</code> to create
+			the &ldquo;button&rdquo;).</p>
+
+		<h2>Getting it</h2>
+
+		<p><a href="expander.js">Here's the source</a>,
+			<a href="expander.css">and some CSS</a>.. Call
+			<code>Expander.init()</code>, passing the root element for where it
+			should start looking for <code>&lt;pre&gt;</code> tags, to make it
+			do its things. That's it, really.</p>
+	</div>
+
+	<hr class="footer"/>
+
+	<p><code>$Id: index.sxhtml 493 2010-01-04 10:08:31Z kate $</code></p>
+
+	</body>
+</html>
+
