@@ -1,0 +1,143 @@
+/* $Id$ */
+
+@import "config.less";
+
+
+@menu-pad-sides: (@grid-pad-sides * 0.75);
+
+
+ul.menu {
+	list-style-type: none;
+	margin:  0 0 @grid-baseline 0;
+	padding: 0;
+}
+
+ul.menu li a,
+ul.sections li a {
+	display: block;
+	text-decoration: none;
+}
+
+ul.sections > li a {
+	line-height: (@grid-baseline * 1.5);
+}
+
+ul.menu li a:hover,
+ul.sections li a:hover {
+	background-color: #eee;
+}
+
+ul li.current a {
+	color: #000;
+}
+
+ul.menu li a:before {
+	content: "\25b8";
+	color: #ddd;
+	display: block;
+	width: @grid-baseline;
+	float: left;
+	clear: left;
+	text-align: center;
+}
+
+ul.menu li.current a:before {
+	color: #888;
+}
+
+ul.menu li {
+	border-top: dotted 1px #ddd;
+	margin: 0;
+}
+
+ul.menu li:first-child {
+	border-top: none;
+}
+
+ul.menu li a {
+	line-height: (@grid-baseline * 1.5);
+	color: #666;
+}
+
+ul.menu li a:hover {
+	color: #000;
+}
+
+
+/* sections menu */
+
+/* adapted from http://www.divitodesign.com/2008/09/how-to-dropdown-css-menu/ */
+
+ul.sections {
+	height:  (@grid-baseline * 1.5);
+	padding: (@grid-baseline * 0.5) 0 0 0;
+}
+
+ul.sections > li {
+	position: relative;
+	float: left;
+	margin: 0;
+}
+
+ul.sections > li > a {
+	height:  (@grid-baseline * 1.5);
+	padding: 0 @menu-pad-sides;
+	margin:  0;
+}
+
+ul.sections > li.current > a {
+	font-weight: bold;
+}
+
+ul.sections,
+ul.sections li > ul {
+	list-style-type: none;
+	z-index: 1;
+}
+
+ul.sections li > ul li a {
+	min-width: (15 * @grid-basefont);
+	height:    (@grid-baseline * 1.5);
+	padding:   0 (@menu-pad-sides - 1px); /* -1px for the border */
+	margin:    0;
+}
+
+ul.sections li > ul li {
+	border-left:  solid 1px #ddd;
+	border-right: solid 1px #ddd;
+	margin: 0;
+}
+
+ul.sections li > ul li.sep {
+	border-bottom: solid 1px #ddd;
+}
+
+ul.sections li > ul {
+	border-top:    solid 5px #000;
+	border-bottom: solid 5px #000;
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+}
+
+ul.sections li > ul {
+	top: auto;
+	left: auto;
+}
+
+ul.sections li:hover ul {
+	display: block;
+}
+
+
+/* for IE6 */
+/* http://naarvoren.nl/artikel/hover/csshover.htc
+http://www.xs4all.nl/~peterned/csshover.html
+body {   behavior:url(csshover.htc); }
+*/
+
+

@@ -1,0 +1,82 @@
+/* $Id$ */
+
+@import "config.less";
+
+@import "webpage.menu.less";
+
+
+/* TODO: move out stuff common to stand-alone documents? */
+
+
+div.head {
+	border-bottom-style: solid;
+	border-bottom-width: 5px;
+}
+
+div.foot {
+	border-top-style: solid;
+	border-top-width: 5px;
+}
+
+
+
+
+input { border: solid 1px #ddd; }
+
+input:active,
+input:hover { border-color: #aaa; }
+
+input:focus { border-color: #000; }
+
+input[type=button],
+input[type=submit] { background-color: #eee; }
+
+input[type=button]:hover,
+input[type=submit]:hover,
+input[type=button]:active,
+input[type=submit]:active { background-color: #ddd; }
+
+
+input {
+	font-size: 80%;
+}
+
+
+form.search input {
+	width: 100%;
+}
+
+form.search {
+	display: block;
+}
+
+.search-input {
+	width: 145px;	/* 130px from blueprint */
+	margin-right: -15px;
+}
+
+.search-submit {
+	width: 50px;	/* 50px from blueprint */
+	margin-left: 30px;
+}
+
+
+
+ul.otherformats:before {
+	content: "This page in other formats: ";
+}
+
+div.head {
+	padding-top: 3em;
+}
+
+div.foot {
+	padding-bottom: 3em;
+}
+
+tt.rcsid {
+	color: #ccc;
+}
+
+
+
