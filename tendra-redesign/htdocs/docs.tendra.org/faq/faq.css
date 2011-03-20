@@ -1,0 +1,33 @@
+/* $Id$ */
+
+dl.faq dt:before     { content: "Q.";  }
+dl.faq dd:before     { content: "A.";  }
+dl.faq dt.noq:before { content: "\A0"; }
+
+dl.faq dt:before,
+dl.faq dd:before {
+	display: block;
+	width: 30px;	/* @grid-indent */
+	float: left;
+	text-align: center;
+	color: #bbb;
+}
+
+dl.faq dt {
+	clear: left;
+}
+
+dl.faq dd {
+	margin-left: 0;
+	margin-top: 9px;	/* @grid-baseline / 2 */
+	margin-bottom: 27px;	/* @grid-baseline * 1.5 */
+}
+
+dl.faq dd:before {
+	margin-left: -30px;    /* (0 - @grid-indent) */
+}
+
+dl.faq dd {
+	padding-left: 30px;	/* @grid-indent */
+}
+

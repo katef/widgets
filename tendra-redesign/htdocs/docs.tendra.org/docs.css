@@ -1,0 +1,59 @@
+/* $Id$ */
+
+table.docs {
+	border: 0;
+	margin: 0;
+}
+
+/* TODO: inherit from h2 */
+table.docs thead th {
+	font-weight: normal;
+	font-family: ms trebuchet, arial, sans-serif;
+	letter-spacing: 1px;
+	line-height: 36px;	/* @grid-baseline * 2 */
+	font-size: 18px;	/* @gris-basefont * 1.5 */
+	color: #999;
+
+}
+
+table.docs td {
+	border: 0;
+	text-align: left;
+	line-height: 18px;	/* @grid-baseline */
+	padding: 9px 0;
+}
+
+table.docs th {
+	border: 0;
+	background-color: transparent;
+	padding: 9px 0 0 0;
+}
+
+table.docs tbody th div.desc {
+	font-weight: normal;
+	line-height: 18px;	/* @grid-baseline */
+	color: #999;
+}
+
+table.docs tbody tr {
+	border-top: dotted 1px #ddd;
+}
+
+table.docs td, table.docs th {
+	text-align: left;
+}
+
+ul.linklist {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul.linklist li {
+	margin: 0;
+}
+
+ul.manlist li {
+	color: #ccc;	/* TODO: centralise a "disabled" colour */
+}
+
