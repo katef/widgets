@@ -1,0 +1,51 @@
+/* $Id$ */
+
+form label.required:after {
+}
+
+form label.stuff.required:after {
+}
+
+form textarea.missing, form input.missing, form label.missing,
+form textarea.invalid, form input.invalid, form label.invalid {
+	color: #f44;
+	border-color: #f88;
+}
+
+form input.missing, form input.invalid,
+form input.missing, form input.invalid {
+	background-color: #fee;
+}
+
+form label span.example {
+	display: none;
+}
+
+form label.invalid span.example tt {
+	color: inherit;
+}
+
+form label.invalid span.example {
+	display: inline;
+	padding-left: 1ex;
+}
+
+form label#stuff2 {
+	position: absolute;
+	top:  -100px;
+	left: -100px;
+}
+
+form div.error {
+	display: none;
+}
+
+form.invalid div.error {
+	display: block;
+	border: solid 2px #f88;
+	color: #f44;
+	background-color: #fee;
+	margin: 40px -10px 20px;
+	padding: 10px;
+}
+
