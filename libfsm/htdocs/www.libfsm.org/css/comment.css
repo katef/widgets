@@ -1,0 +1,61 @@
+/* $Id$ */
+
+/* TODO: remove all this spacing and do it again, esp. using the grid and lesscss */
+
+form.comment input,
+form.comment texrarea {
+	margin-right: 10px;
+}
+
+form.comment div.buttons {
+	clear: left;
+}
+
+form.comment label {
+	display: block;
+	margin-bottom: 10px;
+	clear: left;
+}
+
+form.comment textarea {
+	margin-bottom: 10px;
+	display: block;
+	max-width: 390px;
+	width: 390px;
+	float: left;
+}
+
+form.comment aside.markup {
+	display: inline-block;
+	max-width: 130px;
+	height: 120px;
+	margin-left: 10px;
+}
+
+form.comment aside.markup,
+form.comment aside.markup code {
+	color: #aaa;
+	font-size: 11px;
+	line-height: 19px;
+}
+
+form.comment input[type = "submit"],
+form.comment input[type = "button"] {
+	display: inline-block;
+	padding: 2px 10px;
+}
+
+aside#comment-preview {
+	display: none;
+	border: solid 2px cornflowerblue;
+	margin: 0 -10px 0 -10px;
+	padding: 10px 20px;
+	padding-left: 110px;
+	background-color: aliceblue;
+
+	/* TODO: centralise this sort of thing using lesscss */
+	-webkit-border-radius: 4px;
+	-moz-border-radius:    4px;
+	border-radius:         4px;
+}
+
