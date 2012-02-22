@@ -1,0 +1,11 @@
+/* $Id$ */
+
+table.download {
+	width: 100%;
+}
+
+table.download td tt {
+	color: #aaa;
+	font-size: 80%;
+}
+
