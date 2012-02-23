@@ -1,0 +1,81 @@
+/* $Id$ */
+
+/* TODO: remove all this spacing and do it again, esp. using the grid and lesscss */
+
+section.entry span.date,
+section.entry span.comment-summary {
+	display: block;
+	width: 80px;
+	float: left;
+	text-align: right;
+	margin-left: -100px;
+	color: #aaa;
+	clear: left;
+}
+
+section.entry span.comment-summary a span.icon {
+	/* TODO: SVG icon instead */
+	background: url("http://elide.org/j5/comment-icon.png") no-repeat 0 0;
+	margin-right: 5px;
+	height: 16px;
+	width: 16px;
+	position: relative;
+	top: 4px;
+	display: inline-block;
+}
+
+section.entry span.comment-summary a:hover span.icon {
+	background-position: 0 -16px;
+}
+
+section.entry {
+	margin: 0 0 1.5em 160px;
+	clear: left;
+}
+
+section.entry ul.dotless li {
+	list-style-type: none;
+	margin-bottom: 1em;
+}
+
+section.entry p, section.entry pre {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+aside.comment-details h2 {
+	margin-top: 20px;
+}
+
+aside.comment-details hr {
+	margin: 0;
+}
+
+aside.comment-details ol {
+	margin-bottom: 20px;
+	margin-top: 0px;
+}
+
+aside.comment-details ol li {
+	padding-left: 100px;
+	padding-top: 5px;
+	margin-bottom: 20px;
+	border-top: dotted 1px #ddd;
+	list-style-type: none;
+}
+
+aside.comment-details ol li:first-child {
+	border-top: none;
+}
+
+aside.comment-details ol li span.name,
+aside#comment-preview span.name {
+	display: block;
+	margin-bottom: 5px;
+}
+
+aside.comment-details ol li span.date,
+aside#comment-preview span.date {
+	margin-bottom: 20px;
+}
+

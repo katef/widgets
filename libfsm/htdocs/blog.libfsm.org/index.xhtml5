@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:xi="http://www.w3.org/2001/XInclude">
+
+	<head>
+		<title><?blog-title?></title>
+
+		<meta name="description" content="TODO"/>
+		<meta name="keywords"    content="TODO"/>
+		<meta name="rcsid"       content="$Id: index.xhtml$"/>
+
+		<link rel="stylesheet" href="blog.css"/>
+
+		<!-- TODO: either have blog.less include these, or website.xsl do it for us -->
+		<link rel="stylesheet" href="http://www.libfsm.org/css/valid.css"/>
+		<link rel="stylesheet" href="http://www.libfsm.org/css/comment.css"/>
+		<link rel="stylesheet" href="http://www.libfsm.org/css/calendar.css"/>
+
+		<!-- TODO: js for blog posts etc -->
+		<!-- TODO: centralise with webpage.xsl's js stuff... maybe cat all .js files together, analogue to lesscss -->
+		<script src="http://www.libfsm.org/js/valid.js"/>
+		<script src="http://www.libfsm.org/js/comment.js"/>
+		<script src="http://www.libfsm.org/js/template.js"/>
+
+		<!-- TODO: xinclude these; keep centralised somewhere. also would prefer them to be optional... -->
+		<!-- TODO: namespace IDs -->
+		<script type="text/template" id="comment-preview-template-a">
+			<a href="{ url }"><?js name ?></a>
+		</script>
+
+		<script type="text/template" id="comment-preview-template">
+			<aside style="display: block;">
+				<!-- TODO: do the @id replacement in xreplacechild() in blog.js instead -->
+				<?js void (this.parentNode.id = 'comment-preview'); ?>
+
+				<!-- TODO: use html5's time element for this sort of thing -->
+				<span class="date">
+					<?js date ?>
+				</span>
+				<span class="name">
+					<?js url ? Template(document.getElementById('comment-preview-template-a'), ctx) : name ?>
+				</span>
+				<?js comment ?>
+			</aside>
+		</script>
+	</head>
+
+	<nav id="sidebar">
+		<?blog-calendar?>
+	</nav>
+
+	<body onload="Valid.init(document.documentElement)">	<!-- TODO: centralise somehow? -->
+		<?blog-body?>
+
+		<script>
+			/* XXX: hack until @onload is done properly in website.xsl */
+			Valid.init(document.documentElement);
+		</script>
+
+	</body>
+</html>
+
