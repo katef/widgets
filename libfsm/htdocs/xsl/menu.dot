@@ -1,0 +1,66 @@
+# $Id$
+
+digraph G {
+	rankdir = LR;
+	node [ shape = circle ];
+	node [ label = "", width = 0.3 ];
+
+	start [ shape = none ];
+	start -> 0 [ tooltip = "0 1 2 3 4 5 6 7 8 9 fsm re lx" ];
+
+	0 -> 1 [ label = "A _ _ _", tooltip = "1 2 3 4 5 6 7 8 9 fsm re lx" ];
+	1 -> 2 [ label = " _ ", tooltip = "1 2 3 4 5 6 7 8 9 fsm re lx" ];
+	4 -> 2 [ style = "invis", weight = 0 ];
+	4 -> 1 [ label = " ", weight = 0, tooltip = "1 2 3 4" ];
+	2 -> 3 [ label = "D", tooltip = "3 5 6 7 8 9 fsm re lx" ];
+
+	3 -> 5 [ label = "_ _ _ _", tooltip = "5 6 7 8 9 fsm re lx" ];
+
+	4 -> 3 [ label = "B", tooltip = "3 5 6 7 8 9 fsm re lx" ];
+	5 -> 5 [ label = "O", tooltip = "" ];
+	7 -> 5 [ label = " ", tooltip = "5 7 8" ];
+	7 -> 8 [ label = "R", tooltip = "6 7 8 9 fsm re lx" ];
+	8 -> 7 [ label = " ", tooltip = "5 6 7 8 9 fsm re lx" ];
+	6 -> 9 [ label = " ", tooltip = "5 6 7 8 9 fsm re lx" ];
+	6 -> 6 [ label = "I", color = "invis" ];
+	9 -> 7 [ label = "T", weight = 0, tooltip = "5 6 7 8 9 fsm re lx" ];
+
+	9 -> fsm [ label = "_ _ _ _", tooltip = "fsm re lx" ];
+
+	9 -> 6 [ tooltip = "5 6 7 8 9 fsm re lx" ];
+	5 -> 8 [ tooltip = "5 6 7 8 9 fsm re lx" ];
+	2 -> 4 [ tooltip = "1 2 3 4 5 6 7 8 9 fsm re lx" ];
+	7 -> 6 [ tooltip = "5 6 7 8 9 fsm re lx" ];
+
+	fsm -> re [ tooltip = "re" ];
+	re  -> lx [ style = "invis" ];
+	fsm -> lx [ label = "", tooltip = "lx" ];
+
+	{
+		rank = same;
+		fsm; re; lx;
+	}
+
+	{
+		3   [ shape = doublecircle ];
+		fsm [ shape = doublecircle ];
+		re  [ shape = doublecircle ];
+		lx  [ shape = doublecircle ];
+	}
+
+	0 [ URL = "http://www.libfsm.org/about",    target = "/about" ];
+	1 [ ];
+	2 [ URL = "http://docs.libfsm.org/",        target = "(docs|man)\.libfsm\.org" ];
+	3 [ ];
+	4 [ URL = "http://blog.libfsm.org/",        target = "blog\.libfsm\.org" ];
+	5 [ URL = "http://www.libfsm.org/download", target = "/download" ];
+	6 [ URL = "http://www.libfsm.org/timeline", target = "/timeline" ];
+	7 [ URL = "http://code.libfsm.org/",        target = "code\.libfsm\.org" ];
+	8 [ ];
+	9 [ URL = "http://tickets.libfsm.org/",     target = "tickets\.libfsm\.org" ];
+
+	fsm [ URL = "http://www.libfsm.org/libfsm", target = "/libfsm" ];
+	re  [ URL = "http://www.libfsm.org/libre",  target = "/libre" ];
+	lx  [ URL = "http://www.libfsm.org/lx",     target = "/lx" ];
+}
+

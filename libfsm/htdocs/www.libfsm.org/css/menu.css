@@ -1,0 +1,62 @@
+/* $Id$ */
+
+nav.menu path, nav.menu polygon, nav.menu ellipse {
+	stroke: #888;
+}
+
+nav.menu polygon {
+	fill: #999;
+}
+
+nav.menu path {
+	fill: none ! important;
+}
+
+nav.menu a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+nav.menu a text {
+	font-family: verdana, sans-serif;
+	fill: #888;
+}
+
+nav.menu g.help path {
+	stroke: #555;
+}
+
+nav.menu g.help text {
+	fill: #555;
+	font-family: inherit;
+}
+
+/* this gives the mouse something to hover over */
+nav.menu ellipse {
+	fill: white;
+	fill-opacity: 0.0;
+}
+
+/* a for node, g for edge. .hoveredge is for the <menu> */
+/* XXX: not sure if i like the effect .hoveredge has for <menu> */
+nav.menu a.hoveredge path,
+nav.menu a.hoveredge polygon,
+nav.menu a:hover ellipse, nav.menu a:hover path,
+nav.menu a.hover ellipse, nav.menu g.hover path,
+nav.menu a:hover polygon,
+nav.menu g.hover polygon {
+	stroke: #1b5;
+	stroke-width: 2px;
+	fill: #1b5;
+}
+
+nav.menu a:visited:hover text,
+nav.menu a:link:hover text {
+	fill: #1b5;
+}
+
+nav.menu a.hover ellipse,
+nav.menu a:hover ellipse {
+	fill-opacity: 0.3;
+}
+
