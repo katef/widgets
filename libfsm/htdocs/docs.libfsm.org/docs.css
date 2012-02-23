@@ -1,0 +1,19 @@
+/* $Id$ */
+
+table.manpages {
+	border: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+table.manpages td {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+table.manpages td:first-child {
+	padding-right: 18px;
+}
+

@@ -10,6 +10,8 @@
 		<meta name="description" content="TODO"/>
 		<meta name="keywords"    content="TODO"/>
 		<meta name="rcsid"       content="$Id: index.xhtml$"/>
+
+		<link rel="stylesheet" href="docs.css"/>
 	</head>
 
 	<nav id="sidebar">
