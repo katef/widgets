@@ -65,6 +65,20 @@ function Template(e, ctx) {
 		case s === '':
 			return document.createTextNode('');
 
+		case s instanceof NodeList:
+			var f;
+
+			f = document.createDocumentFragment();
+			for (var i = 0; i < s.length; i++) {
+				f.appendChild(s.item(i).cloneNode(true));
+			}
+
+			return f;
+
+		case s instanceof Document:
+			return s.documentElement.cloneNode(true);
+
+		case s instanceof DocumentFragment:
 		case s instanceof Node:
 			return s;
 
