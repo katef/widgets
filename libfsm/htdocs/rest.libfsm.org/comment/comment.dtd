@@ -1,0 +1,27 @@
+<!-- $Id$ -->
+
+<!ELEMENT html (head, body)>
+<!ATTLIST html xmlns CDATA #FIXED "http://www.w3.org/1999/xhtml">
+
+<!ELEMENT head (meta*)>
+
+<!ELEMENT meta EMPTY>
+<!ATTLIST meta name       (author|email|date|url) #REQUIRED>
+<!ATTLIST meta content    CDATA #REQUIRED>
+
+<!ELEMENT body (#PCDATA|br|p|q|code|pre|em|blockquote|a)*>
+
+<!ELEMENT a (#PCDATA)>
+<!ATTLIST a href CDATA #REQUIRED>
+
+<!ELEMENT br EMPTY>
+
+<!-- TODO: permit some nesting... -->
+<!ELEMENT p    (#PCDATA)>
+<!ELEMENT q    (#PCDATA)>
+<!ELEMENT code (#PCDATA)>
+<!ELEMENT pre  (#PCDATA)>
+<!ELEMENT em   (#PCDATA)>
+
+<!ELEMENT blockquote (#PCDATA)>
+
