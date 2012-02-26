@@ -36,16 +36,3 @@ form label#stuff2 {
 	left: -100px;
 }
 
-form div.error {
-	display: none;
-}
-
-form.invalid div.error {
-	display: block;
-	border: solid 2px #f88;
-	color: #f44;
-	background-color: #fee;
-	margin: 40px -10px 20px;
-	padding: 10px;
-}
-

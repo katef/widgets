@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:xi="http://www.w3.org/2001/XInclude">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 	<head>
 		<title><?blog-title?></title>
@@ -19,30 +18,48 @@
 
 		<!-- TODO: js for blog posts etc -->
 		<!-- TODO: centralise with webpage.xsl's js stuff... maybe cat all .js files together, analogue to lesscss -->
+		<script src="http://www.libfsm.org/js/ajax.js"/>
 		<script src="http://www.libfsm.org/js/valid.js"/>
 		<script src="http://www.libfsm.org/js/comment.js"/>
 		<script src="http://www.libfsm.org/js/template.js"/>
 
-		<!-- TODO: xinclude these; keep centralised somewhere. also would prefer them to be optional... -->
+		<!-- TODO: xinclude these; keep centralised somewhere (as comment.xhtml5?)
+			also would prefer them to be optional... -->
 		<!-- TODO: namespace IDs -->
-		<script type="text/template" id="comment-preview-template-a">
-			<a href="{ url }"><?js name ?></a>
-		</script>
-
 		<script type="text/template" id="comment-preview-template">
 			<aside style="display: block;">
-				<!-- TODO: do the @id replacement in xreplacechild() in blog.js instead -->
+				<!-- TODO: do the @id replacement in xreplacechild() in comment.js instead -->
 				<?js void (this.parentNode.id = 'comment-preview'); ?>
 
 				<!-- TODO: use html5's time element for this sort of thing -->
 				<span class="date">
 					<?js date ?>
 				</span>
-				<span class="name">
-					<?js url ? Template(document.getElementById('comment-preview-template-a'), ctx) : name ?>
+
+				<span class="author">
+					<a href="{ url || this.ownerElement }"><?js author ?></a>
 				</span>
+
 				<?js comment ?>
 			</aside>
+		</script>
+
+		<script type="text/template" id="comment-post-template">
+			<?js void (this.parentNode.id = 'comment-post'); ?>
+
+			<!-- TODO: html5 doctype? -->
+			<html xmlns="http://www.w3.org/1999/xhtml">
+				<head>
+					<meta name="author" content="{ author || this.ownerElement }"/>
+					<meta name="email"  content="{ email  || this.ownerElement }"/>
+					<meta name="date"   content="{ date   || this.ownerElement }"/>
+					<meta name="url"    content="{ url    || this.ownerElement }"/>
+				</head>
+
+				<body>
+					<?js comment ?>
+				</body>
+			</html>
 		</script>
 	</head>
 
@@ -57,7 +74,6 @@
 			/* XXX: hack until @onload is done properly in website.xsl */
 			Valid.init(document.documentElement);
 		</script>
-
 	</body>
 </html>
 

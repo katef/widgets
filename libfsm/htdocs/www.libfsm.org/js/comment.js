@@ -5,16 +5,8 @@ var Comment = new (function () {
 	var oldsubmit;
 
 	/*
-	 * TODO: ideas on sanitizing HTML:
-	 *
-	 * have the browser construct a new dom document
-	 * add the user's html verbatim in the middle of it
-	 * walk the DOM tree throwing an error if any invalid elements are encountered
-	 * (i.e. not one of the allowed elements)
-	 *
-	 * (need to do this server-side, too: can't trust clients. but need to do it client side for the preview stuff)
-	 *
-	 * TODO: supporting multiple syntaxes (wiki syntax etc) done client-side only; all submit as XHTML
+	 * TODO: supporting multiple syntaxes (wiki syntax etc) done client-side only;
+	 * all submit as XHTML
 	 */
 
 	/*
@@ -32,6 +24,54 @@ var Comment = new (function () {
 		parent.replaceChild(newnode, oldnode);
 	}
 
+	/* see http://elide.org/snippets/css.js */
+	function removeclass(node, klass) {
+		var a, c;
+
+		c = node.getAttribute('class');
+		if (c == null) {
+			return;
+		}
+
+		a = c.split(/\s/);
+
+		for (var i = 0; i < a.length; i++) {
+			if (a[i] == klass || a[i] == '') {
+				a.splice(i, 1);
+				i--;
+			}
+		}
+
+		if (a.length == 0) {
+			node.removeAttribute('class');
+		} else {
+			node.setAttribute('class', a.join(' '));
+		}
+	}
+
+	/* see http://elide.org/snippets/css.js */
+	function addclass(node, klass) {
+		var a, c;
+
+		a = [ ];
+
+		c = node.getAttribute('class');
+		if (c != null) {
+			a = c.split(/\s/);
+		}
+
+		for (var i = 0; i < a.length; i++) {
+			if (a[i] == klass || a[i] == '') {
+				a.splice(i, 1);
+				i--;
+			}
+		}
+
+		a.push(klass);
+
+		node.setAttribute('class', a.join(' '));
+	}
+
 	function fieldvalue(id) {
 		var e;
 
@@ -43,90 +83,162 @@ var Comment = new (function () {
 		return e.value;
 	}
 
-	function sanitise(str) {
+	function parsefragment(str) {
 		var doc;
-		var x;
-		var frag;
 
-		/* TODO:
-		doc = document.implementation.createDocument("", "", null);
+		str = '<body xmlns="http://www.w3.org/1999/xhtml">'
+			+   str
+			+ '</body>';
 
-		frag = document.implementation.createDocumentFragment();
+		/* TODO: would prefer to parse html (hence permitting ill-formed markup).
+		can data:// URIs for XHR permit that?
+		not all DOMParser implemntations seem to accept text/html */
 
-		frag.appendChild(
+		/* TODO: catch exceptions here? */
+		doc = new DOMParser().parseFromString(str, 'text/xml');
+		if (!doc) {
+			/* TODO: can't happen; DOMParser stupidly returns an error document */
+			return null;
+		}
 
-		frag.normalize();
+		/* TODO: parse error: http://html5.org/specs/dom-parsing.html#the-domparser-interface
+		Let root be a new Element, with its local name set to "parsererror"
+		and its namespace set to "http://www.mozilla.org/newlayout/xml/parsererror.xml".
+		- find this, and return null
 		*/
 
+		/* TODO: walk document here; return null if it contains something not allowed?
+		no need - we will validate server-side via ajax, for DRY on the DTD
+		but if there is any canned client-side general HTML validation we can use
+		(rather than our specific subset), then great, let's do that here; it can't hurt */
 
-		/* TODO: try/catch dom exceptions? */
+		return doc.documentElement.childNodes;
+	}
 
-		/* TODO: better abstract these to browser-specific bits */
+	function error(prefix, message, advice) {
+		document.getElementById('comment-error').textContent
+			= prefix ? (prefix + ': ' + message + '.') : (message + '.');
 
-		var parser = new DOMParser();
-		var d = parser.parseFromString('<x>' + str + '</x>', "text/xml");
+		if (advice) {
+			document.getElementById('comment-advice').textContent = advice;
 
-		var s = new XMLSerializer();
-		var z = s.serializeToString(d);
+			addclass(document.getElementById('comment'), 'advice');
+		}
+
+		addclass(document.getElementById('comment'), 'error');
+	}
+
+	function post(action, f) {
+		var t;
+
+		/* TODO: remove old preview? */
+
+		removeclass(document.getElementById('comment'), 'error');
+		removeclass(document.getElementById('comment'), 'advice');
+		document.getElementById('comment-advice').textContent = '';
+
+		var fields = {
+			author:  fieldvalue('form-author'),
+			email:   fieldvalue('form-email'),
+			date:    '2010-11-11',	/* TODO: actually date+time */
+			url:     fieldvalue('form-url'),
+			comment: fieldvalue('form-comment')
+		};
+
+		fields.comment = parsefragment(fields.comment);
+		if (!fields.comment) {
+			return error(null, message,
+				'Please make sure your markup is well-formed.');
+		}
+
+		/* server-side valdiation (TODO: explain DRY for the DTD) */
+		/* don't need any query string stuff for just validation */
+		t = Template(document.getElementById('comment-post-template'), fields);
+
+		Ajax.post(action, t, function (status, message) {
+			switch (status) {
+			case 200:
+			case 201:
+				break;
+
+			case 0:	  /* client side */
+			case 408: /* server side */
+				return error(null, message,
+					'Please try again in a little while.');
+
+			case 400:
+				return error(null, message,
+					'Please make sure your markup is well-formed and only '
+			      + 'contains the tags permitted.');
+
+			case 404:
+				return error('Error', 'No such post');
+
+			case 403:
+			case 418:
+				return error('Error', message);
+
+			case 405:
+			case 500:
+			case 503:
+				return error(status, message,
+					"This is not your fault. Unless you're me.");
+
+			default:
+				return error(status, message);
+			}
+
+			f(fields);
+		});
 	}
 
 	this.preview = function(e) {
-		var aside;
+		var comment;
 
 		if (oldsubmit && !oldsubmit(e)) {
 			return false;
 		}
 
-		/* TODO: remove old preview if it's already there */
-		/* TODO: add new preview */
-		/* TODO: message for hilighting it as a preview (or just set a CSS class) */
-		/* TODO: don't submit after this */
+		post(this.action, function (fields) {
+				var t;
+				var placeholder;
 
-		/* TODO: do want to keep this separate from the real comments,
-		 * for visual emphasis that it does not exist yet.
-		 * then refresh when the ajax is submitted */
-		aside = document.getElementById('comment-preview');
+				/* TODO: namespace @id, as tmpl:comment-preview or somesuch */
+				/* TODO: do the @id replacement here, instead of in the template */
+				t = Template(document.getElementById('comment-preview-template'), fields);
 
-		/*
-		 * TODO: if sanity-check fails, show an error which goes where the normal form error is.
-		 * two kinds of error:
-		 * 1. does not parse
-		 * 2. contains dissalowed elements (permit entity references; permit CDATA)
-		 */
+				placeholder = document.getElementById('comment-preview');
 
-		var fields = {
-			name:    fieldvalue('form-name'),
-			date:    '2010-11-11',	/* TODO */
-			url:     fieldvalue('form-url'),
-			comment: fieldvalue('form-comment')
-		};
-
-		sanitise(fields.comment);
-
-		/* TODO: namespace @id, as tmpl:comment-preview or somesuch */
-		var t = Template(document.getElementById('comment-preview-template'), fields);
-
-		/* TODO: comment needs to be parsed... but then it is from validation, anyway */
-
-		/* TODO: do the @id replacement here, instead of in the template */
-		xreplacechild(aside.parentNode, t, aside);
+				xreplacechild(placeholder.parentNode, t, placeholder);
+			});
 
 		return false;
 	}
 
 	this.submit = function(e) {
+		var action;
+
 		if (oldsubmit && !oldsubmit(e)) {
 			return false;
 		}
 
-		/* TODO: remove old preview if it's already there */
+		action = this.action
+			+ '?repo='      + 'blog'
+			+ '&id='        + '1994/08/22' /* TODO: get date from somewhere; - to / */
+			+ '&shortform=' + encodeURIComponent('short-url-title2') /* TODO: ditto */
+			+ '&stuff1='    + encodeURIComponent(this.stuff1.value)
+			+ '&stuff2='    + encodeURIComponent(this.stuff2.value);
 
-		/* TODO: submit to ajax */
+		post(action, function (fields) {
+				/* TODO: options here:
+				 * - reload the page; good feeling of something having been done
+				 * - append to DOM, and fade background from green to white
+				 * - don't show it (or rebuild the backend) at all; wait for moderator
+				 */
 
-		/* TODO: add new preview */
-		/* TODO: message for ajax submission success/failure (or just set a CSS class) */
-
-		alert("submit " + e);
+				/* XXX: hacky. @style in the template sets display: block */
+				document.getElementById('comment-preview').removeAttribute('style');
+			});
 
 		return false;
 	}

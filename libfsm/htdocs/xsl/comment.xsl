@@ -30,14 +30,19 @@
 
 	<xsl:template name="comment-form">
 		<!-- TODO: tab order attributes -->
-		<form class="comment">
+		<form id="comment" class="comment" action="{$libfsm.url.rest}/comment/">
 			<h3>
 				<xsl:text>Leave a comment</xsl:text>
 			</h3>
 
 			<label>
-				<input id="form-name" type="text" name="name" size="30" v:regex="."/>
+				<input id="form-author" type="text" name="author" size="30" v:regex="."/>
 				<xsl:text>Your name (required)</xsl:text>
+			</label>
+
+			<label>
+				<input id="form-email" type="text" name="email" size="30" v:regex="@?"/>	<!-- TODO: regexp -->
+				<xsl:text>Your email (it won't be shown)</xsl:text>
 			</label>
 
 			<label>
@@ -64,6 +69,7 @@
 			</label>
 
 			<label>
+<!-- TODO: what's the id for? -->
 				<textarea id="form-comment" name="comment" rows="10" cols="80" v:regex="^.+$"/>
 				<aside class="markup">
 					<xsl:text>Markup permitted: </xsl:text>
@@ -85,9 +91,15 @@
 				</aside>
 			</label>
 
-			<div class="error">
-				<xsl:text>Please correct the fields indicated and try again.</xsl:text>
-			</div>
+			<aside class="feedback">
+				<p class="invalid">
+					<xsl:text>Please correct the fields indicated and try again.</xsl:text>
+				</p>
+
+				<p id="comment-error"/>
+
+				<p id="comment-advice"/>
+			</aside>
 
 			<div class="buttons">
 				<input type="submit" value="Submit"  onclick="Comment.onsubmit(this.form, Comment.submit)"/>
@@ -117,21 +129,19 @@
 	<xsl:template match="h:html" mode="details">
 		<li>
 			<span class="date">
-				<!-- TODO: where to get the comment date from? -->
-				<xsl:text>TODO</xsl:text>
-				<xsl:value-of select="substring(tl:entry/@date, 1, 10)"/>
+				<xsl:value-of select="h:head/h:meta[@name = 'date']/@content"/>
 			</span>
 
-			<span class="name">
+			<span class="author">
 				<xsl:choose>
 					<!-- TODO: @url -->
-					<xsl:when test="@url">
-						<a href="{@url}">
-							<xsl:value-of select="@name"/>
+					<xsl:when test="h:head/h:meta[@name = 'url']">
+						<a href="{h:head/h:meta[@name = 'url']/@content}">
+							<xsl:value-of select="h:head/h:meta[@name = 'author']/@content"/>
 						</a>
 					</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="@name"/>
+						<xsl:value-of select="h:head/h:meta[@name = 'author']/@content"/>
 					</xsl:otherwise>
 				</xsl:choose>
 			</span>

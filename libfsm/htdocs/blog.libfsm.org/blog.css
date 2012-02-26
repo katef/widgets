@@ -68,8 +68,8 @@ aside.comment-details ol li:first-child {
 	border-top: none;
 }
 
-aside.comment-details ol li span.name,
-aside#comment-preview span.name {
+aside.comment-details ol li span.author,
+aside#comment-preview span.author {
 	display: block;
 	margin-bottom: 5px;
 }

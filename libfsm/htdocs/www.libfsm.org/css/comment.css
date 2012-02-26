@@ -59,3 +59,34 @@ aside#comment-preview {
 	border-radius:         4px;
 }
 
+form aside.feedback {
+	display: none;
+}
+
+form aside.feedback p {
+	display: none;
+	margin: 0;
+}
+
+form.invalid aside.feedback,
+form.error aside.feedback {
+	display: block;
+	border: solid 2px #f88;
+	color: #f44;
+	background-color: #fee;
+	margin: 40px -10px 20px;
+	padding: 10px;
+}
+
+form.invalid p.invalid {
+	display: block;
+}
+
+form.error aside.feedback p#comment-error {
+	display: block;
+}
+
+form.advice aside.feedback p#comment-advice {
+	display: block;
+}
+
