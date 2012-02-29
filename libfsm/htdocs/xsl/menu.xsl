@@ -71,7 +71,7 @@
 
 			<!-- XXX: grid concepts for webpage.xsl only -->
 			<xsl:attribute name="class">
-				<xsl:text>menu grid-span-6</xsl:text>
+				<xsl:text>dot menu grid-span-6</xsl:text>
 			</xsl:attribute>
 
 			<xsl:apply-templates select="node()"/>
