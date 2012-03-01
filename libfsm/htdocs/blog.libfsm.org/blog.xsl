@@ -2,11 +2,11 @@
 
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:str="http://exslt.org/strings"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:tl="http://xml.elide.org/timeline"
-	xmlns:kxslt="http://xml.elide.org/mod_kxslt"
-	xmlns:str="http://exslt.org/strings"
 	xmlns:cal="http://xml.elide.org/calendar"
+	xmlns:kxslt="http://xml.elide.org/mod_kxslt"
 	xmlns:date="http://exslt.org/dates-and-times"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 
@@ -68,6 +68,40 @@
 				</xsl:otherwise>
 			</xsl:choose>
 		</xsl:attribute>
+	</xsl:template>
+
+	<!--
+		We do this here (rather than when generating the consolidated blog.xml)
+		because here we have the option of falling back to a .png instead,
+		depending on the Accept header from mod_kxslt.
+	-->
+	<xsl:template match="tl:entry/h:html/h:body//h:img
+		[not(starts-with(@src, 'http://'))]">
+
+		<xsl:variable name="path" select="concat('blog',
+			'/', translate(substring(ancestor::tl:entry/@date, 1, 10), '-', '/'),
+			'/', ancestor::tl:entry/@shortform)"/>
+
+		<xsl:variable name="file" select="substring-before(@src, '.')"/>
+		<xsl:variable name="ext"  select="substring-after (@src, '.')"/>
+
+		<!-- TODO: could also provide .fsm, perhaps -->
+		<!-- TODO: could also provide data:// URLs -->
+		<xsl:choose>
+			<xsl:when test="$ext = 'dot'">
+				<xsl:copy-of select="document(
+					concat($path, '/', $file, '.svg'))"/>
+			</xsl:when>
+
+			<xsl:when test="$ext = 'txt'">
+				<xsl:copy-of select="document(
+					concat($path, '/', $file, '.xml'))"/>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<xsl:copy-of select="."/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template match="processing-instruction('blog-title')">

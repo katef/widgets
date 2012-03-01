@@ -21,7 +21,6 @@
 		TODO: interject with day/month changes
 		TODO: show >> instead of > if there's a gap
 		 XXX: clicking on a day goes to the wrong #
-		TODO: <img> URLs etc (and an image widget)
 	-->
 
 	<xsl:import href="calendar.xsl"/>
