@@ -15,7 +15,7 @@
 	<xsl:import href="../xsl/webpage.xsl"/>
 	<xsl:import href="../xsl/timeline.xsl"/>
 
-	<xsl:variable name="timeline" select="document('blog.xml')"/>
+	<xsl:variable name="timeline" select="document('../repo/blog.xml')"/>
 
 	<!-- TODO: keep timeline entries (suitable for SVN, too) seperate from blog specifics;
 	so this file is equivalent to blog-main, and we have a centralised timeline.xsl

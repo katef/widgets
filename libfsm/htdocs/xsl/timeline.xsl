@@ -8,10 +8,12 @@
 	xmlns:str="http://exslt.org/strings"
 	xmlns:cal="http://xml.elide.org/calendar"
 	xmlns:tl="http://xml.elide.org/timeline"
+	xmlns:kxslt="http://xml.elide.org/mod_kxslt"
 
-	exclude-result-prefixes="h date str tl cal">
+	exclude-result-prefixes="h date str tl cal kxslt">
 
 	<!--
+		TODO: this shouldn't depend on mod_kxslt
 		TODO: pass in option for whether to permit comments or not? could even show commit messages as a comment
 		TODO: can permit comments on any timeline entry... including svn/wiki changesets
 		TODO: hilight current day, month, year etc
@@ -209,34 +211,54 @@
 	</xsl:template>
 
 
+	<xsl:template match="tl:entry/h:html/h:head/h:title">
+		<xsl:apply-templates/>
+	</xsl:template>
+
 	<xsl:template match="tl:entry/h:html">
 		<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 	</xsl:template>
 
 	<xsl:template match="tl:entry">
 		<section class="entry">
-			<xsl:if test="@date">
+			<a name="{@date}"/>
+
+			<h2>
+				<xsl:apply-templates select="h:html/h:head/h:title"/>
+
 				<span class="date">
-					<a name="{@date}"/>
-					<xsl:value-of select="@date"/>
+					<xsl:value-of select="date:day-in-month(@date)"/>
+					<xsl:text>&#xA0;</xsl:text>
+					<xsl:value-of select="date:month-abbreviation(@date)"/>
+					<xsl:text>&#xA0;&#8217;</xsl:text>
+					<xsl:value-of select="substring(date:year(@date), 3, 2)"/>
 				</span>
+			</h2>
 
-				<xsl:if test="not($timeline-shortform)">
-					<xsl:apply-templates select="tl:comments" mode="summary"/>
-				</xsl:if>
-			</xsl:if>
-
-			<!-- note that comments don't have titles -->
 			<xsl:apply-templates select="h:html"/>
 
-			<xsl:if test="$timeline-shortform">
-				<xsl:apply-templates select="tl:comments" mode="details"/>
+			<xsl:choose>
+				<xsl:when test="$timeline-shortform">
+					<xsl:apply-templates select="tl:comments" mode="details"/>
 
-				<!-- placeholder for javascript to modify -->
-				<aside id="comment-preview"/>
+					<!-- placeholder for javascript to modify -->
+					<aside id="ph:preview"/>
 
-				<xsl:call-template name="comment-form"/>
-			</xsl:if>
+					<xsl:call-template name="comment-form">
+						<!-- XXX: postpath blog-specific; move this to blog.xsl -->
+						<xsl:with-param name="postpath"
+							select="translate($timeline-date, '-', '/')"/>
+						<xsl:with-param name="date"
+							select="$timeline-date"/>
+						<xsl:with-param name="shortform"
+							select="$timeline-shortform"/>
+					</xsl:call-template>
+				</xsl:when>
+
+				<xsl:otherwise>
+					<xsl:apply-templates select="tl:comments" mode="summary"/>
+				</xsl:otherwise>
+			</xsl:choose>
 		</section>
 	</xsl:template>
 
@@ -341,6 +363,12 @@
 		<!-- TODO: pretty this up a bit -->
 		<xsl:choose>
 			<xsl:when test="$timeline-shortform">
+				<!-- For submitting comments and window.reload()ing -->
+				<!-- TODO: maybe this should be done by .htaccess instead -->
+				<xsl:variable name="dummy1" select="kxslt:setheader('Cache-control', 'no-store')"/>
+				<xsl:variable name="dummy2" select="kxslt:setheader('Pragma',        'no-cache')"/>
+				<xsl:variable name="dummy3" select="kxslt:setheader('Expires',       '-1')"/>
+
 				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:date($timeline-date) = date:date(@date)
 					and $timeline-shortform = @shortform]"/>
 

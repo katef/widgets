@@ -84,7 +84,7 @@ var Comment = new (function () {
 	}
 
 	function parsefragment(str) {
-		var doc;
+		var root;
 
 		str = '<body xmlns="http://www.w3.org/1999/xhtml">'
 			+   str
@@ -95,24 +95,45 @@ var Comment = new (function () {
 		not all DOMParser implemntations seem to accept text/html */
 
 		/* TODO: catch exceptions here? */
-		doc = new DOMParser().parseFromString(str, 'text/xml');
-		if (!doc) {
-			/* TODO: can't happen; DOMParser stupidly returns an error document */
+		root = new DOMParser().parseFromString(str, 'text/xml').documentElement;
+
+		/*
+		 * Parse errors according to http://html5.org/specs/dom-parsing.html
+		 *
+		 *   Let root be a new Element, with its local name set to "parsererror"
+		 *   and its namespace set to "http://www.mozilla.org/newlayout/xml/parsererror.xml".
+		 */
+		if (root.nodeName != 'body') {
 			return null;
 		}
 
-		/* TODO: parse error: http://html5.org/specs/dom-parsing.html#the-domparser-interface
-		Let root be a new Element, with its local name set to "parsererror"
-		and its namespace set to "http://www.mozilla.org/newlayout/xml/parsererror.xml".
-		- find this, and return null
-		*/
+		/*
+		 * However in Chrome, we get our <body> with <parsererror> inside it.
+		 * Experimentation suggests this is always the first child, regardless
+		 * of other content.
+		 */
+		if (root.childNodes.length > 0
+		 && root.childNodes.item(0).nodeName == 'parsererror') {
+			return null;
+		}
 
-		/* TODO: walk document here; return null if it contains something not allowed?
-		no need - we will validate server-side via ajax, for DRY on the DTD
-		but if there is any canned client-side general HTML validation we can use
-		(rather than our specific subset), then great, let's do that here; it can't hurt */
+		/* XXX: js PI nodes and {}s need stripping; run through template.js here first?
+		 * no; do it server-side. but nice to error on the client, too. Even better to
+		 * find how <?js comment ?> is causing this to be executed... */
 
-		return doc.documentElement.childNodes;
+		/*
+		 * TODO: walk document here; return null if it contains something not allowed?
+		 * No need - we will validate server-side via ajax, for DRY on the DTD.
+		 * But if there is any canned client-side general HTML validation we can use
+		 * (rather than our specific subset), then great, let's do that here too.
+		 */
+
+		/*
+		 * Any remaining parse errors will be found server-side.
+		 * We're just attempting to avoid an unneccessary trip above.
+		 */
+
+		return root.childNodes;
 	}
 
 	function error(prefix, message, advice) {
@@ -131,17 +152,15 @@ var Comment = new (function () {
 	function post(action, f) {
 		var t;
 
-		/* TODO: remove old preview? */
-
 		removeclass(document.getElementById('comment'), 'error');
 		removeclass(document.getElementById('comment'), 'advice');
 		document.getElementById('comment-advice').textContent = '';
 
 		var fields = {
-			author:  fieldvalue('form-author'),
-			email:   fieldvalue('form-email'),
-			date:    '2010-11-11',	/* TODO: actually date+time */
+			date:    new Date().toISOString(),
 			url:     fieldvalue('form-url'),
+			email:   fieldvalue('form-email'),
+			author:  fieldvalue('form-author'),
 			comment: fieldvalue('form-comment')
 		};
 
@@ -153,7 +172,7 @@ var Comment = new (function () {
 
 		/* server-side valdiation (TODO: explain DRY for the DTD) */
 		/* don't need any query string stuff for just validation */
-		t = Template(document.getElementById('comment-post-template'), fields);
+		t = Template(document.getElementById('tmpl:post'), fields);
 
 		Ajax.post(action, t, function (status, message) {
 			switch (status) {
@@ -201,15 +220,14 @@ var Comment = new (function () {
 
 		post(this.action, function (fields) {
 				var t;
-				var placeholder;
+				var ph;
 
-				/* TODO: namespace @id, as tmpl:comment-preview or somesuch */
 				/* TODO: do the @id replacement here, instead of in the template */
-				t = Template(document.getElementById('comment-preview-template'), fields);
+				t = Template(document.getElementById('tmpl:preview'), fields);
 
-				placeholder = document.getElementById('comment-preview');
+				ph = document.getElementById('ph:preview');
 
-				xreplacechild(placeholder.parentNode, t, placeholder);
+				xreplacechild(ph.parentNode, t, ph);
 			});
 
 		return false;
@@ -222,22 +240,21 @@ var Comment = new (function () {
 			return false;
 		}
 
+		/* TODO: encodeURIComponent() for all fields; need to decode in rc */
 		action = this.action
 			+ '?repo='      + 'blog'
-			+ '&id='        + '1994/08/22' /* TODO: get date from somewhere; - to / */
-			+ '&shortform=' + encodeURIComponent('short-url-title2') /* TODO: ditto */
+			+ '&date='      + this.date.value
+			+ '&postpath='  + this.postpath.value
+			+ '&shortform=' + this.shortform.value
+			+ '&author='    + encodeURIComponent(this.author.value)
 			+ '&stuff1='    + encodeURIComponent(this.stuff1.value)
 			+ '&stuff2='    + encodeURIComponent(this.stuff2.value);
 
 		post(action, function (fields) {
-				/* TODO: options here:
-				 * - reload the page; good feeling of something having been done
-				 * - append to DOM, and fade background from green to white
-				 * - don't show it (or rebuild the backend) at all; wait for moderator
-				 */
-
 				/* XXX: hacky. @style in the template sets display: block */
 				document.getElementById('comment-preview').removeAttribute('style');
+
+				window.location.reload(true);
 			});
 
 		return false;

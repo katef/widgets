@@ -2,35 +2,18 @@
 
 /* TODO: remove all this spacing and do it again, esp. using the grid and lesscss */
 
-section.entry span.date,
-section.entry span.comment-summary {
+section.entry footer.comment-summary {
 	display: block;
-	width: 80px;
-	float: left;
 	text-align: right;
-	margin-left: -100px;
 	color: #aaa;
-	clear: left;
+	margin-bottom: 18px;
 }
 
-section.entry span.comment-summary a span.icon {
-	/* TODO: SVG icon instead */
-	background: url("http://elide.org/j5/comment-icon.png") no-repeat 0 0;
-	margin-right: 5px;
-	height: 16px;
-	width: 16px;
-	position: relative;
-	top: 4px;
-	display: inline-block;
-}
-
-section.entry span.comment-summary a:hover span.icon {
-	background-position: 0 -16px;
-}
-
-section.entry {
-	margin: 0 0 1.5em 160px;
-	clear: left;
+section.entry h2 span.date {
+	color: #ccc;
+	padding-left: 9px;
+	margin-left: 9px;
+	border-left: solid 1px #ddd;
 }
 
 section.entry ul.dotless li {

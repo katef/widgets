@@ -6,6 +6,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:tl="http://xml.elide.org/timeline"
 	xmlns:v="http://xml.elide.org/valid"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
 
 	exclude-result-prefixes="h tl v">
 
@@ -14,28 +15,48 @@
 	-->
 
 	<xsl:template match="tl:comments" mode="summary">
-		<span class="comment-summary">
+		<footer class="comment-summary">
 			<a>
 				<xsl:call-template name="tl:href">
 					<xsl:with-param name="date"      select="../@date"/>
 					<xsl:with-param name="shortform" select="../@shortform"/>
 				</xsl:call-template>
 
-				<span class="icon"/>
+				<xsl:if test="count(tl:comment) != 0">
+					<xsl:value-of select="count(tl:comment)"/>
+					<xsl:text>&#xA0;</xsl:text>
+				</xsl:if>
 
-				<xsl:value-of select="count(tl:comment)"/>
+				<xsl:text>Comment</xsl:text>
+				<xsl:if test="count(tl:comment) > 1">
+					<xsl:text>s</xsl:text>
+				</xsl:if>
 			</a>
-		</span>
+		</footer>
 	</xsl:template>
 
 	<xsl:template name="comment-form">
+		<xsl:param name="postpath"/>
+		<xsl:param name="date"/>
+		<xsl:param name="shortform"/>
+
 		<!-- TODO: tab order attributes -->
 		<form id="comment" class="comment" action="{$libfsm.url.rest}/comment/">
 			<h3>
 				<xsl:text>Leave a comment</xsl:text>
 			</h3>
 
+			<input id="form-postpath" type="hidden" name="postpath"
+				value="{ $postpath }"/>
+
+			<input id="form-date" type="hidden" name="date"
+				value="{ $date }"/>
+
+			<input id="form-shortform" type="hidden" name="shortform"
+				value="{ $shortform }"/>
+
 			<label>
+<!-- TODO: default to anonymous -->
 				<input id="form-author" type="text" name="author" size="30" v:regex="."/>
 				<xsl:text>Your name (required)</xsl:text>
 			</label>
@@ -109,21 +130,23 @@
 	</xsl:template>
 
 	<xsl:template match="tl:comments" mode="details">
-		<aside class="comment-details">
-			<h3>
-				<xsl:value-of select="count(h:html)"/>
-				<xsl:text> comment</xsl:text>
-				<xsl:if test="count(h:html) != 1">
-					<xsl:text>s</xsl:text>
-				</xsl:if>
-			</h3>
+		<xsl:if test="count(h:html) > 0">
+			<aside class="comment-details">
+				<h3>
+					<xsl:value-of select="count(h:html)"/>
+					<xsl:text> comment</xsl:text>
+					<xsl:if test="count(h:html) != 1">
+						<xsl:text>s</xsl:text>
+					</xsl:if>
+				</h3>
 
-			<hr/>
+				<hr/>
 
-			<ol>
-				<xsl:apply-templates select="h:html" mode="details"/>
-			</ol>
-		</aside>
+				<ol>
+					<xsl:apply-templates select="h:html" mode="details"/>
+				</ol>
+			</aside>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="h:html" mode="details">
@@ -131,6 +154,8 @@
 			<span class="date">
 				<xsl:value-of select="h:head/h:meta[@name = 'date']/@content"/>
 			</span>
+
+			<!-- note that comments don't have titles -->
 
 			<span class="author">
 				<xsl:choose>

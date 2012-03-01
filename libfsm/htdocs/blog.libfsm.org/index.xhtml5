@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="blog.css"/>
 
 		<!-- TODO: either have blog.less include these, or website.xsl do it for us -->
+		<link rel="stylesheet" href="http://www.libfsm.org/css/dot.css"/>
 		<link rel="stylesheet" href="http://www.libfsm.org/css/valid.css"/>
 		<link rel="stylesheet" href="http://www.libfsm.org/css/comment.css"/>
 		<link rel="stylesheet" href="http://www.libfsm.org/css/calendar.css"/>
@@ -25,8 +26,7 @@
 
 		<!-- TODO: xinclude these; keep centralised somewhere (as comment.xhtml5?)
 			also would prefer them to be optional... -->
-		<!-- TODO: namespace IDs -->
-		<script type="text/template" id="comment-preview-template">
+		<script type="text/template" id="tmpl:preview">
 			<aside style="display: block;">
 				<!-- TODO: do the @id replacement in xreplacechild() in comment.js instead -->
 				<?js void (this.parentNode.id = 'comment-preview'); ?>
@@ -44,7 +44,7 @@
 			</aside>
 		</script>
 
-		<script type="text/template" id="comment-post-template">
+		<script type="text/template" id="tmpl:post">
 			<?js void (this.parentNode.id = 'comment-post'); ?>
 
 			<!-- TODO: html5 doctype? -->
