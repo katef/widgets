@@ -1,0 +1,45 @@
+/* $Id: calendar.css 3 2010-03-23 08:02:20Z kate $ */
+
+table.calendar {
+	margin: 0;
+	min-width: 13em;
+}
+
+table.calendar th {
+	text-align: center;
+}
+
+table.calendar td {
+	text-align: right;
+	min-width: 24px;
+	min-height: 24px;
+	padding: 0 5px;
+}
+
+table.calendar th {
+	font-weight: normal;
+	min-height: 24px;
+	color: #888;
+}
+
+table.calendar td {
+	color: #ddd;
+	padding: 2px 4px;
+}
+
+table.calendar td.today {
+	background-color: #f4f4f4;
+	color: #ccc;
+}
+
+table.calendar a {
+	display: block;
+	padding: 0 5px;
+	margin: 0 -5px;
+}
+
+table.calendar a:hover {
+	text-decoration: none;
+	background-color: #f7f7f7;
+}
+

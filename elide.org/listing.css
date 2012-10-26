@@ -1,16 +1,26 @@
 /* $Id$ */
 
 table.listing td:first-child {
-	padding-right: 2em;
+	padding-right: 5px;
+}
+
+table.listing td:first-child a {
+	padding-right: 15px;
+	padding-left: 25px;
+	display: block;
+	line-height: 26px;
+	min-width: 120px;
 	text-align: right;
+}
+
+table.listing td:first-child a:hover code,
+table.listing td:first-child a:hover {
+	text-decoration: none;
+	background-color: #eee;
 }
 
 table.listing {
 	border: none;
-}
-
-table.listing td:first-child {
-	width: 8em;
 }
 
 table.listing td.meta {

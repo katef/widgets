@@ -1,4 +1,4 @@
-/* $Id$ */
+/* $Id: elide.css 530 2010-09-26 18:58:44Z kate $ */
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -38,11 +38,11 @@ h2, h3 {
 }
 
 body, td {
-	color: #555;
+	color: #444;
 }
 
 a code, a, a:link, a:visited {
-	color: #f04b37;
+	color: #26478A;
 }
 
 pre, code, tt {
@@ -77,7 +77,7 @@ ul#contents li.current a {
 }
 
 ul#contents li a {
-	color: #efa096;
+	color: #a6a7bA;
 }
 
 ul#contents li a:hover {
@@ -87,10 +87,11 @@ ul#contents li a:hover {
 table.listing td:first-child {
 	padding-right: 18px;
 	width: 108px;
+	text-align: right;
 }
 
 ul#contents {
-	background-color: #f04b37;
+	background-color: #eef;
 	display: block;
 	padding-bottom: 9px;
 	margin-bottom: 9px;
@@ -103,7 +104,7 @@ ul#contents li {
 
 h1#title, ul#contents, ul#contents a, ul#contents a:hover ul#contents a:visited {
 	color: #fff;
-	background-color: #f04b37;
+	background-color: #26478A;
 }
 
 ul#contents {
