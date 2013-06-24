@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html xmlns="http://www.w3.org/TR/xhtml1/strict" xmlns:t="http://xml.bubblephone.com/testreport">
+	<head>
+		<title>Kate&rsquo;s Web Widgets &mdash; Expander</title>
+
+		<link rel="stylesheet" href="expander.css" type="text/css"/>
+		<script src="expander.js" type="text/javascript"></script>
+
+		<style>dl.somecustomclass { border-left: solid 1px blue; }</style>
+	</head>
+
+	<body onload="init_expander()">
+		<dl class="expandable">
+			<dt>Something <i>to</i> expand (implicitly collapsed by default)</dt>
+			<dd>Expanded stuff</dd>
+		</dl>
+
+		<dl class="expandable expanded somecustomclass">
+			<dt>Something <i>to</i> expand (expanded by default)</dt>
+			<dd>Expanded stuff</dd>
+		</dl>
+
+		<dl class="expandable collapsed">
+			<dt>Something <i>to</i> expand (explicitly collapsed by default)</dt>
+			<dd>Expanded stuff</dd>
+		</dl>
+	</body>
+</html>
+

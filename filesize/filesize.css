@@ -1,0 +1,11 @@
+/* $Id$ */
+
+table tr td:first-child {
+	text-align: right;
+}
+
+table tr td:first-child:after {
+	content: "\2192";
+	text-align: right;
+}
+

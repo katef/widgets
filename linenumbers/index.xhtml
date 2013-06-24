@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:xi="http://www.w3.org/2001/XInclude">
+	<head>
+		<title>Kate&rsquo;s Web Widgets &mdash; Non-selectable Line Numbers</title>
+
+		<link rel="stylesheet" href="../../qanda.css"/>
+
+		<meta name="keywords" content="kate,css,tutorial,guide,overview,widget,line numbers,automatic,selectable,pre,code"/>
+		<meta name="rcsid"    content="$Id: index.sxhtml 494 2010-01-04 12:10:22Z kate $"/>
+	</head>
+
+	<body>
+	<div id="main">
+		<p>Line numbers alongside blocks of code are handy; you can refer to
+			them by number instead of saying things like &ldquo;the second
+			<code>if</code> statement in your third loop&rdquo;.</p>
+
+		<p>However often they get in the way when selecting code to cut and
+			paste. This is an attempt to solve that problem.</p>
+
+		<h2>The code</h2>
+
+		<p>Here's how it looks. Try cut &amp; pasting and see what you get:</p>
+
+		<pre><xi:include href="linenumbers.js" parse="text"/></pre>
+
+		<p>You can <a href="linnumbers.js">download it here</a>.</p>
+
+		<p>Minimal CSS:</p>
+
+		<pre><xi:include href="linenumbers.css" parse="text"/></pre>
+
+		<h2>Design Constraints</h2>
+
+		<ul>
+			<li>Numbering must be automatic. My <code>&lt;pre&gt;</code> blocks
+				come from various sources; I don't want to modify them all. In
+				practice this means having javascript go and find all the blocks
+				of code, and add numbering to them.</li>
+
+			<li>The code must be selectable without also selecting the line
+				numbers. If the line numbers <i>are</i> also selected, they must be
+				visually hilighted (else you'd get a surprise when pasting!)</li>
+
+			<li>Simple to maintain vertical alignment. If it's complex, it
+				will go wrong.</li>
+
+			<li>The gutter must scale in width according to the number of
+				digits; fixed-width gutters look silly for short fragments of
+				code, and they look worse for very large line numbers spilling
+				over into the code itself.</li>
+		</ul>
+
+		<p>I tried a few different approaches (which I've seen around), rejected as
+			follows:</p>
+
+		<dl class="qanda">
+			<dt>Why not have the line numbers dynamically disabled with a
+				button or somesuch?</dt>
+			<dd>This is clutter.</dd>
+
+			<dt>Why not use <code>&lt;li&gt;</code>'s numbering?</dt>
+			<dd>I did try this; it turned out you could select it (in firefox)
+				accidentally, without it being hilighted. Confusing!</dd>
+
+			<dt>Why not use <code>:before { content: '123'; }</code> for the numbering?</dt>
+			<dd>I tried that; the end effect is identical to simply outputting
+				numbers as text.</dd>
+
+			<dt>Why not generate the line-number <code>&lt;div&gt;</code> server-side?</dt>
+			<dd>Because of my first design constraint.</dd>
+		</dl>
+
+		<p>This was adapted from <a href="http://meddle.dzygn.com/eng/weblog/line.numbers/">somebody
+			else's attempt</a> at the same thing.</p>
+
+		<p>One place this sees use is in conjuction with my
+			<a href="http://trac-hacks.org/wiki/PreCodeBrowserPlugin">PreCodeBrowserPlugin</a>
+			for Trac. Together, they give selectable code for Trac's source
+			code browser. Additionally, the line numbering is great for Trac's
+			<code>{{{ ... }}}</code> wiki syntax used for snippets of code on
+			wiki pages and in blog entries.</p>
+	</div>
+
+	</body>
+</html>
+
