@@ -1,0 +1,210 @@
+/* $Id: journal.css 430 2009-01-18 13:19:02Z kate $ */
+
+div.entry span.date,
+div.entry span.comment-summary {
+	display: block;
+	width: 80px;
+	float: left;
+	text-align: right;
+	margin-left: -100px;
+	color: #aaa;
+	clear: left;
+}
+
+div.entry span.comment-summary a span.icon {
+	background: url("http://elide.org/j5/comment-icon.png") no-repeat 0 0;
+	margin-right: 5px;
+	height: 16px;
+	width: 16px;
+	position: relative;
+	top: 4px;
+	display: inline-block;
+}
+
+div.entry span.comment-summary a:hover span.icon {
+	background-position: 0 -16px;
+}
+
+div.entry {
+	margin: 0 300px 1.5em 160px;
+	clear: left;
+}
+
+div.entry ul.dotless li {
+	list-style-type: none;
+	margin-bottom: 1em;
+}
+
+div.cal-index {
+	float: right;
+	position: relative;
+	margin-right: 60px;
+	margin-bottom: 40px;
+}
+
+div.cal-index a:hover {
+	text-decoration: none;
+	background-color: #f7f7f7;
+}
+
+div.cal-index hr {
+	margin: 20px 0;
+}
+
+div.year-view {
+	margin-right: 340px;
+	margin-left: 40px;
+	margin-bottom: 40px;
+}
+
+div.year-view table.calendar {
+	float: left;
+	margin: 0 2em 0 0;
+	min-height: 220px;	/* enough for 31 days */
+	display: block;
+}
+
+div.entry p, div.entry pre {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+div.prose p {
+	text-indent: 2em;
+	margin: 0;
+}
+
+div.prose p:first-child {
+	text-indent: 0;
+	margin-top: 1em;
+}
+
+div.entry h2 {
+	font-weight: normal;
+	font-size: inherit;
+	color: inherit;
+	font-family: verdana, sans-serif;
+	margin: 0;
+}
+
+div.entry > h2:after {
+	content: ".";
+}
+
+ol.years {
+	margin: 0;
+	padding: 0;
+}
+
+ol.years li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ol.years a {
+	display: block;
+	padding: 0.5ex 1em;
+}
+
+ol.years li.current-year {
+	background-color: #f4f4f4;
+}
+
+div.comment-details h2,
+div.comment-form h2 {
+	margin-top: 20px;
+}
+
+div.comment-details hr,
+div.comment-form hr {
+	margin: 0;
+}
+
+div.comment-form hr {
+	margin-bottom: 10px;
+}
+
+div.comment-details ol {
+	font-size: 80%;
+	margin-bottom: 20px;
+	margin-top: 0px;
+}
+
+div.comment-details ol li {
+	padding-left: 100px;
+	padding-top: 5px;
+	margin-bottom: 20px;
+	border-top: dotted 1px #ddd;
+}
+
+div.comment-details ol li:first-child {
+	border-top: none;
+}
+
+div.comment-details ol li span.name,
+div#comment-preview span.name {
+	display: block;
+	margin-bottom: 5px;
+}
+
+div.comment-details ol li span.date,
+div#comment-preview span.date {
+	margin-bottom: 20px;
+}
+
+div.comment-form form {
+	margin-left: 100px;
+}
+
+div.comment-form form input,
+div.comment-form form texrarea {
+	margin-right: 10px;
+}
+
+div.comment-form form div.buttons {
+	clear: left;
+}
+
+div.comment-form form label {
+	display: block;
+	margin-bottom: 10px;
+	clear: left;
+}
+
+div.comment-form form textarea {
+	margin-bottom: 10px;
+	display: block;
+	max-width: 450px;
+	width: 450px;
+	float: left;
+}
+
+div.markup {
+	display: inline-block;
+	max-width: 230px;
+	height: 120px;
+	margin-left: 10px;
+}
+
+div.markup, div.markup code {
+	color: #aaa;
+	font-size: 11px;
+	line-height: 19px;
+}
+
+div.comment-form form input[type = "submit"],
+div.comment-form form input[type = "button"] {
+	display: inline-block;
+	padding: 2px 10px;
+}
+
+div#comment-preview {
+	display: none;
+	border: solid 2px cornflowerblue;
+	margin: 0 -10px 0 -10px;
+	padding: 10px 20px;
+	padding-left: 110px;
+	background-color: aliceblue;
+}
+
