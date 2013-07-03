@@ -6,25 +6,21 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:str="http://exslt.org/strings"
 	xmlns:date="http://exslt.org/dates-and-times"
-	xmlns:kxslt="http://xml.elide.org/mod_kxslt"
 	xmlns:cal="http://xml.elide.org/calendar"
 
-	exclude-result-prefixes="b kxslt str date cal"
+	exclude-result-prefixes="b str date cal"
 
-	extension-element-prefixes="kxslt str date">
+	extension-element-prefixes="str date">
 
-
+	<xsl:import href="elide.xsl"/>
 	<xsl:import href="blog.xsl"/>
 
+	<xsl:param name="www-base"/>
+	<xsl:param name="www-css"/>
+	<xsl:param name="www-js"/>
 
 	<!-- TODO: find this programatically -->
-	<xsl:variable name="base" select="'/j5/'"/>
-
-	<xsl:variable name="QUERY_STRING" select="kxslt:getenv('QUERY_STRING')"/>
-
-	<xsl:variable name="blog-date"  select="substring($QUERY_STRING, 1,  10)"/>
-	<xsl:variable name="blog-title" select="substring($QUERY_STRING, 12, string-length($QUERY_STRING) - 11)"/>
-
+	<xsl:param name="base" select="'/'"/>
 
 	<xsl:output indent="yes" method="xml" encoding="utf-8"
 		cdata-section-elements="script"
@@ -32,7 +28,6 @@
 
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"/>
-
 
 	<xsl:template name="b:href">
 		<xsl:param name="date"/>
@@ -61,29 +56,54 @@
 	</xsl:template>
 
 	<xsl:template match="/b:blog">
-		<xsl:processing-instruction name="xml-stylesheet">
-			<xsl:text>href="/srv/www/vhosts/elide.org/elide.xsl" type="text/xsl"</xsl:text>
-		</xsl:processing-instruction>
-
 		<html>
 			<head>
 				<title>
 					<xsl:text>Blog</xsl:text>
 				</title>
 
-				<meta rcsid="$Id$"/>
+				<link rel="stylesheet" href="{$www-css}/blog.css"/>
+				<link rel="stylesheet" href="{$www-css}/valid.css"/>
+				<link rel="stylesheet" href="{$www-css}/calendar.css"/>
 
-				<link rel="stylesheet" href="/j5/blog.css"/>
-				<link rel="stylesheet" href="/j5/valid.css"/>
-				<link rel="stylesheet" href="/calendar.css"/>
+<link rel="stylesheet" href="{$www-css}/elide.css"/>
+<link rel="stylesheet" href="{$www-css}/listing.css"/>
 
-				<script src="/j5/blog.js"     type="text/javascript"></script>
-				<script src="/j5/valid.js"    type="text/javascript"></script>
-				<script src="/j5/template.js" type="text/javascript"></script>	<!-- TODO: only where needed -->
+				<script src="{$www-js}/blog.js"     type="text/javascript"></script>
+				<script src="{$www-js}/valid.js"    type="text/javascript"></script>
+				<script src="{$www-js}/template.js" type="text/javascript"></script>	<!-- TODO: only where needed -->
 			</head>
 
 			<body onload="Valid.init(document.documentElement)">
-				<xsl:call-template name="b:blog"/>
+				<h1 id="title">
+					<xsl:variable name="title">
+						<xsl:call-template name="b:title"/>
+					</xsl:variable>
+
+					<xsl:text>Kate's Amazing Blog</xsl:text>
+
+					<xsl:if test="$title">
+						<xsl:text> - </xsl:text>
+						<xsl:copy-of select="$title"/>
+					</xsl:if>
+				</h1>
+
+				<xsl:call-template name="contents"/>
+
+				<div class="cal-index">
+					<xsl:call-template name="b:calendar"/>
+
+					<hr/>
+
+					<ol class="years">
+						<xsl:call-template name="b:years"/>
+					</ol>
+				</div>
+
+				<xsl:call-template name="b:content"/>
+
+
+				<xsl:call-template name="rcsid"/>
 			</body>
 		</html>
 	</xsl:template>

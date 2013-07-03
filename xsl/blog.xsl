@@ -13,7 +13,6 @@
 
 	exclude-result-prefixes="h date func str b v cal">
 
-
 	<!--
 		TODO: hilight current day, month, year etc
 		TODO: search
@@ -436,6 +435,8 @@
 				<!-- placeholder for javascript to modify -->
 				<div id="comment-preview"/>
 			</xsl:if>
+
+<xsl:copy-of select="*|text()"/>
 
 			<xsl:call-template name="comment-form"/>
 		</div>

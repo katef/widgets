@@ -8,6 +8,11 @@
 
 	exclude-result-prefixes="h c">
 
+	<xsl:param name="www-base"/>
+	<xsl:param name="www-css"/>
+	<xsl:param name="www-js"/>
+	<xsl:param name="uri"/>
+
 	<xsl:output indent="yes" method="xml" encoding="utf-8"
 		media-type="application/xhtml+xml"
 
@@ -24,28 +29,27 @@
 -->
 	</c:contents>
 
-	<xsl:variable name="istracpage" select="boolean(//h:a[@id = 'tracpowered'])"/>
-
 	<!-- TODO: also normalise all <a/> hrefs -->
+<!--
 	<xsl:variable name="prefix">
 		<xsl:variable name="server" select="$server_name"/>
 		<xsl:if test="$server != 'elide.org'">
 			<xsl:text>http://elide.org</xsl:text>
 		</xsl:if>
 	</xsl:variable>
+-->
 
 	<xsl:template name="contents">
 		<ul id="contents">
 			<xsl:for-each select="document('')//c:contents/c:category">
 				<li>
-					<xsl:if test="starts-with($uri, concat('/', @href, '/'))
-						or (@href = 'projects' and $istracpage)">
+					<xsl:if test="starts-with($uri, concat('/', @href, '/'))">
 						<xsl:attribute name="class">
 							<xsl:text>current</xsl:text>
 						</xsl:attribute>
 					</xsl:if>
 
-					<a href="{$prefix}/{@href}">
+					<a href="{$www-base}/{@href}">
 						<xsl:value-of select="@name"/>
 					</a>
 				</li>
@@ -73,71 +77,33 @@
 
 	<xsl:template match="/h:html">
 		<html>
-			<xsl:choose>
-				<xsl:when test="$istracpage">
-					<head>
-						<title>
-							<xsl:text>Kate&#x2019;s Projects: </xsl:text>
-							<xsl:apply-templates select="h:head/h:title"/>
-						</title>
+			<head>
+				<title>
+					<xsl:apply-templates select="h:head/h:title"/>
+				</title>
 
-						<link rel="stylesheet" href="{$prefix}/elide.css"/>
-						<link rel="stylesheet" href="{$prefix}/trac/trac.css"/>
+				<link rel="stylesheet" href="{$www-css}/elide.css"/>
+				<link rel="stylesheet" href="{$www-css}/listing.css"/>
 
-						<xsl:copy-of select="h:head/h:link[not(contains(@href, '/chrome/common/css/trac.css'))]"/>
-						<xsl:copy-of select="h:head/h:style"/>
+				<xsl:copy-of select="h:head/*"/>
 
-						<script src="{$prefix}/widgets/linenumbers/linenumbers.js" type="text/javascript"/>
-					</head>
+				<script src="{$www-js}/widgets/linenumbers/linenumbers.js" type="text/javascript"/>
+			</head>
 
-					<body onload="contents();
-						Linenumbers.init(document.documentElement);
-						{h:body/@onload}">
+			<body onload="contents();
+				Linenumbers.init(document.documentElement);
+				{h:body/@onload}">
 
-						<h1 id="title">
-							<xsl:text>Kate&#x2019;s Projects: </xsl:text>
-							<xsl:apply-templates select="h:head/h:title"/>
-						</h1>
+				<h1 id="title">
+					<xsl:apply-templates select="h:head/h:title"/>
+				</h1>
 
-						<xsl:call-template name="contents"/>
+				<xsl:call-template name="contents"/>
 
-						<xsl:copy-of select="h:body/h:div[@id = 'mainnav']"/>
-						<xsl:copy-of select="h:body/h:div[@id = 'main']"/>
+				<xsl:copy-of select="h:body/*|h:body/text()"/>
 
-						<xsl:call-template name="rcsid"/>
-					</body>
-				</xsl:when>
-
-				<xsl:otherwise>
-					<head>
-						<title>
-							<xsl:apply-templates select="h:head/h:title"/>
-						</title>
-
-						<link rel="stylesheet" href="{$prefix}/elide.css"/>
-						<link rel="stylesheet" href="{$prefix}/listing.css"/>
-
-						<xsl:copy-of select="h:head/*"/>
-
-						<script src="{$prefix}/widgets/linenumbers/linenumbers.js" type="text/javascript"/>
-					</head>
-
-					<body onload="contents();
-						Linenumbers.init(document.documentElement);
-						{h:body/@onload}">
-
-						<h1 id="title">
-							<xsl:apply-templates select="h:head/h:title"/>
-						</h1>
-
-						<xsl:call-template name="contents"/>
-
-						<xsl:copy-of select="h:body/*|h:body/text()"/>
-
-						<xsl:call-template name="rcsid"/>
-					</body>
-				</xsl:otherwise>
-			</xsl:choose>
+				<xsl:call-template name="rcsid"/>
+			</body>
 		</html>
 	</xsl:template>
 
