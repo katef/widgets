@@ -19,6 +19,10 @@
 
 	exclude-result-prefixes="exslt date str cal">
 
+	<!--
+		TODO: option for starting on sunday, or starting on monday
+		(ultimately depending on locale, passed in from mod_kxslt)
+	-->
 
 	<!--
 		Override this for some useful output per day.
