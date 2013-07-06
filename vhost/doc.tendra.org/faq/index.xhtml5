@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd" [
+<!DOCTYPE html>
 
-]>
 <!-- TODO: figure out how to centralise entities with the docbook ones... generate DTDs? so complex...
 or have them all expand out to a db: namespace -->
 <!-- TODO: likewise URLs etc... one idea; include elements from the docbook namespace in these html documents,
