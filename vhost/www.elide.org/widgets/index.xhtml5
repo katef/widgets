@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
+<!DOCTYPE html [
+	<!ENTITY mdash "&#8212;">
+]>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<title>Kate&rsquo;s Projects &mdash; Web Widgets</title>
+		<title>Projects &mdash; Web Widgets</title>
 
 		<meta name="description" content="Kate's Projects"/>
 		<meta name="keywords"    content="kate,programming,projects,web,widgets,html,javascript,css,dhtml,xhtml"/>

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
+<!DOCTYPE html [
+	<!ENTITY mdash "&#8212;">
+]>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<title>Kate&rsquo;s Lego Stuff &mdash; Torsen differentials</title>
+		<title>Lego Stuff &mdash; Torsen differentials</title>
 
 		<meta name="description" content="Kate's Lego Stuff"/>
 		<meta name="keywords"    content="kate,lego,torsen,torsen diff,differential,torsen differential"/>
