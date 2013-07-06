@@ -116,8 +116,6 @@
 				<link rel="stylesheet" href="{$www-css}/listing.css"/>
 
 				<xsl:call-template name="e:page-head"/>
-
-				<script src="{$www-js}/widgets/linenumbers/linenumbers.js" type="text/javascript"/>
 			</head>
 
 <!-- XXX: no h:body/@onload here; provide a template and use xsl:attribute -->
