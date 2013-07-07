@@ -240,6 +240,9 @@ var Comment = new (function () {
 			return false;
 		}
 
+		/* TODO: disable submit and preview buttons;
+		 * timeout to reenable them (or let the ajax timeout drive that) */
+
 		/* TODO: encodeURIComponent() for all fields; need to decode in rc */
 		action = this.action
 			+ '?repo='      + 'blog'
