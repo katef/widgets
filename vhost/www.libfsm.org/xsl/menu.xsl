@@ -8,7 +8,7 @@
 	xmlns:gv="http://xml.libfsm.org/gv"
 	xmlns:xlink="http://www.w3.org/1999/xlink">
 
-	<xsl:import href="dot.xsl"/>
+	<xsl:import href="../../../xsl/dot.xsl"/>
 
 	<xsl:namespace-alias stylesheet-prefix="xsl2" result-prefix="xsl"/>
 

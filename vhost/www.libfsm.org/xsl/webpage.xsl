@@ -3,15 +3,13 @@
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://www.w3.org/1999/xhtml"
-	xmlns:apr="http://xml.elide.org/apr"
-	xmlns:kxslt="http://xml.elide.org/mod_kxslt"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:svg="http://www.w3.org/2000/svg"
 
-	exclude-result-prefixes="h apr kxslt">
+	exclude-result-prefixes="h">
 
 	<xsl:import href="base.xsl"/>
-	<xsl:import href="output.xsl"/>
+	<xsl:import href="../../../xsl/output.xsl"/>
 	<xsl:import href="menu.xsl"/>
 
 	<!-- TODO: i really dislike using xsl:output here.
@@ -78,22 +76,8 @@
 	</xsl:template>
 
 	<xsl:template name="static-head">
-		<!-- TODO: perhaps leave these mmaps to mod_pagespeed to inline small css/js files -->
-
 		<xsl:for-each select="h:head/h:link[@rel = 'stylesheet']">
-			<xsl:choose>
-				<xsl:when test="starts-with(@href, 'http://')">
-					<xsl:copy-of select="."/>
-				</xsl:when>
-
-				<xsl:otherwise>
-					<style>
-						<xsl:copy-of select="attribute::*[not(name() = 'href') and not(name() = 'rel')]"/>
-
-						<xsl:value-of select="apr:mmap(string(@href))"/>
-					</style>
-				</xsl:otherwise>
-			</xsl:choose>
+			<xsl:copy-of select="."/>
 		</xsl:for-each>
 
 		<xsl:for-each select="h:head/h:script">
@@ -105,12 +89,8 @@
 						<xsl:copy-of select="node()|text()|processing-instruction()"/>
 					</xsl:when>
 
-					<xsl:when test="starts-with(@src, 'http://')">
-						<xsl:copy-of select="@src"/>
-					</xsl:when>
-
 					<xsl:otherwise>
-						<xsl:value-of select="apr:mmap(string(@src))"/>
+						<xsl:copy-of select="@src"/>
 					</xsl:otherwise>
 				</xsl:choose>
 			</script>
@@ -129,18 +109,11 @@
 		</header>
 
 		<nav class="menu grid-container">
-			<!-- TODO: or: degrade inside the <svg> element?
-			<xsl:choose>
-				<xsl:when test="contains(kxslt:getheader('Accept'), 'application/xhtml+xml')">
-					<xsl:call-template name="menu"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:text>TODO: non-SVG menu</xsl:text>
-				</xsl:otherwise>
-			</xsl:choose>
-			-->
-
+			<!-- TODO: or: degrade to non-SVG menu inside the <svg> element? -->
+			<!-- TODO: consider looking at the Accept: header to decide to degrade to non-SVG here -->
+<!-- XXX:
 			<xsl:call-template name="menu"/>
+-->
 
 			<menu class="grid-span-2 grid-last">
 				<li>
@@ -178,7 +151,9 @@
 	<!-- TODO: make sure xml:output stuff matches that for output.xsl -->
 	<xsl:template match="/h:html">
 		<!-- XXX: hack until libxslt supports html 5 -->
+<!-- XXX:
 		<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
+-->
 
 		<xsl:call-template name="output-content">
 			<xsl:with-param name="method" select="'xhtml5'"/>

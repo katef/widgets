@@ -10,12 +10,12 @@
 	xmlns:date="http://exslt.org/dates-and-times"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 
-	exclude-result-prefixes="h kxslt tl date cal str">
+	exclude-result-prefixes="h tl date cal str">
 
-	<xsl:import href="../xsl/webpage.xsl"/>
-	<xsl:import href="../xsl/timeline.xsl"/>
+	<xsl:import href="../www.libfsm.org/xsl/webpage.xsl"/>
+	<xsl:import href="../../xsl/timeline.xsl"/>
 
-	<xsl:variable name="timeline" select="document('../repo/blog.xml')"/>
+	<xsl:variable name="timeline" select="document('../../xml/libfsm-blog.xml')"/>
 
 	<!-- TODO: keep timeline entries (suitable for SVN, too) seperate from blog specifics;
 	so this file is equivalent to blog-main, and we have a centralised timeline.xsl
@@ -25,10 +25,8 @@
 	i.e. viewing an entire month, or viewing an entire year) -->
 	<!-- TODO: so this file just glues PIs onto timeline.xsl -->
 
-	<xsl:variable name="QUERY_STRING" select="kxslt:getenv('QUERY_STRING')"/>
-
-	<xsl:variable name="timeline-date"      select="substring($QUERY_STRING, 1,  10)"/>
-	<xsl:variable name="timeline-shortform" select="substring($QUERY_STRING, 12, string-length($QUERY_STRING) - 11)"/>
+	<xsl:variable name="timeline-date"  select="date:date()"/>
+	<xsl:variable name="timeline-title" select="false()"/>
 
 	<xsl:template name="tl:title">
 		<xsl:choose>
@@ -37,6 +35,7 @@
 			</xsl:when>
 
 			<xsl:otherwise>
+				<!-- XXX: not specifically a blog -->
 				<xsl:text>Blog</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
