@@ -8,12 +8,10 @@
 	xmlns:str="http://exslt.org/strings"
 	xmlns:cal="http://xml.elide.org/calendar"
 	xmlns:tl="http://xml.elide.org/timeline"
-	xmlns:kxslt="http://xml.elide.org/mod_kxslt"
 
-	exclude-result-prefixes="h date str tl cal kxslt">
+	exclude-result-prefixes="h date str tl cal">
 
 	<!--
-		TODO: this shouldn't depend on mod_kxslt
 		TODO: pass in option for whether to permit comments or not? could even show commit messages as a comment
 		TODO: can permit comments on any timeline entry... including svn/wiki changesets
 		TODO: hilight current day, month, year etc
@@ -26,6 +24,7 @@
 	<xsl:import href="calendar.xsl"/>
 	<xsl:import href="comment.xsl"/>
 
+	<xsl:variable name="timeline-limit"     select="20"/>
 	<xsl:variable name="timeline-date"      select="date:date()"/>
 	<xsl:variable name="timeline-year"      select="date:year($timeline-date)"/>
 	<xsl:variable name="timeline-month"     select="date:month-in-year($timeline-date)"/>
@@ -364,9 +363,11 @@
 			<xsl:when test="$timeline-shortform">
 				<!-- For submitting comments and window.reload()ing -->
 				<!-- TODO: maybe this should be done by .htaccess instead -->
+<!-- XXX:
 				<xsl:variable name="dummy1" select="kxslt:setheader('Cache-control', 'no-store')"/>
 				<xsl:variable name="dummy2" select="kxslt:setheader('Pragma',        'no-cache')"/>
 				<xsl:variable name="dummy3" select="kxslt:setheader('Expires',       '-1')"/>
+-->
 
 				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:date($timeline-date) = date:date(@date)
 					and $timeline-shortform = @shortform]"/>
@@ -409,7 +410,7 @@
 			<xsl:otherwise>
 				<!-- TODO: interject with month headings -->
 				<!-- TODO: pagnation -->
-				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[position() >= last() - 20]"/>
+				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[position() >= last() - $timeline-limit]"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
