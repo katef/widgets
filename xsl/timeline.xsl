@@ -335,13 +335,13 @@
 		<ol class="years">
 			<xsl:for-each select="$timeline/tl:timeline/tl:entry/@date">
 				<!-- TODO: really data-type is number? -->
-				<xsl:sort data-type="number" select="date:year(.)"/>
+				<xsl:sort data-type="number" select="date:year(.)" order="descending"/>
 		
 				<xsl:variable name="year" select="date:year(.)"/>
 		
 				<xsl:if test="not(../preceding-sibling::tl:entry[date:year(@date) = $year])">
 					<li>
-						<xsl:if test="$date = $year">
+						<xsl:if test="$timeline-year = $year">
 							<xsl:attribute name="class">
 								<xsl:text>current</xsl:text>
 							</xsl:attribute>
