@@ -357,8 +357,7 @@
 		</ol>
 	</xsl:template>
 
-	<xsl:template name="tl:content">
-		<!-- TODO: pretty this up a bit -->
+	<xsl:template name="tl:content-body">
 		<xsl:choose>
 			<xsl:when test="$timeline-short">
 				<!-- For submitting comments and window.reload()ing -->
@@ -371,34 +370,17 @@
 
 				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:date($timeline-date) = date:date(@date)
 					and $timeline-short = @short]"/>
-
-				<!-- TODO: rewrite this in a nicer way, somehow... -->
-				<xsl:if test="not($timeline/tl:timeline/tl:entry[date:date($timeline-date) = date:date(@date)
-					and $timeline-short = @short])">
-					<xsl:text>(no entries)</xsl:text>
-				</xsl:if>
 			</xsl:when>
 
 			<xsl:when test="$timeline-day">
 				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:year(@date) = $timeline-year
 					and date:month-in-year(@date) = $timeline-month
 					and date:day-in-month(@date)  = $timeline-day]"/>
-
-				<xsl:if test="not($timeline/tl:timeline/tl:entry[date:year(@date) = $timeline-year
-					and date:day-in-month(@date)  = $timeline-day
-					and date:month-in-year(@date) = $timeline-month])">
-					<xsl:text>(no entries)</xsl:text>
-				</xsl:if>
 			</xsl:when>
 
 			<xsl:when test="$timeline-month">
 				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:year(@date) = $timeline-year
 					and date:month-in-year(@date) = $timeline-month]"/>
-
-				<xsl:if test="not($timeline/tl:timeline/tl:entry[date:year(@date) = $timeline-year
-					and date:month-in-year(@date) = $timeline-month])">
-					<xsl:text>(no entries)</xsl:text>
-				</xsl:if>
 			</xsl:when>
 
 			<xsl:when test="$timeline-year">
@@ -411,6 +393,22 @@
 				<!-- TODO: interject with month headings -->
 				<!-- TODO: pagnation -->
 				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[position() >= last() - $timeline-limit]"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="tl:content">
+		<xsl:variable name="r">
+			<xsl:call-template name="tl:content-body"/>
+		</xsl:variable>
+
+		<xsl:choose>
+			<xsl:when test="$r = ''"> <!-- XXX: why can't i count($r) here? -->
+				<xsl:text>(no entries)</xsl:text>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<xsl:copy-of select="$r"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
