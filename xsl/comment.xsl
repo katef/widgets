@@ -16,6 +16,9 @@
 
 	<xsl:template match="tl:comments" mode="summary">
 		<footer class="comment-summary">
+<!-- TODO: need to show author for details view, too -->
+<xsl:text>by kate | </xsl:text>
+
 			<a>
 				<xsl:call-template name="tl:href">
 					<xsl:with-param name="date"      select="../@date"/>
@@ -41,7 +44,7 @@
 		<xsl:param name="shortform"/>
 
 		<!-- TODO: tab order attributes -->
-		<form id="comment" class="comment" action="{$libfsm.url.rest}/comment/">
+		<form id="comment" class="comment" action="{$www-rest}/comment/">
 			<h3>
 				<xsl:text>Leave a comment</xsl:text>
 			</h3>
@@ -68,7 +71,7 @@
 
 			<label>
 				<!-- TODO: html5 validation fields -->
-				<input id="form-url" type="text" name="url" size="30" v:regex="^((http://)?([^.]+\.)+[a-z]+(/.*)?)?$"/>
+				<input id="form-url" type="text" name="url" size="30" v:regex="^((https?://)?([^.]+\.)+[a-z]+(/.*)?)?$"/>
 				<xsl:text>Your website</xsl:text>
 				<span class="example">
 					<xsl:text>(e.g. </xsl:text>

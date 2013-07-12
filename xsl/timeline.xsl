@@ -24,13 +24,13 @@
 	<xsl:import href="calendar.xsl"/>
 	<xsl:import href="comment.xsl"/>
 
-	<xsl:variable name="timeline-limit"     select="20"/>
-	<xsl:variable name="timeline-date"      select="date:date()"/>
-	<xsl:variable name="timeline-year"      select="date:year($timeline-date)"/>
-	<xsl:variable name="timeline-month"     select="date:month-in-year($timeline-date)"/>
-	<xsl:variable name="timeline-day"       select="date:day-in-month($timeline-date)"/>
-	<xsl:variable name="timeline-shortform" select="false()"/>
-
+	<xsl:param name="timeline"       select="/.."/>
+	<xsl:param name="timeline-limit" select="20"/>
+	<xsl:param name="timeline-date"  select="date:date()"/>
+	<xsl:param name="timeline-year"  select="date:year($timeline-date)"/>
+	<xsl:param name="timeline-month" select="date:month-in-year($timeline-date)"/>
+	<xsl:param name="timeline-day"   select="date:day-in-month($timeline-date)"/>
+	<xsl:param name="timeline-short" select="false()"/>
 
 	<xsl:template name="cal:content">
 		<xsl:param name="date"/>
@@ -236,7 +236,7 @@
 			<xsl:apply-templates select="h:html"/>
 
 			<xsl:choose>
-				<xsl:when test="$timeline-shortform">
+				<xsl:when test="$timeline-short">
 					<xsl:apply-templates select="tl:comments" mode="details"/>
 
 					<!-- placeholder for javascript to modify -->
@@ -248,8 +248,8 @@
 							select="translate($timeline-date, '-', '/')"/>
 						<xsl:with-param name="date"
 							select="$timeline-date"/>
-						<xsl:with-param name="shortform"
-							select="$timeline-shortform"/>
+						<xsl:with-param name="short"
+							select="$timeline-short"/>
 					</xsl:call-template>
 				</xsl:when>
 
@@ -360,7 +360,7 @@
 	<xsl:template name="tl:content">
 		<!-- TODO: pretty this up a bit -->
 		<xsl:choose>
-			<xsl:when test="$timeline-shortform">
+			<xsl:when test="$timeline-short">
 				<!-- For submitting comments and window.reload()ing -->
 				<!-- TODO: maybe this should be done by .htaccess instead -->
 <!-- XXX:
@@ -370,11 +370,11 @@
 -->
 
 				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:date($timeline-date) = date:date(@date)
-					and $timeline-shortform = @shortform]"/>
+					and $timeline-short = @short]"/>
 
 				<!-- TODO: rewrite this in a nicer way, somehow... -->
 				<xsl:if test="not($timeline/tl:timeline/tl:entry[date:date($timeline-date) = date:date(@date)
-					and $timeline-shortform = @shortform])">
+					and $timeline-short = @short])">
 					<xsl:text>(no entries)</xsl:text>
 				</xsl:if>
 			</xsl:when>
