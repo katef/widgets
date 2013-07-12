@@ -9,6 +9,8 @@
 	xmlns:cal="http://xml.elide.org/calendar"
 	xmlns:tl="http://xml.elide.org/timeline"
 
+	extension-element-prefixes="date str"
+
 	exclude-result-prefixes="h date str tl cal">
 
 	<!--

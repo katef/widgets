@@ -9,6 +9,8 @@
 	xmlns:date="http://exslt.org/dates-and-times"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 
+	extension-element-prefixes="date str"
+
 	exclude-result-prefixes="h tl date cal str">
 
 	<xsl:import href="copy.xsl"/>
