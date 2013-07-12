@@ -19,7 +19,7 @@
 		<link rel="stylesheet" href="http://www.libfsm.org/css/timeline.css"/>
 
 		<!-- TODO: js for blog posts etc -->
-		<!-- TODO: centralise with webpage.xsl's js stuff... maybe cat all .js files together, analogue to lesscss -->
+		<!-- TODO: centralise with theme.xsl's js stuff... maybe cat all .js files together, analogue to lesscss -->
 		<script src="http://www.libfsm.org/js/ajax.js"/>
 		<script src="http://www.libfsm.org/js/valid.js"/>
 		<script src="http://www.libfsm.org/js/comment.js"/>
