@@ -11,6 +11,13 @@
 
 	extension-element-prefixes="common str">
 
+	<xsl:template match="processing-instruction()">
+		<xsl:message terminate="yes">
+			<xsl:text>Unhandled PI: </xsl:text>
+			<xsl:value-of select="name()"/>
+		</xsl:message>
+	</xsl:template>
+
 	<xsl:template name="output">
 		<xsl:param name="filename"/>
 		<xsl:param name="title"/>
@@ -115,8 +122,8 @@
 
 				<!-- TODO: maybe a node set is better, after all -->
 				<xsl:for-each select="str:tokenize(concat(
-					' ', $libfsm.url.www, '/css/grid.css',
-					' ', $libfsm.url.www, '/css/typography.css',
+					' ', $www-css, 'grid.css',
+					' ', $www-css, '/typography.css',
 					' ', 'http://fonts.googleapis.com/css?family=Quattrocento',
 					' ', $css))">
 					<link rel="stylesheet" type="text/css" media="screen" href="{.}"/>
@@ -125,11 +132,11 @@
 <!-- TODO: linenumbers only for docbook and wiki pages? -->
 <!-- TODO:
 				<xsl:for-each select="str:tokenize(concat(
-					' ', $libfsm.url.www, '/js/debug.js',
-					' ', $libfsm.url.www, '/js/linenumbers.js',
-					' ', $libfsm.url.www, '/js/table.js',
-					' ', $libfsm.url.www, '/js/col.js',
-					' ', $libfsm.url.www, '/js/javascript-xpath-cmp.js',
+					' ', $www-js, '/debug.js',
+					' ', $www-js, '/linenumbers.js',
+					' ', $www-js, '/table.js',
+					' ', $www-js, '/col.js',
+					' ', $www-js, '/javascript-xpath-cmp.js',
 					' ', $js))">
 					<script type="text/javascript" src="{.}"></script>
 				</xsl:for-each>
