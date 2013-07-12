@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 	<head>
 		<title><?blog-title?></title>
 
@@ -11,7 +10,7 @@
 
 		<link rel="stylesheet" href="blog.css"/>
 
-		<!-- TODO: either have blog.less include these, or website.xsl do it for us -->
+		<!-- TODO: either have blog.less include these, or theme.xsl do it for us -->
 		<link rel="stylesheet" href="http://www.libfsm.org/css/dot.css"/>
 		<link rel="stylesheet" href="http://www.libfsm.org/css/valid.css"/>
 		<link rel="stylesheet" href="http://www.libfsm.org/css/comment.css"/>
@@ -64,15 +63,15 @@
 		</script>
 	</head>
 
-	<nav id="sidebar">
-		<?blog-calendar?>
-	</nav>
-
 	<body onload="Valid.init(document.documentElement)">	<!-- TODO: centralise somehow? -->
 		<?blog-body?>
 
+		<div id="cal-index">
+			<?blog-calendar?>
+		</div>
+
 		<script>
-			/* XXX: hack until @onload is done properly in website.xsl */
+			/* XXX: hack until @onload is done properly in theme.xsl */
 			Valid.init(document.documentElement);
 		</script>
 	</body>
