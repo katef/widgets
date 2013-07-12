@@ -21,8 +21,8 @@
 
 			<a>
 				<xsl:call-template name="tl:href">
-					<xsl:with-param name="date"      select="../@date"/>
-					<xsl:with-param name="shortform" select="../@shortform"/>
+					<xsl:with-param name="date"  select="../h:html/h:head/h:meta[@name = 'date']/@content"/>
+					<xsl:with-param name="short" select="../@short"/>
 				</xsl:call-template>
 
 				<xsl:if test="count(tl:comment) != 0">
@@ -41,7 +41,7 @@
 	<xsl:template name="comment-form">
 		<xsl:param name="postpath"/>
 		<xsl:param name="date"/>
-		<xsl:param name="shortform"/>
+		<xsl:param name="short"/>
 
 		<!-- TODO: tab order attributes -->
 		<form id="comment" class="comment" action="{$www-rest}/comment/">
@@ -55,8 +55,8 @@
 			<input id="form-date" type="hidden" name="date"
 				value="{ $date }"/>
 
-			<input id="form-shortform" type="hidden" name="shortform"
-				value="{ $shortform }"/>
+			<input id="form-short" type="hidden" name="short"
+				value="{ $short }"/>
 
 			<label>
 <!-- TODO: default to anonymous -->

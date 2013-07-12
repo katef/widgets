@@ -39,9 +39,9 @@
 
 		<xsl:choose>
 			<xsl:when test="$timeline/tl:timeline/tl:entry[
-					date:year(@date) = date:year($date)
-					and date:month-in-year(@date) = date:month-in-year($date)
-					and date:day-in-month(@date) = date:day-in-month($date)]">
+					date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date)
+					and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date)
+					and date:day-in-month(h:html/h:head/h:meta[@name = 'date']/@content) = date:day-in-month($date)]">
 				<a>
 					<xsl:call-template name="tl:href">
 						<!-- TODO: wrong date passed in? -->
@@ -49,7 +49,7 @@
 					</xsl:call-template>
 
 					<xsl:attribute name="title">
-						<xsl:for-each select="$timeline/tl:timeline/tl:entry[@date = $date]">
+						<xsl:for-each select="$timeline/tl:timeline/tl:entry[h:html/h:head/h:meta[@name = 'date']/@content = $date]">
 							<xsl:choose>
 								<xsl:when test="h:html/h:head/h:title">
 									<xsl:value-of select="h:html/h:head/h:title"/>
@@ -89,8 +89,8 @@
 						<!-- TODO: centralise somehow -->
 						<xsl:choose>
 							<xsl:when test="$timeline/tl:timeline/tl:entry[
-								date:year(@date) = date:year($date-delta)
-								and date:month-in-year(@date) = date:month-in-year($date-delta)]">
+								date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date-delta)
+								and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date-delta)]">
 								<a>
 									<xsl:call-template name="tl:href">
 										<xsl:with-param name="date"
@@ -102,12 +102,12 @@
 								</a>
 							</xsl:when>
 
-							<xsl:when test="$timeline/tl:timeline/tl:entry[starts-with(date:difference($date, @date), '-')]">
+							<xsl:when test="$timeline/tl:timeline/tl:entry[starts-with(date:difference($date, h:html/h:head/h:meta[@name = 'date']/@content), '-')]">
 								<a>
 									<xsl:variable name="date-skip"
 										select="$timeline/tl:timeline/tl:entry
-											[starts-with(date:difference($date, @date), '-')]
-											[position() = last()]/@date"/>
+											[starts-with(date:difference($date, h:html/h:head/h:meta[@name = 'date']/@content), '-')]
+											[position() = last()]/h:html/h:head/h:meta[@name = 'date']/@content"/>
 
 									<!-- TODO: skip to next populated entry -->
 									<xsl:call-template name="tl:href">
@@ -152,8 +152,8 @@
 
 						<xsl:choose>
 							<xsl:when test="$timeline/tl:timeline/tl:entry[
-								date:year(@date) = date:year($date-delta)
-								and date:month-in-year(@date) = date:month-in-year($date-delta)]">
+								date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date-delta)
+								and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date-delta)]">
 								<a>
 									<xsl:call-template name="tl:href">
 										<xsl:with-param name="date"
@@ -165,12 +165,12 @@
 								</a>
 							</xsl:when>
 
-							<xsl:when test="$timeline/tl:timeline/tl:entry[starts-with(date:difference(@date, $date), '-')]">
+							<xsl:when test="$timeline/tl:timeline/tl:entry[starts-with(date:difference(h:html/h:head/h:meta[@name = 'date']/@content, $date), '-')]">
 								<a>
 									<xsl:variable name="date-skip"
 										select="$timeline/tl:timeline/tl:entry
-											[starts-with(date:difference(@date, $date), '-')]
-											[position() = 1]/@date"/>
+											[starts-with(date:difference(h:html/h:head/h:meta[@name = 'date']/@content, $date), '-')]
+											[position() = 1]/h:html/h:head/h:meta[@name = 'date']/@content"/>
 
 									<!-- TODO: skip to next populated entry -->
 									<xsl:call-template name="tl:href">
@@ -194,8 +194,8 @@
 					<th colspan="7">
 						<xsl:choose>
 							<xsl:when test="$timeline/tl:timeline/tl:entry
-								[date:year(@date) = date:year($date)
-								and date:month-in-year(@date) = date:month-in-year($date)]">
+								[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date)
+								and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date)]">
 								<a>
 									<xsl:call-template name="tl:href">
 										<xsl:with-param name="date"
@@ -228,18 +228,18 @@
 
 	<xsl:template match="tl:entry">
 		<section class="entry">
-			<a name="{concat(date:year(@date), '-', date:month-in-year(@date), '-', date:day-in-month(@date))}"/>
+			<a name="{concat(date:year(h:html/h:head/h:meta[@name = 'date']/@content), '-', date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content), '-', date:day-in-month(h:html/h:head/h:meta[@name = 'date']/@content))}"/>
 
 			<h2>
 				<xsl:apply-templates select="h:html/h:head/h:title"/>
 
 				<!-- TODO: this should be formatted by a particular theme. maybe output a PI here -->
 				<span class="date">
-					<xsl:value-of select="date:day-in-month(@date)"/>
+					<xsl:value-of select="date:day-in-month(h:html/h:head/h:meta[@name = 'date']/@content)"/>
 					<xsl:text>&#xA0;</xsl:text>
-					<xsl:value-of select="date:month-abbreviation(@date)"/>
+					<xsl:value-of select="date:month-abbreviation(h:html/h:head/h:meta[@name = 'date']/@content)"/>
 					<xsl:text>&#xA0;&#8217;</xsl:text>
-					<xsl:value-of select="substring(date:year(@date), 3, 2)"/>
+					<xsl:value-of select="substring(date:year(h:html/h:head/h:meta[@name = 'date']/@content), 3, 2)"/>
 				</span>
 			</h2>
 
@@ -340,13 +340,12 @@
 		</xsl:variable>
 
 		<ol class="years">
-			<xsl:for-each select="$timeline/tl:timeline/tl:entry/@date">
-				<!-- TODO: really data-type is number? -->
+			<xsl:for-each select="$timeline/tl:timeline/tl:entry/h:html/h:head/h:meta[@name = 'date']/@content">
 				<xsl:sort data-type="number" select="date:year(.)" order="descending"/>
 		
 				<xsl:variable name="year" select="date:year(.)"/>
 		
-				<xsl:if test="not(../preceding-sibling::tl:entry[date:year(@date) = $year])">
+				<xsl:if test="not(../../../../preceding-sibling::tl:entry[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = $year])">
 					<li>
 						<xsl:if test="$timeline-year = $year">
 							<xsl:attribute name="class">
@@ -378,19 +377,19 @@
 				<xsl:variable name="dummy3" select="kxslt:setheader('Expires',       '-1')"/>
 -->
 
-				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:date($timeline-date) = date:date(@date)
+				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:date($timeline-date) = date:date(h:html/h:head/h:meta[@name = 'date']/@content)
 					and $timeline-short = @short]"/>
 			</xsl:when>
 
 			<xsl:when test="$timeline-day">
-				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:year(@date) = $timeline-year
-					and date:month-in-year(@date) = $timeline-month
-					and date:day-in-month(@date)  = $timeline-day]"/>
+				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = $timeline-year
+					and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = $timeline-month
+					and date:day-in-month(h:html/h:head/h:meta[@name = 'date']/@content)  = $timeline-day]"/>
 			</xsl:when>
 
 			<xsl:when test="$timeline-month">
-				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:year(@date) = $timeline-year
-					and date:month-in-year(@date) = $timeline-month]"/>
+				<xsl:apply-templates select="$timeline/tl:timeline/tl:entry[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = $timeline-year
+					and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = $timeline-month]"/>
 			</xsl:when>
 
 			<xsl:when test="$timeline-year">

@@ -80,7 +80,7 @@
 		[not(starts-with(@src, 'http://'))]">
 
 		<xsl:variable name="path" select="concat('blog',
-			'/', translate(substring(ancestor::tl:entry/@date, 1, 10), '-', '/'),
+			'/', translate(substring(ancestor::tl:entry/h:html/h:head/h:meta[@name = 'date']/@content, 1, 10), '-', '/'),
 			'/', ancestor::tl:entry/@short)"/>
 
 		<xsl:variable name="file" select="substring-before(@src, '.')"/>
