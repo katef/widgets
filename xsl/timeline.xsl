@@ -232,19 +232,21 @@
 	</xsl:template>
 
 	<xsl:template match="tl:entry">
+		<xsl:variable name="date" select="h:html/h:head/h:meta[@name = 'date']/@content"/>
+
 		<section class="entry">
-			<a name="{concat(date:year(h:html/h:head/h:meta[@name = 'date']/@content), '-', date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content), '-', date:day-in-month(h:html/h:head/h:meta[@name = 'date']/@content))}"/>
+			<a name="{concat(date:year($date), '-', date:month-in-year($date), '-', date:day-in-month($date))}"/>
 
 			<h2>
 				<xsl:apply-templates select="h:html/h:head/h:title"/>
 
 				<!-- TODO: this should be formatted by a particular theme. maybe output a PI here -->
 				<span class="date">
-					<xsl:value-of select="date:day-in-month(h:html/h:head/h:meta[@name = 'date']/@content)"/>
+					<xsl:value-of select="date:day-in-month($date)"/>
 					<xsl:text>&#xA0;</xsl:text>
-					<xsl:value-of select="date:month-abbreviation(h:html/h:head/h:meta[@name = 'date']/@content)"/>
+					<xsl:value-of select="date:month-abbreviation($date)"/>
 					<xsl:text>&#xA0;&#8217;</xsl:text>
-					<xsl:value-of select="substring(date:year(h:html/h:head/h:meta[@name = 'date']/@content), 3, 2)"/>
+					<xsl:value-of select="substring(date:year($date), 3, 2)"/>
 				</span>
 			</h2>
 
