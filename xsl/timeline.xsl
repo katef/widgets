@@ -186,7 +186,9 @@
 				<xsl:otherwise>
 					<th colspan="7">
 						<xsl:choose>
-							<xsl:when test="$timeline/tl:timeline/tl:entry[starts-with(@date, substring($date, 1, 7))]">
+							<xsl:when test="$timeline/tl:timeline/tl:entry
+								[date:year(@date) = date:year($date)
+								and date:month-in-year(@date) = date:month-in-year($date)]">
 								<a>
 									<xsl:call-template name="tl:href">
 										<xsl:with-param name="date"
@@ -224,6 +226,7 @@
 			<h2>
 				<xsl:apply-templates select="h:html/h:head/h:title"/>
 
+				<!-- TODO: this should be formatted by a particular theme. maybe output a PI here -->
 				<span class="date">
 					<xsl:value-of select="date:day-in-month(@date)"/>
 					<xsl:text>&#xA0;</xsl:text>
@@ -332,11 +335,11 @@
 		<ol class="years">
 			<xsl:for-each select="$timeline/tl:timeline/tl:entry/@date">
 				<!-- TODO: really data-type is number? -->
-				<xsl:sort data-type="number" select="@date"/>
+				<xsl:sort data-type="number" select="date:year(.)"/>
 		
-				<xsl:variable name="year" select="substring(., 1, 4)"/>
+				<xsl:variable name="year" select="date:year(.)"/>
 		
-				<xsl:if test="not(../preceding-sibling::tl:entry[substring(@date, 1, 4) = $year])">
+				<xsl:if test="not(../preceding-sibling::tl:entry[date:year(@date) = $year])">
 					<li>
 						<xsl:if test="$date = $year">
 							<xsl:attribute name="class">
