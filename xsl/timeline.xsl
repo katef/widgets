@@ -38,7 +38,10 @@
 		<xsl:variable name="day" select="date:day-in-month($date)"/>
 
 		<xsl:choose>
-			<xsl:when test="$timeline/tl:timeline/tl:entry[@date = $date]">
+			<xsl:when test="$timeline/tl:timeline/tl:entry[
+					date:year(@date) = date:year($date)
+					and date:month-in-year(@date) = date:month-in-year($date)
+					and date:day-in-month(@date) = date:day-in-month($date)]">
 				<a>
 					<xsl:call-template name="tl:href">
 						<!-- TODO: wrong date passed in? -->
@@ -85,7 +88,9 @@
 
 						<!-- TODO: centralise somehow -->
 						<xsl:choose>
-							<xsl:when test="$timeline/tl:timeline/tl:entry[starts-with(@date, $date-delta)]">
+							<xsl:when test="$timeline/tl:timeline/tl:entry[
+								date:year(@date) = date:year($date-delta)
+								and date:month-in-year(@date) = date:month-in-year($date-delta)]">
 								<a>
 									<xsl:call-template name="tl:href">
 										<xsl:with-param name="date"
@@ -146,7 +151,9 @@
 						<xsl:variable name="date-delta" select="date:add($date, 'P1M')"/>
 
 						<xsl:choose>
-							<xsl:when test="$timeline/tl:timeline/tl:entry[starts-with(@date, $date-delta)]">
+							<xsl:when test="$timeline/tl:timeline/tl:entry[
+								date:year(@date) = date:year($date-delta)
+								and date:month-in-year(@date) = date:month-in-year($date-delta)]">
 								<a>
 									<xsl:call-template name="tl:href">
 										<xsl:with-param name="date"
@@ -221,7 +228,7 @@
 
 	<xsl:template match="tl:entry">
 		<section class="entry">
-			<a name="{@date}"/>
+			<a name="{concat(date:year(@date), '-', date:month-in-year(@date), '-', date:day-in-month(@date))}"/>
 
 			<h2>
 				<xsl:apply-templates select="h:html/h:head/h:title"/>
