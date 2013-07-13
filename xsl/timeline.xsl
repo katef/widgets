@@ -34,27 +34,167 @@
 	<xsl:param name="tl:day"     select="date:day-in-month($tl:date)"/>
 	<xsl:param name="tl:short"   select="false()"/>
 
-	<xsl:template name="cal:content">
+	<xsl:template name="cal-link">
+		<xsl:param name="date"/>
+		<xsl:param name="delta"/>
+		<xsl:param name="rel"/>
+		<xsl:param name="next"/>
+		<xsl:param name="skip"  select="concat($next, $next)"/>
+		<xsl:param name="blank" select="$next"/>
+		<xsl:param name="dest"  select="date:add($date, $delta)"/>
+
+		<xsl:variable name="ds" select="date:seconds(date:add($date, $delta)) - date:seconds($date)"/>
+
+		<xsl:choose>
+			<xsl:when test="$tl:entries/tl:entry
+				[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($dest)
+					and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content)
+						= date:month-in-year($dest)]">
+
+				<a rel="{$rel}">
+					<xsl:call-template name="tl:href">
+						<xsl:with-param name="date" select="concat(date:year($dest), '-',
+							str:align(date:month-in-year($dest), '00', 'right'))"/>
+					</xsl:call-template>
+
+					<xsl:value-of select="$next"/>
+				</a>
+			</xsl:when>
+
+			<xsl:when test="$ds &gt; 0
+				and $tl:entries/tl:entry
+					[date:seconds(h:html/h:head/h:meta[@name = 'date']/@content) &gt; date:seconds($dest)]">
+				<xsl:variable name="date-skip" select="$tl:entries/tl:entry
+					[date:seconds(h:html/h:head/h:meta[@name = 'date']/@content) &gt; date:seconds($dest)]
+					[1]
+					/h:html/h:head/h:meta[@name = 'date']/@content"/>
+
+				<a rel="{$rel}">
+					<xsl:call-template name="tl:href">
+						<xsl:with-param name="date" select="concat(date:year($date-skip), '-',
+							str:align(date:month-in-year($date-skip), '00', 'right'))"/>
+					</xsl:call-template>
+
+					<xsl:value-of select="$skip"/>
+				</a>
+			</xsl:when>
+
+			<xsl:when test="$ds &lt; 0
+				and $tl:entries/tl:entry
+					[date:seconds(h:html/h:head/h:meta[@name = 'date']/@content) &lt; date:seconds($dest)]">
+				<xsl:variable name="date-skip" select="$tl:entries/tl:entry
+					[date:seconds(h:html/h:head/h:meta[@name = 'date']/@content) &lt; date:seconds($dest)]
+					[last()]
+					/h:html/h:head/h:meta[@name = 'date']/@content"/>
+
+				<a rel="{$rel}">
+					<xsl:call-template name="tl:href">
+						<xsl:with-param name="date" select="concat(date:year($date-skip), '-',
+							str:align(date:month-in-year($date-skip), '00', 'right'))"/>
+					</xsl:call-template>
+
+					<xsl:value-of select="$skip"/>
+				</a>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<xsl:value-of select="$blank"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="cal-head">
+		<xsl:param name="date"/>
+		<xsl:param name="text"/>
+
+		<xsl:choose>
+			<xsl:when test="$tl:entries/tl:entry
+				[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date)
+				and date:month-in-year(h:html/h:head/h:meta[
+					@name = 'date']/@content) = date:month-in-year($date)]">
+				<a rel="up">
+					<xsl:call-template name="tl:href">
+						<xsl:with-param name="date"
+							select="concat(date:year($date), '-',
+								str:align(date:month-in-year($date), '00', 'right'))"/>
+					</xsl:call-template>
+
+					<xsl:value-of select="$text"/>
+				</a>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<xsl:value-of select="$text"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="cal:caption">
 		<xsl:param name="date"/>
 
-		<xsl:variable name="day" select="date:day-in-month($date)"/>
+		<tr>
+			<xsl:choose>
+				<xsl:when test="$tl:month or date:day-in-month($date)">
+					<th>
+						<xsl:call-template name="cal-link">
+							<xsl:with-param name="date"  select="$date"/>
+							<xsl:with-param name="delta" select="'-P1M'"/>
+							<xsl:with-param name="rel"   select="'prev'"/>
+							<xsl:with-param name="next"  select="'&lt;'"/>
+						</xsl:call-template>
+					</th>
+					<th colspan="5">
+						<!-- XXX: no; if displaying the current month (not a day) then omit the link here -->
+						<xsl:call-template name="cal-head">
+							<xsl:with-param name="date" select="$date"/>
+							<xsl:with-param name="text" select="concat(date:month-name($date),
+								'&#160;', date:year($date))"/>
+						</xsl:call-template>
+					</th>
+					<th>
+						<xsl:call-template name="cal-link">
+							<xsl:with-param name="date"  select="$date"/>
+							<xsl:with-param name="delta" select="'P1M'"/>
+							<xsl:with-param name="rel"   select="'next'"/>
+							<xsl:with-param name="next"  select="'&gt;'"/>
+						</xsl:call-template>
+					</th>
+				</xsl:when>
+
+				<xsl:otherwise>
+					<th colspan="7">
+						<xsl:call-template name="cal-head">
+							<xsl:with-param name="date" select="$date"/>
+							<xsl:with-param name="text" select="date:month-name($date)"/>
+						</xsl:call-template>
+					</th>
+				</xsl:otherwise>
+			</xsl:choose>
+		</tr>
+	</xsl:template>
+
+	<xsl:template name="cal:content">
+		<xsl:param name="date"/>
 
 		<xsl:choose>
 			<xsl:when test="$tl:entries/tl:entry[
 					date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date)
-					and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date)
-					and date:day-in-month(h:html/h:head/h:meta[@name = 'date']/@content) = date:day-in-month($date)]">
+					and date:month-in-year(h:html/h:head/h:meta[
+						@name = 'date']/@content) = date:month-in-year($date)
+					and date:day-in-month(h:html/h:head/h:meta[
+						@name = 'date']/@content) = date:day-in-month($date)]">
 				<a>
 					<xsl:call-template name="tl:href">
-						<!-- TODO: wrong date passed in? -->
 						<xsl:with-param name="date" select="$date"/>
 					</xsl:call-template>
 
 					<xsl:attribute name="title">
 						<xsl:for-each select="$tl:entries/tl:entry[
 							date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date)
-							and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date)
-							and date:day-in-month(h:html/h:head/h:meta[@name = 'date']/@content) = date:day-in-month($date)]">
+							and date:month-in-year(h:html/h:head/h:meta[
+								@name = 'date']/@content) = date:month-in-year($date)
+							and date:day-in-month(h:html/h:head/h:meta[
+								@name = 'date']/@content) = date:day-in-month($date)]">
 							<xsl:choose>
 								<xsl:when test="h:html/h:head/h:title">
 									<xsl:value-of select="string(h:html/h:head/h:title)"/>
@@ -70,156 +210,14 @@
 						</xsl:for-each>
 					</xsl:attribute>
 
-					<xsl:value-of select="$day"/>
+					<xsl:value-of select="date:day-in-month($date)"/>
 				</a>
 			</xsl:when>
 
 			<xsl:otherwise>
-				<xsl:value-of select="$day"/>
+				<xsl:value-of select="date:day-in-month($date)"/>
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:template>
-
-	<xsl:template name="cal:caption">
-		<xsl:param name="date"/>
-
-		<xsl:variable name="year-index" select="boolean(date:day-in-week($date))"/>
-
-		<tr>
-			<xsl:choose>
-				<xsl:when test="$tl:month or $year-index">
-					<th>
-						<xsl:variable name="date-delta" select="date:add($date, '-P1M')"/>
-
-						<!-- TODO: centralise somehow -->
-						<xsl:choose>
-							<xsl:when test="$tl:entries/tl:entry[
-								date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date-delta)
-								and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date-delta)]">
-								<a rel="prev">
-									<xsl:call-template name="tl:href">
-										<xsl:with-param name="date"
-											select="concat(date:year($date-delta), '-',
-												str:align(date:month-in-year($date-delta), '00', 'right'))"/>
-									</xsl:call-template>
-
-									<xsl:text>&lt;</xsl:text>
-								</a>
-							</xsl:when>
-
-							<xsl:when test="$tl:entries/tl:entry[starts-with(date:difference($date, h:html/h:head/h:meta[@name = 'date']/@content), '-')]">
-								<a rel="prev">
-									<xsl:variable name="date-skip"
-										select="$tl:entries/tl:entry
-											[starts-with(date:difference($date, h:html/h:head/h:meta[@name = 'date']/@content), '-')]
-											[position() = last()]/h:html/h:head/h:meta[@name = 'date']/@content"/>
-
-									<!-- TODO: skip to next populated entry -->
-									<xsl:call-template name="tl:href">
-										<xsl:with-param name="date"
-											select="concat(date:year($date-skip), '-',
-												str:align(date:month-in-year($date-skip), '00', 'right'))"/>
-									</xsl:call-template>
-
-									<xsl:text>&lt;&lt;</xsl:text>
-								</a>
-							</xsl:when>
-
-							<xsl:otherwise>
-								<xsl:text>&lt;</xsl:text>
-							</xsl:otherwise>
-						</xsl:choose>
-					</th>
-					<th colspan="5">
-						<xsl:choose>
-							<xsl:when test="$year-index">
-								<a rel="up">
-									<xsl:call-template name="tl:href">
-										<xsl:with-param name="date" select="concat(date:year($date), '-',
-											str:align(date:month-in-year($date), '00', 'right'))"/>
-									</xsl:call-template>
-
-									<xsl:value-of select="date:month-name($date)"/>
-									<xsl:text> </xsl:text>
-									<xsl:value-of select="date:year($date)"/>
-								</a>
-							</xsl:when>
-
-							<xsl:otherwise>
-								<xsl:value-of select="date:month-name($date)"/>
-								<xsl:text> </xsl:text>
-								<xsl:value-of select="date:year($date)"/>
-							</xsl:otherwise>
-						</xsl:choose>
-					</th>
-					<th>
-						<xsl:variable name="date-delta" select="date:add($date, 'P1M')"/>
-
-						<xsl:choose>
-							<xsl:when test="$tl:entries/tl:entry[
-								date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date-delta)
-								and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date-delta)]">
-								<a rel="next">
-									<xsl:call-template name="tl:href">
-										<xsl:with-param name="date"
-											select="concat(date:year($date-delta), '-',
-												str:align(date:month-in-year($date-delta), '00', 'right'))"/>
-									</xsl:call-template>
-
-									<xsl:text>&gt;</xsl:text>
-								</a>
-							</xsl:when>
-
-							<xsl:when test="$tl:entries/tl:entry[starts-with(date:difference(h:html/h:head/h:meta[@name = 'date']/@content, $date), '-')]">
-								<a rel="next">
-									<xsl:variable name="date-skip"
-										select="$tl:entries/tl:entry
-											[starts-with(date:difference(h:html/h:head/h:meta[@name = 'date']/@content, $date), '-')]
-											[position() = 1]/h:html/h:head/h:meta[@name = 'date']/@content"/>
-
-									<!-- TODO: skip to next populated entry -->
-									<xsl:call-template name="tl:href">
-										<xsl:with-param name="date"
-											select="concat(date:year($date-skip), '-',
-												str:align(date:month-in-year($date-skip), '00', 'right'))"/>
-									</xsl:call-template>
-
-									<xsl:text>&gt;&gt;</xsl:text>
-								</a>
-							</xsl:when>
-
-							<xsl:otherwise>
-								<xsl:text>&gt;</xsl:text>
-							</xsl:otherwise>
-						</xsl:choose>
-					</th>
-				</xsl:when>
-
-				<xsl:otherwise>
-					<th colspan="7">
-						<xsl:choose>
-							<xsl:when test="$tl:entries/tl:entry
-								[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date)
-								and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date)]">
-								<a rel="up">
-									<xsl:call-template name="tl:href">
-										<xsl:with-param name="date"
-											select="concat(date:year($date), '-',
-												str:align(date:month-in-year($date), '00', 'right'))"/>
-									</xsl:call-template>
-
-									<xsl:value-of select="date:month-name($date)"/>
-								</a>
-							</xsl:when>
-
-							<xsl:otherwise>
-								<xsl:value-of select="date:month-name($date)"/>
-							</xsl:otherwise>
-						</xsl:choose>
-					</th>
-				</xsl:otherwise>
-			</xsl:choose>
-		</tr>
 	</xsl:template>
 
 
@@ -362,6 +360,7 @@ that's an argument to do it in a single pass and reinstate vhost.x.org/blog.xsl,
 							</xsl:attribute>
 						</xsl:if>
 
+						<!-- TODO: rel next/prev iff this is a year view -->
 						<a rel="directory">
 							<xsl:call-template name="tl:href">
 								<xsl:with-param name="date" select="$year"/>
