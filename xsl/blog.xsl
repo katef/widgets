@@ -59,11 +59,11 @@
 						'/', $short)"/>
 				</xsl:when>
 
-				<xsl:when test="date:day-in-week($date)">
+				<xsl:when test="date:day-in-month($date)">
 					<xsl:value-of select="concat($blog-base,
 						'/', date:year($date),
 						'-', str:align(date:month-in-year($date), '00', 'right'),
-						'-', str:align(date:day-in-week($date),   '00', 'right'))"/>
+						'-', str:align(date:day-in-month($date),  '00', 'right'))"/>
 				</xsl:when>
 
 				<xsl:otherwise>
