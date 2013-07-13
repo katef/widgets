@@ -96,7 +96,7 @@
 							<xsl:when test="$tl:entries/tl:entry[
 								date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date-delta)
 								and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date-delta)]">
-								<a>
+								<a rel="prev">
 									<xsl:call-template name="tl:href">
 										<xsl:with-param name="date"
 											select="concat(date:year($date-delta), '-',
@@ -108,7 +108,7 @@
 							</xsl:when>
 
 							<xsl:when test="$tl:entries/tl:entry[starts-with(date:difference($date, h:html/h:head/h:meta[@name = 'date']/@content), '-')]">
-								<a>
+								<a rel="prev">
 									<xsl:variable name="date-skip"
 										select="$tl:entries/tl:entry
 											[starts-with(date:difference($date, h:html/h:head/h:meta[@name = 'date']/@content), '-')]
@@ -133,7 +133,7 @@
 					<th colspan="5">
 						<xsl:choose>
 							<xsl:when test="$year-index">
-								<a>
+								<a rel="up">
 									<xsl:call-template name="tl:href">
 										<xsl:with-param name="date" select="concat(date:year($date), '-',
 											str:align(date:month-in-year($date), '00', 'right'))"/>
@@ -159,7 +159,7 @@
 							<xsl:when test="$tl:entries/tl:entry[
 								date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date-delta)
 								and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date-delta)]">
-								<a>
+								<a rel="next">
 									<xsl:call-template name="tl:href">
 										<xsl:with-param name="date"
 											select="concat(date:year($date-delta), '-',
@@ -171,7 +171,7 @@
 							</xsl:when>
 
 							<xsl:when test="$tl:entries/tl:entry[starts-with(date:difference(h:html/h:head/h:meta[@name = 'date']/@content, $date), '-')]">
-								<a>
+								<a rel="next">
 									<xsl:variable name="date-skip"
 										select="$tl:entries/tl:entry
 											[starts-with(date:difference(h:html/h:head/h:meta[@name = 'date']/@content, $date), '-')]
@@ -201,7 +201,7 @@
 							<xsl:when test="$tl:entries/tl:entry
 								[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date)
 								and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = date:month-in-year($date)]">
-								<a>
+								<a rel="up">
 									<xsl:call-template name="tl:href">
 										<xsl:with-param name="date"
 											select="concat(date:year($date), '-',
@@ -241,6 +241,8 @@
 				<xsl:apply-templates select="h:html/h:head/h:title"/>
 
 				<!-- TODO: this should be formatted by a particular theme. maybe output a PI here -->
+<!-- TODO: or could just apply-templates here and let a parent stylesheet (blog.xsl) override things
+that's an argument to do it in a single pass and reinstate vhost.x.org/blog.xsl, too -->
 				<span class="date">
 					<xsl:value-of select="date:day-in-month($date)"/>
 					<xsl:text>&#xA0;</xsl:text>
@@ -360,7 +362,7 @@
 							</xsl:attribute>
 						</xsl:if>
 
-						<a>
+						<a rel="directory">
 							<xsl:call-template name="tl:href">
 								<xsl:with-param name="date" select="$year"/>
 							</xsl:call-template>
