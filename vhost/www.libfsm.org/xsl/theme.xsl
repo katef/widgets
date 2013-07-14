@@ -14,21 +14,44 @@
 
 	<xsl:import href="base.xsl"/>
 	<xsl:import href="../../../xsl/theme.xsl"/>
+	<xsl:import href="../../../xsl/ordinal.xsl"/>
 <!--
 	<xsl:import href="menu.xsl"/>
 -->
 
-	<xsl:template match="h:article[@class = 'entry']/h:time">
-		<time datetime="{.}">
-			<xsl:copy-of select="@pubdate"/>
+	<xsl:template match="h:article[@class = 'entry']/h:h1">
+		<xsl:variable name="date" select="../h:time[@pubdate]"/>
 
-			<xsl:value-of select="date:day-in-month(.)"/>
+		<h1>
+			<xsl:copy-of select="text()|*"/>
+
+		<time datetime="{$date}" pubdate="pubdate">
+			<xsl:value-of select="date:day-in-month($date)"/>
+			<span class="ordinal">
+				<xsl:call-template name="ordinal">
+					<xsl:with-param name="n" select="date:day-in-month($date)"/>
+				</xsl:call-template>
+			</span>
+
 			<xsl:text>&#xA0;</xsl:text>
-			<xsl:value-of select="date:month-abbreviation(.)"/>
+
+			<xsl:variable name="mon" select="date:month-abbreviation($date)"/>
+			<xsl:choose>
+				<xsl:when test="$mon = 'Sep'">
+					<xsl:text>Sept</xsl:text>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="$mon"/>
+				</xsl:otherwise>
+			</xsl:choose>
+
 			<xsl:text>&#xA0;&#8217;</xsl:text>
-			<xsl:value-of select="substring(date:year(.), 3, 2)"/>
+			<xsl:value-of select="substring(date:year($date), 3, 2)"/>
 		</time>
+		</h1>
 	</xsl:template>
+
+	<xsl:template match="h:article[@class = 'entry']/h:time"/>
 
 	<xsl:template name="rcsid">
 		<tt class="rcsid">
@@ -45,12 +68,9 @@
 	</xsl:template>
 
 	<xsl:template name="body">
-		<div class="grid-span-6">
-			<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
-		</div>
+		<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 
-		<!-- TODO: call this 'sidebar' instead -->
-		<nav class="grid-span-2 grid-last">
+		<nav class="sidebar">
 			<!-- TODO: maybe i *do* want a @layout thingy instead... i dunno -->
 
 			<xsl:if test="h:nav[@id = 'sidebar']">
@@ -60,8 +80,11 @@
 	</xsl:template>
 
 	<xsl:template name="theme-head">
-		<link rel="stylesheet" href="{$www-css}/menu.css"/>
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Quattrocento"/>
+		<link rel="stylesheet" href="{$www-css}/header.css"/>
+		<link rel="stylesheet" href="{$www-css}/baseline.css"/>
 		<link rel="stylesheet" href="{$www-css}/style.css"/>
+		<link rel="stylesheet" href="{$www-css}/colour.css"/>
 	</xsl:template>
 
 	<!-- TODO: use nav, footer etc for html5 -->
@@ -69,48 +92,46 @@
 		we should only have one .xsl file which knows about blueprint layout (i.e. layout.xsl) -->
 	<!-- TODO: breadcrums navigation; is it neccessary? -->
 	<xsl:template name="theme-content">
-		<header class="page-section inverted">
-			<h1 class="title">Kate&#x2019;s&#xa0;Lexer&#xa0;Generator
+		<header>
+			<h1>Kate&#x2019;s&#xa0;Lexer&#xa0;Generator</h1>
 
-			<span class="tagline">(<span class="amp">&amp;</span>&#xa0;friends)</span></h1>
-		</header>
-
-		<nav class="menu grid-container">
-			<!-- TODO: or: degrade to non-SVG menu inside the <svg> element? -->
-			<!-- TODO: consider looking at the Accept: header to decide to degrade to non-SVG here -->
+			<nav>
+				<!-- TODO: or: degrade to non-SVG menu inside the <svg> element? -->
+				<!-- TODO: consider looking at the Accept: header to decide to degrade to non-SVG here -->
 <!-- XXX:
-			<xsl:call-template name="menu"/>
+				<xsl:call-template name="menu"/>
 -->
 
-			<menu class="grid-span-2 grid-last">
-				<li>
-					<a id="menu-fsm" href="{$libfsm.url.www}/libfsm">
-						<span class="title">libfsm</span>
-						<span class="desc">Static analysis of Finite Automata</span>
-					</a>
-				</li>
+				<menu>
+					<li>
+						<a id="menu-fsm" href="{$libfsm.url.www}/libfsm">
+							<span class="title">libfsm</span>
+							<span class="desc">Static analysis of Finite Automata</span>
+						</a>
+					</li>
 
-				<li>
-					<a id="menu-re" href="{$libfsm.url.www}/libre">
-						<span class="title">libre</span>
-						<span class="desc">Compiling Regular Expressions to DFA</span>
-					</a>
-				</li>
+					<li>
+						<a id="menu-re" href="{$libfsm.url.www}/libre">
+							<span class="title">libre</span>
+							<span class="desc">Compiling Regular Expressions to DFA</span>
+						</a>
+					</li>
 
-				<li>
-					<a id="menu-lx" href="{$libfsm.url.www}/lx">
-						<span class="title">lx</span>
-						<span class="desc">Lexer generator</span>
-					</a>
-				</li>
-			</menu>
-		</nav>
+					<li>
+						<a id="menu-lx" href="{$libfsm.url.www}/lx">
+							<span class="title">lx</span>
+							<span class="desc">Lexer generator</span>
+						</a>
+					</li>
+				</menu>
+			</nav>
+		</header>
 
-		<section class="page-section normal grid-container">
+		<section>
 			<xsl:call-template name="body"/>
 		</section>
 
-		<footer class="page-section inverted">
+		<footer>
 			<xsl:call-template name="rcsid"/>
 		</footer>
 	</xsl:template>
