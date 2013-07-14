@@ -5,14 +5,30 @@
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:svg="http://www.w3.org/2000/svg"
+	xmlns:tl="http://xml.elide.org/timeline"
+	xmlns:date="http://exslt.org/dates-and-times"
 
-	exclude-result-prefixes="h">
+	extension-element-prefixes="date"
+
+	exclude-result-prefixes="h tl date">
 
 	<xsl:import href="base.xsl"/>
 	<xsl:import href="../../../xsl/theme.xsl"/>
 <!--
 	<xsl:import href="menu.xsl"/>
 -->
+
+	<xsl:template match="h:article[@class = 'entry']/h:time">
+		<time datetime="{.}">
+			<xsl:copy-of select="@pubdate"/>
+
+			<xsl:value-of select="date:day-in-month(.)"/>
+			<xsl:text>&#xA0;</xsl:text>
+			<xsl:value-of select="date:month-abbreviation(.)"/>
+			<xsl:text>&#xA0;&#8217;</xsl:text>
+			<xsl:value-of select="substring(date:year(.), 3, 2)"/>
+		</time>
+	</xsl:template>
 
 	<xsl:template name="rcsid">
 		<tt class="rcsid">
@@ -90,9 +106,9 @@
 			</menu>
 		</nav>
 
-		<article class="page-section normal grid-container">
+		<section class="page-section normal grid-container">
 			<xsl:call-template name="body"/>
-		</article>
+		</section>
 
 		<footer class="page-section inverted">
 			<xsl:call-template name="rcsid"/>
