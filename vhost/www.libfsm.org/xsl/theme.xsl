@@ -9,29 +9,10 @@
 	exclude-result-prefixes="h">
 
 	<xsl:import href="base.xsl"/>
-	<xsl:import href="../../../xsl/output.xsl"/>
+	<xsl:import href="../../../xsl/theme.xsl"/>
+<!--
 	<xsl:import href="menu.xsl"/>
-
-	<!-- TODO: i really dislike using xsl:output here.
-		i want mod_kxslt to provide some way i can use common:document instead,
-		and then keep outputting centralised for both standalone user documentation and the website -->
-	<!-- TODO: have kxslt:header() output the appropriate content-type for html5 (text/html),
-		which lets the source stay as .xhtml -->
-	<!-- TODO: centralise output.xsl along with all my other web stuff... keep it generic -->
-	<!-- TODO: kxslt:getheader() to do content negotiation and degrade to text/html with no SVG,
-		if the browser doesn't accept application/xml+html -->
-	<!-- XXX:
-		doctype-public="HTML"
-		doctype-system="TODO"
-	-->
-	<xsl:output
-		method="xml"
-		encoding="utf-8"
-		indent="yes"
-		omit-xml-declaration="yes"
-		cdata-section-elements="script"
-		media-type="application/xhtml+xml"
-		standalone="yes"/>
+-->
 
 	<xsl:template name="rcsid">
 		<tt class="rcsid">
@@ -47,22 +28,9 @@
 		</tt>
 	</xsl:template>
 
-	<xsl:template match="processing-instruction()">
-		<xsl:message terminate="yes">
-			<xsl:text>Unhandled PI: </xsl:text>
-			<xsl:value-of select="name()"/>
-		</xsl:message>
-	</xsl:template>
-
-	<xsl:template match="@*|node()">
-		<xsl:copy>
-			<xsl:apply-templates select="@*|node()|processing-instruction()"/>
-		</xsl:copy>
-	</xsl:template>
-
 	<xsl:template name="body">
 		<div class="grid-span-6">
-			<xsl:apply-templates select="h:body/node()|h:body/processing-instruction()"/>
+			<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 		</div>
 
 		<!-- TODO: call this 'sidebar' instead -->
@@ -75,33 +43,16 @@
 		</nav>
 	</xsl:template>
 
-	<xsl:template name="static-head">
-		<xsl:for-each select="h:head/h:link[@rel = 'stylesheet']">
-			<xsl:copy-of select="."/>
-		</xsl:for-each>
-
-		<xsl:for-each select="h:head/h:script">
-			<script>
-				<xsl:copy-of select="attribute::*[not(name() = 'src')]"/>
-
-				<xsl:choose>
-					<xsl:when test="not(@src)">
-						<xsl:copy-of select="node()|text()|processing-instruction()"/>
-					</xsl:when>
-
-					<xsl:otherwise>
-						<xsl:copy-of select="@src"/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</script>
-		</xsl:for-each>
+	<xsl:template name="theme-head">
+		<link rel="stylesheet" href="{$www-css}/menu.css"/>
+		<link rel="stylesheet" href="{$www-css}/style.css"/>
 	</xsl:template>
 
 	<!-- TODO: use nav, footer etc for html5 -->
 	<!-- TODO: centralise all this, for both static and non-static website pages. call it layout.xsl.
 		we should only have one .xsl file which knows about blueprint layout (i.e. layout.xsl) -->
 	<!-- TODO: breadcrums navigation; is it neccessary? -->
-	<xsl:template name="static-content">
+	<xsl:template name="theme-content">
 		<header class="page-section inverted">
 			<h1 class="title">Kate&#x2019;s&#xa0;Lexer&#xa0;Generator
 
@@ -146,40 +97,6 @@
 		<footer class="page-section inverted">
 			<xsl:call-template name="rcsid"/>
 		</footer>
-	</xsl:template>
-
-	<!-- TODO: make sure xml:output stuff matches that for output.xsl -->
-	<xsl:template match="/h:html">
-		<!-- XXX: hack until libxslt supports html 5 -->
-<!-- XXX:
-		<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
--->
-
-		<xsl:call-template name="output-content">
-			<xsl:with-param name="method" select="'xhtml5'"/>
-
-			<xsl:with-param name="css" select="concat(
-				' ', $libfsm.url.www, '/css/menu.css',
-				' ', $libfsm.url.www, '/css/style.css')"/>
-
-<!-- TODO: obsoleted
-			<xsl:with-param name="css" select="concat(
-					' ', $libfsm.url.www, '/css/webpage.css',
-					' ', $libfsm.url.www, '/css/menu.css')"/>
--->
-
-			<xsl:with-param name="title">
-				<xsl:apply-templates select="h:head/h:title"/>
-			</xsl:with-param>
-
-			<xsl:with-param name="content.head">
-				<xsl:call-template name="static-head"/>
-			</xsl:with-param>
-
-			<xsl:with-param name="content.body">
-				<xsl:call-template name="static-content"/>
-			</xsl:with-param>
-		</xsl:call-template>
 	</xsl:template>
 
 </xsl:stylesheet>

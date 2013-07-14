@@ -9,17 +9,13 @@
 
 	exclude-result-prefixes="h c e">
 
-	<xsl:param name="www-base"/>
+	<xsl:import href="../../../xsl/theme.xsl"/>
+
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
 	<xsl:param name="uri"/>
 
-	<xsl:output indent="yes" method="xml" encoding="utf-8"
-		media-type="application/xhtml+xml"
-
-		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"/>
-
+	<!-- TODO: rename contents to toc -->
 	<c:contents>
 		<c:category href="http://blog.elide.org/"         name="Blog"/>
 		<c:category href="http://www.elide.org/snippets/" name="Snippets"/>
@@ -53,25 +49,6 @@
 		<xsl:apply-templates select="h:head/h:title"/>
 	</xsl:template>
 
-	<!-- TODO: rename contents to toc -->
-	<xsl:template name="e:title-header">
-		<xsl:call-template name="e:title-head"/>
-	</xsl:template>
-
-	<xsl:template name="e:title-head">
-		<xsl:text>Kate&#8217;s&#160;Amazing </xsl:text>
-		<xsl:call-template name="e:category-title"/>
-
-		<xsl:variable name="subpage">
-			<xsl:call-template name="e:subpage-title"/>
-		</xsl:variable>
-
-		<xsl:if test="$subpage">
-			<xsl:text> &#8212; </xsl:text>
-			<xsl:copy-of select="$subpage"/>
-		</xsl:if>
-	</xsl:template>
-
 	<xsl:template name="e:page-head">
 		<xsl:copy-of select="h:head/*"/>
 	</xsl:template>
@@ -80,7 +57,7 @@
 	</xsl:template>
 
 	<xsl:template name="e:page-body">
-		<xsl:copy-of select="h:body/*|h:body/text()"/>
+		<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 	</xsl:template>
 
 	<xsl:template name="e:page-footer">
@@ -97,7 +74,26 @@
 		</tt>
 	</xsl:template>
 
-	<xsl:template name="e:page" match="/h:html">
+	<xsl:template name="theme-title">
+		<xsl:text>Kate&#8217;s&#160;Amazing </xsl:text>
+		<xsl:call-template name="e:category-title"/>
+
+		<xsl:variable name="subpage">
+			<xsl:call-template name="e:subpage-title"/>
+		</xsl:variable>
+
+		<xsl:if test="$subpage">
+			<xsl:text> &#8212; </xsl:text>
+			<xsl:copy-of select="$subpage"/>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template name="theme-head">
+		<link rel="stylesheet" href="{$www-css}/elide.css"/>
+		<link rel="stylesheet" href="{$www-css}/listing.css"/>
+	</xsl:template>
+
+	<xsl:template name="theme-content">
 
 		<!--
 			This is an entry point for various sources (e.g. blog XML) to produce
@@ -106,40 +102,21 @@
 			e:-named templates which can be overridden.
 		-->
 
-		<html>
-			<head>
-				<title>
-					<xsl:call-template name="e:title-head"/>
-				</title>
-
-				<link rel="stylesheet" href="{$www-css}/elide.css"/>
-				<link rel="stylesheet" href="{$www-css}/listing.css"/>
-
-				<xsl:call-template name="e:page-head"/>
-			</head>
-
 <!-- XXX: no h:body/@onload here; provide a template and use xsl:attribute -->
-			<body>
-				<xsl:attribute name="onload">
-					<xsl:text>Linenumbers.init(document.documentElement);</xsl:text>
-					<xsl:call-template name="e:page-onload"/>
-				</xsl:attribute>
 
-				<h1 id="title">
-					<xsl:call-template name="e:title-header"/>
-				</h1>
+		<h1 id="title">
+			<xsl:call-template name="theme-title"/>
+		</h1>
 
-				<xsl:call-template name="e:contents"/>
+		<xsl:call-template name="e:contents"/>
 
-				<xsl:call-template name="e:page-body"/>
+		<xsl:call-template name="e:page-body"/>
 
-				<hr class="footer"/>
+		<hr class="footer"/>
 
-				<p>
-					<xsl:call-template name="e:page-footer"/>
-				</p>
-			</body>
-		</html>
+		<p>
+			<xsl:call-template name="e:page-footer"/>
+		</p>
 	</xsl:template>
 
 </xsl:stylesheet>
