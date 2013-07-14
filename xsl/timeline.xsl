@@ -360,8 +360,27 @@ that's an argument to do it in a single pass and reinstate vhost.x.org/blog.xsl,
 							</xsl:attribute>
 						</xsl:if>
 
-						<!-- TODO: rel next/prev iff this is a year view -->
-						<a rel="directory">
+						<a>
+							<xsl:choose>
+								<xsl:when test="$tl:month and $tl:year = $year">
+									<xsl:attribute name="rel">
+										<xsl:text>directory</xsl:text>
+									</xsl:attribute>
+								</xsl:when>
+
+								<xsl:when test="not($tl:month) and $tl:year = $year - 1">
+									<xsl:attribute name="rel">
+										<xsl:text>prev</xsl:text>
+									</xsl:attribute>
+								</xsl:when>
+
+								<xsl:when test="not($tl:month) and $tl:year = $year + 1">
+									<xsl:attribute name="rel">
+										<xsl:text>next</xsl:text>
+									</xsl:attribute>
+								</xsl:when>
+							</xsl:choose>
+
 							<xsl:call-template name="tl:href">
 								<xsl:with-param name="date" select="$year"/>
 							</xsl:call-template>
