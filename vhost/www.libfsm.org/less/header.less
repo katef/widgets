@@ -1,0 +1,21 @@
+/* $Id$ */
+
+@import "theme.less";
+
+header,
+footer {
+	background-color: #555;
+	color: #aaa;
+}
+
+header h1 {
+	color: #eee;
+	text-align: left;
+}
+
+header h1:after {
+	content: " (&\0000a0friends)";
+	font-size: (@grid-baseline * 1.0);
+	color: #aaa;
+}
+

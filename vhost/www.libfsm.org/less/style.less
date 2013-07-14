@@ -1,0 +1,39 @@
+/* $Id$ */
+
+@import "theme.less";
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body, p, dd {
+	text-align: justify;
+}
+
+h1, th { 
+	font-weight: normal;
+}
+
+em {
+	font-weight: bold;
+	font-style:  normal;
+}
+
+abbr[title],
+acronym[title] {
+        border-bottom: dotted 1px #888;
+}
+
+article.entry h1 time[pubdate] {
+	color: #ccc;
+	padding-left: 0.5em;
+	margin-left:  0.5em;
+	border-left:  solid 1px #ddd;
+	font-size:    (@grid-baseline * 0.9);
+}
+
+article.entry h1 time[pubdate] span.ordinal {
+	font-size:    (@grid-baseline * 0.8);
+}
+
