@@ -232,23 +232,16 @@
 	<xsl:template match="tl:entry">
 		<xsl:variable name="date" select="h:html/h:head/h:meta[@name = 'date']/@content"/>
 
-		<section class="entry">
+		<article class="entry">
 			<a name="{concat(date:year($date), '-', date:month-in-year($date), '-', date:day-in-month($date))}"/>
 
-			<h2>
+			<h1>
 				<xsl:apply-templates select="h:html/h:head/h:title"/>
+			</h1>
 
-				<!-- TODO: this should be formatted by a particular theme. maybe output a PI here -->
-<!-- TODO: or could just apply-templates here and let a parent stylesheet (blog.xsl) override things
-that's an argument to do it in a single pass and reinstate vhost.x.org/blog.xsl, too -->
-				<span class="date">
-					<xsl:value-of select="date:day-in-month($date)"/>
-					<xsl:text>&#xA0;</xsl:text>
-					<xsl:value-of select="date:month-abbreviation($date)"/>
-					<xsl:text>&#xA0;&#8217;</xsl:text>
-					<xsl:value-of select="substring(date:year($date), 3, 2)"/>
-				</span>
-			</h2>
+			<time pubdate="pubdate">
+				<xsl:value-of select="$date"/>
+			</time>
 
 			<xsl:apply-templates select="h:html"/>
 
@@ -274,7 +267,7 @@ that's an argument to do it in a single pass and reinstate vhost.x.org/blog.xsl,
 					<xsl:apply-templates select="tl:comments" mode="summary"/>
 				</xsl:otherwise>
 			</xsl:choose>
-		</section>
+		</article>
 	</xsl:template>
 
 	<xsl:template name="tl:year-view">
@@ -385,7 +378,9 @@ that's an argument to do it in a single pass and reinstate vhost.x.org/blog.xsl,
 								<xsl:with-param name="date" select="$year"/>
 							</xsl:call-template>
 		
-							<xsl:value-of select="$year"/>
+							<time>
+								<xsl:value-of select="$year"/>
+							</time>
 						</a>
 					</li>
 				</xsl:if>
