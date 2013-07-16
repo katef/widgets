@@ -48,6 +48,22 @@
 	</xsl:template>
 
 	<!--
+		Override this to customise (or omit) day headings.
+	-->
+	<xsl:template name="cal:day-heading">
+		<tr class="day-heading">
+			<!-- TODO: exslt abbr-name() -->
+			<th abbr="Sunday">   <xsl:text>Su</xsl:text></th>
+			<th abbr="Monday">   <xsl:text>Mo</xsl:text></th>
+			<th abbr="Tuesday">  <xsl:text>Tu</xsl:text></th>
+			<th abbr="Wednesday"><xsl:text>We</xsl:text></th>
+			<th abbr="Thursday"> <xsl:text>Th</xsl:text></th>
+			<th abbr="Friday">   <xsl:text>Fr</xsl:text></th>
+			<th abbr="Saturday"> <xsl:text>Sa</xsl:text></th>
+		</tr>
+	</xsl:template>
+
+	<!--
 		Entry point
 	-->
 	<xsl:template name="cal:calendar">
@@ -58,16 +74,7 @@
 				<xsl:with-param name="date" select="$date"/>
 			</xsl:call-template>
 
-			<tr>
-				<!-- TODO: exslt abbr-name() -->
-				<th abbr="Sunday">   <xsl:text>Su</xsl:text></th>
-				<th abbr="Monday">   <xsl:text>Mo</xsl:text></th>
-				<th abbr="Tuesday">  <xsl:text>Tu</xsl:text></th>
-				<th abbr="Wednesday"><xsl:text>We</xsl:text></th>
-				<th abbr="Thursday"> <xsl:text>Th</xsl:text></th>
-				<th abbr="Friday">   <xsl:text>Fr</xsl:text></th>
-				<th abbr="Saturday"> <xsl:text>Sa</xsl:text></th>
-			</tr>
+			<xsl:call-template name="cal:day-heading"/>
 
 			<xsl:call-template name="cal:week">
 				<xsl:with-param name="date" select="$date"/>
@@ -189,7 +196,9 @@
 			</xsl:when>
 			<xsl:otherwise>
 				<td>
-					<xsl:if test="concat(substring($date, 1, 7), '-', str:align($day, '00', 'right')) = date:date()">
+					<xsl:if test="date:year(date:date())    = date:year($date)
+						and date:month-in-year(date:date()) = date:month-in-year($date)
+						and date:day-in-month(date:date())  = $day">
 						<xsl:attribute name="class">
 							<xsl:text>today</xsl:text>
 						</xsl:attribute>
