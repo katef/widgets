@@ -114,12 +114,7 @@
 
 	<xsl:template match="processing-instruction('blog-calendar')">
 		<xsl:call-template name="tl:calendar"/>
-
-		<hr/>
-
-		<ol class="years">
-			<xsl:call-template name="tl:years"/>
-		</ol>
+		<xsl:call-template name="tl:years"/>
 	</xsl:template>
 
 	<xsl:template match="processing-instruction('blog-body')">
