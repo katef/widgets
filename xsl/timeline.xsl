@@ -135,7 +135,7 @@
 		<tr>
 			<xsl:choose>
 				<xsl:when test="$tl:month or date:day-in-month($date)">
-					<th>
+					<th class="prev">
 						<xsl:call-template name="cal-link">
 							<xsl:with-param name="date"  select="$date"/>
 							<xsl:with-param name="delta" select="'-P1M'"/>
@@ -143,7 +143,7 @@
 							<xsl:with-param name="next"  select="'&lt;'"/>
 						</xsl:call-template>
 					</th>
-					<th colspan="5">
+					<th class="month" colspan="5">
 						<!-- XXX: no; if displaying the current month (not a day) then omit the link here -->
 						<xsl:call-template name="cal-head">
 							<xsl:with-param name="date" select="$date"/>
@@ -151,7 +151,7 @@
 								'&#160;', date:year($date))"/>
 						</xsl:call-template>
 					</th>
-					<th>
+					<th class="next">
 						<xsl:call-template name="cal-link">
 							<xsl:with-param name="date"  select="$date"/>
 							<xsl:with-param name="delta" select="'P1M'"/>
@@ -236,12 +236,26 @@
 			<a name="{concat(date:year($date), '-', date:month-in-year($date), '-', date:day-in-month($date))}"/>
 
 			<h1>
-				<xsl:apply-templates select="h:html/h:head/h:title"/>
+				<a>
+					<xsl:call-template name="tl:href">
+						<xsl:with-param name="date"  select="$date"/>
+						<xsl:with-param name="short" select="@short"/>
+					</xsl:call-template>
+
+					<xsl:apply-templates select="h:html/h:head/h:title"/>
+				</a>
 			</h1>
 
 			<time pubdate="pubdate">
 				<xsl:value-of select="$date"/>
 			</time>
+
+<!-- TODO: placeholder for tags
+			<ul class="tags">
+				<li><a href="#TODO"><xsl:text>cheese</xsl:text></a></li>
+				<li><a href="#TODO"><xsl:text>fish</xsl:text></a></li>
+			</ul>
+-->
 
 			<xsl:apply-templates select="h:html"/>
 
