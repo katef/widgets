@@ -4,6 +4,7 @@
 
 body {
 	font-family: Quattrocento, serif;
+	word-spacing: -1px;
 
 	font-size:   @grid-basefont;
 	line-height: @grid-baseline;
@@ -11,21 +12,42 @@ body {
 
 header h1 { 
 	margin: 0;
-	margin-bottom: (@grid-baseline * 0.5); 
-	font-size:     (@grid-baseline * 1.5); 
-	line-height:   (@grid-baseline * 2.0);
+	padding-bottom: (@grid-baseline * 0.5); 
+	font-size:      (@grid-baseline * 1.5); 
+	line-height:    (@grid-baseline * 2.0);
+}
+
+footer {
+	padding-top:    (@grid-baseline * 1.0);
+	padding-bottom: (@grid-baseline * 2.0);
 }
 
 article h1 { 
 	margin: 0;
-	margin-bottom: (@grid-baseline * 1.0); 
-	margin-top:    (@grid-baseline * 1.0); 
+	margin-bottom: (@grid-baseline * 0.5); 
+	margin-top:    (@grid-baseline * 2.0); 
 	font-size:     (@grid-baseline * 1.3); 
-	line-height:   (@grid-baseline * 2.0);
+	line-height:   (@grid-baseline * 1.5);
 }
 
 p {
 	margin: 0;
 	margin-bottom: (@grid-baseline * 1.0);
+}
+
+table td {
+	padding: 0;
+}
+
+hr {
+	border: none;
+	height: 1px;
+	margin:  0;
+	padding: 0;
+	margin-bottom: (@grid-baseline - 1px);
+}
+
+nav.sidebar {
+	font-size:   (@grid-basefont - 1px);
 }
 
