@@ -25,33 +25,38 @@
 		<h1>
 			<xsl:copy-of select="text()|*"/>
 
-		<time datetime="{$date}" pubdate="pubdate">
-			<xsl:value-of select="date:day-in-month($date)"/>
-			<span class="ordinal">
-				<xsl:call-template name="ordinal">
-					<xsl:with-param name="n" select="date:day-in-month($date)"/>
-				</xsl:call-template>
-			</span>
+			<time datetime="{$date}" pubdate="pubdate">
+				<xsl:value-of select="date:day-in-month($date)"/>
+				<span class="ordinal">
+					<xsl:call-template name="ordinal">
+						<xsl:with-param name="n" select="date:day-in-month($date)"/>
+					</xsl:call-template>
+				</span>
 
-			<xsl:text>&#xA0;</xsl:text>
+				<xsl:text>&#xA0;</xsl:text>
 
-			<xsl:variable name="mon" select="date:month-abbreviation($date)"/>
-			<xsl:choose>
-				<xsl:when test="$mon = 'Sep'">
-					<xsl:text>Sept</xsl:text>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:value-of select="$mon"/>
-				</xsl:otherwise>
-			</xsl:choose>
+				<xsl:variable name="mon" select="date:month-abbreviation($date)"/>
+				<xsl:choose>
+					<xsl:when test="$mon = 'Sep'">
+						<xsl:text>Sept</xsl:text>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="$mon"/>
+					</xsl:otherwise>
+				</xsl:choose>
 
-			<xsl:text>&#xA0;&#8217;</xsl:text>
-			<xsl:value-of select="substring(date:year($date), 3, 2)"/>
-		</time>
+				<xsl:text>&#xA0;&#8217;</xsl:text>
+				<xsl:value-of select="substring(date:year($date), 3, 2)"/>
+			</time>
 		</h1>
 	</xsl:template>
 
 	<xsl:template match="h:article[@class = 'entry']/h:time"/>
+
+	<!-- TMI? -->
+<!--
+	<xsl:template match="h:table[@class = 'calendar']/h:tr[@class = 'day-heading']"/>
+-->
 
 	<xsl:template name="rcsid">
 		<tt class="rcsid">
@@ -82,8 +87,11 @@
 	<xsl:template name="theme-head">
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Quattrocento"/>
 		<link rel="stylesheet" href="{$www-css}/header.css"/>
+		<link rel="stylesheet" href="{$www-css}/menu.css"/>
 		<link rel="stylesheet" href="{$www-css}/baseline.css"/>
+		<link rel="stylesheet" href="{$www-css}/grid.css"/>
 		<link rel="stylesheet" href="{$www-css}/style.css"/>
+		<link rel="stylesheet" href="{$www-css}/screen.css"/>
 		<link rel="stylesheet" href="{$www-css}/colour.css"/>
 	</xsl:template>
 
@@ -94,13 +102,16 @@
 	<xsl:template name="theme-content">
 		<header>
 			<h1>Kate&#x2019;s&#xa0;Lexer&#xa0;Generator</h1>
+		</header>
 
-			<nav>
+		<section class="page">
+			<nav class="menu">
 				<!-- TODO: or: degrade to non-SVG menu inside the <svg> element? -->
 				<!-- TODO: consider looking at the Accept: header to decide to degrade to non-SVG here -->
 <!-- XXX:
 				<xsl:call-template name="menu"/>
 -->
+				<span>menu stuff here</span>
 
 				<menu>
 					<li>
@@ -125,9 +136,7 @@
 					</li>
 				</menu>
 			</nav>
-		</header>
 
-		<section>
 			<xsl:call-template name="body"/>
 		</section>
 
