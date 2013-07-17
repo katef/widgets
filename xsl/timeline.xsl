@@ -5,13 +5,14 @@
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:date="http://exslt.org/dates-and-times"
+	xmlns:func="http://exslt.org/functions"
 	xmlns:str="http://exslt.org/strings"
 	xmlns:cal="http://xml.elide.org/calendar"
 	xmlns:tl="http://xml.elide.org/timeline"
 
-	extension-element-prefixes="date str"
+	extension-element-prefixes="date func str"
 
-	exclude-result-prefixes="h date str tl cal">
+	exclude-result-prefixes="h date func str tl cal">
 
 	<!--
 		TODO: pass in option for whether to permit comments or not? could even show commit messages as a comment
@@ -34,6 +35,12 @@
 	<xsl:param name="tl:day"     select="date:day-in-month($tl:date)"/>
 	<xsl:param name="tl:short"   select="false()"/>
 
+	<func:function name="tl:pubdate">
+		<xsl:param name="entry"/>
+
+		<func:result select="$entry/h:html/h:head/h:meta[@name = 'date']/@content"/>
+	</func:function>
+
 	<xsl:template name="cal-link">
 		<xsl:param name="date"/>
 		<xsl:param name="delta"/>
@@ -47,8 +54,8 @@
 
 		<xsl:choose>
 			<xsl:when test="$tl:entries/tl:entry
-				[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($dest)
-					and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content)
+				[date:year(tl:pubdate(.)) = date:year($dest)
+					and date:month-in-year(tl:pubdate(.))
 						= date:month-in-year($dest)]">
 
 				<a rel="{$rel}">
@@ -63,11 +70,10 @@
 
 			<xsl:when test="$ds &gt; 0
 				and $tl:entries/tl:entry
-					[date:seconds(h:html/h:head/h:meta[@name = 'date']/@content) &gt; date:seconds($dest)]">
-				<xsl:variable name="date-skip" select="$tl:entries/tl:entry
-					[date:seconds(h:html/h:head/h:meta[@name = 'date']/@content) &gt; date:seconds($dest)]
-					[1]
-					/h:html/h:head/h:meta[@name = 'date']/@content"/>
+					[date:seconds(tl:pubdate(.)) &gt; date:seconds($dest)]">
+				<xsl:variable name="date-skip" select="tl:pubdate($tl:entries/tl:entry
+					[date:seconds(tl:pubdate(.)) &gt; date:seconds($dest)]
+					[1])"/>
 
 				<a rel="{$rel}">
 					<xsl:call-template name="tl:href">
@@ -81,11 +87,10 @@
 
 			<xsl:when test="$ds &lt; 0
 				and $tl:entries/tl:entry
-					[date:seconds(h:html/h:head/h:meta[@name = 'date']/@content) &lt; date:seconds($dest)]">
-				<xsl:variable name="date-skip" select="$tl:entries/tl:entry
-					[date:seconds(h:html/h:head/h:meta[@name = 'date']/@content) &lt; date:seconds($dest)]
-					[last()]
-					/h:html/h:head/h:meta[@name = 'date']/@content"/>
+					[date:seconds(tl:pubdate(.)) &lt; date:seconds($dest)]">
+				<xsl:variable name="date-skip" select="tl:pubdate($tl:entries/tl:entry
+					[date:seconds(tl:pubdate(.)) &lt; date:seconds($dest)]
+					[last()])"/>
 
 				<a rel="{$rel}">
 					<xsl:call-template name="tl:href">
@@ -109,9 +114,8 @@
 
 		<xsl:choose>
 			<xsl:when test="$tl:entries/tl:entry
-				[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date)
-				and date:month-in-year(h:html/h:head/h:meta[
-					@name = 'date']/@content) = date:month-in-year($date)]">
+				[date:year(tl:pubdate(.)) = date:year($date)
+				and date:month-in-year(tl:pubdate(.)) = date:month-in-year($date)]">
 				<a rel="up">
 					<xsl:call-template name="tl:href">
 						<xsl:with-param name="date"
@@ -178,11 +182,9 @@
 
 		<xsl:choose>
 			<xsl:when test="$tl:entries/tl:entry[
-					date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date)
-					and date:month-in-year(h:html/h:head/h:meta[
-						@name = 'date']/@content) = date:month-in-year($date)
-					and date:day-in-month(h:html/h:head/h:meta[
-						@name = 'date']/@content) = date:day-in-month($date)]">
+					date:year(tl:pubdate(.)) = date:year($date)
+					and date:month-in-year(tl:pubdate(.)) = date:month-in-year($date)
+					and date:day-in-month(tl:pubdate(.)) = date:day-in-month($date)]">
 				<a>
 					<xsl:call-template name="tl:href">
 						<xsl:with-param name="date" select="$date"/>
@@ -190,11 +192,9 @@
 
 					<xsl:attribute name="title">
 						<xsl:for-each select="$tl:entries/tl:entry[
-							date:year(h:html/h:head/h:meta[@name = 'date']/@content) = date:year($date)
-							and date:month-in-year(h:html/h:head/h:meta[
-								@name = 'date']/@content) = date:month-in-year($date)
-							and date:day-in-month(h:html/h:head/h:meta[
-								@name = 'date']/@content) = date:day-in-month($date)]">
+							date:year(tl:pubdate(.)) = date:year($date)
+							and date:month-in-year(tl:pubdate(.)) = date:month-in-year($date)
+							and date:day-in-month(tl:pubdate(.)) = date:day-in-month($date)]">
 							<xsl:choose>
 								<xsl:when test="h:html/h:head/h:title">
 									<xsl:value-of select="string(h:html/h:head/h:title)"/>
@@ -230,7 +230,7 @@
 	</xsl:template>
 
 	<xsl:template match="tl:entry">
-		<xsl:variable name="date" select="h:html/h:head/h:meta[@name = 'date']/@content"/>
+		<xsl:variable name="date" select="tl:pubdate(.)"/>
 
 		<article class="entry">
 			<a name="{concat(date:year($date), '-', date:month-in-year($date), '-', date:day-in-month($date))}"/>
@@ -359,7 +359,7 @@
 		
 				<xsl:variable name="year" select="date:year(.)"/>
 		
-				<xsl:if test="not(../../../../preceding-sibling::tl:entry[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = $year])">
+				<xsl:if test="not(../../../../preceding-sibling::tl:entry[date:year(tl:pubdate(.)) = $year])">
 					<li>
 						<xsl:if test="$tl:year = $year">
 							<xsl:attribute name="class">
@@ -413,19 +413,19 @@
 				<xsl:variable name="dummy3" select="kxslt:setheader('Expires',       '-1')"/>
 -->
 
-				<xsl:apply-templates select="$tl:entries/tl:entry[date:date($tl:date) = date:date(h:html/h:head/h:meta[@name = 'date']/@content)
+				<xsl:apply-templates select="$tl:entries/tl:entry[date:date($tl:date) = date:date(tl:pubdate(.))
 					and $tl:short = @short]"/>
 			</xsl:when>
 
 			<xsl:when test="$tl:day">
-				<xsl:apply-templates select="$tl:entries/tl:entry[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = $tl:year
-					and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = $tl:month
-					and date:day-in-month(h:html/h:head/h:meta[@name = 'date']/@content)  = $tl:day]"/>
+				<xsl:apply-templates select="$tl:entries/tl:entry[date:year(tl:pubdate(.)) = $tl:year
+					and date:month-in-year(tl:pubdate(.)) = $tl:month
+					and date:day-in-month(tl:pubdate(.))  = $tl:day]"/>
 			</xsl:when>
 
 			<xsl:when test="$tl:month">
-				<xsl:apply-templates select="$tl:entries/tl:entry[date:year(h:html/h:head/h:meta[@name = 'date']/@content) = $tl:year
-					and date:month-in-year(h:html/h:head/h:meta[@name = 'date']/@content) = $tl:month]"/>
+				<xsl:apply-templates select="$tl:entries/tl:entry[date:year(tl:pubdate(.)) = $tl:year
+					and date:month-in-year(tl:pubdate(.)) = $tl:month]"/>
 			</xsl:when>
 
 			<xsl:when test="$tl:year">
