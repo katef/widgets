@@ -24,6 +24,7 @@
 		 XXX: clicking on a day goes to the wrong #
 	-->
 
+	<xsl:import href="date.xsl"/>
 	<xsl:import href="calendar.xsl"/>
 	<xsl:import href="comment.xsl"/>
 
@@ -181,20 +182,14 @@
 		<xsl:param name="date"/>
 
 		<xsl:choose>
-			<xsl:when test="$tl:entries/tl:entry[
-					date:year(tl:pubdate(.)) = date:year($date)
-					and date:month-in-year(tl:pubdate(.)) = date:month-in-year($date)
-					and date:day-in-month(tl:pubdate(.)) = date:day-in-month($date)]">
+			<xsl:when test="$tl:entries/tl:entry[date:same-day(tl:pubdate(.), $date)]">
 				<a>
 					<xsl:call-template name="tl:href">
 						<xsl:with-param name="date" select="$date"/>
 					</xsl:call-template>
 
 					<xsl:attribute name="title">
-						<xsl:for-each select="$tl:entries/tl:entry[
-							date:year(tl:pubdate(.)) = date:year($date)
-							and date:month-in-year(tl:pubdate(.)) = date:month-in-year($date)
-							and date:day-in-month(tl:pubdate(.)) = date:day-in-month($date)]">
+						<xsl:for-each select="$tl:entries/tl:entry[date:same-day(tl:pubdate(.), $date)]">
 							<xsl:choose>
 								<xsl:when test="h:html/h:head/h:title">
 									<xsl:value-of select="string(h:html/h:head/h:title)"/>
@@ -418,9 +413,7 @@
 			</xsl:when>
 
 			<xsl:when test="$tl:day">
-				<xsl:apply-templates select="$tl:entries/tl:entry[date:year(tl:pubdate(.)) = $tl:year
-					and date:month-in-year(tl:pubdate(.)) = $tl:month
-					and date:day-in-month(tl:pubdate(.))  = $tl:day]"/>
+				<xsl:apply-templates select="$tl:entries/tl:entry[date:same-day(tl:pubdate(.), $tl:date)]"/>
 			</xsl:when>
 
 			<xsl:when test="$tl:month">
