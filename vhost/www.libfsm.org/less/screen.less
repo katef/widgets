@@ -1,0 +1,66 @@
+/* $Id$ */
+
+@import "theme.less";
+
+@media only screen and (min-width: @full-min) {
+
+	header,
+	section.page,
+	footer {
+/*
+		margin-left:  (@grid-width * 0.5);
+		margin-right: (@grid-width * 0.5);
+*/
+		width: 100%;
+		max-width: 1100px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	header {
+		margin-top:    (@grid-baseline * 3.0);
+		margin-bottom: (@grid-baseline * 1.0);
+		background-color: transparent ! important;
+		padding-left:  0;
+	}
+
+	footer {
+		padding-top:    (@grid-baseline * 1.0);
+		padding-bottom: (@grid-baseline * 4.0);
+		background-color: transparent ! important;
+	}
+
+	section.page {
+		-moz-box-shadow:    0px 0px 15px 5px #444;
+		-webkit-box-shadow: 0px 0px 15px 5px #444;
+		box-shadow:         0px 0px 15px 5px #444;
+	}
+
+	article.entry {
+		width:       (@grid-width * 4);
+		margin-left: (@grid-width * 1);
+	}
+
+	article.entry {
+		position: relative;
+	}
+
+	article.entry ul.tags {
+		position: absolute;
+		top: (@grid-baseline * 0.5); /* optical alignment to line-centered <h1> */
+		float: left;
+		left: (-@grid-width * 1);
+		width: (@grid-width * 1);
+	}
+
+	article.entry ul.tags li {
+		display: block;
+	}
+
+	nav.sidebar {
+		font-size: @grid-basefont;
+	        width:    (@grid-width * 2);
+	}
+
+}
+
