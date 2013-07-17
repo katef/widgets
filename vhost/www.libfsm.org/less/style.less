@@ -11,7 +11,17 @@ body, p, dd {
 	text-align: justify;
 }
 
-h1, th { 
+h1 { 
+	font-weight: normal;
+	text-align: left ! important;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+th {
 	font-weight: normal;
 }
 
@@ -35,5 +45,49 @@ article.entry h1 time[pubdate] {
 
 article.entry h1 time[pubdate] span.ordinal {
 	font-size:    (@grid-baseline * 0.8);
+}
+
+nav.sidebar table.calendar,
+nav.sidebar ol.years {
+	margin-left: 1em;
+	width: 90%;
+}
+
+nav.sidebar table.calendar a {
+	display: block;
+	padding:  2ex  3ex;
+	margin:  -2ex -3ex;
+}
+
+nav.sidebar ol.years li {
+	padding:  2ex  1em;
+}
+
+nav.sidebar ol.years li a {
+	display: block;
+	padding:  2ex  1em;
+	margin:  -2ex -1em;
+}
+
+nav.sidebar table.calendar td,
+nav.sidebar table.calendar th {
+	padding:  2ex  3ex;
+}
+
+article.entry ul.tags {
+	margin: 0;
+	position: relative;
+	top:           (-@grid-baseline * 0.5);
+	margin-bottom: (-@grid-baseline * 0.0);
+}
+
+article.entry ul.tags li {
+	display: inline;
+	margin: 0;
+}
+
+article.entry ul.tags li a {
+	margin: 0;
+	margin-right: 1ex;
 }
 
