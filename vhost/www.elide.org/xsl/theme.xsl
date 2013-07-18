@@ -41,6 +41,22 @@
 		</ul>
 	</xsl:template>
 
+	<xsl:template match="h:article[@class = 'entry']/h:h1/h:a">
+		<xsl:copy-of select="*|text()"/>
+	</xsl:template>
+
+	<xsl:template match="h:article/h:a[@name]"/>
+
+	<xsl:template match="h:article/h:time[@pubdate]">
+		<a href="{$blog-base}/{.}">
+			<xsl:copy-of select="../h:a[@name]/@*"/>
+<!--
+			<xsl:copy-of select="../h:h1/h:a/@href, '/'"/>
+-->
+			<xsl:copy-of select="."/>
+		</a>
+	</xsl:template>
+
 	<xsl:template name="e:category-title">
 		<xsl:text>Website</xsl:text>
 	</xsl:template>
@@ -89,8 +105,14 @@
 	</xsl:template>
 
 	<xsl:template name="theme-head">
-		<link rel="stylesheet" href="{$www-css}/elide.css"/>
-		<link rel="stylesheet" href="{$www-css}/listing.css"/>
+		<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,700' rel='stylesheet' type='text/css'/>
+
+		<link rel="stylesheet" href="{$www-css}/debug.css"/>
+		<link rel="stylesheet" href="{$www-css}/baseline.css"/>
+		<link rel="stylesheet" href="{$www-css}/grid.css"/>
+		<link rel="stylesheet" href="{$www-css}/screen.css"/>
+		<link rel="stylesheet" href="{$www-css}/style.css"/>
+		<link rel="stylesheet" href="{$www-css}/colour.css"/>
 	</xsl:template>
 
 	<xsl:template name="theme-content">
@@ -104,19 +126,21 @@
 
 <!-- XXX: no h:body/@onload here; provide a template and use xsl:attribute -->
 
-		<h1 id="title">
-			<xsl:call-template name="theme-title"/>
-		</h1>
+		<header>
+			<h1>
+				<xsl:call-template name="theme-title"/>
+			</h1>
 
-		<xsl:call-template name="e:contents"/>
+			<xsl:call-template name="e:contents"/>
+		</header>
 
-		<xsl:call-template name="e:page-body"/>
+		<section class="page">
+			<xsl:call-template name="e:page-body"/>
+		</section>
 
-		<hr class="footer"/>
-
-		<p>
+		<footer>
 			<xsl:call-template name="e:page-footer"/>
-		</p>
+		</footer>
 	</xsl:template>
 
 </xsl:stylesheet>
