@@ -29,8 +29,6 @@ ol.overlay#cols li:after {
 	right:    0;
 	bottom:   0;
 	left:     0;
-	padding:  0;
-	margin:   0;
 
 	width:    auto;
 	height:   auto;
@@ -39,6 +37,9 @@ ol.overlay#cols li:after {
 ol.overlay {
 	display:  none;
 	position: absolute;
+
+	margin:  0;
+	padding: 0 @gutter-page;
 
 	zoom: 1;
 	filter: alpha(opacity=30);
@@ -51,7 +52,6 @@ ol.overlay#cols {
 	border-right: dotted 1px;
 	margin-right: -1px;
 	margin-left: -(@gutter-cols);
-	padding: 0 @gutter-page;
 }
 
 ol.overlay#cols li {
@@ -70,6 +70,9 @@ ol.overlay#cols li {
 ol.overlay#cols li:after {
 	content: '\0000A0';
 	background-color: pink;
+
+	padding:  0;
+	margin:   0;
 
 	display: block;
 	position: absolute;
