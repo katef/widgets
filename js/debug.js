@@ -72,15 +72,16 @@ document.onkeyup = function (e) {
 	}
 
 	/* 71 is 'g' */
-	if (e.altKey && e.shiftKey && e.keyCode == 71) {
+	if (e.altKey && e.keyCode == 71) {
 		var html;
 
 		html = document.body.parentNode;
 
-		if (hasclass(html, 'debug-grid')) {
-			removeclass(html, 'debug-grid');
+/* TODO: store state in cookie */
+		if (hasclass(html, 'debug')) {
+			removeclass(html, 'debug');
 		} else {
-			addclass(html, 'debug-grid');
+			addclass(html, 'debug');
 		}
 	}
 }
