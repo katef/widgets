@@ -1,0 +1,94 @@
+/* $Id$ */
+
+@import "theme.less";
+
+/*
+ * Layout looks like so:
+ *
+ *   ├────────────── Browser window width ───────────────┤
+ *   ╎    ├────────── 100% of "page" width ─────────┤    ╎
+ *   │             ├─┤ @gutter-cols                      │
+ *   │    ▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒    │
+ *   │    ▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒    │
+ *   │    ▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒    │
+ *   │    ▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒    │
+ *   │    ├──────────┤ @grid-width includes @gutter-cols │
+ *   │    ├───────┤ automatic column width               │
+ *
+ * All variables may be either percentage or fixed widths.
+ *
+ *   @grid-width     Width of a column and its gutter, relative to "page". E.g. (100% / 6)
+ *   @grid-baseline  Line height of rows. E.g. 18px
+ *   @gutter-cols    Gutter width between columns. E.g. 18px;
+ *   @gutter-page    Gutter to the right and left of the page. E.g. (@gutter-cols * 2)
+ */
+
+ol.overlay,
+ol.overlay#cols li:after {
+	top:      0;
+	right:    0;
+	bottom:   0;
+	left:     0;
+	padding:  0;
+	margin:   0;
+
+	width:    auto;
+	height:   auto;
+}
+
+ol.overlay {
+	display:  none;
+	position: absolute;
+
+	zoom: 1;
+	filter: alpha(opacity=30);
+	opacity: 0.3;
+
+	pointer-events: none;
+}
+
+ol.overlay#cols {
+	border-right: dotted 1px;
+	margin-right: -1px;
+	padding: 0 @gutter-page;
+}
+
+ol.overlay#cols li {
+	display:  block;
+	position: relative;
+
+	margin:   0;
+	padding:  0;
+	width:    @grid-width;
+	height:   auto;
+
+	float:      left;
+	min-height: 100%;
+}
+
+ol.overlay#cols li:after {
+	content: '\0000A0';
+	background-color: pink;
+
+	display: block;
+	position: absolute;
+
+	margin-left: @gutter-cols;
+}
+
+ol.overlay#cols li:first-child:after {
+	margin-left: 0;
+}
+
+ol.overlay#rows li {
+	display:  block;
+
+	margin:   0;
+	padding:  0;
+	width:    auto;
+	height:   @grid-baseline;
+
+	border-bottom: solid 1px #bbb;
+	margin-bottom: -1px;
+}
+
