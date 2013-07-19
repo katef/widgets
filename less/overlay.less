@@ -50,6 +50,7 @@ ol.overlay {
 ol.overlay#cols {
 	border-right: dotted 1px;
 	margin-right: -1px;
+	margin-left: -(@gutter-cols);
 	padding: 0 @gutter-page;
 }
 
@@ -74,10 +75,6 @@ ol.overlay#cols li:after {
 	position: absolute;
 
 	margin-left: @gutter-cols;
-}
-
-ol.overlay#cols li:first-child:after {
-	margin-left: 0;
 }
 
 ol.overlay#rows li {
