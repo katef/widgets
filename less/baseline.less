@@ -3,6 +3,7 @@
 body {
 	font-size:   @grid-basefont;
 	line-height: @grid-baseline;
+	text-rendering: optimizeLegibility; 
 }
 
 footer {
@@ -18,10 +19,10 @@ table, td, th {
 }
 
 h1 { 
-	padding-bottom: (@grid-baseline * 0.5); 
-	padding-top:    (@grid-baseline * 1.0); 
-	font-size:      (@grid-baseline * 1.3); 
-	line-height:    (@grid-baseline * 1.5);
+	padding-bottom: floor(@grid-baseline * 0.5); 
+	padding-top:    ceil( @grid-baseline * 1.0); 
+	font-size:      ceil( @grid-baseline * 1.3); 
+	line-height:    round(@grid-baseline * 1.5);
 }
 
 p {
