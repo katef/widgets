@@ -9,15 +9,6 @@
 		<meta name="keywords"    content="TODO"/>
 		<meta name="rcsid"       content="$Id: index.xhtml$"/>
 
-		<link rel="stylesheet" href="blog.css"/>
-
-		<!-- TODO: either have blog.less include these, or website.xsl do it for us -->
-		<link rel="stylesheet" href="http://www.libfsm.org/css/dot.css"/>
-		<link rel="stylesheet" href="http://www.libfsm.org/css/valid.css"/>
-		<link rel="stylesheet" href="http://www.libfsm.org/css/comment.css"/>
-		<link rel="stylesheet" href="http://www.libfsm.org/css/calendar.css"/>
-		<link rel="stylesheet" href="http://www.libfsm.org/css/timeline.css"/>
-
 		<!-- TODO: js for blog posts etc -->
 		<!-- TODO: centralise with theme.xsl's js stuff... maybe cat all .js files together, analogue to lesscss -->
 		<script src="http://www.libfsm.org/js/ajax.js"/>
