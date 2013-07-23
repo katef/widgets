@@ -1,1 +1,1 @@
-../../../../trunk/share/js/col.js
+../../../wc/libfsm-share/js/col.js

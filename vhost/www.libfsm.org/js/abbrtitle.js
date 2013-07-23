@@ -1,1 +1,1 @@
-../../../../trunk/share/js/abbrtitle.js
+../../../wc/libfsm-share/js/abbrtitle.js
