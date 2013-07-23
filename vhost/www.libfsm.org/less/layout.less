@@ -1,0 +1,41 @@
+/* $Id$ */
+
+body section.page {
+	padding: @grid-baseline 1em;
+
+	.grid-container;
+}
+
+body section.page nav.menu {
+	margin-top:   -@grid-baseline;
+	margin-left:  -1em;
+	margin-right: -1em;
+	margin-bottom: 0;
+}
+
+article.entry {
+/* TODO:
+	width:       (@grid-width * 5);
+	margin-left: (@grid-width * 0);
+*/
+}
+
+article.entry p {
+	/* XXX: hackish; this is for a gutter */
+	margin-right: 1em;
+}
+
+body section.page {
+	position: relative;
+}
+
+nav.sidebar {
+	font-size:   (@grid-basefont - 1px);
+	top:      (@grid-baseline * 7);
+/* TODO:
+	width:    (@grid-width    * 3);
+*/
+	right:    1em;
+	position: absolute;
+}
+

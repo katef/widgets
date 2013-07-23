@@ -1,0 +1,91 @@
+/* $Id$ */
+
+@import "tags.less";
+@import "colour.less";
+
+@import "grid.less";
+@import "baseline.less";
+@import "calendar.less";
+@import "blog.less";
+@import "layout.less";
+@import "widgets.less";
+@import "screen.less";
+
+@import "theme.less";
+
+body {
+	font-family: 'Maven Pro', 'sans serif';
+	word-spacing: -1px;
+}
+
+tt, code, pre {
+	font-family: 'Ubuntu Mono', 'monospace';
+}
+
+body {
+	/* optimiseLegibility actually looks worse for Maven Pro. "Pro" indeed... */
+	text-rendering: geometricPrecision;
+}
+
+h1 {
+	font-weight: normal;
+	text-align: left;
+	text-rendering: optimizeLegibility;
+}
+
+body, td {
+	text-align: justify;
+}
+
+body, th {
+	font-weight: normal;
+}
+
+header ul#contents {
+	list-style-type: none;
+}
+
+header ul#contents li {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+nav#sidebar ol.years {
+	list-style-type: none;
+}
+
+nav#sidebar ol.years li {
+	display: block;
+}
+
+article.entry h1 {
+	display: none;
+}
+
+article.entry ul.tags {
+	display: none;
+}
+
+nav#monthindex > a {
+	float: right;
+}
+
+nav#monthindex ol.pages > li:first-child > time:before,
+nav#monthindex ol.pages > li:first-child > a:before {
+/*
+	content: "\2190\00a0";
+	padding-right: 1ex;
+*/
+	content: "<\00a0";
+}
+
+nav#monthindex ol.pages > li:last-child > time:after,
+nav#monthindex ol.pages > li:last-child > a:after {
+/*
+	content: "\00a0\2192";
+	content: "\00a0>>";
+	padding-left: 1ex;
+*/
+	content: "\00a0>";
+}
+

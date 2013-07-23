@@ -1,0 +1,77 @@
+/* $Id$ */
+
+@full-half: @full-min * 0.5;
+
+/* TODO: define these in em */
+
+@media only screen and (max-width: @full-half) {
+	section.page article.entry,
+	nav#monthindex {
+		margin-left: 0;
+	}
+
+	article.entry a[name],
+	article.entry ul.tags {
+		margin-left: 0;
+		display: block;
+		position: relative;
+		text-align: left;
+	}
+
+
+	header h1 {
+		line-height: (@grid-baseline * 1.5);
+		font-size:   (@grid-baseline * 1.2);
+	}
+
+	nav#sidebar table.calendar {
+		margin: 0;
+		width: 100%;
+		max-width: 100%;
+	}
+
+	nav#monthindex ol.pages li.group li {
+		display: none;
+	}
+
+	nav#monthindex ol.pages li.group li:first-child,
+	nav#monthindex ol.pages li.group li:last-child {
+		display: inline;
+	}
+
+	nav#monthindex ol.pages li.group li:first-child > time:after,
+	nav#monthindex ol.pages li.group li:first-child a:after {
+		content: "\00a0" attr(data-month);
+	}
+
+	nav#monthindex ol.pages li.group li:last-child > time:before,
+	nav#monthindex ol.pages li.group li:last-child a:before {
+		content: attr(data-month) "\00a0";
+	}
+
+}
+
+@media only screen and (min-width: @full-min) {
+
+	nav#sidebar {
+/* XXX:
+		display: block;
+*/
+		position: absolute;
+		top: (@grid-baseline * 6);
+	}
+
+	nav.pages {
+		display: block;
+	}
+
+	nav#sidebar ol.years {
+		display: block;
+	}
+
+	section.page article.entry, nav#pages, nav#monthindex {
+		max-width: (@grid-baseline * 35);
+	}
+
+}
+
