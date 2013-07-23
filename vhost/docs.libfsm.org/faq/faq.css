@@ -1,0 +1,41 @@
+/* $Id$ */
+
+dl.faq dt:before {
+	content: "Q.\A0\A0";
+}
+
+dl.faq dd:before {
+	content: "A.\A0\A0";
+}
+
+dl.faq dt:before,
+dl.faq dd:before {
+	display: inline-block;
+	width: 120px;
+	margin-left: -120px;
+	text-align: right;
+	float: left;
+}
+
+dl.faq dt {
+	clear: left;
+	font-weight: normal;
+}
+
+dl.faq dt {
+	margin-bottom: 18px;
+}
+
+dl.faq dd {
+	margin-bottom: 36px;
+}
+
+h2.faq {
+	margin-left: 100px;
+}
+
+dl.faq dt,
+dl.faq dd {
+	margin-left: 120px;
+}
+
