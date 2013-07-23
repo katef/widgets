@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html [
+	<!ENTITY Sigma "&#x03A3;">
+	<!ENTITY isin  "&#x2208;">
+	<!ENTITY cup   "&#8746;">
+	<!ENTITY sdot  "&#8901;">
+]>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Bibliography</title>
+
+		<meta name="description" content="TODO"/>
+		<meta name="keywords"    content="TODO"/>
+		<meta name="rcsid"       content="$Id: index.xhtml$"/>
+
+		<link rel="stylesheet" href="../docs.css"/>
+		<link rel="stylesheet" href="bibliography.css"/>
+	</head>
+
+	<nav id="sidebar">
+<!-- TODO: xinclude these; centralise for all docs -->
+		<h2>Manpages</h2>
+
+		<table class="manpages">
+			<col align="left"/>
+			<col align="left"/>
+
+			<tbody>
+				<tr>
+					<td><a href="http://man.libfsm.org/fsm.1/">fsm(1)</a></td>
+					<td>Finite Automata <abbr>CLI</abbr></td>
+				</tr>
+				<tr>
+					<td><a href="http://man.libfsm.org/re.1/">re(1)</a></td>
+					<td>Regular Expressions <abbr>CLI</abbr></td>
+				</tr>
+				<tr>
+					<td><a href="http://man.libfsm.org/lx.1/">lx(1)</a></td>
+					<td>Lexer generator <abbr>CLI</abbr></td>
+				</tr>
+
+				<tr>
+					<td><a href="http://libfsm.org/libre.3/">libre(3)</a></td>
+					<td>libre <abbr>API</abbr> reference</td>
+				</tr>
+				<tr>
+					<td><a href="http://libfsm.org/libfsm.3/">libfsm(3)</a></td>
+					<td>libfsm <abbr>API</abbr> reference</td>
+				</tr>
+				<tr>
+					<td><a href="http://libfsm.org/lx.3/">lx(3)</a></td>
+					<td>lx generated <abbr>API</abbr> reference</td>
+				</tr>
+
+				<tr>
+					<td><a href="http://libfsm.org/fsm.5/">fsm(5)</a></td>
+					<td>fsm file format</td>
+				</tr>
+				<tr>
+					<td><a href="http://libfsm.org/re.5/">re(5)</a></td>
+					<td>libre regexp dialects</td>
+				</tr>
+				<tr>
+					<td><a href="http://libfsm.org/lx.5/">lx(5)</a></td>
+					<td>lx specification language</td>
+				</tr>
+			</tbody>
+		</table>
+	</nav>
+
+	<body>
+		<h2>Bibliography</h2>
+
+		<p>Academic papers:</p>
+
+		<dl class="bibliography">
+			<dt>[CKP02]</dt>
+			<dd>J.-M. Champarnaud, A. Khorsi, and T. Paranthoën
+				 "<a href="http://www.stringology.org/cgi-bin/getfile.cgi?t=pdf&amp;c=-&amp;y=2002&amp;n=11">Split and join for minimizing: Brzozowski's algorithm</a>"
+				In M. Balık and M. Simanek, editors, Proc. of PSC'02,
+					Report DC-2002-03, pages 96–104. Czech Technical University of Prague, 2002.</dd>
+
+			<dt>[Wat95]</dt>
+			<dd>B.W. Watson. "Taxonomies and toolkit of regular languages algortihms"
+				PhD thesis, Eindhoven Univ. of Tec., 1995.</dd>
+
+			<dt>[Wat94]</dt>
+			<dd>B.W. Watson, "<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.55.8900&amp;rep=rep1&amp;type=pdf">A taxonomy of finite automata minimization</a>", 1994.</dd>
+
+			<dt>[Hop71]</dt>
+			<dd>J. Hopcroft. "An n log n algorithm for minimizing states in a finite automaton".
+				In Proc. Inter. Symp. on the Theory of Machines and Computations, pages 189–196, Haifa, Israel, 1971. AP.</dd>
+
+			<dt>[Brz63]</dt>
+			<dd>J.A. Brzozowski. "Canonical regular expressions and minimal state graphs for definite events"
+				In J. Fox, editor, Proc. of the Sym. on Mathematical Theory of Automata,
+				vol. 12 of MRI Symposia Series, pages 529–561, NY, 1963.
+				Polytechnic Press of the Polytechnic Institute of Brooklyn.</dd>
+
+			<dt>[Tho68]</dt>
+			<dd>K. Thompson, "Regular Expression search Algorithm"
+				Communications of the ACM, vol. 11, Num 6, 1968, pp. 419-422.</dd>
+
+			<dt>[Brü93]</dt>
+			<dd>A. Brüggermann-Klein, "<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.36.7792&amp;rep=rep1&amp;type=pdf">Regular Expressions into Finite Automata</a>"
+				Theoretical Computer Science, vol. 120, 1993, pp. 87-98.</dd>
+
+			<dt>[BC07]</dt>
+			<dd>M.-P. Béal and M. Crochemore, "<a href="http://igm.univ-mlv.fr/~beal/Recherche/Publications/aftIEEE.pdf">Minimizing local automata</a>" Information Theory, ISIT 2007. IEEE International Symposium on, 2007, pp. 1376-1380.</dd>
+		</dl>
+
+		<p>And books:</p>
+
+		<dl class="bibliography">
+			<dt>[ASU86]</dt>
+			<dd>A.V. Aho, R. Sethi, and J. D. Ullman.
+				"<a href="http://www.amazon.co.uk/Compilers-Principles-Techniques-Alfred-Aho/dp/0321486811">Compilers: Principles, Techniques and Tools</a>".
+				Addison Wesley, 1986. (Colloquially known as "The dragon book").</dd>
+
+			<dt>[App04]</dt>
+			<dd>A.W. Appel, "<a href="http://www.amazon.co.uk/Modern-Compiler-Implementation-Andrew-Appel/dp/0521607655/ref=sr_1_3?ie=UTF8&amp;s=books&amp;qid=1221917432&amp;sr=1-3">Modern Compiler Implementation in C</a>".
+				Cambridge University Press, 2004. (Colloquially known as "The tiger book").</dd>
+		</dl>
+	</body>
+</html>
+
