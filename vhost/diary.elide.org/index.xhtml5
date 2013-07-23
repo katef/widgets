@@ -8,13 +8,6 @@
 		<meta name="keywords"    content="TODO"/>
 		<meta name="rcsid"       content="$Id: index.xhtml$"/>
 
-		<!-- TODO: js for blog posts etc -->
-		<!-- TODO: centralise with webpage.xsl's js stuff... maybe cat all .js files together, analogue to lesscss -->
-		<script src="http://www.libfsm.org/js/ajax.js"/>
-		<script src="http://www.libfsm.org/js/valid.js"/>
-		<script src="http://www.libfsm.org/js/comment.js"/>
-		<script src="http://www.libfsm.org/js/template.js"/>
-
 		<!-- TODO: xinclude these; keep centralised somewhere (as comment.xhtml5?)
 			also would prefer them to be optional... -->
 		<script type="text/template" id="tmpl:preview">
