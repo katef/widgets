@@ -84,17 +84,27 @@
 		</nav>
 	</xsl:template>
 
+	<xsl:variable name="theme-css" select="concat(
+		'style.css ',
+		'debug.css')"/>
+
+	<xsl:variable name="theme-fonts" select="concat(
+		'Quattrocento')"/>
+
+	<xsl:variable name="theme-js">
+		<xsl:value-of select="concat(
+			'style.js ',
+			'overlay.js ')"/>
+
+		<!-- TODO: only where relevant -->
+		<xsl:value-of select="concat(
+			'ajax.js ',
+			'valid.js ',
+			'comment.js ',
+			'template.js')"/>
+	</xsl:variable>
+
 	<xsl:template name="theme-head">
-		<!-- TODO: pass to output-content as $fonts -->
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Quattrocento"/>
-
-		<!-- TODO: pass to output-content as $css -->
-		<link rel="stylesheet" href="{$www-css}/debug.css"/>
-		<link rel="stylesheet" href="{$www-css}/style.css"/>
-
-		<!-- TODO: pass to output-content as $js -->
-		<script type="text/javascript" src="{$www-js}/debug.js"></script>
-		<script type="text/javascript" src="{$www-js}/overlay.js"></script>
 	</xsl:template>
 
 	<!-- TODO: use nav, footer etc for html5 -->

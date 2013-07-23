@@ -109,7 +109,8 @@
 		<xsl:param name="title"/>
 		<xsl:param name="method"       select="'xml'"/>
 		<xsl:param name="css"          select="''"/>
-		<xsl:param name="js"           select="''"/>
+		<xsl:param name="fonts"        select="''"/>
+		<xsl:param name="js"           select="/.."/>
 		<xsl:param name="content.head" select="/.."/>
 		<xsl:param name="content.body" select="/.."/>
 
@@ -121,26 +122,18 @@
 				</title>
 
 				<!-- TODO: maybe a node set is better, after all -->
-				<xsl:for-each select="str:tokenize(concat(
-					' ', $www-css, 'grid.css',
-					' ', $www-css, '/typography.css',
-					' ', 'http://fonts.googleapis.com/css?family=Quattrocento',
-					' ', $css))">
-					<link rel="stylesheet" type="text/css" media="screen" href="{.}"/>
+				<xsl:for-each select="str:tokenize($css)">
+					<link rel="stylesheet" type="text/css" media="screen" href="{$www-css}/{.}"/>
 				</xsl:for-each>
 
-<!-- TODO: linenumbers only for docbook and wiki pages? -->
-<!-- TODO:
-				<xsl:for-each select="str:tokenize(concat(
-					' ', $www-js, '/debug.js',
-					' ', $www-js, '/linenumbers.js',
-					' ', $www-js, '/table.js',
-					' ', $www-js, '/col.js',
-					' ', $www-js, '/javascript-xpath-cmp.js',
-					' ', $js))">
-					<script type="text/javascript" src="{.}"></script>
+				<xsl:for-each select="str:tokenize($fonts)">
+					<xsl:variable name="google" select="'http://fonts.googleapis.com/css'"/>
+					<link rel="stylesheet" type="text/css" href="{$google}?family={.}"/>
 				</xsl:for-each>
--->
+
+				<xsl:for-each select="str:tokenize($js)">
+					<script type="text/javascript" src="{$www-js}/{.}"></script>
+				</xsl:for-each>
 
 				<!-- TODO: meta headers for prev/next links -->
 

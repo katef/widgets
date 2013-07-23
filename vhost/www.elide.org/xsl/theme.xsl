@@ -3,6 +3,7 @@
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:common="http://exslt.org/common"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:c="http://xml.elide.org/elide_contents"
 	xmlns:e="http://xml.elide.org/elide_website"
@@ -109,18 +110,28 @@
 		</xsl:if>
 	</xsl:template>
 
+	<xsl:variable name="theme-css" select="concat(
+		'style.css ',
+		'debug.css ')"/>
+
+	<xsl:variable name="theme-fonts" select="concat(
+		'Maven+Pro:400,700 ',
+		'Ubuntu+Mono')"/>
+
+	<xsl:variable name="theme-js">
+		<xsl:value-of select="concat(
+			'debug.js ',
+			'overlay.js ')"/>
+
+		<!-- TODO: only where relevant -->
+		<xsl:value-of select="concat(
+			'ajax.js ',
+			'valid.js ',
+			'comment.js ',
+			'template.js')"/>
+	</xsl:variable>
+
 	<xsl:template name="theme-head">
-		<!-- TODO: pass to output-content as $fonts -->
-		<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,700' rel='stylesheet' type='text/css'/>
-		<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
-
-		<!-- TODO: pass to output-content as $css -->
-		<link rel="stylesheet" href="{$www-css}/debug.css"/>
-		<link rel="stylesheet" href="{$www-css}/style.css"/>
-
-		<!-- TODO: pass to output-content as $js -->
-		<script type="text/javascript" src="{$www-js}/debug.js"></script>
-		<script type="text/javascript" src="{$www-js}/overlay.js"></script>
 	</xsl:template>
 
 	<xsl:template name="theme-content">

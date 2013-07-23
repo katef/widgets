@@ -3,9 +3,12 @@
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:common="http://exslt.org/common"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 
-	exclude-result-prefixes="h">
+	extension-element-prefixes="common"
+
+	exclude-result-prefixes="h common">
 
 	<xsl:import href="copy.xsl"/>
 	<xsl:import href="output.xsl"/>
@@ -44,11 +47,9 @@
 		<xsl:call-template name="output-content">
 			<xsl:with-param name="method" select="'xhtml5'"/>
 
-<!-- XXX:
-			<xsl:with-param name="css" select="concat(
-				' ', $www-css, '/menu.css',
-				' ', $www-css, '/style.css')"/>
--->
+			<xsl:with-param name="css"   select="$theme-css"/>
+			<xsl:with-param name="fonts" select="$theme-fonts"/>
+			<xsl:with-param name="js"    select="$theme-js"/>
 
 			<xsl:with-param name="title">
 				<xsl:call-template name="theme-title"/>
