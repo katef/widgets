@@ -8,14 +8,14 @@
 	xmlns:gv="http://xml.libfsm.org/gv"
 	xmlns:xlink="http://www.w3.org/1999/xlink">
 
-	<xsl:import href="../../../xsl/dot.xsl"/>
+	<xsl:import href="dot.xsl"/>
 
 	<xsl:namespace-alias stylesheet-prefix="xsl2" result-prefix="xsl"/>
 
 	<xsl:output indent="yes" cdata-section-elements="script"/>
 
 	<xsl:template match="/">
-		<!-- This is generated so that webpage.xsl can call-template it to include svg inline.
+		<!-- This is generated so that theme.xsl can call-template it to include svg inline.
 			(the SVG needs to be inline so that it has the same DOM document, and therefore permits relocating) -->
 		<xsl2:stylesheet version="1.0"
 			xmlns="http://www.w3.org/2000/svg"
@@ -28,8 +28,8 @@
 		</xsl2:stylesheet>
 	</xsl:template>
 
-	<xsl:template name="braces">
-		<g transform="translate(-5 110)" class="help">
+	<xsl:template name="brace-learn">
+		<g transform="translate(30 -60)" class="help wide">
 			<!-- TODO: is there a nice way to <def> and <use> this where each brace has a different width? -->
 			<path
 				d=" M 50,10
@@ -42,25 +42,37 @@
 				<xsl:text>Learn about it</xsl:text>
 			</text>
 		</g>
+	</xsl:template>
 
-		<g transform="translate(75 110)" class="help">
+	<xsl:template name="brace-use">
+		<g transform="translate(500 -60)" class="help wide">
 			<path
-				d=" M 310,10
-				    C 310,15.5 315,21.25 320.25,21.25
-				    L 422,21.25
-				    C 427.25,21.25 432.5,27 432.5,32 432.5,27 437.25,21.25 443,21.25
-				    L 544.75,21.25
-				    C 550,21.25 555.25,15.5 555.25,10"/>
-			<text text-anchor="middle" x="432.5" y="47">
+				d=" M 10,10
+				    C 10,15.5 15,21.25 20.25,21.25
+				    L 122,21.25
+				    C 127.25,21.25 132.5,27 132.5,32 132.5,27 137.25,21.25 143,21.25
+				    L 244.75,21.25
+				    C 250,21.25 255.25,15.5 255.25,10"/>
+			<text text-anchor="middle" x="132.5" y="47">
 				<xsl:text>Use it</xsl:text>
 			</text>
 		</g>
 	</xsl:template>
 
-	<xsl:template match="svg:svg">
-		<xsl:copy>
-			<xsl:apply-templates select="@*"/>
+	<xsl:template match="svg:g[@class = 'edge'][svg:title = 'fsm-&gt;lx']">
+		<g class="wide">
+			<xsl:apply-imports/>
+		</g>
+	</xsl:template>
 
+	<xsl:template match="svg:g[@class = 'node'][svg:title = 'lx']">
+		<g class="wide">
+			<xsl:apply-imports/>
+		</g>
+	</xsl:template>
+
+	<xsl:template match="svg:svg">
+<!-- TODO:
 			<xsl:attribute name="onload">
 				<xsl:value-of select="'Menu.restore();'"/>
 			</xsl:attribute>
@@ -69,15 +81,45 @@
 				<xsl:value-of select="'Menu.save();'"/>
 			</xsl:attribute>
 
-			<!-- XXX: grid concepts for webpage.xsl only -->
 			<xsl:attribute name="class">
-				<xsl:text>dot menu grid-span-6</xsl:text>
+				<xsl:text>dot</xsl:text>
 			</xsl:attribute>
+-->
 
-			<xsl:apply-templates select="node()"/>
 
-			<xsl:call-template name="braces"/>
-		</xsl:copy>
+		<xsl:call-template name="dot-defs"/>
+
+
+<!-- TODO: nest with preserveAspectRatio differently for each node and arrowhead? -->
+
+		<svg id="learn" class="dot" viewBox="0 -180 470 190" preserveAspectRatio="none">
+			<xsl:apply-templates select=".//svg:g[svg:title = 'start']"/>
+
+			<xsl:apply-templates select=".//svg:g[svg:title = '0']"/>
+			<xsl:apply-templates select=".//svg:g[svg:title = '1']"/>
+			<xsl:apply-templates select=".//svg:g[svg:title = '2']"/>
+			<xsl:apply-templates select=".//svg:g[svg:title = '3']"/>
+			<xsl:apply-templates select=".//svg:g[svg:title = '4']"/>
+
+			<xsl:call-template name="brace-learn"/>
+		</svg>
+
+		<svg id="use" class="dot" viewBox="440 -180 420 190" preserveAspectRatio="none">
+			<xsl:apply-templates select=".//svg:g[svg:title = '5']"/>
+			<xsl:apply-templates select=".//svg:g[svg:title = '6']"/>
+			<xsl:apply-templates select=".//svg:g[svg:title = '7']"/>
+			<xsl:apply-templates select=".//svg:g[svg:title = '8']"/>
+			<xsl:apply-templates select=".//svg:g[svg:title = '9']"/>
+
+			<xsl:apply-templates select=".//svg:g[svg:title = 'fsm']"/>
+			<xsl:apply-templates select=".//svg:g[svg:title = 're']"/>
+			<xsl:apply-templates select=".//svg:g[svg:title = 'lx']"/>
+
+			<xsl:call-template name="brace-use"/>
+		</svg>
+
+		<svg id="braces" class="narrow">
+		</svg>
 	</xsl:template>
 
 	<!-- TODO: maybe do this in css instead? -->
