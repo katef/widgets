@@ -85,14 +85,16 @@
 	</xsl:template>
 
 	<xsl:template name="theme-head">
+		<!-- TODO: pass to output-content as $fonts -->
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Quattrocento"/>
-		<link rel="stylesheet" href="{$www-css}/header.css"/>
-		<link rel="stylesheet" href="{$www-css}/menu.css"/>
-		<link rel="stylesheet" href="{$www-css}/baseline.css"/>
-		<link rel="stylesheet" href="{$www-css}/grid.css"/>
+
+		<!-- TODO: pass to output-content as $css -->
+		<link rel="stylesheet" href="{$www-css}/debug.css"/>
 		<link rel="stylesheet" href="{$www-css}/style.css"/>
-		<link rel="stylesheet" href="{$www-css}/screen.css"/>
-		<link rel="stylesheet" href="{$www-css}/colour.css"/>
+
+		<!-- TODO: pass to output-content as $js -->
+		<script type="text/javascript" src="{$www-js}/debug.js"></script>
+		<script type="text/javascript" src="{$www-js}/overlay.js"></script>
 	</xsl:template>
 
 	<!-- TODO: use nav, footer etc for html5 -->
@@ -143,6 +145,13 @@
 		<footer>
 			<xsl:call-template name="rcsid"/>
 		</footer>
+
+<!-- XXX: hack until @onload is done properly -->
+<script><xsl:text>
+Overlay.init(document.documentElement, 'cols',  8);
+Overlay.init(document.documentElement, 'rows', 66);
+</xsl:text></script>
+
 	</xsl:template>
 
 </xsl:stylesheet>

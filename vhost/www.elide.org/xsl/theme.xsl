@@ -17,10 +17,11 @@
 
 	<!-- TODO: rename contents to toc -->
 	<c:contents>
-		<c:category href="http://blog.elide.org/"         name="Blog"/>
+		<c:category href="http://diary.elide.org/"        name="Diary"/>
 		<c:category href="http://www.elide.org/snippets/" name="Snippets"/>
-		<c:category href="http://www.elide.org/small/"    name="Small Programs"/>
+		<c:category href="http://www.elide.org/small/"    name="Small"/>
 		<c:category href="http://www.elide.org/projects/" name="Projects"/>
+		<c:category href="http://www.elide.org/contact/"  name="Contact"/>
 	</c:contents>
 
 	<xsl:template name="e:contents">
@@ -76,6 +77,10 @@
 		<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 	</xsl:template>
 
+	<xsl:template name="e:page-sidebar">
+		<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>
+	</xsl:template>
+
 	<xsl:template name="e:page-footer">
 		<tt class="rcsid">
 			<xsl:choose>
@@ -105,14 +110,17 @@
 	</xsl:template>
 
 	<xsl:template name="theme-head">
+		<!-- TODO: pass to output-content as $fonts -->
 		<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,700' rel='stylesheet' type='text/css'/>
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'/>
 
+		<!-- TODO: pass to output-content as $css -->
 		<link rel="stylesheet" href="{$www-css}/debug.css"/>
-		<link rel="stylesheet" href="{$www-css}/baseline.css"/>
-		<link rel="stylesheet" href="{$www-css}/grid.css"/>
-		<link rel="stylesheet" href="{$www-css}/screen.css"/>
 		<link rel="stylesheet" href="{$www-css}/style.css"/>
-		<link rel="stylesheet" href="{$www-css}/colour.css"/>
+
+		<!-- TODO: pass to output-content as $js -->
+		<script type="text/javascript" src="{$www-js}/debug.js"></script>
+		<script type="text/javascript" src="{$www-js}/overlay.js"></script>
 	</xsl:template>
 
 	<xsl:template name="theme-content">
@@ -138,9 +146,20 @@
 			<xsl:call-template name="e:page-body"/>
 		</section>
 
+		<nav id="sidebar">
+			<xsl:call-template name="e:page-sidebar"/>
+		</nav>
+
 		<footer>
 			<xsl:call-template name="e:page-footer"/>
 		</footer>
+
+<!-- XXX: hack until @onload is done properly -->
+<script><xsl:text>
+Overlay.init(document.documentElement, 'cols',  6);
+Overlay.init(document.documentElement, 'rows', 26);
+</xsl:text></script>
+
 	</xsl:template>
 
 </xsl:stylesheet>
