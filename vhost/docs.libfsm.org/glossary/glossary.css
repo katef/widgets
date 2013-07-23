@@ -1,0 +1,29 @@
+/* $Id$ */
+
+dl.glossary {
+	margin-left: 120px;
+}
+
+dl.glossary dt.alt:after {
+	content: ",";
+	font-weight: normal;
+}
+
+dl.glossary dt:after {
+	content: ": ";
+}
+
+dl.glossary dt {
+	display: inline;
+}
+
+dl.glossary dd.short {
+	display: inline;
+}
+
+dl.glossary dd {
+	margin-top: 9px;
+	margin-bottom: 36px;
+	margin-left: 0;
+}
+

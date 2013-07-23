@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html [
+	<!ENTITY Sigma "&#x03A3;">
+	<!ENTITY isin  "&#x2208;">
+	<!ENTITY cup   "&#8746;">
+	<!ENTITY sdot  "&#8901;">
+]>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Glossary</title>
+
+		<meta name="description" content="TODO"/>
+		<meta name="keywords"    content="TODO"/>
+		<meta name="rcsid"       content="$Id: index.xhtml$"/>
+
+		<link rel="stylesheet" href="../docs.css"/>
+		<link rel="stylesheet" href="glossary.css"/>
+	</head>
+
+	<nav id="sidebar">
+<!-- TODO: xinclude these; centralise for all docs -->
+		<h2>Manpages</h2>
+
+		<table class="manpages">
+			<col align="left"/>
+			<col align="left"/>
+
+			<tbody>
+				<tr>
+					<td><a href="http://man.libfsm.org/fsm.1/">fsm(1)</a></td>
+					<td>Finite Automata <abbr>CLI</abbr></td>
+				</tr>
+				<tr>
+					<td><a href="http://man.libfsm.org/re.1/">re(1)</a></td>
+					<td>Regular Expressions <abbr>CLI</abbr></td>
+				</tr>
+				<tr>
+					<td><a href="http://man.libfsm.org/lx.1/">lx(1)</a></td>
+					<td>Lexer generator <abbr>CLI</abbr></td>
+				</tr>
+
+				<tr>
+					<td><a href="http://libfsm.org/libre.3/">libre(3)</a></td>
+					<td>libre <abbr>API</abbr> reference</td>
+				</tr>
+				<tr>
+					<td><a href="http://libfsm.org/libfsm.3/">libfsm(3)</a></td>
+					<td>libfsm <abbr>API</abbr> reference</td>
+				</tr>
+				<tr>
+					<td><a href="http://libfsm.org/lx.3/">lx(3)</a></td>
+					<td>lx generated <abbr>API</abbr> reference</td>
+				</tr>
+
+				<tr>
+					<td><a href="http://libfsm.org/fsm.5/">fsm(5)</a></td>
+					<td>fsm file format</td>
+				</tr>
+				<tr>
+					<td><a href="http://libfsm.org/re.5/">re(5)</a></td>
+					<td>libre regexp dialects</td>
+				</tr>
+				<tr>
+					<td><a href="http://libfsm.org/lx.5/">lx(5)</a></td>
+					<td>lx specification language</td>
+				</tr>
+			</tbody>
+		</table>
+	</nav>
+
+	<body>
+		<h2>Glossary</h2>
+
+		<dl class="glossary">
+			<dt><abbr>DFA</abbr></dt>
+			<dd class="short">Deterministic Finite Automaton.</dd>
+			<dd>
+				<p>An automaton who's edge transitions are always unambiguous.
+					Contrast to <abbr>NFA</abbr>.
+					Hence for any given input, the next state is always
+					immediately known.</p>
+
+				<p>Every DFA has exactly one minimal form;
+					libfsm provides <a href="TODO">fsm_minimize()</a> in
+					<a href="TODO">&lt;fsm/graph.h&gt;</a> to produce this.</p>
+			</dd>
+
+			<dt>Epsilon</dt>
+			<dd class="short">An <abbr>NFA</abbr> edge which may be
+				traversed without consuming input.</dd>
+			<dd>
+				<p>These are particularly convenient for regular-expression
+					style construction corresponding to Kleene operators,
+					where repetition and optionality may be expressed simply
+					by adding epsilon transitions which loop back or
+					bypass a labelled edge.</p>
+
+				<p>Epsilon edges may be created by calling
+					<a href="TODO">fsm_addedge_epsilon()</a> in
+					<a href="TODO">&lt;fsm/fsm.h&gt;</a>.</p>
+			</dd>
+
+			<dt class="alt"><abbr>FA</abbr></dt>
+			<dt class="alt"><abbr>FSA</abbr></dt>
+			<dt><abbr>FSM</abbr></dt>
+			<dd class="short">Finite State Automata/Machine.</dd>
+			<dd>
+				<p>An automaton with a finite number of states.
+					Transitions between the states correspond to input read,
+					and are labelled with the input for each transition.
+					By our use, the states themselves contain no information,
+					other than possibly being an end state.</p>
+
+				<p>According to <a href="TODO">[BC07]</a>,
+					mathematically, automaton is a pair A = (Q,&#xA0;E),
+					where Q is a finite set of states, and E is a finite set
+					of edges labelled by letters of a finite alphabet A.
+					Edges are triples of the form (p,&#xA0;a,&#xA0;q), p,
+					q&#xA0;∈&#xA0;Q, a&#xA0;∈&#xA0;A.</p>
+
+				<p>Wikipedia has <a href="http://en.wikipedia.org/wiki/Finite_State_Machine">a particularly confusing explanation</a>.</p>
+
+				<p>These are used all over computer science, in any situation
+					where a program is in one of a set number of states,
+					and input to that program causes it to change state.</p>
+			</dd>
+
+			<dt><abbr>NFA</abbr></dt>
+			<dd class="short">Non-deterministic Finite Automaton.</dd>
+			<dd>
+				<p>An automaton who's edge transitions may include epsilon
+					transitions, and may include multiple edges of the
+					same label from any given state.
+					Hence the edge to take for a given input is not known
+					until further input is processed.</p>
+
+				<p>For our purposes, we consider an <abbr>FSM</abbr> to be
+					an <abbr>NFA</abbr> unless we know otherwise.
+					<a href="TODO">fsm_isdfa()</a> in
+					<a href="TODO">&lt;fsm/graph.h&gt;</a></p>
+
+				<p>Any <abbr>NFA</abbr> may be converted to a <abbr>DFA</abbr>.
+					libfsm provides <a href="TODO">fsm_todfa()</a> in
+					<a href="TODO">&lt;fsm/graph.h&gt;</a> to convert an
+					<abbr>NFA</abbr> to a <abbr>DFA</abbr>.</p>
+			</dd>
+
+			<dt>Regular</dt>
+			<dd class="short">The class of languages which may be expressed
+				as a <abbr>DFA</abbr>.</dd>
+			<dd>
+				<p>A regular language is defined over an alphabet, &Sigma;:
+					For each a &isin; &Sigma;, {a} is regular.
+					If A and B are regular,
+					A&#xA0;&cup;&#xA0;B is regular,
+					A&#xA0;&sdot;&#xA0;B is regular,
+					and A* is regular.</p>
+
+				<p>Hence a Regular Expression is an expression which denotes
+					a Regular Language, and a Regular Language is the set of
+					strings generated by that Regular Grammar.
+					Regular Grammars are also known as Type-3 Grammars in
+					the Chomsky-Schützenerger hierarchy.</p>
+
+				<p>Regular Expressions are typically notated using postfix
+					operators, but need not be.</p>
+			</dd>
+		</dl>
+	</body>
+</html>
+
