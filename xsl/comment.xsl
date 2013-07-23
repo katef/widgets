@@ -44,7 +44,7 @@
 		<xsl:param name="short"/>
 
 		<!-- TODO: tab order attributes -->
-		<form id="comment" class="comment" action="{$www-rest}/comment/">
+		<form id="comment" class="comment" action="{$www-api}/comment/">
 			<h3>
 				<xsl:text>Leave a comment</xsl:text>
 			</h3>
