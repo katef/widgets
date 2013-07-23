@@ -1,0 +1,57 @@
+/* $Id$ */
+
+/*
+ * Layout looks like so:
+ *
+ *   ├────────────────────────── parent ───────────────────────┤
+ *   ╎    ├──────────────── .grid-container ──────────────┤    ╎
+ *   │    ╎          ├─┤ @grid-gutter                     ╎    │
+ *   │    ░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░    │
+ *   │    ░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░    │
+ *   │    ░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░    │
+ *   │    ░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░░▒▒▒▒▒▒▒▒▒░░    │
+ *   ╎   ╎              ├───────┤ automatic column width       │
+ *   ├───┤ @grid-margin                                        │
+ *
+ * All variables may be either percentage or fixed widths.
+ *
+ *   @grid-width     Width of a column and its gutter, relative to "page". E.g. (100% / 6)
+ *   @grid-baseline  Line height of rows. E.g. 18px
+ *   @gutter-cols    Gutter width between columns. E.g. 18px;
+ *   @gutter-page    Gutter to the right and left of the page. E.g. (@gutter-cols * 2)
+ */
+
+@grid-margin:   5%;
+@grid-gutter:   20px;
+@grid-page:     100%;
+@grid-ncols:    12;
+
+@import "misc.less";
+
+.grid-container () {
+	margin:  0 @grid-margin;
+	padding: 0;
+	padding-left: @grid-gutter;
+
+	.box-sizing(border-box);
+
+	clear: both;
+}
+
+/* you can pass a negative @colspan here to exdent */
+.grid-column (@colspan: 1) {
+	float: left;
+
+	.box-sizing(border-box);
+
+	width: ((@grid-page / @grid-ncols) * @colspan);
+
+	margin:  0;
+	padding: 0;
+	padding-right: @grid-gutter;
+}
+
+.grid-indent (@colspan: 1) {
+	margin-left: ((@grid-page / @grid-ncols) * @colspan);
+}
+
