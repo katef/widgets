@@ -307,6 +307,76 @@
 		</xsl:choose>
 	</xsl:template>
 
+	<xsl:template name="tl:index">
+		<ol class="pages">
+<!-- TODO: titles for links -->
+<!-- TODO: rel next/prev etc -->
+			<li>
+				<!-- TODO: use cal th link here -->
+				<a href="#TODO"> <!-- TODO: link to YYYY-MM not YYYY -->
+					<xsl:text>2006</xsl:text> <!-- TODO: not $tl:year-1, but rather search for year -->
+				</a>
+			</li>
+
+			<li class="group">
+				<li>
+					<a href="#TODO" data-month="27"> <!-- TODO: data-month -->
+						<xsl:text>&lt;</xsl:text>
+					</a>
+				</li>
+
+				<xsl:for-each select="str:tokenize('1 2 3 4 5 6 7 8 9 10 11 12')">
+					<li>
+						<xsl:if test="$tl:month and $tl:month = .">
+							<xsl:attribute name="class">
+								<xsl:text>current</xsl:text>
+							</xsl:attribute>
+						</xsl:if>
+
+						<!-- TODO: function to build a date and str:align etc -->
+						<xsl:choose>
+							<xsl:when test="$tl:entries/tl:entry
+								[date:year(tl:pubdate(.)) = $tl:year
+								and date:month-in-year(tl:pubdate(.)) = str:align(current(), '00', 'right')]">
+								<a>
+									<xsl:call-template name="tl:href">
+										<!-- TODO: centralise date function -->
+										<xsl:with-param name="date" select="concat($tl:year, '-',
+											str:align(., '00', 'right'))"/>
+									</xsl:call-template>
+
+<!-- TODO: use <time> inside all date links -->
+									<time datetime="{concat($tl:year, '-', str:align(., '00', 'right'))}">
+										<xsl:value-of select="."/>
+									</time>
+								</a>
+							</xsl:when>
+
+							<xsl:otherwise>
+								<time datetime="{concat($tl:year, '-', str:align(., '00', 'right'))}">
+									<xsl:value-of select="."/>
+								</time>
+							</xsl:otherwise>
+						</xsl:choose>
+					</li>
+				</xsl:for-each>
+
+				<li>
+					<a href="#TODO" data-month="29"> <!-- TODO: data-month -->
+						<xsl:text>&gt;</xsl:text>
+					</a>
+				</li>
+			</li>
+
+			<li>
+				<!-- TODO: use cal th link here -->
+				<a href="#TODO"> <!-- TODO: link to YYYY-MM not YYYY -->
+					<xsl:text>2010</xsl:text> <!-- TODO: not $tl:year-1, but rather search for year -->
+				</a>
+			</li>
+		</ol>
+	</xsl:template>
+
 	<xsl:template name="tl:calendar">
 		<xsl:variable name="date">
 			<xsl:choose>

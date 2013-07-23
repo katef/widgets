@@ -61,6 +61,12 @@
 	<body onload="Valid.init(document.documentElement)">	<!-- TODO: centralise somehow? -->
 		<?blog-body?>
 
+		<nav id="monthindex">
+			<?blog-index?>
+
+			<a href="/archive">Archive</a>
+		</nav>
+
 		<script>
 			/* XXX: hack until @onload is done properly in theme.xsl */
 			Valid.init(document.documentElement);

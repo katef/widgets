@@ -112,6 +112,10 @@
 		<xsl:call-template name="tl:title"/>
 	</xsl:template>
 
+	<xsl:template match="processing-instruction('blog-index')">
+		<xsl:call-template name="tl:index"/>
+	</xsl:template>
+
 	<xsl:template match="processing-instruction('blog-calendar')">
 		<xsl:call-template name="tl:calendar"/>
 		<xsl:call-template name="tl:years"/>
