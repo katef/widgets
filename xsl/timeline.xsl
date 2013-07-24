@@ -54,17 +54,16 @@
 		<xsl:variable name="ds" select="date:seconds(date:add($date, $delta)) - date:seconds($date)"/>
 
 		<xsl:choose>
-			<xsl:when test="$tl:entries/tl:entry
-				[date:year(tl:pubdate(.)) = date:year($dest)
-					and date:month-in-year(tl:pubdate(.))
-						= date:month-in-year($dest)]">
+			<xsl:when test="$tl:entries/tl:entry[date:same-month(tl:pubdate(.), $dest)]">
 
 				<a rel="{$rel}">
 					<xsl:call-template name="tl:href">
 						<xsl:with-param name="date" select="date:ym($dest)"/>
 					</xsl:call-template>
 
-					<xsl:value-of select="$next"/>
+					<time datetime="{date:ym($dest)}">
+						<xsl:value-of select="$next"/>
+					</time>
 				</a>
 			</xsl:when>
 
@@ -80,7 +79,9 @@
 						<xsl:with-param name="date" select="date:ym($date-skip)"/>
 					</xsl:call-template>
 
-					<xsl:value-of select="$skip"/>
+					<time datetime="{date:ym($date-skip)}">
+						<xsl:value-of select="$skip"/>
+					</time>
 				</a>
 			</xsl:when>
 
@@ -96,7 +97,9 @@
 						<xsl:with-param name="date" select="date:ym($date-skip)"/>
 					</xsl:call-template>
 
-					<xsl:value-of select="$skip"/>
+					<time datetime="{date:ym($date-skip)}">
+						<xsl:value-of select="$skip"/>
+					</time>
 				</a>
 			</xsl:when>
 
@@ -111,15 +114,15 @@
 		<xsl:param name="text"/>
 
 		<xsl:choose>
-			<xsl:when test="$tl:entries/tl:entry
-				[date:year(tl:pubdate(.)) = date:year($date)
-				and date:month-in-year(tl:pubdate(.)) = date:month-in-year($date)]">
+			<xsl:when test="$tl:entries/tl:entry[date:same-month(tl:pubdate(.), $date)]">
 				<a rel="up">
 					<xsl:call-template name="tl:href">
 						<xsl:with-param name="date" select="date:ym($date)"/>
 					</xsl:call-template>
 
-					<xsl:value-of select="$text"/>
+					<time datetime="{date:ym($date)}">
+						<xsl:value-of select="$text"/>
+					</time>
 				</a>
 			</xsl:when>
 
@@ -200,12 +203,16 @@
 						</xsl:for-each>
 					</xsl:attribute>
 
-					<xsl:value-of select="date:day-in-month($date)"/>
+					<time datetime="{$date}">
+						<xsl:value-of select="date:day-in-month($date)"/>
+					</time>
 				</a>
 			</xsl:when>
 
 			<xsl:otherwise>
-				<xsl:value-of select="date:day-in-month($date)"/>
+				<time datetime="{$date}">
+					<xsl:value-of select="date:day-in-month($date)"/>
+				</time>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -308,14 +315,18 @@
 			<li>
 				<!-- TODO: use cal th link here -->
 				<a href="#TODO"> <!-- TODO: link to YYYY-MM not YYYY -->
-					<xsl:text>2006</xsl:text> <!-- TODO: not $tl:year-1, but rather search for year -->
+					<time datetime="TODO">
+						<xsl:text>2006</xsl:text> <!-- TODO: not $tl:year-1, but rather search for year -->
+					</time>
 				</a>
 			</li>
 
 			<li class="group">
 				<li>
 					<a href="#TODO" data-month="27"> <!-- TODO: data-month -->
-						<xsl:text>&lt;</xsl:text>
+						<time datetime="TODO">
+							<xsl:text>&lt;</xsl:text>
+						</time>
 					</a>
 				</li>
 
@@ -335,7 +346,6 @@
 										<xsl:with-param name="date" select="date:ym($tl:year, .)"/>
 									</xsl:call-template>
 
-<!-- TODO: use <time> inside all date links -->
 									<time datetime="{date:ym($tl:year, .)}">
 										<xsl:value-of select="."/>
 									</time>
@@ -353,7 +363,9 @@
 
 				<li>
 					<a href="#TODO" data-month="29"> <!-- TODO: data-month -->
-						<xsl:text>&gt;</xsl:text>
+						<time datetime="TODO">
+							<xsl:text>&gt;</xsl:text>
+						</time>
 					</a>
 				</li>
 			</li>
@@ -361,7 +373,9 @@
 			<li>
 				<!-- TODO: use cal th link here -->
 				<a href="#TODO"> <!-- TODO: link to YYYY-MM not YYYY -->
-					<xsl:text>2010</xsl:text> <!-- TODO: not $tl:year-1, but rather search for year -->
+					<time datetime="TODO">
+						<xsl:text>2010</xsl:text> <!-- TODO: not $tl:year-1, but rather search for year -->
+					</time>
 				</a>
 			</li>
 		</ol>
@@ -477,8 +491,7 @@
 			</xsl:when>
 
 			<xsl:when test="$tl:month">
-				<xsl:apply-templates select="$tl:entries/tl:entry[date:year(tl:pubdate(.)) = $tl:year
-					and date:month-in-year(tl:pubdate(.)) = $tl:month]"/>
+				<xsl:apply-templates select="$tl:entries/tl:entry[date:same-month(tl:pubdate(.), date:ym($tl:year, $tl:month))]"/>
 			</xsl:when>
 
 			<xsl:when test="$tl:year">

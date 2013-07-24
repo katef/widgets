@@ -30,7 +30,9 @@
 	<xsl:template name="cal:content">
 		<xsl:param name="date"/>
 
-		<xsl:value-of select="date:day-in-month($date)"/>
+		<time datetime="{$date}">
+			<xsl:value-of select="date:day-in-month($date)"/>
+		</time>
 	</xsl:template>
 
 	<!--
@@ -41,9 +43,11 @@
 		<xsl:param name="date"/>
 
 		<caption>
-			<xsl:value-of select="date:month-name($date)"/>
-			<xsl:text> </xsl:text>
-			<xsl:value-of select="date:year($date)"/>
+			<time datetime="{$date}">
+				<xsl:value-of select="date:month-name($date)"/>
+				<xsl:text> </xsl:text>
+				<xsl:value-of select="date:year($date)"/>
+			</time>
 		</caption>
 	</xsl:template>
 
