@@ -3,7 +3,6 @@
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:common="http://exslt.org/common"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:c="http://xml.elide.org/elide_contents"
 	xmlns:e="http://xml.elide.org/elide_website"
