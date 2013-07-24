@@ -59,26 +59,8 @@
 	</xsl:template>
 
 	<xsl:template name="e:category-title">
+		<!-- TODO: override for blog etc - how? pass in as param from nginx conf? -->
 		<xsl:text>Website</xsl:text>
-	</xsl:template>
-
-	<xsl:template name="e:subpage-title">
-		<xsl:apply-templates select="h:head/h:title"/>
-	</xsl:template>
-
-	<xsl:template name="e:page-head">
-		<xsl:copy-of select="h:head/*"/>
-	</xsl:template>
-
-	<xsl:template name="e:page-onload">
-	</xsl:template>
-
-	<xsl:template name="e:page-body">
-		<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
-	</xsl:template>
-
-	<xsl:template name="e:page-sidebar">
-		<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>
 	</xsl:template>
 
 	<xsl:template name="e:page-footer">
@@ -95,77 +77,64 @@
 		</tt>
 	</xsl:template>
 
-	<xsl:template name="theme-title">
-		<xsl:text>Kate&#8217;s&#160;Amazing </xsl:text>
-		<xsl:call-template name="e:category-title"/>
-
-		<xsl:variable name="subpage">
-			<xsl:call-template name="e:subpage-title"/>
-		</xsl:variable>
-
-		<xsl:if test="$subpage">
-			<xsl:text> &#8212; </xsl:text>
-			<xsl:copy-of select="$subpage"/>
-		</xsl:if>
+	<xsl:template match="/h:html/h:head/h:title" mode="body">
+		<xsl:apply-templates select="node()|text()|processing-instruction()"/>
 	</xsl:template>
 
-	<xsl:variable name="theme-css" select="concat(
-		'style.css ',
-		'debug.css ')"/>
+	<xsl:template match="/h:html">
+		<xsl:call-template name="theme-output">
+			<xsl:with-param name="css"   select="'style.css debug.css'"/>
+			<xsl:with-param name="fonts" select="'Maven+Pro:400,700 Ubuntu+Mono'"/>
 
-	<xsl:variable name="theme-fonts" select="concat(
-		'Maven+Pro:400,700 ',
-		'Ubuntu+Mono')"/>
+			<xsl:with-param name="js">
+				<xsl:value-of select="'debug.js overlay.js'"/>
 
-	<xsl:variable name="theme-js">
-		<xsl:value-of select="concat(
-			'debug.js ',
-			'overlay.js ')"/>
+				<!-- TODO: only where relevant -->
+				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>
+			</xsl:with-param>
 
-		<!-- TODO: only where relevant -->
-		<xsl:value-of select="concat(
-			'ajax.js ',
-			'valid.js ',
-			'comment.js ',
-			'template.js')"/>
-	</xsl:variable>
+			<xsl:with-param name="onload">
+				<xsl:text>Overlay.init(r, 'cols',  6);</xsl:text>
+				<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
+			</xsl:with-param>
 
-	<xsl:variable name="theme-onload">
-		<xsl:text>Overlay.init(r, 'cols',  6);</xsl:text>
-		<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
-	</xsl:variable>
+			<xsl:with-param name="page">
+				<xsl:apply-templates select="h:head/h:title" mode="body"/>
+			</xsl:with-param>
 
-	<xsl:template name="theme-head">
-	</xsl:template>
+			<xsl:with-param name="site">
+				<xsl:text>Kate&#8217;s </xsl:text>
+				<xsl:call-template name="e:category-title"/>
+			</xsl:with-param>
 
-	<xsl:template name="theme-content">
+			<xsl:with-param name="body">
+				<header>
+					<h1>
+						<xsl:text>Kate&#8217;s&#160;Amazing </xsl:text>
+						<xsl:call-template name="e:category-title"/>
 
-		<!--
-			This is an entry point for various sources (e.g. blog XML) to produce
-			a page that looks like it belongs on elide.org. There should be nothing
-			in here specific to transforming an XHTML source; those things are in
-			e:-named templates which can be overridden.
-		-->
+						<xsl:if test="h:head/h:title">
+							<xsl:text> &#8211;&#xa0;</xsl:text>
+							<xsl:apply-templates select="h:head/h:title" mode="body"/>
+						</xsl:if>
+					</h1>
 
-		<header>
-			<h1>
-				<xsl:call-template name="theme-title"/>
-			</h1>
+					<xsl:call-template name="e:contents"/>
+				</header>
 
-			<xsl:call-template name="e:contents"/>
-		</header>
+				<section class="page">
+					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
+				</section>
 
-		<section class="page">
-			<xsl:call-template name="e:page-body"/>
-		</section>
+				<nav id="sidebar">
+					<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>
+				</nav>
 
-		<nav id="sidebar">
-			<xsl:call-template name="e:page-sidebar"/>
-		</nav>
-
-		<footer>
-			<xsl:call-template name="e:page-footer"/>
-		</footer>
+				<footer>
+					<xsl:call-template name="e:page-footer"/>
+				</footer>
+			</xsl:with-param>
+		</xsl:call-template>
 
 	</xsl:template>
 

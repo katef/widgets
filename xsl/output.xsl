@@ -108,20 +108,24 @@
 	</xsl:template>
 
 	<xsl:template name="output-content">
-		<xsl:param name="title"/>
-		<xsl:param name="method"       select="'xml'"/>
-		<xsl:param name="css"          select="''"/>
-		<xsl:param name="fonts"        select="''"/>
-		<xsl:param name="js"           select="''"/>
-		<xsl:param name="onload"       select="''"/>
-		<xsl:param name="content.head" select="/.."/>
-		<xsl:param name="content.body" select="/.."/>
+		<xsl:param name="method" select="'xml'"/>
+		<xsl:param name="css"    select="''"/>
+		<xsl:param name="fonts"  select="''"/>
+		<xsl:param name="js"     select="''"/>
+		<xsl:param name="onload" select="''"/>
+
+		<xsl:param name="title"  select="/.."/>
+		<xsl:param name="head"   select="/.."/>
+		<xsl:param name="body"   select="/.."/>
+
+		<xsl:if test="$method = 'html'">
+			<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
+		</xsl:if>
 
 		<html>
 			<head>
 				<title>
 					<xsl:value-of select="$title"/>
-					<xsl:text> &#8211; libfsm</xsl:text>
 				</title>
 
 				<!-- TODO: maybe a node set is better, after all -->
@@ -138,18 +142,16 @@
 					<script type="text/javascript" src="{$www-js}/{.}"></script>
 				</xsl:for-each>
 
-				<!-- TODO: meta headers for prev/next links -->
-
 				<xsl:if test="$method = 'html'">
 					<meta http-equiv="Content-Type"
 						content="text/html; charset=utf-8"/>
 				</xsl:if>
 
-				<xsl:copy-of select="$content.head"/>
+				<xsl:copy-of select="$head"/>
 			</head>
 
 			<body onload="var r = document.documentElement; {$onload}">
-				<xsl:copy-of select="$content.body"/>
+				<xsl:copy-of select="$body"/>
 			</body>
 		</html>
 

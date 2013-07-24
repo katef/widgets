@@ -28,33 +28,37 @@
 		standalone="yes"/>
 -->
 
-	<xsl:template name="theme-title">
-		<xsl:apply-templates select="h:head/h:title"/>
-	</xsl:template>
+	<!-- TODO: maybe roll this into output.xsl -->
+	<xsl:template name="theme-output">
+		<xsl:param name="css"    select="''"/>
+		<xsl:param name="fonts"  select="''"/>
+		<xsl:param name="js"     select="''"/>
+		<xsl:param name="onload" select="''"/>
 
-	<xsl:template name="theme-head">
-	</xsl:template>
-
-	<xsl:template name="theme-content">
-	</xsl:template>
-
-	<xsl:template match="/h:html">
-		<!-- XXX: hack until libxslt supports HTML5 -->
-		<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
+		<xsl:param name="page"   select="/.."/>
+		<xsl:param name="site"   select="/.."/>
+		<xsl:param name="head"   select="/.."/>
+		<xsl:param name="body"   select="/.."/>
 
 		<xsl:call-template name="output-content">
 			<xsl:with-param name="method" select="'xhtml5'"/>
 
-			<xsl:with-param name="css"    select="$theme-css"/>
-			<xsl:with-param name="fonts"  select="$theme-fonts"/>
-			<xsl:with-param name="js"     select="$theme-js"/>
-			<xsl:with-param name="onload" select="$theme-onload"/>
+			<xsl:with-param name="css"    select="$css"/>
+			<xsl:with-param name="fonts"  select="$fonts"/>
+			<xsl:with-param name="js"     select="$js"/>
+			<xsl:with-param name="onload" select="$onload"/>
 
 			<xsl:with-param name="title">
-				<xsl:call-template name="theme-title"/>
+				<xsl:copy-of select="$page"/>
+
+				<xsl:if test="$site and $page">
+					<xsl:text> &#8211;&#xa0;</xsl:text>
+				</xsl:if>
+
+				<xsl:copy-of select="$site"/>
 			</xsl:with-param>
 
-			<xsl:with-param name="content.head">
+			<xsl:with-param name="head">
 				<xsl:for-each select="h:head/h:link[@rel = 'stylesheet']">
 					<xsl:copy-of select="."/>
 				</xsl:for-each>
@@ -75,13 +79,14 @@
 					</script>
 				</xsl:for-each>
 
-				<xsl:call-template name="theme-head"/>
+				<!-- TODO: meta headers for prev/next links -->
+
+				<xsl:copy-of select="$head"/>
 			</xsl:with-param>
 
-			<xsl:with-param name="content.body">
-				<xsl:call-template name="theme-content"/>
-			</xsl:with-param>
+			<xsl:with-param name="body" select="$body"/>
 		</xsl:call-template>
+
 	</xsl:template>
 
 </xsl:stylesheet>

@@ -72,95 +72,95 @@
 		</tt>
 	</xsl:template>
 
-	<xsl:template name="body">
-		<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
+	<xsl:template name="theme-menu">
+		<nav class="menu">
+			<!-- TODO: or: degrade to non-SVG menu inside the <svg> element? -->
+			<!-- TODO: consider looking at the Accept: header to decide to degrade to non-SVG here -->
+<!-- XXX:
+			<xsl:call-template name="menu"/>
+-->
+			<span>menu stuff here</span>
 
-		<nav class="sidebar">
-			<!-- TODO: maybe i *do* want a @layout thingy instead... i dunno -->
+			<menu>
+				<li>
+					<a id="menu-fsm" href="{$libfsm.url.www}/libfsm">
+						<span class="title">libfsm</span>
+						<span class="desc">Static analysis of Finite Automata</span>
+					</a>
+				</li>
 
-			<xsl:if test="h:nav[@id = 'sidebar']">
-				<xsl:apply-templates select="h:nav[@id = 'sidebar']/node()|h:nav[@id = 'sidebar']/processing-instruction()"/>
-			</xsl:if>
+				<li>
+					<a id="menu-re" href="{$libfsm.url.www}/libre">
+						<span class="title">libre</span>
+						<span class="desc">Compiling Regular Expressions to DFA</span>
+					</a>
+				</li>
+
+				<li>
+					<a id="menu-lx" href="{$libfsm.url.www}/lx">
+						<span class="title">lx</span>
+						<span class="desc">Lexer generator</span>
+					</a>
+				</li>
+			</menu>
 		</nav>
 	</xsl:template>
 
-	<xsl:variable name="theme-css" select="concat(
-		'style.css ',
-		'debug.css')"/>
-
-	<xsl:variable name="theme-fonts" select="concat(
-		'Quattrocento')"/>
-
-	<xsl:variable name="theme-js">
-		<xsl:value-of select="concat(
-			'style.js ',
-			'overlay.js ')"/>
-
-		<!-- TODO: only where relevant -->
-		<xsl:value-of select="concat(
-			'ajax.js ',
-			'valid.js ',
-			'comment.js ',
-			'template.js')"/>
-	</xsl:variable>
-
-	<xsl:variable name="theme-onload">
-		<xsl:text>Overlay.init(document.documentElement, 'cols',  8);</xsl:text>
-		<xsl:text>Overlay.init(document.documentElement, 'rows', 66);</xsl:text>
-	</xsl:variable>
-
-	<xsl:template name="theme-head">
+	<xsl:template match="/h:html/h:head/h:title" mode="body">
+		<xsl:apply-templates select="node()|text()|processing-instruction()"/>
 	</xsl:template>
 
-	<!-- TODO: use nav, footer etc for html5 -->
-	<!-- TODO: centralise all this, for both static and non-static website pages. call it layout.xsl.
-		we should only have one .xsl file which knows about blueprint layout (i.e. layout.xsl) -->
-	<!-- TODO: breadcrums navigation; is it neccessary? -->
-	<xsl:template name="theme-content">
-		<header>
-			<h1>Kate&#x2019;s&#xa0;Lexer&#xa0;Generator</h1>
-		</header>
+	<xsl:template match="/h:html">
+		<xsl:call-template name="theme-output">
+			<xsl:with-param name="css"   select="'style.css debug.css'"/>
+			<xsl:with-param name="fonts" select="'Quattrocento'"/>
 
-		<section class="page">
-			<nav class="menu">
-				<!-- TODO: or: degrade to non-SVG menu inside the <svg> element? -->
-				<!-- TODO: consider looking at the Accept: header to decide to degrade to non-SVG here -->
-<!-- XXX:
-				<xsl:call-template name="menu"/>
--->
-				<span>menu stuff here</span>
+			<xsl:with-param name="js">
+				<xsl:value-of select="'style.js overlay.js'"/>
 
-				<menu>
-					<li>
-						<a id="menu-fsm" href="{$libfsm.url.www}/libfsm">
-							<span class="title">libfsm</span>
-							<span class="desc">Static analysis of Finite Automata</span>
-						</a>
-					</li>
+				<!-- TODO: only where relevant -->
+				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>
+			</xsl:with-param>
 
-					<li>
-						<a id="menu-re" href="{$libfsm.url.www}/libre">
-							<span class="title">libre</span>
-							<span class="desc">Compiling Regular Expressions to DFA</span>
-						</a>
-					</li>
+			<xsl:with-param name="onload">
+				<xsl:text>Overlay.init(document.documentElement, 'cols',  8);</xsl:text>
+				<xsl:text>Overlay.init(document.documentElement, 'rows', 66);</xsl:text>
+			</xsl:with-param>
 
-					<li>
-						<a id="menu-lx" href="{$libfsm.url.www}/lx">
-							<span class="title">lx</span>
-							<span class="desc">Lexer generator</span>
-						</a>
-					</li>
-				</menu>
-			</nav>
+			<xsl:with-param name="site" select="'libfsm'"/>
+			<xsl:with-param name="page">
+				<xsl:apply-templates select="h:head/h:title" mode="body"/>
+			</xsl:with-param>
 
-			<xsl:call-template name="body"/>
-		</section>
 
-		<footer>
-			<xsl:call-template name="rcsid"/>
-		</footer>
+			<xsl:with-param name="body">
+				<header>
+					<h1>
+						<xsl:text>Kate&#x2019;s Lexer&#xa0;Generator</xsl:text>
 
+						<xsl:if test="h:head/h:title">
+							<xsl:text> &#8211;&#xa0;</xsl:text>
+							<xsl:apply-templates select="h:head/h:title" mode="body"/>
+						</xsl:if>
+					</h1>
+				</header>
+
+				<section class="page">
+					<xsl:call-template name="theme-menu"/>
+
+					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
+				</section>
+
+				<nav class="sidebar">
+					<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>
+				</nav>
+
+				<footer>
+					<xsl:call-template name="rcsid"/>
+				</footer>
+			</xsl:with-param>
+
+		</xsl:call-template>
 	</xsl:template>
 
 </xsl:stylesheet>
