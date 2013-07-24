@@ -9,7 +9,9 @@
 	xmlns:common="http://exslt.org/common"
 	xmlns:str="http://exslt.org/strings"
 
-	extension-element-prefixes="common str">
+	extension-element-prefixes="common str"
+
+	exclude-result-prefixes="common str">
 
 	<xsl:template match="processing-instruction()">
 		<xsl:message terminate="yes">
