@@ -327,11 +327,9 @@
 							</xsl:attribute>
 						</xsl:if>
 
-						<!-- TODO: function to build a date and str:align etc -->
 						<xsl:choose>
 							<xsl:when test="$tl:entries/tl:entry
-								[date:year(tl:pubdate(.)) = $tl:year
-								and date:month-in-year(tl:pubdate(.)) = str:align(current(), '00', 'right')]">
+								[date:same-month(tl:pubdate(.), date:ym($tl:year, current()))]">
 								<a>
 									<xsl:call-template name="tl:href">
 										<xsl:with-param name="date" select="date:ym($tl:year, .)"/>
