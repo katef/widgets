@@ -61,8 +61,7 @@
 
 				<a rel="{$rel}">
 					<xsl:call-template name="tl:href">
-						<xsl:with-param name="date" select="concat(date:year($dest), '-',
-							str:align(date:month-in-year($dest), '00', 'right'))"/>
+						<xsl:with-param name="date" select="date:ym($dest)"/>
 					</xsl:call-template>
 
 					<xsl:value-of select="$next"/>
@@ -78,8 +77,7 @@
 
 				<a rel="{$rel}">
 					<xsl:call-template name="tl:href">
-						<xsl:with-param name="date" select="concat(date:year($date-skip), '-',
-							str:align(date:month-in-year($date-skip), '00', 'right'))"/>
+						<xsl:with-param name="date" select="date:ym($date-skip)"/>
 					</xsl:call-template>
 
 					<xsl:value-of select="$skip"/>
@@ -95,8 +93,7 @@
 
 				<a rel="{$rel}">
 					<xsl:call-template name="tl:href">
-						<xsl:with-param name="date" select="concat(date:year($date-skip), '-',
-							str:align(date:month-in-year($date-skip), '00', 'right'))"/>
+						<xsl:with-param name="date" select="date:ym($date-skip)"/>
 					</xsl:call-template>
 
 					<xsl:value-of select="$skip"/>
@@ -119,9 +116,7 @@
 				and date:month-in-year(tl:pubdate(.)) = date:month-in-year($date)]">
 				<a rel="up">
 					<xsl:call-template name="tl:href">
-						<xsl:with-param name="date"
-							select="concat(date:year($date), '-',
-								str:align(date:month-in-year($date), '00', 'right'))"/>
+						<xsl:with-param name="date" select="date:ym($date)"/>
 					</xsl:call-template>
 
 					<xsl:value-of select="$text"/>
@@ -283,8 +278,7 @@
 		<xsl:param name="month" select="1"/>
 
 		<xsl:call-template name="cal:calendar">
-			<xsl:with-param name="date"
-				select="concat($tl:year, '-', str:align($month, '00', 'right'))"/>
+			<xsl:with-param name="date" select="date:ym($tl:year, $month)"/>
 		</xsl:call-template>
 
 		<xsl:if test="$month &lt; 12">
@@ -340,20 +334,18 @@
 								and date:month-in-year(tl:pubdate(.)) = str:align(current(), '00', 'right')]">
 								<a>
 									<xsl:call-template name="tl:href">
-										<!-- TODO: centralise date function -->
-										<xsl:with-param name="date" select="concat($tl:year, '-',
-											str:align(., '00', 'right'))"/>
+										<xsl:with-param name="date" select="date:ym($tl:year, .)"/>
 									</xsl:call-template>
 
 <!-- TODO: use <time> inside all date links -->
-									<time datetime="{concat($tl:year, '-', str:align(., '00', 'right'))}">
+									<time datetime="{date:ym($tl:year, .)}">
 										<xsl:value-of select="."/>
 									</time>
 								</a>
 							</xsl:when>
 
 							<xsl:otherwise>
-								<time datetime="{concat($tl:year, '-', str:align(., '00', 'right'))}">
+								<time datetime="{date:ym($tl:year, .)}">
 									<xsl:value-of select="."/>
 								</time>
 							</xsl:otherwise>
@@ -381,7 +373,7 @@
 		<xsl:variable name="date">
 			<xsl:choose>
 				<xsl:when test="$tl:month">
-					<xsl:value-of select="concat($tl:year, '-', str:align($tl:month, '00', 'right'))"/>
+					<xsl:value-of select="date:ym($tl:year, $tl:month)"/>
 				</xsl:when>
 
 				<xsl:when test="$tl:year">
@@ -409,7 +401,7 @@
 		<xsl:variable name="date">
 			<xsl:choose>
 				<xsl:when test="$tl:month">
-					<xsl:value-of select="concat($tl:year, '-', str:align($tl:month, '00', 'right'))"/>
+					<xsl:value-of select="date:ym($tl:year, $tl:month)"/>
 				</xsl:when>
 
 				<xsl:when test="$tl:year">
