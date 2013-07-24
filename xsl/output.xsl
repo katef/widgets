@@ -113,6 +113,7 @@
 		<xsl:param name="css"          select="''"/>
 		<xsl:param name="fonts"        select="''"/>
 		<xsl:param name="js"           select="''"/>
+		<xsl:param name="onload"       select="''"/>
 		<xsl:param name="content.head" select="/.."/>
 		<xsl:param name="content.body" select="/.."/>
 
@@ -147,19 +148,11 @@
 				<xsl:copy-of select="$content.head"/>
 			</head>
 
-			<!-- TODO: only load javascript if $content contains appropiate things (or pass in explicitly stating what to load) -->
-			<!-- TODO: not documentElement, but the 'main' div within the body, if there is one -->
-			<body>
-<!-- TODO:
- onload="var r = document.documentElement;
-				Linenumbers.init(r);
-				Colalign.init(r);
-				Table.init(r)">
--->
-
+			<body onload="var r = document.documentElement; {$onload}">
 				<xsl:copy-of select="$content.body"/>
 			</body>
 		</html>
+
 	</xsl:template>
 
 </xsl:stylesheet>

@@ -130,6 +130,11 @@
 			'template.js')"/>
 	</xsl:variable>
 
+	<xsl:variable name="theme-onload">
+		<xsl:text>Overlay.init(r, 'cols',  6);</xsl:text>
+		<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
+	</xsl:variable>
+
 	<xsl:template name="theme-head">
 	</xsl:template>
 
@@ -141,8 +146,6 @@
 			in here specific to transforming an XHTML source; those things are in
 			e:-named templates which can be overridden.
 		-->
-
-<!-- XXX: no h:body/@onload here; provide a template and use xsl:attribute -->
 
 		<header>
 			<h1>
@@ -163,12 +166,6 @@
 		<footer>
 			<xsl:call-template name="e:page-footer"/>
 		</footer>
-
-<!-- XXX: hack until @onload is done properly -->
-<script><xsl:text>
-Overlay.init(document.documentElement, 'cols',  6);
-Overlay.init(document.documentElement, 'rows', 26);
-</xsl:text></script>
 
 	</xsl:template>
 

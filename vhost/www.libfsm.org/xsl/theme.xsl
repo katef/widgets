@@ -104,6 +104,11 @@
 			'template.js')"/>
 	</xsl:variable>
 
+	<xsl:variable name="theme-onload">
+		<xsl:text>Overlay.init(document.documentElement, 'cols',  8);</xsl:text>
+		<xsl:text>Overlay.init(document.documentElement, 'rows', 66);</xsl:text>
+	</xsl:variable>
+
 	<xsl:template name="theme-head">
 	</xsl:template>
 
@@ -155,12 +160,6 @@
 		<footer>
 			<xsl:call-template name="rcsid"/>
 		</footer>
-
-<!-- XXX: hack until @onload is done properly -->
-<script><xsl:text>
-Overlay.init(document.documentElement, 'cols',  8);
-Overlay.init(document.documentElement, 'rows', 66);
-</xsl:text></script>
 
 	</xsl:template>
 

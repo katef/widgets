@@ -40,16 +40,15 @@
 
 	<xsl:template match="/h:html">
 		<!-- XXX: hack until libxslt supports HTML5 -->
-<!-- XXX:
 		<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
--->
 
 		<xsl:call-template name="output-content">
 			<xsl:with-param name="method" select="'xhtml5'"/>
 
-			<xsl:with-param name="css"   select="$theme-css"/>
-			<xsl:with-param name="fonts" select="$theme-fonts"/>
-			<xsl:with-param name="js"    select="$theme-js"/>
+			<xsl:with-param name="css"    select="$theme-css"/>
+			<xsl:with-param name="fonts"  select="$theme-fonts"/>
+			<xsl:with-param name="js"     select="$theme-js"/>
+			<xsl:with-param name="onload" select="$theme-onload"/>
 
 			<xsl:with-param name="title">
 				<xsl:call-template name="theme-title"/>
