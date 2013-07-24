@@ -18,6 +18,14 @@
 		          and date:day-in-year($a) = date:day-in-year($b)"/>
 	</func:function>
 
+	<func:function name="date:same-month">
+		<xsl:param name="a"/>
+		<xsl:param name="b"/>
+
+		<func:result select="date:year($a) =          date:year($b)
+		        and date:month-in-year($a) = date:month-in-year($b)"/>
+	</func:function>
+
 	<!-- TODO: eventually replace with date:format-date() -->
 	<func:function name="date:ym">
 		<xsl:param name="date"/>
