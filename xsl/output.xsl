@@ -112,7 +112,7 @@
 		<xsl:param name="method"       select="'xml'"/>
 		<xsl:param name="css"          select="''"/>
 		<xsl:param name="fonts"        select="''"/>
-		<xsl:param name="js"           select="/.."/>
+		<xsl:param name="js"           select="''"/>
 		<xsl:param name="content.head" select="/.."/>
 		<xsl:param name="content.body" select="/.."/>
 
