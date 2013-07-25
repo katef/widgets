@@ -133,7 +133,7 @@
 				<time datetime="{date:format-date($dest, $dtfmt)}">
 					<xsl:if test="$data">
 						<xsl:attribute name="data-fmt">
-							<xsl:value-of select="date:format-date($date-skip, $data)"/>
+							<xsl:value-of select="date:format-date($dest, $data)"/>
 						</xsl:attribute>
 					</xsl:if>
 
