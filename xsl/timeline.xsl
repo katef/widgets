@@ -56,6 +56,7 @@
 		<xsl:param name="skip"/>
 		<xsl:param name="blank" select="$next"/>
 		<xsl:param name="dtfmt" select="'yyyy-MM-dd'"/>
+		<xsl:param name="data"  select="false()"/>
 
 		<xsl:variable name="ds" select="date:seconds(date:add($date, $delta)) - date:seconds($date)"/>
 
@@ -67,6 +68,12 @@
 					<xsl:call-template name="tl:href">
 						<xsl:with-param name="date" select="date:format-date($dest, 'yyyy-MM')"/>
 					</xsl:call-template>
+
+					<xsl:if test="$data">
+						<xsl:attribute name="data-fmt">
+							<xsl:value-of select="date:format-date($dest, $data)"/>
+						</xsl:attribute>
+					</xsl:if>
 
 					<time datetime="{date:format-date($dest, $dtfmt)}">
 						<xsl:value-of select="date:format-date($dest, $next)"/>
@@ -86,6 +93,12 @@
 						<xsl:with-param name="date" select="date:format-date($date-skip, 'yyyy-MM')"/>
 					</xsl:call-template>
 
+					<xsl:if test="$data">
+						<xsl:attribute name="data-fmt">
+							<xsl:value-of select="date:format-date($date-skip, $data)"/>
+						</xsl:attribute>
+					</xsl:if>
+
 					<time datetime="{date:format-date($date-skip, $dtfmt)}">
 						<xsl:value-of select="date:format-date($date-skip, $skip)"/>
 					</time>
@@ -104,6 +117,12 @@
 						<xsl:with-param name="date" select="date:format-date($date-skip, 'yyyy-MM')"/>
 					</xsl:call-template>
 
+					<xsl:if test="$data">
+						<xsl:attribute name="data-fmt">
+							<xsl:value-of select="date:format-date($date-skip, $data)"/>
+						</xsl:attribute>
+					</xsl:if>
+
 					<time datetime="{date:format-date($date-skip, $dtfmt)}">
 						<xsl:value-of select="date:format-date($date-skip, $skip)"/>
 					</time>
@@ -112,6 +131,12 @@
 
 			<xsl:otherwise>
 				<time datetime="{date:format-date($dest, $dtfmt)}">
+					<xsl:if test="$data">
+						<xsl:attribute name="data-fmt">
+							<xsl:value-of select="date:format-date($date-skip, $data)"/>
+						</xsl:attribute>
+					</xsl:if>
+
 					<xsl:value-of select="date:format-date($dest, $blank)"/>
 				</time>
 			</xsl:otherwise>
@@ -337,18 +362,21 @@
 					<xsl:with-param name="rel"   select="'prev'"/>
 					<xsl:with-param name="next"  select=    "&quot;'&lt;&#160;'yyyy&quot;"/>
 					<xsl:with-param name="skip"  select="&quot;'&lt;&lt;&#160;'yyyy&quot;"/>
-					<xsl:with-param name="blank" select=    "&quot;'&lt;&#160;'yyyy&quot;"/>
 					<xsl:with-param name="dtfmt" select="'yyyy'"/>
 				</xsl:call-template>
 			</li>
 
 			<li class="group">
 				<li>
-					<a href="#TODO" data-month="27"> <!-- TODO: data-month -->
-						<time datetime="TODO">
-							<xsl:text>&lt;</xsl:text>
-						</time>
-					</a>
+					<xsl:call-template name="cal-link">
+						<xsl:with-param name="date"  select="$tl:date"/>
+						<xsl:with-param name="delta" select="'-P1M'"/>
+						<xsl:with-param name="rel"   select="'prev'"/>
+						<xsl:with-param name="next"  select=    "&quot;'&lt;&quot;"/>
+						<xsl:with-param name="skip"  select="&quot;'&lt;&lt;&quot;"/>
+						<xsl:with-param name="dtfmt" select="'yyyy-MM'"/>
+						<xsl:with-param name="data"  select="'MM'"/>
+					</xsl:call-template>
 				</li>
 
 				<xsl:for-each select="str:tokenize('1 2 3 4 5 6 7 8 9 10 11 12')">
@@ -383,11 +411,15 @@
 				</xsl:for-each>
 
 				<li>
-					<a href="#TODO" data-month="29"> <!-- TODO: data-month -->
-						<time datetime="TODO">
-							<xsl:text>&gt;</xsl:text>
-						</time>
-					</a>
+					<xsl:call-template name="cal-link">
+						<xsl:with-param name="date"  select="$tl:date"/>
+						<xsl:with-param name="delta" select="'P1M'"/>
+						<xsl:with-param name="rel"   select="'prev'"/>
+						<xsl:with-param name="next"  select=    "&quot;'&gt;&quot;"/>
+						<xsl:with-param name="skip"  select="&quot;'&gt;&gt;&quot;"/>
+						<xsl:with-param name="dtfmt" select="'yyyy-MM'"/>
+						<xsl:with-param name="data"  select="'MM'"/>
+					</xsl:call-template>
 				</li>
 			</li>
 
@@ -398,7 +430,6 @@
 					<xsl:with-param name="rel"   select="'next'"/>
 					<xsl:with-param name="next"  select="&quot;yyyy'&#160;&gt;'&quot;"/>
 					<xsl:with-param name="skip"  select="&quot;yyyy'&#160;&gt;&gt;'&quot;"/>
-					<xsl:with-param name="blank" select="&quot;yyyy'&#160;&gt;'&quot;"/>
 					<xsl:with-param name="dtfmt" select="'yyyy'"/>
 				</xsl:call-template>
 			</li>
