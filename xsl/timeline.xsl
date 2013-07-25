@@ -65,7 +65,7 @@
 
 				<a rel="{$rel}">
 					<xsl:call-template name="tl:href">
-						<xsl:with-param name="date" select="date:ym($dest)"/>
+						<xsl:with-param name="date" select="date:format-date($dest, 'yyyy-MM')"/>
 					</xsl:call-template>
 
 					<time datetime="{date:format-date($dest, $dtfmt)}">
@@ -83,7 +83,7 @@
 
 				<a rel="{$rel}">
 					<xsl:call-template name="tl:href">
-						<xsl:with-param name="date" select="date:ym($date-skip)"/>
+						<xsl:with-param name="date" select="date:format-date($date-skip, 'yyyy-MM')"/>
 					</xsl:call-template>
 
 					<time datetime="{date:format-date($date-skip, $dtfmt)}">
@@ -101,7 +101,7 @@
 
 				<a rel="{$rel}">
 					<xsl:call-template name="tl:href">
-						<xsl:with-param name="date" select="date:ym($date-skip)"/>
+						<xsl:with-param name="date" select="date:format-date($date-skip, 'yyyy-MM')"/>
 					</xsl:call-template>
 
 					<time datetime="{date:format-date($date-skip, $dtfmt)}">
@@ -128,10 +128,10 @@
 
 				<a rel="up">
 					<xsl:call-template name="tl:href">
-						<xsl:with-param name="date" select="date:ym($date)"/>
+						<xsl:with-param name="date" select="date:format-date($date, 'yyyy-MM')"/>
 					</xsl:call-template>
 
-					<time datetime="{date:ym($date)}">
+					<time datetime="{date:format-date($date, 'yyyy-MM')}">
 						<xsl:value-of select="$text"/>
 					</time>
 				</a>
@@ -163,8 +163,7 @@
 						<!-- XXX: no; if displaying the current month (not a day) then omit the link here -->
 						<xsl:call-template name="cal-head">
 							<xsl:with-param name="date" select="$date"/>
-							<xsl:with-param name="text" select="concat(date:month-name($date),
-								'&#160;', date:year($date))"/>
+							<xsl:with-param name="text" select="date:format-date($date, &quot;MMMMM'&#160;'yyyy&quot;)"/>
 						</xsl:call-template>
 					</th>
 					<th class="next">
@@ -249,9 +248,7 @@
 		<xsl:variable name="date" select="tl:pubdate(.)"/>
 
 		<article class="entry">
-			<a name="{concat(date:year($date),
-			   '-', date:month-in-year($date),
-			   '-',  date:day-in-month($date))}"/>
+			<a name="{date:format-date($date, 'yyyy-MM-dd')}"/>
 
 			<h1>
 				<a>
