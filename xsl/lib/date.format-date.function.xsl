@@ -213,7 +213,7 @@
                        <xsl:value-of select="format-number($month, '00')" />
                     </xsl:when>
                     <xsl:otherwise>
-                       <xsl:value-of select="$month" />
+                       <xsl:value-of select="format-number($month, '0')" />
                     </xsl:otherwise>
                  </xsl:choose>
               </xsl:when>
