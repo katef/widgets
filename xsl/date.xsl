@@ -26,14 +26,57 @@
 		        and date:month-in-year($a) = date:month-in-year($b)"/>
 	</func:function>
 
-	<!-- TODO: eventually replace with date:format-date() -->
-	<func:function name="date:ym">
-		<xsl:param name="date"/>
-		<xsl:param name="month" select="date:month-in-year($date)"/>
+	<func:function name="date:make">
+		<xsl:param name="y"/>
+		<xsl:param name="M" select="false()"/>
+		<xsl:param name="d" select="false()"/>
+		<xsl:param name="h" select="false()"/>
+		<xsl:param name="m" select="false()"/>
+		<xsl:param name="s" select="false()"/>
+		<xsl:param name="S" select="false()"/>
+		<xsl:param name="Z" select="false()"/>
 
-		<xsl:variable name="year"  select="date:year($date)"/>
+		<xsl:variable name="yyyy" select="str:align($y, '0000', 'right')"/>
+		<xsl:variable name="MM"   select="str:align($M,   '00', 'right')"/>
+		<xsl:variable name="dd"   select="str:align($d,   '00', 'right')"/>
+		<xsl:variable name="hh"   select="str:align($h,   '00', 'right')"/>
+		<xsl:variable name="mm"   select="str:align($m,   '00', 'right')"/>
+		<xsl:variable name="ss"   select="str:align($s,   '00', 'right')"/>
 
-		<func:result select="concat($year, '-', str:align($month, '00', 'right'))"/>
+		<!-- TODO: eventually replace with snprintf... or something... -->
+		<xsl:choose>
+			<xsl:when test="$Z">
+				<func:result select="concat($yyyy, '-', $MM, '-', $dd, 'T', '$hh', ':', $mm, ':', $ss, '.', '$S', $Z)"/>
+			</xsl:when>
+
+			<xsl:when test="$S">
+				<func:result select="concat($yyyy, '-', $MM, '-', $dd, 'T', '$hh', ':', $mm, ':', $ss, '.', '$S')"/>
+			</xsl:when>
+
+			<xsl:when test="$s">
+				<func:result select="concat($yyyy, '-', $MM, '-', $dd, 'T', '$hh', ':', $mm, ':', $ss)"/>
+			</xsl:when>
+
+			<xsl:when test="$m">
+				<func:result select="concat($yyyy, '-', $MM, '-', $dd, 'T', '$hh', ':', $mm)"/>
+			</xsl:when>
+
+			<xsl:when test="$h">
+				<func:result select="concat($yyyy, '-', $MM, '-', $dd, 'T', '$hh')"/>
+			</xsl:when>
+
+			<xsl:when test="$d">
+				<func:result select="concat($yyyy, '-', $MM, '-', $dd)"/>
+			</xsl:when>
+
+			<xsl:when test="$M">
+				<func:result select="concat($yyyy, '-', $MM)"/>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<func:result select="concat($yyyy)"/>
+			</xsl:otherwise>
+		</xsl:choose>
 	</func:function>
 
 </xsl:stylesheet>

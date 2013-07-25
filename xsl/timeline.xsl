@@ -328,7 +328,7 @@
 		<xsl:param name="month" select="1"/>
 
 		<xsl:call-template name="cal:calendar">
-			<xsl:with-param name="date" select="date:ym($tl:year, $month)"/>
+			<xsl:with-param name="date" select="date:make($tl:year, $month)"/>
 		</xsl:call-template>
 
 		<xsl:if test="$month &lt; 12">
@@ -389,20 +389,20 @@
 
 						<xsl:choose>
 							<xsl:when test="$tl:entries/tl:entry
-								[date:same-month(tl:pubdate(.), date:ym($tl:year, current()))]">
+								[date:same-month(tl:pubdate(.), date:make($tl:year, current()))]">
 								<a>
 									<xsl:call-template name="tl:href">
-										<xsl:with-param name="date" select="date:ym($tl:year, .)"/>
+										<xsl:with-param name="date" select="date:make($tl:year, .)"/>
 									</xsl:call-template>
 
-									<time datetime="{date:ym($tl:year, .)}">
+									<time datetime="{date:make($tl:year, .)}">
 										<xsl:value-of select="."/>
 									</time>
 								</a>
 							</xsl:when>
 
 							<xsl:otherwise>
-								<time datetime="{date:ym($tl:year, .)}">
+								<time datetime="{date:make($tl:year, .)}">
 									<xsl:value-of select="."/>
 								</time>
 							</xsl:otherwise>
@@ -440,7 +440,7 @@
 		<xsl:variable name="date">
 			<xsl:choose>
 				<xsl:when test="$tl:month">
-					<xsl:value-of select="date:ym($tl:year, $tl:month)"/>
+					<xsl:value-of select="date:make($tl:year, $tl:month)"/>
 				</xsl:when>
 
 				<xsl:when test="$tl:year">
@@ -468,7 +468,7 @@
 		<xsl:variable name="date">
 			<xsl:choose>
 				<xsl:when test="$tl:month">
-					<xsl:value-of select="date:ym($tl:year, $tl:month)"/>
+					<xsl:value-of select="date:make($tl:year, $tl:month)"/>
 				</xsl:when>
 
 				<xsl:when test="$tl:year">
@@ -553,7 +553,7 @@
 
 			<xsl:when test="$tl:month">
 				<xsl:apply-templates select="$tl:entries/tl:entry
-					[date:same-month(tl:pubdate(.), date:ym($tl:year, $tl:month))]"/>
+					[date:same-month(tl:pubdate(.), date:make($tl:year, $tl:month))]"/>
 			</xsl:when>
 
 			<xsl:when test="$tl:year">
