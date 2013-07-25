@@ -7,12 +7,13 @@
 	xmlns:date="http://exslt.org/dates-and-times"
 	xmlns:func="http://exslt.org/functions"
 	xmlns:str="http://exslt.org/strings"
+	xmlns:common="http://exslt.org/common"
 	xmlns:cal="http://xml.elide.org/calendar"
 	xmlns:tl="http://xml.elide.org/timeline"
 
-	extension-element-prefixes="date func str"
+	extension-element-prefixes="date func str common"
 
-	exclude-result-prefixes="h date func str tl cal">
+	exclude-result-prefixes="h date func str common tl cal">
 
 	<!--
 		TODO: pass in option for whether to permit comments or not? could even show commit messages as a comment
@@ -548,7 +549,7 @@
 		</xsl:variable>
 
 		<xsl:choose>
-			<xsl:when test="$r = ''"> <!-- XXX: why can't i count($r) here? -->
+			<xsl:when test="count(common:node-set($r)/node()) = 0">
 				<xsl:text>(no entries)</xsl:text>
 			</xsl:when>
 
