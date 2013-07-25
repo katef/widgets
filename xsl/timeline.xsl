@@ -24,6 +24,8 @@
 		 XXX: clicking on a day goes to the wrong #
 	-->
 
+	<xsl:import href="lib/date.format-date.function.xsl"/>
+
 	<xsl:import href="date.xsl"/>
 	<xsl:import href="calendar.xsl"/>
 	<xsl:import href="comment.xsl"/>
@@ -46,10 +48,13 @@
 		<xsl:param name="date"/>
 		<xsl:param name="delta"/>
 		<xsl:param name="rel"/>
-		<xsl:param name="next"/>
-		<xsl:param name="skip"  select="concat($next, $next)"/>
-		<xsl:param name="blank" select="$next"/>
 		<xsl:param name="dest"  select="date:add($date, $delta)"/>
+
+		<!-- these are date:format-date() format strings -->
+		<xsl:param name="next"/>
+		<xsl:param name="skip"/>
+		<xsl:param name="blank" select="$next"/>
+		<xsl:param name="dtfmt" select="'yyyy-MM-dd'"/>
 
 		<xsl:variable name="ds" select="date:seconds(date:add($date, $delta)) - date:seconds($date)"/>
 
@@ -62,8 +67,8 @@
 						<xsl:with-param name="date" select="date:ym($dest)"/>
 					</xsl:call-template>
 
-					<time datetime="{date:ym($dest)}">
-						<xsl:value-of select="$next"/>
+					<time datetime="{date:format-date($dest, $dtfmt)}">
+						<xsl:value-of select="date:format-date($dest, $next)"/>
 					</time>
 				</a>
 			</xsl:when>
@@ -80,8 +85,8 @@
 						<xsl:with-param name="date" select="date:ym($date-skip)"/>
 					</xsl:call-template>
 
-					<time datetime="{date:ym($date-skip)}">
-						<xsl:value-of select="$skip"/>
+					<time datetime="{date:format-date($date-skip, $dtfmt)}">
+						<xsl:value-of select="date:format-date($date-skip, $skip)"/>
 					</time>
 				</a>
 			</xsl:when>
@@ -98,14 +103,16 @@
 						<xsl:with-param name="date" select="date:ym($date-skip)"/>
 					</xsl:call-template>
 
-					<time datetime="{date:ym($date-skip)}">
-						<xsl:value-of select="$skip"/>
+					<time datetime="{date:format-date($date-skip, $dtfmt)}">
+						<xsl:value-of select="date:format-date($date-skip, $skip)"/>
 					</time>
 				</a>
 			</xsl:when>
 
 			<xsl:otherwise>
-				<xsl:value-of select="$blank"/>
+				<time datetime="{date:format-date($dest, $dtfmt)}">
+					<xsl:value-of select="date:format-date($dest, $blank)"/>
+				</time>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -146,7 +153,9 @@
 							<xsl:with-param name="date"  select="$date"/>
 							<xsl:with-param name="delta" select="'-P1M'"/>
 							<xsl:with-param name="rel"   select="'prev'"/>
-							<xsl:with-param name="next"  select="'&lt;'"/>
+							<xsl:with-param name="next"  select="&quot;'&lt;'&quot;"/>
+							<xsl:with-param name="skip"  select="&quot;'&lt;&lt;'&quot;"/>
+							<xsl:with-param name="dtfmt" select="'yyyy-MM'"/>
 						</xsl:call-template>
 					</th>
 					<th class="month" colspan="5">
@@ -162,7 +171,9 @@
 							<xsl:with-param name="date"  select="$date"/>
 							<xsl:with-param name="delta" select="'P1M'"/>
 							<xsl:with-param name="rel"   select="'next'"/>
-							<xsl:with-param name="next"  select="'&gt;'"/>
+							<xsl:with-param name="next"  select="&quot;'&gt;'&quot;"/>
+							<xsl:with-param name="skip"  select="&quot;'&gt;&gt;'&quot;"/>
+							<xsl:with-param name="dtfmt" select="'yyyy-MM'"/>
 						</xsl:call-template>
 					</th>
 				</xsl:when>
@@ -322,12 +333,15 @@
 <!-- TODO: titles for links -->
 <!-- TODO: rel next/prev etc -->
 			<li>
-				<!-- TODO: use cal th link here -->
-				<a href="#TODO"> <!-- TODO: link to YYYY-MM not YYYY -->
-					<time datetime="TODO">
-						<xsl:text>2006</xsl:text> <!-- TODO: not $tl:year-1, but rather search for year -->
-					</time>
-				</a>
+				<xsl:call-template name="cal-link">
+					<xsl:with-param name="date"  select="$tl:date"/>
+					<xsl:with-param name="delta" select="'-P1Y'"/>
+					<xsl:with-param name="rel"   select="'prev'"/>
+					<xsl:with-param name="next"  select=    "&quot;'&lt;&#160;'yyyy&quot;"/>
+					<xsl:with-param name="skip"  select="&quot;'&lt;&lt;&#160;'yyyy&quot;"/>
+					<xsl:with-param name="blank" select=    "&quot;'&lt;&#160;'yyyy&quot;"/>
+					<xsl:with-param name="dtfmt" select="'yyyy'"/>
+				</xsl:call-template>
 			</li>
 
 			<li class="group">
@@ -380,12 +394,15 @@
 			</li>
 
 			<li>
-				<!-- TODO: use cal th link here -->
-				<a href="#TODO"> <!-- TODO: link to YYYY-MM not YYYY -->
-					<time datetime="TODO">
-						<xsl:text>2010</xsl:text> <!-- TODO: not $tl:year-1, but rather search for year -->
-					</time>
-				</a>
+				<xsl:call-template name="cal-link">
+					<xsl:with-param name="date"  select="$tl:date"/>
+					<xsl:with-param name="delta" select="'P1Y'"/>
+					<xsl:with-param name="rel"   select="'next'"/>
+					<xsl:with-param name="next"  select="&quot;yyyy'&#160;&gt;'&quot;"/>
+					<xsl:with-param name="skip"  select="&quot;yyyy'&#160;&gt;&gt;'&quot;"/>
+					<xsl:with-param name="blank" select="&quot;yyyy'&#160;&gt;'&quot;"/>
+					<xsl:with-param name="dtfmt" select="'yyyy'"/>
+				</xsl:call-template>
 			</li>
 		</ol>
 	</xsl:template>
