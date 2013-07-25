@@ -375,7 +375,7 @@
 						<xsl:with-param name="next"  select=    "&quot;'&lt;&quot;"/>
 						<xsl:with-param name="skip"  select="&quot;'&lt;&lt;&quot;"/>
 						<xsl:with-param name="dtfmt" select="'yyyy-MM'"/>
-						<xsl:with-param name="data"  select="'MM'"/>
+						<xsl:with-param name="data"  select="'M'"/>
 					</xsl:call-template>
 				</li>
 
@@ -418,7 +418,7 @@
 						<xsl:with-param name="next"  select=    "&quot;'&gt;&quot;"/>
 						<xsl:with-param name="skip"  select="&quot;'&gt;&gt;&quot;"/>
 						<xsl:with-param name="dtfmt" select="'yyyy-MM'"/>
-						<xsl:with-param name="data"  select="'MM'"/>
+						<xsl:with-param name="data"  select="'M'"/>
 					</xsl:call-template>
 				</li>
 			</li>
