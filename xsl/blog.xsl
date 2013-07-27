@@ -36,7 +36,7 @@
 	<xsl:template name="tl:title">
 		<xsl:choose>
 			<xsl:when test="$tl:date">
-				<xsl:value-of select="$tl:date"/>
+				<xsl:value-of select="translate($tl:date, '-', '&#8211;')"/>
 			</xsl:when>
 
 			<xsl:otherwise>

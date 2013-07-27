@@ -287,7 +287,7 @@
 			</h1>
 
 			<time pubdate="pubdate">
-				<xsl:value-of select="$date"/>
+				<xsl:value-of select="translate($date, '-', '&#8211;')"/>
 			</time>
 
 <!-- TODO: placeholder for tags
