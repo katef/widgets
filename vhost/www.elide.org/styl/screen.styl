@@ -1,12 +1,10 @@
 /* $Id$ */
 
-$full-min = 700px; // TODO: shouldn't be here
-
-$full-half = $full-min * 0.5;
+$full-min  = 700px;
 
 /* TODO: define these in em */
 
-@media only screen and (max-width: $full-half) {
+@media only screen and (max-width: $full-min * 0.5) {
 	section.page article.entry,
 	nav#monthindex {
 		margin-left: 0;

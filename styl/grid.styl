@@ -22,11 +22,11 @@
  *   $grid-gutter    Space between one column and the next
  */
 
-$grid-width   = 100%;    // e.g. 100%, or e.g. 800px (and set $grid-margin to auto)
-$grid-ncols   = 12;      // e.g. 12
-$grid-margin  = 0   10%; // e.g. 2em, or e.g. 15%
-$grid-padding = 1em 1em; // e.g. 10px 5%
-$grid-gutter  = 2em;     // e.g. 2em, or e.g. 6%. Ought to be an even number
+$grid-width   ?= 100%;    // e.g. 100%, or e.g. 800px (and set $grid-margin to auto)
+$grid-ncols   ?= 12;      // e.g. 12
+$grid-margin  ?= 0   10%; // e.g. 2em, or e.g. 15%
+$grid-padding ?= 1em 1em; // e.g. 10px 5%
+$grid-gutter  ?= 2em;     // e.g. 2em, or e.g. 6%. Ought to be an even number
 
 @import "misc.styl";
 
