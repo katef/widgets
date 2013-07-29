@@ -4,6 +4,14 @@
 /* TODO: gradients for backgrounds */
 /* TODO: rounded corners */
 
+.clearfix () {
+	&:after {
+		content: "";
+		display: table;
+		clear:   both;
+	}
+}
+
 .opacity (@o: 100%) {
 	/* TODO: */
 	zoom: 1;
