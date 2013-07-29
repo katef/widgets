@@ -47,8 +47,6 @@
 }
 
 .grid-indent (@colspan: 1) {
-	& :before {
-		.grid-column (@colspan);
-	}
+	margin-left: @grid-width * (@colspan / @grid-ncols);
 }
 
