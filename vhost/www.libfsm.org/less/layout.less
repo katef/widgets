@@ -1,16 +1,20 @@
 /* $Id$ */
 
-body section.page {
+section.page {
 	padding: @grid-baseline 1em;
-
-	.grid-container;
 }
 
-body section.page nav.menu {
+header, nav.menu, section.page, footer {
+	.grid-container(0 1em, 0);
+}
+
+nav.menu {
+/* XXX:
 	margin-top:   -@grid-baseline;
 	margin-left:  -1em;
 	margin-right: -1em;
 	margin-bottom: 0;
+*/
 }
 
 nav#monthindex {
@@ -38,7 +42,9 @@ article.entry p {
 }
 
 body section.page {
+/* XXX:
 	position: relative;
+*/
 }
 
 nav.sidebar {
@@ -46,8 +52,9 @@ nav.sidebar {
 	top:      (@grid-baseline * 7);
 /* TODO:
 	width:    (@grid-width    * 3);
-*/
 	right:    1em;
 	position: absolute;
+*/
+	display: none;
 }
 

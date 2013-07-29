@@ -15,7 +15,7 @@
 
 @pages-inact-border:        #ddd;
 @pages-inact-background:    transparent;
-@pages-inact-color:         #ddd;
+@pages-inact-color:         #bbb;
 
 @pages-hover-border:        darken(@pages-hover-background, 10%);
 @pages-hover-background:    #eee;
@@ -76,24 +76,5 @@ article.entry ul.tags {
 
 nav#monthindex > a {
 	float: right;
-}
-
-nav#monthindex ol.pages > li:first-child > time:before,
-nav#monthindex ol.pages > li:first-child > a:before {
-/*
-	content: "\2190\00a0";
-	padding-right: 1ex;
-*/
-	content: "<\00a0";
-}
-
-nav#monthindex ol.pages > li:last-child > time:after,
-nav#monthindex ol.pages > li:last-child > a:after {
-/*
-	content: "\00a0\2192";
-	content: "\00a0>>";
-	padding-left: 1ex;
-*/
-	content: "\00a0>";
 }
 
