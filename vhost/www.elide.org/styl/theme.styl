@@ -1,0 +1,24 @@
+/* $Id$ */
+
+$www-css = "http://www.elide.org/css";
+
+$grid-baseline = 19px;
+$grid-basefont = 14px;
+
+$grid-width  = 100%;
+$grid-margin = 0%;
+$grid-gutter = $grid-baseline;
+$grid-ncols  = 6;
+$grid-page   = $grid-ncols * $grid-baseline * 6;
+
+/*
+ * The grid this layout is actually set on is two fixed-width columns
+ * of 6 * @grid-baseline each, followed by one auto-width column which
+ * fills the remaining space. Of course overlay.less can't show that.
+ * Tools eternally fall short of what I want them to be.
+ */
+
+$full-min = 700px; /* threshold for going "fullscreen" */
+
+$cal-cell = 2em;
+

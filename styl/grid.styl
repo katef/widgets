@@ -1,0 +1,52 @@
+/* $Id$ */
+
+/*
+ * Layout looks like so:
+ *
+ *   ├─────────────────────────── parent ────────────────────────┤
+ *   ╎    ├───────────────── .grid-container ────────────────┤   ╎
+ *   │    ╎          ├──┤ $grid-gutter                       ╎   │
+ *   │    ░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░   │
+ *   │    ░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░   │
+ *   │    ░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░   │
+ *   │    ░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░   │
+ *   ╎   ╎               ├───────┤ automatic column width        │
+ *   ├───┤ $grid-margin                                          │
+ *
+ * All variables may be either percentage or fixed widths.
+ *
+ *   $grid-width     Width of the container, relative to its parent. E.g. 100%
+ *   $grid-ncols     Number of columns
+ *   $grid-margin    Margin outside .grid-container
+ *   $grid-padding   Padding inside .grid-container (not illustrated)
+ *   $grid-gutter    Space between one column and the next
+ */
+
+$grid-width   = 100%;    // e.g. 100%, or e.g. 800px (and set $grid-margin to auto)
+$grid-ncols   = 12;      // e.g. 12
+$grid-margin  = 0   10%; // e.g. 2em, or e.g. 15%
+$grid-padding = 1em 1em; // e.g. 10px 5%
+$grid-gutter  = 2em;     // e.g. 2em, or e.g. 6%. Ought to be an even number
+
+@import "misc.styl";
+
+grid-container($padding = $grid-padding, $margin = $grid-margin) {
+	padding: $padding;
+	margin:  $margin;
+
+	clearfix;
+}
+
+grid-column($colspan = 1) {
+	float: left;
+	width: ($grid-width * ($colspan / $grid-ncols));
+
+	padding: 0 ($grid-gutter / 2);
+
+	box-sizing(border-box);
+}
+
+grid-indent($colspan = 1) {
+	margin-left: ($grid-width * ($colspan / $grid-ncols));
+}
+

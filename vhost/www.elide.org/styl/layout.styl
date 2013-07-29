@@ -1,0 +1,110 @@
+/* $Id$ */
+
+$grid-basefont = 18px; // TODO
+
+body {
+	margin:  0;
+	padding: 0;
+	padding-bottom: ($grid-baseline * 3);
+}
+
+header, footer, section.page, nav#sidebar, nav.pages {
+	grid-container;
+	padding-right: $grid-baseline;
+}
+
+header {
+	margin-bottom: $grid-baseline;
+}
+
+header h1 {
+	font-size:   ($grid-basefont * 2);
+	padding-top: ceil($grid-baseline * 1.5);
+	line-height: ($grid-baseline * 2);
+}
+
+header ul#contents {
+	position: relative;
+	top: floor(-($grid-baseline * 0.5));
+}
+
+footer {
+	margin-top: ($grid-baseline * 2);
+	margin-bottom: ($grid-baseline * 2);
+	display: none; /* XXX */
+}
+
+nav#monthindex,
+section.page nav.pages,
+section.page article.entry {
+	margin-left: ($grid-baseline * 6);
+}
+
+nav#monthindex {
+	display: block;
+	margin-top:    ($grid-baseline * 1);
+	margin-bottom: ($grid-baseline * 1);
+}
+
+nav#monthindex ol.pages {
+	float: left;
+}
+
+nav#monthindex > a {
+	float: right;
+}
+
+article.entry a[name],
+article.entry ul.tags {
+	margin-left: -($grid-baseline * 6);
+	width: ($grid-baseline * 5);
+
+	position: absolute;
+
+	text-align: right;
+}
+
+article.entry a[name] time[pubdate] {
+}
+
+article.entry ul.tags {
+	margin-top: ($grid-baseline * 1);
+}
+
+article.entry ul.tags li {
+	font-size: ($grid-basefont - 1px);
+}
+
+nav#sidebar {
+	display: none;
+}
+
+nav#sidebar table.calendar {
+	table-layout: fixed;
+
+	max-width: (12 * $grid-baseline);
+	margin-left: (6 * $grid-baseline);
+	width: 50%;
+
+	/* TODO: mixin? */
+	border-spacing: 0 ! important;
+	border-collapse: collapse ! important;
+}
+
+nav#sidebar ol.years {
+	display: none;
+	float: left;
+	margin-left: $grid-gutter;
+	margin-bottom: $grid-gutter;
+}
+
+nav.pages {
+	padding-top:    ($grid-baseline * 1);
+	padding-bottom: ($grid-baseline * 4);
+}
+
+pre {
+	overflow-y: auto;
+	margin-left: $grid-baseline;
+}
+

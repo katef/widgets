@@ -1,0 +1,39 @@
+/* $Id$ */
+
+/* TODO: clearfix */
+/* TODO: gradients for backgrounds */
+/* TODO: rounded corners */
+
+clearfix() {
+	&:after {
+		content: "";
+		display: table;
+		clear:   both;
+	}
+}
+
+opacity($o = 100%) {
+	/* TODO: */
+//	zoom: 1;
+//	filter: alpha(opacity=30);
+//	opacity: 0.3;
+}
+
+shadow($h, $v, $b, $s, $c = #000) {
+	-moz-box-shadow:    $h $v $b $s $c;
+	-webkit-box-shadow: $h $v $b $s $c;
+	box-shadow:         $h $v $b $s $c;
+}
+
+box-sizing($s = content-box) {
+	-webkit-box-sizing: $s; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing:    $s; /* Firefox, other Gecko */
+	box-sizing:         $s; /* Opera/IE 8+ */
+}
+
+tab-size($t = 1.5em) {
+	-moz-tab-size: $t;
+	-o-tab-size:   $t;
+	tab-size:      $t;
+}
+
