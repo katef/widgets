@@ -86,6 +86,7 @@ section.page article.entry {
 
 nav#monthindex {
 	grid-column($grid-ncols);
+	grid-indent(0);
 
 	display: block;
 	margin-top:    ($grid-baseline * 1);
@@ -101,26 +102,28 @@ nav#monthindex {
 		float: right;
 	}
 
-	/* respond when the #monthindex is too narrow to fit all 12 months explicitly */
-	$q = "all and " + grid-respond("max", $grid-basefont * 28, 4);
+	/* respond when 1 colspan has a min-width wide enough for "YYYY-MM-DD" */
+	$q = "all and " + grid-respond("min", 100px, 1);
 	@media $q {
-		pages-collapse(data-fmt);
-
-		grid-column($grid-ncols);
-		grid-indent(0);
-
-		/* TODO: inherit same $q as for "YYYY-MM-DD" */
-		/* respond when 1 colspan has a min-width wide enough for "YYYY-MM-DD" */
-		$q = "all and " + grid-respond("min", 100px, 1);
-		@media $q {
-			grid-column($grid-ncols - 1);
-			grid-indent(1);
-		}
-
-		/* TODO: when it's really narrow, lose the attr() and fold all li's into one lozenge */
+		grid-column($grid-ncols - 1);
+		grid-indent(1);
 	}
 
-	/* TODO: when #monthindex is wide enough, indent it one column */
+	/* TODO: could animate collapsing by transitioning on width to 0 */
+
+	/* respond when the #monthindex is too narrow to fit all 12 months explicitly */
+	$q = "all and " + grid-respond("max", $grid-basefont * 30, 4);
+	@media $q {
+		pages-collapse(data-fmt);
+	}
+
+	/* respond when the #monthindex is too narrow to fit the attr() months */
+	$q = "all and " + grid-respond("max", $grid-basefont * 12, 3);
+	@media $q {
+		pages-collapse(false);
+
+		/* TODO: fold all li's into one lozenge */
+	}
 }
 
 article.entry {
@@ -141,7 +144,7 @@ nav#sidebar {
 
 		max-width: (12 * $grid-baseline);
 		margin-left: (6 * $grid-baseline);
-		width: 50%;
+		width: 100%;
 
 		/* TODO: mixin? */
 		border-spacing: 0 ! important;
