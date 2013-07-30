@@ -35,9 +35,42 @@ footer {
 }
 
 nav#monthindex,
-section.page nav.pages,
+section.page nav.pages {
+	grid-column($grid-ncols);
+}
+
 section.page article.entry {
-	margin-left: ($grid-baseline * 6);
+	grid-column($grid-ncols);
+color: red;
+
+	a[name],
+	ul.tags {
+		margin-left: 0;
+		display: block;
+		position: relative;
+		text-align: left;
+	}
+
+	// indent (for hanging timestamps) where the media is such that an article.entry is of a minimum width of 350px
+	/* TODO: now i should make a convenience which lets me say "when a line is under 20em wide" */
+	$q = "all and " + grid-respond("min", 350px, $grid-ncols - 1);
+	@media $q {
+color: blue;
+		grid-column($grid-ncols - 1);
+		grid-indent(1);
+
+		a[name],
+		ul.tags {
+			/* TODO: make this a grid-exdent() mixin */
+			margin-left: -($grid-baseline * 6);
+			width:        ($grid-baseline * 5);
+
+			position: absolute;
+
+			text-align: right;
+		}
+
+	}
 }
 
 nav#monthindex {
@@ -55,16 +88,6 @@ nav#monthindex {
 }
 
 article.entry {
-	a[name],
-	ul.tags {
-		margin-left: -($grid-baseline * 6);
-		width:        ($grid-baseline * 5);
-
-		position: absolute;
-
-		text-align: right;
-	}
-
 	ul.tags {
 		margin-top: ($grid-baseline * 1);
 
@@ -92,7 +115,7 @@ nav#sidebar {
 	ol.years {
 		display: none;
 		float: left;
-		margin-left: $grid-gutter;
+		margin-left:   $grid-gutter;
 		margin-bottom: $grid-gutter;
 	}
 }
