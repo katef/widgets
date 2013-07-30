@@ -104,3 +104,29 @@ ol.pages {
 	}
 
 }
+
+pages-collapse($attr = false) {
+
+	ol.pages li.group li {
+		display: none;
+
+		&:first-child,
+		&:last-child {
+			display: inline;
+		}
+
+		if ($data) {
+			&:first-child > time:after,
+			&:first-child a:after {
+				content: "\00a0" attr($attr);
+			}
+
+			&:last-child > time:before,
+			&:last-child a:before {
+				content: attr($attr) "\00a0";
+			}
+		}
+	}
+
+}
+
