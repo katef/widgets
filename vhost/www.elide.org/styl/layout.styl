@@ -41,7 +41,6 @@ section.page nav.pages {
 
 section.page article.entry {
 	grid-column($grid-ncols);
-color: red;
 
 	a[name],
 	ul.tags {
@@ -51,25 +50,22 @@ color: red;
 		text-align: left;
 	}
 
-	// indent (for hanging timestamps) where the media is such that an article.entry is of a minimum width of 350px
-	/* TODO: now i should make a convenience which lets me say "when a line is under 20em wide" */
-	$q = "all and " + grid-respond("min", 350px, $grid-ncols - 1);
+	/* respond when 1 colspan has a min-width wide enough for "YYYY-MM-DD" */
+	$q = "all and " + grid-respond("min", 100px, 1);
 	@media $q {
-color: blue;
 		grid-column($grid-ncols - 1);
 		grid-indent(1);
 
 		a[name],
 		ul.tags {
-			/* TODO: make this a grid-exdent() mixin */
-			margin-left: -($grid-baseline * 6);
-			width:        ($grid-baseline * 5);
+			grid-column(1);
+			grid-ident(-1);
 
 			position: absolute;
+			left: 0;
 
 			text-align: right;
 		}
-
 	}
 }
 
