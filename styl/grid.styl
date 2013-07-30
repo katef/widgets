@@ -30,6 +30,34 @@ $grid-gutter  ?= 2em;     // e.g. 2em, or e.g. 6%. Ought to be an even number
 
 @import "misc.styl";
 
+/*
+ * This gives the screen width (in pixels) if we imagine a column is $width
+ * pixels wide. This is intended to be useful for for responsive layouts.
+ */
+grid-imagine($width, $colspan = 1) {
+	/* TODO: assert $width is in px */
+	$grid-ncols * ($width / $colspan);
+}
+
+/*
+ * Produce a media query expression which is true where the given colspan is larger
+ * (or smaller) than the given pixel width. For example:
+ * 
+ *    $q = "all and " + grid-respond("min", 100px, 1);
+ *    @media $q {
+ *         color: red;
+ *    }
+ *
+ * The above will apply on media where the minimum width for one column is 100px.
+ */
+grid-respond($m, $width, $colspan = 1) {
+	"(" + $m + "-width: " + grid-imagine($width, $colspan) + ")";
+}
+
+grid-colwidth($colspan = 1, $width = $grid-width) {
+	$width * ($colspan / $grid-ncols);
+}
+
 grid-container($padding = $grid-padding, $margin = $grid-margin) {
 	padding: $padding;
 	margin:  $margin;
@@ -39,7 +67,7 @@ grid-container($padding = $grid-padding, $margin = $grid-margin) {
 
 grid-column($colspan = 1) {
 	float: left;
-	width: ($grid-width * ($colspan / $grid-ncols));
+	width: grid-colwidth($colspan);
 
 	padding: 0 ($grid-gutter / 2);
 
@@ -47,6 +75,6 @@ grid-column($colspan = 1) {
 }
 
 grid-indent($colspan = 1) {
-	margin-left: ($grid-width * ($colspan / $grid-ncols));
+	margin-left: grid-colwidth($colspan);
 }
 
