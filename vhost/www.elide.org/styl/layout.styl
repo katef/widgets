@@ -10,6 +10,8 @@ body {
 
 section.page {
 	grid-container();
+
+	// TODO: max-width: $grid-baseline * 100;
 }
 
 header, footer {
@@ -83,19 +85,42 @@ section.page article.entry {
 }
 
 nav#monthindex {
+	grid-column($grid-ncols);
+
 	display: block;
 	margin-top:    ($grid-baseline * 1);
 	margin-bottom: ($grid-baseline * 1);
 
 	font-size: .9em;
 
-	nav#monthindex ol.pages {
+	ol.pages {
 		float: left;
 	}
 
-	nav#monthindex > a {
+	> a {
 		float: right;
 	}
+
+	/* respond when the #monthindex is too narrow to fit all 12 months explicitly */
+	$q = "all and " + grid-respond("max", $grid-basefont * 28, 4);
+	@media $q {
+		pages-collapse(data-fmt);
+
+		grid-column($grid-ncols);
+		grid-indent(0);
+
+		/* TODO: inherit same $q as for "YYYY-MM-DD" */
+		/* respond when 1 colspan has a min-width wide enough for "YYYY-MM-DD" */
+		$q = "all and " + grid-respond("min", 100px, 1);
+		@media $q {
+			grid-column($grid-ncols - 1);
+			grid-indent(1);
+		}
+
+		/* TODO: when it's really narrow, lose the attr() and fold all li's into one lozenge */
+	}
+
+	/* TODO: when #monthindex is wide enough, indent it one column */
 }
 
 article.entry {
