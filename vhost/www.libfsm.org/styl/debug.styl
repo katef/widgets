@@ -5,11 +5,15 @@
 @import "grid.styl";
 @import "overlay.styl";
 
-html.debug ol.overlay#cols {
-	display: block;
-}
+html.debug {
+	ol.overlay {
+		&#cols {
+			display: block;
+		}
 
-html.debug ol.overlay#rows {
-	display: block;
+		&#rows {
+			display: block;
+		}
+	}
 }
 

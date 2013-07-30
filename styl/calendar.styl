@@ -1,25 +1,29 @@
 /* $Id$ */
 
-table.calendar tr th.month {
-	text-align: center;
-}
+table.calendar {
 
-table.calendar td,
-table.calendar th {
-	text-align: right;
-	min-width: $grid-baseline;
-}
+	tr th.month {
+		text-align: center;
+	}
 
-table.calendar td.today {
-	background-color: #eee;
-}
+	td,
+	th {
+		text-align: right;
+		min-width: $grid-baseline;
+	}
 
-table.calendar tr:first-child th {
-	text-align: center;
-}
+	td.today {
+		background-color: #eee;
+	}
 
-table.calendar tr:first-child th:first-child,
-table.calendar tr:first-child th:last-child {
-	text-align: right;
+	tr:first-child th {
+		text-align: center;
+
+		&:first-child,
+		&:last-child {
+			text-align: right;
+		}
+	}
+
 }
 

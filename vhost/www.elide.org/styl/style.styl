@@ -24,15 +24,21 @@ $pages-hover-color      = $black;
 body {
 	font-family: 'Maven Pro', 'sans serif';
 	word-spacing: -1px;
+
+	/* optimiseLegibility actually looks worse for Maven Pro. "Pro" indeed... */
+	text-rendering: geometricPrecision;
+
+	td {
+		text-align: justify;
+	}
+
+	th {
+		font-weight: normal;
+	}
 }
 
 tt, code, pre {
 	font-family: 'Ubuntu Mono', 'monospace';
-}
-
-body {
-	/* optimiseLegibility actually looks worse for Maven Pro. "Pro" indeed... */
-	text-rendering: geometricPrecision;
 }
 
 h1 {
@@ -41,37 +47,31 @@ h1 {
 	text-rendering: optimizeLegibility;
 }
 
-body, td {
-	text-align: justify;
-}
-
-body, th {
-	font-weight: normal;
-}
-
 header ul#contents {
 	list-style-type: none;
-}
 
-header ul#contents li {
-	display: inline-block;
-	margin-right: 1em;
+	li {
+		display: inline-block;
+		margin-right: 1em;
+	}
 }
 
 nav#sidebar ol.years {
 	list-style-type: none;
+
+	li {
+		display: block;
+	}
 }
 
-nav#sidebar ol.years li {
-	display: block;
-}
+article.entry {
+	h1 {
+		display: none;
+	}
 
-article.entry h1 {
-	display: none;
-}
-
-article.entry ul.tags {
-	display: none;
+	ul.tags {
+		display: none;
+	}
 }
 
 nav#monthindex > a {

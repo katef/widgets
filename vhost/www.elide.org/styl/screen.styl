@@ -18,7 +18,6 @@ $full-min  = 700px;
 		text-align: left;
 	}
 
-
 	header h1 {
 		line-height: ($grid-baseline * 1.5);
 		font-size:   ($grid-baseline * 1.2);
@@ -32,21 +31,21 @@ $full-min  = 700px;
 
 	nav#monthindex ol.pages li.group li {
 		display: none;
-	}
 
-	nav#monthindex ol.pages li.group li:first-child,
-	nav#monthindex ol.pages li.group li:last-child {
-		display: inline;
-	}
+		&:first-child,
+		&:last-child {
+			display: inline;
+		}
 
-	nav#monthindex ol.pages li.group li:first-child > time:after,
-	nav#monthindex ol.pages li.group li:first-child a:after {
-		content: "\00a0" attr(data-fmt);
-	}
+		&:first-child > time:after,
+		&:first-child a:after {
+			content: "\00a0" attr(data-fmt);
+		}
 
-	nav#monthindex ol.pages li.group li:last-child > time:before,
-	nav#monthindex ol.pages li.group li:last-child a:before {
-		content: attr(data-fmt) "\00a0";
+		&:last-child > time:before,
+		&:last-child a:before {
+			content: attr(data-fmt) "\00a0";
+		}
 	}
 
 }
@@ -61,15 +60,11 @@ $full-min  = 700px;
 		top: ($grid-baseline * 6);
 	}
 
-	nav.pages {
-		display: block;
-	}
-
 	nav#sidebar ol.years {
 		display: block;
 	}
 
-	section.page article.entry, nav#pages, nav#monthindex {
+	section.page article.entry, nav#monthindex {
 		max-width: ($grid-baseline * 35);
 	}
 

@@ -36,36 +36,38 @@ header {
 	background-color: $primary;
 	color: #fff;
 
-/* TODO: mixin */
-/* XXX: do i even want this?
-background-image: linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
-background-image: -o-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
-background-image: -moz-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
-background-image: -webkit-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
-background-image: -ms-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
+	/* TODO: mixin */
+	/* XXX: do i even want this?
+	background-image: linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
+	background-image: -o-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
+	background-image: -moz-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
+	background-image: -webkit-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
+	background-image: -ms-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
 
-background-image: -webkit-gradient(
-	linear,
-	left bottom,
-	left top,
-	color-stop(0.15, rgb(235,72,54)),
-	color-stop(0.72, rgb(240,73,55))
-);
-*/
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.15, rgb(235,72,54)),
+		color-stop(0.72, rgb(240,73,55))
+	);
+	*/
 
 	shadow(0px, 0px, 2px, 1px, #aaa);
-}
 
-header ul#contents li.current a {
-	color: #fff;
-}
+	ul#contents {
+		li.current a {
+			color: #fff;
+		}
 
-header ul#contents li a {
-	color: lighten($primary, 50%);
-}
+		li a {
+			color: lighten($primary, 50%);
 
-header ul#contents li a:hover {
-	color: #fff;
+			&:hover {
+				color: #fff;
+			}
+		}
+	}
 }
 
 a:hover code, a:hover {
@@ -82,15 +84,17 @@ tt.rcsid {
 	color: $dark;
 }
 
-article.entry time[pubdate] {
-	color: $light;
+article.entry {
+	a:hover time {
+		color: $black;
+	}
+
+	time[pubdate] {
+		color: $light;
+	}
 }
 
 table.calendar td {
 	color: $light;
-}
-
-article.entry a:hover time {
-	color: $black;
 }
 

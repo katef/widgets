@@ -47,24 +47,22 @@
 	article.entry {
 		grid-column($grid-ncols - 3) ! important;
 		grid-indent(1) ! important;
-	}
 
-	article.entry {
 		position: relative;
-	}
 
-	article.entry ul.tags {
-		position: absolute;
-		top: ($grid-baseline * 0.5); /* optical alignment to line-centered <h1> */
-		float: left;
+		ul.tags {
+			position: absolute;
+			top: ($grid-baseline * 0.5); /* optical alignment to line-centered <h1> */
+			float: left;
 /* TODO:
-		left: (-$grid-width * 1);
-		width: ($grid-width * 1);
+			left: (-$grid-width * 1);
+			width: ($grid-width * 1);
 */
-	}
 
-	article.entry ul.tags li {
-		display: block;
+			li {
+				display: block;
+			}
+		}
 	}
 
 	nav.sidebar {

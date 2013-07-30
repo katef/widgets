@@ -14,9 +14,7 @@ ol.overlay {
 
 	width:    auto;
 	height:   auto;
-}
 
-ol.overlay {
 	display:  none;
 
 	list-style-type: none;
@@ -24,48 +22,49 @@ ol.overlay {
 	opacity (30%);
 
 	pointer-events: none;
-}
 
-ol.overlay#cols {
-	grid-container;
+	&#cols {
+		grid-container;
 
-	border-right: dotted 1px;
-	margin-right: -1px;
-}
+		border-right: dotted 1px;
+		margin-right: -1px;
 
-ol.overlay#cols li {
-	grid-column;
+		li {
+			grid-column;
 
-	min-height: 100%;
+			min-height: 100%;
 
-	position: relative; /* for :after */
-}
+			position: relative; /* for :after */
 
-ol.overlay#cols li:after {
-	position: absolute;
+			&:after {
+				position: absolute;
 
-	top:      0;
-	right:    $grid-gutter;
-	bottom:   0;
-	left:     0;
+				top:      0;
+				right:    $grid-gutter;
+				bottom:   0;
+				left:     0;
 
-	margin:  0;
-	padding: 0;
+				margin:  0;
+				padding: 0;
 
-	width:    auto;
-	height:   auto;
+				width:    auto;
+				height:   auto;
 
-	content: '\0000A0';
-	background-color: $grid-colour;
-}
+				content: '\0000A0';
+				background-color: $grid-colour;
+			}
+		}
+	}
 
-ol.overlay#rows li {
-	margin:   0;
-	padding:  0;
-	width:    auto;
-	height:   $grid-baseline;
+	&#rows li {
+		margin:   0;
+		padding:  0;
+		width:    auto;
+		height:   $grid-baseline;
 
-	border-bottom: solid 1px #bbb;
-	margin-bottom: -1px;
+		border-bottom: solid 1px #bbb;
+		margin-bottom: -1px;
+	}
+
 }
 

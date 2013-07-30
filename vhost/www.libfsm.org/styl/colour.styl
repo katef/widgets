@@ -31,18 +31,21 @@ a:hover {
 	text-decoration: underline;
 }
 
-table.calendar th {
-	color: #666;
+table.calendar {
+	th {
+		color: #666;
+	}
+
+	td {
+		color: #ddd;
+
+		&.today {
+			background-color: #eee;
+			color: #ccc;
+		}
+	}
 }
 
-table.calendar td {
-	color: #ddd;
-}
-
-table.calendar td.today {
-	background-color: #eee;
-	color: #ccc;
-}
 
 nav.sidebar ol.years li a:hover,
 nav.sidebar table.calendar td a:hover,
