@@ -8,16 +8,21 @@ body {
 	padding-bottom: ($grid-baseline * 3);
 }
 
-header, footer, section.page, nav#sidebar, nav.pages {
-	grid-container;
-	padding-right: $grid-baseline;
+section.page {
+	grid-container();
+}
+
+header, footer {
+	/* XXX: better to use grid-container() if possible. or both -container and -column,
+	in which case -column ought to look for existing @padding and just add to it */
+	padding: $grid-padding[0] ($grid-padding[1] + $grid-gutter / 2);
 }
 
 header {
 	margin-bottom: $grid-baseline;
 
 	h1 {
-		font-size:   ($grid-basefont * 2);
+		font-size:   ($grid-basefont * 1.5);
 		padding-top: ceil($grid-baseline * 1.5);
 		line-height: ($grid-baseline * 2);
 	}
@@ -73,6 +78,8 @@ nav#monthindex {
 	display: block;
 	margin-top:    ($grid-baseline * 1);
 	margin-bottom: ($grid-baseline * 1);
+
+	font-size: .9em;
 
 	nav#monthindex ol.pages {
 		float: left;
