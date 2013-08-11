@@ -17,18 +17,19 @@
 
 	<!-- TODO: rename contents to toc -->
 	<c:contents>
-		<c:category href="http://diary.elide.org/"        name="Diary"/>
-		<c:category href="http://www.elide.org/snippets/" name="Snippets"/>
-		<c:category href="http://www.elide.org/small/"    name="Small"/>
-		<c:category href="http://www.elide.org/projects/" name="Projects"/>
-		<c:category href="http://www.elide.org/contact/"  name="Contact"/>
+		<c:category href="/diary/"    name="Diary"/>
+		<c:category href="/articles/" name="Articles"/>
+		<c:category href="/snippets/" name="Snippets"/>
+		<c:category href="/small/"    name="Small"/>
+		<c:category href="/projects/" name="Projects"/>
+		<c:category href="/about/"  name="About"/>
 	</c:contents>
 
 	<xsl:template name="e:contents">
 		<ul id="contents">
 			<xsl:for-each select="document('')//c:contents/c:category">
 				<li>
-					<xsl:if test="starts-with(concat($scheme, '://', $host, $uri), @href)">
+					<xsl:if test="starts-with($uri, @href)">
 						<xsl:attribute name="class">
 							<xsl:text>current</xsl:text>
 						</xsl:attribute>

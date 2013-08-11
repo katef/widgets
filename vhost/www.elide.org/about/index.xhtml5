@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>About</title>
+	</head>
+
+	<body>
+		<p>This website is just a collection of a few bits and
+			pieces, mostly to do with programming in C, which I
+			think might possibly be of interest
+			to somebody. I tend to be pretty bad at getting
+			things done, so I'm using this to help prompt me
+			into finishing off things enough that I can put
+			them here.</p>
+
+		<p>I favour small, simple implementations. I try to write
+			portable code. I like lexing, parsing, compilers,
+			standards compliance, and I especially enjoy writing
+			those tidy little functions which seem to suit C so
+			nicely.</p>
+
+		<p>You can find me on <a href="http://www.freenode.net/">irc.freenode.net</a>
+			as <code>kate`</code>  and (possibly) email me as
+			<tt>kate@</tt> this domain name.</p>
+	</body>
+</html>
+
