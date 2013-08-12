@@ -1,8 +1,5 @@
 /* $Id$ */
 
-@import "config.less";
-
-
 table th.table-sortable:hover {
 	cursor: pointer;
 	background-color: #eee;
@@ -41,7 +38,7 @@ table th {
 }
 
 table {
-	margin: (@grid-baseline - 2px) (@grid-indent - @grid-basefont);	/* -2px for the borders */
+	margin: ($grid-baseline - 2px) ($grid-indent - $grid-basefont);	/* -2px for the borders */
 	border-collapse: collapse;
 	border-left: solid 1px #ddd;
 	border-bottom: solid 1px #ddd;
@@ -54,9 +51,9 @@ table {
  * containing element to restore vertical rythm for following elements.
  */
 table th, table td {
-	padding: 0 (@grid-pad-sides - 1px);	/* -1px for the border */
-	line-height: (@grid-baseline * 1.5 - 1px);	/* -1px for the border */
-	font-size: (@grid-basefont - 1px);
+	padding: 0 ($grid-pad-sides - 1px);	/* -1px for the border */
+	line-height: ($grid-baseline * 1.5 - 1px);	/* -1px for the border */
+	font-size: ($grid-basefont - 1px);
 	vertical-align: top;
 	border-top: solid 1px #ddd;
 	border-right: solid 1px #ddd;
