@@ -6,34 +6,10 @@ $full-min  = 700px;
 
 @media only screen and (max-width: $full-min * 0.5) {
 
-	header h1 {
-		line-height: ($grid-baseline * 1.5);
-		font-size:   ($grid-baseline * 1.2);
-	}
-
 	nav#sidebar table.calendar {
 		margin: 0;
 		width: 100%;
 		max-width: 100%;
-	}
-
-	nav#monthindex ol.pages li.group li {
-		display: none;
-
-		&:first-child,
-		&:last-child {
-			display: inline;
-		}
-
-		&:first-child > time:after,
-		&:first-child a:after {
-			content: "\00a0" attr(data-fmt);
-		}
-
-		&:last-child > time:before,
-		&:last-child a:before {
-			content: attr(data-fmt) "\00a0";
-		}
 	}
 
 }
