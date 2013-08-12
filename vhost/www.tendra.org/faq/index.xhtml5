@@ -14,8 +14,6 @@ or have them all expand out to a db: namespace -->
 		<meta name="keywords"    content="FAQ, FAQS, questions, status, about"/>
 		<meta name="rcsid"       content="$Id$"/>
 		<meta name="layout"      content="docs"/>
-
-		<link rel="stylesheet" type="text/css" media="screen" href="faq.css"/>
 	</head>
 
 	<body>
@@ -44,7 +42,7 @@ or have them all expand out to a db: namespace -->
 			</dd>
 
 			<dt>Is it actively developed?</dt>
-			<dt class="noq">Why was it stagnant for a few years?</dt>
+			<dt>Why was it stagnant for a few years?</dt>
 			<dd>
 				<p>Yes, it is actively developed, though only by one person.
 					You can see exactly what's going on by watching the
@@ -66,7 +64,7 @@ or have them all expand out to a db: namespace -->
 			</dd>
 
 			<dt>What's it written in?</dt>
-			<dt class="noq">What does it depend on?</dt>
+			<dt>What does it depend on?</dt>
 			<dd>
 				<p>Mostly C. It has no build dependencies other than a
 					<a href="#TODO">supported OS</a> and a <a href="#TODO">BSD-compatible
@@ -84,7 +82,7 @@ or have them all expand out to a db: namespace -->
 			</dd>
 
 			<dt>Why does it depend on OS-specific knowledge?</dt>
-			<dt class="noq">Shouldn't it be written in portable C?</dt>
+			<dt>Shouldn't it be written in portable C?</dt>
 			<dd>
 				<p>It is written in portable C, however your OS's system
 					headers are probably not.
@@ -118,7 +116,7 @@ or have them all expand out to a db: namespace -->
 			</dd>
 
 			<dt>What languages are supported?</dt>
-			<dt class="noq">What's the status of the implemented languages?</dt>
+			<dt>What's the status of the implemented languages?</dt>
 			<dd>
 				<table>
 					<col align="center"/>
@@ -174,7 +172,7 @@ or have them all expand out to a db: namespace -->
 			</dd>
 
 			<dt>How many developers are active?</dt>
-			<dt class="noq">Who did what?</dt>
+			<dt>Who did what?</dt>
 			<dd>
 				<p>See <a href="#TODO">People</a> and <a href="#TODO">WhoDunnit</a>.</p>
 			</dd>
@@ -185,7 +183,7 @@ or have them all expand out to a db: namespace -->
 			</dd>
 
 			<dt>What needs doing next?</dt>
-			<dt class="noq">How can I help?</dt>
+			<dt>How can I help?</dt>
 			<dd>
 				<p class="TODO">TODO etc etc</p>
 

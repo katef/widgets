@@ -1,41 +1,41 @@
 /* $Id$ */
 
-dl.faq dt:before {
-	content: "Q.\A0\A0";
-}
+$faq-gutter = ($grid-gutter * 2);
 
-dl.faq dd:before {
-	content: "A.\A0\A0";
-}
+dl.faq      dd:before { content: "A.";  }
+dl.faq      dt:before { content: "Q.";  }
+dl.faq dt + dt:before { content: "\A0";  }
 
-dl.faq dt:before,
-dl.faq dd:before {
-	display: inline-block;
-	width: 120px;
-	margin-left: -120px;
-	text-align: right;
-	float: left;
-}
+dl.faq {
 
-dl.faq dt {
-	clear: left;
-	font-weight: normal;
-}
+	dt {
+		clear: left;
+		margin-bottom: 0;
+	}
 
-dl.faq dt {
-	margin-bottom: 18px;
-}
+	dd {
+		margin-top:    ($grid-baseline * 0);
+		margin-bottom: ($grid-baseline * 2);
+	}
 
-dl.faq dd {
-	margin-bottom: 36px;
-}
+	dt,
+	dd {
+		position: relative; /* for :before */
+		margin-left: $faq-gutter;
 
-h2.faq {
-	margin-left: 100px;
-}
+		&:before {
+			display: block;
+			width: $faq-gutter;
 
-dl.faq dt,
-dl.faq dd {
-	margin-left: 120px;
+			text-align: right;
+			position: absolute;
+			left: -($faq-gutter);
+			width: $faq-gutter;
+
+			padding-right: 1ex;
+			box-sizing: border-box;
+		}
+	}
+
 }
 
