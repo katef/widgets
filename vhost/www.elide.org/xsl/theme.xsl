@@ -22,7 +22,8 @@
 		<c:category href="/snippets/" name="Snippets"/>
 		<c:category href="/small/"    name="Small"/>
 		<c:category href="/projects/" name="Projects"/>
-		<c:category href="/about/"  name="About"/>
+		<c:category href="/faq/"      name="FAQ"/>
+		<c:category href="/about/"    name="About"/>
 	</c:contents>
 
 	<xsl:template name="e:contents">
