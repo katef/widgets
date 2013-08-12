@@ -13,8 +13,6 @@
 		<meta name="description" content="Downloads"/>
 		<meta name="keywords"    content="download, checkout, source, svn, rcs, cvs, git, packages"/>
 		<meta name="rcsid"       content="$Id: index.xhtml$"/>
-
-<link rel="stylesheet" href="download.css"/>
 	</head>
 
 	<body>

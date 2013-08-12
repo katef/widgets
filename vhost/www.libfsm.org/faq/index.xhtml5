@@ -12,7 +12,6 @@
 		<meta name="rcsid"       content="$Id: index.xhtml$"/>
 
 		<link rel="stylesheet" href="../docs.css"/>
-		<link rel="stylesheet" href="faq.css"/>
 	</head>
 
 	<nav id="sidebar">
