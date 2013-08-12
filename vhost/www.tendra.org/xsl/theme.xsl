@@ -185,11 +185,6 @@
 		</a>
 	</xsl:template>
 
-	<xsl:template name="t:category-title">
-		<!-- TODO: override for blog etc - how? pass in as param from nginx conf? -->
-		<xsl:text>Website</xsl:text>
-	</xsl:template>
-
 	<xsl:template name="t:page-footer">
 <!-- TODO -->
 		<ul class="otherformats pipelist">
@@ -212,7 +207,10 @@
 	<xsl:template match="/h:html">
 		<xsl:call-template name="theme-output">
 			<xsl:with-param name="css"   select="'style.css debug.css'"/>
-			<xsl:with-param name="fonts" select="'Maven+Pro:400,700 Ubuntu+Mono'"/>
+<!--
+			XXX: will need to serve Palatino (and SC) woff ourselves
+			<xsl:with-param name="fonts" select="'Alegreya Alegreya+SC'"/>
+-->
 
 			<xsl:with-param name="js">
 				<xsl:value-of select="'debug.js overlay.js'"/>
@@ -231,8 +229,7 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="site">
-				<xsl:text>Kate&#8217;s </xsl:text>
-				<xsl:call-template name="t:category-title"/>
+				<xsl:text>TenDRA</xsl:text>
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
@@ -252,18 +249,16 @@
 					</h1>
 
 					<form class="search">
-						<div class="span-2">
-							<input type="text"/>
-						</div>
-						<div class="span-1 last">
-							<input type="submit" value="Search"/>
-						</div>
+						<input type="text"/>
+						<input type="submit" value="Search"/>
 					</form>
 
 					<xsl:call-template name="t:contents"/>
 				</header>
 
-				<xsl:apply-templates select="h:head/h:title" mode="body"/>
+				<h1>
+					<xsl:apply-templates select="h:head/h:title" mode="body"/>
+				</h1>
 
 				<section class="page">
 					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>

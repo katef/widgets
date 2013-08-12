@@ -4,6 +4,20 @@
  * "The TenDRA Project" Banner
  */
 
+/* intentionally off-grid */
+h1#banner {
+	margin: 0;
+	padding-top: 1em;
+	padding-bottom: 1.5em;
+
+	font-size: ($grid-basefont * 1.125);
+	line-height: ($grid-basefont * 2.5);
+	letter-spacing: 1px;
+	font-size: ($grid-basefont * 0.9);
+	text-transform: lowercase;
+	font-family: 'Palatino Linotype SC', serif;
+}
+
 h1#banner a {
 	text-decoration: none;
 }
@@ -13,22 +27,15 @@ h1#banner a:hover {
 	color: #000;
 }
 
-h1#banner {
-	padding-top: 1em;
-	padding-bottom: 1.5em;
-	margin: 0;
-	font-size: 10pt;
-	text-transform: uppercase;
-}
-
 h1#banner span.logo {
-	font-size: 24pt;
+	font-size: ($grid-basefont * 2.5);
+	letter-spacing: 0;
 	text-transform: none;
+	font-family: 'Palatino Linotype', serif;
 }
 
 h1#banner span.smallcaps {
 	text-transform: lowercase;
-	font-variant: small-caps;
+	font-family: 'Palatino Linotype SC', serif;
 }
-
 
