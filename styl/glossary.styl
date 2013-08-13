@@ -2,6 +2,8 @@
 
 $glossary-gutter  ?= ($grid-gutter * 4);
 $glossary-padding ?= 1em;
+$glossary-border  ?= dotted 1px #ccc;
+$glossary-overlap ?= 1ex; // a:hover vertical overlap relatve to li size
 
 dl.glossary {
 
@@ -35,6 +37,46 @@ dl.glossary {
 			content: ": ";
 			margin-left: -($glossary-padding); /* to overlap the dt's padding-right */
 		}
+	}
+
+}
+
+ol.glossary {
+	padding: 0;
+	margin:  0;
+	margin-bottom: ($grid-baseline * 0.5);
+
+	display: block;
+	text-align: center;
+	list-style-type: none;
+
+	font-size: 0; /* inline whitespace hack */
+
+	li,
+	li a {
+		margin: $glossary-overlap 0;
+		display: inline-block;
+		font-size: $grid-basefont;
+		line-height: ($grid-baseline * 1.0);
+
+		min-width: 2em;
+		max-width: 4em;
+	}
+
+	li {
+		margin-left: -($glossary-border[1]);
+		border-left: $glossary-border;
+		padding: 0;
+		cursor: default;
+	}
+
+	li:first-child {
+		border-left: none;
+	}
+
+	li a {
+		margin: -($glossary-overlap) 0;
+		padding: ($glossary-overlap) 0;
 	}
 
 }

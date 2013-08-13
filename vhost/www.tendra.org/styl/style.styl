@@ -42,3 +42,24 @@ dl.glossary {
 	}
 }
 
+ol.glossary {
+	li,
+	li a {
+		font-size: 11px; // XXX: $grid-basefont;
+	}
+
+	li {
+		color: #ccc;
+
+		a {
+			color: (@color / 2);
+			text-decoration: none;
+
+			&:hover {
+				color: #000;
+				background-color: #e7e7e7;
+			}
+		}
+	}
+}
+

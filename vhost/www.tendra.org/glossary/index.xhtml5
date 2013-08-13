@@ -13,8 +13,6 @@
 		<meta name="keywords"    content="Glossary, terms, definitions, meanings, acronyms"/>
 		<meta name="rcsid"       content="$Id$"/>
 		<meta name="layout"      content="docs"/>
-
-		<link rel="stylesheet" type="text/css" media="screen" href="glossary.css"/>
 	</head>
 
 	<body>
