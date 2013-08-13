@@ -51,7 +51,9 @@
 		<a name="A"/>
 
 		<dl class="glossary">
-			<dt>ANDF: Architecture Neutral Distribution format</dt>
+			<dt>ANDF</dt>
+
+			<dd class="abbr">Architecture Neutral Distribution format</dd>
 			<dd>The format standardised by
 				<a href="http://www.opengroup.org/">the Open Group</a> (formerly OSF),
 				for which TDF was selected.</dd>
@@ -81,16 +83,22 @@
 			<dt>Capsule</dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>CRT: C runtime</dt>
+			<dt>CRT</dt>
+
+			<dd class="abbr">C runtime</dd>
 			<dd class="TODO">TODO</dd>
 		</dl>
 
 		<a name="D"/>
 
 		<dl class="glossary">
-			<dt>DERA: Defence Research and Evaluation Agency
-				<span class="note">(previously DRA, now DSTL and QinetiQ)</span></dt>
+<!-- TODO: just for /history maybe
+			<dt>DERA</dt>
+
+			<dd class="abbr">Defence Research and Evaluation Agency
+				<span class="note">(neé DRA, now DSTL and QinetiQ)</span></dd>
 			<dd class="TODO">TODO</dd>
+-->
 
 			<dt>disp</dt>
 			<dd>
@@ -128,7 +136,9 @@
 		<a name="L"/>
 
 		<dl class="glossary">
-			<dt>LALR:  Left-Associative Left-to-right, Rightmost-derivation parser</dt>
+			<dt>LALR</dt>
+
+			<dd class="abbr">Left-Associative Left-to-right, Rightmost-derivation parser</dd>
 			<dd>A subset of LR parsers.</dd>
 			<!-- TODO: link to wikipedia for things like that -->
 
@@ -181,10 +191,12 @@
 			<dt>Object</dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>OSF: Open Software Foundation</dt>
+			<dt>OSF</dt>
+			<dd class="abbr">Open Software Foundation</dd>
 			<dd class="TODO">TODO</dd>
 
-			<dt>OSSG: Open Source Specialist Group</dt>
+			<dt>OSSG</dt>
+			<dd>Open Source Specialist Group</dd>
 			<dd class="TODO">TODO: http://ossg.bcs.org/</dd>
 		</dl>
 
@@ -204,7 +216,8 @@
 		<a name="R"/>
 
 		<dl class="glossary">
-			<dt>RTTI: Run-Time Type Identification</dt>
+			<dt>RTTI</dt>
+			<dd class="abbr">Run-Time Type Identification</dd>
 			<dd>The standard C++ mechanism for class objects to identify their
 				dynamic or run-time types.</dd>
 		</dl>
@@ -212,7 +225,8 @@
 		<a name="S"/>
 
 		<dl class="glossary">
-			<dt>SID: Syntax Improving Device</dt>
+			<dt>SID</dt>
+			<dd class="abbr">Syntax Improving Device</dd>
 			<dd>SID is an <a href="#TODO">LL(1)</a> <a href="#TODO">parser generator</a>
 				with a long history (the original version dates back to the mid-sixties!).
 				As well as the normal rule transformations it provides powerful
@@ -224,6 +238,9 @@
 			<dd class="TODO">TODO</dd>
 
 			<dt>Start-up File <span class="note">(TCC modes)</span></dt>
+			<!-- TODO: there are two of these -->
+			<dd class="TODO">TODO</dd>
+
 			<dt>Start-up File <span class="note">(C producer arguments)</span></dt>
 			<!-- TODO: there are two of these -->
 			<dd class="TODO">TODO</dd>
@@ -238,7 +255,8 @@
 			<dt>tcc</dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>TDF: TenDRA Distribution Format</dt>
+			<dt>TDF</dt>
+			<dd class="abbr">TenDRA Distribution Format</dd>
 			<dd class="TODO">TODO</dd>
 
 			<dt>TDF Capsule</dt>
@@ -250,7 +268,7 @@
 			<dt>TDF Notation Compiler</dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>The Ten15 language</dt>
+			<dt>Ten15 language, the</dt>
 			<dd>The Ten15 language (usually called Ten15 Notation) was the main
 				language used to program the Ten15 system; it was created to
 				provide all of the virtual machine's abilities.</dd>
@@ -258,7 +276,7 @@
 			<dt>Ten15 Notation</dt>
 			<dd>See The Ten15 language.</dd>
 
-			<dt>The Ten15 system</dt>
+			<dt>Ten15 system, the</dt>
 			<dd>
 				<p>This was a capability architecture which was created as an
 					equivalent to the Flex capability architecture for the
@@ -278,7 +296,7 @@
 					This was eventually provided for by TDF, instead.</p>
 			</dd>
 
-			<dt>The Ten15 intermediate representation</dt>
+			<dt>Ten15 <abbr title="Intermediate Representation">IR</abbr>, the</dt>
 			<dd class="TODO">TODO</dd>
 
 			<dt>ten15.org</dt>

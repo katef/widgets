@@ -48,15 +48,3 @@ ol.glossary li a:hover {
 	background-color: #e7e7e7;
 }
 
-dl.glossary {
-	margin: 18px 0 18px 0;	/* @grid-baseline, @grid-baseline * 2 */
-}
-
-dl.glossary dd {
-	margin-left: 0;
-}
-
-dl.glossary dt span.note {
-	font-weight: normal;
-}
-

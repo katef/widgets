@@ -11,6 +11,7 @@
 @import "grid.styl";
 //@import "pages.styl";
 @import "faq.styl";
+@import "glossary.styl";
 
 //@import "layout.styl";
 //@import "screen.styl";
@@ -31,7 +32,13 @@
 //$pages-hover-background = #eee;
 //$pages-hover-color      = $black;
 
-dt {
-	font-weight: bold;
+dl.glossary {
+	dt, dd.abbr {
+		font-weight: bold;
+
+		span.note {
+			font-weight: normal;
+		}
+	}
 }
 

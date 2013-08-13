@@ -1,29 +1,41 @@
 /* $Id$ */
 
+$glossary-gutter  ?= ($grid-gutter * 4);
+$glossary-padding ?= 1em;
+
 dl.glossary {
-	margin-left: 120px;
-}
 
-dl.glossary dt.alt:after {
-	content: ",";
-	font-weight: normal;
-}
+	dt {
+		display: inline;
+		float: left;
+		padding-right: $glossary-padding;
 
-dl.glossary dt:after {
-	content: ": ";
-}
+		&.alt {
+			padding-right: 1ex;
 
-dl.glossary dt {
-	display: inline;
-}
+			&.alt:after {
+				content: ", ";
+			}
+		}
 
-dl.glossary dd.short {
-	display: inline;
-}
+		span.note {
+		}
+	}
 
-dl.glossary dd {
-	margin-top: 9px;
-	margin-bottom: 36px;
-	margin-left: 0;
+	dd {
+		margin-top:    0;
+		margin-left:   $glossary-gutter;
+		margin-bottom: $grid-baseline;
+	}
+
+	dt + dd.abbr {
+		margin-left: 0;
+
+		&:before {
+			content: ": ";
+			margin-left: -($glossary-padding); /* to overlap the dt's padding-right */
+		}
+	}
+
 }
 

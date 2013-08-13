@@ -73,7 +73,7 @@
 
 		<dl class="glossary">
 			<dt><abbr>DFA</abbr></dt>
-			<dd class="short">Deterministic Finite Automaton.</dd>
+			<dd class="abbr">Deterministic Finite Automaton.</dd>
 			<dd>
 				<p>An automaton who's edge transitions are always unambiguous.
 					Contrast to <abbr>NFA</abbr>.
@@ -86,7 +86,7 @@
 			</dd>
 
 			<dt>Epsilon</dt>
-			<dd class="short">An <abbr>NFA</abbr> edge which may be
+			<dd class="abbr">An <abbr>NFA</abbr> edge which may be
 				traversed without consuming input.</dd>
 			<dd>
 				<p>These are particularly convenient for regular-expression
@@ -103,7 +103,7 @@
 			<dt class="alt"><abbr>FA</abbr></dt>
 			<dt class="alt"><abbr>FSA</abbr></dt>
 			<dt><abbr>FSM</abbr></dt>
-			<dd class="short">Finite State Automata/Machine.</dd>
+			<dd class="abbr">Finite State Automata/Machine.</dd>
 			<dd>
 				<p>An automaton with a finite number of states.
 					Transitions between the states correspond to input read,
@@ -126,7 +126,7 @@
 			</dd>
 
 			<dt><abbr>NFA</abbr></dt>
-			<dd class="short">Non-deterministic Finite Automaton.</dd>
+			<dd class="abbr">Non-deterministic Finite Automaton.</dd>
 			<dd>
 				<p>An automaton who's edge transitions may include epsilon
 					transitions, and may include multiple edges of the
@@ -146,9 +146,9 @@
 			</dd>
 
 			<dt>Regular</dt>
-			<dd class="short">The class of languages which may be expressed
-				as a <abbr>DFA</abbr>.</dd>
 			<dd>
+				<p>The class of languages which may be expressed as a <abbr>DFA</abbr>.</p>
+
 				<p>A regular language is defined over an alphabet, &Sigma;:
 					For each a &isin; &Sigma;, {a} is regular.
 					If A and B are regular,
