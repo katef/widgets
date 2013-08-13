@@ -10,32 +10,34 @@ h1#banner {
 	padding-top: 1em;
 	padding-bottom: 1.5em;
 
-	font-size: ($grid-basefont * 1.125);
+	font-size:   ($grid-basefont * 1.125);
 	line-height: ($grid-basefont * 2.5);
+	font-size:   ($grid-basefont * 0.9);
+
 	letter-spacing: 1px;
-	font-size: ($grid-basefont * 0.9);
 	text-transform: lowercase;
 	font-family: 'Palatino Linotype SC', serif;
-}
 
-h1#banner a {
-	text-decoration: none;
-}
+	a {
+		text-decoration: none;
 
-h1#banner a:hover {
-	text-decoration: underline;
-	color: #000;
-}
+		&:hover {
+			text-decoration: underline;
+			color: #000;
+		}
+	}
 
-h1#banner span.logo {
-	font-size: ($grid-basefont * 2.5);
-	letter-spacing: 0;
-	text-transform: none;
-	font-family: 'Palatino Linotype', serif;
-}
+	span.logo {
+		font-size: ($grid-basefont * 2.5);
+		letter-spacing: 0;
+		text-transform: none;
+		font-family: 'Palatino Linotype', serif;
+	}
 
-h1#banner span.smallcaps {
-	text-transform: lowercase;
-	font-family: 'Palatino Linotype SC', serif;
+	span.smallcaps {
+		text-transform: lowercase;
+		font-family: 'Palatino Linotype SC', serif;
+	}
+
 }
 
