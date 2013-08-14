@@ -1,0 +1,63 @@
+/* $Id$ */
+
+table.download {
+	width: 100%;
+	padding-left: 2em;
+
+	tr.download:hover {
+		background-color: #f4f4f4;
+		cursor: pointer;
+
+		a {
+			text-decoration: underline;
+			color: blue; // XXX: get from theme.styl or somewhere
+		}
+	}
+
+	td tt {
+		color: #aaa;
+		font-size: 80%;
+	}
+
+	th,
+	td {
+		padding: 0.5ex 1ex;
+	}
+
+	th {
+		font-weight: bold;
+		vertical-align: top;
+
+		th:first-child {
+			padding: 0 1em;
+			min-width: 10em;
+		}
+
+		th:last-child {
+			color: #bbb;
+
+			tt {
+				color: #ccc;
+			}
+		}
+
+		h3 {
+			margin: 0;
+			margin-top: 2em;
+			font-size: 11pt;
+		}
+	}
+
+	tr.project td,
+	tr.project th {
+		border-top: dotted 1px #ccc;
+	}
+
+	span.obs {
+		color: #aaa;
+		font-weight: normal;
+		float: right;
+	}
+
+}
+
