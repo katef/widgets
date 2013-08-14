@@ -19,7 +19,7 @@ function ConvertRowsToLinks(xTableId) {
 			klass = '';
 		}
 
-		rows[i].setAttribute('klass', klass + ' dl');
+		rows[i].setAttribute('class', klass + ' ' + xTableId);
 	}
 }
 
