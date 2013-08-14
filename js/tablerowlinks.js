@@ -5,7 +5,7 @@ function ConvertRowsToLinks(xTableId) {
 	rows = document.getElementById(xTableId).getElementsByTagName("tr");
 	for (i = 0; i < rows.length; i++) {
 		var link;
-		var class;
+		var klass;
 
 		link = rows[i].getElementsByTagName("a")
 		if (link.length != 1) {
@@ -14,12 +14,12 @@ function ConvertRowsToLinks(xTableId) {
 
 		rows[i].onclick = new Function("document.location.href='" + link[0].href + "'");
 
-		class = rows[i].getAttribute('class');
-		if (class == null) {
-			class = '';
+		klass = rows[i].getAttribute('class');
+		if (klass == null) {
+			klass = '';
 		}
 
-		rows[i].setAttribute('class', class + ' dl');
+		rows[i].setAttribute('klass', klass + ' dl');
 	}
 }
 
