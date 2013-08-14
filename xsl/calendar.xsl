@@ -45,7 +45,7 @@
 		<caption>
 			<time datetime="{$date}">
 				<xsl:value-of select="date:month-name($date)"/>
-				<xsl:text> </xsl:text>
+				<xsl:text>&#160;</xsl:text>
 				<xsl:value-of select="date:year($date)"/>
 			</time>
 		</caption>
