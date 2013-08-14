@@ -116,15 +116,17 @@
 			<xsl:with-param name="fonts" select="'Quattrocento'"/>
 
 			<xsl:with-param name="js">
-				<xsl:value-of select="'style.js overlay.js'"/>
+				<xsl:value-of select="'col.js table.js overlay.js'"/>
 
 				<!-- TODO: only where relevant -->
 				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="onload">
-				<xsl:text>Overlay.init(document.documentElement, 'cols',  8);</xsl:text>
-				<xsl:text>Overlay.init(document.documentElement, 'rows', 66);</xsl:text>
+				<xsl:text>Colalign.init(r);</xsl:text>
+				<xsl:text>Table.init(r);</xsl:text>
+				<xsl:text>Overlay.init(r, 'cols',  8);</xsl:text>
+				<xsl:text>Overlay.init(r, 'rows', 66);</xsl:text>
 			</xsl:with-param>
 
 			<xsl:with-param name="site" select="'libfsm'"/>
