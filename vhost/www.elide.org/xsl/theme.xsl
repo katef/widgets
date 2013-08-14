@@ -98,7 +98,7 @@
 
 			<xsl:with-param name="onload">
 				<xsl:text>Colalign.init(r);</xsl:text>
-				<xsl:text>Overlay.init(r, 'cols',  6);</xsl:text>
+				<xsl:text>Overlay.init(r, 'cols',  5);</xsl:text>
 				<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
 			</xsl:with-param>
 
