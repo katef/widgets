@@ -53,11 +53,21 @@ table.download {
 		border-top: dotted 1px #ccc;
 	}
 
+	/* XXX: workaround until sorttable table.js supports sorting with rowspans */
+	tr th.rowspanhack {
+		border-top: none;
+	}
+
 	span.obs {
 		color: #aaa;
 		font-weight: normal;
 		float: right;
 	}
 
+	/* Nobody cares */
+	th.date, td.date { display: none; }
+
+	/* Shown in the filename */
+	th.version, td.version { display: none; }
 }
 
