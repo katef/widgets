@@ -1,0 +1,32 @@
+/* $Id$ */
+
+table {
+
+	th.table-sortable:hover {
+		cursor: pointer;
+	}
+
+	th.table-notype {
+		border-color: darkred;
+		background-color: pink;
+	}
+
+	th.table-descending:after {
+		content: "\25B2";
+	}
+
+	th.table-ascending:after {
+		content: "\25BC";
+	}
+
+	th.table-sorted:after {
+		min-width: 1em;
+		text-align: right;
+		padding-left: 1em;
+		display: block;
+		float: right;
+		cursor: pointer;
+	}
+
+}
+

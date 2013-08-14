@@ -1,7 +1,6 @@
 /* $Id$ */
 
 table th.table-sortable:hover {
-	cursor: pointer;
 	background-color: #eee;
 }
 
@@ -9,32 +8,12 @@ table th.table-sortable:hover:after {
 	color: #ccc;
 }
 
-table th.table-notype {
-	border-color: darkred;
-	background-color: pink;
-}
-
-table th.table-descending:after {
-	content: "\25B2";
-}
-
-table th.table-ascending:after {
-	content: "\25BC";
+table th {
+	background-color: #f7f7f7;
 }
 
 table th.table-sorted:after {
-	min-width: 1em;
-	text-align: right;
-	padding-left: 1em;
 	color: #ddd;
-	display: block;
-	float: right;
-	cursor: pointer;
-}
-
-
-table th {
-	background-color: #f7f7f7;
 }
 
 table {
