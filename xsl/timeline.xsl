@@ -287,7 +287,7 @@
 			</h1>
 
 			<time pubdate="pubdate">
-				<xsl:value-of select="translate($date, '-', '&#8211;')"/>
+				<xsl:value-of select="date:format-date($date, &quot;yyyy&#8288;&#x2013;&#8288;MM&#8288;&#x2013;&#8288;dd&quot;)"/>
 			</time>
 
 <!-- TODO: placeholder for tags
