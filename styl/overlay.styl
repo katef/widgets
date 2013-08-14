@@ -5,7 +5,8 @@
 $grid-colour ?= pink;
 
 ol.overlay {
-	position: absolute;
+	position: fixed;
+	pointer-events: none;
 
 	top:      0;
 	right:    0;
@@ -15,13 +16,10 @@ ol.overlay {
 	width:    auto;
 	height:   auto;
 
+	opacity(30%);
 	display:  none;
 
 	list-style-type: none;
-
-	opacity (30%);
-
-	pointer-events: none;
 
 	&#cols {
 		grid-container;
@@ -30,29 +28,14 @@ ol.overlay {
 		margin-right: -1px;
 
 		li {
-			grid-column;
+			grid-column(1);
+
+			background-color: $grid-colour;
+
+			border-left:  solid ($grid-gutter / 2) $grid-colour - 50%;
+			border-right: solid ($grid-gutter / 2) $grid-colour - 50%;
 
 			min-height: 100%;
-
-			position: relative; /* for :after */
-
-			&:after {
-				position: absolute;
-
-				top:      0;
-				right:    $grid-gutter;
-				bottom:   0;
-				left:     0;
-
-				margin:  0;
-				padding: 0;
-
-				width:    auto;
-				height:   auto;
-
-				content: '\0000A0';
-				background-color: $grid-colour;
-			}
 		}
 	}
 
