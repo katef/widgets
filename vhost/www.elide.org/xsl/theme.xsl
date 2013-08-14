@@ -90,7 +90,7 @@
 			<xsl:with-param name="fonts" select="'Maven+Pro:400,700 Ubuntu+Mono'"/>
 
 			<xsl:with-param name="js">
-				<xsl:value-of select="'debug.js col.js table.js overlay.js'"/>
+				<xsl:value-of select="'debug.js col.js overlay.js'"/>
 
 				<!-- TODO: only where relevant -->
 				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>
@@ -98,7 +98,6 @@
 
 			<xsl:with-param name="onload">
 				<xsl:text>Colalign.init(r);</xsl:text>
-				<xsl:text>Table.init(r);</xsl:text>
 				<xsl:text>Overlay.init(r, 'cols',  6);</xsl:text>
 				<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
 			</xsl:with-param>
