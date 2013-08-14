@@ -14,18 +14,17 @@
 		<meta name="rcsid"       content="$Id$"/>
 		<meta name="layout"      content="source"/>
 
-		<link rel="stylesheet" href="download.css" />
-
 		<!-- TODO: find if we need to include this automatically, in the xslt? -->
 		<!-- TODO: <script src="http://www.tendra.org/js/tablerowlinks.js"/> -->
+		<script src="http://www.tendra.org/js/tablerowlinks.js"/>
+		<script src="http://www.tendra.org/js/table.js"/>
 	</head>
 
-	<!-- TODO: onload="ConvertRowsToLinks('dl') -->
 	<body>
 		<h3>Stable Releases</h3>
 
 		<!-- TODO: this probably should be dynamically generated; a shell/awk script would suffice -->
-		<table class="download" id="dl">
+		<table class="download" id="download">
 			<thead>
 				<tr>
 					<th/>

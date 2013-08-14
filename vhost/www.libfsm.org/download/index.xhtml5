@@ -20,10 +20,10 @@
 		<section>
 			<h2>Download</h2>
 
-<!-- TODO: borrow table from tendra's page? i liked the entire row being clickable -->
-			<table class="download">
+			<table class="download" id="download">
 				<col align="left"/>
-				<col align="center"/>
+				<col align="left"/>
+				<col align="left"/>
 				<col align="left"/>
 				<col align="left"/>
 
