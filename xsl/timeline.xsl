@@ -548,12 +548,18 @@
 
 			<xsl:when test="$tl:day">
 				<xsl:apply-templates select="$tl:entries/tl:entry
-					[date:same-day(tl:pubdate(.), $tl:date)]"/>
+					[date:same-day(tl:pubdate(.), $tl:date)]">
+					<xsl:sort select="date:seconds(tl:pubdate(.))"
+						data-type="number" order="descending"/>
+				</xsl:apply-templates>
 			</xsl:when>
 
 			<xsl:when test="$tl:month">
 				<xsl:apply-templates select="$tl:entries/tl:entry
-					[date:same-month(tl:pubdate(.), date:make($tl:year, $tl:month))]"/>
+					[date:same-month(tl:pubdate(.), date:make($tl:year, $tl:month))]">
+					<xsl:sort select="date:seconds(tl:pubdate(.))"
+						data-type="number" order="descending"/>
+				</xsl:apply-templates>
 			</xsl:when>
 
 			<xsl:when test="$tl:year">
@@ -566,7 +572,10 @@
 				<!-- TODO: interject with month headings -->
 				<!-- TODO: pagnation -->
 				<xsl:apply-templates select="$tl:entries/tl:entry
-					[position() >= last() - $tl:limit]"/>
+					[position() >= last() - $tl:limit]">
+					<xsl:sort select="date:seconds(tl:pubdate(.))"
+						data-type="number" order="descending"/>
+				</xsl:apply-templates>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
