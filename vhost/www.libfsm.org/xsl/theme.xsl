@@ -116,7 +116,7 @@
 			<xsl:with-param name="fonts" select="'Quattrocento'"/>
 
 			<xsl:with-param name="js">
-				<xsl:value-of select="'col.js table.js overlay.js'"/>
+				<xsl:value-of select="'col.js table.js overlay.js debug.js'"/>
 
 				<!-- TODO: only where relevant -->
 				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>

@@ -90,7 +90,7 @@
 			<xsl:with-param name="fonts" select="'Maven+Pro:400,700 Ubuntu+Mono'"/>
 
 			<xsl:with-param name="js">
-				<xsl:value-of select="'debug.js col.js overlay.js'"/>
+				<xsl:value-of select="'col.js overlay.js debug.js'"/>
 
 				<!-- TODO: only where relevant -->
 				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>
