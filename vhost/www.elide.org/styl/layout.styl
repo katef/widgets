@@ -17,7 +17,7 @@ section.page {
 header, footer {
 	/* XXX: better to use grid-container() if possible. or both -container and -column,
 	in which case -column ought to look for existing @padding and just add to it */
-	padding: $grid-padding[0] ($grid-padding[1] + $grid-gutter / 2);
+	padding: $grid-padding[0] ($grid-margin + $grid-padding[1] + $grid-gutter / 2);
 }
 
 header {
@@ -31,7 +31,6 @@ header {
 		/* respond when the page height is below 40 lines */
 		$q = "all and (max-height: " + ($grid-baseline * 40) + ")";
 		@media $q {
-			padding-top: ceil($grid-baseline * 1.5);
 			line-height:     ($grid-baseline * 1.5);
 			font-size:       ($grid-baseline * 1.2);
 		}
