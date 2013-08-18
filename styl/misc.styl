@@ -43,3 +43,25 @@ border-radius($args...) {
 	border-radius:         $args;
 }
 
+font-feature-settings($f, $o) {
+	/*
+	 * Note if @-webkit-font-feature-settings here because
+	 * just @font-feature-settings would be this mixin itself.
+	 */
+	if @-webkit-font-feature-settings {
+		-moz-font-feature-settings:    @-moz-font-feature-settings,    $f $o;
+		-moz-font-feature-settings:    @-moz-font-feature-settings,    $f + "=" + $o;
+		-ms-font-feature-settings:     @-ms-font-feature-settings,     $f $o;
+		-o-font-feature-settings:      @-o-font-feature-settings,      $f $o;
+		-webkit-font-feature-settings: @-webkit-font-feature-settings, $f $o;
+		font-feature-settings:         @font-feature-settings,         $f $o;
+	} else {
+		-moz-font-feature-settings:    $f $o;
+		-moz-font-feature-settings:    $f + "=" + $o;
+		-ms-font-feature-settings:     $f $o;
+		-o-font-feature-settings:      $f $o;
+		-webkit-font-feature-settings: $f $o;
+		font-feature-settings:         $f $o;
+	}
+}
+
