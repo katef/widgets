@@ -19,6 +19,7 @@
 	<xsl:param name="blog-date"  select="substring(date:date(), 1, 10)"/>
 	<xsl:param name="blog-data"  select="/.."/>
 	<xsl:param name="blog-short" select="false()"/>
+	<xsl:param name="blog-name" select="'Blog'"/>
 
 	<!-- TODO: keep timeline entries (suitable for SVN, too) seperate from blog specifics;
 	so this file is equivalent to blog-main, and we have a centralised timeline.xsl
@@ -41,7 +42,7 @@
 			</xsl:when>
 
 			<xsl:otherwise>
-				<xsl:text>Blog</xsl:text>
+				<xsl:value-of select="$blog-name"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
