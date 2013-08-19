@@ -21,24 +21,30 @@ header, footer {
 }
 
 header {
-	margin-bottom: $grid-baseline;
+	margin-top:    ($grid-baseline * 6.0);
+	margin-bottom: ($grid-baseline * 2.5);
 
-	h1 {
-		padding-top: ceil($grid-baseline * 2.5);
-		font-size:       ($grid-basefont * 1.5);
-		line-height:     ($grid-baseline * 2.0);
-
-		/* respond when the page height is below 40 lines */
-		$q = "all and (max-height: " + ($grid-baseline * 40) + ")";
-		@media $q {
-			line-height:     ($grid-baseline * 1.5);
-			font-size:       ($grid-baseline * 1.2);
-		}
+	/* respond when the page height is below 30 lines */
+	$q = "all and (max-height: " + ($grid-baseline * 30) + ")";
+	@media $q {
+		margin-top: ($grid-baseline * 2.0);
 	}
 
-	ul#contents {
-		position: relative;
-		top: floor(-($grid-baseline * 0.5));
+	h1, ul#contents {
+		grid-indent(1);
+	}
+
+	h1 {
+		padding-top: ceil($grid-baseline * 0.0);
+		font-size:       ($grid-basefont * 3.0);
+		line-height:     ($grid-baseline * 2.0);
+
+		/* respond when the page height is below 30 lines */
+		$q = "all and (max-height: " + ($grid-baseline * 30) + ")";
+		@media $q {
+			line-height:     ($grid-baseline * 1.5);
+			font-size:       ($grid-baseline * 2.0);
+		}
 	}
 }
 
@@ -58,7 +64,7 @@ section.page article.entry {
 
 	a[name],
 	ul.tags {
-		margin-left: 0;
+		margin-left: ($grid-margin + $grid-gutter / 2);
 		display: block;
 		position: relative;
 		text-align: left;
@@ -77,8 +83,6 @@ section.page article.entry {
 
 			position: absolute;
 			left: 0;
-
-			text-align: right;
 		}
 	}
 }
