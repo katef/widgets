@@ -19,179 +19,153 @@
 			template to modify, which I keep around to remind me how I
 			did something.</p>
 
-		<table class="listing">
-			<tr>
-				<td><a href="comment.c"><code>comment.c</code></a></td>
+		<dl class="index">
+			<dt><a href="comment.c"><code>comment.c</code></a></dt>
+			<dd>
+				<p>Identifying partial lines with
+					<code>fgets()</code>.</p>
+			</dd>
 
-				<td>An example of identifying partial lines with
-					<code>fgets()</code>.</td>
-			</tr>
-
-			<tr>
-				<td><a href="xstrrep.c"><code>xstrrep.c</code></a></td>
-
-				<td>In response to the stock reply <q>it takes five
+			<dt><a href="xstrrep.c"><code>xstrrep.c</code></a></dt>
+			<dd>
+				<p>In response to the stock reply <q>it takes five
 					minutes to write your own</q>. It took me the best part
-					of a day.</td>
-			</tr>
+					of a day.</p>
+			</dd>
 
-			<tr>
-				<td><a href="substr.c"><code>substr.c</code></a></td>
+			<dt><a href="substr.c"><code>substr.c</code></a></dt>
+			<dd>
+				<p>Substrings using either absolute offsets, or a start and a
+					length. Negative ranges are permitted.</p>
+			</dd>
 
-				<td>Substrings using either absolute offsets, or a start and a
-					length. Negative ranges are permitted.</td>
-			</tr>
+			<dt><a href="trim.c"><code>trim.c</code></a></dt>
+			<dd>
+				<p>Trimming whitespace.</p>
+			</dd>
 
-			<tr>
-				<td><a href="trim.c"><code>trim.c</code></a></td>
+			<dt><a href="lcm.c"><code>lcm.c</code></a></dt>
+			<dd>
+				<p>The &lcm; and &gcd; of two numbers.</p>
+			</dd>
 
-				<td>trimming whitespace.</td>
-			</tr>
+			<dt><a href="log.c"><code>log.c</code></a></dt>
+			<dd>
+				<p>Things related to logarithms. These are the sorts
+					of things I am bad at getting right.</p>
+			</dd>
 
-			<tr>
-				<td><a href="lcm.c"><code>lcm.c</code></a></td>
+			<dt><a href="bits.c"><code>bits.c</code></a></dt>
+			<dd>
+				<p>Dealing with bits, which I am also bad at getting right.</p>
+			</dd>
 
-				<td>The &lcm; and &gcd; of two numbers.</td>
-			</tr>
+			<dt><a href="temp.sql"><code>temp.sql</code></a></dt>
+			<dd>
+				<p>Support routines for creating temporary tables in
+					PL/pgSQL, with their OID being cached.</p>
+			</dd>
 
-			<tr>
-				<td><a href="log.c"><code>log.c</code></a></td>
+			<dt><a href="sprintf.sql"><code>sprintf.sql</code></a></dt>
+			<dd>
+				<p>A minimal <code>sprintf()</code> for PL/pgSQL.</p>
+			</dd>
 
-				<td>Things related to logarithms. These are the sorts
-					of things I am bad at getting right.</td>
-			</tr>
+			<dt><a href="xmalloc.c"><code>xmalloc.c</code></a></dt>
+			<dd>
+				<p><code>xmalloc()</code> and friends.</p>
+			</dd>
 
-			<tr>
-				<td><a href="bits.c"><code>bits.c</code></a></td>
-
-				<td>Dealing with bits, which I am also bad at getting
-					right.</td>
-			</tr>
-
-			<tr>
-				<td><a href="temp.sql"><code>temp.sql</code></a></td>
-
-				<td>Support routines for creating temporary tables in
-					PL/pgSQL, with their OID being cached.</td>
-			</tr>
-
-			<tr>
-				<td><a href="sprintf.sql"><code>sprintf.sql</code></a></td>
-
-				<td>A minimal <code>sprintf()</code> for PL/pgSQL.</td>
-			</tr>
-
-			<tr>
-				<td><a href="xmalloc.c"><code>xmalloc.c</code></a></td>
-
-				<td><code>xmalloc()</code> and friends.</td>
-			</tr>
-
-			<tr>
-				<td><a href="dburi.c"><code>dburi.c</code></a></td>
-
-				<td>Database &uri; parsing for <a href="http://libdbi.sourceforge.net/">libdbi</a>,
+			<dt><a href="dburi.c"><code>dburi.c</code></a></dt>
+			<dd>
+				<p>Database &uri; parsing for
+					<a href="http://libdbi.sourceforge.net/">libdbi</a>,
 					written in C99.  This provides a URI scheme similar to
 					<a href="http://trac.edgewall.org/wiki/TracEnvironment#DatabaseConnectionStrings">Trac's Database Connection Strings</a>.
-					Its <a href="dburitest.c">unit tests</a> are separate.</td>
-			</tr>
+					Its <a href="dburitest.c">unit tests</a> are separate.</p>
+			</dd>
 
-			<tr>
-				<td><a href="regrep.c"><code>regrep.c</code></a></td>
+			<dt><a href="regrep.c"><code>regrep.c</code></a></dt>
+			<dd>
+				<p>Substitute arrays of <code>regmatch_t</code> matches into
+					a formatting string.</p>
+			</dd>
 
-				<td>Substitute arrays of <code>regmatch_t</code> matches into
-					a formatting string.</td>
-			</tr>
+			<dt><a href="signal.c"><code>signal.c</code></a></dt>
+			<dd>
+				<p>Fork a child and catch signals sent from the child to its
+					parent.</p>
+			</dd>
 
-			<tr>
-				<td><a href="signal.c"><code>signal.c</code></a></td>
+			<dt><a href="tok.c"><code>tok.c</code></a></dt>
+			<dd>
+				<p>Various forms of push-driven tokenisation.</p>
+			</dd>
 
-				<td>Fork a child and catch signals sent from the child to its
-					parent.</td>
-			</tr>
-
-			<tr>
-				<td><a href="tok.c"><code>tok.c</code></a></td>
-
-				<td>Various forms of push-driven tokenisation.</td>
-			</tr>
-
-			<tr>
-				<td><a href="csv.c"><code>csv.c</code></a></td>
-
-				<td><a href="http://en.wikipedia.org/wiki/Comma-separated_values">CSV</a>
+			<dt><a href="csv.c"><code>csv.c</code></a></dt>
+			<dd>
+				<p><a href="http://en.wikipedia.org/wiki/Comma-separated_values">CSV</a>
 					parsing as per
 					<a href="http://tools.ietf.org/html/rfc4180">RFC 4180</a>.
 					Here's the <a href="csv.png">FSM as a diagram</a>. Some
 					states are duplicated in the code for ease of output; the
-					grammar is equivalent.</td>
-			</tr>
+					grammar is equivalent.</p>
+			</dd>
 
-			<tr>
-				<td><a href="css.js"><code>css.js</code></a></td>
+			<dt><a href="css.js"><code>css.js</code></a></dt>
+			<dd>
+				<p>Javascript DOM manipulation for CSS classes in XHTML.</p>
+			</dd>
 
-				<td>Javascript DOM manipulation for CSS classes in XHTML.</td>
-			</tr>
+			<dt><a href="events.js"><code>events.js</code></a></dt>
+			<dd>
+				<p>Javascript DOM event manipulation.</p>
+			</dd>
 
-			<tr>
-				<td><a href="events.js"><code>events.js</code></a></td>
+			<dt><a href="urlalloc.c"><code>urlalloc.c</code></a></dt>
+			<dd>
+				<p>A particularly brutal implementation of URL parsing.</p>
+			</dd>
 
-				<td>Javascript DOM event manipulation.</td>
-			</tr>
-
-			<tr>
-				<td><a href="urlalloc.c"><code>urlalloc.c</code></a></td>
-
-				<td>A particularly brutal implementation of URL parsing.</td>
-			</tr>
-
-			<tr>
-				<td><a href="unescape.c"><code>unescape.c</code></a></td>
-
-				<td>Resolving C-style escape sequences for strings.<!--
+			<dt><a href="unescape.c"><code>unescape.c</code></a></dt>
+			<dd>
+				<p>Resolving C-style escape sequences for strings.<!--
 					It's tricky to find a good balance between modularity and
-					complexity of interface here.--></td>
-			</tr>
+					complexity of interface here.--></p>
+			</dd>
 
-			<tr>
-				<td><a href="args.c"><code>args.c</code></a></td>
-
-				<td>Argument parsing to produce <code>argv[]</code>.
-					I found this difficult to do neatly.</td>
-			</tr>
+			<dt><a href="args.c"><code>args.c</code></a></dt>
+			<dd>
+				<p>Argument parsing to produce <code>argv[]</code>.
+					I found this difficult to do neatly.</p>
+			</dd>
 
 <!--
-			<tr>
-				<td rowspan="2"><a href="args.c"><code>args.c</code></a></td>
+			<dt rowspan="2"><a href="args.c"><code>args.c</code></a></dt>
+			<dd>Argument parsing to produce a <code>NULL</code>-terminated
+				<code>argv</code> array suitable for use with
+				<code>execve()</code> and similar.
+				This came out far more complex than I would have liked.</dd>
 
-				<td>Argument parsing to produce a <code>NULL</code>-terminated
-					<code>argv</code> array suitable for use with
-					<code>execve()</code> and similar.
-					This came out far more complex than I would have liked.</td>
-			</tr>
-
-			<tr>
-				<td>The syntax is similar to <code>sh</code> commands.
-					Whitespace separates arguments.
-					Each argument consists of one or more single-quoted,
-					double-quoted or unquoted strings.
-					These concatenate.
-					Unquoted and double-quoted strings may contain C-style
-					escapes.</td>
-			</tr>
+			<dd>The syntax is similar to <code>sh</code> commands.
+				Whitespace separates arguments.
+				Each argument consists of one or more single-quoted,
+				double-quoted or unquoted strings.
+				These concatenate.
+				Unquoted and double-quoted strings may contain C-style
+				escapes.</dd>
 -->
-		</table>
+		</dl>
 
 		<p>And some fragments of things:</p>
 
-		<table class="listing">
-			<tr>
-				<td><a href="bits/">Bit Twiddling</a></td>
-
-				<td>My collection of little bit-related things, which I can
-					never figure out very easily on the spot.</td>
-			</tr>
-		</table>
+		<dl class="index">
+			<dt><a href="bits/">Bit Twiddling</a></dt>
+			<dd>
+				<p>My collection of little bit-related things, which I can
+					never figure out very easily on the spot.</p>
+			</dd>
+		</dl>
 
 	</body>
 </html>

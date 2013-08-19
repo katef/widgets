@@ -13,59 +13,54 @@
 	<body>
 		<p>Small programs, mostly written in C. These are single files; usually
 			<q><code>make <i>filename</i></code></q> (without the <code>.c</code>
-			extension) is enough to compile them. You might need a library
-			or two; see the source code.</p>
+			extension) is enough to compile them.<!-- You might need a library
+			or two; see the source code.--></p>
 
-		<table class="listing">
-			<tr>
-				<td><a href="rawdump.c"><code>rawdump.c</code></a></td>
-
-				<td>Convert an arbitary binary file into an array suitable
+		<dl class="index">
+			<dt><a href="rawdump.c"><code>rawdump.c</code></a></dt>
+			<dd>
+				<p>Convert an arbitary binary file into an array suitable
 					for including as a C header. <code>xxd -i</code> does a
-					similar job.</td>
-			</tr>
+					similar job.</p>
+			</dd>
 
-			<tr>
-				<td><a href="primes.bas"><code>primes.bas</code></a></td>
+			<dt><a href="primes.bas"><code>primes.bas</code></a></dt>
+			<dd>
+				<p>In response to a microoptimised C program using a
+					poor algorithim.</p>
+			</dd>
 
-				<td>In response to a microoptimised C program using a
-					poor algorithim.</td>
-			</tr>
-
-			<tr>
-				<td><a href="life.c"><code>life.c</code></a></td>
-
-				<td>John Conway's
+			<dt><a href="life.c"><code>life.c</code></a></dt>
+			<dd>
+				<p>John Conway's
 					<a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Game
 					of Life</a>, written in C99 for POSIX using Curses. It can read
 					files written in the widely-used
-					<a href="http://www.mirwoj.opus.chelm.pl/ca/ca_files_formats.html">RLE</a> format.</td>
-			</tr>
+					<a href="http://www.mirwoj.opus.chelm.pl/ca/ca_files_formats.html">RLE</a>
+					format.</p>
+			</dd>
 
-			<tr>
-				<td><a href="caesar.c"><code>caesar.c</code></a></td>
-
-				<td>A straightforward implementation of
+			<dt><a href="caesar.c"><code>caesar.c</code></a></dt>
+			<dd>
+				<p>A straightforward implementation of
 					<a href="http://wikipedia.org/wiki/Caesar_cipher">Caesar's cipher</a>.
 					Somebody in <a href="irc://irc.freenode.org/##c">##c</a>
 					wrote <a href="http://www.calltopower.de/blog/?p=901">a Qt
-					frontend</a> to this.</td>
-			</tr>
+					frontend</a> to this.</p>
+			</dd>
 
-			<tr>
-				<td><a href="rpn.c"><code>rpn.c</code></a></td>
+			<dt><a href="rpn.c"><code>rpn.c</code></a></dt>
+			<dd>
+				<p>A reverse polish notation calculator. Arguments are
+					consumed from the command line.</p>
+			</dd>
 
-				<td>A reverse polish notation calculator. Arguments are
-					consumed from the command line.</td>
-			</tr>
-
-			<tr>
-				<td><a href="rpn-f.c"><code>rpn-f.c</code></a></td>
-
-				<td>A reverse polish notation calculator,
-					functional style.</td>
-			</tr>
-		</table>
+			<dt><a href="rpn-f.c"><code>rpn-f.c</code></a></dt>
+			<dd>
+				<p>A reverse polish notation calculator,
+					functional style.</p>
+			</dd>
+		</dl>
 
 	</body>
 </html>

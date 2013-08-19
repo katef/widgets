@@ -114,31 +114,38 @@
 
 		<p>Other people's similar things:</p>
 
-		<ul class="list">
-			<li><a href="http://www.kungstorget.nu/?link=torsen">http://www.kungstorget.nu/?link=torsen</a>
-				&mdash; a completely different approach (not quite the same as a
-				torsen differential, but acheiving the same effect), and rather
-				elegant. Perhaps the diameter could be reduced with epicyclic
-				connections?</li>
+		<dl>
+			<dt><a href="http://www.kungstorget.nu/?link=torsen">http://www.kungstorget.nu/?link=torsen</a></dt>
+			<dd>
+				<p>A completely different approach (not quite the same as a
+					torsen differential, but acheiving the same effect), and rather
+					elegant. Perhaps the diameter could be reduced with epicyclic
+					connections?</p>
+			</dd>
 
-			<li><a href="http://www.bloomington.in.us/~alano/brian/torsen/">http://www.bloomington.in.us/~alano/brian/torsen/</a>
-				&mdash; I like the layout of two worm drives end-to-end, which
-				is closer to the ones found in real vehicles (I think).
-				Unfortunately I can't find a way to modify that to reduce the
-				overall diameter to within less than a 40 tooth gear.</li>
+			<dt><a href="http://www.bloomington.in.us/~alano/brian/torsen/">http://www.bloomington.in.us/~alano/brian/torsen/</a></dt>
+			<dd>
+				<p>I like the layout of two worm drives end-to-end, which
+					is closer to the ones found in real vehicles (I think).
+					Unfortunately I can't find a way to modify that to reduce the
+					overall diameter to within less than a 40 tooth gear.</p>
+			</dd>
 
-			<li><a href="http://individual.utoronto.ca/stehlik/torsen.html">http://individual.utoronto.ca/stehlik/torsen.html</a>
-				&mdash; A faithful reproduction of the real thing, using one of
-				those giant turntables. And a smaller version, which is almost
-				identical to my second attempt! I guess that goes to show there
-				aren't really that many options for this. His looks slightly
-				more robust than mine, but I still think the axial approach is
-				a bad idea.</li>
+			<dt><a href="http://individual.utoronto.ca/stehlik/torsen.html">http://individual.utoronto.ca/stehlik/torsen.html</a></dt>
+			<dd>
+				<p>A faithful reproduction of the real thing, using one of
+					those giant turntables. And a smaller version, which is almost
+					identical to my second attempt! I guess that goes to show there
+					aren't really that many options for this. His looks slightly
+					more robust than mine, but I still think the axial approach is
+					a bad idea.</p>
+			</dd>
 
-			<li><a href="http://wind.prohosting.com/mrplanet/">http://wind.prohosting.com/mrplanet/</a>
-				&mdash; Lots of interesting things here. Again, axial,
-				though.</li>
-		</ul>
+			<dt><a href="http://wind.prohosting.com/mrplanet/">http://wind.prohosting.com/mrplanet/</a></dt>
+			<dd>
+				<p>Lots of interesting things here. Again, axial, though.</p>
+			</dd>
+		</dl>
 
 	</body>
 </html>

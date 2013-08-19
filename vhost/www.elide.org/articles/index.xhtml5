@@ -5,20 +5,16 @@
 	<head>
 		<title>Articles</title>
 
-		<meta name="description" content="Kate's Projects"/>
+		<meta name="description" content="Kate's Articles"/>
 		<meta name="keywords"    content="kate"/>
 		<meta name="rcsid"       content="$Id$"/>
 	</head>
 
 	<body>
-		<table class="listing">
-			<tr>
-				<td><a href="/articles/torsen/">Torsen differentials in&nbsp;Lego</a></td>
-
-				<td>Searching for a workable torsen differential.</td>
-			</tr>
-		</table>
-
+		<dl class="index">
+			<dt><a href="/articles/torsen/">Torsen differentials in&nbsp;Lego</a></dt>
+			<dd>Searching for a workable torsen differential.</dd>
+		</dl>
 	</body>
 </html>
 
