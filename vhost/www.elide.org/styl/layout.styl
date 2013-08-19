@@ -6,12 +6,46 @@ body {
 	margin:  0;
 	padding: 0;
 	padding-bottom: ($grid-baseline * 3);
+
+	clearfix();
 }
 
 section.page {
 	grid-container();
 
 	// TODO: max-width: $grid-baseline * 100;
+
+	& > p,
+	& > h2,
+	& > ul,
+	& > dl {
+		grid-column($grid-ncols - 1);
+		grid-indent(1);
+	}
+
+	h2 {
+		padding-top: ceil($grid-baseline * 0.0);
+		font-size:       ($grid-basefont * 2.0);
+		line-height:     ($grid-baseline * 1.0);
+	}
+
+	& > dl.index {
+		dt a {
+			display: block;
+
+			width: 25%;
+			float: left;
+			clear: left;
+
+			padding: 0.5ex  2ex;
+			margin: -0.5ex -2ex;
+		}
+
+		dd {
+			margin-left:  25%;
+			padding-left: $grid-gutter;
+		}
+	}
 }
 
 header, footer {
@@ -101,7 +135,7 @@ nav#monthindex {
 		float: left;
 	}
 
-	> a {
+	& > a {
 		float: right;
 	}
 
@@ -169,6 +203,6 @@ nav.pages {
 
 pre {
 	overflow-y: auto;
-	margin-left: $grid-baseline;
+	margin-left: 0;
 }
 
