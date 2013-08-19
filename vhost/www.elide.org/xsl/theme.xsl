@@ -106,11 +106,7 @@
 			<xsl:with-param name="body">
 				<header>
 					<h1>
-						<xsl:text>Kate</xsl:text>
-						<span class="aposhack">
-							<xsl:text>&#8217;</xsl:text>
-						</span>
-						<xsl:text>s&#160;Amazing </xsl:text>
+						<xsl:text>Kate&#8217;s&#160;Amazing </xsl:text>
 						<xsl:apply-templates select="h:head/h:title" mode="body"/>
 					</h1>
 
