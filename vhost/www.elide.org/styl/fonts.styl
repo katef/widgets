@@ -1,0 +1,75 @@
+
+font-face('Sofia Pro Light', normal, normal,
+	'/woff/sofiapro/SofiaProLight-webfont', '#sofia_pro_lightregular');
+
+/* XXX: regenerate -webfont.* with smcp etc */
+@font-face {
+	font-family: 'Sofia Pro Light';
+	src: url('/woff/sofiapro/SofiaProLight.otf') format('opentype');
+}
+
+font-face('EB Garamond', normal, normal,
+	'/woff/EBGaramond', 'XXX');
+
+body {
+	font-family: Sofia Pro Light, Verdana, sans;
+
+	text-rendering: optimizeLegibility;
+
+	&, td {
+		text-align: left;
+	}
+
+	th {
+		font-weight: normal;
+	}
+}
+
+tt, code, pre {
+	// TODO: pick something, or woff
+	font-family: 'Ubuntu Mono', 'monospace';
+}
+
+header h1 {
+	font-family: EB Garamond, Garamond, Georgia, serif;
+	font-weight: normal;
+
+	text-transform: lowercase;
+
+	&:first-letter {
+		font-size: 0.9em; /* specific to EB Garamond; fake title case because 'K' is too heavy */
+		text-transform: uppercase;
+	}
+
+	span.aposhack {
+		font-size: 0.8em; /* specific to EB Garamond; the apostrophe is too large here */
+		margin-right: -2px;
+	}
+}
+
+body {
+	font-feature-settings: "onum" 1;
+	font-feature-settings: "kern" 1;
+	font-feature-settings: "ss01" 0; /* single story 'a' */
+	font-feature-settings: "frac" 1;
+
+	abbr {
+		font-feature-settings: "c2sc" 1;
+
+		/*
+		 * I would set onum=0, lnum=1 to align numbers to small caps.
+		 * But I can't find a way to get this font to do that, and so
+		 * onum=1 looks better than numbers sticking out above small caps.
+		 */
+	}
+
+	article.entry time[pubdate] {
+		font-feature-settings: "lnum" 1;
+		font-feature-settings: "tnum" 1;
+	}
+
+	header h1 {
+		font-feature-settings: "titl" 1; /* XXX: only if actually used */
+	}
+}
+
