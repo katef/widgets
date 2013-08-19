@@ -2,99 +2,35 @@
 
 @import "misc.styl";
 
-$light = #ccc;
-$dark  = #555;
-$black = #000;
-
-//$primary = #f04b37;
-$primary = #345;
+$accent = #f22;
 
 body, td {
-	color: $dark;
-}
-
-ol.overlay#cols {
-	border-color: red;
+	background-color: #fff;
+	color: #000;
 }
 
 a code, a, a:link, a:visited {
-	color: saturate(lighten($primary, 15%), 60%);
+	color: $accent;
 	text-decoration: none;
 }
 
-em {
-	color: #000;
-	font-weight: normal;
-	font-style: normal;
-}
-
-pre, code, tt {
-	color: $black;
-}
-
-header {
-	background-color: $primary;
-	color: #fff;
-
-	/* TODO: mixin */
-	/* XXX: do i even want this?
-	background-image: linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
-	background-image: -o-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
-	background-image: -moz-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
-	background-image: -webkit-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
-	background-image: -ms-linear-gradient(bottom, rgb(235,72,54) 15%, rgb(240,73,55) 72%);
-
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.15, rgb(235,72,54)),
-		color-stop(0.72, rgb(240,73,55))
-	);
-	*/
-
-	shadow(0px, 0px, 2px, 1px, #aaa);
-
-	ul#contents {
-		li.current a {
-			color: #fff;
-		}
-
-		li a {
-			color: lighten($primary, 50%);
-
-			&:hover {
-				color: #fff;
-			}
-		}
-	}
-}
-
 a:hover code, a:hover {
-	text-decoration: underline;
-	color: $black;
-}
-
-pre {
-	background-color: #fff;
-	color: #444;
-}
-
-tt.rcsid {
-	color: $dark;
+	text-decoration: none;
+	color: #000;
 }
 
 article.entry {
 	a:hover time {
-		color: $black;
+		color: inherit;
 	}
 
 	time[pubdate] {
-		color: $light;
+		color: #ccc;
 	}
 }
 
-table.calendar td {
-	color: $light;
+*[title] {
+	border-bottom: dotted 1px #888;
+	cursor: help;
 }
 
