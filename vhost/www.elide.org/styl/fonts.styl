@@ -1,18 +1,11 @@
 
-font-face('Sofia Pro Light', normal, normal,
-	'/woff/sofiapro/SofiaProLight-webfont', '#sofia_pro_lightregular');
-
-/* XXX: regenerate -webfont.* with smcp etc */
-@font-face {
-	font-family: 'Sofia Pro Light';
-	src: url('/woff/sofiapro/SofiaProLight.otf') format('opentype');
-}
-
-font-face('EB Garamond', normal, normal,
-	'/woff/EBGaramond', 'XXX');
+font-face('Sofia Pro Light', 300, normal, '/fonts/SofiaPro-Light',     '#SofiaProLight');
+font-face('EB Garamond',     400, normal, '/fonts/EBGaramond-Regular', '#EBGaramond-Regular');
+font-face('Ubuntu Mono',     400, normal, '/fonts/UbuntuMono-Regular', '#UbuntuMono-Regular');
 
 body {
 	font-family: Sofia Pro Light, Verdana, sans;
+	font-weight: 300;
 
 	text-rendering: optimizeLegibility;
 
@@ -26,13 +19,13 @@ body {
 }
 
 tt, code, pre {
-	// TODO: pick something, or woff
-	font-family: 'Ubuntu Mono', 'monospace';
+	font-family: 'Ubuntu Mono', monospace;
+	font-weight: 400;
 }
 
 header h1 {
 	font-family: EB Garamond, Garamond, Georgia, serif;
-	font-weight: normal;
+	font-weight: 400;
 
 	text-transform: lowercase;
 
