@@ -12,11 +12,19 @@ body, td {
 a code, a, a:link, a:visited {
 	color: $accent;
 	text-decoration: none;
+
+	*[title] {
+		border-color: @color;
+	}
 }
 
 a:hover code, a:hover {
 	text-decoration: none;
 	color: #000;
+
+	*[title] {
+		border-color: @color;
+	}
 }
 
 article.entry {
@@ -32,9 +40,5 @@ article.entry {
 *[title] {
 	border-bottom: dotted 1px #888;
 	cursor: help;
-}
-
-a *[title] {
-	border-color: $accent;
 }
 
