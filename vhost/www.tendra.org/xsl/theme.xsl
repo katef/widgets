@@ -54,10 +54,6 @@
 	<xsl:template match="/h:html">
 		<xsl:call-template name="theme-output">
 			<xsl:with-param name="css"   select="'style.css debug.css'"/>
-<!--
-			XXX: will need to serve Palatino (and SC) woff ourselves
-			<xsl:with-param name="fonts" select="'Alegreya Alegreya+SC'"/>
--->
 
 			<xsl:with-param name="js">
 				<xsl:value-of select="'col.js table.js overlay.js hyphenator-min.js debug.js'"/>

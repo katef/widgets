@@ -110,7 +110,6 @@
 	<xsl:template name="output-content">
 		<xsl:param name="method" select="'xml'"/>
 		<xsl:param name="css"    select="''"/>
-		<xsl:param name="fonts"  select="''"/>
 		<xsl:param name="js"     select="''"/>
 		<xsl:param name="onload" select="''"/>
 
@@ -131,11 +130,6 @@
 				<!-- TODO: maybe a node set is better, after all -->
 				<xsl:for-each select="str:tokenize($css)">
 					<link rel="stylesheet" type="text/css" media="screen" href="{$www-css}/{.}"/>
-				</xsl:for-each>
-
-				<xsl:for-each select="str:tokenize($fonts)">
-					<xsl:variable name="google" select="'http://fonts.googleapis.com/css'"/>
-					<link rel="stylesheet" type="text/css" href="{$google}?family={.}"/>
 				</xsl:for-each>
 
 				<xsl:for-each select="str:tokenize($js)">
