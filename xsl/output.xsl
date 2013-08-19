@@ -122,7 +122,7 @@
 			<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
 		</xsl:if>
 
-		<html>
+		<html lang="en-gb">	<!-- XXX: pass as param -->
 			<head>
 				<title>
 					<xsl:value-of select="$title"/>

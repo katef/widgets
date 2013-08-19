@@ -82,7 +82,7 @@
 			<xsl:with-param name="fonts" select="'Maven+Pro:400,700 Ubuntu+Mono'"/>
 
 			<xsl:with-param name="js">
-				<xsl:value-of select="'col.js overlay.js debug.js'"/>
+				<xsl:value-of select="'col.js overlay.js hyphenator-min.js debug.js'"/>
 
 				<!-- TODO: only where relevant -->
 				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>
@@ -113,7 +113,7 @@
 					<xsl:call-template name="e:contents"/>
 				</header>
 
-				<section class="page">
+				<section class="page hyphenate">
 					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 				</section>
 

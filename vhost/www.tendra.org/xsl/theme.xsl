@@ -60,7 +60,7 @@
 -->
 
 			<xsl:with-param name="js">
-				<xsl:value-of select="'col.js table.js overlay.js debug.js'"/>
+				<xsl:value-of select="'col.js table.js overlay.js hyphenator-min.js debug.js'"/>
 
 				<!-- TODO: only where relevant -->
 				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>
@@ -102,11 +102,11 @@
 					<xsl:apply-templates select="h:head/h:title" mode="body"/>
 				</h1>
 
-				<section class="page">
+				<section class="page hyphenate">
 					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 				</section>
 
-				<nav id="sidebar">
+				<nav id="sidebar hyphenate">
 					<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>
 				</nav>
 
