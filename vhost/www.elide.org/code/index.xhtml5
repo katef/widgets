@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Code</title>
+
+		<meta name="description" content="Kate's Projects"/>
+		<meta name="keywords"    content="kate,programming,code"/>
+		<meta name="rcsid"       content="$Id: index.xhtml5 3950 2013-07-06 23:45:31Z kate $"/>
+	</head>
+
+	<body>
+		<p>I favour small, simple implementations. I try to write
+			portable code. I like lexing, parsing, compilers,
+			standards compliance, and I especially enjoy writing
+			those tidy little functions which seem to suit C so
+			nicely.</p>
+
+		<table class="listing">
+			<tr>
+				<td><a href="/projects/">Projects</a></td>
+
+				<td>
+					<p>Some of my programing outside of work.
+						These are things I spend significant time on.</p>
+				</td>
+			</tr>
+
+			<tr>
+				<td><a href="/snippets/">Snippets</a></td>
+
+				<td>
+					<p>Some fragments of programs. Some of these I use as a sort of
+						template to modify, which I keep around to remind me how I
+						did something.</p>
+				</td>
+			</tr>
+
+			<tr>
+				<td><a href="/small/">Small programs</a></td>
+
+				<td>
+					<p>Single-file programs, mostly written in C.
+						These were mostly written to illustrate something,
+						or to try out a particular idea.</p>
+				</td>
+			</tr>
+		</table>
+
+		<p>These are placed in the
+			<a href="http://creativecommons.org/licenses/publicdomain/">Public Domain</a>.
+			I know I haven't done the legal stuff properly. I'll do it later.
+			If you're using something, please let me know. Everybody likes feedback!</p>
+	</body>
+</html>
+
