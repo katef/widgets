@@ -19,10 +19,7 @@
 	<c:contents>
 		<c:category href="/diary/"    name="Diary"/>
 		<c:category href="/articles/" name="Articles"/>
-		<c:category href="/snippets/" name="Snippets"/>
-		<c:category href="/small/"    name="Small"/>
-		<c:category href="/projects/" name="Projects"/>
-		<c:category href="/faq/"      name="FAQ"/>
+		<c:category href="/code/"     name="Code"/>
 		<c:category href="/about/"    name="About"/>
 	</c:contents>
 
@@ -59,11 +56,6 @@
 -->
 			<xsl:copy-of select="."/>
 		</a>
-	</xsl:template>
-
-	<xsl:template name="e:category-title">
-		<!-- TODO: override for blog etc - how? pass in as param from nginx conf? -->
-		<xsl:text>Website</xsl:text>
 	</xsl:template>
 
 	<xsl:template name="e:page-footer">
@@ -108,19 +100,18 @@
 
 			<xsl:with-param name="site">
 				<xsl:text>Kate&#8217;s </xsl:text>
-				<xsl:call-template name="e:category-title"/>
+				<xsl:apply-templates select="h:head/h:title" mode="body"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
 				<header>
 					<h1>
-						<xsl:text>Kate&#8217;s&#160;Amazing </xsl:text>
-						<xsl:call-template name="e:category-title"/>
-
-						<xsl:if test="h:head/h:title">
-							<xsl:text> &#8211;&#xa0;</xsl:text>
-							<xsl:apply-templates select="h:head/h:title" mode="body"/>
-						</xsl:if>
+						<xsl:text>Kate</xsl:text>
+						<span class="aposhack">
+							<xsl:text>&#8217;</xsl:text>
+						</span>
+						<xsl:text>s&#160;Amazing </xsl:text>
+						<xsl:apply-templates select="h:head/h:title" mode="body"/>
 					</h1>
 
 					<xsl:call-template name="e:contents"/>
