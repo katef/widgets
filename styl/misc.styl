@@ -65,17 +65,17 @@ font-feature-settings($f, $o) {
 	}
 }
 
-font-face($family, $basename, $weight, $style) {
+font-face($family, $weight, $style, $basename, $svg) {
 	@font-face {
 		font-family: $family;
 		font-weight: $weight;
 		font-style:  $style;
 
 		src: url($basename + '.eot');
-		src: url($basename + '.eot?#iefix')     format('embedded-opentype'),
-		     url($basename + '.woff')           format('woff'),
-		     url($basename + '.ttf')            format('truetype'),
-		     url($basename + '.svg#' + $family) format('svg');
+		src: url($basename + '.eot?#iefix') format('embedded-opentype'),
+		     url($basename + '.woff')       format('woff'),
+		     url($basename + '.ttf')        format('truetype'),
+		     url($basename + '.svg' + $svg) format('svg');
 	}
 }
 
