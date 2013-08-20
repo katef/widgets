@@ -13,7 +13,7 @@ a code, a, a:link, a:visited {
 	color: $accent;
 	text-decoration: none;
 
-	*[title] {
+	*[title].important {
 		border-color: @color;
 	}
 }
@@ -22,7 +22,7 @@ a:hover code, a:hover {
 	text-decoration: none;
 	color: #000;
 
-	*[title] {
+	*[title].important {
 		border-color: @color;
 	}
 }
@@ -42,8 +42,11 @@ article.entry {
 	}
 }
 
-*[title] {
+*[title].important {
 	border-bottom: dotted 1px #888;
+}
+
+*[title] {
 	cursor: help;
 }
 
