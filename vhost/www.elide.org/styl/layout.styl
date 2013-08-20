@@ -15,6 +15,14 @@ section.page {
 
 	// TODO: max-width: $grid-baseline * 100;
 
+	// TODO: this is ugly
+	& > p,
+	& > h2,
+	& > ul,
+	& > dl {
+		grid-column($grid-ncols);
+	}
+
 	/* respond when 1 colspan has a min-width wide enough for "YYYY-MM-DD" */
 	$q = "all and " + grid-respond("min", 100px, 1);
 		@media $q {
@@ -53,13 +61,9 @@ section.page {
 
 }
 
-header, footer {
-	/* XXX: better to use grid-container() if possible. or both -container and -column,
-	in which case -column ought to look for existing @padding and just add to it */
-	padding: $grid-padding[0] ($grid-margin + $grid-padding[1] + $grid-gutter / 2);
-}
-
 header {
+	grid-container();
+
 	margin-top:    ($grid-baseline * 5.0);
 	margin-bottom: ($grid-baseline * 2.0);
 
@@ -77,6 +81,10 @@ header {
 		}
 	}
 
+	h1, ul#contents {
+		grid-column($grid-ncols - 2);
+	}
+
 	h1 {
 		padding-top:    ceil($grid-baseline * 0.5);
 		font-size:          ($grid-basefont * 2.7);
@@ -86,6 +94,8 @@ header {
 }
 
 footer {
+	grid-container();
+
 	margin-top:    ($grid-baseline * 2);
 	margin-bottom: ($grid-baseline * 2);
 	display: none; /* XXX */
