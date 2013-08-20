@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html [
-	<!ENTITY mdash "&#8212;">
+	<!ENTITY css   '<abbr title="Cascading Style Sheets">CSS</abbr>'>
+	<!ENTITY js    '<abbr title="Javascript">JS</abbr>'>
+	<!ENTITY xslt  '<abbr title="Extensible Stylesheet Language Transformations">XSLT</abbr>'>
+	<!ENTITY html  '<abbr title="Hypertext Markup Language">HTML</abbr>'>
+	<!ENTITY dhtml '<abbr title="Dynamic Hypertext Markup Language">HTML</abbr>'>
 ]>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<title>Projects &mdash; Web Widgets</title>
+		<title>Web Widgets</title>
 
 		<meta name="description" content="Kate's Projects"/>
 		<meta name="keywords"    content="kate,programming,projects,web,widgets,html,javascript,css,dhtml,xhtml"/>
@@ -13,27 +17,27 @@
 	</head>
 
 	<body>
-		<p>These are little bits and pieces for HTML, CSS, Javascript (for
-			DHTML) and such.<br/>
+		<p>These are little bits and pieces for &html;, &css;, Javascript (for
+			&dhtml;) and such.<br/>
 			What to call these? Web Widgets?</p>
 
 		<dl class="index">
 			<dt><a href="/widgets/dotted/">Dotted&nbsp;contents</a></dt>
-			<dd>CSS</dd>
+			<dd>&css;</dd>
 			<dd>
-				<p>How to implement dotted contents listings in CSS, and why
+				<p>How to implement dotted contents listings in &css;, and why
 					it's a bad idea.</p>
 			</dd>
 
 			<dt><a href="/widgets/expander/">Fold-down&nbsp;expander</a></dt>
-			<dd>JS</dd>
+			<dd>&js;</dd>
 			<dd>
 				<p>A collapsable fold-down expansion clickable line, to show
 					and hide details for things.</p>
 			</dd>
 
 			<dt><a href="/widgets/linenumbers/">Line&nbsp;numbers</a></dt>
-			<dd>JS</dd>
+			<dd>&js;</dd>
 			<dd>
 				<p>Automated line-numbering for <code>&lt;pre&gt;</code>
 					elements, which are non-selectable during cut &amp;
@@ -41,23 +45,23 @@
 			</dd>
 
 			<dt><a href="/widgets/valid/">Form&nbsp;validation</a></dt>
-			<dd>JS</dd>
+			<dd>&js;</dd>
 			<dd>
 				<p>Everybody has Javascript form validation. Here's mine.</p>
 			</dd>
 
 			<dt><a href="/widgets/sorting/">Sortable Tables</a></dt>
-			<dd>JS</dd>
+			<dd>&js;</dd>
 			<dd>
 				<p>Automated sortability for <code>&lt;table&gt;</code>
 					elements, with data types for columns identified
 					automatically.</p>
 			</dd>
 
-			<dt><a href="/widgets/xslt-calendar/">XSLT Calendar</a></dt>
-			<dd>XSLT</dd>
+			<dt><a href="/widgets/xslt-calendar/">&xslt; Calendar</a></dt>
+			<dd>&xslt;</dd>
 			<dd>
-				<p>A monthly calendar, implemented in XSLT.</p>
+				<p>A monthly calendar, implemented in &xslt;.</p>
 			</dd>
 		</dl>
 

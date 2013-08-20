@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html [
-	<!ENTITY gcd '<acronym title="Greatest Common Denominator">GCD</acronym>'>
-	<!ENTITY lcm '<acronym title="Lowest Common Multiple">LCM</acronym>'>
-	<!ENTITY uri '<acronym title="Uniform Resource Identifier">URI</acronym>'>
+	<!ENTITY gcd   '<abbr title="Greatest Common Denominator">GCD</abbr>'>
+	<!ENTITY lcm   '<abbr title="Lowest Common Multiple">LCM</abbr>'>
+	<!ENTITY uri   '<abbr title="Uniform Resource Identifier">URI</abbr>'>
+	<!ENTITY url   '<abbr title="Uniform Resource Locator">URL</abbr>'>
+	<!ENTITY dom   '<abbr title="Document Object Model">DOM</abbr>'>
+	<!ENTITY css   '<abbr title="Cascading Style Sheets">CSS</abbr>'>
+	<!ENTITY uri   '<abbr title="Uniform Resource Indicator">URI</abbr>'>
+	<!ENTITY oid   '<abbr title="Object Identifier">OID</abbr>'>
+	<!ENTITY csv   '<abbr title="Comma-Separated Values">CSV</abbr>'>
+	<!ENTITY rfc   '<abbr title="Request For Comments">RFC</abbr>'>
+	<!ENTITY fsm   '<abbr title="Finite State Machine">FSM</abbr>'>
+	<!ENTITY xhtml '<abbr title="Extensible Hypertext Markup Language">XHTML</abbr>'>
+
+	<!ENTITY c       '<abbr>C</abbr>'>
+	<!ENTITY c99     '<abbr>C99</abbr>'>
+	<!ENTITY plpgsql '<abbr>PL/</abbr>pg<abbr>SQL</abbr>'>
 ]>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -63,12 +76,12 @@
 			<dt><a href="temp.sql"><code>temp.sql</code></a></dt>
 			<dd>
 				<p>Support routines for creating temporary tables in
-					PL/pgSQL, with their OID being cached.</p>
+					&plpgsql;, with their &oid; being cached.</p>
 			</dd>
 
 			<dt><a href="sprintf.sql"><code>sprintf.sql</code></a></dt>
 			<dd>
-				<p>A minimal <code>sprintf()</code> for PL/pgSQL.</p>
+				<p>A minimal <code>sprintf()</code> for &plpgsql;.</p>
 			</dd>
 
 			<dt><a href="xmalloc.c"><code>xmalloc.c</code></a></dt>
@@ -80,7 +93,7 @@
 			<dd>
 				<p>Database &uri; parsing for
 					<a href="http://libdbi.sourceforge.net/">libdbi</a>,
-					written in C99.  This provides a URI scheme similar to
+					written in &c99;.  This provides a &uri; scheme similar to
 					<a href="http://trac.edgewall.org/wiki/TracEnvironment#DatabaseConnectionStrings">Trac's Database Connection Strings</a>.
 					Its <a href="dburitest.c">unit tests</a> are separate.</p>
 			</dd>
@@ -104,32 +117,32 @@
 
 			<dt><a href="csv.c"><code>csv.c</code></a></dt>
 			<dd>
-				<p><a href="http://en.wikipedia.org/wiki/Comma-separated_values">CSV</a>
+				<p><a href="http://en.wikipedia.org/wiki/Comma-separated_values">&csv;</a>
 					parsing as per
-					<a href="http://tools.ietf.org/html/rfc4180">RFC 4180</a>.
-					Here's the <a href="csv.png">FSM as a diagram</a>. Some
+					<a href="http://tools.ietf.org/html/rfc4180">&rfc; 4180</a>.
+					Here's the <a href="csv.png">&fsm; as a diagram</a>. Some
 					states are duplicated in the code for ease of output; the
 					grammar is equivalent.</p>
 			</dd>
 
 			<dt><a href="css.js"><code>css.js</code></a></dt>
 			<dd>
-				<p>Javascript DOM manipulation for CSS classes in XHTML.</p>
+				<p>Javascript &dom; manipulation for &css; classes in &xhtml;.</p>
 			</dd>
 
 			<dt><a href="events.js"><code>events.js</code></a></dt>
 			<dd>
-				<p>Javascript DOM event manipulation.</p>
+				<p>Javascript &dom; event manipulation.</p>
 			</dd>
 
 			<dt><a href="urlalloc.c"><code>urlalloc.c</code></a></dt>
 			<dd>
-				<p>A particularly brutal implementation of URL parsing.</p>
+				<p>A particularly brutal implementation of &url; parsing.</p>
 			</dd>
 
 			<dt><a href="unescape.c"><code>unescape.c</code></a></dt>
 			<dd>
-				<p>Resolving C-style escape sequences for strings.<!--
+				<p>Resolving &c;-style escape sequences for strings.<!--
 					It's tricky to find a good balance between modularity and
 					complexity of interface here.--></p>
 			</dd>
@@ -152,7 +165,7 @@
 				Each argument consists of one or more single-quoted,
 				double-quoted or unquoted strings.
 				These concatenate.
-				Unquoted and double-quoted strings may contain C-style
+				Unquoted and double-quoted strings may contain &c;-style
 				escapes.</dd>
 -->
 		</dl>

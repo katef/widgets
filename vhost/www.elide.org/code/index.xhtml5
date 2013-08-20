@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
+<!DOCTYPE html [
+	<!ENTITY c '<abbr>C</abbr>'>
+]>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
@@ -14,7 +16,7 @@
 		<p>I favour small, simple implementations. I try to write
 			portable code. I like lexing, parsing, compilers,
 			standards compliance, and I especially enjoy writing
-			those tidy little functions which seem to suit C so
+			those tidy little functions which seem to suit &c; so
 			nicely.</p>
 
 		<dl class="index">
@@ -33,7 +35,7 @@
 
 			<dt><a href="/small/">Small programs</a></dt>
 			<dd>
-				<p>Single-file programs, mostly written in C.
+				<p>Single-file programs, mostly written in &c;.
 					These were mostly written to illustrate something,
 					or to try out a particular idea.</p>
 			</dd>

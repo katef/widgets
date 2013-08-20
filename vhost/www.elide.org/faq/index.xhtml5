@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
+<!DOCTYPE html [
+	<!ENTITY c "<abbr>C</abbr>">
+
+	<!ENTITY os  "<abbr title='Operating System'>OS</abbr>">
+	<!ENTITY uk  "<abbr title='United Kingdom'>UK</abbr>">
+	<!ENTITY ide "<abbr title='Integrated Development Environment'>IDE</abbr>">
+
+	<!ENTITY openbsd "Open<abbr>BSD</abbr>">
+]>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -13,9 +21,9 @@
 
 	<body>
 		<dl class="faq">
-			<dt>Kate, why do you think C is the best language?</dt>
+			<dt>Kate, why do you think &c; is the best language?</dt>
 			<dd>
-				<p>I don't think C is the best language.</p>
+				<p>I don't think &c; is the best language.</p>
 			</dd>
 
 			<dt>Kate, what's your favorite programing language?</dt>
@@ -35,15 +43,15 @@
 			</dd>
 
 <!--
-			<dt>Kate, what OS/IDE/Compiler/etc do you use?</dt>
+			<dt>Kate, what &os;/&ide;/Compiler/etc do you use?</dt>
 			<dd>
-				<p>I use OpenBSD where I can, and Linux where I can't.</p>
+				<p>I use &openbsd; where I can, and Linux where I can't.</p>
 
 				<p>zsh, notion, and whatever vi is around.
 					I use various compilers, depending on what I need to do.
 					I don't use a debugger often&mdash;I find I can get by just
 					fine with <code>printf</code>-style debugging.
-					I use whatever vi is around. I don't use an IDE.</p>
+					I use whatever vi is around. I don't use an &ide;.</p>
 
 				<p>I like <a href="http://justgetflux.com/">flux</a>.</p>
 
@@ -53,7 +61,7 @@
 			</dd>
 -->
 
-			<dt>You're in the UK? You're not Kate Middelton are you?</dt>
+			<dt>You're in the &uk;? You're not Kate Middelton are you?</dt>
 			<dd>
 				<p>No, I'm not Kate Middleton.</p>
 			</dd>

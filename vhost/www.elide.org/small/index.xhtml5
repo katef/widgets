@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
+<!DOCTYPE html [
+	<!ENTITY c      "<abbr>C</abbr>">
+	<!ENTITY c99   "<abbr>C99</abbr>">
+	<!ENTITY posix "<abbr>POSIX</abbr>">
+
+	<!ENTITY os  "<abbr title='Operating System'>OS</abbr>">
+	<!ENTITY rle "<abbr title='Run-Length Encoding'>RLE</abbr>">
+]>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
@@ -11,7 +18,7 @@
 	</head>
 
 	<body>
-		<p>Small programs, mostly written in C. These are single files; usually
+		<p>Small programs, mostly written in &c;. These are single files; usually
 			<q><code>make <i>filename</i></code></q> (without the <code>.c</code>
 			extension) is enough to compile them.<!-- You might need a library
 			or two; see the source code.--></p>
@@ -20,13 +27,13 @@
 			<dt><a href="rawdump.c"><code>rawdump.c</code></a></dt>
 			<dd>
 				<p>Convert an arbitary binary file into an array suitable
-					for including as a C header. <code>xxd -i</code> does a
+					for including as a &c; header. <code>xxd -i</code> does a
 					similar job.</p>
 			</dd>
 
 			<dt><a href="primes.bas"><code>primes.bas</code></a></dt>
 			<dd>
-				<p>In response to a microoptimised C program using a
+				<p>In response to a microoptimised &c; program using a
 					poor algorithim.</p>
 			</dd>
 
@@ -34,10 +41,10 @@
 			<dd>
 				<p>John Conway's
 					<a href="http://en.wikipedia.org/wiki/Conway's_Game_of_Life">Game
-					of Life</a>, written in C99 for POSIX using Curses. It can read
+					of Life</a>, written in &c99; for &posix; using Curses. It can read
 					files written in the widely-used
-					<a href="http://www.mirwoj.opus.chelm.pl/ca/ca_files_formats.html">RLE</a>
-					format.</p>
+					<a href="http://www.mirwoj.opus.chelm.pl/ca/ca_files_formats.html">&rle;
+					format</a>.</p>
 			</dd>
 
 			<dt><a href="caesar.c"><code>caesar.c</code></a></dt>
@@ -51,13 +58,13 @@
 
 			<dt><a href="rpn.c"><code>rpn.c</code></a></dt>
 			<dd>
-				<p>A reverse polish notation calculator. Arguments are
-					consumed from the command line.</p>
+				<p>A Reverse Polish Notation calculator.
+					Arguments are consumed from the command line.</p>
 			</dd>
 
 			<dt><a href="rpn-f.c"><code>rpn-f.c</code></a></dt>
 			<dd>
-				<p>A reverse polish notation calculator,
+				<p>A Reverse Polish Notation calculator,
 					functional style.</p>
 			</dd>
 		</dl>
