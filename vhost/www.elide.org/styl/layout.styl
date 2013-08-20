@@ -15,12 +15,16 @@ section.page {
 
 	// TODO: max-width: $grid-baseline * 100;
 
-	& > p,
-	& > h2,
-	& > ul,
-	& > dl {
-		grid-column($grid-ncols - 1);
-		grid-indent(1);
+	/* respond when 1 colspan has a min-width wide enough for "YYYY-MM-DD" */
+	$q = "all and " + grid-respond("min", 100px, 1);
+		@media $q {
+		& > p,
+		& > h2,
+		& > ul,
+		& > dl {
+			grid-column($grid-ncols - 1);
+			grid-indent(1);
+		}
 	}
 
 	h2 {
@@ -46,6 +50,7 @@ section.page {
 			padding-left: $grid-gutter;
 		}
 	}
+
 }
 
 header, footer {
@@ -55,8 +60,8 @@ header, footer {
 }
 
 header {
-	margin-top:    ($grid-baseline * 6.0);
-	margin-bottom: ($grid-baseline * 2.5);
+	margin-top:    ($grid-baseline * 5.0);
+	margin-bottom: ($grid-baseline * 2.0);
 
 	/* respond when the page height is below 30 lines */
 	$q = "all and (max-height: " + ($grid-baseline * 30) + ")";
@@ -64,21 +69,19 @@ header {
 		margin-top: ($grid-baseline * 2.0);
 	}
 
-	h1, ul#contents {
-		grid-indent(1);
+	/* respond when 1 colspan has a min-width wide enough for "YYYY-MM-DD" */
+	$q = "all and " + grid-respond("min", 100px, 1);
+	@media $q {
+		h1, ul#contents {
+			grid-indent(1);
+		}
 	}
 
 	h1 {
-		padding-top: ceil($grid-baseline * 0.0);
-		font-size:       ($grid-basefont * 3.0);
-		line-height:     ($grid-baseline * 2.0);
-
-		/* respond when the page height is below 30 lines */
-		$q = "all and (max-height: " + ($grid-baseline * 30) + ")";
-		@media $q {
-			line-height:     ($grid-baseline * 1.5);
-			font-size:       ($grid-baseline * 2.0);
-		}
+		padding-top:    ceil($grid-baseline * 0.5);
+		font-size:          ($grid-basefont * 2.7);
+		line-height:        ($grid-baseline * 2.0);
+		padding-bottom: ceil($grid-baseline * 0.5);
 	}
 }
 

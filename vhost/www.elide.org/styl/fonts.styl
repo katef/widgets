@@ -1,7 +1,7 @@
 
 font-face('Sofia Pro Light', 300, normal, '/fonts/SofiaPro-Light',     '#SofiaProLight');
-font-face('EB Garamond',     400, normal, '/fonts/EBGaramond-Regular', '#EBGaramond-Regular');
 font-face('Ubuntu Mono',     400, normal, '/fonts/UbuntuMono-Regular', '#UbuntuMono-Regular');
+font-face('Heros',           700, normal, '/fonts/Heros-Bold',         '#TeXGyreHeros-Bold');
 
 body {
 	font-family: Sofia Pro Light, Verdana, sans;
@@ -23,9 +23,14 @@ tt, code, pre {
 	font-weight: 400;
 }
 
-header h1 {
-	font-family: EB Garamond, Garamond, Georgia, serif;
-	font-weight: 400;
+h1, h2 {
+	font-family: Heros, Helvetica, Arial, sans;
+	font-weight: 700;
+
+	font-feature-settings: "kern" 1;
+	font-feature-settings: "size" 1;
+	font-feature-settings: "lnum" 1;
+	font-feature-settings: "cpsp" 0;
 }
 
 body {
@@ -47,10 +52,6 @@ body {
 	article.entry time[pubdate] {
 		font-feature-settings: "lnum" 1;
 		font-feature-settings: "tnum" 1;
-	}
-
-	header h1 {
-		font-feature-settings: "titl" 1; /* XXX: only if actually used */
 	}
 }
 
