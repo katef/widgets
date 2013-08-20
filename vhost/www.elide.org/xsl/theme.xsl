@@ -81,7 +81,7 @@
 			<xsl:with-param name="css"   select="'style.css debug.css'"/>
 
 			<xsl:with-param name="js">
-				<xsl:value-of select="'col.js overlay.js hyphenator-min.js debug.js'"/>
+				<xsl:value-of select="'col.js fixup.js hyphenator-min.js overlay.js debug.js'"/>
 
 				<!-- TODO: only where relevant -->
 				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>
@@ -89,6 +89,7 @@
 
 			<xsl:with-param name="onload">
 				<xsl:text>Colalign.init(r);</xsl:text>
+				<xsl:text>Fixup.init(r);</xsl:text>
 				<xsl:text>Overlay.init(r, 'cols',  5);</xsl:text>
 				<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
 			</xsl:with-param>
