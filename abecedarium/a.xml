@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<!--
+TODO: variant endings for some languages
+TODO: check armenian; very unsure about that
+TODO: check hebrew; it's confusing
+TODO: numerals?
+
+Wanted: hungarian, hangul, thai, tamil, sanskrit, ethiopean, spanish, romanian, polish, navajo
+Maybe: runes?
+-->
+
+<a>
+	<lang name="armn"
+		upper="ԱԲԳԴԵԶԷԸԹԺԻԼԽԾԿՀՁՂՃՄՅՆՇՈՉՊՋՌՍՎՏՐՑՒՓՔՕՖ"
+		lower="աբգդեզէըթժիլխծկհձղճմյնշոչպջռսվտրցւփքօֆ"
+		vowels="ԱԵԷԸԻՈաեէըիո"/>
+		<!-- TODO: Ու and ու -->
+	<lang name="cz"
+	      upper="AÁBCČDĎEÉ FGH|Ch|IÍJKLMNŇOÓPQRŘSŠTŤUÚ VWXYÝZŽ"
+	      lower="aábcčdďeéěfgh|ch|iíjklmnňoópqrřsštťuúůvwxyýzž"
+	      vowels="AÁEÉĚIÍOÓUÚYÝaáeéěiíoóuúů"
+	      loan="QWXqwx"/>
+	<lang name="en"
+	      upper="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	      lower="abcdefghijklmnoprqstuvwxyz"
+	      vowels="AEIOUaeiou"/>
+	<lang name="fr"
+	      upper="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	      lower="abcdefghijklmnoprqstuvwxyz"
+	      vowels="AEIOUYaeiouy"
+	      loan="KWkw"/>
+    <lang name="geor"
+	      uni="აბგდევზჱთიკლმნჲოპჟრსტჳუფქღყშჩცძწჭხჴჯჰჵჶჷ"
+	      vowels="ეიაოუ"/>
+	<lang name="gr"
+	      upper="ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ"
+	      lower="αβγδεζηθικλμνξοπρ|σ/ς|τυφχψω"
+	      vowels="ΑΕΙΟΥΩαειουω"/>
+	<lang name="hebr"
+		uni="אבגדהוזחטיכךלמםנןסעפףצץקרשת"/>
+	<lang name="rus"
+	      upper="АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
+	      lower="абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+	      vowels="ЕЁИЮЯеёиюяАЭЫУОаэыуо"/>
+	<lang name="swe"
+	      upper="ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ"
+	      lower="abcdefghijklmnopqrstuvwxyzåäö"
+	      vowels="AEIOUYÅÄÖaeiouyåäö"
+	      loan="QWZqwz"/>
+</a>
+

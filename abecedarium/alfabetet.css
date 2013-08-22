@@ -1,0 +1,113 @@
+/* $Id$ */
+
+body {
+	font-family: helvetica, sans-serif;
+}
+
+div#help {
+	font-size: 25px;
+	color: #ddd;
+	position: absolute;
+	top: 100px;
+	left: 300px;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	margin-top: 100px;
+	margin-left: 100px;
+	list-style-type: none;
+}
+
+ul > li {
+	text-align: center;
+	float: left;
+	font-size: 25px;
+}
+
+ul > li > span.lang {
+	cursor: pointer;
+	display: block;
+	width: 65px;
+	line-height: 1.5em;
+	padding: 0 1ex;
+}
+
+ul > li.uni > span.lang {
+	width: 150px;
+}
+
+ul > li.upper,
+ul > li.uni {
+	clear: left;
+	text-align: right;
+}
+
+ul > li.uni {
+	text-align: center;
+}
+
+ul > li.lower {
+	text-align: left;
+}
+
+ul > li > ol {
+	background-color: white;
+	list-style-type: none;
+	font-size: 75px;
+	margin: 0;
+	padding: 0;
+	width: 460px;
+	display: none;
+	position: absolute;
+	top: 100px;
+	left: 290px;
+	letter-spacing: -5px;
+}
+
+ul > li:hover > span.lang {
+	background-color: #eee;
+}
+
+/*
+ul > li:hover:before {
+	content: "\25B8";
+	position: absolute;
+	left: 80px;
+	color: #d7d7d7;
+}
+*/
+
+ul > li:hover > ol,
+ul > li > ol:hover {
+	display: block;
+}
+
+ul > li > ol > li {
+	color: #222;
+	display: block;
+	width: 75px;
+	height: 90px;
+	vertical-align: middle;
+	text-align: center;
+	float: left;
+}
+
+ul > li > ol > li.loan {
+	color: #d7d7d7;
+}
+
+ul > li > ol > li.vowel {
+	color: #d00;
+}
+
+sub, sup {
+}
+
+sup {
+}
+
+sub {
+}
+
