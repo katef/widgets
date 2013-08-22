@@ -12,31 +12,35 @@ h1#banner {
 
 	font-size:   ($grid-basefont * 1.125);
 	line-height: ($grid-basefont * 2.5);
-	font-size:   ($grid-basefont * 0.9);
+	font-size:   ($grid-basefont * 1.6);
 
-	letter-spacing: 1px;
+	font-feature-settings: "smcp" 1;
+	font-feature-settings: "size" 1;
+	font-feature-settings: "cpsp" 1;
+
 	text-transform: lowercase;
-	font-family: 'Palatino Linotype SC', serif;
 
 	a {
 		text-decoration: none;
 
 		&:hover {
 			text-decoration: underline;
-			color: #000;
+			color: inherit;
 		}
 	}
 
 	span.logo {
 		font-size: ($grid-basefont * 2.5);
-		letter-spacing: 0;
+
+		font-feature-settings: "smcp" 0;
+
 		text-transform: none;
-		font-family: 'Palatino Linotype', serif;
 	}
 
+// XXX: rename to span.sc
 	span.smallcaps {
-		text-transform: lowercase;
-		font-family: 'Palatino Linotype SC', serif;
+// TODO: lighter weight, larger size?
+		font-size: 1.1em;
 	}
 
 }

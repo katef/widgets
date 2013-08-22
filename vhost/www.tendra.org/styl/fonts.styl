@@ -1,0 +1,27 @@
+
+font-face('Pagella', 400, normal, '/fonts/Pagella-Regular', '#TeXGyrePagella-Regular');
+
+h1, h2 {
+	font-family: Pagella, Palatino, serif;
+	font-weight: 400;
+
+	font-feature-settings: "kern" 1;
+	font-feature-settings: "size" 1;
+	font-feature-settings: "lnum" 1;
+	font-feature-settings: "cpsp" 0;
+}
+
+body {
+//	font-feature-settings: "onum" 1;
+	font-feature-settings: "kern" 1;
+	font-feature-settings: "frac" 1;
+
+// XXX: rename to span.sc
+span.smallcaps,
+	span.units, span.sc, em.sc {
+		font-feature-settings: "c2sc" 1;
+		font-weight: normal;
+		font-style:  normal;
+	}
+}
+
