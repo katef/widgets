@@ -1,10 +1,10 @@
 
-font-face('Sofia Pro Light', 300, normal, '/fonts/SofiaPro-Light',     '#SofiaProLight');
-font-face('Ubuntu Mono',     400, normal, '/fonts/UbuntuMono-Regular', '#UbuntuMono-Regular');
-font-face('Heros',           700, normal, '/fonts/Heros-Bold',         '#TeXGyreHeros-Bold');
+font-face('Sofia Pro',   300, normal, '/fonts/SofiaPro-Light',     '#SofiaProLight');
+font-face('Ubuntu Mono', 400, normal, '/fonts/UbuntuMono-Regular', '#UbuntuMono-Regular');
+font-face('Heros',       700, normal, '/fonts/Heros-Bold',         '#TeXGyreHeros-Bold');
 
 body {
-	font-family: Sofia Pro Light, Verdana, sans;
+	font-family: Sofia Pro, Verdana, sans;
 	font-weight: 300;
 
 	text-rendering: optimizeLegibility;
@@ -39,8 +39,14 @@ body {
 	font-feature-settings: "ss01" 0; /* single story 'a' */
 	font-feature-settings: "frac" 1;
 
+	span.units, span.sc, em.sc {
+//		font-feature-settings: "c2sc" 1;
+		font-weight: normal;
+		font-style:  normal;
+	}
+
 	abbr {
-		font-feature-settings: "c2sc" 1;
+//		font-feature-settings: "smcp" 1;
 
 		/*
 		 * I would set onum=0, lnum=1 to align numbers to small caps.
