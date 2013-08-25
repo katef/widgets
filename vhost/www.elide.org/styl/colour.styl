@@ -2,15 +2,13 @@
 
 @import "misc.styl";
 
-$accent = #f22;
-
 body, td {
 	background-color: #fff;
 	color: #000;
 }
 
 a code, a, a:link, a:visited {
-	color: $accent;
+	color: #f22;
 	text-decoration: none;
 
 	*[title].important {
@@ -19,8 +17,7 @@ a code, a, a:link, a:visited {
 }
 
 a:hover code, a:hover {
-	text-decoration: none;
-	color: #000;
+	color: inherit;
 
 	*[title].important {
 		border-color: @color;
@@ -55,10 +52,10 @@ a *[title] {
 }
 
 ::-moz-selection {
-	background-color: #ddd;//lighten($accent, 15%);
+	background-color: #ddd;
 }
 
 ::selection {
-	background-color: #ddd;//lighten($accent, 15%);
+	background-color: #ddd;
 }
 
