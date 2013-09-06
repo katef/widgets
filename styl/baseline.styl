@@ -1,14 +1,15 @@
 /* $Id$ */
 
+$baseline ?= 1em;
+
 body {
-	font-size:   $grid-basefont;
-	line-height: $grid-baseline;
+	line-height:    $baseline;
 	text-rendering: optimizeLegibility; 
 }
 
 footer {
-	padding-top:    ($grid-baseline * 1.0);
-	padding-bottom: ($grid-baseline * 2.0);
+	padding-top:    ($baseline * 1.0);
+	padding-bottom: ($baseline * 2.0);
 }
 
 header, footer, nav,
@@ -19,31 +20,31 @@ table, td, th {
 }
 
 h1 { 
-	padding-bottom: floor($grid-baseline * 0.5); 
-	padding-top:    ceil( $grid-baseline * 1.0); 
-	font-size:      ceil( $grid-baseline * 1.3); 
-	line-height:    round($grid-baseline * 1.5);
+	padding-bottom: floor($baseline * 0.5); 
+	padding-top:    ceil( $baseline * 1.0); 
+	font-size:      ceil( $baseline * 1.3); 
+	line-height:    round($baseline * 1.5);
 }
 
 p {
-	margin-bottom: ($grid-baseline * 1.0);
+	margin-bottom: ($baseline * 1.0);
 }
 
 hr {
 	border: none;
 	height: 1px;
-	margin-bottom: ($grid-baseline - 1px);
+	margin-bottom: ($baseline - 1px);
 }
 
 pre, code {
-	font-size: $grid-basefont - 1px;
-	line-height: ceil($grid-baseline * 0.75); /* XXX: hackish */
+	font-size: 0.9em;
+	line-height: ceil($baseline * 0.75); /* XXX: hackish */
 }
 
 pre {
 	overflow-x: auto;
 	overflow-y: hidden;
 
-	tab-size(4 * $grid-baseline);
+	tab-size(4 * $baseline);
 }
 

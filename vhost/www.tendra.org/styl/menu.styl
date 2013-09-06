@@ -3,12 +3,12 @@
 @import "theme.styl";
 
 //$menu-pad-sides = ($grid-pad-sides * 0.75);
-$menu-pad-sides = ($grid-baseline * 0.75);
+$menu-pad-sides = ($baseline * 0.75);
 
 
 ul.menu {
 	list-style-type: none;
-	margin:  0 0 $grid-baseline 0;
+	margin:  0 0 $baseline 0;
 	padding: 0;
 }
 
@@ -19,7 +19,7 @@ ul.sections li a {
 }
 
 ul.sections > li a {
-	line-height: ($grid-baseline * 1.5);
+	line-height: ($baseline * 1.5);
 }
 
 ul.menu li a:hover,
@@ -35,7 +35,7 @@ ul.menu li a:before {
 	content: "\25b8";
 	color: #ddd;
 	display: block;
-	width: $grid-baseline;
+	width: $baseline;
 	float: left;
 	clear: left;
 	text-align: center;
@@ -55,7 +55,7 @@ ul.menu li:first-child {
 }
 
 ul.menu li a {
-	line-height: ($grid-baseline * 1.5);
+	line-height: ($baseline * 1.5);
 	color: #666;
 }
 
@@ -69,8 +69,8 @@ ul.menu li a:hover {
 /* adapted from http://www.divitodesign.com/2008/09/how-to-dropdown-css-menu/ */
 
 ul.sections {
-	height:  ($grid-baseline * 1.5);
-	padding: ($grid-baseline * 0.5) 0 0 0;
+	height:  ($baseline * 1.5);
+	padding: ($baseline * 0.5) 0 0 0;
 }
 
 ul.sections > li {
@@ -80,7 +80,7 @@ ul.sections > li {
 }
 
 ul.sections > li > a {
-	height:  ($grid-baseline * 1.5);
+	height:  ($baseline * 1.5);
 	padding: 0 $menu-pad-sides;
 	margin:  0;
 }
@@ -96,8 +96,8 @@ ul.sections li > ul {
 }
 
 ul.sections li > ul li a {
-	min-width: (15 * $grid-basefont);
-	height:    ($grid-baseline * 1.5);
+	min-width: (15em);
+	height:    ($baseline * 1.5);
 	padding:   0 ($menu-pad-sides - 1px); /* -1px for the border */
 	margin:    0;
 }

@@ -2,17 +2,16 @@
 
 $www-css = "http://www.elide.org/css";
 
-$grid-baseline = 21px;
-$grid-basefont = 15px;
-
 $grid-colour  = pink;
+
+$baseline = 21px; // XXX: i would prefer to define this next to the font size
 
 $ncols    ?= ( 1       4      5     6      );
 $layouts  ?= ( fluid   fluid  fixed fixed  );
 $aligns   ?= ( center  center left  center );
 
-$colwidth ?= $grid-baseline * 6; // wide enough for YYYY-MM-DD
-$gutter   ?= $grid-baseline / 2;
+$colwidth ?= $baseline * 6; // wide enough for YYYY-MM-DD
+$gutter   ?= $baseline / 2;
 
 $fixed-margin ?= $gutter;
 $fluid-margin ?= 0;

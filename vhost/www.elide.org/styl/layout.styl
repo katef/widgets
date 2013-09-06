@@ -3,18 +3,18 @@
 body {
 	margin:  0;
 	padding: 0;
-	padding-bottom: ($grid-baseline * 3);
+	padding-bottom: ($baseline * 3);
 
 	clearfix();
 }
 
 section.page {
-	// TODO: max-width: $grid-baseline * 100;
+	// TODO: max-width: $baseline * 100;
 
 	h2 {
-		padding-top: ceil($grid-baseline * 0.0);
-		font-size:       ($grid-basefont * 2.0);
-		line-height:     ($grid-baseline * 1.0);
+		padding-top: ceil($baseline * 0.0);
+		font-size:       2em;
+		line-height:     ($baseline * 1.0);
 	}
 
 	& > dl.index {
@@ -34,26 +34,26 @@ section.page {
 }
 
 header {
-	margin-top:    ($grid-baseline * 5.0);
-	margin-bottom: ($grid-baseline * 2.0);
+	margin-top:    ($baseline * 5.0);
+	margin-bottom: ($baseline * 2.0);
 
 	/* respond when the page height is below 30 lines */
-	$q = "all and (max-height: " + ($grid-baseline * 30) + ")";
+	$q = "all and (max-height: " + ($baseline * 30) + ")";
 	@media $q {
-		margin-top: ($grid-baseline * 2.0);
+		margin-top: ($baseline * 2.0);
 	}
 
 	h1 {
-		padding-top:    ceil($grid-baseline * 0.5);
-		font-size:          ($grid-basefont * 2.7);
-		line-height:        ($grid-baseline * 2.0);
-		padding-bottom: ceil($grid-baseline * 0.5);
+		padding-top:    ceil($baseline * 0.5);
+		font-size:          2.7em;
+		line-height:        ($baseline * 2.0);
+		padding-bottom: ceil($baseline * 0.5);
 	}
 }
 
 footer {
-	margin-top:    ($grid-baseline * 2);
-	margin-bottom: ($grid-baseline * 2);
+	margin-top:    ($baseline * 2);
+	margin-bottom: ($baseline * 2);
 	display: none; /* XXX */
 }
 
@@ -89,8 +89,8 @@ section.page article.entry {
 
 nav#monthindex {
 	display: block;
-	margin-top:    ($grid-baseline * 1);
-	margin-bottom: ($grid-baseline * 1);
+	margin-top:    ($baseline * 1);
+	margin-bottom: ($baseline * 1);
 
 	font-size: .9em;
 
@@ -105,11 +105,7 @@ nav#monthindex {
 
 article.entry {
 	ul.tags {
-		margin-top: ($grid-baseline * 1);
-
-		li {
-			font-size: ($grid-basefont - 1px);
-		}
+		margin-top: ($baseline * 1);
 	}
 }
 
@@ -119,8 +115,8 @@ nav#sidebar {
 	table.calendar {
 		table-layout: fixed;
 
-		max-width:   (12 * $grid-baseline);
-		margin-left: (6  * $grid-baseline);
+		max-width:   (12 * $baseline);
+		margin-left: (6  * $baseline);
 		width: 100%;
 
 		/* TODO: mixin? */
@@ -137,8 +133,8 @@ nav#sidebar {
 }
 
 nav.pages {
-	padding-top:    ($grid-baseline * 1);
-	padding-bottom: ($grid-baseline * 4);
+	padding-top:    ($baseline * 1);
+	padding-bottom: ($baseline * 4);
 }
 
 pre {

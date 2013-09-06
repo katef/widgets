@@ -6,6 +6,9 @@ body {
 	font-family: Sofia Pro, Verdana, sans;
 	font-weight: 300;
 
+	font-size:   15px;
+	line-height: $baseline;
+
 	text-rendering: optimizeLegibility;
 
 	&, td {
@@ -70,6 +73,7 @@ body {
 		 */
 	}
 
+	section.archive-year time[pubdate],
 	article.entry time[pubdate] {
 		font-feature-settings: "lnum" 1;
 		font-feature-settings: "tnum" 1;
@@ -77,6 +81,10 @@ body {
 
 	ol.pages {
 		font-feature-settings: "lnum" 1;
+	}
+
+	ol.overlay#cols li:after {
+		font-feature-settings: "onum" 0;
 	}
 }
 

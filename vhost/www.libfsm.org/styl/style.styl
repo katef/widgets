@@ -35,6 +35,10 @@ body {
 	padding: 0;
 
 	font-family: Quattrocento, serif;
+
+	font-size:   14px;
+	line-height: $baseline;
+
 	word-spacing: -1px;
 }
 
@@ -71,10 +75,9 @@ article.entry h1 time[pubdate] {
 	padding-left: 0.5em;
 	margin-left:  0.5em;
 	border-left:  solid 1px #ddd;
-	font-size:    ($grid-baseline * 0.9);
 
 	span.ordinal {
-		font-size:    ($grid-baseline * 0.8);
+		font-size: 0.8em;
 	}
 }
 
@@ -112,8 +115,6 @@ nav.sidebar {
 article.entry ul.tags {
 	margin: 0;
 	position: relative;
-	top:           -($grid-baseline * 0.5);
-	margin-bottom: -($grid-baseline * 0.0);
 
 	li {
 		display: inline;
