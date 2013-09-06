@@ -5,21 +5,20 @@ $www-css = "http://www.elide.org/css";
 $grid-baseline = 21px;
 $grid-basefont = 15px;
 
-$grid-width   = 100%;
-$grid-ncols   = 5;
-$grid-margin  = $grid-baseline;
-$grid-padding = 0 ($grid-baseline / 2);
-$grid-gutter  = $grid-baseline;
 $grid-colour  = pink;
 
-/*
- * The grid this layout is actually set on is two fixed-width columns
- * of 6 * @grid-baseline each, followed by one auto-width column which
- * fills the remaining space. Of course overlay.less can't show that.
- * Tools eternally fall short of what I want them to be.
- */
+$ncols    ?= ( 1       4      5     6      );
+$layouts  ?= ( fluid   fluid  fixed fixed  );
+$aligns   ?= ( center  center left  center );
 
-$full-min = 700px; /* threshold for going "fullscreen" */
+$colwidth ?= $grid-baseline * 6; // wide enough for YYYY-MM-DD
+$gutter   ?= $grid-baseline / 2;
+
+$fixed-margin ?= $gutter;
+$fluid-margin ?= 0;
+
+$grid = $ncols $layouts $aligns $colwidth $gutter $fixed-margin $fluid-margin;
+
 
 $cal-cell = 2em;
 

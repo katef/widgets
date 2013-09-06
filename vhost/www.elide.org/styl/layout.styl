@@ -1,7 +1,5 @@
 /* $Id$ */
 
-$grid-basefont = 18px; // TODO
-
 body {
 	margin:  0;
 	padding: 0;
@@ -11,29 +9,7 @@ body {
 }
 
 section.page {
-	grid-container();
-
 	// TODO: max-width: $grid-baseline * 100;
-
-	// TODO: this is ugly
-	& > p,
-	& > h2,
-	& > ul,
-	& > dl {
-		grid-column($grid-ncols);
-	}
-
-	/* respond when 1 colspan has a min-width wide enough for "YYYY-MM-DD" */
-	$q = "all and " + grid-respond("min", 100px, 1);
-		@media $q {
-		& > p,
-		& > h2,
-		& > ul,
-		& > dl {
-			grid-column($grid-ncols - 1);
-			grid-indent(1);
-		}
-	}
 
 	h2 {
 		padding-top: ceil($grid-baseline * 0.0);
@@ -45,6 +21,7 @@ section.page {
 		dt a {
 			display: block;
 
+// XXX: align to grid
 			width: 25%;
 			float: left;
 			clear: left;
@@ -52,18 +29,11 @@ section.page {
 			padding: 0.5ex  2ex;
 			margin: -0.5ex -2ex;
 		}
-
-		dd {
-			margin-left:  25%;
-			padding-left: $grid-gutter;
-		}
 	}
 
 }
 
 header {
-	grid-container();
-
 	margin-top:    ($grid-baseline * 5.0);
 	margin-bottom: ($grid-baseline * 2.0);
 
@@ -71,18 +41,6 @@ header {
 	$q = "all and (max-height: " + ($grid-baseline * 30) + ")";
 	@media $q {
 		margin-top: ($grid-baseline * 2.0);
-	}
-
-	/* respond when 1 colspan has a min-width wide enough for "YYYY-MM-DD" */
-	$q = "all and " + grid-respond("min", 100px, 1);
-	@media $q {
-		h1, ul#contents {
-			grid-indent(1);
-		}
-	}
-
-	h1, ul#contents {
-		grid-column($grid-ncols - 2);
 	}
 
 	h1 {
@@ -94,21 +52,32 @@ header {
 }
 
 footer {
-	grid-container();
-
 	margin-top:    ($grid-baseline * 2);
 	margin-bottom: ($grid-baseline * 2);
 	display: none; /* XXX */
 }
 
-nav#monthindex,
-section.page nav.pages {
-	grid-column($grid-ncols);
+section.page section.archive-year[data-count = "0"] {
+	display: none;
+}
+
+section.page section.archive-year > ol {
+	list-style-type: none;
+}
+
+section.page section.archive-year {
+	& > h1 {
+		&:after {
+			content: " ";
+		}
+
+		a {
+			display: none;
+		}
+	}
 }
 
 section.page article.entry {
-	grid-column($grid-ncols);
-
 	time.update,
 	a[name],
 	ul.tags {
@@ -116,28 +85,9 @@ section.page article.entry {
 		position: relative;
 		text-align: left;
 	}
-
-	/* respond when 1 colspan has a min-width wide enough for "YYYY-MM-DD" */
-	$q = "all and " + grid-respond("min", 100px, 1);
-	@media $q {
-		grid-column($grid-ncols - 1);
-		grid-indent(1);
-
-		a[name],
-		ul.tags {
-			grid-column(1);
-			grid-ident(-1);
-
-			position: absolute;
-			left: 0;
-		}
-	}
 }
 
 nav#monthindex {
-	grid-column($grid-ncols);
-	grid-indent(0);
-
 	display: block;
 	margin-top:    ($grid-baseline * 1);
 	margin-bottom: ($grid-baseline * 1);
@@ -150,29 +100,6 @@ nav#monthindex {
 
 	& > a {
 		float: right;
-	}
-
-	/* respond when 1 colspan has a min-width wide enough for "YYYY-MM-DD" */
-	$q = "all and " + grid-respond("min", 100px, 1);
-	@media $q {
-		grid-column($grid-ncols - 1);
-		grid-indent(1);
-	}
-
-	/* TODO: could animate collapsing by transitioning on width to 0 */
-
-	/* respond when the #monthindex is too narrow to fit all 12 months explicitly */
-	$q = "all and " + grid-respond("max", $grid-basefont * 30, 4);
-	@media $q {
-		pages-collapse(data-fmt);
-	}
-
-	/* respond when the #monthindex is too narrow to fit the attr() months */
-	$q = "all and " + grid-respond("max", $grid-basefont * 12, 3);
-	@media $q {
-		pages-collapse(false);
-
-		/* TODO: fold all li's into one lozenge */
 	}
 }
 
@@ -192,8 +119,8 @@ nav#sidebar {
 	table.calendar {
 		table-layout: fixed;
 
-		max-width: (12 * $grid-baseline);
-		margin-left: (6 * $grid-baseline);
+		max-width:   (12 * $grid-baseline);
+		margin-left: (6  * $grid-baseline);
 		width: 100%;
 
 		/* TODO: mixin? */
@@ -204,8 +131,8 @@ nav#sidebar {
 	ol.years {
 		display: none;
 		float: left;
-		margin-left:   $grid-gutter;
-		margin-bottom: $grid-gutter;
+		margin-left:   $gutter;
+		margin-bottom: $gutter;
 	}
 }
 
@@ -217,5 +144,64 @@ nav.pages {
 pre {
 	overflow-y: auto;
 	margin-left: 0;
+}
+
+for $l in 0 .. length($ncols) - 1 {
+	$q = grid-breakpoint($grid, $l);
+	@media $q {
+		header,
+		section.page,
+		footer {
+			grid-container($grid, $l);
+		}
+
+		if ($ncols[$l] == 1) {
+			header h1,
+			header ul {
+				grid-column($grid, $l, $ncols[$l]);
+			}
+
+			section.page > * {
+				grid-column($grid, $l, $ncols[$l]);
+			}
+		}
+
+		if ($ncols[$l] >= 4) {
+			header h1,
+			header ul {
+				grid-column($grid, $l, $ncols[$l] - 1, 1);
+			}
+
+			section.page > * {
+				grid-column($grid, $l, $ncols[$l] - 1, 1);
+			}
+
+			section.page > article.entry {
+				& > time.update,
+				& > a[name],
+				& > ul.tags {
+// XXX: this is wrong; need to define a sub-grid, so the percentage of $ncols[$l] - 1 is correct
+					grid-column($grid, $l, 1, -1);
+				}
+			}
+
+			nav#monthindex {
+				/* TODO: could animate collapsing by transitioning on width to 0 */
+
+				/* respond when the #monthindex is too narrow to fit all 12 months explicitly */
+				// TODO: pages-collapse(data-fmt);
+
+				/* respond when the #monthindex is too narrow to fit the attr() months */
+				// TODO: pages-collapse(false);
+			}
+		}
+
+		if ($ncols[$l] >= 5) {
+			header h1,
+			header ul {
+				grid-column($grid, $l, 4, 1);
+			}
+		}
+	}
 }
 

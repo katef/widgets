@@ -1,0 +1,50 @@
+/* $Id$ */
+
+for $l in 0 .. length($ncols) - 1 {
+	$q = grid-breakpoint($grid, $l);
+	@media $q {
+		header, nav.menu, section.page, footer {
+			grid-container($grid, $l);
+		}
+
+		header > *,
+		footer > * {
+			grid-column($grid, $l, $ncols[$l]);
+		}
+
+		header > form.search {
+			// TODO: define subgrid for 66/33%
+			input[type=text] {
+				grid-column($grid, $l, 2);
+			}
+
+			input[type=submit] {
+				grid-column($grid, $l, 1);
+			}
+		}
+
+		header > h1#banner,
+		header > form.search {
+			if ($ncols[$l] == 1) {
+				grid-subcontainer($grid, $l, 1, $ncols[$l] - 1);
+			}
+ 
+			if ($ncols[$l] == 3) {
+				grid-subcontainer($grid, $l, 2, $ncols[$l] - 2);
+			}
+ 
+			if ($ncols[$l] >= 6) {
+				grid-subcontainer($grid, $l, 3, $ncols[$l] - 3);
+			}
+		}
+ 
+		article.entry {
+			grid-column($grid, $l, $ncols[$l] - 1, 1);
+
+			ul.tags {
+				// TODO: exdent
+			}
+		}
+	}
+}
+

@@ -1,22 +1,5 @@
 /* $Id$ */
 
-section.page {
-	padding: $grid-baseline 1em;
-}
-
-header, nav.menu, section.page, footer {
-	grid-container(0 1em, 0);
-}
-
-nav.menu {
-/* XXX:
-	margin-top:   -$grid-baseline;
-	margin-left:  -1em;
-	margin-right: -1em;
-	margin-bottom: 0;
-*/
-}
-
 nav#monthindex {
 	display: block;
 
@@ -29,20 +12,32 @@ nav#monthindex {
 	}
 }
 
-body section.page {
-/* XXX:
-	position: relative;
-*/
-}
-
 nav.sidebar {
 	font-size:   ($grid-basefont - 1px);
 	top:      ($grid-baseline * 7);
-/* TODO:
-	width:    ($grid-width    * 3);
-	right:    1em;
-	position: absolute;
-*/
+
 	display: none;
+}
+
+for $l in 0 .. length($ncols) - 1 {
+	$q = grid-breakpoint($grid, $l);
+	@media $q {
+		header, section.page, footer {
+			grid-container($grid, $l);
+		}
+
+		header > *,
+		footer > * {
+			grid-column($grid, $l, $ncols[$l] - 0, 0);
+		}
+
+		section.page > * {
+			grid-column($grid, $l, $ncols[$l] - 1, 1);
+
+			ul.tags {
+				// TODO: exdent
+			}
+		}
+	}
 }
 

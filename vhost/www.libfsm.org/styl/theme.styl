@@ -5,12 +5,19 @@ $www-css       = "http://www.libfsm.org/css";
 $grid-baseline = 18px;
 $grid-basefont = 14px;
 
-$grid-width    = 100%;
-$grid-gutter   = $grid-baseline;
-$grid-ncols    = 8;
 $grid-colour   = orange;
 
-$full-min      = 700px; /* threshold for going "fullscreen" */
+$ncols    ?= ( 6      8      );
+$layouts  ?= ( fluid  fixed  );
+$aligns   ?= ( center center );
+
+$colwidth ?= $grid-baseline * 6;
+$gutter   ?= $grid-baseline / 2;
+
+$fixed-margin ?= $gutter;
+$fluid-margin ?= 0;
+
+$grid = $ncols $layouts $aligns $colwidth $gutter $fixed-margin $fluid-margin;
 
 $cal-cell      = 2em;
 
