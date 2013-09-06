@@ -39,7 +39,8 @@ ol.overlay {
 			border-right: solid $gutter $grid-colour - 50%;
 
 			&:after {
-				text-align: center;
+				text-align:  center;
+				white-space: pre-wrap;
 				color: $grid-colour - 50%;
 			}
 
@@ -77,7 +78,7 @@ for $l in 0 .. length($ncols) - 1 {
 			for $n in 1 .. $ncols[length($ncols) - 1] {
 				&:nth-child({$n}) {
 					&:after {
-						content: '"#%s %s:%s"' % ($n $ncols[$l] round(@width));
+						content: '"#%s\A %s"' % ($n round(@width));
 					}
 				}
 			}
