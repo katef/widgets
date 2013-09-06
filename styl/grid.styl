@@ -1,80 +1,213 @@
 /* $Id$ */
 
 /*
- * Layout looks like so:
+ * This grid system has the principle that columns are imagined to be a fixed width,
+ * that width determines how many columns maximum would fix into the current media.
+ *
+ * The idea is that designers design layouts to suit various numbers of columns.
+ *
+ * Responsive design is provided by selecting between those layouts as the media
+ * width changes. Any given layout may be either fluid or fixed-width.
+ *
+ * Anatomy of a layout:
  *
  *   ├─────────────────────────── parent ────────────────────────┤
- *   ╎    ├───────────────── .grid-container ────────────────┤   ╎
- *   │    ╎          ├──┤ $grid-gutter                       ╎   │
+ *   ╎    ├──────────────────── container ───────────────────┤   ╎
+ *   │    ╎            ├┤ gutter                             ╎   │
  *   │    ░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░   │
  *   │    ░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░   │
  *   │    ░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░   │
  *   │    ░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░░░▒▒▒▒▒▒▒▒▒░░   │
- *   ╎   ╎               ├───────┤ automatic column width        │
- *   ├───┤ $grid-margin                                          │
+ *   ╎   ╎             ├───────────┤ column                      │
+ *   ├───┤ margin                                                │
  *
- * All variables may be either percentage or fixed widths.
+ * There are also sub-containers, which are columns containing other columns.
+ * Those make life easier for heirachical markup.
  *
- *   $grid-width     Width of the container, relative to its parent. E.g. 100%
- *   $grid-ncols     Number of columns
- *   $grid-margin    Margin outside .grid-container
- *   $grid-padding   Padding inside .grid-container (not illustrated)
- *   $grid-gutter    Space between one column and the next
+ * Per-layout variables:
+ *
+ *   $ncols  [$l]  Number of columns for layout $l
+ *   $layouts[$l]  Column strategy for layout $l (fixed or fluid)
+ *   $aligns [$l]  Alignment for layout $l (left, right or center)
+ *
+ * Global variables:
+ *
+ *   $colwidth     Column width for fixed layouts
+ *   $gutter       Half the width between adjacent columns
+ *   $*-margin     Container margin for fixed- and fluid- layouts respectively
+ *
+ * $colwidth is used to decide if a layout will fit in the container,
+ * regardless of whether that layout happens to be fluid or fixed.
+ *
+ * Units for $colwidth must be suitable for @media min-width (i.e. px or pt, but
+ * not em or ex). Units here must match the units for $fixed-margin and $gutter.
+ *
+ *
+ * There are no pre-defined CSS classes to scatter over your markup. Instead, you're
+ * expected to call the grid mixins for your relevant elements, for each of the layouts
+ * you define.
+ *
+ * Example:
+ *
+ *  $ncols   ?= (     1      2      3      4      6      8     10     12     14     16  );
+ *  $layouts ?= ( fluid  fluid  fluid  fluid  fixed  fixed  fixed  fixed  fixed  fixed  );
+ *  $aligns  ?= ( center center center center center center center center center center );
+ *
+ *  $colwidth ?= 100px;
+ *  $gutter   ?= 18px;
+ *
+ *  $fixed-margin ?= $gutter * 3; // must be same units as $colwidth
+ *  $fluid-margin ?= $gutter;     // must be same units as $colwidth
+ *
+ *  $grid = $ncols $layouts $aligns $colwidth $gutter $fixed-margin $fluid-margin;
+ *
+ *  for $l in 0 .. length($ncols) - 1 {
+ *  	$q = grid-breakpoint($grid, $l);
+ *  	@media $q {
+ *  		ol {
+ *  			grid-container($grid, $l);
+ *  		}
+ *
+ *  		li {
+ *  			grid-column($grid, $l);
+ *  		}
+ *  	}
+ *  }
+ *
+ * Unfortunately I can't hide this stuff inside mixins because Stylus has various bugs
+ * in its @media handling. So the loop for breakpoints has to be provided by the user.
+ * Sorry about that. I've done my best to minimize the guts exposed.
+ *
+ * You can have completely different layouts, if you wish. For example, by using
+ * conditionals inside the media queries:
+ *
+ *  for $l in 0 .. length($ncols) - 1 {
+ *  	$q = grid-breakpoint($grid, $l);
+ *  	@media $q {
+ *  		if ($ncols[$l] == 1) {
+ *  			...
+ *  		}
+ *  
+ *  		if ($ncols[$l] >= 2) {
+ *  			...
+ *  		}
+ *  	}
+ *  }
+ *
  */
 
-$grid-width   ?= 100%;    // e.g. 100%, or e.g. 800px (and set $grid-margin to auto)
-$grid-ncols   ?= 12;      // e.g. 12
-$grid-margin  ?= 0   10%; // e.g. 2em, or e.g. 15%
-$grid-padding ?= 1em 1em; // e.g. 10px 5%
-$grid-gutter  ?= 2em;     // e.g. 2em, or e.g. 6%. Ought to be an even number
+/*
+ * TODO: have an element be both a container and a column
+ * TODO: permit $gutter to be a percentage
+ * TODO: permit $colspan to be a percentage
+ */
 
 @import "misc.styl";
 
-/*
- * This gives the screen width (in pixels) if we imagine a column is $width
- * pixels wide. This is intended to be useful for for responsive layouts.
- */
-grid-imagine($width, $colspan = 1) {
-	/* TODO: assert $width is in px */
-	$grid-ncols * ($width / $colspan);
+grid-breakpoint($grid, $l) {
+	$ncols        = $grid[0];
+	$layouts      = $grid[1];
+	$colwidth     = $grid[3];
+	$fixed-margin = $grid[5];
+
+	/*
+ 	 * TODO: permitting $fixed-margin as a percentage shouldn't be so hard.
+	 * I think it's just 1/percent and not a simultaneous equation.
+	 */
+
+	if ($l == 0) {
+		$min = null;
+	} else {
+		$min = 2 * $fixed-margin + $ncols[$l] * $colwidth;
+	}
+
+	// p("%s cols: $min = %s (%s)" % ($ncols[$l] $min $layouts[$l]));
+
+	// the media width for which this layout is applicable
+	$q = "all";
+	$q += " and (min-width: %s)" % $min if $min;
+
+	return $q;
 }
 
-/*
- * Produce a media query expression which is true where the given colspan is larger
- * (or smaller) than the given pixel width. For example:
- * 
- *    $q = "all and " + grid-respond("min", 100px, 1);
- *    @media $q {
- *         color: red;
- *    }
- *
- * The above will apply on media where the minimum width for one column is 100px.
- */
-grid-respond($m, $width, $colspan = 1) {
-	"(" + $m + "-width: " + grid-imagine($width, $colspan) + ")";
-}
-
-grid-colwidth($colspan = 1, $width = $grid-width) {
-	$width * ($colspan / $grid-ncols);
-}
-
-grid-container($padding = $grid-padding, $margin = $grid-margin) {
-	padding: $padding;
-	margin:  $margin;
+grid-container($grid, $l) {
+	$ncols        = $grid[0];
+	$layouts      = $grid[1];
+	$aligns       = $grid[2];
+	$colwidth     = $grid[3];
+	$gutter       = $grid[4];
+	$fixed-margin = $grid[5];
+	$fluid-margin = $grid[6];
 
 	clearfix();
+
+	if ($layouts[$l] == fixed) {
+		width: $ncols[$l] * $colwidth;
+	} else {
+		width: auto;
+	}
+
+	if ($layouts[$l] == fixed) {
+		margin-left:  $aligns[$l] == left  ? $fixed-margin : auto;
+		margin-right: $aligns[$l] == right ? $fixed-margin : auto;
+	} else {
+		margin-left:  $aligns[$l] != right ? $fluid-margin : 0;
+		margin-right: $aligns[$l] != left  ? $fluid-margin : 0;
+	}
+
+	padding-left:  $gutter;
+	padding-right: $gutter;
 }
 
-grid-column($colspan = $grid-ncols) {
+grid-subgrid($grid, $l, $indent) {
+	$subgrid = clone($grid);
+	$subgrid[0][$l] = $subgrid[0][$l] - $indent;
+
+	return $subgrid;
+}
+
+grid-column($grid, $l, $colspan = 1, $indent = 0) {
+	$ncols        = $grid[0];
+	$layouts      = $grid[1];
+	$colwidth     = $grid[3];
+	$gutter       = $grid[4];
+
 	float: left;
-	width: grid-colwidth($colspan);
 
-	padding: 0 ($grid-gutter / 2);
+	/* TODO: need to work around sub-pixel percentage bugs
+	 * (e.g. overflow: hidden, and set container to 101%) */
 
-	box-sizing(border-box);
+	if ($layouts[$l] == fixed) {
+		width: $colspan * $colwidth;
+	} else {
+		width: ($colspan * 100% / $ncols[$l]);
+	}
+
+	box-sizing: border-box;
+
+	/* XXX: only if not already set (e.g. for an element being both a column and a container) */
+	padding-left:  0;
+	padding-right: 0;
+	margin-left:   0;
+	margin-right:  0;
+
+	if ($layouts[$l] == fixed) {
+		margin-left: $indent * $colwidth;
+	} else {
+		margin-left: $indent * (100% / $ncols[$l]);
+	}
+
+	padding-left:  @padding-left  + $gutter;
+	padding-right: @padding-right + $gutter;
 }
 
-grid-indent($colspan = 1) {
-	margin-left: grid-colwidth($colspan);
+grid-subcontainer($grid, $l, $colspan = 1, $indent = 0) {
+	$gutter       = $grid[4];
+
+	grid-column($grid, $l, $colspan, $indent);
+
+	// to override grid-column()
+	padding-left:  @padding-left  - $gutter;
+	padding-right: @padding-right - $gutter;
 }
 
