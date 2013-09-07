@@ -189,11 +189,17 @@ for $l in 0 .. length($ncols) - 1 {
 			}
 
 			section.page > article.entry {
+				grid-subcontainer($grid, $l, $ncols[$l], 0);
+				$subgrid = grid-subgrid($grid, $l, 0);
+
+				& > * {
+					grid-column($subgrid, $l, $ncols[$l] - 1);
+				}
+
 				& > time.update,
 				& > a[name],
 				& > ul.tags {
-// XXX: this is wrong; need to define a sub-grid, so the percentage of $ncols[$l] - 1 is correct
-					grid-column($grid, $l, 1, -1);
+					grid-column($subgrid, $l, 1);
 				}
 			}
 
@@ -226,7 +232,6 @@ for $l in 0 .. length($ncols) - 1 {
 			if ($ncols[$l] == 1) {
 				/* when too narrow to fit the attr() months */
 				pages-collapse-group(false);
-// TODO: also need to hide year numbers
 			}
 
 			if ($ncols[$l] >= 2 && $ncols[$l] <= 5) {
