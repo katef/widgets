@@ -425,9 +425,10 @@
 					<xsl:with-param name="date"  select="$tl:date"/>
 					<xsl:with-param name="delta" select="'-P1Y'"/>
 					<xsl:with-param name="rel"   select="'prev'"/>
-					<xsl:with-param name="next"  select=    "&quot;'&lt;&#160;'yyyy&quot;"/>
-					<xsl:with-param name="skip"  select="&quot;'&lt;&lt;&#160;'yyyy&quot;"/>
+					<xsl:with-param name="next"  select=    "&quot;'&lt;'&quot;"/>
+					<xsl:with-param name="skip"  select="&quot;'&lt;&lt;'&quot;"/>
 					<xsl:with-param name="dtfmt" select="'yyyy'"/>
+					<xsl:with-param name="data"  select="'yyyy'"/>
 				</xsl:call-template>
 			</li>
 
@@ -493,9 +494,10 @@
 					<xsl:with-param name="date"  select="$tl:date"/>
 					<xsl:with-param name="delta" select="'P1Y'"/>
 					<xsl:with-param name="rel"   select="'next'"/>
-					<xsl:with-param name="next"  select="&quot;yyyy'&#160;&gt;'&quot;"/>
-					<xsl:with-param name="skip"  select="&quot;yyyy'&#160;&gt;&gt;'&quot;"/>
+					<xsl:with-param name="next"  select=    "&quot;'&gt;'&quot;"/>
+					<xsl:with-param name="skip"  select="&quot;'&gt;&gt;'&quot;"/>
 					<xsl:with-param name="dtfmt" select="'yyyy'"/>
+					<xsl:with-param name="data"  select="'yyyy'"/>
 				</xsl:call-template>
 			</li>
 		</ol>
