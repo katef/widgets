@@ -1,0 +1,60 @@
+/* $Id$ */
+
+/* faces, weights and styles */
+body {
+	font-family: Quattrocento, serif;
+
+	h1 { 
+		font-weight: normal;
+	}
+
+	th {
+		font-weight: normal;
+	}
+
+	em {
+		font-weight: bold;
+		font-style:  normal;
+	}
+}
+
+/* sizes */
+body {
+	font-size:   16px;
+	line-height: $baseline;
+
+	word-spacing: -1px;
+
+	h1 {
+		font-size: 1.8em;
+	}
+
+	article.entry h1 time[pubdate] {
+		font-size: 0.75em; /* x-height */
+
+		span.ordinal {
+			font-size: 0.8em;
+		}
+	}
+}
+
+/* alignment */
+body {
+	& {
+		text-align: justify;
+	}
+
+	h1 {
+		text-align: left;
+	}
+}
+
+/* features */
+body {
+	text-rendering: optimizeLegibility;
+
+	pre {
+		overflow-x: auto;
+	}
+}
+

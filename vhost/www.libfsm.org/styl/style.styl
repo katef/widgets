@@ -20,6 +20,8 @@
 @import "layout.styl";
 @import "screen.styl";
 
+@import "fonts.styl";
+
 @import "download.styl";
 
 $pages-inact-border     = #ddd;
@@ -33,36 +35,11 @@ $pages-hover-color      = #000;
 body {
 	margin:  0;
 	padding: 0;
-
-	font-family: Quattrocento, serif;
-
-	font-size:   14px;
-	line-height: $baseline;
-
-	word-spacing: -1px;
-}
-
-body, p, dd {
-	text-align: justify;
-}
-
-h1 { 
-	font-weight: normal;
-	text-align: left ! important;
 }
 
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-}
-
-th {
-	font-weight: normal;
-}
-
-em {
-	font-weight: bold;
-	font-style:  normal;
 }
 
 abbr[title],
@@ -75,10 +52,6 @@ article.entry h1 time[pubdate] {
 	padding-left: 0.5em;
 	margin-left:  0.5em;
 	border-left:  solid 1px #ddd;
-
-	span.ordinal {
-		font-size: 0.8em;
-	}
 }
 
 nav.sidebar {

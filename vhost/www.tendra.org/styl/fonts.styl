@@ -1,30 +1,99 @@
 
 font-face('Pagella', 400, normal, '/fonts/Pagella-Regular', '#TeXGyrePagella-Regular');
 
-h1, h2 {
-	font-family: Pagella, Palatino, serif;
-	font-weight: 400;
+/* faces, weights and styles */
+body {
+	h1, h2 {
+		font-family: Pagella, Palatino, serif;
+		font-weight: 400;
+	}
 
-	font-feature-settings: "kern" 1;
-	font-feature-settings: "size" 1;
-	font-feature-settings: "lnum" 1;
-	font-feature-settings: "cpsp" 0;
+	em.sc {
+		font-weight: normal;
+		font-style:  normal;
+	}
+
+	blockquote {
+		font-style: normal;
+	}
+
+	label {
+		font-weight: normal;
+	}
+
+	ul.sections li.current {
+		font-weight: bold;
+
+		ul {
+			font-weight: normal;
+		}
+	}
+
+	dl.glossary {
+		dt, dd.abbr {
+			font-weight: bold;
+
+			span.note {
+				font-weight: normal;
+			}
+		}
+	}
 }
 
+/* sizes */
 body {
 	font-size:   13px;
 	line-height: $baseline;
+
+	h1 {
+		font-size: 28px;
+	}
+
+	h2 {
+		font-size: 18px;
+	}
+
+	input {
+		font-size: 11px;
+	}
+}
+
+/* alignment */
+body {
+	& {
+		text-align: justify;
+	}
+
+	h1, h2 {
+		text-align: left;
+	}
+
+	table th.table-sorted:after {
+		text-align: right;
+	}
+}
+
+/* features */
+body {
+	pre {
+		overflow-x: auto;
+	}
 
 //	font-feature-settings: "onum" 1;
 	font-feature-settings: "kern" 1;
 	font-feature-settings: "frac" 1;
 
-// XXX: rename to span.sc
-span.smallcaps,
+	// XXX: rename to span.sc
+	span.smallcaps,
 	span.units, span.sc, em.sc {
 		font-feature-settings: "c2sc" 1;
-		font-weight: normal;
-		font-style:  normal;
+	}
+
+	h1, h2 {
+		font-feature-settings: "kern" 1;
+		font-feature-settings: "size" 1;
+		font-feature-settings: "lnum" 1;
+		font-feature-settings: "cpsp" 0;
 	}
 }
 

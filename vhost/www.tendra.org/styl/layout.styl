@@ -1,5 +1,9 @@
 /* $Id$ */
 
+h1, h2, h3 {
+	text-align: left;
+}
+
 for $l in 0 .. length($ncols) - 1 {
 	$q = grid-breakpoint($grid, $l);
 	@media $q {

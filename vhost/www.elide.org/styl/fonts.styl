@@ -2,18 +2,10 @@
 font-face('Sofia Pro',   300, normal, '/fonts/SofiaPro-Light',     '#SofiaProLight');
 font-face('Ubuntu Mono', 400, normal, '/fonts/UbuntuMono-Regular', '#UbuntuMono-Regular');
 
+/* faces, weights and styles */
 body {
 	font-family: Sofia Pro, Verdana, sans;
 	font-weight: 300;
-
-	font-size:   15px;
-	line-height: $baseline;
-
-	text-rendering: optimizeLegibility;
-
-	&, td {
-		text-align: left;
-	}
 
 	th {
 		font-weight: normal;
@@ -24,25 +16,46 @@ body {
 		font-weight: inherit;
 		font-style:  italic;
 	}
+
+	h1, h2 {
+		font-family: inherit;
+		font-weight: inherit;
+
+		text-transform: lowercase;
+
+		&:first-letter {
+			text-transform: uppercase;
+		}
+	}
+
+	tt, code, pre {
+		font-family: 'Ubuntu Mono', monospace;
+		font-weight: 400;
+	}
 }
 
-tt, code, pre {
-	font-family: 'Ubuntu Mono', monospace;
-	font-weight: 400;
-}
-
-h1, h2 {
-	font-family: inherit;
-	font-weight: inherit;
-
-	text-transform: lowercase;
-
-	&:first-letter {
-		text-transform: uppercase;
-        }
-}
-
+/* sizes */
 body {
+	font-size:   15px;
+	line-height: $baseline;
+
+}
+
+/* alignment */
+body {
+	& {
+		text-align: left;
+	}
+}
+
+/* features */
+body {
+	text-rendering: optimizeLegibility;
+
+	pre {
+		overflow-x: auto;
+	}
+
 	font-feature-settings: "onum" 1;
 	font-feature-settings: "kern" 1;
 	font-feature-settings: "ss01" 0; /* single story 'a' */
