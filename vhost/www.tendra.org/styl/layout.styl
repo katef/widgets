@@ -1,9 +1,5 @@
 /* $Id$ */
 
-h1, h2, h3 {
-	text-align: left;
-}
-
 for $l in 0 .. length($ncols) - 1 {
 	$q = grid-breakpoint($grid, $l);
 	@media $q {
@@ -27,7 +23,43 @@ for $l in 0 .. length($ncols) - 1 {
 			}
 		}
 
-		header > h1#banner,
+		/* fallbacks for when fittext.js isn't available */
+		header > h1#banner {
+			if ($ncols[$l] == 1) {
+				font-size: 1.3em;
+			}
+ 
+			if ($ncols[$l] == 3) {
+				font-size: 1.5em;
+			}
+ 
+			if ($ncols[$l] == 6) {
+				font-size: 2.2em;
+			}
+ 
+			if ($ncols[$l] == 8) {
+				font-size: 2.0em;
+			}
+ 
+			if ($ncols[$l] == 12) {
+				font-size: 2.2em;
+			}
+		}
+ 
+		header > h1#banner {
+			if ($ncols[$l] == 1) {
+				grid-column($grid, $l, 1, $ncols[$l] - 1);
+			}
+ 
+			if ($ncols[$l] == 3) {
+				grid-column($grid, $l, 2, $ncols[$l] - 2);
+			}
+ 
+			if ($ncols[$l] >= 6) {
+				grid-column($grid, $l, 3, $ncols[$l] - 3);
+			}
+		}
+
 		header > form.search {
 			if ($ncols[$l] == 1) {
 				grid-subcontainer($grid, $l, 1, $ncols[$l] - 1);
@@ -41,7 +73,7 @@ for $l in 0 .. length($ncols) - 1 {
 				grid-subcontainer($grid, $l, 3, $ncols[$l] - 3);
 			}
 		}
- 
+
 		article.entry {
 			grid-column($grid, $l, $ncols[$l] - 1, 1);
 

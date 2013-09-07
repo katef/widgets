@@ -58,6 +58,8 @@
 			<xsl:with-param name="js">
 				<xsl:value-of select="'col.js fixup.js hyphenator-min.js table.js overlay.js debug.js'"/>
 
+				<xsl:value-of select="' fittext.js'"/>
+
 				<!-- TODO: only where relevant -->
 				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>
 				<xsl:value-of select="' tablerowlinks.js'"/>
@@ -69,6 +71,9 @@
 				<xsl:text>Table.init(r);</xsl:text>
 				<xsl:text>Overlay.init(r, 'cols', 12);</xsl:text>
 				<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
+
+				<!-- TODO: consider vw css units instead -->
+				<xsl:text>window.fitText(document.getElementById("banner"), 1.1);</xsl:text>
 
 				<!-- TODO: only where relevant -->
 				<xsl:text>ConvertRowsToLinks('download');</xsl:text>
