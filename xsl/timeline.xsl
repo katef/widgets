@@ -39,10 +39,28 @@
 	<xsl:param name="tl:day"     select="date:day-in-month($tl:date)"/>
 	<xsl:param name="tl:short"   select="false()"/>
 
+	<xsl:variable name="tl:min" select="tl:pubdate($tl:entries/tl:entry)[1]"/>
+	<xsl:variable name="tl:max" select="tl:pubdate($tl:entries/tl:entry)[last()]"/>
+
 	<func:function name="tl:pubdate">
 		<xsl:param name="entry"/>
 
 		<func:result select="$entry/h:html/h:head/h:meta[@name = 'date']/@content"/>
+	</func:function>
+
+	<func:function name="tl:entrytitle">
+		<xsl:param name="entry"/>
+
+		<func:result>
+			<xsl:choose>
+				<xsl:when test="string($entry/h:html/h:head/h:title)">
+					<xsl:apply-templates select="$entry/h:html/h:head/h:title"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:text>(untitled)</xsl:text>
+				</xsl:otherwise>
+			</xsl:choose>
+		</func:result>
 	</func:function>
 
 	<xsl:template name="cal-link">
@@ -231,14 +249,7 @@
 						<xsl:for-each select="$tl:entries/tl:entry
 							[date:same-day(tl:pubdate(.), $date)]">
 
-							<xsl:choose>
-								<xsl:when test="h:html/h:head/h:title">
-									<xsl:value-of select="string(h:html/h:head/h:title)"/>
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:text>(untitled)</xsl:text>
-								</xsl:otherwise>
-							</xsl:choose>
+							<xsl:value-of select="string(tl:entrytitle(.))"/>
 
 							<xsl:if test="position() != last()">
 								<xsl:text>, </xsl:text>
@@ -286,7 +297,7 @@
 				</a>
 			</h1>
 
-			<time pubdate="pubdate">
+			<time pubdate="{tl:pubdate(.)}">
 				<xsl:value-of select="date:format-date($date, &quot;yyyy&#8288;&#x2013;&#8288;MM&#8288;&#x2013;&#8288;dd&quot;)"/>
 			</time>
 
@@ -338,6 +349,60 @@
 		</xsl:if>
 	</xsl:template>
 
+	<xsl:template name="tl:archive-view">
+		<xsl:param name="year" select="date:year($tl:max)"/>
+
+		<xsl:variable name="count"
+			select="count($tl:entries/tl:entry[date:year(tl:pubdate(.)) = $year])"/>
+
+		<section class="archive-year" data-count="{$count}">
+			<h1>
+				<a name="{$year}">
+					<xsl:call-template name="tl:href">
+						<xsl:with-param name="date"  select="$year"/>
+					</xsl:call-template>
+
+					<time pubdate="{$year}">
+						<xsl:value-of select="$year"/>
+					</time>
+				</a>
+			</h1>
+
+			<xsl:if test="$count &gt; 0">
+				<ol>
+					<xsl:for-each select="$tl:entries/tl:entry
+						[date:year(tl:pubdate(.)) = $year]">
+	
+						<xsl:sort data-type="number" select="date:seconds(tl:pubdate(.))"
+							order="descending"/>
+	
+						<li>
+							<xsl:variable name="date" select="date:format-date(tl:pubdate(.), 'yyyy-MM-dd')"/>
+
+							<time pubdate="{tl:pubdate(.)}">
+								<xsl:value-of select="$date"/>
+							</time>
+	
+							<a>
+								<xsl:call-template name="tl:href">
+									<xsl:with-param name="date"  select="$date"/>
+									<xsl:with-param name="short" select="@short"/>
+								</xsl:call-template>
+
+								<xsl:value-of select="tl:entrytitle(.)"/>
+							</a>
+						</li>
+					</xsl:for-each>
+				</ol>
+			</xsl:if>
+		</section>
+
+		<xsl:if test="$year &gt; date:year($tl:min)">
+			<xsl:call-template name="tl:archive-view">
+				<xsl:with-param name="year" select="$year - 1"/>
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
 
 	<xsl:template name="tl:title">
 		<xsl:choose>
@@ -594,6 +659,12 @@
 				<xsl:copy-of select="$r"/>
 			</xsl:otherwise>
 		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="tl:content-archive">
+		<section class="archive-view">
+			<xsl:call-template name="tl:archive-view"/>
+		</section>
 	</xsl:template>
 
 </xsl:stylesheet>

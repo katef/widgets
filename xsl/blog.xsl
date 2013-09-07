@@ -127,5 +127,9 @@
 		<xsl:call-template name="tl:content"/>
 	</xsl:template>
 
+	<xsl:template match="processing-instruction('blog-archive')">
+		<xsl:call-template name="tl:content-archive"/>
+	</xsl:template>
+
 </xsl:stylesheet>
 
