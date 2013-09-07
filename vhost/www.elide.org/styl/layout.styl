@@ -81,9 +81,8 @@ section.page article.entry {
 	time.update,
 	a[name],
 	ul.tags {
-		display: block;
-		position: relative;
-		text-align: left;
+		display:    block;
+		position:   relative;
 	}
 }
 
@@ -192,14 +191,14 @@ for $l in 0 .. length($ncols) - 1 {
 				grid-subcontainer($grid, $l, $ncols[$l], 0);
 				$subgrid = grid-subgrid($grid, $l, 0);
 
-				& > * {
-					grid-column($subgrid, $l, $ncols[$l] - 1);
-				}
-
 				& > time.update,
 				& > a[name],
 				& > ul.tags {
 					grid-column($subgrid, $l, 1);
+				}
+
+				& > div.body {
+					grid-column($subgrid, $l, $ncols[$l] - 1);
 				}
 			}
 

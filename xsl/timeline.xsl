@@ -308,7 +308,9 @@
 			</ul>
 -->
 
-			<xsl:apply-templates select="h:html"/>
+			<div class="body">
+				<xsl:apply-templates select="h:html"/>
+			</div>
 
 			<xsl:choose>
 				<xsl:when test="$tl:short">
