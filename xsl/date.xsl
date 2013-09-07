@@ -26,6 +26,13 @@
 		        and date:month-in-year($a) = date:month-in-year($b)"/>
 	</func:function>
 
+	<func:function name="date:same-year">
+		<xsl:param name="a"/>
+		<xsl:param name="b"/>
+
+		<func:result select="date:year($a) =          date:year($b)"/>
+	</func:function>
+
 	<func:function name="date:make">
 		<xsl:param name="y"/>
 		<xsl:param name="M" select="false()"/>
