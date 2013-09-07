@@ -160,9 +160,7 @@ for $l in 0 .. length($ncols) - 1 {
 			section.page > * {
 				grid-column($grid, $l, $ncols[$l]);
 			}
-		}
 
-		if ($ncols[$l] <= 2) {
 			nav#monthindex {
 				grid-subcontainer($grid, $l, $ncols[$l], 0);
 				$subgrid = grid-subgrid($grid, $l, 0);
@@ -171,6 +169,12 @@ for $l in 0 .. length($ncols) - 1 {
 				& > a {
 					grid-column($subgrid, $l, $ncols[$l]);
 				}
+			}
+		}
+
+		if ($ncols[$l] >= 2) {
+			nav#monthindex {
+				pages-collapse-outer(data-fmt);
 			}
 		}
 
@@ -221,13 +225,13 @@ for $l in 0 .. length($ncols) - 1 {
 			/* TODO: could animate collapsing by transitioning on width to 0 */
 			if ($ncols[$l] == 1) {
 				/* when too narrow to fit the attr() months */
-				pages-collapse(false);
+				pages-collapse-group(false);
 // TODO: also need to hide year numbers
 			}
 
 			if ($ncols[$l] >= 2 && $ncols[$l] <= 5) {
 				/* when too narrow to fit all 12 months explicitly */
-				pages-collapse(data-fmt);
+				pages-collapse-group(data-fmt);
 			}
 
 			if ($ncols[$l] <= 2) {

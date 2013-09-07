@@ -105,7 +105,7 @@ ol.pages {
 
 }
 
-pages-collapse($attr = false) {
+pages-collapse-group($attr = false) {
 
 	ol.pages li.group li {
 		display: none;
@@ -115,6 +115,24 @@ pages-collapse($attr = false) {
 			display: inline;
 		}
 
+		if ($data) {
+			&:first-child > time:after,
+			&:first-child a:after {
+				content: "\00a0" attr($attr);
+			}
+
+			&:last-child > time:before,
+			&:last-child a:before {
+				content: attr($attr) "\00a0";
+			}
+		}
+	}
+
+}
+
+pages-collapse-outer($attr = false) {
+
+	ol.pages > li {
 		if ($data) {
 			&:first-child > time:after,
 			&:first-child a:after {
