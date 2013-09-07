@@ -151,7 +151,7 @@ for $l in 0 .. length($ncols) - 1 {
 			grid-container($grid, $l);
 		}
 
-		if ($ncols[$l] == 1) {
+		if ($ncols[$l] <= 2) {
 			header h1,
 			header ul {
 				grid-column($grid, $l, $ncols[$l]);
@@ -159,6 +159,18 @@ for $l in 0 .. length($ncols) - 1 {
 
 			section.page > * {
 				grid-column($grid, $l, $ncols[$l]);
+			}
+		}
+
+		if ($ncols[$l] <= 2) {
+			nav#monthindex {
+				grid-subcontainer($grid, $l, $ncols[$l], 0);
+				$subgrid = grid-subgrid($grid, $l, 0);
+
+				ol.pages,
+				& > a {
+					grid-column($subgrid, $l, $ncols[$l]);
+				}
 			}
 		}
 
@@ -182,13 +194,16 @@ for $l in 0 .. length($ncols) - 1 {
 			}
 
 			nav#monthindex {
-				/* TODO: could animate collapsing by transitioning on width to 0 */
+				grid-subcontainer($grid, $l, $ncols[$l] - 1, 1);
+				$subgrid = grid-subgrid($grid, $l, 1);
 
-				/* respond when the #monthindex is too narrow to fit all 12 months explicitly */
-				// TODO: pages-collapse(data-fmt);
+				ol.pages {
+					grid-column($subgrid, $l, $ncols[$l] - 2);
+				}
 
-				/* respond when the #monthindex is too narrow to fit the attr() months */
-				// TODO: pages-collapse(false);
+				& > a {
+					grid-column($subgrid, $l, 1);
+				}
 			}
 		}
 
@@ -196,6 +211,34 @@ for $l in 0 .. length($ncols) - 1 {
 			header h1,
 			header ul {
 				grid-column($grid, $l, 4, 1);
+			}
+		}
+	}
+
+	$q = "%s and %s" % (grid-breakpoint($grid, $l, min) grid-breakpoint($grid, $l, max));
+	@media $q {
+		nav#monthindex {
+			/* TODO: could animate collapsing by transitioning on width to 0 */
+			if ($ncols[$l] == 1) {
+				/* when too narrow to fit the attr() months */
+				pages-collapse(false);
+// TODO: also need to hide year numbers
+			}
+
+			if ($ncols[$l] >= 2 && $ncols[$l] <= 5) {
+				/* when too narrow to fit all 12 months explicitly */
+				pages-collapse(data-fmt);
+			}
+
+			if ($ncols[$l] <= 2) {
+				& > a,
+				ol.pages {
+					text-align: center;
+				}
+
+				& > a {
+					margin-top: 2ex; // XXX: hacky
+				}
 			}
 		}
 	}
