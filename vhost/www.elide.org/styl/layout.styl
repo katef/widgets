@@ -143,7 +143,7 @@ pre {
 }
 
 for $l in 0 .. length($ncols) - 1 {
-	$q = grid-breakpoint($grid, $l);
+	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
 		header,
 		section.page,

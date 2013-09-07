@@ -62,7 +62,7 @@
  *  $grid = $ncols $layouts $aligns $colwidth $gutter $fixed-margin $fluid-margin;
  *
  *  for $l in 0 .. length($ncols) - 1 {
- *  	$q = grid-breakpoint($grid, $l);
+ *  	$q = grid-breakpoint($grid, $l, min);
  *  	@media $q {
  *  		ol {
  *  			grid-container($grid, $l);
@@ -82,7 +82,7 @@
  * conditionals inside the media queries:
  *
  *  for $l in 0 .. length($ncols) - 1 {
- *  	$q = grid-breakpoint($grid, $l);
+ *  	$q = grid-breakpoint($grid, $l, min);
  *  	@media $q {
  *  		if ($ncols[$l] == 1) {
  *  			...
@@ -104,30 +104,54 @@
 
 @import "misc.styl";
 
-grid-breakpoint($grid, $l) {
+grid-breakpoint-min($grid, $l) {
 	$ncols        = $grid[0];
 	$layouts      = $grid[1];
 	$colwidth     = $grid[3];
 	$fixed-margin = $grid[5];
+
+	if ($l == 0) {
+		return null;
+	} else {
+		return 2 * $fixed-margin + $ncols[$l] * $colwidth;
+	}
+}
+
+grid-breakpoint-max($grid, $l) {
+	$ncols        = $grid[0];
+	$layouts      = $grid[1];
+	$colwidth     = $grid[3];
+	$fixed-margin = $grid[5];
+
+	if ($l == length($ncols) - 1) {
+		return null;
+	} else {
+		return 2 * $fixed-margin + $ncols[$l + 1] * $colwidth - 1;
+	}
+}
+
+grid-breakpoint($grid, $l, $m) {
+	$ncols        = $grid[0];
+	$layouts      = $grid[1];
 
 	/*
  	 * TODO: permitting $fixed-margin as a percentage shouldn't be so hard.
 	 * I think it's just 1/percent and not a simultaneous equation.
 	 */
 
-	if ($l == 0) {
-		$min = null;
+	if ($m == min) {
+		$width = grid-breakpoint-min($grid, $l);
 	} else {
-		$min = 2 * $fixed-margin + $ncols[$l] * $colwidth;
+		$width = grid-breakpoint-max($grid, $l);
 	}
 
-	// p("%s cols: $min = %s (%s)" % ($ncols[$l] $min $layouts[$l]));
+	if (!$width) {
+		return all;
+	}
 
-	// the media width for which this layout is applicable
-	$q = "all";
-	$q += " and (min-width: %s)" % $min if $min;
+//	p("%s cols: %s = %s, %s" % ($ncols[$l] $m $width $layouts[$l]));
 
-	return $q;
+	return "(%s-width: %s)" % ($m $width);
 }
 
 grid-container($grid, $l) {
