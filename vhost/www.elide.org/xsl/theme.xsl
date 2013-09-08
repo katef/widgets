@@ -3,11 +3,16 @@
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:date="http://exslt.org/dates-and-times"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:c="http://xml.elide.org/elide_contents"
 	xmlns:e="http://xml.elide.org/elide_website"
 
-	exclude-result-prefixes="h c e">
+	extension-element-prefixes="date"
+
+	exclude-result-prefixes="h c e date">
+
+	<xsl:import href="../../../xsl/lib/date.format-date.function.xsl"/>
 
 	<xsl:import href="../../../xsl/theme.xsl"/>
 
@@ -58,6 +63,18 @@
 		</a>
 	</xsl:template>
 
+	<xsl:template match="h:section[@class = 'archive-year']/h:a[@name]"/>
+
+<!--
+	<xsl:template match="h:section[@class = 'archive-year']/h:h1">
+		<xsl:copy-of select="h:a"/>
+	</xsl:template>
+-->
+
+<!--
+	<xsl:template match="h:section[@class = 'archive-year']/h:ol/h:li/h:time[@pubdate]"/>
+-->
+
 	<xsl:template name="e:page-footer">
 		<tt class="rcsid">
 			<xsl:choose>
@@ -90,7 +107,7 @@
 			<xsl:with-param name="onload">
 				<xsl:text>Colalign.init(r);</xsl:text>
 				<xsl:text>Fixup.init(r);</xsl:text>
-				<xsl:text>Overlay.init(r, 'cols',  5);</xsl:text>
+				<xsl:text>Overlay.init(r, 'cols',  6);</xsl:text>
 				<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
 			</xsl:with-param>
 
@@ -106,7 +123,7 @@
 			<xsl:with-param name="body">
 				<header>
 					<h1>
-						<xsl:text>Kate&#8217;s&#160;Amazing </xsl:text>
+						<xsl:text>Kate&#8217;s amazing </xsl:text>
 						<xsl:apply-templates select="h:head/h:title" mode="body"/>
 					</h1>
 

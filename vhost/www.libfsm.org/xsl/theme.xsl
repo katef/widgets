@@ -19,13 +19,12 @@
 	<xsl:import href="menu.xsl"/>
 -->
 
-	<xsl:template match="h:article[@class = 'entry']/h:h1">
-		<xsl:variable name="date" select="../h:time[@pubdate]"/>
+	<xsl:template name="ordinaldate">
+		<xsl:param name="date"/>
 
-		<h1>
-			<xsl:copy-of select="text()|*"/>
-
-			<time datetime="{$date}" pubdate="pubdate">
+		<!-- TODO: pubdate? -->
+		<time datetime="{$date}" pubdate="pubdate">
+			<xsl:if test="date:day-in-month($date)">
 				<xsl:value-of select="date:day-in-month($date)"/>
 				<span class="ordinal">
 					<xsl:call-template name="ordinal">
@@ -34,7 +33,9 @@
 				</span>
 
 				<xsl:text>&#xA0;</xsl:text>
+			</xsl:if>
 
+			<xsl:if test="date:day-in-month($date)">
 				<xsl:variable name="mon" select="date:month-abbreviation($date)"/>
 				<xsl:choose>
 					<xsl:when test="$mon = 'Sep'">
@@ -45,9 +46,23 @@
 					</xsl:otherwise>
 				</xsl:choose>
 
-				<xsl:text>&#xA0;&#8217;</xsl:text>
-				<xsl:value-of select="substring(date:year($date), 3, 2)"/>
-			</time>
+				<xsl:text>&#xA0;</xsl:text>
+			</xsl:if>
+
+			<xsl:text>&#8217;</xsl:text>
+			<xsl:value-of select="substring(date:year($date), 3, 2)"/>
+		</time>
+	</xsl:template>
+
+	<xsl:template match="h:article[@class = 'entry']/h:h1">
+		<xsl:variable name="date" select="../h:time[@pubdate]"/>
+
+		<h1>
+			<xsl:copy-of select="text()|*"/>
+
+			<xsl:call-template name="ordinaldate">
+				<xsl:with-param name="date" select="$date"/>
+			</xsl:call-template>
 		</h1>
 	</xsl:template>
 
