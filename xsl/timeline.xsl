@@ -658,7 +658,9 @@
 
 		<xsl:choose>
 			<xsl:when test="count(common:node-set($r)/node()) = 0">
-				<xsl:text>(no entries)</xsl:text>
+				<span class="noentries">
+					<xsl:text>(no entries)</xsl:text>
+				</span>
 			</xsl:when>
 
 			<xsl:otherwise>
