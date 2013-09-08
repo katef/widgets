@@ -409,7 +409,9 @@
 	<xsl:template name="tl:title">
 		<xsl:choose>
 			<xsl:when test="$tl:date">
-				<xsl:value-of select="$tl:date"/>
+				<time datetime="{$tl:date}">
+					<xsl:value-of select="$tl:date"/>
+				</time>
 			</xsl:when>
 
 			<xsl:otherwise>

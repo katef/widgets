@@ -37,8 +37,10 @@
 	<xsl:template name="tl:title">
 		<xsl:choose>
 			<xsl:when test="$tl:date">
-				<xsl:value-of select="date:format-date($tl:date,
-					&quot;yyyy&#8288;&#x2013;&#8288;MM&#8288;&#x2013;&#8288;dd&quot;)"/>
+				<time datetime="{$tl:date}">
+					<xsl:value-of select="date:format-date($tl:date,
+						&quot;yyyy&#8288;&#x2013;&#8288;MM&#8288;&#x2013;&#8288;dd&quot;)"/>
+				</time>
 			</xsl:when>
 
 			<xsl:otherwise>
