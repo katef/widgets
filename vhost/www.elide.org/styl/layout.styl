@@ -16,21 +16,6 @@ section.page {
 		font-size:       2em;
 		line-height:     ($baseline * 1.0);
 	}
-
-	& > dl.index {
-		dt a {
-			display: block;
-
-// XXX: align to grid
-			width: 25%;
-			float: left;
-			clear: left;
-
-			padding: 0.5ex  2ex;
-			margin: -0.5ex -2ex;
-		}
-	}
-
 }
 
 header {
@@ -160,6 +145,18 @@ for $l in 0 .. length($ncols) - 1 {
 				grid-column($grid, $l, $ncols[$l]);
 			}
 
+			dl.index {
+				grid-subcontainer($grid, $l, $ncols[$l], 0);
+
+				dt a {
+					grid-column($grid, $l, 1);
+				}
+
+				dd {
+					grid-column($grid, $l, 1);
+				}
+			}
+
 			nav#monthindex {
 				grid-subcontainer($grid, $l, $ncols[$l], 0);
 				$subgrid = grid-subgrid($grid, $l, 0);
@@ -185,6 +182,19 @@ for $l in 0 .. length($ncols) - 1 {
 
 			section.page > * {
 				grid-column($grid, $l, $ncols[$l] - 1, 1);
+			}
+
+			dl.index {
+				grid-subcontainer($grid, $l, $ncols[$l] - 1, 1);
+				$subgrid = grid-subgrid($grid, $l, 1);
+
+				dt a {
+					grid-column($subgrid, $l, 1);
+				}
+
+				dd {
+					grid-column($subgrid, $l, $ncols[$l] - 2);
+				}
 			}
 
 			section.page > article.entry {

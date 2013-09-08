@@ -3,8 +3,13 @@ font-face('Pagella', 400, normal, '/fonts/Pagella-Regular', '#TeXGyrePagella-Reg
 
 /* faces, weights and styles */
 body {
-	h1, h2 {
+	h1 {
 		font-family: Pagella, Palatino, serif;
+		font-weight: 400;
+	}
+
+	h2, h3, h4 {
+		font-family: inherit;
 		font-weight: 400;
 	}
 
@@ -53,6 +58,14 @@ body {
 		font-size: 18px;
 	}
 
+	h3 {
+		font-size: 16px;
+	}
+
+	h4 {
+		font-size: 14px;
+	}
+
 	input {
 		font-size: 11px;
 	}
@@ -62,10 +75,6 @@ body {
 body {
 	& {
 		text-align: justify;
-	}
-
-	h1, h2 {
-		text-align: left;
 	}
 
 	table th.table-sorted:after {
@@ -89,7 +98,7 @@ body {
 		font-feature-settings: "c2sc" 1;
 	}
 
-	h1, h2 {
+	h1, h2, h3, h4 {
 		font-feature-settings: "kern" 1;
 		font-feature-settings: "size" 1;
 		font-feature-settings: "lnum" 1;
