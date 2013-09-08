@@ -9,7 +9,6 @@
 	exclude-result-prefixes="tl date">
 
 	<xsl:include href="../../../xsl/blog.xsl"/>
-	<xsl:include href="theme.xsl"/>
 
 	<xsl:template match="processing-instruction('blog-title')">
 		<xsl:choose>

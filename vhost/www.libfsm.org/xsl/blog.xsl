@@ -8,8 +8,8 @@
 
 	exclude-result-prefixes="tl date">
 
-	<xsl:include href="../../../xsl/blog.xsl"/>
-	<xsl:include href="theme.xsl"/>
+	<xsl:import href="ordinaldate.xsl"/>
+	<xsl:import href="../../../xsl/blog.xsl"/>
 
 	<xsl:template match="processing-instruction('blog-title')">
 		<xsl:choose>
