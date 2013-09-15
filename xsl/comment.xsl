@@ -45,9 +45,9 @@
 
 		<!-- TODO: tab order attributes -->
 		<form id="comment" class="comment" action="{$www-api}/comment/">
-			<h3>
+			<h2>
 				<xsl:text>Leave a comment</xsl:text>
-			</h3>
+			</h2>
 
 			<input id="form-postpath" type="hidden" name="postpath"
 				value="{ $postpath }"/>
