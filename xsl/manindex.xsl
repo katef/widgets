@@ -18,7 +18,9 @@
 				<a href="{concat(../../mi:refmeta/mi:refentrytitle,
 					'.', ../../mi:refmeta/mi:manvolnum)}">	<!-- canonical page name -->
 <!-- TODO: apply-templates for proper XHTML output -->
-					<xsl:value-of select="concat(., '.', ../../mi:refmeta/mi:manvolnum)"/>
+					<tt class="command">
+						<xsl:value-of select="concat(., '.', ../../mi:refmeta/mi:manvolnum)"/>
+					</tt>
 				</a>
 			</dt>
 		</xsl:for-each>
@@ -28,21 +30,54 @@
 		</dd>
 	</xsl:template>
 
-	<xsl:template match="mi:manvolnum" mode="section">
-		<section>
+	<xsl:template name="section">
+		<xsl:param name="manvolnum"/>
+		<xsl:param name="productname"/>
+
+		<section class="manindex">
 			<h1>
 				<a id="{.}"/>
 				<xsl:text>Section </xsl:text>
-				<xsl:value-of select="."/>
+				<xsl:value-of select="$manvolnum"/>
+
+				<xsl:if test="$productname">
+					<span class="product">
+						<xsl:value-of select="$productname"/>
+					</span>
+				</xsl:if>
 			</h1>
 
-			<dl class="manindex">
-				<xsl:apply-templates select="//mi:refentry[mi:refmeta/mi:manvolnum = current()]">
-					<!-- TODO: sort by file extension first, if present -->
+			<dl>
+				<xsl:apply-templates select="//mi:refentry
+					[mi:refmeta/mi:manvolnum = $manvolnum]
+					[not($productname) or mi:refentryinfo/mi:productname = $productname]">
 					<xsl:sort select="."/>
 				</xsl:apply-templates>
 			</dl>
 		</section>
+	</xsl:template>
+
+	<xsl:template match="mi:manvolnum" mode="section">
+		<xsl:variable name="manvolnum" select="."/>
+
+		<xsl:if test="//mi:refentry
+			[mi:refmeta/mi:manvolnum = current()]
+			[not(mi:refentryinfo/mi:productname)]">
+			<xsl:call-template name="section">
+				<xsl:with-param name="manvolnum" select="$manvolnum"/>
+			</xsl:call-template>
+		</xsl:if>
+
+		<xsl:for-each select="//mi:refentry
+			[mi:refmeta/mi:manvolnum = current()]/mi:refentryinfo/mi:productname
+			[not(. = ../../preceding-sibling::mi:refentry
+				[mi:refmeta/mi:manvolnum = current()]/mi:refentryinfo/mi:productname)]">
+			<xsl:sort select="."/>
+			<xsl:call-template name="section">
+				<xsl:with-param name="manvolnum"   select="$manvolnum"/>
+				<xsl:with-param name="productname" select="."/>
+			</xsl:call-template>
+		</xsl:for-each>
 	</xsl:template>
 
 	<xsl:template match="/mi:manindex">
@@ -51,7 +86,7 @@
 			<xsl:with-param name="method" select="'xml'"/>
 
 			<xsl:with-param name="title">
-<xsl:text>TODO</xsl:text>
+<!-- TODO -->
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
