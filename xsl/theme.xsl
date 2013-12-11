@@ -13,22 +13,12 @@
 	<xsl:import href="copy.xsl"/>
 	<xsl:import href="output.xsl"/>
 
-	<!-- XXX:
-		doctype-public="HTML"
-		doctype-system="TODO"
+	<!--
+		The main purpose of this is to copy through XHTML source to the
+		output document. This cannot be done in output.xsl because
+		output.xsl is not aware that the source may be (unthemed) XHTML.
 	-->
-<!-- XXX: do i need this here, and not just in output.xsl?
-	<xsl:output
-		method="xml"
-		encoding="utf-8"
-		indent="yes"
-		omit-xml-declaration="yes"
-		cdata-section-elements="script"
-		media-type="application/xhtml+xml"
-		standalone="yes"/>
--->
 
-	<!-- TODO: maybe roll this into output.xsl -->
 	<xsl:template name="theme-output">
 		<xsl:param name="css"    select="''"/>
 		<xsl:param name="fonts"  select="''"/>
@@ -41,7 +31,7 @@
 		<xsl:param name="body"   select="/.."/>
 
 		<xsl:call-template name="output-content">
-			<xsl:with-param name="method" select="'xhtml5'"/>
+			<xsl:with-param name="method" select="'html'"/>
 
 			<xsl:with-param name="css"    select="$css"/>
 			<xsl:with-param name="fonts"  select="$fonts"/>
