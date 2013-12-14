@@ -4,6 +4,8 @@
 /* TODO: gradients for backgrounds */
 /* TODO: rounded corners */
 
+$tabsize ?= 4;
+
 clearfix() {
 	&:after {
 		content: "";
@@ -31,7 +33,7 @@ box-sizing($s = content-box) {
 	box-sizing:         $s; /* Opera/IE 8+ */
 }
 
-tab-size($t = 1.5em) {
+tab-size($t = 4) {
 	-moz-tab-size: $t;
 	-o-tab-size:   $t;
 	tab-size:      $t;
