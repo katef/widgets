@@ -1,0 +1,100 @@
+/* $Id: comment.css 340 2012-02-26 00:14:02Z kate $ */
+
+$comment-gutter   ?= 1.0em;
+$comment-baseline ?= 0.5em;
+$comment-aside    ?= #aaa;
+
+form.comment {
+	input,
+	texrarea {
+		margin-right: $comment-gutter;
+	}
+
+	div.buttons {
+		clear: left;
+	}
+
+	label {
+		display: block;
+		margin-bottom: $comment-baseline;
+		clear: left;
+	}
+
+	textarea {
+		margin-bottom: $comment-baseline;
+		display: block;
+/* XXX:
+		max-width: 390px;
+		width: 390px;
+		float: left;
+*/
+	}
+
+	aside.markup {
+		display: inline-block;
+/* XXX:
+		max-width: 130px;
+*/
+//		height: 120px;
+		margin-left: 10px;
+	}
+
+	aside.markup,
+	aside.markup code {
+		color: $comment-aside;
+	/* TODO: inherit a "smaller" from baseline.styl */
+	}
+
+	input[type = "submit"],
+	input[type = "button"] {
+		display: inline-block;
+		padding: 2px 10px;
+	}
+}
+
+// TODO: rework this
+aside#comment-preview {
+	display: none;
+	border: solid 2px cornflowerblue;
+	margin: 0 -10px 0 -10px;
+	padding: 10px 20px;
+	padding-left: 110px;
+	background-color: aliceblue;
+
+	border-radius:         4px;
+}
+
+// TODO: rework this
+form {
+	aside.feedback {
+		display: none;
+
+		p {
+			display: none;
+			margin: 0;
+		}
+	}
+
+	&.invalid aside.feedback,
+	&.error aside.feedback {
+		display: block;
+		border: solid 2px #f88;
+		color: #f44;
+		background-color: #fee;
+		margin: 40px -10px 20px;
+		padding: 10px;
+	}
+	
+	&.invalid p.invalid {
+		display: block;
+	}
+
+	&.error aside.feedback p#comment-error {
+		display: block;
+	}
+
+	&.advice aside.feedback p#comment-advice {
+		display: block;
+	}
+}
+
