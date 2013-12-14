@@ -1,0 +1,126 @@
+/* $Id$ */
+
+span.command {
+	font-weight: bold;
+
+	&[data-manvolnum]:after {
+		content: "(" attr(data-manvolnum) ")";
+		font-weight: 600; /* 100 less than bold */
+	}
+}
+
+div.navigation {
+	color: #aaa;
+
+	&.bottom {
+		margin-top: 3em;
+	}
+
+	& div.pages {
+		float: right;
+	}
+}
+
+ol.toc {
+	margin-left: 1em;
+	list-style-type: none;
+
+	ol {
+		margin-left: 2em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+		list-style-type: none;
+	}
+}
+
+table.informal,
+table.informal td {
+	border: none;
+}
+
+ul, ol {
+	margin-left: 2em;
+}
+
+div.figure, div.table {
+	margin: 2em;
+}
+
+div.figure img {
+	display: block;
+}
+
+div.figure b {
+	margin-top: 1em;
+	display: block;
+}
+
+blockquote.literallayout {
+	white-space: pre-line;
+	tab-size($tabsize);
+}
+
+ol.footnotes {
+	list-style-type: none;
+	margin-left: 3em;
+	margin-top: 3em;
+}
+
+ol.footnotes sup.footnote-number {
+	position: absolute;
+	width: 2em;
+	margin-left: -2.5em;
+}
+
+div.table ol.footnotes {
+	margin-top: 2em;
+}
+
+pre.screen div.lines {
+	display: none;
+}
+
+pre.screen {
+	padding: 1ex 1em;
+}
+
+
+a i.citetitle {
+	font-style: normal;
+}
+
+sup.footnote-number a {
+	text-decoration: none;
+}
+
+p.cmdsynopsis {
+	clear: left;
+	margin-bottom: 1ex;
+
+	span.cmd {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	div.args {
+		display: inline-block;
+	}
+
+	div.args a {
+		text-decoration: none;
+	}
+
+	div.args a:hover {
+		text-decoration: underline;
+	}
+
+	div.args {
+		color: #444;
+	}
+}
+
+abbr[title] {
+	border-bottom: dotted 1px #666;
+	cursor: help;
+}
+
