@@ -24,6 +24,7 @@
 		<xsl:param name="fonts"  select="''"/>
 		<xsl:param name="js"     select="''"/>
 		<xsl:param name="onload" select="''"/>
+		<xsl:param name="class"  select="false()"/>
 
 		<xsl:param name="page"   select="/.."/>
 		<xsl:param name="site"   select="/.."/>
@@ -37,6 +38,7 @@
 			<xsl:with-param name="fonts"  select="$fonts"/>
 			<xsl:with-param name="js"     select="$js"/>
 			<xsl:with-param name="onload" select="$onload"/>
+			<xsl:with-param name="class"  select="$class"/>
 
 			<xsl:with-param name="title">
 				<xsl:copy-of select="$page"/>
