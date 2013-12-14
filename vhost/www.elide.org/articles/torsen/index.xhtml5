@@ -52,21 +52,17 @@
 
 		<p>Here's a schematic. Everything inside the grey box rotates:</p>
 
-		<center>
-			<img src="torsen-axial.png" class="noborder"/>
-		</center>
+		<figure class="single-narrow">
+			<!-- TODO: svg -->
+			<?img src="torsen-axial.png"?>
+		</figure>
 
-		<p>And here're two attempts to implement that in Lego:</p>
+		<p>And here are two attempts to implement that in Lego:</p>
 
-		<center>
-			<a href="torsen1.jpeg">
-				<img src="torsen1-small.jpeg"/>
-			</a>
-
-			<a href="torsen2.jpeg">
-				<img src="torsen2-small.jpeg"/>
-			</a>
-		</center>
+		<figure class="double">
+			<?img src="torsen1.jpeg"?>
+			<?img src="torsen2.jpeg"?>
+		</figure>
 
 		<p>These are relatively weak, because the axles going to the wheels are
 			not connected to much. Perhaps the second one would be a little
@@ -86,17 +82,17 @@
 		<p>Here's a schematic. Again, everything inside the grey box
 			rotates:</p>
 
-		<center>
-			<img src="torsen-epicyclic.png" class="noborder"/>
-		</center>
+		<figure class="single-narrow">
+			<!-- TODO: svg -->
+			<?img src="torsen-epicyclic.png"?>
+		</figure>
 
 		<p>And here's how it looks in Lego:</p>
 
-		<center>
-			<a href="torsen3.jpeg">
-				<img src="torsen3-small.jpeg"/>
-			</a>
-		</center>
+		<!-- TODO: generate with PI, same as for blog posts -->
+		<figure class="single-wide">
+			<?img src="torsen3-small.jpeg"?>
+		</figure>
 
 		<p>No supporting red bits!</p>
 
