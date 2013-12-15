@@ -15,6 +15,7 @@
 	<xsl:import href="../../../xsl/lib/date.format-date.function.xsl"/>
 
 	<xsl:import href="../../../xsl/theme.xsl"/>
+	<xsl:import href="../../../xsl/img.xsl"/>
 
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
