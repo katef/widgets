@@ -1,0 +1,1 @@
+../../../js/hyphenator-min.js
