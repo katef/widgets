@@ -135,6 +135,46 @@ for $l in 0 .. length($ncols) - 1 {
 			grid-container($grid, $l);
 		}
 
+if ($ncols[$l] == 5) {
+	figure {
+//		grid-subcontainer($grid, $l, $ncols[$l] - 1, 1);
+//		$subgrid = ( 2 ) ( fluid ) ( center ) $colwidth $gutter $fixed-margin $fluid-margin;
+
+
+		a:hover img {
+			border-color: #000;
+		}
+
+		img {
+			width: 100%;
+
+			border: solid 1px #ccc;
+			&:first-child {
+				padding-left:  0 \! important; // hack
+			}
+
+			&:last-child {
+				padding-right: 0 \! important; // hack
+			}
+		}
+
+		&.double img {
+//			grid-column($subgrid, 0, 1);
+		}
+
+		&.single-narrow img {
+//			grid-column($subgrid, 0, 2);
+			img {
+				width: 80%;
+			}
+		}
+
+		&.single-wide img {
+//			grid-column($subgrid, 0, 2);
+		}
+	}
+}
+
 		if ($ncols[$l] <= 2) {
 			header h1,
 			header ul {
