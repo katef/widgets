@@ -1,0 +1,54 @@
+body,div,h1,h2,h3,h4,h5,h6,p,blockquote,pre,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,th,td,article,aside,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0;border:0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,audio,canvas,video{display:block;}
+html{height:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+body{min-height:100%;font-size:100%;}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}
+sup{top:-0.5em;}
+sub{bottom:-0.25em;}
+pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word;}
+b,strong{font-weight:bold;}
+abbr[title]{border-bottom:1px dotted;}
+table{border-collapse:collapse;border-spacing:0;}
+a img,img{-ms-interpolation-mode:bicubic;border:0;}
+input,textarea,button,select{margin:0;font-size:100%;line-height:normal;vertical-align:baseline;}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button;}
+input[type="checkbox"],input[type="radio"]{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-o-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
+body{margin:0 auto;}
+#grid{height:16.5em;position:relative;overflow:hidden;}
+.col{background:#ddd;height:100%;width:3em;position:absolute;left:50%;top:0;margin-left:0.75em;}
+.col2{margin-left:5.25em;}
+.col3{margin-left:9.75em;}
+.col4{margin-left:14.25em;}
+.col5{margin-left:18.75em;}
+.col6{margin-left:23.25em;}
+.col7{margin-left:27.75em;}
+.col8{margin-left:32.25em;}
+.col9{margin-left:36.75em;}
+.col10{margin-left:41.25em;}
+.col11{margin-left:45.75em;}
+.col12{margin-left:50.25em;}
+.col13{margin-left:54.75em;}
+.col14{margin-left:59.25em;}
+.col15{margin-left:63.75em;}
+.col16{margin-left:68.25em;}
+.col17{margin-left:72.75em;}
+.col18{margin-left:77.25em;}
+.col19{margin-left:-3.75em;}
+.col20{margin-left:-8.25em;}
+.col21{margin-left:-12.75em;}
+.col22{margin-left:-17.25em;}
+.col23{margin-left:-21.75em;}
+.col24{margin-left:-26.25em;}
+.col25{margin-left:-30.75em;}
+.col26{margin-left:-35.25em;}
+.col27{margin-left:-39.75em;}
+.col28{margin-left:-44.25em;}
+.col29{margin-left:-48.75em;}
+.col30{margin-left:-53.25em;}
+.col31{margin-left:-57.75em;}
+.col32{margin-left:-62.25em;}
+.col33{margin-left:-66.75em;}
+.col34{margin-left:-71.25em;}
+.col35{margin-left:-75.75em;}
+.col36{margin-left:-80.25em;}
+.col1,.col2,.col3,.col4,.col19,.col20,.col21,.col22{background:pink;}

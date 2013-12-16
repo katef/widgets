@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+	"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+	viewBox="-500 -200 500 300" height="500px" width="500px">
+	<circle id="pr" cx="10%"  cy="10%"  rx="10%" />
+	<circle id="px" cx="10px" cy="10px" rx="10px"/>
+	<circle id="in" cx="10in" cy="10in" rx="10in"/>
+	<circle id="cm" cx="10cm" cy="10cm" rx="10cm"/>
+	<circle id="mm" cx="10mm" cy="10mm" rx="10mm"/>
+	<circle id="pt" cx="10pt" cy="10pt" rx="10pt"/>
+	<circle id="pc" cx="10pc" cy="10pc" rx="10pc"/>
+	<circle id="em" cx="10em" cy="10em" rx="10em"/>
+	<circle id="ex" cx="10ex" cy="10ex" rx="10ex"/>
+</svg>
+
