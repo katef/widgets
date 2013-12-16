@@ -1,1 +1,1 @@
-../wc/bp-trunk/www/www.bubblephone.com
+../wc/bubblephone-trunk/www/www.bubblephone.com
