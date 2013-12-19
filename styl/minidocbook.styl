@@ -40,15 +40,15 @@ html.minidocbook {
 		margin-left: 2em;
 	}
 
-	div.figure, div.table {
+	figure, table {
 		margin: 2em;
 	}
 
-	div.figure img {
+	figure img {
 		display: block;
 	}
 
-	div.figure b {
+	figure figcaption {
 		margin-top: 1em;
 		display: block;
 	}
@@ -70,7 +70,7 @@ html.minidocbook {
 		margin-left: -2.5em;
 	}
 
-	div.table ol.footnotes {
+	figure.table ol.footnotes {
 		margin-top: 2em;
 	}
 
@@ -91,7 +91,7 @@ html.minidocbook {
 		text-decoration: none;
 	}
 
-	div.refnamediv p {
+	section.refnamediv p {
 		text-indent: -($ndiv-indent);
 		margin-left:  ($ndiv-indent);
 	}
@@ -125,6 +125,21 @@ html.minidocbook {
 	abbr[title] {
 		border-bottom: dotted 1px #666;
 		cursor: help;
+	}
+
+	section.description dl {
+		dt.narrow {
+			float: left;
+			clear: left;
+		}
+
+		dt {
+			font-weight: bold;
+		}
+
+		dd {
+			margin-bottom: 1em;
+		}
 	}
 }
 
