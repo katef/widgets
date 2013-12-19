@@ -1,13 +1,8 @@
 /* $Id$ */
 
 html.minidocbook {
-	span.command {
-		font-weight: bold;
-
-		&[data-manvolnum]:after {
-			content: "(" attr(data-manvolnum) ")";
-			font-weight: 600; /* 100 less than bold */
-		}
+	span.command[data-manvolnum]:after {
+		content: "(" attr(data-manvolnum) ")";
 	}
 
 	div.navigation {
