@@ -1,5 +1,7 @@
 /* $Id$ */
 
+$ndiv-indent ?= 2em;
+
 html.minidocbook {
 	span.command[data-manvolnum]:after {
 		content: "(" attr(data-manvolnum) ")";
@@ -87,6 +89,11 @@ html.minidocbook {
 
 	sup.footnote-number a {
 		text-decoration: none;
+	}
+
+	div.refnamediv p {
+		text-indent: -($ndiv-indent);
+		margin-left:  ($ndiv-indent);
 	}
 
 	p.cmdsynopsis {
