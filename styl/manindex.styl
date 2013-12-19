@@ -1,10 +1,11 @@
 /* $Id$ */
 
-$mi-gutter     = 1em;
-$mi-indent     = 2em;
-$mi-titlewidth = 13em;
+$mi-gutter  ?= 1em;
+$mi-indent  ?= 2em;
+$mi-dtwidth ?= 8ex;
 
-html.manindex section {
+html.manindex {
+
 	h1 {
 		margin-top:    3ex;
 		margin-bottom: 0;
@@ -27,41 +28,53 @@ html.manindex section {
 		font-weight: inherit;
 	}
 
-	table {
-		margin-top: 1em;
-		margin-left: $mi-indent;
+	section dl {
+		margin-top:    0.5em;
+		margin-bottom: 0.5em;
+		padding-left: $mi-indent;
 
-		background-color: inherit;
-		border:           inherit;
-		border-spacing:   0;
-		border-collapse:  collapse;
+		clearfix();
 
-		th, td {
+		dt {
+			display: block;
+			min-width: $mi-dtwidth;
+
+			float: left;
+			clear: left;
 			text-align: left;
-			vertical-align: top;
-			padding: 0;
-			padding-bottom: 0.5ex;
 		}
 
-		th {
-			width: $mi-titlewidth;
+		dd {
+			display: inline;
+			margin-left: 0;
 
-			font-weight: inherit;
-			background-color: inherit;
-			border: inherit;
-			line-height: 100%;
+			float: left;
+			text-align: left;
+
+			&:before {
+				content: "\2009\2014\2009";
+			}
+		}
+	}
+
+	section[data-manvolnum="3"] dl {
+		text-align: left;
+
+		dd {
+			display: none;
 		}
 
-		td {
-			padding-left: $mi-gutter;
-			margin-left:  $mi-titlewidth;
+		dt {
+			display: inline;
+		}
+	}
 
-			margin-top:    0;
-			margin-bottom: 0;
-			margin-right:  1em;
+	section section[data-productname] {
+		margin-right: $mi-gutter;
+		float: left;
 
-			background-color: inherit;
-			border: inherit;
+		& + h1 {
+			clear: left;
 		}
 	}
 }
