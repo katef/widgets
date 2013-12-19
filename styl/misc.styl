@@ -81,3 +81,12 @@ font-face($family, $weight, $style, $basename, $svg) {
 	}
 }
 
+midpoint($c) {
+	r = 0; r += red(n)   for n in $c; r /= length($c)
+	g = 0; g += green(n) for n in $c; g /= length($c)
+	b = 0; b += blue(n)  for n in $c; b /= length($c)
+	a = 0; a += alpha(n) for n in $c; a /= length($c)
+
+	rgb(r * 0.5, g, b, a);
+}
+
