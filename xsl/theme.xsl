@@ -42,6 +42,10 @@
 		<func:result select="$test != ''"/>
 	</func:function>
 
+	<xsl:template match="node()" mode="copy">
+		<xsl:apply-templates select="node()|text()|processing-instruction()"/>
+	</xsl:template>
+
 	<xsl:template name="theme-output">
 		<xsl:param name="css"    select="''"/>
 		<xsl:param name="fonts"  select="''"/>
