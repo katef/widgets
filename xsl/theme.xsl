@@ -4,11 +4,13 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:common="http://exslt.org/common"
+	xmlns:func="http://exslt.org/functions"
+	xmlns:str="http://exslt.org/strings"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 
-	extension-element-prefixes="common"
+	extension-element-prefixes="common func str"
 
-	exclude-result-prefixes="h common">
+	exclude-result-prefixes="h common func str">
 
 	<xsl:import href="copy.xsl"/>
 	<xsl:import href="output.xsl"/>
@@ -18,6 +20,27 @@
 		output document. This cannot be done in output.xsl because
 		output.xsl is not aware that the source may be (unthemed) XHTML.
 	-->
+
+	<!-- TODO: centralise -->
+	<func:function name="str:contains-word">
+		<xsl:param name="string"/>
+		<xsl:param name="word"/>
+
+		<xsl:variable name="test">
+			<xsl:for-each select="str:tokenize($string, ' ')">
+				<xsl:if test=". = $word">
+					<xsl:text>hack</xsl:text>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:variable>
+
+		<!--
+			A string comparison is used here just in case $class contains
+			multiple words which match.
+		-->
+
+		<func:result select="$test != ''"/>
+	</func:function>
 
 	<xsl:template name="theme-output">
 		<xsl:param name="css"    select="''"/>
