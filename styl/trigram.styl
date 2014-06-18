@@ -1,0 +1,37 @@
+/* $Id$ */
+
+/*
+ * Use as:
+ *   <a class="trigram" href="#"><span class="fallback">Menu</span></a>
+ *
+ * Inspired by: http://css-tricks.com/three-line-menu-navicon/
+ *
+ * Caveat: the mark/space ratio cannot be set arbitarily, because this uses
+ * a double border and we cannot control what's drawn inside that.
+ * Fortunately a 1:1:1:1:1 ratio is the typically-done thing.
+ */
+
+$trigram-colour ?= #000;
+$trigram-height ?= 15px;
+$trigram-size   ?= ($trigram-height / 5);
+
+.trigram {
+	padding: ($trigram-size * 2);
+	display: inline-block;
+
+	span {
+		margin-left: 1em;
+	}
+
+	&:before {
+		content: "";
+		display: block;
+		float:   left;
+
+		border-top:     $trigram-size      solid  $trigram-colour;
+		border-bottom: ($trigram-size * 3) double $trigram-colour;
+		height: $trigram-size;
+		width: ($trigram-size * 5);
+	}
+}
+
