@@ -2,7 +2,7 @@
 
 /*
  * Use as:
- *   <a class="trigram" href="#"><span class="fallback">Menu</span></a>
+ *   <a class="trigram" href="#">Menu</a>
  *
  * Inspired by: http://css-tricks.com/three-line-menu-navicon/
  *
@@ -11,27 +11,23 @@
  * Fortunately a 1:1:1:1:1 ratio is the typically-done thing.
  */
 
-$trigram-colour ?= #000;
 $trigram-height ?= 15px;
 $trigram-size   ?= ($trigram-height / 5);
 
-.trigram {
-	padding: ($trigram-size * 2);
+.trigram a:after {
+	content: "";
 	display: inline-block;
 
-	span {
-		margin-left: 1em;
-	}
+	border-top:     $trigram-size      solid;
+	border-bottom: ($trigram-size * 3) double;
+	height: $trigram-size;
+	width: ($trigram-size * 5);
 
-	&:before {
-		content: "";
-		display: block;
-		float:   left;
+	/* alignment to baseline */
+	margin-top:       ceil($trigram-size / 2);
+	margin-bottom: -(floor($trigram-size / 2));
 
-		border-top:     $trigram-size      solid  $trigram-colour;
-		border-bottom: ($trigram-size * 3) double $trigram-colour;
-		height: $trigram-size;
-		width: ($trigram-size * 5);
-	}
+	margin-left: 1em; /* assuming text before */
+	float: right;
 }
 
