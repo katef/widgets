@@ -2,7 +2,7 @@
 
 /*
  * This grid system has the principle that columns are imagined to be a fixed width,
- * that width determines how many columns maximum would fix into the current media.
+ * that width determines how many columns maximum would fit into the current media.
  *
  * The idea is that designers design layouts to suit various numbers of columns.
  *
@@ -79,15 +79,16 @@
  * Sorry about that. I've done my best to minimize the guts exposed.
  *
  * You can have completely different layouts, if you wish. For example, by using
- * conditionals inside the media queries:
+ * conditionals inside the media queries. This works best limiting rules to apply
+ * between a specific min-max range by omitting the $m argument for grid-breakpoint():
  *
  *  for $l in 0 .. length($ncols) - 1 {
- *  	$q = grid-breakpoint($grid, $l, min);
+ *  	$q = grid-breakpoint($grid, $l);
  *  	@media $q {
  *  		if ($ncols[$l] == 1) {
  *  			...
  *  		}
- *  
+ *
  *  		if ($ncols[$l] >= 2) {
  *  			...
  *  		}
@@ -130,9 +131,24 @@ grid-breakpoint-max($grid, $l) {
 	}
 }
 
-grid-breakpoint($grid, $l, $m) {
+grid-breakpoint($grid, $l, $m = both) {
 	$ncols        = $grid[0];
 	$layouts      = $grid[1];
+
+	if ($m == both) {
+		$min = grid-breakpoint($grid, $l, min);
+		$max = grid-breakpoint($grid, $l, max);
+
+		if ($min == all) {
+			return $max;
+		}
+
+		if ($max == all) {
+			return $min;
+		}
+
+		return "%s and %s" % ($min $max);
+	}
 
 	/*
  	 * TODO: permitting $fixed-margin as a percentage shouldn't be so hard.
