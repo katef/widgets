@@ -14,20 +14,22 @@
 $trigram-height ?= 15px;
 $trigram-size   ?= ($trigram-height / 5);
 
-.trigram a:after {
-	content: "";
-	display: inline-block;
+trigram() {
+	&:after {
+		content: "";
+		display: inline-block;
 
-	border-top:     $trigram-size      solid;
-	border-bottom: ($trigram-size * 3) double;
-	height: $trigram-size;
-	width: ($trigram-size * 5);
+		border-top:     $trigram-size      solid;
+		border-bottom: ($trigram-size * 3) double;
+		height: $trigram-size;
+		width: ($trigram-size * 5);
 
-	/* alignment to baseline */
-	margin-top:       ceil($trigram-size / 2);
-	margin-bottom: -(floor($trigram-size / 2));
+		/* alignment to baseline */
+		margin-top:       ceil($trigram-size / 2);
+		margin-bottom: -(floor($trigram-size / 2));
 
-	margin-left: 1em; /* assuming text before */
-	float: right;
+		margin-left: 1em; /* assuming text before */
+		float: right;
+	}
 }
 
