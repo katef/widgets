@@ -1,0 +1,38 @@
+/* $Id$ */
+
+/*
+ * An accordion-style collapsable menu.
+ *
+ * This collapses down all items except for the .current one, leaving
+ * that visible. So it's effectively a sort of makeshift combobox.
+ *
+ * Use with expander.js for @class updates.
+ *
+ * Intended for use as a drop-down navigation menu for narrow mobile devices,
+ * but could perhaps hold other content too.
+ */
+
+$concertina-height ?= 1em;
+$concertina-time   ?= .25s;
+
+concertina() {
+	li.current a {
+		trigram();
+	}
+
+	&.expanded li,
+	&.collapsed li {
+		transition: max-height $concertina-time ease-in-out;
+		overflow: hidden;
+	}
+
+	&.expanded li,
+	&.collapsed li.current {
+		max-height: $concertina-height;
+	}
+
+	&.collapsed li {
+		max-height: 0;
+	}
+}
+
