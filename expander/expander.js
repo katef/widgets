@@ -20,7 +20,7 @@ var Expander = new (function () {
 		a = e.getAttribute("class").split(" ");
 
 		for (i = 0; i < a.length; i++) {
-			if (a[i] == "collapsed" || a[i] == "expanding" || a[i] == "expanded") {
+			if (a[i] == "collapsed" || a[i] == "expanded") {
 				a[i] = replacement;
 				break;
 			}
@@ -39,7 +39,11 @@ var Expander = new (function () {
 
 	this.expand = function (a) {
 		var dl = a.parentNode.parentNode;
+		var dt = a.parentNode;
 		var endclass;
+		var r;
+
+		r = !classcontains(dt, "current");
 
 		if (classcontains(dl, "expanded")) {
 			endclass = "collapsed";
@@ -48,19 +52,17 @@ var Expander = new (function () {
 		}
 
 		if (classcontains(dl, endclass)) {
-			return;
+			return r;
 		}
 
-		classreplace(dl, "expanding");
+		classreplace(dl, endclass);
 
-		window.setTimeout(function() {
-				classreplace(dl, endclass);
-			}, 50);
+		return r;
 	}
 
 	/* TODO: can this be added to a stack of init functions? */
-	this.init = function (root) {
-		var dl = root.getElementsByTagName("dl");
+	this.init = function (root, dlname, dtname) {
+		var dl = root.getElementsByTagName(dlname);
 
 		/* Here I would use XPath, if it were supported... */
 		for (var i = 0; i < dl.length; i++) {
@@ -68,14 +70,23 @@ var Expander = new (function () {
 				continue;
 			}
 
-			var dt = dl[i].getElementsByTagName("dt")[0];
+			var dt = dl[i].getElementsByTagName(dtname);
+			for (var j = 0; j < dt.length; j++) {
+				var a = dt[j].getElementsByTagName("a");
+				if (a != null) {
+					a = a[0];
+				} else {
+					a = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+					a.innerHTML  = dt[j].innerHTML;
 
-			var a = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
-			a.setAttribute("onclick", "javascript:Expander.expand(this)");
-			a.setAttribute("onmousedown", "javascript:Expander.down(this)");
-			a.innerHTML  = dt.innerHTML;
-			dt.innerHTML = null;
-			dt.appendChild(a);
+					dt[j].innerHTML = null;
+					dt[j].appendChild(a);
+				}
+
+				/* XXX: returning false (to prevent bubbling) is deprecated */
+				a.setAttribute("onclick",     "return Expander.expand(this);");
+//				a.setAttribute("onmousedown", "return Expander.down(this);");
+			}
 
 			if (!classcontains(dl[i], "expanded")) {
 				classreplace(dl[i], "collapsed");
