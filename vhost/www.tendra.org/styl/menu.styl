@@ -13,17 +13,17 @@ ul.menu {
 }
 
 ul.menu li a,
-ul.sections li a {
+menu li a {
 	display: block;
 	text-decoration: none;
 }
 
-ul.sections > li a {
+menu > li a {
 	line-height: ($baseline * 1.5);
 }
 
 ul.menu li a:hover,
-ul.sections li a:hover {
+menu li a:hover {
 	background-color: #eee;
 }
 
@@ -68,51 +68,51 @@ ul.menu li a:hover {
 
 /* adapted from http://www.divitodesign.com/2008/09/how-to-dropdown-css-menu/ */
 
-ul.sections {
+menu {
 	height:  ($baseline * 1.5);
 	padding: ($baseline * 0.5) 0 0 0;
 }
 
-ul.sections > li {
+menu > li {
 	position: relative;
 	float: left;
 	margin: 0;
 }
 
-ul.sections > li > a {
+menu > li > a {
 	height:  ($baseline * 1.5);
 	padding: 0 $menu-pad-sides;
 	margin:  0;
 }
 
-ul.sections > li.current > a {
+menu > li.current > a {
 	font-weight: bold;
 }
 
-ul.sections,
-ul.sections li > ul {
+menu,
+menu li > ul {
 	list-style-type: none;
 	z-index: 1;
 }
 
-ul.sections li > ul li a {
+menu li > ul li a {
 	min-width: (15em);
 	height:    ($baseline * 1.5);
 	padding:   0 ($menu-pad-sides - 1px); /* -1px for the border */
 	margin:    0;
 }
 
-ul.sections li > ul li {
+menu li > ul li {
 	border-left:  solid 1px #ddd;
 	border-right: solid 1px #ddd;
 	margin: 0;
 }
 
-ul.sections li > ul li.sep {
+menu li > ul li.sep {
 	border-bottom: solid 1px #ddd;
 }
 
-ul.sections li > ul {
+menu li > ul {
 	border-top:    solid 5px #000;
 	border-bottom: solid 5px #000;
 	display: none;
@@ -124,12 +124,12 @@ ul.sections li > ul {
 	background-color: #fff;
 }
 
-ul.sections li > ul {
+menu li > ul {
 	top: auto;
 	left: auto;
 }
 
-ul.sections li:hover ul {
+menu li:hover ul {
 	display: block;
 }
 

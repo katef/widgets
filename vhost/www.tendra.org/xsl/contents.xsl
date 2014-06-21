@@ -126,9 +126,9 @@
 
 	<!-- TODO: rename contents -->
 	<xsl:template name="t:sections-menu">
-		<ul class="sections">
+		<menu>
 			<xsl:apply-templates select="document('')//t:sections/t:section"/>
-		</ul>
+		</menu>
 	</xsl:template>
 
 </xsl:stylesheet>
