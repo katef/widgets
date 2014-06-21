@@ -58,7 +58,7 @@
 			<xsl:with-param name="css"   select="'style.css debug.css'"/>
 
 			<xsl:with-param name="js">
-				<xsl:value-of select="'col.js fixup.js hyphenator-min.js table.js overlay.js debug.js'"/>
+				<xsl:value-of select="'col.js fixup.js hyphenator-min.js expander.js table.js overlay.js debug.js'"/>
 
 				<xsl:value-of select="' fittext.js'"/>
 
@@ -68,6 +68,7 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="onload">
+				<xsl:text>Expander.init(r, "menu", "li");</xsl:text>
 				<xsl:text>Colalign.init(r);</xsl:text>
 				<xsl:text>Fixup.init(r);</xsl:text>
 				<xsl:text>Table.init(r);</xsl:text>
@@ -78,7 +79,9 @@
 				<xsl:text>window.fitText(document.getElementById("banner"), 1.1);</xsl:text>
 
 				<!-- TODO: only where relevant -->
+<!-- XXX:
 				<xsl:text>ConvertRowsToLinks('download');</xsl:text>
+-->
 			</xsl:with-param>
 
 			<xsl:with-param name="page">

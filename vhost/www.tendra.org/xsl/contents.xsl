@@ -126,7 +126,7 @@
 
 	<!-- TODO: rename contents -->
 	<xsl:template name="t:sections-menu">
-		<menu>
+		<menu class="expandable collapsed">
 			<xsl:apply-templates select="document('')//t:sections/t:section"/>
 		</menu>
 	</xsl:template>

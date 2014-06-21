@@ -3,6 +3,10 @@
 for $l in 0 .. length($ncols) - 1 {
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
+		header menu {
+			menu-layout($ncols[$l] == 1 ? vertical : horizontal);
+		}
+
 		header, nav.menu, section.page, footer {
 			grid-container($grid, $l);
 		}
