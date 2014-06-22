@@ -1,10 +1,10 @@
 /* $Id$ */
 
 /*
- * A horizontal or an accordion-style collapsable menu.
+ * A horizontal or vertical collapsable menu.
  *
- * This collapses down all items except for the .current one, leaving
- * that visible. So it's effectively a sort of makeshift combobox.
+ * When operating vertically, this collapses all items except the .current one,
+ * leaving just that visible. So it's effectively a sort of makeshift combobox.
  *
  * Use with expander.js for @class updates.
  *
@@ -12,18 +12,18 @@
  * but could perhaps hold other content too.
  */
 
-$menu-border   ?= 2px;
-$menu-delta    ?= 2ex;
-$menu-overhang ?= ($menu-delta / 2);
-$menu-colour   ?= #000;
-$menu-height   ?= 1em;
-$menu-time     ?= .25s;
+$concertina-border   ?= $menu-border   || 2px;
+$concertina-delta    ?= $menu-delta    || 2ex;
+$concertina-overhang ?= $menu-overhang || ($concertina-delta / 2);
+$concertina-colour   ?= $menu-colour   || #000;
+$concertina-height   ?= $menu-time     || 1em;
+$concertina-time     ?= $menu-time     || .25s;
 
-menu-layout(type) {
+concertina-layout(type) {
 	margin:  0;
 	padding: 0;
 
-	border-bottom: solid $menu-border $menu-colour;
+	border-bottom: solid $concertina-border $concertina-colour;
 
 	li {
 		margin:  0;
@@ -43,13 +43,13 @@ menu-layout(type) {
 
 		&.expanded li,
 		&.collapsed li {
-			transition: max-height $menu-time ease-in-out;
+			transition: max-height $concertina-time ease-in-out;
 			overflow: hidden;
 		}
 
 		&.expanded li,
 		&.collapsed li.current {
-			max-height: $menu-height;
+			max-height: $concertina-height;
 		}
 
 		&.collapsed li {
@@ -58,10 +58,10 @@ menu-layout(type) {
 
 		border-bottom-width: 0;
 
-		transition: border-bottom-width ($menu-time * 0.75) ease-in-out;
+		transition: border-bottom-width ($concertina-time * 0.75) ease-in-out;
 
 		&.expanded {
-			border-bottom-width: $menu-border;
+			border-bottom-width: $concertina-border;
 		}
 	}
 }
