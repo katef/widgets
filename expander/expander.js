@@ -3,7 +3,13 @@
 var Expander = new (function () {
 
 	function classcontains(e, needle) {
-		var a = e.getAttribute("class").split(" ");
+		var a = e.getAttribute("class");
+
+		if (a == null) {
+			return false;
+		}
+
+		a = a.split(" ");
 
 		for (var i = 0; i < a.length; i++) {
 			if (a[i] == needle) {
@@ -43,6 +49,8 @@ var Expander = new (function () {
 		var endclass;
 		var r;
 
+/* TODO: option to collapse adjacent siblings, e.g. for accordian style */
+
 		r = !classcontains(dt, "current");
 
 		if (classcontains(dl, "expanded")) {
@@ -64,7 +72,6 @@ var Expander = new (function () {
 	this.init = function (root, dlname, dtname) {
 		var dl = root.getElementsByTagName(dlname);
 
-		/* Here I would use XPath, if it were supported... */
 		for (var i = 0; i < dl.length; i++) {
 			if (!classcontains(dl[i], "expandable")) {
 				continue;
@@ -73,7 +80,7 @@ var Expander = new (function () {
 			var dt = dl[i].getElementsByTagName(dtname);
 			for (var j = 0; j < dt.length; j++) {
 				var a = dt[j].getElementsByTagName("a");
-				if (a != null) {
+				if (a.length > 0) {
 					a = a[0];
 				} else {
 					a = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
