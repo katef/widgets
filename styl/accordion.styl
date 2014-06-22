@@ -1,0 +1,34 @@
+/* $Id$ */
+
+/*
+ * A mutually-exclusive fixed-height accordion.
+ *
+ * This is intended for displaying several items of ancillory information which
+ * are of a similar ilk, and are not important enough to be visible together.
+ * For example, background for each organisation involved in a press release.
+ */
+
+$accordion-height ?= 15em;
+$accordion-time   ?= $menu-time || .25s;
+
+accordion-layout() {
+	dt a {
+		display: block;
+	}
+
+	dd {
+		overflow: hidden;
+		max-height: 0;
+
+/* XXX: asymetrical */
+//		transition: max-height $accordion-time linear;
+	}
+
+	dt.current + dd {
+		max-height: $accordion-height;
+		min-height: $accordion-height;
+
+		overflow-y: auto;
+	}
+}
+
