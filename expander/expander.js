@@ -2,17 +2,19 @@
 
 var Expander = new (function () {
 
-	function classcontains(e, needle) {
-		var a = e.getAttribute("class");
+	/* see http://elide.org/snippets/css.js */
+	function hasclass(node, klass) {
+		var a, c;
 
-		if (a == null) {
-			return false;
+		c = node.getAttribute('class');
+		if (c == null) {
+			return;
 		}
 
-		a = a.split(" ");
+		a = c.split(/\s/);
 
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == needle) {
+		for (var i in a) {
+			if (a[i] == klass) {
 				return true;
 			}
 		}
@@ -20,60 +22,94 @@ var Expander = new (function () {
 		return false;
 	}
 
-	function classreplace(e, replacement) {
-		var i;
+	/* see http://elide.org/snippets/css.js */
+	function removeclass(node, klass) {
+		var a, c;
 
-		a = e.getAttribute("class").split(" ");
+		c = node.getAttribute('class');
+		if (c == null) {
+			return;
+		}
 
-		for (i = 0; i < a.length; i++) {
-			if (a[i] == "collapsed" || a[i] == "expanded") {
-				a[i] = replacement;
-				break;
+		a = c.split(/\s/);
+
+		for (var i = 0; i < a.length; i++) {
+			if (a[i] == klass || a[i] == '') {
+				a.splice(i, 1);
+				i--;
 			}
 		}
 
-		if (i == a.length) {
-			a.push(replacement);
+		if (a.length == 0) {
+			node.removeAttribute('class');
+		} else {
+			node.setAttribute('class', a.join(' '));
+		}
+	}
+
+	/* see http://elide.org/snippets/css.js */
+	function addclass(node, klass) {
+		var a, c;
+
+		a = [ ];
+
+		c = node.getAttribute('class');
+		if (c != null) {
+			a = c.split(/\s/);
 		}
 
-		e.setAttribute("class", a.join(" "));
+		for (var i = 0; i < a.length; i++) {
+			if (a[i] == klass || a[i] == '') {
+				a.splice(i, 1);
+				i--;
+			}
+		}
+
+		a.push(klass);
+
+		node.setAttribute('class', a.join(' '));
 	}
 
-	this.down = function (a) {
-		/* TODO: hold diagonal */
-	}
-
-	this.expand = function (a) {
+	this.toggle = function (a, accordion, expander) {
 		var dl = a.parentNode.parentNode;
 		var dt = a.parentNode;
 		var endclass;
 		var r;
 
-/* TODO: option to collapse adjacent siblings, e.g. for accordian style */
+		r = !hasclass(dt, "current");
 
-		r = !classcontains(dt, "current");
+		if (accordion) {
+			var xdt = dl.getElementsByTagName("dt");
+			for (var j = 0; j < xdt.length; j++) {
+				removeclass(xdt[j], "current");
+			}
 
-		if (classcontains(dl, "expanded")) {
-			endclass = "collapsed";
-		} else {
-			endclass = "expanded";
+			if (r) {
+				addclass(dt, "current");
+			}
 		}
 
-		if (classcontains(dl, endclass)) {
-			return r;
-		}
+		if (expander) {
+			if (hasclass(dl, "expanded")) {
+				endclass = "collapsed";
+			} else {
+				endclass = "expanded";
+			}
 
-		classreplace(dl, endclass);
+			removeclass(dl, "expanded");
+			removeclass(dl, "collapsed");
+
+			addclass(dl, endclass);
+		}
 
 		return r;
 	}
 
-	/* TODO: can this be added to a stack of init functions? */
-	this.init = function (root, dlname, dtname) {
+	this.init = function (root, dlname, dtname, accordion, expander) {
 		var dl = root.getElementsByTagName(dlname);
 
 		for (var i = 0; i < dl.length; i++) {
-			if (!classcontains(dl[i], "expandable")) {
+			if (!hasclass(dl[i], "expandable")) {
 				continue;
 			}
 
@@ -90,13 +126,13 @@ var Expander = new (function () {
 					dt[j].appendChild(a);
 				}
 
-				/* XXX: returning false (to prevent bubbling) is deprecated */
-				a.setAttribute("onclick",     "return Expander.expand(this);");
-//				a.setAttribute("onmousedown", "return Expander.down(this);");
+				a.onclick = function () {
+						return Expander.toggle(this, accordion, expander);
+					};
 			}
 
-			if (!classcontains(dl[i], "expanded")) {
-				classreplace(dl[i], "collapsed");
+			if (!accordion && !hasclass(dl[i], "expanded")) {
+				addclass(dl[i], "collapsed");
 			}
 		}
 	}
