@@ -2,14 +2,17 @@
 
 $faq-gutter ?= 2em;
 
-dl.faq      dd:before { content: "A.";  }
-dl.faq      dt:before { content: "Q.";  }
-dl.faq dt + dt:before { content: "\A0";  }
-
 dl.faq {
+	     dd:before { content: "A.";  }
+	     dt:before { content: "Q.";  }
+	dt + dt:before { content: "\A0"; }
+
+	dt,
+	dd {
+		hang($faq-gutter, 1ex, exdent);
+	}
 
 	dt {
-		clear: left;
 		margin-bottom: 0;
 	}
 
@@ -17,25 +20,5 @@ dl.faq {
 		margin-top:    ($baseline * 1);
 		margin-bottom: ($baseline * 2);
 	}
-
-	dt,
-	dd {
-		position: relative; /* for :before */
-		margin-left: $faq-gutter;
-
-		&:before {
-			display: block;
-			width: $faq-gutter;
-
-			text-align: right;
-			position: absolute;
-			left: -($faq-gutter);
-			width: $faq-gutter;
-
-			padding-right: 1ex;
-			box-sizing: border-box;
-		}
-	}
-
 }
 

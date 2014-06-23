@@ -1,0 +1,31 @@
+/* $Id$ */
+
+/*
+ * Positioning for hanging itemisation markers. Arguably applying
+ * list-item-marker to non-list elements would make more sense.
+ */
+
+hang($gutter, $padding = 1ex, type = exdent) {
+	if (type == exdent) {
+		margin-left: $gutter;
+		position: relative; /* for :before */
+	}
+
+	&:before {
+		width: $gutter;
+
+		if (type == inline) {
+			display: inline-block;
+			text-align: left;
+		} else {
+			display: block;
+			text-align: right;
+
+			position: absolute;
+			left: -($gutter);
+		}
+
+		margin-right: $padding;
+	}
+}
+
