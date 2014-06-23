@@ -8,15 +8,33 @@
  * For example, background for each organisation involved in a press release.
  */
 
-$accordion-height ?= 15em;
-$accordion-time   ?= $menu-time || .25s;
+$accordion-height  ?= 15em;
+$accordion-time    ?= $menu-time || .25s;
+$accordion-gutter  ?= 2em;
+$accordion-indent  ?= 4em;
+$accordion-padding ?= $menu-padding || 1ex;
 
 accordion-layout() {
 	dt a {
-		display: block;
+		hang($accordion-gutter, $accordion-padding, inline);
+
+		&:before {
+			content: "\25B6";
+		}
+	}
+
+	dt.current a:before {
+		content: "\25BC";
+
+		/*
+		 * I would transform:rotate(90deg); here but it looks terrible because
+		 * the triangle is not positioned about its centre.
+		 */
 	}
 
 	dd {
+		margin-left: $accordion-indent;
+
 		overflow: hidden;
 		max-height: 0;
 
