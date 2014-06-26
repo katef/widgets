@@ -103,6 +103,13 @@
  * TODO: permit $colspan to be a percentage
  */
 
+/*
+ * XXX: some browsers consider scrollbars part of the mq width; others do not.
+ * I think this may be only relevant for fixed width layouts; we can
+ * conservatively subtract a convervatively wide scrollbar width for those,
+ * and break later as hysteresis.
+ */
+
 @import "misc.styl";
 
 grid-breakpoint-min($grid, $l) {
@@ -213,8 +220,8 @@ grid-column($grid, $l, $colspan = 1, $indent = 0) {
 		float: left;
 	}
 
-	/* TODO: need to work around sub-pixel percentage bugs
-	 * (e.g. overflow: hidden, and set container to 101%) */
+	// TODO: need to work around sub-pixel percentage bugs
+	// (e.g. overflow: hidden, and set container to 101%)
 
 	if ($layouts[$l] == fixed) {
 		width: $colspan * $colwidth;
@@ -224,7 +231,7 @@ grid-column($grid, $l, $colspan = 1, $indent = 0) {
 
 	box-sizing: border-box;
 
-	/* XXX: only if not already set (e.g. for an element being both a column and a container) */
+	// XXX: only if not already set (e.g. for an element being both a column and a container)
 	padding-left:  0;
 	padding-right: 0;
 	margin-left:   0;
@@ -236,6 +243,8 @@ grid-column($grid, $l, $colspan = 1, $indent = 0) {
 		margin-left: $indent * (100% / $ncols[$l]);
 	}
 
+	// TODO: make an option to fill out to 100% of the container width
+	// i.e. to overlap the container's padding. or just elide padding here
 	padding-left:  @padding-left  + $gutter;
 	padding-right: @padding-right + $gutter;
 }
