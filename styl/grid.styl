@@ -224,7 +224,7 @@ grid-column($grid, $l, $colspan = 1, $indent = 0) {
 	// (e.g. overflow: hidden, and set container to 101%)
 
 	if ($layouts[$l] == fixed) {
-		width: $colspan * $colwidth;
+		width: ($colspan * $colwidth);
 	} else {
 		width: ($colspan * 100% / $ncols[$l]);
 	}
