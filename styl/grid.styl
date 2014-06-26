@@ -209,7 +209,9 @@ grid-column($grid, $l, $colspan = 1, $indent = 0) {
 	$colwidth     = $grid[3];
 	$gutter       = $grid[4];
 
-	float: left;
+	if ($colspan < $ncols[$l]) {
+		float: left;
+	}
 
 	/* TODO: need to work around sub-pixel percentage bugs
 	 * (e.g. overflow: hidden, and set container to 101%) */
