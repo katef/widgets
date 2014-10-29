@@ -140,5 +140,28 @@ html.minidocbook {
 			margin-bottom: 1em;
 		}
 	}
+
+	section ul.authorgroup {
+		list-style-type: none;
+		display: inline;
+
+		margin-left: 0;
+
+		li {
+			display: inline;
+
+			margin-left: 0;
+
+			&:after {
+				content: "; ";
+			}
+
+/* TODO: " and " for penultimate */
+
+			&:last-child:after {
+				content: ".";
+			}
+		}
+	}
 }
 
