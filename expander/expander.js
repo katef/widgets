@@ -122,7 +122,7 @@ var Expander = new (function () {
 					a = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
 					a.innerHTML  = dt[j].innerHTML;
 
-					dt[j].innerHTML = null;
+					dt[j].innerHTML = '';
 					dt[j].appendChild(a);
 				}
 
