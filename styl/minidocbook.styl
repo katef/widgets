@@ -96,29 +96,28 @@ html.minidocbook {
 		margin-left:  ($ndiv-indent);
 	}
 
-	p.cmdsynopsis {
-		clear: left;
-		margin-bottom: 1ex;
+	section.synopsis {
+		clearfix();
 
-		span.cmd {
-			display: inline-block;
-			vertical-align: top;
+		p.cmdsynopsis {
+			float: left;
+			clear: left;
+			margin-bottom: 1ex;
 		}
 
 		div.args {
-			display: inline-block;
-		}
+			display: block;
+			float: left;
 
-		div.args a {
-			text-decoration: none;
-		}
-
-		div.args a:hover {
-			text-decoration: underline;
-		}
-
-		div.args {
 			color: #444;
+
+			a {
+				text-decoration: none;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
 		}
 	}
 
