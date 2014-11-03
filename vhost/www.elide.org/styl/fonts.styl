@@ -1,44 +1,66 @@
 
-font-face('Sofia Pro',   300, normal, '/fonts/SofiaPro-Light',     '#SofiaProLight');
-font-face('Ubuntu Mono', 400, normal, '/fonts/UbuntuMono-Regular', '#UbuntuMono-Regular');
+font-face('Deja Vu Sans',       400, normal, '/fonts/DejaVuSans-Regular',     '#DejaVuSans-Regular');
+font-face('Deja Vu Sans Mono',  400, normal, '/fonts/DejaVuSansMono-Regular', '#DejaVuSansMono-Regular');
+font-face('EB Garamond Twelve', 400, normal, '/fonts/EBGaramond12-Regular',   '#EBGaramond12-Regular');
 
 /* faces, weights and styles */
 body {
-	font-family: Sofia Pro, Verdana, sans;
-	font-weight: 300;
+	font-family: Deja Vu Sans, Verdana, sans;
+	font-weight: 400;
 
 	th {
 		font-weight: normal;
 	}
 
 	em {
-		// TODO
+		// TODO: maybe bold
 		font-weight: inherit;
 		font-style:  italic;
 	}
 
 	h1, h2 {
-		font-family: inherit;
+		font-family: EB Garamond Twelve, Minion Pro, Georgia, serif;
 		font-weight: inherit;
 	}
 
+	h2 {
+		text-transform: uppercase;
+	}
+
 	tt, code, pre {
-		font-family: 'Ubuntu Mono', monospace;
+		font-family: 'Deja Vu Sans Mono', monospace;
 		font-weight: 400;
 	}
 }
 
 /* sizes */
 body {
-	font-size:   15px;
+	font-size:   $fontsize;
 	line-height: $baseline;
 
+	tt, code, pre {
+		font-size: ($fontsize - 2px);
+	}
+
+	h1, h2 {
+		letter-spacing: .25ex;
+		word-spacing:   .25ex;
+	}
+
+	header h1 {
+		font-size:   ($baseline * 1.3);
+		line-height: ($baseline * 1.3);
+	}
+
+	h2 {
+		font-size: ($fontsize * 1.125);
+	}
 }
 
 /* alignment */
 body {
 	& {
-		text-align: left;
+		text-align: justify;
 	}
 }
 
@@ -50,17 +72,19 @@ body {
 		overflow-x: auto;
 	}
 
-	font-feature-settings: "onum" 1;
-	font-feature-settings: "kern" 1;
-	font-feature-settings: "ss01" 0; /* single story 'a' */
-	font-feature-settings: "frac" 1;
+//	font-feature-settings: "onum" 1;
+//	font-feature-settings: "kern" 1;
+//	font-feature-settings: "ss01" 0; /* single story 'a' */
+//	font-feature-settings: "frac" 1;
 
 	h1 {
 //		font-feature-settings: "ss01" 1; /* double story 'a' */
-		font-feature-settings: "kern" 1;
-		font-feature-settings: "size" 1;
-		font-feature-settings: "lnum" 1;
-		font-feature-settings: "cpsp" 0;
+//		font-feature-settings: "kern" 1;
+//		font-feature-settings: "size" 1;
+//		font-feature-settings: "lnum" 1;
+//		font-feature-settings: "cpsp" 0;
+
+		font-feature-settings: "smcp" 1;
 	}
 
 	span.units, span.sc, em.sc {
