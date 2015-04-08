@@ -34,7 +34,7 @@
 		<table class="docs">
 <tr>
 <td>
-		<h2>Reference Material</h2>
+		<h2>Reference</h2>
 		<ul class="linklist">
 			<li><a href="#">TDF Specification</a></li>
 			<li><a href="#">A Guide to the TDF Spec.</a></li>
@@ -44,7 +44,7 @@
 </td>
 
 <td>
-		<h2>Research Papers</h2>
+		<h2>Research</h2>
 		<ul class="linklist">
 			<li><a href="#">C++ and Portability</a></li>
 			<li><a href="#">TDF and Portability</a></li>
