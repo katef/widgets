@@ -96,10 +96,12 @@
 				<header class="donthyphenate">
 					<xsl:call-template name="t:banner"/>
 
+<!-- search is overkill for now
 					<form class="search">
 						<input type="text"/>
 						<input type="submit" value="Search"/>
 					</form>
+-->
 
 					<!-- TODO: <nav> around this -->
 					<xsl:call-template name="t:sections-menu"/>
