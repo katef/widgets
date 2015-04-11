@@ -2,13 +2,75 @@
 
 @import "misc.styl";
 
+$footer-height = $baseline / 2;
+
 html {
-	background-color: #f7f7ff;
-	color: #333;
+	background-color: #fff;
+	color: #000;
+}
+
+// abusing this for visual purposes
+footer {
+	height: 0px;
+	display: block;
+	clear: both;
+	* {
+		display: none;
+	}
+}
+
+// :before is image background
+// :after is tint for footer image to match ul#contents tint
+footer:before,
+footer:after {
+	content: " ";
+	display: block;
+	height: $footer-height;
+	position: relative;
+}
+
+footer:after {
+	top: -($footer-height);
+}
+
+ul#contents,
+footer:after {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+footer:before, footer:after {
+	height: $footer-height;
+	display: block;
+}
+
+header,
+footer:before {
+	// colour set in theme.xsl for loading time
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+}
+
+footer:before {
+	background-position: center 90%;
+}
+
+header {
+	color: lighten(#49b, 80%);
+
+	background-position: center 45%;
+
+	ul#contents a {
+		text-decoration: none;
+		color: rgba(255, 255, 255, 0.5);
+		&:hover {
+			background-color: #fff;
+			color: #000;
+		}
+	}
 }
 
 a code, a, a:link, a:visited {
-	color: #00f;
+	color: #0b367a;
 	text-decoration: underline;
 
 	*[title].important {

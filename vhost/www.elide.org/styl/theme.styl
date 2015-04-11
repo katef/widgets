@@ -2,7 +2,7 @@
 
 $www-css = "http://www.elide.org/css";
 
-$grid-colour = aliceblue;
+$grid-colour = lighten(#0b367a, 20%);
 
 $fontsize = 13px;
 $baseline = 20px;
@@ -23,4 +23,22 @@ $grid = $ncols $layouts $aligns $colwidth $gutter $fixed-margin $fluid-margin;
 $list-gutter = $gutter * 3;
 $faq-gutter  = $gutter * 2;
 $cal-cell    = 2em;
+
+$theme = ( );
+for $l in 0 .. length($ncols) - 1 {
+	$theme[$l] = {
+		concertina: $ncols[$l] >= 2 ? horizontal : vertical
+		fish:       $ncols[$l] >= 3 ? horizontal : vertical
+	};
+}
+
+// goal: not to have [$l] in theme.styl
+// call as:
++grid-media($grid) {
+	p {
+		if ($theme[$l][concertina] == horizontal) {
+			color: red;
+		}
+	}
+}
 

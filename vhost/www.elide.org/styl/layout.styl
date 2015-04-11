@@ -10,6 +10,7 @@ body {
 
 section.page {
 	// TODO: max-width: $baseline * 100;
+	margin-bottom: $baseline;
 
 	h2 {
 		padding-top: ceil($baseline * 0.0);
@@ -19,20 +20,41 @@ section.page {
 }
 
 header {
-	margin-top:    ($baseline * 5.0);
-	margin-bottom: ($baseline * 2.0);
+	margin-top:    ($baseline * 1.5);
+	margin-bottom: ($baseline * 2);
+	padding-top:   ($baseline * 8);
+
+	text-align: center;
+
+	ul#contents {
+		li {
+        	display: inline-block;
+			margin: 0;
+
+			a {
+				display: inline-block;
+				height: 100%;
+				padding: 0 1.5em;
+			}
+		}
+
+    	list-style-type: none;
+		line-height: ($baseline * 2);
+	}
 
 	/* respond when the page height is below 30 lines */
 	$q = "all and (max-height: " + ($baseline * 30) + ")";
 	@media $q {
-		margin-top: ($baseline * 2.0);
+//		margin-top: ($baseline * 2.0);
 	}
 
 	h1 {
-		padding-top:    ceil($baseline * 0.5);
-		font-size:          2.7em;
+		display: none;
+
+		font-size:      2.7em;
+		padding-top:    ceil($baseline * 3.5);
 		line-height:        ($baseline * 2.0);
-		padding-bottom: ceil($baseline * 0.5);
+		padding-bottom: ceil($baseline * 1.5);
 	}
 }
 
@@ -129,9 +151,7 @@ pre {
 for $l in 0 .. length($ncols) - 1 {
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
-		header,
-		section.page,
-		footer {
+		body {
 			grid-container($grid, $l);
 		}
 
@@ -142,19 +162,19 @@ if ($ncols[$l] == 5) {
 
 
 		a:hover img {
-			border-color: #000;
+//			border-color: #000;
 		}
 
 		img {
-			width: 100%;
+//			width: 100%;
 
-			border: solid 1px #ccc;
+//			border: solid 1px #ccc;
 			&:first-child {
-				padding-left:  0 \! important; // hack
+//				padding-left:  0 \! important; // hack
 			}
 
 			&:last-child {
-				padding-right: 0 \! important; // hack
+//				padding-right: 0 \! important; // hack
 			}
 		}
 
@@ -176,34 +196,33 @@ if ($ncols[$l] == 5) {
 }
 
 		if ($ncols[$l] <= 2) {
-			header h1,
-			header ul {
-				grid-column($grid, $l, $ncols[$l]);
+			header {
+//				grid-column($grid, $l, $ncols[$l]);
 			}
 
-			section.page > * {
-				grid-column($grid, $l, $ncols[$l]);
+			section.page {
+//				grid-column($grid, $l, $ncols[$l]);
 			}
 
 			dl.index {
-				grid-subcontainer($grid, $l, $ncols[$l], 0);
+//				grid-subcontainer($grid, $l, $ncols[$l], 0);
 
 				dt a {
-					grid-column($grid, $l, 1);
+//					grid-column($grid, $l, 1);
 				}
 
 				dd {
-					grid-column($grid, $l, 1);
+//					grid-column($grid, $l, 1);
 				}
 			}
 
 			nav#monthindex {
-				grid-subcontainer($grid, $l, $ncols[$l], 0);
-				$subgrid = grid-subgrid($grid, $l, 0);
+//				grid-subcontainer($grid, $l, $ncols[$l], 0);
+//				$subgrid = grid-subgrid($grid, $l, 0);
 
 				ol.pages,
 				& > a {
-					grid-column($subgrid, $l, $ncols[$l]);
+//					grid-column($subgrid, $l, $ncols[$l]);
 				}
 			}
 		}
@@ -215,88 +234,90 @@ if ($ncols[$l] == 5) {
 		}
 
 		if ($ncols[$l] >= 4) {
-			header h1,
-			header ul {
-				grid-column($grid, $l, $ncols[$l] - 1, 1);
+			header {
+//				grid-column($grid, $l, $ncols[$l] - 1, 1);
 			}
 
-			section.page > * {
+			section.page {
 				grid-column($grid, $l, $ncols[$l] - 1, 1);
 			}
 
 			dl.index {
-				grid-subcontainer($grid, $l, $ncols[$l] - 1, 1);
-				$subgrid = grid-subgrid($grid, $l, 1);
+//				grid-subcontainer($grid, $l, $ncols[$l] - 1, 0);
+//				$subgrid = grid-subgrid($grid, $l, 1);
+//				$subcols = $subgrid[0];
 
 				dt a {
-					grid-column($subgrid, $l, 1);
+//					grid-column($subgrid, $l, 1);
 				}
 
 				dd {
-					grid-column($subgrid, $l, $ncols[$l] - 2);
+//					grid-column($subgrid, $l, $subcols[$l] - 1);
 				}
 			}
 
 			section.page > article.entry {
-				grid-subcontainer($grid, $l, $ncols[$l], 0);
-				$subgrid = grid-subgrid($grid, $l, 0);
+//				grid-subcontainer($grid, $l, $ncols[$l], 0);
+//				$subgrid = grid-subgrid($grid, $l, 0);
 
 				& > time.update,
 				& > a[name],
 				& > ul.tags {
-					grid-column($subgrid, $l, 1);
+//					grid-column($subgrid, $l, 1);
 				}
 
 				& > div.body {
-					grid-column($subgrid, $l, $ncols[$l] - 1);
+//					grid-column($subgrid, $l, $ncols[$l] - 1);
 				}
 			}
 
 			nav#monthindex {
-				grid-subcontainer($grid, $l, $ncols[$l] - 1, 1);
-				$subgrid = grid-subgrid($grid, $l, 1);
+//				grid-subcontainer($grid, $l, $ncols[$l] - 1, 1);
+//				$subgrid = grid-subgrid($grid, $l, 1);
 
 				ol.pages {
-					grid-column($subgrid, $l, $ncols[$l] - 2);
+//					grid-column($subgrid, $l, $ncols[$l] - 2);
 				}
 
 				& > a {
-					grid-column($subgrid, $l, 1);
-					text-align: center;
+//					grid-column($subgrid, $l, 1);
+//					text-align: center;
 				}
 			}
 		}
 
 		if ($ncols[$l] >= 5) {
-			header h1,
-			header ul {
-				grid-column($grid, $l, 3, 1);
+			header {
+//				grid-column($grid, $l, 3, 1);
 			}
 		}
 	}
 
+/* XXX:
 	$q = "%s and %s" % (grid-breakpoint($grid, $l, min) grid-breakpoint($grid, $l, max));
+*/
+$q = 'fish';
 	@media $q {
 		nav#monthindex {
 			/* TODO: could animate collapsing by transitioning on width to 0 */
 			if ($ncols[$l] == 1) {
 				/* when too narrow to fit the attr() months */
-				pages-collapse-group(false);
+//				pages-collapse-group(false);
 			}
 
 			if ($ncols[$l] >= 2 && $ncols[$l] <= 5) {
 				/* when too narrow to fit all 12 months explicitly */
-				pages-collapse-group(data-fmt);
+//				pages-collapse-group(data-fmt);
 			}
 
 			if ($ncols[$l] <= 2) {
 				& > a,
 				ol.pages {
-					text-align: center;
+//					text-align: center;
 				}
 
 				& > a {
-					margin-top: 2ex; // XXX: hacky
+//					margin-top: 2ex; // XXX: hacky
 				}
 			}
 		}
