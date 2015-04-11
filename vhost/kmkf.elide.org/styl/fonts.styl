@@ -1,0 +1,170 @@
+
+font-face('Source Sans Pro', 400, normal, '/fonts/SourceSansPro-Regular', '#SourceSansPro-Regular');
+font-face('Source Code Pro', 400, normal, '/fonts/SourceCodePro-Regular', '#SourceCodePro-Regular');
+
+
+/* faces, weights and styles */
+html {
+	body {
+		font-family: Source Sans Pro, DejaVu Sans, Verdana, sans;
+		font-weight: 400;
+
+		code, tt, pre {
+			font-family: Source Code Pro, DejaVu Sans Mono, Ubuntu mono, Lucidia Console, monospace;
+		}
+
+		pre {
+			letter-spacing: -1px; /* forgive me */
+		}
+
+		h1 {
+			font-weight: 700;
+		}
+
+		h2, h3, h4 {
+/* XXX:
+			font-weight: 600;
+*/
+			font-weight: 400;
+		}
+
+		em {
+			font-weight: 700;
+			font-style:  normal;
+		}
+
+		address {
+			font-style:  normal;
+
+			em {
+				font-family: inherit;
+			}
+		}
+
+		footer ol.breadcrumbs li {
+			font-weight: 300;
+
+			&:first-child {
+				font-family: vag rounded std, @font-family;
+				font-weight: 700;
+			}
+		}
+	}
+
+	&.manindex section.page {
+		h1 {
+			font-weight: 600;
+		}
+	}
+
+	&.minidocbook {
+		header#bp-doctitle {
+			h1 {
+				span {
+					font-weight: 300;
+				}
+
+				font-size: 1.5em;
+			}
+
+			h2 {
+				font-size: 1.2em;
+				text-transform: uppercase;
+				font-weight: 300;
+			}
+		}
+	}
+}
+
+/* sizes */
+body {
+	font-size:   14px;
+	line-height: $baseline;
+
+	address {
+		line-height: inherit;
+	}
+
+	footer ol.breadcrumbs {
+		font-size: 17px;
+
+		li:first-child {
+			letter-spacing: 1px;
+			font-size: 14px;
+		}
+	}
+
+	pre {
+		font-size:   13px;
+		line-height: $baseline - 2px;
+	}
+
+	p > code, p > tt {
+		letter-spacing: -1px;
+	}
+}
+
+/* alignment */
+body {
+	& {
+		text-align: justify;
+	}
+
+	h1, h2 {
+		text-align: left;
+	}
+}
+
+/* features */
+body {
+	text-rendering: optimizeLegibility;
+
+	font-feature-settings: "onum" 0; /* not for technical writing */
+	font-feature-settings: "pnum" 1; /* nb. ignored for SourceCodePro */
+	font-feature-settings: "kern" 1;
+	font-feature-settings: "ss02" 1; /* single story 'a' */
+
+	h1, h2, h3 {
+		font-feature-settings: "ss02" 0; /* double story 'a' */
+	}
+
+	footer ol.breadcrumbs li:first-child {
+		text-transform: uppercase;
+	}
+
+	pre {
+		overflow-x: auto;
+	}
+
+	span.units, span.sc, em.sc {
+		font-weight: normal;
+		font-style:  normal;
+	}
+
+	span.units, span.sc, em.sc, abbr {
+		font-feature-settings: "c2sc" 0; /* too close to x-height */
+	}
+
+	h1 > abbr, h2 > abbr {
+		font-feature-settings: "c2sc" 0;
+	}
+
+	abbr[title] {
+		border-bottom: none;
+	}
+
+	section.archive-year time[pubdate],
+	article.entry time[pubdate] {
+		font-feature-settings: "lnum" 1;
+		font-feature-settings: "tnum" 1;
+	}
+
+	ol.pages {
+		font-feature-settings: "lnum" 1;
+	}
+
+	ol.overlay#cols li:after {
+		font-feature-settings: "onum" 0;
+	}
+}
+

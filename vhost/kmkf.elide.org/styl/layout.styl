@@ -1,0 +1,72 @@
+/* $Id$ */
+
+body {
+	margin:  0;
+	padding: 0;
+	padding-bottom: ($baseline * 3);
+
+	clearfix();
+}
+
+pre {
+	overflow-y: auto;
+}
+
+header {
+	margin: ($baseline * 2) 0;
+}
+
+for $l in 0 .. length($ncols) - 1 {
+	$q = grid-breakpoint($grid, $l, min);
+	@media $q {
+		body {
+			grid-container($grid, $l);
+		}
+
+		html {
+			if ($layouts[$l] == fluid) {
+				border-top:    solid $baseline #d44;
+				border-bottom: solid $baseline #d44;
+				border-left: none;
+				border-right: none;
+
+				section {
+					& > * {
+						margin-left: 0;
+					}
+
+					& > h2 {
+						margin-left: 0;
+					}
+				}
+			} else {
+				border-top:    none;
+				border-bottom: none;
+				border-left:  solid $baseline #d44;
+				border-right: solid $baseline transparent;
+
+				section {
+					& > * {
+						margin-left: (2 * $baseline);
+					}
+
+					& > h2 {
+						margin-left: 0;
+					}
+				}
+			}
+		}
+
+		header,
+		section,
+		footer {
+			grid-column($grid, $l, $ncols[$l] - 0, 0);
+		}
+
+aside.meta {
+display: none; // XXX
+}
+
+	}
+}
+

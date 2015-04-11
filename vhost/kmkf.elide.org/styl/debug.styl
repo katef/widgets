@@ -1,0 +1,37 @@
+/* $Id: debug.less 316 2012-02-22 18:10:48Z kate $ */
+
+@import "theme.styl";
+
+@import "grid.styl";
+@import "overlay.styl";
+
+html.debug {
+	ol.overlay {
+		&#cols {
+			display: block;
+		}
+
+		&#rows {
+			display: block;
+		}
+	}
+
+	header {
+		& > h1 {
+			background-color: pink;
+		}
+	}
+
+	section {
+		background-color: ivory;
+
+		& > * {
+			background-color: aliceblue;
+		}
+
+		& > h2 {
+			background-color: pink;
+		}
+	}
+}
+

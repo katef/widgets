@@ -1,0 +1,26 @@
+/* $Id$ */
+
+$www-css = "http://kxmf.elide.org/css";
+
+$grid-colour = #dbf;
+
+$fontsize = 13px;
+$baseline = 20px;
+$tabsize  = 4;
+
+$ncols    ?= ( 1       4      5      7      );
+$layouts  ?= ( fluid   fluid  fixed  fixed  );
+$aligns   ?= ( center  center center center );
+
+$colwidth ?= $baseline * 6;
+$gutter   ?= $baseline * 2;
+
+$fixed-margin ?= $gutter;
+$fluid-margin ?= $gutter;
+
+$grid = $ncols $layouts $aligns $colwidth $gutter $fixed-margin $fluid-margin;
+
+$list-gutter = $gutter * 3;
+$faq-gutter  = $gutter * 2;
+$cal-cell    = 2em;
+

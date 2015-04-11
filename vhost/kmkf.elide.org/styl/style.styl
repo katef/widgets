@@ -1,0 +1,85 @@
+/* $Id$ */
+
+@import "theme.styl";
+
+@import "baseline.styl";
+@import "grid.styl";
+@import "tablesort.styl";
+@import "lists.styl";
+@import "minidocbook.styl";
+@import "colour.styl";
+
+@import "layout.styl";
+@import "screen.styl";
+
+@import "fonts.styl";
+
+@import "man.styl";
+
+$gamma = 20%;
+$indent = ($baseline * 2);
+
+html {
+/*
+	background-color: #fff;
+
+	body {
+		border-left: solid 1em #d44;
+	}
+*/
+}
+
+section {
+	h2 {
+		text-transform: uppercase;
+		font-size: inherit;
+	}
+}
+
+pre, code {
+	color: #888;
+}
+
+pre.synopsis {
+/*
+	$b = 0.5ex;
+	$p = 0.5ex;
+	color: #777;
+	background-color: #f7f7f7;
+	padding: $p;
+	margin-left: -($b + $p);
+	border: solid $b #efefef;
+	border-radius: $b;
+	margin-right: $indent;
+*/
+}
+
+i.replaceable:before {
+	content: "${";
+}
+
+i.replaceable:after {
+	content: "}";
+}
+
+pre.synopsis i.replaceable {
+	color: #000;
+}
+
+span.remark {
+	color: #000;
+}
+
+section.refsection.variables table {
+	border-collapse: collapsed;
+	border-spacing: 0;
+
+	td, th {
+		padding-right: 1em;
+	}
+
+	tbody.sep tr:first-child td {
+		padding-top: 1em;
+	}
+}
+
