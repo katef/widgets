@@ -121,10 +121,21 @@
 				<xsl:apply-templates select="h:head/h:title" mode="body"/>
 			</xsl:with-param>
 
+			<xsl:with-param name="head">
+				<!-- here to cut loading time -->
+				<style><![CDATA[
+					header,
+					footer:before {
+						background-color: #0c3e86; /* 0b367a */
+						background-image: url('/img/shelves.jpeg');
+					}
+				]]></style>
+			</xsl:with-param>
+
 			<xsl:with-param name="body">
 				<header>
 					<h1>
-						<xsl:text>Kate&#8217;s amazing </xsl:text>
+						<xsl:text>Kate&#8217;s Amazing </xsl:text>
 						<xsl:apply-templates select="h:head/h:title" mode="body"/>
 					</h1>
 
