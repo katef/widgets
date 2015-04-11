@@ -13,11 +13,13 @@
 	</head>
 
 	<body>
+<!--
 		<p>I favour small, simple implementations. I try to write
 			portable code. I like lexing, parsing, compilers,
 			standards compliance, and I especially enjoy writing
 			those tidy little functions which seem to suit &c; so
 			nicely.</p>
+-->
 
 		<dl class="index">
 			<dt><a href="/projects/">Projects</a></dt>
