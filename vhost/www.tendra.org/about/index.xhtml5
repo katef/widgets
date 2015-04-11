@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+
+<!-- TODO: figure out how to centralise entities with the docbook ones... generate DTDs? so complex...
+or have them all expand out to a db: namespace -->
+<!-- TODO: likewise URLs etc... one idea; include elements from the docbook namespace in these html documents,
+	and have mod_kxslt expand those out to xhtml on-the-fly -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>About</title>
+
+		<meta name="description" content="Development roadmap"/>
+		<meta name="keywords"    content="roadmap, status, development, progress, plans, future"/>
+		<meta name="rcsid"       content="$Id: index.xhtml5 4126 2013-08-12 22:13:50Z kate $"/>
+		<meta name="layout"      content="docs"/>
+	</head>
+
+	<nav id="sidebar">
+		<h1>Goals</h1>
+
+		<p>The goals of the TenDRA project are:</p>
+
+		<ol class="goals">
+			<li>To continuously <em>produce correct code</em>,</li>
+
+			<li>to <em>ensure code correctness</em> through various means,</li>
+
+			<li>to continuously improve the performance of the compiler and
+				resulting code, <em>unless it would jeopardise the points above</em>.</li>
+		</ol>
+
+		<p>See the <a href="#">Status page</a> for supported platforms and features.</p>
+
+		<h1>Get Involved</h1>
+
+		<p>Getting your feet wet is pretty easy; <a href="#">check out the
+			code</a>, come and <a href="#">find us on IRC</a>, or discuss
+			development suggestions <a href="#">on tickets</a>. We'll be
+			happy to hear your thoughts; see the <a href="#">Contact</a>
+			page for details.</p>
+
+		<p>You can also follow <a href="#">RSS
+			feeds</a> for most of the interesting things on this site.</p>
+	</nav>
+
+	<body>
+		<p>TenDRA is a compiler framework for <a href="#">architecture neutral</a>
+			representation of compiled programs. It provides a C and C++
+			front-end. Origional development was undertaken under <a href="#">Crown
+			Copyright</a>; current development is <a href="#">BSD licenced</a>.
+			It's mostly written in C.</p>
+
+		<p>TenDRA is based on the following principle:</p>
+
+		<blockquote>If a program is written to conform to an abstract
+			API specification, then that program will be portable to any
+			machine which implements the API specification correctly.</blockquote>
+
+		<p>TODO: why this is interesting: ...</p>
+
+		<p>That's the essence of what TenDRA is about; see <a href="#">TDF and Portability</a>
+			for details and some of the implications of this approach.
+			Here's how it looks in practice:</p>
+
+		<p>TODO: quick tour</p>
+
+		<pre>TODO: something interesting, -Yansi, -Yposix</pre>
+
+		<p>There's a <a href="#">blog post about this</a> if you like
+			this sort of thing.</p>
+	</body>
+</html>
+
