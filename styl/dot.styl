@@ -1,0 +1,115 @@
+/* $Id: dot.css 348 2012-03-16 13:42:17Z kate $ */
+
+$dot-colour ?= #00f;
+$dot-marker ?= #f00;
+$dot-stroke ?= #000;
+
+svg.dot {
+
+	// color: $dot-stroke;
+	for $c in (red green blue) {
+		path.blue,
+		polygon.blue,
+		circle.blue {
+			color: $c;
+		}
+	}
+
+	path,
+	polygon,
+	circle {
+		stroke: #444;
+	}
+
+	polygon {
+		fill: #555;
+	}
+
+	path {
+		fill: none ! important;
+	}
+
+	a {
+		text-decoration: none;
+		cursor: pointer;
+
+		text {
+			font-family: verdana, sans-serif;
+			fill: #444;
+		}
+	}
+
+	/* this gives the mouse something to hover over */
+	circle {
+		fill: white;
+		fill-opacity: 0.0;
+
+		&.inner {
+			fill-opacity: 0 ! important;
+		}
+	}
+
+	/* a for node, g for edge. .hoveredge is for the <menu> */
+	/* XXX: not sure if i like the effect .hoveredge has for <menu> */
+	a.hoveredge path,
+	a.hoveredge polygon,
+	a:hover circle, svg.dot a:hover path,
+	a.hover circle, svg.dot g.hover path,
+	a:hover polygon,
+	g.hover polygon {
+		stroke: $dot-colour;
+		stroke-width: 2px;
+		fill: $dot-colour;
+	}
+
+	a:hover text,
+	a:visited:hover text,
+	a:link:hover text {
+		fill: $dot-colour;
+	}
+
+	a:hover circle,
+	a.hover circle,
+	a.highlight:hover circle,
+	a:hover circle.highlight {
+		fill-opacity: 0.3;
+	}
+
+	/* node highlighting for inlined dot */
+	path.highlight,
+	polygon.highlight,
+	a.highlight path,
+	a.highlight polygon {
+		stroke: $dot-colour;
+		stroke-width: 1.25px;
+	}
+
+	polygon.highlight,
+	text.highlight,
+	a.highlight polygon,
+	a.highlight text {
+		fill: $dot-colour;
+	}
+
+	circle.highlight,
+	a.highlight circle {
+		stroke-width: 1.25px;
+		stroke: $dot-colour;
+		fill: $dot-colour;
+		fill-opacity: 0.15;
+	}
+
+	a:hover circle.highlight,
+	a.highlight:hover circle.highlight,
+	a.highlight:hover circle,
+	a.highlight:hover path,
+	a.highlight:hover polygon {
+		stroke-width: 2px;
+	}
+
+	marker {
+		stroke: $dot-marker;
+	}
+
+};
+
