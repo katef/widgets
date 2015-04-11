@@ -23,7 +23,7 @@ concertina-layout(type) {
 
 	border-bottom: solid $concertina-border $concertina-colour;
 
-	li {
+	& > li {
 		margin:  0;
 		padding: 0;
 
@@ -35,7 +35,7 @@ concertina-layout(type) {
 	}
 
 	if (type == vertical) {
-		li.current a {
+		& > li.current a {
 			trigram();
 		}
 
