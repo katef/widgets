@@ -1,10 +1,13 @@
 
-font-face('OFLGoudyStM-Regular', 400, normal, '/fonts/OFLGoudyStM/OFLGoudyStM-Regular', '#OFLGoudyStM-Regular');
+//font-face('OFLGoudyStM-Regular', 400, normal, '/fonts/OFLGoudyStM/OFLGoudyStM-Regular', '#OFLGoudyStM-Regular');
 
 /* faces, weights and styles */
 body {
+	font-family: verdana, tahoma, sans-serif;
+
 	h1 {
-		font-family: OFLGoudyStM-Regular, Palatino, serif;
+		//font-family: OFLGoudyStM-Regular, Palatino, serif;
+		font-family: Palatino, georgia, times new roman, Bitstream Vera Serif, serif;
 		font-weight: 400;
 	}
 
@@ -52,10 +55,12 @@ body {
 
 	h1 {
 		font-size: 28px;
+		line-height: ($baseline * 2);
 	}
 
 	h2 {
 		font-size: 18px;
+		line-height: ($baseline * 2);
 	}
 
 	h3 {
@@ -73,12 +78,8 @@ body {
 
 /* alignment */
 body {
-	& {
+	p, td, dd {
 		text-align: justify;
-	}
-
-	table th.table-sorted:after {
-		text-align: right;
 	}
 }
 
@@ -103,6 +104,16 @@ body {
 		font-feature-settings: "size" 1;
 		font-feature-settings: "lnum" 1;
 		font-feature-settings: "cpsp" 0;
+	}
+}
+
+acronym.title {
+	border-bottom: dotted 1px #888;
+
+	&:hover {
+		border-bottom-color: #000;
+		color: #000;
+		cursor: help;
 	}
 }
 

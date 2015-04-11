@@ -23,11 +23,11 @@
 	</xsl:template>
 
 	<t:sections>
-		<t:section href="#" name="About">
+		<t:section href="/about" name="About">
 			<t:subsection href="#" name="Introduction"/>
 			<t:subsection href="#" name="Status"/>
 			<t:subsection href="#" name="History"/>
-			<t:subsection href="#" name="People"/>
+			<t:subsection href="/people" name="People"/>
 			<t:subsection href="#" name="Contact"/>
 			<t:subsection href="#" name="Licences"/>
 		</t:section>
@@ -36,24 +36,27 @@
 
 		<t:section href="#" name="Wiki"/>
 
-		<t:section href="#" name="Documentation">
-			<t:subsection href="#" name="User&#160;guides"/>
-			<t:subsection href="#" name="Developer&#160;Guides"/>
+		<t:section href="/docs" name="Documentation">
+			<t:subsection href="#" name="User/Developer&#160;guides"/>
+			<t:subsection href="/man" name="Manpages"/>
 			<t:subsection href="#" name="Reference"/>
-			<t:subsection href="#" name="Manual&#160;Pages"/>
+			<t:sep/>
+			<t:subsection href="#" name="API&#160;Headers"/>
+			<t:subsection href="#" name="API&#160;Coverage"/>
 			<t:sep/>
 			<t:subsection href="#" name="Bibliography"/>
-			<t:subsection href="#" name="Glossary"/>
-			<t:subsection href="#" name="FAQ"/>
+			<t:subsection href="/glossary" name="Glossary"/>
+			<t:subsection href="/faq" name="FAQ"/>
 		</t:section>
 
 		<t:section href="#" name="Projects">
 			<t:subsection href="#" name="TCC"                 desc="UI"/>
-			<t:subsection href="#" name="DRA&#160;Producers"  desc="C/C++&#160;&#x2192;&#160;TDF"/>
-			<t:subsection href="#" name="DRA&#160;Installers" desc="TDF&#160;&#x2192;&#160;asm"/>
+			<t:subsection href="#" name="Producers"  desc="C/C++&#160;&#x2192;&#160;TDF"/>
+			<t:subsection href="#" name="Installers" desc="TDF&#160;&#x2192;&#160;asm"/>
 			<t:sep/>
+			<t:subsection href="#" name="libtdf"         desc="TDF&#160;Datastructures"/>
 			<t:subsection href="#" name="TLD"            desc="TDF&#160;Linker"/>
-			<t:subsection href="#" name="TNC"            desc="TNC&#160;&#x2194;&#160;TDF"/>
+			<t:subsection href="#" name="TNC"            desc="ASCII&#160;&#x2194;&#160;TDF"/>
 			<t:subsection href="#" name="TPL"            desc="PL_TDF&#160;&#x2192;&#160;TDF"/>
 			<t:subsection href="#" name="disp"           desc="TDF&#160;&#x2192;&#160;ASCII"/>
 			<t:sep/>
@@ -66,6 +69,7 @@
 		</t:section>
 
 		<t:section href="#" name="Development">
+			<t:subsection href="#" name="Roadmap"/>
 			<t:subsection href="#" name="Tickets"/>
 			<t:subsection href="#" name="Timeline"/>
 			<t:subsection href="#" name="Revision&#160;Log"/>
@@ -73,7 +77,7 @@
 			<t:subsection href="#" name="Automated&#160;Builds"/>
 		</t:section>
 
-		<t:section href="#" name="Downloads"/>
+		<t:section href="/download" name="Downloads"/>
 	</t:sections>
 
 	<xsl:template match="t:subsection/@desc">

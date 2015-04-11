@@ -1,132 +1,201 @@
 /* $Id$ */
 
-@import "theme.styl";
+$bp-grey  = #eee;
+
+/* XXX: bubblephone-specific concertina stuff */
+for $l in 0 .. length($ncols) - 1 {
+	$q = grid-breakpoint($grid, $l);
+	@media $q {
+		if ($ncols[$l] <= 3) {
+			header menu {
+				li a {
+					background-color: lighten($menu-colour, 50%);
+				}
+
+				li.current a {
+					transition: color $menu-time ease-in-out;
+
+					/* trigram */
+					&:after {
+						color:        darken($bp-grey, 30%);
+						border-color: darken($bp-grey, 30%);
+					}
+
+					&:hover:after {
+						border-color: darken($bp-grey, 50%);
+					}
+				}
+
+				&.collapsed li.current a {
+					color: darken($bp-grey, 30%);
+				}
+
+				border-bottom: solid 0 $menu-colour;
+			}
+		}
+	}
+}
+
+menu a,
+nav.submenu a,
+aside.notes dl dt a {
+	text-align: left;
+	display: block;
+	padding: ($menu-delta / 2) $menu-delta;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+aside.notes dl dt:before {
+	padding: ($menu-delta / 2) $menu-delta;
+}
+
+menu li a:hover,
+menu li.current > a,
+nav.submenu li.current > a,
+nav.submenu li a:hover,
+aside.notes dl dt a:hover {
+	background-color: $menu-colour;
+	text-decoration: none;
+}
+
+menu li a,
+nav.submenu li a,
+aside.notes dl dt a {
+	cursor: pointer;
+}
 
 //$menu-pad-sides = ($grid-pad-sides * 0.75);
 $menu-pad-sides = ($baseline * 0.75);
 
+// TODO: centralise
+menu-container() {
+	li a {
+		display: block;
+		text-decoration: none;
+	}
 
-ul.menu {
-	list-style-type: none;
-	margin:  0 0 $baseline 0;
-	padding: 0;
+	& > li a {
+		line-height: ($baseline * 1.5);
+	}
+
+	& li a:hover {
+		background-color: #eee;
+	}
 }
 
-ul.menu li a,
-menu li a {
-	display: block;
-	text-decoration: none;
-}
-
-menu > li a {
-	line-height: ($baseline * 1.5);
-}
-
-ul.menu li a:hover,
-menu li a:hover {
-	background-color: #eee;
+ul.menu,
+menu {
+	menu-container();
 }
 
 ul li.current a {
 	color: #000;
 }
 
-ul.menu li a:before {
-	content: "\25b8";
-	color: #ddd;
-	display: block;
-	width: $baseline;
-	float: left;
-	clear: left;
-	text-align: center;
-}
+ul.menu {
+	list-style-type: none;
+	margin:  0 0 $baseline 0;
+	padding: 0;
 
-ul.menu li.current a:before {
-	color: #888;
-}
+	li {
+		border-top: dotted 1px #ddd;
+		margin: 0;
 
-ul.menu li {
-	border-top: dotted 1px #ddd;
-	margin: 0;
-}
+		&:first-child {
+			border-top: none;
+		}
 
-ul.menu li:first-child {
-	border-top: none;
-}
+		&.current a:before {
+			color: #888;
+		}
 
-ul.menu li a {
-	line-height: ($baseline * 1.5);
-	color: #666;
-}
+		a:before {
+			content: "\25b8";
+			color: #ddd;
+			display: block;
+			width: $baseline;
+			float: left;
+			clear: left;
+			text-align: center;
+		}
 
-ul.menu li a:hover {
-	color: #000;
+		a {
+			line-height: ($baseline * 1.5);
+			color: #666;
+
+			&:hover {
+				color: #000;
+			}
+		}
+	}
 }
 
 
 /* sections menu */
+// TODO: centralise
 
 /* adapted from http://www.divitodesign.com/2008/09/how-to-dropdown-css-menu/ */
 
-menu > li > a {
-	height:  ($baseline * 1.5);
-	padding: 0 $menu-pad-sides;
-	margin:  0;
+menu {
+	& > li > a {
+		height:  ($baseline * 1.5);
+		padding: 0 $menu-pad-sides;
+		margin:  0;
+	}
+
+	& > li.current > a {
+		font-weight: bold;
+	}
+
+	&,
+	& li > ul {
+		list-style-type: none;
+		z-index: 1;
+	}
+
+	& li > ul {
+		border-top:    solid 5px #000;
+		border-bottom: solid 5px #000;
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		margin: 0;
+		padding: 0;
+		background-color: #fff;
+
+		top: auto;
+		left: auto;
+
+		li a {
+			min-width: (15em);
+			height:    ($baseline * 1.5);
+			padding:   0 ($menu-pad-sides - 1px); /* -1px for the border */
+			margin:    0;
+		}
+
+		li {
+			border-left:  solid 1px #ddd;
+			border-right: solid 1px #ddd;
+			margin: 0;
+
+			span.description {
+				float: right;
+				color: #aaa;
+				font-size: .95em;
+			}
+		}
+
+		li.sep {
+			border-bottom: solid 1px #ddd;
+		}
+	}
+
+	& li:hover ul {
+		display: block;
+	}
 }
-
-menu > li.current > a {
-	font-weight: bold;
-}
-
-menu,
-menu li > ul {
-	list-style-type: none;
-	z-index: 1;
-}
-
-menu li > ul li a {
-	min-width: (15em);
-	height:    ($baseline * 1.5);
-	padding:   0 ($menu-pad-sides - 1px); /* -1px for the border */
-	margin:    0;
-}
-
-menu li > ul li {
-	border-left:  solid 1px #ddd;
-	border-right: solid 1px #ddd;
-	margin: 0;
-}
-
-menu li > ul li.sep {
-	border-bottom: solid 1px #ddd;
-}
-
-menu li > ul {
-	border-top:    solid 5px #000;
-	border-bottom: solid 5px #000;
-	display: none;
-	position: absolute;
-	top: 0;
-	left: 0;
-	margin: 0;
-	padding: 0;
-	background-color: #fff;
-}
-
-menu li > ul {
-	top: auto;
-	left: auto;
-}
-
-menu li:hover ul {
-	display: block;
-}
-
-
-/* for IE6 */
-/* http://naarvoren.nl/artikel/hover/csshover.htc
-http://www.xs4all.nl/~peterned/csshover.html
-body {   behavior:url(csshover.htc); }
-*/
-
 

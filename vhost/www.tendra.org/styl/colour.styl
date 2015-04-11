@@ -1,32 +1,41 @@
 /* $Id: common.css 2710 2012-04-16 23:38:49Z kate $ */
 
-/* main */
-
-div.head, div.foot { border-color: #111; }
-menu li ul {
-	border-top-color: #111;
-	border-bottom-color: #111;
-}
-menu > li:hover,
-menu > li:hover > a:hover {
-	background-color: #111;
-	color: #fff;
+body {
+	color: #444;
+	background-color: #fff;
 }
 
-
-/* accents */
-
-a tt {
-	color: inherit;
+hr {
+	height: 1px;
+	background-color: #eee;
+	border: none;
 }
 
-a acronym.title:hover {
-	color: inherit;
-	border-bottom-color: #88f;
+b {
+	color: #222;
 }
 
-menu > li:hover > a {
-	color: #fff;
+em {
+	font-style: normal;
+	color: #000;
+}
+
+a {
+	text-decoration: underline;
+	color: #000;
+
+	&:hover {
+		color: blue;
+	}
+
+	tt {
+		color: inherit;
+	}
+
+	acronym.title:hover {
+		color: inherit;
+		border-bottom-color: #88f;
+	}
 }
 
 h1 {
@@ -37,15 +46,44 @@ h2, h3, h4 {
 	color: #aaa;
 }
 
-menu li:hover ul a {
-	color: #222;
+menu {
+	& > li:hover > a {
+		color: #fff;
+	}
+
+	li:hover ul a {
+		color: #222;
+	}
+
+	li > a:hover {
+		color: #000;
+	}
+
+	li ul {
+		border-top-color: #111;
+		border-bottom-color: #111;
+	}
+
+	& > li:hover,
+	& > li:hover > a:hover {
+		background-color: #111;
+		color: #fff;
+	}
 }
 
-menu li > a:hover {
-	color: #000;
-}
+ol.glossary {
+	li {
+		color: #ccc;
 
-div.timeline dt a em {
-	color: #222;
+		a {
+			color: (@color / 2);
+			text-decoration: none;
+
+			&:hover {
+				color: #000;
+				background-color: #e7e7e7;
+			}
+		}
+	}
 }
 

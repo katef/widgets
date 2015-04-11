@@ -161,9 +161,9 @@ or have them all expand out to a db: namespace -->
 				<p>See <a href="#TODO">Status</a> for details.</p>
 			</dd>
 
-			<dt>What's the plan for C99 support?</dt>
+			<dt>What's the plan for C99 and C11 support?</dt>
 			<dd>
-				<p class="TODO">TODO etc etc</p>
+				<p class="TODO">TODO etc etc. see the Roadmap</p>
 			</dd>
 
 			<dt>What's the plan for C++ support?</dt>
@@ -179,7 +179,7 @@ or have them all expand out to a db: namespace -->
 
 			<dt>What's the deal with all the forks?</dt>
 			<dd>
-				<p class="TODO">TODO etc etc</p>
+				<p class="TODO">TODO etc etc. See History for merged work</p>
 			</dd>
 
 			<dt>What needs doing next?</dt>
@@ -195,6 +195,8 @@ or have them all expand out to a db: namespace -->
 					<li>general stuff: find bugs, fix them, etc</li>
 					<li>documentation</li>
 				</ul>
+
+				<p class="TODO">See Roadmap for dependency chains for specific targets</p>
 			</dd>
 		</dl>
 

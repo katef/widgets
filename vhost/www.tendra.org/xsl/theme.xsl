@@ -76,7 +76,7 @@
 				<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
 
 				<!-- TODO: consider vw css units instead -->
-				<xsl:text>window.fitText(document.getElementById("banner"), 1.1);</xsl:text>
+				<xsl:text>window.fitText(document.getElementById("banner"), 1.2);</xsl:text>
 
 				<!-- TODO: only where relevant -->
 <!-- XXX:
@@ -103,19 +103,18 @@
 					</form>
 -->
 
-					<!-- TODO: <nav> around this -->
 					<xsl:call-template name="t:sections-menu"/>
 				</header>
 
-				<h1>
-					<xsl:apply-templates select="h:head/h:title" mode="body"/>
-				</h1>
-
 				<section class="page hyphenate">
+					<h1>
+						<xsl:apply-templates select="h:head/h:title" mode="body"/>
+					</h1>
+
 					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 				</section>
 
-				<nav id="sidebar hyphenate">
+				<nav id="sidebar" class="hyphenate">
 					<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>
 				</nav>
 

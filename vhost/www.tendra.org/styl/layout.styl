@@ -1,19 +1,49 @@
 /* $Id$ */
 
+blockquote {
+	margin: 0 $grid-indent $baseline $grid-indent;
+	color: #999;
+}
+
+pre {
+	margin: 0;
+}
+
 for $l in 0 .. length($ncols) - 1 {
+	$q = grid-breakpoint($grid, $l);
+	@media $q {
+		body > header menu {
+			concertina-layout($ncols[$l] <= 3 ? vertical : horizontal);
+if ($ncols[$l] <= 3) {
+li > ul { display: none; } // XXX: need to have this expand out, too
+}
+		}
+	}
+
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
-		header menu {
-			menu-layout($ncols[$l] == 1 ? vertical : horizontal);
-		}
-
-		header, nav.menu, section.page, footer {
+		body {
 			grid-container($grid, $l);
 		}
 
-		header > *,
-		footer > * {
+		header, footer {
 			grid-column($grid, $l, $ncols[$l]);
+		}
+
+		section.page {
+			if ($ncols[$l] > 6) {
+				grid-column($grid, $l, $ncols[$l] - 3);
+			} else {
+				grid-column($grid, $l, $ncols[$l]);
+			}
+		}
+
+		nav#sidebar {
+			if ($ncols[$l] > 6) {
+				grid-column($grid, $l, 3);
+			} else {
+				grid-column($grid, $l, $ncols[$l]);
+			}
 		}
 
 		header > form.search {
@@ -29,36 +59,37 @@ for $l in 0 .. length($ncols) - 1 {
 
 		/* fallbacks for when fittext.js isn't available */
 		header > h1#banner {
+// TODO: update for all new sizes
 			if ($ncols[$l] == 1) {
 				font-size: 1.3em;
 			}
- 
+
 			if ($ncols[$l] == 3) {
 				font-size: 1.5em;
 			}
- 
+
 			if ($ncols[$l] == 6) {
 				font-size: 2.2em;
 			}
- 
+
 			if ($ncols[$l] == 8) {
 				font-size: 2.0em;
 			}
- 
+
 			if ($ncols[$l] == 12) {
 				font-size: 2.2em;
 			}
 		}
- 
+
 		header > h1#banner {
 			if ($ncols[$l] == 1) {
 				grid-column($grid, $l, 1, $ncols[$l] - 1);
 			}
- 
+
 			if ($ncols[$l] == 3) {
 				grid-column($grid, $l, 2, $ncols[$l] - 2);
 			}
- 
+
 			if ($ncols[$l] >= 6) {
 				grid-column($grid, $l, 3, $ncols[$l] - 3);
 			}
@@ -68,11 +99,11 @@ for $l in 0 .. length($ncols) - 1 {
 			if ($ncols[$l] == 1) {
 				grid-subcontainer($grid, $l, 1, $ncols[$l] - 1);
 			}
- 
+
 			if ($ncols[$l] == 3) {
 				grid-subcontainer($grid, $l, 2, $ncols[$l] - 2);
 			}
- 
+
 			if ($ncols[$l] >= 6) {
 				grid-subcontainer($grid, $l, 3, $ncols[$l] - 3);
 			}
@@ -85,6 +116,63 @@ for $l in 0 .. length($ncols) - 1 {
 				// TODO: exdent
 			}
 		}
+
+		section.docs {
+			grid-column($grid, $l, 9);
+
+			// XXX: hacky effort at a fluid subgrid
+			div {
+				float: left;
+				width: 33%;
+				box-sizing: border-box;
+				padding-left:  $gutter;
+				padding-right: $gutter;
+			}
+
+			margin-left:  -($gutter);
+			margin-right: -($gutter);
+		}
 	}
+
+	$q = grid-breakpoint($grid, $l, max);
+	@media $q {
+		if ($ncols[$l] <= 1) {
+			table.download th:first-child,
+			table.download td:first-child {
+				display: none;
+			}
+		}
+
+		if ($ncols[$l] <= 8) {
+			table.download th.md5,
+			table.download td.md5 {
+				display: none;
+			}
+		}
+	}
+}
+
+pre {
+	padding: 1ex 1.75em;
+	margin: 1.25em 0;
+	border: solid 1px #ddd;
+
+	& div.lines {
+		float: left;
+		border-right: solid 1px #ddd;
+		background-color: #f7f7f7;
+		color: #bbb ! important;
+		margin-right: 1ex;
+		padding: 1ex 0;
+		padding-right: 1.5ex;
+		padding-left: 1ex;
+		margin: -1ex 0;
+		margin-left: -1.75em;
+		margin-right: 1ex;
+	}
+}
+
+ol.goals li {
+	margin-bottom: 1em;
 }
 
