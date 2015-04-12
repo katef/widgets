@@ -16,7 +16,7 @@ header {
 	margin: ($baseline * 2) 0;
 }
 
-for $l in 0 .. length($ncols) - 1 {
+for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
 		body {
@@ -24,7 +24,7 @@ for $l in 0 .. length($ncols) - 1 {
 		}
 
 		html {
-			if ($layouts[$l] == fluid) {
+			if ($grid.layouts[$l] == fluid) {
 				border-top:    solid $baseline #d44;
 				border-bottom: solid $baseline #d44;
 				border-left: none;
@@ -60,7 +60,7 @@ for $l in 0 .. length($ncols) - 1 {
 		header,
 		section,
 		footer {
-			grid-column($grid, $l, $ncols[$l] - 0, 0);
+			grid-column($grid, $l, $grid.ncols[$l] - 0, 0);
 		}
 
 aside.meta {

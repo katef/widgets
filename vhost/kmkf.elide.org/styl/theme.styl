@@ -8,19 +8,19 @@ $fontsize = 13px;
 $baseline = 20px;
 $tabsize  = 4;
 
-$ncols    ?= ( 1       4      5      7      );
-$layouts  ?= ( fluid   fluid  fixed  fixed  );
-$aligns   ?= ( center  center center center );
+$grid = {
+	ncols:   ( 1       4      5      7      )
+	layouts: ( fluid   fluid  fixed  fixed  )
+	aligns:  ( center  center center center )
 
-$colwidth ?= $baseline * 6;
-$gutter   ?= $baseline * 2;
+	colwidth: $baseline * 6
+	gutter:   $baseline * 2
 
-$fixed-margin ?= $gutter;
-$fluid-margin ?= $gutter;
+	fixed-margin: $baseline * 2
+	fluid-margin: $baseline * 2
+}
 
-$grid = $ncols $layouts $aligns $colwidth $gutter $fixed-margin $fluid-margin;
-
-$list-gutter = $gutter * 3;
-$faq-gutter  = $gutter * 2;
+$list-gutter = $grid.gutter * 3;
+$faq-gutter  = $grid.gutter * 2;
 $cal-cell    = 2em;
 

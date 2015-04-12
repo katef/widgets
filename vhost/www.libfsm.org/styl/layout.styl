@@ -18,7 +18,7 @@ nav.sidebar {
 	display: none;
 }
 
-for $l in 0 .. length($ncols) - 1 {
+for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
 		header, section.page, footer {
@@ -27,11 +27,11 @@ for $l in 0 .. length($ncols) - 1 {
 
 		header > *,
 		footer > * {
-			grid-column($grid, $l, $ncols[$l] - 0, 0);
+			grid-column($grid, $l, $grid.ncols[$l] - 0, 0);
 		}
 
 		section.page > * {
-			grid-column($grid, $l, $ncols[$l] - 1, 1);
+			grid-column($grid, $l, $grid.ncols[$l] - 1, 1);
 
 			ul.tags {
 				// TODO: exdent

@@ -1,27 +1,27 @@
 /* $Id$ */
 
-$www-css       = "http://www.libfsm.org/css";
+$www-css  = "http://www.libfsm.org/css";
 
 $baseline = 20px;
 $tabsize  = 4;
 
 $grid-colour   = orange;
 
-$ncols    ?= ( 6      8      );
-$layouts  ?= ( fluid  fixed  );
-$aligns   ?= ( center center );
+$grid = {
+	ncols:   ( 6      8      )
+	layouts: ( fluid  fixed  )
+	aligns:  ( center center )
 
-$colwidth ?= $baseline * 6;
-$gutter   ?= $baseline / 2;
+	colwidth: $baseline * 6
+	gutter:   $baseline / 2
 
-$fixed-margin ?= $gutter;
-$fluid-margin ?= 0;
+	fixed-margin: $baseline / 2
+	fluid-margin: 0
+}
 
-$grid = $ncols $layouts $aligns $colwidth $gutter $fixed-margin $fluid-margin;
-
-$list-gutter   = $gutter * 3;
-$faq-gutter    = $list-gutter;
-$cal-cell      = 2em;
+$list-gutter = $grid.gutter * 3;
+$faq-gutter  = $list-gutter;
+$cal-cell    = 2em;
 
 $dot-colour = #1b5;
 $dot-marker = #f00;

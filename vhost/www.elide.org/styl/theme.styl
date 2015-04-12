@@ -8,37 +8,27 @@ $fontsize = 13px;
 $baseline = 20px;
 $tabsize  = 4;
 
-$ncols    ?= ( 1       2      4      5      6      );
-$layouts  ?= ( fluid   fluid  fluid  fixed  fixed  );
-$aligns   ?= ( center  center center center center );
+$grid = {
+	ncols:    ( 1       2      4      5      6      )
+	layouts:  ( fluid   fluid  fluid  fixed  fixed  )
+	aligns:   ( center  center center center center )
 
-$colwidth ?= $baseline * 5.8; // wide enough for YYYY-MM-DD
-$gutter   ?= $baseline / 2;
+	colwidth: $baseline * 5.8 // wide enough for YYYY-MM-DD
+	gutter:   $baseline / 2
 
-$fixed-margin ?= 0;
-$fluid-margin ?= 0;
+	fixed-margin: 0
+	fluid-margin: 0
+}
 
-$grid = $ncols $layouts $aligns $colwidth $gutter $fixed-margin $fluid-margin;
-
-$list-gutter = $gutter * 3;
-$faq-gutter  = $gutter * 2;
+$list-gutter = $grid.gutter * 3;
+$faq-gutter  = $grid.gutter * 2;
 $cal-cell    = 2em;
 
 $theme = ( );
 for $l in 0 .. length($ncols) - 1 {
 	$theme[$l] = {
-		concertina: $ncols[$l] >= 2 ? horizontal : vertical
-		fish:       $ncols[$l] >= 3 ? horizontal : vertical
+		concertina: $grid.ncols[$l] >= 2 ? horizontal : vertical
+		fish:       $grid.ncols[$l] >= 3 ? horizontal : vertical
 	};
-}
-
-// goal: not to have [$l] in theme.styl
-// call as:
-+grid-media($grid) {
-	p {
-		if ($theme[$l][concertina] == horizontal) {
-			color: red;
-		}
-	}
 }
 

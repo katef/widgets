@@ -65,7 +65,7 @@ ol.overlay {
 }
 
 // TODO: abstraction
-for $l in 0 .. length($ncols) - 1 {
+for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
 		ol.overlay#cols {
@@ -75,7 +75,7 @@ for $l in 0 .. length($ncols) - 1 {
 		ol.overlay#cols li {
 			grid-column($grid, $l);
 
-			for $n in 1 .. $ncols[length($ncols) - 1] {
+			for $n in 1 .. $grid.ncols[length($grid.ncols) - 1] {
 				&:nth-child({$n}) {
 					&:after {
 						content: '"#%s\A %s"' % ($n round(@width));

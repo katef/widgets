@@ -3,10 +3,10 @@
 $bp-grey  = #eee;
 
 /* XXX: bubblephone-specific concertina stuff */
-for $l in 0 .. length($ncols) - 1 {
+for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l);
 	@media $q {
-		if ($ncols[$l] <= 3) {
+		if ($grid.ncols[$l] <= 3) {
 			header menu {
 				li a {
 					background-color: lighten($menu-colour, 50%);

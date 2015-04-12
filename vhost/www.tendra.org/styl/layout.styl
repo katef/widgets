@@ -9,12 +9,12 @@ pre {
 	margin: 0;
 }
 
-for $l in 0 .. length($ncols) - 1 {
+for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l);
 	@media $q {
 		body > header menu {
-			concertina-layout($ncols[$l] <= 3 ? vertical : horizontal);
-if ($ncols[$l] <= 3) {
+			concertina-layout($grid.ncols[$l] <= 3 ? vertical : horizontal);
+if ($grid.ncols[$l] <= 3) {
 li > ul { display: none; } // XXX: need to have this expand out, too
 }
 		}
@@ -27,22 +27,22 @@ li > ul { display: none; } // XXX: need to have this expand out, too
 		}
 
 		header, footer {
-			grid-column($grid, $l, $ncols[$l]);
+			grid-column($grid, $l, $grid.ncols[$l]);
 		}
 
 		section.page {
-			if ($ncols[$l] > 6) {
-				grid-column($grid, $l, $ncols[$l] - 3);
+			if ($grid.ncols[$l] > 6) {
+				grid-column($grid, $l, $grid.ncols[$l] - 3);
 			} else {
-				grid-column($grid, $l, $ncols[$l]);
+				grid-column($grid, $l, $grid.ncols[$l]);
 			}
 		}
 
 		nav#sidebar {
-			if ($ncols[$l] > 6) {
+			if ($grid.ncols[$l] > 6) {
 				grid-column($grid, $l, 3);
 			} else {
-				grid-column($grid, $l, $ncols[$l]);
+				grid-column($grid, $l, $grid.ncols[$l]);
 			}
 		}
 
@@ -60,57 +60,57 @@ li > ul { display: none; } // XXX: need to have this expand out, too
 		/* fallbacks for when fittext.js isn't available */
 		header > h1#banner {
 // TODO: update for all new sizes
-			if ($ncols[$l] == 1) {
+			if ($grid.ncols[$l] == 1) {
 				font-size: 1.3em;
 			}
 
-			if ($ncols[$l] == 3) {
+			if ($grid.ncols[$l] == 3) {
 				font-size: 1.5em;
 			}
 
-			if ($ncols[$l] == 6) {
+			if ($grid.ncols[$l] == 6) {
 				font-size: 2.2em;
 			}
 
-			if ($ncols[$l] == 8) {
+			if ($grid.ncols[$l] == 8) {
 				font-size: 2.0em;
 			}
 
-			if ($ncols[$l] == 12) {
+			if ($grid.ncols[$l] == 12) {
 				font-size: 2.2em;
 			}
 		}
 
 		header > h1#banner {
-			if ($ncols[$l] == 1) {
-				grid-column($grid, $l, 1, $ncols[$l] - 1);
+			if ($grid.ncols[$l] == 1) {
+				grid-column($grid, $l, 1, $grid.ncols[$l] - 1);
 			}
 
-			if ($ncols[$l] == 3) {
-				grid-column($grid, $l, 2, $ncols[$l] - 2);
+			if ($grid.ncols[$l] == 3) {
+				grid-column($grid, $l, 2, $grid.ncols[$l] - 2);
 			}
 
-			if ($ncols[$l] >= 6) {
-				grid-column($grid, $l, 3, $ncols[$l] - 3);
+			if ($grid.ncols[$l] >= 6) {
+				grid-column($grid, $l, 3, $grid.ncols[$l] - 3);
 			}
 		}
 
 		header > form.search {
-			if ($ncols[$l] == 1) {
-				grid-subcontainer($grid, $l, 1, $ncols[$l] - 1);
+			if ($grid.ncols[$l] == 1) {
+				grid-subcontainer($grid, $l, 1, $grid.ncols[$l] - 1);
 			}
 
-			if ($ncols[$l] == 3) {
-				grid-subcontainer($grid, $l, 2, $ncols[$l] - 2);
+			if ($grid.ncols[$l] == 3) {
+				grid-subcontainer($grid, $l, 2, $grid.ncols[$l] - 2);
 			}
 
-			if ($ncols[$l] >= 6) {
-				grid-subcontainer($grid, $l, 3, $ncols[$l] - 3);
+			if ($grid.ncols[$l] >= 6) {
+				grid-subcontainer($grid, $l, 3, $grid.ncols[$l] - 3);
 			}
 		}
 
 		article.entry {
-			grid-column($grid, $l, $ncols[$l] - 1, 1);
+			grid-column($grid, $l, $grid.ncols[$l] - 1, 1);
 
 			ul.tags {
 				// TODO: exdent
@@ -125,25 +125,25 @@ li > ul { display: none; } // XXX: need to have this expand out, too
 				float: left;
 				width: 33%;
 				box-sizing: border-box;
-				padding-left:  $gutter;
-				padding-right: $gutter;
+				padding-left:  $grid.gutter;
+				padding-right: $grid.gutter;
 			}
 
-			margin-left:  -($gutter);
-			margin-right: -($gutter);
+			margin-left:  -($grid.gutter);
+			margin-right: -($grid.gutter);
 		}
 	}
 
 	$q = grid-breakpoint($grid, $l, max);
 	@media $q {
-		if ($ncols[$l] <= 1) {
+		if ($grid.ncols[$l] <= 1) {
 			table.download th:first-child,
 			table.download td:first-child {
 				display: none;
 			}
 		}
 
-		if ($ncols[$l] <= 8) {
+		if ($grid.ncols[$l] <= 8) {
 			table.download th.md5,
 			table.download td.md5 {
 				display: none;

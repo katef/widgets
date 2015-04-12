@@ -26,21 +26,22 @@
  *
  * Per-layout variables:
  *
- *   $ncols  [$l]  Number of columns for layout $l
- *   $layouts[$l]  Column strategy for layout $l (fixed or fluid)
- *   $aligns [$l]  Alignment for layout $l (left, right or center)
+ *   $grid.ncols  [$l]  Number of columns for layout $l
+ *   $grid.layouts[$l]  Column strategy for layout $l (fixed or fluid)
+ *   $grid.aligns [$l]  Alignment for layout $l (left, right or center)
  *
  * Global variables:
  *
- *   $colwidth     Column width for fixed layouts
- *   $gutter       Half the width between adjacent columns
- *   $*-margin     Container margin for fixed- and fluid- layouts respectively
+ *   $grid.colwidth     Column width for fixed layouts
+ *   $grid.gutter       Half the width between adjacent columns
+ *   $grid.*-margin     Container margin for fixed- and fluid- layouts respectively
  *
- * $colwidth is used to decide if a layout will fit in the container,
+ * $grid.colwidth is used to decide if a layout will fit in the container,
  * regardless of whether that layout happens to be fluid or fixed.
  *
- * Units for $colwidth must be suitable for @media min-width (i.e. px or pt, but
- * not em or ex). Units here must match the units for $fixed-margin and $gutter.
+ * Units for $grid.colwidth must be suitable for @media min-width (i.e. px or pt,
+ * but not em or ex). Units here must match the units for $grid.fixed-margin
+ * and $grid.gutter.
  *
  *
  * There are no pre-defined CSS classes to scatter over your markup. Instead, you're
@@ -49,19 +50,19 @@
  *
  * Example:
  *
- *  $ncols   ?= (     1      2      3      4      6      8     10     12     14     16  );
- *  $layouts ?= ( fluid  fluid  fluid  fluid  fixed  fixed  fixed  fixed  fixed  fixed  );
- *  $aligns  ?= ( center center center center center center center center center center );
+ *  $grid = {
+ *  	ncols:   (     1      2      3      4      6      8     10     12     14     16  )
+ *  	layouts: ( fluid  fluid  fluid  fluid  fixed  fixed  fixed  fixed  fixed  fixed  )
+ *  	aligns:  ( center center center center center center center center center center )
  *
- *  $colwidth ?= 100px;
- *  $gutter   ?= 18px;
+ *  	colwidth: 100px
+ *  	gutter:   18px
  *
- *  $fixed-margin ?= $gutter * 3; // must be same units as $colwidth
- *  $fluid-margin ?= $gutter;     // must be same units as $colwidth
+ *  	fixed-margin: $gutter * 3 // must be same units as $colwidth
+ *  	fluid-margin: $gutter     // must be same units as $colwidth
+ *  }
  *
- *  $grid = $ncols $layouts $aligns $colwidth $gutter $fixed-margin $fluid-margin;
- *
- *  for $l in 0 .. length($ncols) - 1 {
+ *  for $l in 0 .. length($grid.ncols) - 1 {
  *  	$q = grid-breakpoint($grid, $l, min);
  *  	@media $q {
  *  		ol {
@@ -82,7 +83,7 @@
  * conditionals inside the media queries. This works best limiting rules to apply
  * between a specific min-max range by omitting the $m argument for grid-breakpoint():
  *
- *  for $l in 0 .. length($ncols) - 1 {
+ *  for $l in 0 .. length($grid.ncols) - 1 {
  *  	$q = grid-breakpoint($grid, $l);
  *  	@media $q {
  *  		if ($ncols[$l] == 1) {
@@ -99,8 +100,8 @@
 
 /*
  * TODO: have an element be both a container and a column
- * TODO: permit $gutter to be a percentage
- * TODO: permit $colspan to be a percentage
+ * TODO: permit $grid.gutter to be a percentage
+ * TODO: permit $grid.colspan to be a percentage
  */
 
 /*
@@ -113,35 +114,22 @@
 @import "misc.styl";
 
 grid-breakpoint-min($grid, $l) {
-	$ncols        = $grid[0];
-	$layouts      = $grid[1];
-	$colwidth     = $grid[3];
-	$fixed-margin = $grid[5];
-
 	if ($l == 0) {
 		return null;
 	} else {
-		return 2 * $fixed-margin + $ncols[$l] * $colwidth;
+		return 2 * $grid.fixed-margin + $grid.ncols[$l] * $grid.colwidth;
 	}
 }
 
 grid-breakpoint-max($grid, $l) {
-	$ncols        = $grid[0];
-	$layouts      = $grid[1];
-	$colwidth     = $grid[3];
-	$fixed-margin = $grid[5];
-
-	if ($l == length($ncols) - 1) {
+	if ($l == length($grid.ncols) - 1) {
 		return null;
 	} else {
-		return 2 * $fixed-margin + $ncols[$l + 1] * $colwidth - 1;
+		return 2 * $grid.fixed-margin + $grid.ncols[$l + 1] * $grid.colwidth - 1;
 	}
 }
 
 grid-breakpoint($grid, $l, $m = both) {
-	$ncols        = $grid[0];
-	$layouts      = $grid[1];
-
 	if ($m == both) {
 		$min = grid-breakpoint($grid, $l, min);
 		$max = grid-breakpoint($grid, $l, max);
@@ -158,7 +146,7 @@ grid-breakpoint($grid, $l, $m = both) {
 	}
 
 	/*
- 	 * TODO: permitting $fixed-margin as a percentage shouldn't be so hard.
+ 	 * TODO: permitting $grid.fixed-margin as a percentage shouldn't be so hard.
 	 * I think it's just 1/percent and not a simultaneous equation.
 	 */
 
@@ -172,34 +160,26 @@ grid-breakpoint($grid, $l, $m = both) {
 		return all;
 	}
 
-//	p("%s cols: %s = %s, %s" % ($ncols[$l] $m $width $layouts[$l]));
+//	p("%s cols: %s = %s, %s" % ($grid.ncols[$l] $m $width $grid.layouts[$l]));
 
 	return "(%s-width: %s)" % ($m $width);
 }
 
 grid-container($grid, $l) {
-	$ncols        = $grid[0];
-	$layouts      = $grid[1];
-	$aligns       = $grid[2];
-	$colwidth     = $grid[3];
-	$gutter       = $grid[4];
-	$fixed-margin = $grid[5];
-	$fluid-margin = $grid[6];
-
 	clearfix();
 
-	if ($layouts[$l] == fixed) {
-		width: $ncols[$l] * $colwidth;
+	if ($grid.layouts[$l] == fixed) {
+		width: $grid.ncols[$l] * $grid.colwidth;
 	} else {
 		width: auto;
 	}
 
-	if ($layouts[$l] == fixed) {
-		margin-left:  $aligns[$l] == left  ? $fixed-margin : auto;
-		margin-right: $aligns[$l] == right ? $fixed-margin : auto;
+	if ($grid.layouts[$l] == fixed) {
+		margin-left:  $grid.aligns[$l] == left  ? $fixed-margin : auto;
+		margin-right: $grid.aligns[$l] == right ? $fixed-margin : auto;
 	} else {
-		margin-left:  $aligns[$l] != right ? $fluid-margin : 0;
-		margin-right: $aligns[$l] != left  ? $fluid-margin : 0;
+		margin-left:  $grid.aligns[$l] != right ? $fluid-margin : 0;
+		margin-right: $grid.aligns[$l] != left  ? $fluid-margin : 0;
 	}
 }
 
@@ -211,22 +191,17 @@ grid-subgrid($grid, $l, $indent) {
 }
 
 grid-column($grid, $l, $colspan = 1, $indent = 0) {
-	$ncols        = $grid[0];
-	$layouts      = $grid[1];
-	$colwidth     = $grid[3];
-	$gutter       = $grid[4];
-
-	if ($colspan < $ncols[$l]) {
+	if ($grid.colspan < $grid.ncols[$l]) {
 		float: left;
 	}
 
 	// TODO: need to work around sub-pixel percentage bugs
 	// (e.g. overflow: hidden, and set container to 101%)
 
-	if ($layouts[$l] == fixed) {
-		width: ($colspan * $colwidth);
+	if ($grid.layouts[$l] == fixed) {
+		width: ($colspan * $grid.colwidth);
 	} else {
-		width: ($colspan * 100% / $ncols[$l]);
+		width: ($colspan * 100% / $grid.ncols[$l]);
 	}
 
 	box-sizing: border-box;
@@ -237,25 +212,23 @@ grid-column($grid, $l, $colspan = 1, $indent = 0) {
 	margin-left:   0;
 	margin-right:  0;
 
-	if ($layouts[$l] == fixed) {
-		margin-left: $indent * $colwidth;
+	if ($grid.layouts[$l] == fixed) {
+		margin-left: $indent * $grid.colwidth;
 	} else {
-		margin-left: $indent * (100% / $ncols[$l]);
+		margin-left: $indent * (100% / $grid.ncols[$l]);
 	}
 
 	// TODO: make an option to fill out to 100% of the container width
 	// i.e. to overlap the container's padding. or just elide padding here
-	padding-left:  @padding-left  + $gutter;
-	padding-right: @padding-right + $gutter;
+	padding-left:  @padding-left  + $grid.gutter;
+	padding-right: @padding-right + $grid.gutter;
 }
 
 grid-subcontainer($grid, $l, $colspan = 1, $indent = 0) {
-	$gutter       = $grid[4];
-
 	grid-column($grid, $l, $colspan, $indent);
 
 	// to override grid-column()
-	padding-left:  @padding-left  - $gutter;
-	padding-right: @padding-right - $gutter;
+	padding-left:  @padding-left  - $grid.gutter;
+	padding-right: @padding-right - $grid.gutter;
 }
 

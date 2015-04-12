@@ -148,16 +148,16 @@ pre {
 	margin-left: 0;
 }
 
-for $l in 0 .. length($ncols) - 1 {
+for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
 		body {
 			grid-container($grid, $l);
 		}
 
-if ($ncols[$l] == 5) {
+if ($grid.ncols[$l] == 5) {
 	figure {
-//		grid-subcontainer($grid, $l, $ncols[$l] - 1, 1);
+//		grid-subcontainer($grid, $l, $grid.ncols[$l] - 1, 1);
 //		$subgrid = ( 2 ) ( fluid ) ( center ) $colwidth $gutter $fixed-margin $fluid-margin;
 
 
@@ -195,17 +195,17 @@ if ($ncols[$l] == 5) {
 	}
 }
 
-		if ($ncols[$l] <= 2) {
+		if ($grid.ncols[$l] <= 2) {
 			header {
-//				grid-column($grid, $l, $ncols[$l]);
+//				grid-column($grid, $l, $grid.ncols[$l]);
 			}
 
 			section.page {
-//				grid-column($grid, $l, $ncols[$l]);
+//				grid-column($grid, $l, $grid.ncols[$l]);
 			}
 
 			dl.index {
-//				grid-subcontainer($grid, $l, $ncols[$l], 0);
+//				grid-subcontainer($grid, $l, $grid.ncols[$l], 0);
 
 				dt a {
 //					grid-column($grid, $l, 1);
@@ -217,33 +217,33 @@ if ($ncols[$l] == 5) {
 			}
 
 			nav#monthindex {
-//				grid-subcontainer($grid, $l, $ncols[$l], 0);
+//				grid-subcontainer($grid, $l, $grid.ncols[$l], 0);
 //				$subgrid = grid-subgrid($grid, $l, 0);
 
 				ol.pages,
 				& > a {
-//					grid-column($subgrid, $l, $ncols[$l]);
+//					grid-column($subgrid, $l, $grid.ncols[$l]);
 				}
 			}
 		}
 
-		if ($ncols[$l] >= 2) {
+		if ($grid.ncols[$l] >= 2) {
 			nav#monthindex {
 				pages-collapse-outer(data-fmt);
 			}
 		}
 
-		if ($ncols[$l] >= 4) {
+		if ($grid.ncols[$l] >= 4) {
 			header {
-//				grid-column($grid, $l, $ncols[$l] - 1, 1);
+//				grid-column($grid, $l, $grid.ncols[$l] - 1, 1);
 			}
 
 			section.page {
-				grid-column($grid, $l, $ncols[$l] - 1, 1);
+				grid-column($grid, $l, $grid.ncols[$l] - 1, 1);
 			}
 
 			dl.index {
-//				grid-subcontainer($grid, $l, $ncols[$l] - 1, 0);
+//				grid-subcontainer($grid, $l, $grid.ncols[$l] - 1, 0);
 //				$subgrid = grid-subgrid($grid, $l, 1);
 //				$subcols = $subgrid[0];
 
@@ -257,7 +257,7 @@ if ($ncols[$l] == 5) {
 			}
 
 			section.page > article.entry {
-//				grid-subcontainer($grid, $l, $ncols[$l], 0);
+//				grid-subcontainer($grid, $l, $grid.ncols[$l], 0);
 //				$subgrid = grid-subgrid($grid, $l, 0);
 
 				& > time.update,
@@ -267,16 +267,16 @@ if ($ncols[$l] == 5) {
 				}
 
 				& > div.body {
-//					grid-column($subgrid, $l, $ncols[$l] - 1);
+//					grid-column($subgrid, $l, $grid.ncols[$l] - 1);
 				}
 			}
 
 			nav#monthindex {
-//				grid-subcontainer($grid, $l, $ncols[$l] - 1, 1);
+//				grid-subcontainer($grid, $l, $grid.ncols[$l] - 1, 1);
 //				$subgrid = grid-subgrid($grid, $l, 1);
 
 				ol.pages {
-//					grid-column($subgrid, $l, $ncols[$l] - 2);
+//					grid-column($subgrid, $l, $grid.ncols[$l] - 2);
 				}
 
 				& > a {
@@ -286,7 +286,7 @@ if ($ncols[$l] == 5) {
 			}
 		}
 
-		if ($ncols[$l] >= 5) {
+		if ($grid.ncols[$l] >= 5) {
 			header {
 //				grid-column($grid, $l, 3, 1);
 			}
@@ -300,17 +300,17 @@ $q = 'fish';
 	@media $q {
 		nav#monthindex {
 			/* TODO: could animate collapsing by transitioning on width to 0 */
-			if ($ncols[$l] == 1) {
+			if ($grid.ncols[$l] == 1) {
 				/* when too narrow to fit the attr() months */
 //				pages-collapse-group(false);
 			}
 
-			if ($ncols[$l] >= 2 && $ncols[$l] <= 5) {
+			if ($grid.ncols[$l] >= 2 && $grid.ncols[$l] <= 5) {
 				/* when too narrow to fit all 12 months explicitly */
 //				pages-collapse-group(data-fmt);
 			}
 
-			if ($ncols[$l] <= 2) {
+			if ($grid.ncols[$l] <= 2) {
 				& > a,
 				ol.pages {
 //					text-align: center;
