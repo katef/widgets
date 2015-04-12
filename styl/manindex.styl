@@ -1,8 +1,10 @@
 /* $Id$ */
 
-$mi-gutter  ?= 1em;
-$mi-indent  ?= 2em;
-$mi-dtwidth ?= 5em;
+$manindex ?= {
+	gutter:  1em
+	indent:  2em
+	dtwidth: 5em
+}
 
 html.manindex {
 	h1 {
@@ -30,13 +32,13 @@ html.manindex {
 	section dl {
 		margin-top:    0.5em;
 		margin-bottom: 0.5em;
-		padding-left: $mi-indent;
+		padding-left: $manindex.indent;
 
 		clearfix();
 
 		dt {
 			display: block;
-			min-width: $mi-dtwidth;
+			min-width: $manindex.dtwidth;
 
 			float: left;
 			clear: left;
@@ -69,7 +71,7 @@ html.manindex {
 	}
 
 	section section[data-productname] {
-		margin-right: $mi-gutter;
+		margin-right: $manindex.gutter;
 		float: left;
 
 		& + h1 {

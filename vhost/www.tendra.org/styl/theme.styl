@@ -19,14 +19,21 @@ $grid = {
 	fluid-margin: $baseline / 2
 }
 
-$list-gutter = $grid.gutter * 3;
-$faq-gutter  = $list-gutter;
+$list = {
+	gutter: $grid.gutter * 3
+}
+
+$faq = {
+	gutter: $list.gutter
+}
+
 $cal-cell    = 2em;
 
-$menu-border   = $grid.gutter / 2;
-$menu-delta    = $grid.gutter;
-$menu-colour   = $bp-grey;
-$menu-time     = .25s;
-
-$menu-height = $baseline * 1.5;
+$menu = {
+	border: $grid.gutter / 2
+	delta:  $grid.gutter
+	colour: #eee
+	height: $baseline * 1.5
+	time:   .25s
+}
 

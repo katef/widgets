@@ -8,15 +8,17 @@
  * For example, background for each organisation involved in a press release.
  */
 
-$accordion-height  ?= 15em;
-$accordion-time    ?= $menu-time || .25s;
-$accordion-gutter  ?= 2em;
-$accordion-indent  ?= 4em;
-$accordion-padding ?= $menu-padding || 1ex;
+$accordion ?= {
+	height:  15em
+	gutter:  2em
+	indent:  4em
+	padding: $menu.padding || 1ex
+	time:    $menu.time    || .25s
+}
 
 accordion-layout() {
 	dt a {
-		hang($accordion-gutter, $accordion-padding, inline);
+		hang($accordion.gutter, $accordion.padding, inline);
 
 		&:before {
 			content: "\25B6";
@@ -33,18 +35,18 @@ accordion-layout() {
 	}
 
 	dd {
-		margin-left: $accordion-indent;
+		margin-left: $accordion.indent;
 
 		overflow: hidden;
 		max-height: 0;
 
 /* XXX: asymetrical */
-//		transition: max-height $accordion-time ease-in-out;
+//		transition: max-height $accordion.time ease-in-out;
 	}
 
 	dt.current + dd {
-		max-height: $accordion-height;
-		min-height: $accordion-height;
+		max-height: $accordion.height;
+		min-height: $accordion.height;
 
 		overflow-y: auto;
 	}

@@ -12,16 +12,18 @@
  * but could perhaps hold other content too.
  */
 
-$concertina-border   ?= $menu-border || 2px;
-$concertina-colour   ?= $menu-colour || #000;
-$concertina-height   ?= $menu-height || 1em;
-$concertina-time     ?= $menu-time   || .25s;
+$concertina ?= {
+	border: $menu.border || 2px
+	colour: $menu.colour || #000
+	height: $menu.height || 1em
+	time:   $menu.time   || .25s
+}
 
 concertina-layout(type) {
 	margin:  0;
 	padding: 0;
 
-	border-bottom: solid $concertina-border $concertina-colour;
+	border-bottom: solid $concertina.border $concertina.colour;
 
 	& > li {
 		margin:  0;
@@ -41,13 +43,13 @@ concertina-layout(type) {
 
 		&.expanded li,
 		&.collapsed li {
-			transition: max-height $concertina-time ease-in-out;
+			transition: max-height $concertina.time ease-in-out;
 			overflow: hidden;
 		}
 
 		&.expanded li,
 		&.collapsed li.current {
-			max-height: $concertina-height;
+			max-height: $concertina.height;
 		}
 
 		&.collapsed li {
@@ -56,10 +58,10 @@ concertina-layout(type) {
 
 		border-bottom-width: 0;
 
-		transition: border-bottom-width ($concertina-time * 0.75) ease-in-out;
+		transition: border-bottom-width ($concertina.time * 0.75) ease-in-out;
 
 		&.expanded {
-			border-bottom-width: $concertina-border;
+			border-bottom-width: $concertina.border;
 		}
 	}
 }

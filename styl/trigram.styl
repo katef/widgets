@@ -11,22 +11,23 @@
  * Fortunately a 1:1:1:1:1 ratio is the typically-done thing.
  */
 
-$trigram-height ?= 15px;
-$trigram-size   ?= ($trigram-height / 5);
+$trigram ?= {
+	size: 15px / 5
+}
 
 trigram() {
 	&:after {
 		content: "";
 		display: inline-block;
 
-		border-top:     $trigram-size      solid;
-		border-bottom: ($trigram-size * 3) double;
-		height: $trigram-size;
-		width: ($trigram-size * 5);
+		border-top:     $trigram.size      solid;
+		border-bottom: ($trigram.size * 3) double;
+		height: $trigram.size;
+		width: ($trigram.size * 5);
 
 		/* alignment to baseline */
-		margin-top:       ceil($trigram-size / 2);
-		margin-bottom: -(floor($trigram-size / 2));
+		margin-top:       ceil($trigram.size / 2);
+		margin-bottom: -(floor($trigram.size / 2));
 
 		margin-left: 1em; /* assuming text before */
 		float: right;

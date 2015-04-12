@@ -1,5 +1,7 @@
 
-$list-gutter ?= 2em;
+$list ?= {
+	gutter: 2em
+}
 
 ul, ol {
 	margin:  0;
@@ -10,6 +12,6 @@ li {
 	margin:  0;
 	padding: 0;
 
-	margin-left: $list-gutter;
+	margin-left: $list.gutter;
 }
 

@@ -1,16 +1,18 @@
 /* $Id$ */
 
-$pages-inact-border     ?= #ddd;
-$pages-inact-background ?= transparent;
-$pages-inact-color      ?= #ddd;
+$pages ?= {
+	inact-border:     #ddd
+	inact-background: transparent
+	inact-color:      #ddd
 
-$pages-hover-border     ?= $pages-hover-background - 10%;
-$pages-hover-background ?= #eee;
-$pages-hover-color      ?= #000;
+	hover-border:     #ddd
+	hover-background: #eee
+	hover-color:      #000
+}
 
 ol.pages {
 	display: block;
-	color:   $pages-inact-color;
+	color:   $pages.inact-color;
 
 	li {
 		display: inline;
@@ -31,7 +33,7 @@ ol.pages {
 
 	li > time,
 	li a {
-		border: solid 1px $pages-inact-border;
+		border: solid 1px $pages.inact-border;
 		text-decoration: none;
 		padding: 5px 10px;
 		padding: 0.8ex 2ex;
@@ -44,19 +46,19 @@ ol.pages {
 
 	li.current > a,
 	li.current > time {
-		border-color:     $pages-hover-border, 5%;
-		background-color: $pages-hover-background;
+		border-color:     $pages.hover-border, 5%;
+		background-color: $pages.hover-background;
 	}
 
 	li.current a:hover {
-		border-color:     $pages-hover-border     - 5%;
-		background-color: $pages-hover-background - 5%;
+		border-color:     $pages.hover-border     - 5%;
+		background-color: $pages.hover-background - 5%;
 	}
 
 	li a:hover {
-		border-color:     $pages-hover-border;
-		background-color: $pages-hover-background;
-		color:            $pages-hover-color;
+		border-color:     $pages.hover-border;
+		background-color: $pages,hover-background;
+		color:            $pages.hover-color;
 	}
 
 	li.group {
@@ -90,7 +92,7 @@ ol.pages {
 		li:last-child a {
 			border-radius: 0 4px 4px 0;
 			border-right-style: solid;
-			border-right-color: $pages-inact-border;
+			border-right-color: $pages.inact-border;
 		//	padding-right: 1.5ex;
 		}
 
@@ -98,7 +100,7 @@ ol.pages {
 		li.current > time,
 		a:hover {
 			border-style: solid;
-			border-right-color: $pages-hover-border;
+			border-right-color: $pages.hover-border;
 			z-index: 1;
 		}
 	}

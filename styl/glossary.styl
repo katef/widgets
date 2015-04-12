@@ -1,17 +1,19 @@
 /* $Id$ */
 
 // XXX: abstraction
-$glossary-gutter  ?= ($grid.gutter * 4);
-$glossary-padding ?= 1em;
-$glossary-border  ?= dotted 1px #ccc;
-$glossary-overlap ?= 1ex; // a:hover vertical overlap relatve to li size
+$glossary ?= {
+	gutter:  ($grid.gutter * 4)
+	padding: 1em
+	border:  dotted 1px #ccc
+	overlap: 1ex // a:hover vertical overlap relatve to li size
+}
 
 dl.glossary {
 
 	dt {
 		display: inline;
 		float: left;
-		padding-right: $glossary-padding;
+		padding-right: $glossary.padding;
 
 		&.alt {
 			padding-right: 1ex;
@@ -27,7 +29,7 @@ dl.glossary {
 
 	dd {
 		margin-top:    0;
-		margin-left:   $glossary-gutter;
+		margin-left:   $glossary.gutter;
 		margin-bottom: $baseline;
 	}
 
@@ -36,7 +38,7 @@ dl.glossary {
 
 		&:before {
 			content: ": ";
-			margin-left: -($glossary-padding); /* to overlap the dt's padding-right */
+			margin-left: -($glossary.padding); /* to overlap the dt's padding-right */
 		}
 	}
 
@@ -55,7 +57,7 @@ ol.glossary {
 
 	li,
 	li a {
-		margin: $glossary-overlap 0;
+		margin: $glossary.overlap 0;
 		display: inline-block;
 
 		min-width: 2em;
@@ -63,8 +65,8 @@ ol.glossary {
 	}
 
 	li {
-		margin-left: -($glossary-border[1]);
-		border-left: $glossary-border;
+		margin-left: -($glossary.border[1]);
+		border-left: $glossary.border;
 		padding: 0;
 		cursor: default;
 	}
@@ -74,8 +76,8 @@ ol.glossary {
 	}
 
 	li a {
-		margin: -($glossary-overlap) 0;
-		padding: ($glossary-overlap) 0;
+		margin: -($glossary.overlap) 0;
+		padding: ($glossary.overlap) 0;
 	}
 
 }

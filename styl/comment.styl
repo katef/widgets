@@ -1,13 +1,15 @@
 /* $Id: comment.css 340 2012-02-26 00:14:02Z kate $ */
 
-$comment-gutter   ?= 1.0em;
-$comment-baseline ?= 0.5em;
-$comment-aside    ?= #aaa;
+$comment ?= {
+	gutter:   1.0em
+	baseline: 0.5em
+	aside:    #aaa
+}
 
 form.comment {
 	input,
 	texrarea {
-		margin-right: $comment-gutter;
+		margin-right: $comment.gutter;
 	}
 
 	div.buttons {
@@ -16,12 +18,12 @@ form.comment {
 
 	label {
 		display: block;
-		margin-bottom: $comment-baseline;
+		margin-bottom: $comment.baseline;
 		clear: left;
 	}
 
 	textarea {
-		margin-bottom: $comment-baseline;
+		margin-bottom: $comment.baseline;
 		display: block;
 /* XXX:
 		max-width: 390px;
@@ -41,7 +43,7 @@ form.comment {
 
 	aside.markup,
 	aside.markup code {
-		color: $comment-aside;
+		color: $comment.aside;
 	/* TODO: inherit a "smaller" from baseline.styl */
 	}
 

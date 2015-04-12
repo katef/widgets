@@ -175,11 +175,11 @@ grid-container($grid, $l) {
 	}
 
 	if ($grid.layouts[$l] == fixed) {
-		margin-left:  $grid.aligns[$l] == left  ? $fixed-margin : auto;
-		margin-right: $grid.aligns[$l] == right ? $fixed-margin : auto;
+		margin-left:  $grid.aligns[$l] == left  ? $grid.fixed-margin : auto;
+		margin-right: $grid.aligns[$l] == right ? $grid.fixed-margin : auto;
 	} else {
-		margin-left:  $grid.aligns[$l] != right ? $fluid-margin : 0;
-		margin-right: $grid.aligns[$l] != left  ? $fluid-margin : 0;
+		margin-left:  $grid.aligns[$l] != right ? $grid.fluid-margin : 0;
+		margin-right: $grid.aligns[$l] != left  ? $grid.fluid-margin : 0;
 	}
 }
 

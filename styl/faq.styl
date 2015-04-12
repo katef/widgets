@@ -1,6 +1,8 @@
 /* $Id$ */
 
-$faq-gutter ?= 2em;
+$faq ?= {
+	gutter: 2em
+}
 
 dl.faq {
 	     dd:before { content: "A.";  }
@@ -9,7 +11,7 @@ dl.faq {
 
 	dt,
 	dd {
-		hang($faq-gutter, 1ex, exdent);
+		hang($faq.gutter, 1ex, exdent);
 	}
 
 	dt {
