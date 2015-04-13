@@ -13,7 +13,7 @@
  */
 
 $concertina ?= {
-	border: $menu.border || 2px
+	border: $menu.border || none
 	colour: $menu.colour || #000
 	height: $menu.height || 1em
 	time:   $menu.time   || .25s
@@ -23,7 +23,9 @@ concertina-layout(type) {
 	margin:  0;
 	padding: 0;
 
-	border-bottom: solid $concertina.border $concertina.colour;
+	if ($concertina.border != none) {
+		border-bottom: solid $concertina.border $concertina.colour;
+	}
 
 	& > li {
 		margin:  0;
@@ -56,12 +58,13 @@ concertina-layout(type) {
 			max-height: 0;
 		}
 
-		border-bottom-width: 0;
+		if ($concertina.border != none) {
+			border-bottom-width: 0;
+			transition: border-bottom-width ($concertina.time * 0.75) ease-in-out;
 
-		transition: border-bottom-width ($concertina.time * 0.75) ease-in-out;
-
-		&.expanded {
-			border-bottom-width: $concertina.border;
+			&.expanded {
+				border-bottom-width: $concertina.border;
+			}
 		}
 	}
 }
