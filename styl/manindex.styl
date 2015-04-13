@@ -1,9 +1,9 @@
 /* $Id$ */
 
 $manindex ?= {
-	gutter:  1em
-	indent:  2em
-	dtwidth: 5em
+	indent:  $list.gutter   || 2em
+	gutter:  $grid.gutter   || 1em
+	dtwidth: $grid.colwidth || 5em
 }
 
 html.manindex {
