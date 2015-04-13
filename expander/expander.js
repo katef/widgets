@@ -70,7 +70,7 @@ var Expander = new (function () {
 		node.setAttribute('class', a.join(' '));
 	}
 
-	this.toggle = function (a, accordion, expander) {
+	this.toggle = function (a, accordion, expand) {
 		var dl = a.parentNode.parentNode;
 		var dt = a.parentNode;
 		var endclass;
@@ -89,7 +89,7 @@ var Expander = new (function () {
 			}
 		}
 
-		if (expander) {
+		if (expand) {
 			if (hasclass(dl, "expanded")) {
 				endclass = "collapsed";
 			} else {
@@ -105,7 +105,7 @@ var Expander = new (function () {
 		return r;
 	}
 
-	this.init = function (root, dlname, dtname, accordion, expander) {
+	this.init = function (root, dlname, dtname, accordion, expand) {
 		var dl = root.getElementsByTagName(dlname);
 
 		for (var i = 0; i < dl.length; i++) {
@@ -127,7 +127,7 @@ var Expander = new (function () {
 				}
 
 				a.onclick = function () {
-						return Expander.toggle(this, accordion, expander);
+						return Expander.toggle(this, accordion, expand);
 					};
 			}
 
