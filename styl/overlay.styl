@@ -1,7 +1,5 @@
 /* $Id$ */
 
-$grid-colour ?= pink;
-
 ol.overlay {
 	pointer-events: none;
 
@@ -27,19 +25,18 @@ ol.overlay {
 		padding-bottom: 0;
 
 		outline-right: dotted 1px;
-		outline-color: $grid-colour;
+		outline-color: $grid.colour;
 
 		li {
-			background-color: $grid-colour;
+			background-color: $grid.colour;
 
-// XXX: abstraction
-			border-left:  solid $gutter $grid-colour - 50%;
-			border-right: solid $gutter $grid-colour - 50%;
+			border-left:  solid $grid.gutter $grid.colour - 50%;
+			border-right: solid $grid.gutter $grid.colour - 50%;
 
 			&:after {
 				text-align:  center;
 				white-space: pre-wrap;
-				color: $grid-colour - 50%;
+				color: $grid.colour - 50%;
 			}
 
 			min-height: 100%;
@@ -62,7 +59,6 @@ ol.overlay {
 
 }
 
-// TODO: abstraction
 for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
