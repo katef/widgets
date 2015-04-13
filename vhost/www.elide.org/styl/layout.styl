@@ -12,6 +12,10 @@ section.page {
 	// TODO: max-width: $baseline * 100;
 	margin-bottom: $baseline;
 
+	*:last-child {
+		margin-bottom: 0;
+	}
+
 	h2 {
 		padding-top: ceil($baseline * 0.0);
 		font-size:       2em;
@@ -21,7 +25,7 @@ section.page {
 
 header {
 	margin-top:    ($baseline * 1.5);
-	margin-bottom: ($baseline * 2);
+	margin-bottom: ($baseline * 1);
 	padding-top:   ($baseline * 8);
 
 	text-align: center;
@@ -59,7 +63,7 @@ header {
 }
 
 footer {
-	margin-top:    ($baseline * 2);
+	margin-top:    ($baseline * 1);
 	margin-bottom: ($baseline * 2);
 	display: none; /* XXX */
 }
@@ -149,7 +153,7 @@ pre {
 }
 
 for $l in 0 .. length($grid.ncols) - 1 {
-	$q = grid-breakpoint($grid, $l, min);
+	$q = grid-breakpoint($grid, $l);
 	@media $q {
 		body {
 			grid-container($grid, $l);
@@ -281,7 +285,7 @@ if ($grid.ncols[$l] == 5) {
 
 				& > a {
 //					grid-column($subgrid, $l, 1);
-//					text-align: center;
+					text-align: center;
 				}
 			}
 		}
@@ -291,13 +295,7 @@ if ($grid.ncols[$l] == 5) {
 //				grid-column($grid, $l, 3, 1);
 			}
 		}
-	}
 
-/* XXX:
-	$q = "%s and %s" % (grid-breakpoint($grid, $l, min) grid-breakpoint($grid, $l, max));
-*/
-$q = 'fish';
-	@media $q {
 		nav#monthindex {
 			/* TODO: could animate collapsing by transitioning on width to 0 */
 			if ($grid.ncols[$l] == 1) {
