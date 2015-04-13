@@ -17,9 +17,11 @@
 	</head>
 
 	<body>
+<!--
 		<p>These are little bits and pieces for &html;, &css;, Javascript (for
 			&dhtml;) and such.<br/>
 			What to call these? Web Widgets?</p>
+-->
 
 		<dl class="index">
 			<dt><a href="/widgets/dotted/">Dotted&nbsp;contents</a></dt>

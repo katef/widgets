@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html [
-	<!ENTITY c '<abbr>C</abbr>'>
+	<!ENTITY c     '<abbr>C</abbr>'>
+	<!ENTITY css   '<abbr title="Cascading Style Sheets">CSS</abbr>'>
+	<!ENTITY dhtml '<abbr title="Dynamic Hypertext Markup Language">HTML</abbr>'>
+	<!ENTITY html  '<abbr title="Hypertext Markup Language">HTML</abbr>'>
 ]>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -40,6 +43,12 @@
 				<p>Single-file programs, mostly written in &c;.
 					These were mostly written to illustrate something,
 					or to try out a particular idea.</p>
+			</dd>
+
+			<dt><a href="/widgets/">Web Widgets</a></dt>
+			<dd>
+				<p>These are little bits and pieces for &html;, &css;, Javascript (for
+					&dhtml;) and such.</p>
 			</dd>
 		</dl>
 
