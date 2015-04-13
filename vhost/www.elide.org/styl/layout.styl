@@ -300,22 +300,22 @@ if ($grid.ncols[$l] == 5) {
 			/* TODO: could animate collapsing by transitioning on width to 0 */
 			if ($grid.ncols[$l] == 1) {
 				/* when too narrow to fit the attr() months */
-//				pages-collapse-group(false);
+				pages-collapse-group(false);
 			}
 
 			if ($grid.ncols[$l] >= 2 && $grid.ncols[$l] <= 5) {
 				/* when too narrow to fit all 12 months explicitly */
-//				pages-collapse-group(data-fmt);
+				pages-collapse-group(data-fmt);
 			}
 
 			if ($grid.ncols[$l] <= 2) {
 				& > a,
 				ol.pages {
-//					text-align: center;
+					text-align: center;
 				}
 
 				& > a {
-//					margin-top: 2ex; // XXX: hacky
+					margin-top: 2ex; // XXX: hacky
 				}
 			}
 		}
