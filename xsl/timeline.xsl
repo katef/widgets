@@ -437,60 +437,62 @@
 			</li>
 
 			<li class="group">
-				<li>
-					<xsl:call-template name="cal-link">
-						<xsl:with-param name="date"  select="$tl:date"/>
-						<xsl:with-param name="delta" select="'-P1M'"/>
-						<xsl:with-param name="rel"   select="'prev'"/>
-						<xsl:with-param name="next"  select=    "&quot;'&lt;&quot;"/>
-						<xsl:with-param name="skip"  select="&quot;'&lt;&lt;&quot;"/>
-						<xsl:with-param name="dtfmt" select="'yyyy-MM'"/>
-						<xsl:with-param name="data"  select="'M'"/>
-					</xsl:call-template>
-				</li>
-
-				<xsl:for-each select="str:tokenize('1 2 3 4 5 6 7 8 9 10 11 12')">
+				<ol>
 					<li>
-						<xsl:if test="$tl:month and $tl:month = .">
-							<xsl:attribute name="class">
-								<xsl:text>current</xsl:text>
-							</xsl:attribute>
-						</xsl:if>
+						<xsl:call-template name="cal-link">
+							<xsl:with-param name="date"  select="$tl:date"/>
+							<xsl:with-param name="delta" select="'-P1M'"/>
+							<xsl:with-param name="rel"   select="'prev'"/>
+							<xsl:with-param name="next"  select=    "&quot;'&lt;&quot;"/>
+							<xsl:with-param name="skip"  select="&quot;'&lt;&lt;&quot;"/>
+							<xsl:with-param name="dtfmt" select="'yyyy-MM'"/>
+							<xsl:with-param name="data"  select="'M'"/>
+						</xsl:call-template>
+					</li>
 
-						<xsl:choose>
-							<xsl:when test="$tl:entries/tl:entry
-								[date:same-month(tl:pubdate(.), date:make($tl:year, current()))]">
-								<a>
-									<xsl:call-template name="tl:href">
-										<xsl:with-param name="date" select="date:make($tl:year, .)"/>
-									</xsl:call-template>
+					<xsl:for-each select="str:tokenize('1 2 3 4 5 6 7 8 9 10 11 12')">
+						<li>
+							<xsl:if test="$tl:month and $tl:month = .">
+								<xsl:attribute name="class">
+									<xsl:text>current</xsl:text>
+								</xsl:attribute>
+							</xsl:if>
 
+							<xsl:choose>
+								<xsl:when test="$tl:entries/tl:entry
+									[date:same-month(tl:pubdate(.), date:make($tl:year, current()))]">
+									<a>
+										<xsl:call-template name="tl:href">
+											<xsl:with-param name="date" select="date:make($tl:year, .)"/>
+										</xsl:call-template>
+
+										<time datetime="{date:make($tl:year, .)}">
+											<xsl:value-of select="."/>
+										</time>
+									</a>
+								</xsl:when>
+
+								<xsl:otherwise>
 									<time datetime="{date:make($tl:year, .)}">
 										<xsl:value-of select="."/>
 									</time>
-								</a>
-							</xsl:when>
+								</xsl:otherwise>
+							</xsl:choose>
+						</li>
+					</xsl:for-each>
 
-							<xsl:otherwise>
-								<time datetime="{date:make($tl:year, .)}">
-									<xsl:value-of select="."/>
-								</time>
-							</xsl:otherwise>
-						</xsl:choose>
+					<li>
+						<xsl:call-template name="cal-link">
+							<xsl:with-param name="date"  select="$tl:date"/>
+							<xsl:with-param name="delta" select="'P1M'"/>
+							<xsl:with-param name="rel"   select="'prev'"/>
+							<xsl:with-param name="next"  select=    "&quot;'&gt;&quot;"/>
+							<xsl:with-param name="skip"  select="&quot;'&gt;&gt;&quot;"/>
+							<xsl:with-param name="dtfmt" select="'yyyy-MM'"/>
+							<xsl:with-param name="data"  select="'M'"/>
+						</xsl:call-template>
 					</li>
-				</xsl:for-each>
-
-				<li>
-					<xsl:call-template name="cal-link">
-						<xsl:with-param name="date"  select="$tl:date"/>
-						<xsl:with-param name="delta" select="'P1M'"/>
-						<xsl:with-param name="rel"   select="'prev'"/>
-						<xsl:with-param name="next"  select=    "&quot;'&gt;&quot;"/>
-						<xsl:with-param name="skip"  select="&quot;'&gt;&gt;&quot;"/>
-						<xsl:with-param name="dtfmt" select="'yyyy-MM'"/>
-						<xsl:with-param name="data"  select="'M'"/>
-					</xsl:call-template>
-				</li>
+				</ol>
 			</li>
 
 			<li>
