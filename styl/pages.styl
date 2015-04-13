@@ -117,7 +117,7 @@ pages-collapse-group($attr = false) {
 			display: inline;
 		}
 
-		if ($data) {
+		if ($attr) {
 			&:first-child > time:after,
 			&:first-child a:after {
 				content: "\00a0" attr($attr);
@@ -135,7 +135,7 @@ pages-collapse-group($attr = false) {
 pages-collapse-outer($attr = false) {
 
 	ol.pages > li {
-		if ($data) {
+		if ($attr) {
 			&:first-child > time:after,
 			&:first-child a:after {
 				content: "\00a0" attr($attr);
