@@ -23,7 +23,8 @@
 		<title>Programming Snippets</title>
 
 		<meta name="description" content="Kate's Programming Snippets"/>
-		<meta name="keywords"    content="kate,programming,snippets"/>
+		<meta name="keywords"    content="kate,code,programming,snippets"/>
+		<meta name="category"    content="code"/>
 		<meta name="rcsid"       content="$Id$"/>
 	</head>
 

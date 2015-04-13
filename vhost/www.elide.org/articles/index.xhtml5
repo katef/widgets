@@ -6,7 +6,8 @@
 		<title>Articles</title>
 
 		<meta name="description" content="Kate's Articles"/>
-		<meta name="keywords"    content="kate"/>
+		<meta name="keywords"    content="kate,articles,writing,documents"/>
+		<meta name="category"    content="articles"/>
 		<meta name="rcsid"       content="$Id$"/>
 	</head>
 

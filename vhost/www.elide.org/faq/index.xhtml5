@@ -16,6 +16,7 @@
 
 		<meta name="description" content="Frequently Asked Questions"/>
 		<meta name="keywords"    content="FAQ, FAQS, questions, status, about"/>
+		<meta name="category"    content="about"/>
 		<meta name="rcsid"       content="$Id: index.xhtml5 3954 2013-07-07 12:04:25Z kate $"/>
 	</head>
 

@@ -6,7 +6,8 @@
 		<title>Projects</title>
 
 		<meta name="description" content="Kate's Projects"/>
-		<meta name="keywords"    content="kate,programming,projects"/>
+		<meta name="keywords"    content="kate,code,programming,projects"/>
+		<meta name="category"    content="code"/>
 		<meta name="rcsid"       content="$Id$"/>
 	</head>
 

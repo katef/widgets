@@ -12,7 +12,8 @@
 		<title>Web Widgets</title>
 
 		<meta name="description" content="Kate's Projects"/>
-		<meta name="keywords"    content="kate,programming,projects,web,widgets,html,javascript,css,dhtml,xhtml"/>
+		<meta name="keywords"    content="kate,code,programming,projects,web,widgets,html,javascript,css,dhtml,xhtml"/>
+		<meta name="category"    content="code"/>
 		<meta name="rcsid"       content="$Id: index.xhtml 510 2010-03-21 10:11:09Z kate $"/>
 	</head>
 

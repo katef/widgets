@@ -12,6 +12,7 @@
 
 		<meta name="description" content="Kate's Projects"/>
 		<meta name="keywords"    content="kate,programming,code"/>
+		<meta name="category"    content="code"/>
 		<meta name="rcsid"       content="$Id: index.xhtml5 3950 2013-07-06 23:45:31Z kate $"/>
 	</head>
 

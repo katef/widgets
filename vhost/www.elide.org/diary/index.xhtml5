@@ -6,6 +6,7 @@
 
 		<meta name="description" content="TODO"/>
 		<meta name="keywords"    content="TODO"/>
+		<meta name="category"    content="diary"/>
 		<meta name="rcsid"       content="$Id: index.xhtml$"/>
 
 		<!-- TODO: xinclude these; keep centralised somewhere (as comment.xhtml5?)

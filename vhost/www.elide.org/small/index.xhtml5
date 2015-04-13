@@ -13,7 +13,8 @@
 		<title>Small Programs</title>
 
 		<meta name="description" content="Kate's Small Programs"/>
-		<meta name="keywords"    content="kate,small,programs"/>
+		<meta name="keywords"    content="kate,code,small,programs"/>
+		<meta name="category"    content="code"/>
 		<meta name="rcsid"       content="$Id$"/>
 	</head>
 

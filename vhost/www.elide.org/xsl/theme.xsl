@@ -19,7 +19,6 @@
 
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
-	<xsl:param name="uri"/>
 
 	<!-- TODO: rename contents to toc -->
 	<c:contents>
@@ -29,12 +28,14 @@
 		<c:category href="/about/"    name="About"/>
 	</c:contents>
 
+	<xsl:variable name="category" select="//h:meta[@name = 'category']/@content"/>
+
 	<xsl:template name="e:contents">
-<!-- TODO: <nav> for this -->
+<!-- TODO: <nav> for this. or <menu> -->
 		<ul id="contents">
 			<xsl:for-each select="document('')//c:contents/c:category">
 				<li>
-					<xsl:if test="starts-with($uri, @href)">
+					<xsl:if test="starts-with(@href, concat('/', $category))">
 						<xsl:attribute name="class">
 							<xsl:text>current</xsl:text>
 						</xsl:attribute>
