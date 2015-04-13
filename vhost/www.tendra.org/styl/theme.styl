@@ -1,16 +1,14 @@
 /* $Id$ */
 
-$www-css       = "http://www.tendra.org/css";
-
 $baseline = 18px;
 $tabsize  = 4;
 
-$grid-colour   = aliceblue;
+$grid-colour = aliceblue;
 
 $grid = {
-	ncols:   ( 1      3      6      8      9      10     11     12     )
-	layouts: ( fluid  fluid  fluid  fixed  fixed  fixed  fixed  fixed  )
-	aligns:  ( center center center center center center center center )
+	ncols:    ( 1      3      6      8      9      10     11     12     )
+	layouts:  ( fluid  fluid  fluid  fixed  fixed  fixed  fixed  fixed  )
+	aligns:   ( center center center center center center center center )
 
 	colwidth: $baseline * 6
 	gutter:   $baseline / 2
@@ -18,16 +16,6 @@ $grid = {
 	fixed-margin: $baseline
 	fluid-margin: $baseline / 2
 }
-
-$list = {
-	gutter: $grid.gutter * 3
-}
-
-$faq = {
-	gutter: $list.gutter
-}
-
-$cal-cell    = 2em;
 
 $menu = {
 	border: $grid.gutter / 2
