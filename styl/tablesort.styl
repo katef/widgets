@@ -1,31 +1,35 @@
 /* $Id$ */
 
-table {
+@media screen {
 
-	th.table-sortable:hover {
-		cursor: pointer;
-	}
+	table {
 
-	th.table-notype {
-		border-color: darkred;
-		background-color: pink;
-	}
+		th.table-sortable:hover {
+			cursor: pointer;
+		}
 
-	th.table-descending:after {
-		content: "\25B2";
-	}
+		th.table-notype {
+			border-color: darkred;
+			background-color: pink;
+		}
 
-	th.table-ascending:after {
-		content: "\25BC";
-	}
+		th.table-descending:after {
+			content: "\25B2";
+		}
 
-	th.table-sorted:after {
-		min-width: 1em;
-		text-align: right;
-		padding-left: 1em;
-		display: block;
-		float: right;
-		cursor: pointer;
+		th.table-ascending:after {
+			content: "\25BC";
+		}
+
+		th.table-sorted:after {
+			min-width: 1em;
+			text-align: right;
+			padding-left: 1em;
+			display: block;
+			float: right;
+			cursor: pointer;
+		}
+
 	}
 
 }

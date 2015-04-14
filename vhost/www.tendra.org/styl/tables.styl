@@ -6,35 +6,20 @@ table {
 	border-left: solid 1px #ddd;
 	border-bottom: solid 1px #ddd;
 
-	th.table-sortable:hover {
-		cursor: pointer;
-		background-color: #eee;
-	}
+	@media screen {
 
-	th.table-sortable:hover:after {
-		color: #ccc;
-	}
+		th.table-sortable:hover {
+			background-color: #eee;
+		}
 
-	th.table-notype {
-		border-color: darkred;
-		background-color: pink;
-	}
+		th.table-sortable:hover:after {
+			color: #ccc;
+		}
 
-	th.table-descending:after {
-		content: "\25B2";
-	}
+		th.table-sorted:after {
+			color: #ddd;
+		}
 
-	th.table-ascending:after {
-		content: "\25BC";
-	}
-
-	th.table-sorted:after {
-		min-width: 1em;
-		padding-left: 1em;
-		color: #ddd;
-		display: block;
-		float: right;
-		cursor: pointer;
 	}
 
 	th {
