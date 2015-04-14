@@ -3,14 +3,107 @@
 body {
 	margin:  0;
 	padding: 0;
-	padding-bottom: ($baseline * 3);
 
 	clearfix();
+
+	// respond when the page height is over 20 lines
+	// only when not using a collapsed (vertical) menu
+	$q = "all and (min-height: " + ($baseline * 20) + ")";
+	@media $q {
+		for $l in 0 .. length($grid.ncols) - 1 {
+			$q = grid-breakpoint($grid, $l);
+			@media $q {
+				if ($grid.ncols[$l] > 2) {
+					padding-top:    ($baseline * 1.5);
+					padding-bottom: ($baseline * 3);
+				}
+			}
+		}
+	}
+}
+
+header {
+	h1 {
+		display: none;
+	}
+
+	menu {
+    	list-style-type: none;
+		text-align: center;
+
+		margin:  0;
+		padding: 0;
+
+		li {
+			margin:  0;
+			padding: 0;
+
+			a {
+				display: inline-block;
+				height: 100%;
+			}
+		}
+	}
+$menu-padding ?= 1.5em;
+
+	for $l in 0 .. length($grid.ncols) - 1 {
+		$q = grid-breakpoint($grid, $l);
+		@media $q {
+			if ($grid.ncols[$l] <= 2) {
+				position: relative; // for menu
+
+				menu {
+width: 100%;
+					line-height: ($baseline * 1.5);
+					position: absolute;
+					bottom: 0;
+/*
+					left:  20%;
+					right: auto;
+					width: 9em;
+					max-width: ($grid.colwidth * 2);
+*/
+					margin: 0 auto;
+				}
+
+				li {
+					display: inline-block;
+					float: left;
+
+					if ($grid.ncols[$l] > 1) {
+						width: 25%;
+					} else {
+						width: 50%;
+					}
+				}
+
+				a {
+					width: 100%;
+				}
+			} else {
+				menu {
+					line-height: ($baseline * 2);
+				}
+
+				li {
+					display: inline-block;
+				}
+
+				a {
+					padding: 0 $menu-padding;
+				}
+			}
+		}
+	}
+}
+
+footer {
+	display: none; /* XXX */
 }
 
 section.page {
-	// TODO: max-width: $baseline * 100;
-	margin-bottom: $baseline;
+	margin-top:    ($baseline * 1);
+	margin-bottom: ($baseline * 1);
 
 	*:last-child {
 		margin-bottom: 0;
@@ -21,79 +114,39 @@ section.page {
 		font-size:       2em;
 		line-height:     ($baseline * 1.0);
 	}
-}
 
-header {
-	margin-top:    ($baseline * 1.5);
-	margin-bottom: ($baseline * 1);
-	padding-top:   ($baseline * 8);
+	dl.index dd {
+		margin-left: 0;
+	}
 
-	text-align: center;
+	section.archive-year[data-count = "0"] {
+		display: none;
+	}
 
-	ul#contents {
-		li {
-        	display: inline-block;
-			margin: 0;
+	section.archive-year > ol {
+		list-style-type: none;
+	}
+
+	section.archive-year {
+		& > h1 {
+			&:after {
+				content: " ";
+			}
 
 			a {
-				display: inline-block;
-				height: 100%;
-				padding: 0 1.5em;
+				display: none;
 			}
 		}
-
-    	list-style-type: none;
-		line-height: ($baseline * 2);
 	}
 
-	/* respond when the page height is below 30 lines */
-	$q = "all and (max-height: " + ($baseline * 30) + ")";
-	@media $q {
-//		margin-top: ($baseline * 2.0);
-	}
-
-	h1 {
-		display: none;
-
-		font-size:      2.7em;
-		padding-top:    ceil($baseline * 3.5);
-		line-height:        ($baseline * 2.0);
-		padding-bottom: ceil($baseline * 1.5);
-	}
-}
-
-footer {
-	margin-top:    ($baseline * 1);
-	margin-bottom: ($baseline * 2);
-	display: none; /* XXX */
-}
-
-section.page section.archive-year[data-count = "0"] {
-	display: none;
-}
-
-section.page section.archive-year > ol {
-	list-style-type: none;
-}
-
-section.page section.archive-year {
-	& > h1 {
-		&:after {
-			content: " ";
+	article.entry {
+		time.update,
+		a[name],
+		ul.tags {
+			display:    block;
+			position:   relative;
+			margin-top: ($baseline * 1);
 		}
-
-		a {
-			display: none;
-		}
-	}
-}
-
-section.page article.entry {
-	time.update,
-	a[name],
-	ul.tags {
-		display:    block;
-		position:   relative;
 	}
 }
 
@@ -111,11 +164,33 @@ nav#monthindex {
 	& > a {
 		float: right;
 	}
-}
 
-article.entry {
-	ul.tags {
-		margin-top: ($baseline * 1);
+	for $l in 0 .. length($grid.ncols) - 1 {
+		$q = grid-breakpoint($grid, $l);
+		@media $q {
+
+			// TODO: could animate collapsing by transitioning on width to 0
+			// when too narrow to fit the attr() months
+			if ($grid.ncols[$l] == 1) {
+				pages-collapse-group(false);
+			}
+
+			// when too narrow to fit all 12 months explicitly
+			if ($grid.ncols[$l] >= 2 && $grid.ncols[$l] <= 5) {
+				pages-collapse-group(data-fmt);
+			}
+
+			if ($grid.ncols[$l] <= 2) {
+				& > a,
+				ol.pages {
+					text-align: center;
+				}
+
+				& > a {
+					margin-top: 2ex; // XXX: hacky
+				}
+			}
+		}
 	}
 }
 
@@ -149,7 +224,6 @@ nav.pages {
 
 pre {
 	overflow-y: auto;
-	margin-left: 0;
 }
 
 for $l in 0 .. length($grid.ncols) - 1 {
@@ -159,45 +233,45 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			grid-container($grid, $l);
 		}
 
-if ($grid.ncols[$l] == 5) {
-	figure {
-//		grid-subcontainer($grid, $l, $grid.ncols[$l] - 1, 1);
-//		$subgrid = ( 2 ) ( fluid ) ( center ) $colwidth $gutter $fixed-margin $fluid-margin;
+		if ($grid.ncols[$l] == 5) {
+			figure {
+//				grid-subcontainer($grid, $l, $grid.ncols[$l] - 1, 1);
+//				$subgrid = ( 2 ) ( fluid ) ( center ) $colwidth $gutter $fixed-margin $fluid-margin;
 
 
-		a:hover img {
-//			border-color: #000;
-		}
+				a:hover img {
+//					border-color: #000;
+				}
 
-		img {
-//			width: 100%;
+				img {
+//					width: 100%;
 
-//			border: solid 1px #ccc;
-			&:first-child {
-//				padding-left:  0 \! important; // hack
+//					border: solid 1px #ccc;
+					&:first-child {
+//						padding-left:  0 \! important; // hack
+					}
+
+					&:last-child {
+//						padding-right: 0 \! important; // hack
+					}
+				}
+
+				&.double img {
+//					grid-column($subgrid, 0, 1);
+				}
+
+				&.single-narrow img {
+//					grid-column($subgrid, 0, 2);
+					img {
+						width: 80%;
+					}
+				}
+
+				&.single-wide img {
+//					grid-column($subgrid, 0, 2);
+				}
 			}
-
-			&:last-child {
-//				padding-right: 0 \! important; // hack
-			}
 		}
-
-		&.double img {
-//			grid-column($subgrid, 0, 1);
-		}
-
-		&.single-narrow img {
-//			grid-column($subgrid, 0, 2);
-			img {
-				width: 80%;
-			}
-		}
-
-		&.single-wide img {
-//			grid-column($subgrid, 0, 2);
-		}
-	}
-}
 
 		if ($grid.ncols[$l] <= 2) {
 			header {
@@ -293,30 +367,6 @@ if ($grid.ncols[$l] == 5) {
 		if ($grid.ncols[$l] >= 5) {
 			header {
 //				grid-column($grid, $l, 3, 1);
-			}
-		}
-
-		nav#monthindex {
-			/* TODO: could animate collapsing by transitioning on width to 0 */
-			if ($grid.ncols[$l] == 1) {
-				/* when too narrow to fit the attr() months */
-				pages-collapse-group(false);
-			}
-
-			if ($grid.ncols[$l] >= 2 && $grid.ncols[$l] <= 5) {
-				/* when too narrow to fit all 12 months explicitly */
-				pages-collapse-group(data-fmt);
-			}
-
-			if ($grid.ncols[$l] <= 2) {
-				& > a,
-				ol.pages {
-					text-align: center;
-				}
-
-				& > a {
-					margin-top: 2ex; // XXX: hacky
-				}
 			}
 		}
 	}

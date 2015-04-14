@@ -31,8 +31,7 @@
 	<xsl:variable name="category" select="//h:meta[@name = 'category']/@content"/>
 
 	<xsl:template name="e:contents">
-<!-- TODO: <nav> for this. or <menu> -->
-		<ul id="contents">
+		<menu>
 			<xsl:for-each select="document('')//c:contents/c:category">
 				<li>
 					<xsl:if test="starts-with(@href, concat('/', $category))">
@@ -46,7 +45,7 @@
 					</a>
 				</li>
 			</xsl:for-each>
-		</ul>
+		</menu>
 	</xsl:template>
 
 	<xsl:template match="h:article[@class = 'entry']/h:h1/h:a">

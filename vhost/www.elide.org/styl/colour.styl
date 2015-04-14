@@ -20,7 +20,7 @@ footer {
 }
 
 // :before is image background
-// :after is tint for footer image to match ul#contents tint
+// :after is tint for footer image to match menu tint
 footer:before,
 footer:after {
 	content: " ";
@@ -33,7 +33,7 @@ footer:after {
 	top: -($footer-height);
 }
 
-ul#contents,
+header menu,
 footer:after {
 	background-color: rgba(0, 0, 0, 0.2);
 }
@@ -46,8 +46,8 @@ footer:before, footer:after {
 header,
 footer:before {
 	// colour set in theme.xsl for loading time
-	background-repeat: no-repeat;
-	background-size: 100% auto;
+	background-repeat: no-repeat center center fixed;
+	background-size: cover;
 }
 
 footer:before {
@@ -56,11 +56,23 @@ footer:before {
 
 header {
 	color: lighten(#49b, 80%);
-
 	background-position: center 45%;
 
-	ul#contents {
-		a {
+	for $l in 0 .. length($grid.ncols) - 1 {
+		$q = grid-breakpoint($grid, $l);
+		@media $q {
+			if ($grid.ncols[$l] == 1) {
+				padding-top: ($baseline * 5); // for the background image
+			} else if ($grid.ncols[$l] <= 2) {
+				padding-top: ($baseline * 6);
+			} else {
+				padding-top: ($baseline * 8);
+			}
+		}
+	}
+
+	menu {
+		a:link, a:visited {
 			text-decoration: none;
 			color: rgba(255, 255, 255, 0.5);
 		}
