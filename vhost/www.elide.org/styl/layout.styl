@@ -1,5 +1,7 @@
 /* $Id$ */
 
+$menu-padding ?= 1.25em;
+
 body {
 	margin:  0;
 	padding: 0;
@@ -28,6 +30,7 @@ header {
 	}
 
 	menu {
+		line-height: ($baseline * 2);
     	list-style-type: none;
 		text-align: center;
 
@@ -44,7 +47,6 @@ header {
 			}
 		}
 	}
-$menu-padding ?= 1.5em;
 
 	for $l in 0 .. length($grid.ncols) - 1 {
 		$q = grid-breakpoint($grid, $l);
@@ -54,7 +56,6 @@ $menu-padding ?= 1.5em;
 
 				menu {
 width: 100%;
-					line-height: ($baseline * 1.5);
 					position: absolute;
 					bottom: 0;
 /*
@@ -81,10 +82,6 @@ width: 100%;
 					width: 100%;
 				}
 			} else {
-				menu {
-					line-height: ($baseline * 2);
-				}
-
 				li {
 					display: inline-block;
 				}
