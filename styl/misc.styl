@@ -26,6 +26,13 @@ shadow($h, $v, $b, $s, $c = #000) {
 	box-shadow:         $h $v $b $s $c;
 }
 
+background-size($size) {
+	-webkit-background-size: $size;
+	-moz-background-size:    $size;
+	-o-background-size:      $size;
+	background-size:         $size;
+}
+
 box-sizing($s = content-box) {
 	-webkit-box-sizing: $s; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing:    $s; /* Firefox, other Gecko */
