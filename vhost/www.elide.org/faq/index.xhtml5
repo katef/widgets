@@ -31,7 +31,7 @@
 			<dt>Kate, which language do you think is best?</dt>
 			<dt>Kate, which language should I use?</dt>
 			<dd>
-				<p>They suit different things.
+				<p>They suit different things.<br class="rbr"/>
 					Use whatever you enjoy most.</p>
 			</dd>
 
@@ -62,7 +62,8 @@
 			</dd>
 -->
 
-			<dt>You're in the &uk;? You're not Kate Middleton are you?</dt>
+			<dt>You're in the &uk;?<br class="rbr"/>
+				You're not Kate Middleton are you?</dt>
 			<dd>
 				<p>No, I'm not Kate Middleton.</p>
 			</dd>

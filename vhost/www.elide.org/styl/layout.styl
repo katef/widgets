@@ -145,6 +145,20 @@ section.page {
 			margin-top: ($baseline * 1);
 		}
 	}
+
+	for $l in 0 .. length($grid.ncols) - 1 {
+		$q = grid-breakpoint($grid, $l);
+		@media $q {
+
+			if ($grid.ncols[$l] <= 4) {
+				grid-column($grid, $l, $grid.ncols[$l]);
+			} else {
+				grid-column($grid, $l, $grid.ncols[$l] - 1, 1);
+			}
+
+		}
+	}
+
 }
 
 nav#monthindex {
@@ -230,6 +244,12 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			grid-container($grid, $l);
 		}
 
+		if ($grid.ncols[$l] > 2) {
+			br.rbr {
+				display: none;
+			}
+		}
+
 		if ($grid.ncols[$l] == 5) {
 			figure {
 //				grid-subcontainer($grid, $l, $grid.ncols[$l] - 1, 1);
@@ -311,10 +331,6 @@ for $l in 0 .. length($grid.ncols) - 1 {
 		if ($grid.ncols[$l] >= 4) {
 			header {
 //				grid-column($grid, $l, $grid.ncols[$l] - 1, 1);
-			}
-
-			section.page {
-				grid-column($grid, $l, $grid.ncols[$l] - 1, 1);
 			}
 
 			dl.index {
