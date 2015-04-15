@@ -83,12 +83,8 @@ body {
 	abbr {
 //		font-feature-settings: "smcp" 1;
 		font-feature-settings: "c2sc" 1;
-
-		/*
-		 * I would set onum=0, lnum=1 to align numbers to small caps.
-		 * But I can't find a way to get this font to do that, and so
-		 * onum=1 looks better than numbers sticking out above small caps.
-		 */
+		font-feature-settings: "onum" 0;
+		font-feature-settings: "lnum" 1;
 	}
 
 	section.archive-year time[pubdate],
