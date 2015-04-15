@@ -122,7 +122,11 @@ article.entry {
 }
 
 *[title].important {
-	border-bottom: dotted 1px #888;
+	border-bottom: dotted 1px #888; // TODO: centralise with code for abbr[title]
+}
+
+abbr[title] {
+	border-bottom: none; // overkill for this site
 }
 
 ::-moz-selection {
