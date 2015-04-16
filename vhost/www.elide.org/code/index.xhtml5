@@ -51,6 +51,12 @@
 				<p>These are little bits and pieces for &html;, &css;, Javascript (for
 					&dhtml;) and such.</p>
 			</dd>
+
+            <dt><a href="/bits/">Bit Twiddling</a></dt>
+            <dd>
+                <p>My collection of little bit-related things, which I can
+                    never figure out very easily on the spot.</p>
+            </dd>
 		</dl>
 
 		<p>These are placed in the
