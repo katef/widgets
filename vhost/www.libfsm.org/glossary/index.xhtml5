@@ -100,8 +100,8 @@
 					<a href="TODO">&lt;fsm/fsm.h&gt;</a>.</p>
 			</dd>
 
-			<dt class="alt"><abbr>FA</abbr></dt>
-			<dt class="alt"><abbr>FSA</abbr></dt>
+			<dt class="alt"><dfn><abbr>FA</abbr></dfn></dt>
+			<dt class="alt"><dfn><abbr>FSA</abbr></dfn></dt>
 			<dt><dfn><abbr>FSM</abbr></dfn></dt>
 			<dd class="abbr">Finite State Automata/Machine.</dd>
 			<dd>
