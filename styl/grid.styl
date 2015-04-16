@@ -222,6 +222,14 @@ grid-column($grid, $l, $colspan = 1, $indent = 0) {
 	padding-right: @padding-right + $grid.gutter;
 }
 
+grid-subcolumn($grid, $l, $colspan = 1, $indent = 0) {
+	grid-column($grid, $l, $colspan, $indent);
+
+	// to account for containing column
+	position: relative;
+	left: -($grid.gutter);
+}
+
 grid-subcontainer($grid, $l, $colspan = 1, $indent = 0) {
 	grid-column($grid, $l, $colspan, $indent);
 
