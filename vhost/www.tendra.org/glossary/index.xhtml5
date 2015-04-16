@@ -49,21 +49,21 @@
 		<a name="A"/>
 
 		<dl class="glossary">
-			<dt>ANDF</dt>
+			<dt><dfn>ANDF</dfn></dt>
 
 			<dd class="abbr">Architecture Neutral Distribution format</dd>
 			<dd>The format standardised by
 				<a href="http://www.opengroup.org/">the Open Group</a> (formerly OSF),
 				for which TDF was selected.</dd>
 
-			<dt>API</dt>
+			<dt><dfn>API</dfn></dt>
 			<dd class="TODO">TODO</dd>
 		</dl>
 
 		<a name="B"/>
 
 		<dl class="glossary">
-			<dt>bmake</dt>
+			<dt><dfn>bmake</dfn></dt>
 			<dd>A portable version of NetBSD's <code>make</code>.
 			See <a href="http://www.crufty.net/help/sjg/bmake.htm"> http://www.crufty.net/help/sjg/bmake.html</a>.</dd>
 		</dl>
@@ -71,17 +71,17 @@
 		<a name="C"/>
 
 		<dl class="glossary">
-			<dt>Calculus</dt>
+			<dt><dfn>Calculus</dfn></dt>
 			<dd>calculus is an algebraic <a href="#TODO">type system</a> tool,
 				for managing complex C type systems.
 				It uses the TenDRA API checking techniques to enforce strong
 				type checking and type encapsulation, and provides generic
 				container types for lists, vectors etc.</dd>
 
-			<dt>Capsule</dt>
+			<dt><dfn>Capsule</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>CRT</dt>
+			<dt><dfn>CRT</dfn></dt>
 
 			<dd class="abbr">C runtime</dd>
 			<dd class="TODO">TODO</dd>
@@ -91,14 +91,14 @@
 
 		<dl class="glossary">
 <!-- TODO: just for /history maybe
-			<dt>DERA</dt>
+			<dt><dfn>DERA</dfn></dt>
 
 			<dd class="abbr">Defence Research and Evaluation Agency
 				<span class="note">(neé DRA, now DSTL and QinetiQ)</span></dd>
 			<dd class="TODO">TODO</dd>
 -->
 
-			<dt>disp</dt>
+			<dt><dfn>disp</dfn></dt>
 			<dd>
 				<p>disp is the TDF pretty printer.
 					It translates the bitstream comprising a TDF capsule into a
@@ -112,7 +112,7 @@
 		<a name="F"/>
 
 		<dl class="glossary">
-			<dt>Flex</dt>
+			<dt><dfn>Flex</dfn></dt>
 			<!-- TODO: link to wikipedia for things like that -->
 			<dd>
 				<p>A <a href="#">capability architecture</a>
@@ -127,29 +127,29 @@
 		<a name="I"/>
 
 		<dl class="glossary">
-			<dt>Installer</dt>
+			<dt><dfn>Installer</dfn></dt>
 			<dd class="TODO">TODO</dd>
 		</dl>
 
 		<a name="L"/>
 
 		<dl class="glossary">
-			<dt>LALR</dt>
+			<dt><dfn>LALR</dfn></dt>
 
 			<dd class="abbr">Left-Associative Left-to-right, Rightmost-derivation parser</dd>
 			<dd>A subset of LR parsers.</dd>
 			<!-- TODO: link to wikipedia for things like that -->
 
-			<dt>Lexer</dt>
+			<dt><dfn>Lexer</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>lexi</dt>
+			<dt><dfn>lexi</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>LL(1)</dt>
+			<dt><dfn>LL(1)</dfn></dt>
 			<dd>Left-to-right, Leftmost-derivation parser with lookahead of 1 token.</dd>
 
-			<dt>Low-level Ten15</dt>
+			<dt><dfn>Low-level Ten15</dfn></dt>
 			<dd>
 				<p>The format that later became known as TDF.</p>
 
@@ -170,13 +170,13 @@
 		<a name="M"/>
 
 		<dl class="glossary">
-			<dt>Machine</dt>
+			<dt><dfn>Machine</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>make_err</dt>
+			<dt><dfn>make_err</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>make_tdf</dt>
+			<dt><dfn>make_tdf</dfn></dt>
 			<dd>make_tdf is a tool for generating TDF decoders and encoders.
 				It takes a compact description of the TDF specification and a
 				template file, and generates code to read, write or transform
@@ -186,14 +186,14 @@
 		<a name="O"/>
 
 		<dl class="glossary">
-			<dt>Object</dt>
+			<dt><dfn>Object</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>OSF</dt>
+			<dt><dfn>OSF</dfn></dt>
 			<dd class="abbr">Open Software Foundation</dd>
 			<dd class="TODO">TODO</dd>
 
-			<dt>OSSG</dt>
+			<dt><dfn>OSSG</dfn></dt>
 			<dd>Open Source Specialist Group</dd>
 			<dd class="TODO">TODO: http://ossg.bcs.org/</dd>
 		</dl>
@@ -201,20 +201,20 @@
 		<a name="P"/>
 
 		<dl class="glossary">
-			<dt>Porting</dt>
+			<dt><dfn>Porting</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>PL_TDF</dt>
+			<dt><dfn>PL_TDF</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>Producer</dt>
+			<dt><dfn>Producer</dfn></dt>
 			<dd class="TODO">TODO</dd>
 		</dl>
 
 		<a name="R"/>
 
 		<dl class="glossary">
-			<dt>RTTI</dt>
+			<dt><dfn>RTTI</dfn></dt>
 			<dd class="abbr">Run-Time Type Identification</dd>
 			<dd>The standard C++ mechanism for class objects to identify their
 				dynamic or run-time types.</dd>
@@ -223,7 +223,7 @@
 		<a name="S"/>
 
 		<dl class="glossary">
-			<dt>SID</dt>
+			<dt><dfn>SID</dfn></dt>
 			<dd class="abbr">Syntax Improving Device</dd>
 			<dd>SID is an <a href="#TODO">LL(1)</a> <a href="#TODO">parser generator</a>
 				with a long history (the original version dates back to the mid-sixties!).
@@ -232,49 +232,49 @@
 				look-ahead is required (essential for languages like C++),
 				and for error recovery.</dd>
 
-			<dt>Sort</dt>
+			<dt><dfn>Sort</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>Start-up File <span class="note">(TCC modes)</span></dt>
+			<dt><dfn>Start-up File <span class="note">(TCC modes)</span></dfn></dt>
 			<!-- TODO: there are two of these -->
 			<dd class="TODO">TODO</dd>
 
-			<dt>Start-up File <span class="note">(C producer arguments)</span></dt>
+			<dt><dfn>Start-up File <span class="note">(C producer arguments)</span></dfn></dt>
 			<!-- TODO: there are two of these -->
 			<dd class="TODO">TODO</dd>
 
-			<dt>Structured TDF</dt>
+			<dt><dfn>Structured TDF</dfn></dt>
 			<dd class="TODO">TODO</dd>
 		</dl>
 
 		<a name="T"/>
 
 		<dl class="glossary">
-			<dt>tcc</dt>
+			<dt><dfn>tcc</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>TDF</dt>
+			<dt><dfn>TDF</dfn></dt>
 			<dd class="abbr">TenDRA Distribution Format</dd>
 			<dd class="TODO">TODO</dd>
 
-			<dt>TDF Capsule</dt>
+			<dt><dfn>TDF Capsule</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>TDF Notation</dt>
+			<dt><dfn>TDF Notation</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>TDF Notation Compiler</dt>
+			<dt><dfn>TDF Notation Compiler</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>Ten15 language, the</dt>
+			<dt><dfn>Ten15 language, the</dfn></dt>
 			<dd>The Ten15 language (usually called Ten15 Notation) was the main
 				language used to program the Ten15 system; it was created to
 				provide all of the virtual machine's abilities.</dd>
 
-			<dt>Ten15 Notation</dt>
+			<dt><dfn>Ten15 Notation</dfn></dt>
 			<dd>See The Ten15 language.</dd>
 
-			<dt>Ten15 system, the</dt>
+			<dt><dfn>Ten15 system, the</dfn></dt>
 			<dd>
 				<p>This was a capability architecture which was created as an
 					equivalent to the Flex capability architecture for the
@@ -294,16 +294,16 @@
 					This was eventually provided for by TDF, instead.</p>
 			</dd>
 
-			<dt>Ten15 <abbr title="Intermediate Representation">IR</abbr>, the</dt>
+			<dt><dfn>Ten15 <abbr title="Intermediate Representation">IR</abbr>, the</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>ten15.org</dt>
+			<dt><dfn>ten15.org</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>tendra.org</dt>
+			<dt><dfn>tendra.org</dfn></dt>
 			<dd>The home for this project.</dd>
 
-			<dt>tld</dt>
+			<dt><dfn>tld</dfn></dt>
 			<dd>
 				<p>tld is the TDF linker. It combines a number of TDF capsules into a
 					single capsule. It also can be used to create and manipulate
@@ -312,10 +312,10 @@
 				<p>This functionality is provided by tcc, but tld may be called directly.</p>
 			</dd>
 
-			<dt>tnc</dt>
+			<dt><dfn>tnc</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>tpl</dt>
+			<dt><dfn>tpl</dfn></dt>
 			<dd>
 				<p>tpl is the PL_TDF compiler. It is a TDF
 					<q>structured assembler</q> in the lineage of PL360.
@@ -326,7 +326,7 @@
 					directly.</p>
 			</dd>
 
-			<dt>tspec</dt>
+			<dt><dfn>tspec</dfn></dt>
 			<dd>
 				<p>The API checking facilities of the TenDRA compiler are
 					implemented by means of abstract interface specifications
@@ -345,10 +345,10 @@
 		<a name="U"/>
 
 		<dl class="glossary">
-			<dt>Unstructured TDF</dt>
+			<dt><dfn>Unstructured TDF</dfn></dt>
 			<dd class="TODO">TODO</dd>
 
-			<dt>Unit</dt>
+			<dt><dfn>Unit</dfn></dt>
 			<dd class="TODO">TODO</dd>
 		</dl>
 

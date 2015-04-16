@@ -72,7 +72,7 @@
 		<h2>Glossary</h2>
 
 		<dl class="glossary">
-			<dt><abbr>DFA</abbr></dt>
+			<dt><dfn><abbr>DFA</abbr></dfn></dt>
 			<dd class="abbr">Deterministic Finite Automaton.</dd>
 			<dd>
 				<p>An automaton who's edge transitions are always unambiguous.
@@ -85,7 +85,7 @@
 					<a href="TODO">&lt;fsm/graph.h&gt;</a> to produce this.</p>
 			</dd>
 
-			<dt>Epsilon</dt>
+			<dt><dfn>Epsilon</dfn></dt>
 			<dd class="abbr">An <abbr>NFA</abbr> edge which may be
 				traversed without consuming input.</dd>
 			<dd>
@@ -102,7 +102,7 @@
 
 			<dt class="alt"><abbr>FA</abbr></dt>
 			<dt class="alt"><abbr>FSA</abbr></dt>
-			<dt><abbr>FSM</abbr></dt>
+			<dt><dfn><abbr>FSM</abbr></dfn></dt>
 			<dd class="abbr">Finite State Automata/Machine.</dd>
 			<dd>
 				<p>An automaton with a finite number of states.
@@ -125,7 +125,7 @@
 					and input to that program causes it to change state.</p>
 			</dd>
 
-			<dt><abbr>NFA</abbr></dt>
+			<dt><dfn><abbr>NFA</abbr></dfn></dt>
 			<dd class="abbr">Non-deterministic Finite Automaton.</dd>
 			<dd>
 				<p>An automaton who's edge transitions may include epsilon
@@ -145,7 +145,7 @@
 					<abbr>NFA</abbr> to a <abbr>DFA</abbr>.</p>
 			</dd>
 
-			<dt>Regular</dt>
+			<dt><dfn>Regular</dfn></dt>
 			<dd>
 				<p>The class of languages which may be expressed as a <abbr>DFA</abbr>.</p>
 
