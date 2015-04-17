@@ -2,11 +2,30 @@
 
 $list ?= {
 	gutter: 2em
+	bullet: "\2022"
 }
 
 ul, ol {
 	margin:  0;
 	padding: 0;
+}
+
+if ($list.bullet != default) {
+	ul li {
+		position: relative;
+		list-style-type: none;
+
+		// because "list-style-type: disc" is too large
+		&:before {
+			content: $list.bullet;
+			position: absolute;
+			text-align: right;
+			display: block;
+			padding-right: .75em;
+			width: 1em;
+			left: -(@width + @padding-right);
+		}
+	}
 }
 
 li {
