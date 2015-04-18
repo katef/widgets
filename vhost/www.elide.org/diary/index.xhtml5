@@ -48,10 +48,6 @@
 		</script>
 	</head>
 
-	<nav id="sidebar">
-		<?blog-calendar?>
-	</nav>
-
 	<body onload="Valid.init(document.documentElement)">	<!-- TODO: centralise somehow? -->
 		<?blog-body?>
 

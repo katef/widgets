@@ -169,10 +169,6 @@
 					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 				</section>
 
-				<nav id="sidebar">
-					<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>
-				</nav>
-
 				<footer>
 					<xsl:call-template name="e:page-footer"/>
 				</footer>
