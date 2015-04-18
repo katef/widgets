@@ -1,6 +1,7 @@
 /* $Id$ */
 
 $menu-padding ?= 1.25em;
+$page-padding ?= ($baseline * 0.5);
 
 body {
 	margin:  0;
@@ -24,7 +25,22 @@ body {
 	}
 }
 
+nav.pages {
+	padding-top:    ($baseline * 1);
+	padding-bottom: ($baseline * 4);
+}
+
+pre {
+	overflow-y: auto;
+}
+
+dl dd {
+	margin-left: 0;
+}
+
 header {
+	margin-bottom: $page-padding;
+
 	h1 {
 		display: none;
 	}
@@ -96,20 +112,25 @@ width: 100%;
 
 footer {
 	display: none; /* XXX */
+
+	&:before {
+		top: $page-padding;
+	}
+
+	&:after {
+		margin-top: $page-padding;
+	}
 }
 
 section.page {
-	margin-top:    ($baseline * 1);
-	margin-bottom: ($baseline * 1);
+	h1 {
+		margin-top:    0;
+		margin-bottom: ($baseline * 0.5); // assumes <time> follows
 
-	*:last-child {
-		margin-bottom: 0;
-	}
-
-	h2 {
-		padding-top: ceil($baseline * 0.0);
-		font-size:       2em;
-		line-height:     ($baseline * 1.0);
+		& + time {
+			display: block;
+			margin-bottom: ($baseline * 1.0);
+		}
 	}
 
 	dl.index dd {
@@ -137,13 +158,31 @@ section.page {
 	}
 
 	article.entry {
-		time.update,
-		a[name],
+		margin-bottom: $baseline;
+
+		h1 {
+			display: none;
+		}
+
 		ul.tags {
-			display:    block;
-			position:   relative;
+			display: none;
+		}
+
+		time.update,
+		& > a,
+		ul.tags {
 			margin-top: ($baseline * 1);
 		}
+
+		ul.tags {
+			top: $baseline; // to avoid timestamp
+		}
+	}
+
+	aside {
+		margin-top: ($baseline * 1.0);
+		padding-top: ($baseline * 1.0 - 2px);
+		border-top: dotted 2px #ccc;
 	}
 
 	for $l in 0 .. length($grid.ncols) - 1 {
@@ -159,6 +198,10 @@ section.page {
 		}
 	}
 
+}
+
+nav#sidebar {
+	display: none;
 }
 
 nav#monthindex {
@@ -203,38 +246,6 @@ nav#monthindex {
 			}
 		}
 	}
-}
-
-nav#sidebar {
-	display: none;
-
-	table.calendar {
-		table-layout: fixed;
-
-		max-width:   (12 * $baseline);
-		margin-left: (6  * $baseline);
-		width: 100%;
-
-		/* TODO: mixin? */
-		border-spacing: 0 ! important;
-		border-collapse: collapse ! important;
-	}
-
-	ol.years {
-		display: none;
-		float: left;
-		margin-left:   $gutter;
-		margin-bottom: $gutter;
-	}
-}
-
-nav.pages {
-	padding-top:    ($baseline * 1);
-	padding-bottom: ($baseline * 4);
-}
-
-pre {
-	overflow-y: auto;
 }
 
 for $l in 0 .. length($grid.ncols) - 1 {
@@ -328,19 +339,29 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			}
 		}
 
-		if ($grid.ncols[$l] >= 4) {
+		if ($grid.ncols[$l] >= 5) {
 			header {
 //				grid-column($grid, $l, $grid.ncols[$l] - 1, 1);
+			}
+
+			dl.index dt a,
+			section.page > article.entry time.update,
+			section.page > article.entry > a[name],
+			section.page > article.entry > ul.tags {
+				grid-subcolumn($grid, $l, 1, -1);
+				margin-top: 0;
+			}
+
+			section.page > article.entry time.update,
+			section.page > article.entry > a[name],
+			section.page > article.entry > ul.tags {
+				text-align: right;
 			}
 
 			dl.index {
 //				grid-subcontainer($grid, $l, $grid.ncols[$l] - 1, 0);
 //				$subgrid = grid-subgrid($grid, $l, 1);
 //				$subcols = $subgrid[0];
-
-				dt a {
-//					grid-column($subgrid, $l, 1);
-				}
 
 				dd {
 //					grid-column($subgrid, $l, $subcols[$l] - 1);
@@ -350,12 +371,6 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			section.page > article.entry {
 //				grid-subcontainer($grid, $l, $grid.ncols[$l], 0);
 //				$subgrid = grid-subgrid($grid, $l, 0);
-
-				& > time.update,
-				& > a[name],
-				& > ul.tags {
-//					grid-column($subgrid, $l, 1);
-				}
 
 				& > div.body {
 //					grid-column($subgrid, $l, $grid.ncols[$l] - 1);

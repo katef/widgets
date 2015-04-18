@@ -88,6 +88,20 @@ header {
 	}
 }
 
+h1, h2 {
+	color: #aaa;
+	&::selection {
+		color: inherit;
+	}
+	&::-moz-selection {
+		color: inherit;
+	}
+}
+
+h1 + time {
+	color: #aaa;
+}
+
 a code, a, a:link, a:visited {
 	color: #0b367a;
 	text-decoration: underline;
@@ -110,14 +124,19 @@ section.page > dl.index dt a:hover {
 	background-color: #eee;
 }
 
+dl.index dt a,
+article.entry > a {
+	text-decoration: none;
+}
+
+article.entry > a:hover time {
+	color: inherit;
+}
+
 section.archive-year,
 article.entry {
-	a:hover time {
-		color: inherit;
-	}
-
 	time[pubdate] {
-		color: #ccc;
+		color: #bbb;
 	}
 }
 
@@ -129,11 +148,11 @@ abbr[title] {
 	border-bottom: none; // overkill for this site
 }
 
-::-moz-selection {
+::selection {
 	background-color: #ddd;
 }
 
-::selection {
+::-moz-selection {
 	background-color: #ddd;
 }
 
