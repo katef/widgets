@@ -16,5 +16,17 @@ html.debug {
 			display: block;
 		}
 	}
+
+	section.page {
+		background-color: lightgreen;
+	}
+
+	section.page > article.entry {
+		& > time.update,
+		& > a[name],
+		& > ul.tags {
+			background-color: pink;
+		}
+	}
 }
 
