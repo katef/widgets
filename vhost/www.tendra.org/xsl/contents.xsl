@@ -40,6 +40,7 @@
 			<t:subsection href="#" name="User/Developer&#160;guides"/>
 			<t:subsection href="/man" name="Manpages"/>
 			<t:subsection href="#" name="Reference"/>
+			<t:subsection href="#" name="Academic&#160;Papers"/>
 			<t:sep/>
 			<t:subsection href="#" name="API&#160;Headers"/>
 			<t:subsection href="#" name="API&#160;Coverage"/>
