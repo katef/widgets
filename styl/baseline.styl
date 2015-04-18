@@ -15,6 +15,12 @@
 $baseline ?= 1em;
 $tabsize  ?= 4;
 
+$space ?= {
+	para:  0.5 // between paragraphs
+	block: 0.5 // between block-level elements
+	head:  1.0 // before headers
+}
+
 body {
 	line-height:    $baseline;
 	text-rendering: optimizeLegibility;
@@ -27,7 +33,7 @@ footer {
 
 header, footer, nav,
 h1, h2, hr, ul, ol, dl, p,
-table, td, th {
+table, td, th, li {
 	margin:  0;
 	padding: 0;
 }
@@ -35,23 +41,40 @@ table, td, th {
 h1, h2 {
 	padding-bottom: floor($baseline * 0.0);
 	padding-top:    ceil( $baseline * 0.0);
-	padding-top: 0.5em;
+}
+
+h1 {
+	line-height: $baseline * 1.5;
+	font-size:   2em;
+}
+
+h2 {
+	line-height: $baseline * 1.25;
 	font-size:   1.5em;
 }
 
 p {
 	padding-bottom: floor($baseline * 0.0);
 	padding-top:    ceil( $baseline * 0.0);
-	line-height:    round($baseline * 1.0);
+}
+
+li, p, dl {
+	margin-top:    ($baseline * 0.0);
+	margin-bottom: ($baseline * $space.para);
+}
+
+ul, ol, dl {
+	margin-top:    ($baseline * $space.block);
+	margin-bottom: ($baseline * $space.block);
 }
 
 sup, sub {
 	line-height: 0;
 }
 
-h1, h2, p {
-	margin-top:    ($baseline * 0.0);
-	margin-bottom: ($baseline * 0.5);
+h1, h2 {
+	margin-top:    ($baseline * $space.head);
+	margin-bottom: ($baseline * $space.block);
 }
 
 hr {
