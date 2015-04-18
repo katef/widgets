@@ -36,24 +36,25 @@ body {
 		font-size: ($fontsize - 2px);
 	}
 
-	header h1 {
-		font-size:   ($baseline * 1.3);
-		line-height: ($baseline * 1.3);
-	}
-
 	h2 {
-		font-size: ($fontsize * 1.125);
+		line-height: ($baseline * 1.25);
+		font-size:   1.25em;
 	}
 }
 
 /* alignment */
-body {
+p, li, td, dd {
 	text-align: justify;
 }
 
 /* features */
 body {
 	text-rendering: optimizeLegibility;
+
+	p {
+		font-feature-settings: "onum" 1;
+		font-feature-settings: "lnum" 0;
+	}
 
 	pre {
 		overflow-x: auto;
