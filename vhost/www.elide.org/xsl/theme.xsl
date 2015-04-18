@@ -34,7 +34,7 @@
 		<menu>
 			<xsl:for-each select="document('')//c:contents/c:category">
 				<li>
-					<xsl:if test="starts-with(@href, concat('/', $category))">
+					<xsl:if test="$category and starts-with(@href, concat('/', $category))">
 						<xsl:attribute name="class">
 							<xsl:text>current</xsl:text>
 						</xsl:attribute>
