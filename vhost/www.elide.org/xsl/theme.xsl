@@ -133,16 +133,32 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
+				<xsl:variable name="article" select="$category = 'articles'
+					and string(h:head/h:title) != 'Articles'"/>
+
 				<header>
 					<h1>
 						<xsl:text>Kate&#8217;s Amazing </xsl:text>
-						<xsl:apply-templates select="h:head/h:title" mode="body"/>
+						<xsl:choose>
+							<xsl:when test="$article">
+								<xsl:text>Articles</xsl:text>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:apply-templates select="h:head/h:title" mode="body"/>
+							</xsl:otherwise>
+						</xsl:choose>
 					</h1>
 
 					<xsl:call-template name="e:contents"/>
 				</header>
 
 				<section class="page hyphenate">
+					<xsl:if test="$article">
+						<h1>
+							<xsl:apply-templates select="h:head/h:title" mode="body"/>
+						</h1>
+					</xsl:if>
+
 					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 				</section>
 
