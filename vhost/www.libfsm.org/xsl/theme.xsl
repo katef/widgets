@@ -128,11 +128,11 @@
 					</h1>
 				</header>
 
-				<section class="page hyphenate">
+				<main role="main" class="hyphenate">
 					<xsl:call-template name="theme-menu"/>
 
 					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
-				</section>
+				</main>
 
 				<nav class="sidebar hyphenate">
 					<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>

@@ -30,7 +30,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 				border-left: none;
 				border-right: none;
 
-				section {
+				main {
 					& > * {
 						margin-left: 0;
 					}
@@ -45,7 +45,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 				border-left:  solid $baseline #d44;
 				border-right: solid $baseline transparent;
 
-				section {
+				main {
 					& > * {
 						margin-left: (2 * $baseline);
 					}
@@ -58,7 +58,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 		}
 
 		header,
-		section,
+		main,
 		footer {
 			grid-column($grid, $l, $grid.ncols[$l] - 0, 0);
 		}

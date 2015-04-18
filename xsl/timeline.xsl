@@ -42,6 +42,15 @@
 	<xsl:variable name="tl:min" select="tl:pubdate($tl:entries/tl:entry)[1]"/>
 	<xsl:variable name="tl:max" select="tl:pubdate($tl:entries/tl:entry)[last()]"/>
 
+	<func:function name="tl:private">
+		<xsl:param name="entry"/>
+
+		<xsl:variable name="tags" select="$entry/h:html/h:head/h:meta[@name = 'tags']/@content"/>
+
+<!-- TODO: set-contains? -->
+		<func:result select="str:tokenize($tags)[. = 'private']"/>
+	</func:function>
+
 	<func:function name="tl:pubdate">
 		<xsl:param name="entry"/>
 
@@ -280,7 +289,23 @@
 		<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 	</xsl:template>
 
-	<xsl:template match="tl:entry">
+	<xsl:template match="h:html/h:head/h:meta[@name = 'tags'][count(str:tokenize(@content))]">
+		<xsl:if test="@content != 'private'">
+			<ul class="tags">
+				<xsl:for-each select="str:tokenize(@content)">
+					<xsl:sort select="."/>
+
+					<li>
+						<a href="#TODO">
+							<xsl:value-of select="."/>
+						</a>
+					</li>
+				</xsl:for-each>
+			</ul>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match="tl:entry[not(tl:private(.))]">
 		<xsl:variable name="date" select="tl:pubdate(.)"/>
 
 		<article class="entry">
@@ -301,12 +326,7 @@
 				<xsl:value-of select="date:format-date($date, &quot;yyyy&#8288;&#x2013;&#8288;MM&#8288;&#x2013;&#8288;dd&quot;)"/>
 			</time>
 
-<!-- TODO: placeholder for tags
-			<ul class="tags">
-				<li><a href="#TODO"><xsl:text>cheese</xsl:text></a></li>
-				<li><a href="#TODO"><xsl:text>fish</xsl:text></a></li>
-			</ul>
--->
+			<xsl:apply-templates select="h:html/h:head/h:meta[@name = 'tags']"/>
 
 			<div class="body">
 				<xsl:apply-templates select="h:html"/>

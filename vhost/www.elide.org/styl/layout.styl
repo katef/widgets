@@ -122,7 +122,7 @@ footer {
 	}
 }
 
-section.page {
+main {
 	h1 {
 		margin-top:    0;
 		margin-bottom: ($baseline * 0.5); // assumes <time> follows
@@ -302,7 +302,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 //				grid-column($grid, $l, $grid.ncols[$l]);
 			}
 
-			section.page {
+			main {
 //				grid-column($grid, $l, $grid.ncols[$l]);
 			}
 
@@ -341,16 +341,16 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			}
 
 			dl.index dt a,
-			section.page > article.entry time.update,
-			section.page > article.entry > a[name],
-			section.page > article.entry > ul.tags {
+			main > article.entry time.update,
+			main > article.entry > a[name],
+			main > article.entry > ul.tags {
 				grid-subcolumn($grid, $l, 1, -1);
 				margin-top: 0;
 			}
 
-			section.page > article.entry time.update,
-			section.page > article.entry > a[name],
-			section.page > article.entry > ul.tags {
+			main > article.entry time.update,
+			main > article.entry > a[name],
+			main > article.entry > ul.tags {
 				text-align: right;
 			}
 
@@ -364,7 +364,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 				}
 			}
 
-			section.page > article.entry {
+			main > article.entry {
 //				grid-subcontainer($grid, $l, $grid.ncols[$l], 0);
 //				$subgrid = grid-subgrid($grid, $l, 0);
 

@@ -51,9 +51,9 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
-				<article class="page">
+				<main>
 					<xsl:copy-of select="$body"/>
-				</article>
+				</main>
 
 				<xsl:if test="$notes and count(common:node-set($notes)/*) != 0">
 					<aside class="notes">

@@ -106,13 +106,13 @@
 					<xsl:call-template name="t:sections-menu"/>
 				</header>
 
-				<section class="page hyphenate">
+				<main role="main" class="hyphenate">
 					<h1>
 						<xsl:apply-templates select="h:head/h:title" mode="body"/>
 					</h1>
 
 					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
-				</section>
+				</main>
 
 				<nav id="sidebar" class="hyphenate">
 					<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>

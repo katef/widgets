@@ -153,7 +153,7 @@
 					<xsl:call-template name="e:contents"/>
 				</header>
 
-				<section class="page hyphenate">
+				<main role="main" class="hyphenate">
 					<xsl:if test="$article">
 						<h1>
 							<xsl:apply-templates select="h:head/h:title" mode="body"/>
@@ -167,7 +167,7 @@
 					</xsl:if>
 
 					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
-				</section>
+				</main>
 
 				<footer>
 					<xsl:call-template name="e:page-footer"/>
