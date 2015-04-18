@@ -29,6 +29,7 @@
 	</c:contents>
 
 	<xsl:variable name="category" select="//h:meta[@name = 'category']/@content"/>
+	<xsl:variable name="date"     select="//h:meta[@name = 'date']    /@content"/>
 
 	<xsl:template name="e:contents">
 		<menu>
@@ -157,6 +158,12 @@
 						<h1>
 							<xsl:apply-templates select="h:head/h:title" mode="body"/>
 						</h1>
+					</xsl:if>
+
+					<xsl:if test="$date != ''"> <!-- TODO: proper false() -->
+						<time datetime="$date">
+							<xsl:value-of select="date:format-date($date, 'EEE, d MMMM yyyy')"/>
+						</time>
 					</xsl:if>
 
 					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
