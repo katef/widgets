@@ -28,8 +28,8 @@
 			<dt><a href="rawdump.c"><code>rawdump.c</code></a></dt>
 			<dd>
 				<p>Convert an arbitary binary file into an array suitable
-					for including as a &c; header. <code>xxd -i</code> does a
-					similar job.</p>
+					for including as a &c; header.<br/>
+					<code>xxd&nbsp;-i</code> does a similar job.</p>
 			</dd>
 
 			<dt><a href="primes.bas"><code>primes.bas</code></a></dt>
@@ -51,7 +51,7 @@
 			<dt><a href="caesar.c"><code>caesar.c</code></a></dt>
 			<dd>
 				<p>A straightforward implementation of
-					<a href="http://wikipedia.org/wiki/Caesar_cipher">Caesar's cipher</a>.
+					<a href="http://wikipedia.org/wiki/Caesar_cipher">Caesar's cipher</a>.<br/>
 					Somebody in <a href="irc://irc.freenode.org/##c">##c</a>
 					wrote <a href="http://www.calltopower.de/blog/?p=901">a Qt
 					frontend</a> to this.</p>
