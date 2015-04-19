@@ -176,7 +176,7 @@
 				</xsl:if>
 			</xsl:with-param>
 
-			<xsl:with-param name="body">
+			<xsl:with-param name="main">
 				<xsl:choose>
 					<xsl:when test="str:contains-word(@class, 'manindex')">
 						<xsl:for-each select="set:distinct($manindex/h:html/h:body//h:dd/@data-productname)">

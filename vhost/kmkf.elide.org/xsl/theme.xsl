@@ -21,7 +21,7 @@
 		<xsl:param name="site"/>
 
 		<xsl:param name="meta"  select="/.."/>
-		<xsl:param name="body"  select="/.."/>
+		<xsl:param name="main"  select="/.."/>
 		<xsl:param name="notes" select="/.."/>
 
 		<xsl:call-template name="theme-output">
@@ -52,7 +52,7 @@
 
 			<xsl:with-param name="body">
 				<main>
-					<xsl:copy-of select="$body"/>
+					<xsl:copy-of select="$main"/>
 				</main>
 
 				<xsl:if test="$notes and count(common:node-set($notes)/*) != 0">
