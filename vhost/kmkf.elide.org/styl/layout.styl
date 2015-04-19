@@ -57,9 +57,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			}
 		}
 
-		header,
-		main,
-		footer {
+		main {
 			grid-column($grid, $l, $grid.ncols[$l] - 0, 0);
 		}
 
