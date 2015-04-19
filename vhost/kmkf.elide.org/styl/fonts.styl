@@ -1,80 +1,71 @@
 
-font-face('Source Sans Pro', 400, normal, '/fonts/SourceSansPro-Regular', '#SourceSansPro-Regular');
-font-face('Source Sans Pro', 400, italic, '/fonts/SourceSansPro-Italic', '#SourceSansPro-Italic');
+font-face('Source Sans Pro', 400, normal, '/fonts/SourceSansPro-Regular',  '#SourceSansPro-Regular');
+font-face('Source Sans Pro', 400, italic, '/fonts/SourceSansPro-Italic',   '#SourceSansPro-Italic');
 font-face('Source Sans Pro', 600, normal, '/fonts/SourceSansPro-SemiBold', '#SourceSansPro-SemiBold');
 
 font-face('Source Code Pro', 400, normal, '/fonts/SourceCodePro-Regular', '#SourceCodePro-Regular');
-font-face('Source Code Pro', 400, normal, '/fonts/SourceCodePro-Italic', '#SourceCodePro-Italic');
+font-face('Source Code Pro', 400, normal, '/fonts/SourceCodePro-Italic',  '#SourceCodePro-Italic');
 
 
 /* faces, weights and styles */
-html {
-	body {
-		font-family: Source Sans Pro, DejaVu Sans, Verdana, sans;
-		font-weight: 400;
+body {
+	font-synthesis: none;
+	font-family: Source Sans Pro, DejaVu Sans, Verdana, sans;
+	font-weight: 400;
 
-		code, tt, pre, i.replaceable {
-			font-family: Source Code Pro, DejaVu Sans Mono, Ubuntu mono, Lucidia Console, monospace;
-		}
+	code, tt, pre, i.replaceable {
+		font-family: Source Code Pro, DejaVu Sans Mono, Ubuntu mono, Lucidia Console, monospace;
+	}
 
-		pre {
-			letter-spacing: -1px; /* forgive me */
-		}
+	pre {
+		letter-spacing: -1px; /* forgive me */
+	}
 
-		h1, h2, h3, h4 {
-			font-weight: inherit;
-		}
+	h1, h2 {
+		font-weight: inherit;
+	}
+
+	h2 {
+		font-size: inherit;
+		text-transform: uppercase;
+	}
+
+	em {
+		font-weight: inherit;
+		font-style:  normal;
+	}
+
+	address {
+		font-style:  normal;
 
 		em {
-			font-weight: inherit;
-			font-style:  normal;
+			font-family: inherit;
 		}
+	}
+}
 
-		address {
-			font-style:  normal;
+// TODO: centralise?
+header#bp-doctitle {
+	h1 {
+		font-weight: 600;
 
-			em {
-				font-family: inherit;
-			}
+		span {
+			font-weight: 400;
 		}
 	}
 
-	&.manindex main {
-	}
-
-	header#bp-doctitle {
-		h1 {
-			span {
-				font-weight: 400;
-			}
-
-			font-weight: 600;
-			font-size: 1.5em;
-		}
-
-		h2 {
-			font-size: 1.2em;
-			text-transform: uppercase;
-		}
+	h2 {
+		text-transform: uppercase;
 	}
 }
 
 /* sizes */
 body {
-	font-size:   14px;
+	font-size:   $fontsize;
 	line-height: $baseline;
 
 	address {
 		line-height: inherit;
-	}
-
-	footer ol.breadcrumbs {
-		font-size: 17px;
-
-		li:first-child {
-			letter-spacing: 1px;
-			font-size: 14px;
-		}
 	}
 
 	code, tt, pre, i.replaceable {
@@ -84,6 +75,20 @@ body {
 
 	p > code, p > tt {
 		letter-spacing: -1px;
+	}
+
+	header#bp-doctitle {
+		h1 {
+			span {
+				font-size: ($fontsize * 1.4);
+			}
+
+			font-size: ($fontsize * 1.2);
+		}
+
+		h2 {
+			font-size: ($fontsize * 1.2);
+		}
 	}
 }
 
@@ -105,15 +110,7 @@ body {
 	font-feature-settings: "onum" 0; /* not for technical writing */
 	font-feature-settings: "pnum" 1; /* nb. ignored for SourceCodePro */
 	font-feature-settings: "kern" 1;
-	font-feature-settings: "ss02" 1; /* single story 'a' */
-
-	h1, h2, h3 {
-		font-feature-settings: "ss02" 0; /* double story 'a' */
-	}
-
-	footer ol.breadcrumbs li:first-child {
-		text-transform: uppercase;
-	}
+	font-feature-settings: "ss02" 0; /* double story 'a' */
 
 	pre {
 		overflow-x: auto;
