@@ -42,20 +42,20 @@ body {
 			font-family: inherit;
 		}
 	}
-}
 
-// TODO: centralise?
-header#bp-doctitle {
-	h1 {
-		font-weight: 600;
+	// TODO: centralise?
+	header#bp-doctitle {
+		h1 {
+			font-weight: 600;
 
-		span {
-			font-weight: 400;
+			span {
+				font-weight: 400;
+			}
 		}
-	}
 
-	h2 {
-		text-transform: uppercase;
+		h2 {
+			text-transform: uppercase;
+		}
 	}
 }
 
@@ -145,6 +145,16 @@ body {
 
 	ol.overlay#cols li:after {
 		font-feature-settings: "onum" 0;
+	}
+}
+
+i.replaceable {
+	&:before {
+		content: "${";
+	}
+
+	&:after {
+		content: "}";
 	}
 }
 
