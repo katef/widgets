@@ -1,6 +1,10 @@
 
 font-face('Source Sans Pro', 400, normal, '/fonts/SourceSansPro-Regular', '#SourceSansPro-Regular');
+font-face('Source Sans Pro', 400, italic, '/fonts/SourceSansPro-Italic', '#SourceSansPro-Italic');
+font-face('Source Sans Pro', 600, normal, '/fonts/SourceSansPro-SemiBold', '#SourceSansPro-SemiBold');
+
 font-face('Source Code Pro', 400, normal, '/fonts/SourceCodePro-Regular', '#SourceCodePro-Regular');
+font-face('Source Code Pro', 400, normal, '/fonts/SourceCodePro-Italic', '#SourceCodePro-Italic');
 
 
 /* faces, weights and styles */
@@ -9,7 +13,7 @@ html {
 		font-family: Source Sans Pro, DejaVu Sans, Verdana, sans;
 		font-weight: 400;
 
-		code, tt, pre {
+		code, tt, pre, i.replaceable {
 			font-family: Source Code Pro, DejaVu Sans Mono, Ubuntu mono, Lucidia Console, monospace;
 		}
 
@@ -17,19 +21,12 @@ html {
 			letter-spacing: -1px; /* forgive me */
 		}
 
-		h1 {
-			font-weight: 700;
-		}
-
-		h2, h3, h4 {
-/* XXX:
-			font-weight: 600;
-*/
-			font-weight: 400;
+		h1, h2, h3, h4 {
+			font-weight: inherit;
 		}
 
 		em {
-			font-weight: 700;
+			font-weight: inherit;
 			font-style:  normal;
 		}
 
@@ -40,38 +37,24 @@ html {
 				font-family: inherit;
 			}
 		}
-
-		footer ol.breadcrumbs li {
-			font-weight: 300;
-
-			&:first-child {
-				font-family: vag rounded std, @font-family;
-				font-weight: 700;
-			}
-		}
 	}
 
 	&.manindex main {
-		h1 {
-			font-weight: 600;
-		}
 	}
 
-	&.minidocbook {
-		header#bp-doctitle {
-			h1 {
-				span {
-					font-weight: 300;
-				}
-
-				font-size: 1.5em;
+	header#bp-doctitle {
+		h1 {
+			span {
+				font-weight: 400;
 			}
 
-			h2 {
-				font-size: 1.2em;
-				text-transform: uppercase;
-				font-weight: 300;
-			}
+			font-weight: 600;
+			font-size: 1.5em;
+		}
+
+		h2 {
+			font-size: 1.2em;
+			text-transform: uppercase;
 		}
 	}
 }
@@ -94,8 +77,8 @@ body {
 		}
 	}
 
-	pre {
-		font-size:   13px;
+	code, tt, pre, i.replaceable {
+		font-size: (@font-size - 1);
 		line-height: $baseline - 2px;
 	}
 
