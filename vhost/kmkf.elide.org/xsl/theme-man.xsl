@@ -4,110 +4,20 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:h="http://www.w3.org/1999/xhtml"
-	xmlns:func="http://exslt.org/functions"
 	xmlns:str="http://exslt.org/strings"
 	xmlns:set="http://exslt.org/sets"
 	xmlns:common="http://exslt.org/common"
 
-	extension-element-prefixes="func str"
+	extension-element-prefixes="str"
 
-	exclude-result-prefixes="h func str">
+	exclude-result-prefixes="h str">
 
-	<xsl:import href="../../../xsl/string.xsl"/>
 	<xsl:import href="../../../xsl/theme.xsl"/>
-	<xsl:import href="../../../xsl/img.xsl"/>
+	<xsl:import href="../../../xsl/man.xsl"/>
 	<xsl:import href="theme.xsl"/>
 
 	<!-- TODO: path from httpd as param -->
 	<xsl:variable name="manindex" select="document('../../../var/kmkf-man/index.xhtml5')"/>
-
-	<xsl:template match="h:a" mode="submenu">
-		<xsl:param name="page-title"/>
-
-		<xsl:variable name="current" select="str:contains-word($page-title, str:trim(.))"/>
-		<xsl:variable name="fileext" select="contains(., '.')"/>
-
-		<li>
-			<!-- TODO: i want a better way to do this; join() on a space-seperated list. make a classlist() function perhaps -->
-			<xsl:if test="$current or $fileext">
-				<xsl:attribute name="class">
-					<xsl:if test="$current">
-						<xsl:text>current</xsl:text>
-					</xsl:if>
-					<xsl:if test="$current and $fileext">
-						<xsl:text> </xsl:text>
-					</xsl:if>
-					<xsl:if test="$fileext">
-						<xsl:text>fileext</xsl:text>
-					</xsl:if>
-				</xsl:attribute>
-			</xsl:if>
-
-			<!-- XXX: i don't like the h:span child here, which has surrounding whitespace -->
-			<xsl:copy-of select="."/>
-		</li>
-	</xsl:template>
-
-	<xsl:template name="submenu-bottom">
-		<xsl:param name="page-productname"/>
-		<xsl:param name="page-title" select="false()"/>
-
-		<xsl:variable name="links" select="$manindex/h:html/h:body
-			/h:section
-			/h:dl/h:dt[@data-productname = $page-productname]
-			/h:a"/>
-
-		<!-- first, ones with no role, for the currently visible product -->
-		<ul class="small">
-			<xsl:apply-templates select="$links[not(contains(., '.'))]" mode="submenu">
-				<xsl:sort select="."/>
-				<xsl:with-param name="page-title" select="$page-title"/>
-			</xsl:apply-templates>
-
-			<xsl:if test="count($links[contains(., '.')]) and count($links[not(contains(., '.'))])">
-				<hr/>
-			</xsl:if>
-
-			<xsl:apply-templates select="$links[contains(., '.')]" mode="submenu">
-				<xsl:sort select="."/>
-				<xsl:with-param name="page-title" select="$page-title"/>
-			</xsl:apply-templates>
-
-			<!-- then iterate over roles, for the currently visible product -->
-			<xsl:for-each select="$manindex/h:html/h:body/h:section
-				/h:section
-				[h:dl/h:dt[@data-productname = $page-productname]]">
-
-				<xsl:variable name="rolelink-id">
-					<!-- TODO: centralise somehow -->
-					<xsl:if test="../@data-manvolnum = 3 and starts-with(@data-productrole, 'lib')">
-						<!-- XXX: i don't like the h:span child here, which has surrounding whitespace -->
-						<xsl:value-of select="generate-id(h:dl/h:dt/h:a
-							[str:trim(.) = substring(current()/@data-productrole, 4, string-length(current()/@data-productrole))])"/>
-					</xsl:if>
-				</xsl:variable>
-
-				<li>
-					<xsl:if test="str:contains-word($page-title, str:trim(h:dl/h:dt/h:a[generate-id(.) = $rolelink-id]))">
-						<xsl:attribute name="class">
-							<xsl:text>current</xsl:text>
-						</xsl:attribute>
-					</xsl:if>
-
-					<xsl:copy-of select="h:dl/h:dt/h:a[generate-id(.) = $rolelink-id]"/>
-
-					<ul class="small">
-						<xsl:apply-templates select="$manindex/h:html/h:body
-							/h:section/h:section[@data-productrole = current()/@data-productrole]
-							/h:dl/h:dt[@data-productname = $page-productname]
-							/h:a[generate-id(.) != $rolelink-id]" mode="submenu">
-							<xsl:with-param name="page-title" select="$page-title"/>
-						</xsl:apply-templates>
-					</ul>
-				</li>
-			</xsl:for-each>
-		</ul>
-	</xsl:template>
 
 	<xsl:template match="/h:html">
 		<xsl:call-template name="kmkf-output">
@@ -132,6 +42,7 @@
 					<nav class="submenu">
 						<xsl:if test="$manvolnum and $productname and $refname">
 							<xsl:call-template name="submenu-bottom">
+								<xsl:with-param name="manindex"         select="$manindex"/>
 								<xsl:with-param name="page-productname" select="$productname/@content"/>
 								<xsl:with-param name="page-title"       select="$refname/@content"/>
 							</xsl:call-template>
@@ -156,6 +67,7 @@
 inherit spacing from nav.submenu, but not block cursor -->
 								<nav class="submenu">
 									<xsl:call-template name="submenu-bottom">
+										<xsl:with-param name="manindex"         select="$manindex"/>
 										<xsl:with-param name="page-productname" select="."/>
 									</xsl:call-template>
 								</nav>
