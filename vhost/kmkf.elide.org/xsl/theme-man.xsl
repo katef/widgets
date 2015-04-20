@@ -22,7 +22,7 @@
 	<xsl:template match="/h:html">
 		<xsl:call-template name="kmkf-output">
 			<xsl:with-param name="class">
-				<xsl:value-of select="concat(@class, ' typical man')"/>
+				<xsl:value-of select="concat(@class, ' man')"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="page">
