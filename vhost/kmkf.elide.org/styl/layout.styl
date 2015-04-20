@@ -45,8 +45,13 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			aside.meta {
 				grid-column($grid, $l, 2);
 				float: none;
+background: url('/img/spanner.png');
+background-repeat: no-repeat;
+background-size: 60%;
+background-position: center ($baseline * 2);
+
 position: absolute; // XXX: why?
-padding-top:    ($baseline * 4);
+padding-top:    ($baseline * 9);
 padding-bottom: ($baseline * 1);
 border-right: solid $edgesize #d44;
 			}
