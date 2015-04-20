@@ -13,30 +13,13 @@
 
 	exclude-result-prefixes="h func str">
 
+	<xsl:import href="../../../xsl/string.xsl"/>
 	<xsl:import href="../../../xsl/theme.xsl"/>
 	<xsl:import href="../../../xsl/img.xsl"/>
 	<xsl:import href="theme.xsl"/>
 
 	<!-- TODO: path from httpd as param -->
 	<xsl:variable name="manindex" select="document('../../../var/kmkf-man/index.xhtml5')"/>
-
-	<!-- TODO: centralise -->
-	<func:function name="str:trim">
-		<xsl:param name="string"/>
-
-		<!-- XXX: this is not really triming; inter-token whitespace needs preservation -->
-		<func:result select="str:concat(str:tokenize($string))"/>
-	</func:function>
-
-	<!-- TODO: centralise -->
-	<func:function name="str:tolower">
-		<xsl:param name="s"/>
-
-		<xsl:variable name="upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
-		<xsl:variable name="lower" select="'abcdefghijlkmnopqrstuvwxyz'"/>
-
-		<func:result select="translate($s, $upper, $lower)"/>
-	</func:function>
 
 	<xsl:template match="h:a" mode="submenu">
 		<xsl:param name="page-title"/>
