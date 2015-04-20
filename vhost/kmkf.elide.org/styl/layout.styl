@@ -19,52 +19,35 @@ header {
 for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
-		body {
-			grid-container($grid, $l);
-		}
-
-		html {
+		body, ol.overlay#cols {
 			if ($grid.layouts[$l] == fluid) {
-				border-top:    solid $baseline #d44;
-				border-bottom: solid $baseline #d44;
+				border-top:    solid $edgesize #d44;
+				border-bottom: solid $edgesize #d44;
 				border-left:  none;
 				border-right: none;
-
-				main {
-					& > * {
-						margin-left: 0;
-					}
-
-					& > h2 {
-						margin-left: 0;
-					}
-				}
 			} else {
 				border-top:    none;
 				border-bottom: none;
-				border-left:  solid $baseline #d44;
-				border-right: solid $baseline transparent;
-
-				main {
-					& > * {
-						margin-left: (2 * $baseline);
-					}
-
-					& > h2 {
-						margin-left: 0;
-					}
-				}
+				border-left:  solid $edgesize #d44;
+				border-right: solid $edgesize transparent;
 			}
 		}
 
 		main {
-			grid-column($grid, $l, $grid.ncols[$l] - 0, 0);
+			grid-container($grid, $l);
+
+			header, section {
+				if ($grid.ncols[$l] == 7) {
+					grid-column($grid, $l, $grid.ncols[$l] - 2, 2);
+				} else {
+					grid-column($grid, $l, $grid.ncols[$l] - 0, 0);
+				}
+			}
 		}
 
-aside.meta {
-display: none; // XXX
-}
-
+		aside.meta {
+display: none;
+		}
 	}
 }
 
