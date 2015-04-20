@@ -20,6 +20,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
 		body, ol.overlay#cols {
+/*
 			if ($grid.layouts[$l] == fluid) {
 				border-top:    solid $edgesize #d44;
 				border-bottom: solid $edgesize #d44;
@@ -31,22 +32,65 @@ for $l in 0 .. length($grid.ncols) - 1 {
 				border-left:  solid $edgesize #d44;
 				border-right: solid $edgesize transparent;
 			}
+*/
+			grid-container($grid, $l);
 		}
 
-		main {
-			grid-container($grid, $l);
+		if ($grid.ncols[$l] == 7) {
+			main {
+				grid-column($grid, $l, $grid.ncols[$l] - 2, 2);
+				float: right;
+			}
 
-			header, section {
-				if ($grid.ncols[$l] == 7) {
-					grid-column($grid, $l, $grid.ncols[$l] - 2, 2);
-				} else {
-					grid-column($grid, $l, $grid.ncols[$l] - 0, 0);
-				}
+			aside.meta {
+				grid-column($grid, $l, 2);
+				float: none;
+position: absolute; // XXX: why?
+padding-top:    ($baseline * 4);
+padding-bottom: ($baseline * 1);
+border-right: solid $edgesize #d44;
+			}
+		} else {
+			main,
+			aside.meta {
+				grid-column($grid, $l, $grid.ncols[$l] - 0, 0);
+				float: none;
+			}
+		}
+	}
+}
+
+// XXX: rehouse
+aside.meta {
+min-height: 100%;
+
+	ul {
+		margin-left: 0;
+	}
+
+	li {
+		list-style-type: none;
+margin-bottom: 0;
+
+		// TODO: share with bp
+		a {
+			text-decoration: none;
+			display: block;
+			padding: 1ex 1em;
+			&:hover {
+				color: #000;
+				background-color: #eee;
 			}
 		}
 
-		aside.meta {
-display: none;
+		&.fileext {
+			span.command[data-manvolnum]:before {
+				content: "<";
+			}
+
+			span.command[data-manvolnum]:after {
+				content: ">";
+			}
 		}
 	}
 }

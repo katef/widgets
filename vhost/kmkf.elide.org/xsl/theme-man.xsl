@@ -20,6 +20,7 @@
 	<!-- TODO: path from httpd as param -->
 	<xsl:variable name="manindex" select="document('../../../var/kmkf-man/index.xhtml5')"/>
 
+	<!-- TODO: centralise -->
 	<func:function name="str:trim">
 		<xsl:param name="string"/>
 
@@ -27,6 +28,7 @@
 		<func:result select="str:concat(str:tokenize($string))"/>
 	</func:function>
 
+	<!-- TODO: centralise -->
 	<func:function name="str:tolower">
 		<xsl:param name="s"/>
 
@@ -36,55 +38,29 @@
 		<func:result select="translate($s, $upper, $lower)"/>
 	</func:function>
 
-	<xsl:template name="submenu-top">
-		<xsl:param name="page-vol"/>
-		<xsl:param name="page-productname"/>
-
-		<ul>
-			<xsl:for-each select="set:distinct($manindex/h:html/h:body//h:dd/@data-productname)">
-				<xsl:sort select="."/>
-
-				<li>
-					<xsl:if test=". = $page-productname">
-						<xsl:attribute name="class">
-							<xsl:text>current</xsl:text>
-						</xsl:attribute>
-					</xsl:if>
-
-					<!-- TODO: hovering over these should conditionally enable each library's pages below -->
-					<a>
-						<xsl:variable name="first" select="$manindex/h:html/h:body
-							//h:dt[@data-productname = current()]
-							/h:a[str:tolower(str:trim(.)) = str:tolower(current())][1]/@href"/>
-
-						<xsl:choose>
-							<xsl:when test="$first">
-								<xsl:copy-of select="$first"/>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:copy-of select="$manindex/h:html/h:body//h:dt
-									[@data-productname = current()][1]/h:a/@href"/>
-							</xsl:otherwise>
-						</xsl:choose>
-
-						<xsl:value-of select="."/>
-					</a>
-				</li>
-			</xsl:for-each>
-		</ul>
-	</xsl:template>
-
 	<xsl:template match="h:a" mode="submenu">
 		<xsl:param name="page-title"/>
 
+		<xsl:variable name="current" select="str:contains-word($page-title, str:trim(.))"/>
+		<xsl:variable name="fileext" select="contains(., '.')"/>
+
 		<li>
-			<!-- XXX: i don't like the h:span child here, which has surrounding whitespace -->
-			<xsl:if test="str:contains-word($page-title, str:trim(.))">
+			<!-- TODO: i want a better way to do this; join() on a space-seperated list. make a classlist() function perhaps -->
+			<xsl:if test="$current or $fileext">
 				<xsl:attribute name="class">
-					<xsl:text>current</xsl:text>
+					<xsl:if test="$current">
+						<xsl:text>current</xsl:text>
+					</xsl:if>
+					<xsl:if test="$current and $fileext">
+						<xsl:text> </xsl:text>
+					</xsl:if>
+					<xsl:if test="$fileext">
+						<xsl:text>fileext</xsl:text>
+					</xsl:if>
 				</xsl:attribute>
 			</xsl:if>
 
+			<!-- XXX: i don't like the h:span child here, which has surrounding whitespace -->
 			<xsl:copy-of select="."/>
 		</li>
 	</xsl:template>
@@ -93,12 +69,24 @@
 		<xsl:param name="page-productname"/>
 		<xsl:param name="page-title" select="false()"/>
 
+		<xsl:variable name="links" select="$manindex/h:html/h:body
+			/h:section
+			/h:dl/h:dt[@data-productname = $page-productname]
+			/h:a"/>
+
 		<!-- first, ones with no role, for the currently visible product -->
 		<ul class="small">
-			<xsl:apply-templates select="$manindex/h:html/h:body
-				/h:section
-				/h:dl/h:dt[@data-productname = $page-productname]
-				/h:a" mode="submenu">
+			<xsl:apply-templates select="$links[not(contains(., '.'))]" mode="submenu">
+				<xsl:sort select="."/>
+				<xsl:with-param name="page-title" select="$page-title"/>
+			</xsl:apply-templates>
+
+			<xsl:if test="count($links[contains(., '.')]) and count($links[not(contains(., '.'))])">
+				<hr/>
+			</xsl:if>
+
+			<xsl:apply-templates select="$links[contains(., '.')]" mode="submenu">
+				<xsl:sort select="."/>
 				<xsl:with-param name="page-title" select="$page-title"/>
 			</xsl:apply-templates>
 
@@ -159,14 +147,7 @@
 
 				<xsl:if test="not(str:contains-word(@class, 'manindex'))">
 					<nav class="submenu">
-						<xsl:call-template name="submenu-top">
-							<xsl:with-param name="page-vol"         select="$manvolnum/@content"/>
-							<xsl:with-param name="page-productname" select="$productname/@content"/>
-						</xsl:call-template>
-
 						<xsl:if test="$manvolnum and $productname and $refname">
-							<hr/>
-
 							<xsl:call-template name="submenu-bottom">
 								<xsl:with-param name="page-productname" select="$productname/@content"/>
 								<xsl:with-param name="page-title"       select="$refname/@content"/>
