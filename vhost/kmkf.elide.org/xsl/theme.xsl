@@ -65,10 +65,10 @@
 					<nav class="submenu">
 						<ul>
 							<li>
-								<a href="#">Rationalle</a>
+								<a href="/rationalle/">Rationalle</a>
 							</li>
 							<li>
-								<a href="#">Download</a>
+								<a href="/download/">Download</a>
 							</li>
 						</ul>
 					</nav>
