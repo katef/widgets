@@ -30,7 +30,7 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="site">
-				<xsl:text>Bubblephone</xsl:text>
+				<xsl:text>kmkf</xsl:text>
 			</xsl:with-param>
 
 			<xsl:with-param name="meta">
@@ -38,74 +38,46 @@
 				<xsl:variable name="productname" select="h:head/h:meta[@name = 'refmeta-productname']"/>
 				<xsl:variable name="refname"     select="h:head/h:meta[@name = 'refmeta-refname']"/>
 
-				<xsl:if test="not(str:contains-word(@class, 'manindex'))">
-					<nav class="submenu">
-						<xsl:if test="$manvolnum and $productname and $refname">
-							<xsl:call-template name="submenu-bottom">
-								<xsl:with-param name="manindex"         select="$manindex"/>
-								<xsl:with-param name="page-productname" select="$productname/@content"/>
-								<xsl:with-param name="page-title"       select="$refname/@content"/>
-							</xsl:call-template>
-						</xsl:if>
-					</nav>
-				</xsl:if>
+				<nav class="submenu">
+					<xsl:if test="$manvolnum and $productname and $refname">
+						<xsl:call-template name="submenu-bottom">
+							<xsl:with-param name="manindex"         select="$manindex"/>
+							<xsl:with-param name="page-productname" select="$productname/@content"/>
+							<xsl:with-param name="page-title"       select="$refname/@content"/>
+						</xsl:call-template>
+					</xsl:if>
+				</nav>
 			</xsl:with-param>
 
 			<xsl:with-param name="main">
-				<xsl:choose>
-					<xsl:when test="str:contains-word(@class, 'manindex')">
-						<xsl:for-each select="set:distinct($manindex/h:html/h:body//h:dd/@data-productname)">
-<!-- XXX: count(), not string-length() -->
-							<xsl:sort select="string-length(.)"/>
+				<header id="bp-doctitle">
+					<h1>
+						<xsl:variable name="productname" select="h:head/h:meta[@name = 'refmeta-productname']/@content"/>
+						<xsl:variable name="productrole" select="h:head/h:meta[@name = 'refmeta-productrole']/@content"/>
+						<xsl:variable name="title"       select="h:head/h:meta[@name = 'refmeta-title']/@content"/>
+						<xsl:variable name="pre"         select="substring-before($title, ' ')"/>
+						<xsl:variable name="post"        select="substring-after ($title, ' ')"/>
 
-							<section>
-								<h1>
-									<xsl:value-of select="."/>
-								</h1>
+						<xsl:choose>
+							<xsl:when test="$productrole and $pre = $productname">
+								<xsl:value-of select="$productrole"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="$pre"/>
+							</xsl:otherwise>
+						</xsl:choose>
 
-<!-- XXX: therefore all index pages should have a <nav> wrapper.
-inherit spacing from nav.submenu, but not block cursor -->
-								<nav class="submenu">
-									<xsl:call-template name="submenu-bottom">
-										<xsl:with-param name="manindex"         select="$manindex"/>
-										<xsl:with-param name="page-productname" select="."/>
-									</xsl:call-template>
-								</nav>
-							</section>
-						</xsl:for-each>
-					</xsl:when>
+						<span>
+							<xsl:value-of select="$post"/>
+						</span>
+					</h1>
 
-					<xsl:otherwise>
-						<header id="bp-doctitle">
-							<h1>
-								<xsl:variable name="productname" select="h:head/h:meta[@name = 'refmeta-productname']/@content"/>
-								<xsl:variable name="productrole" select="h:head/h:meta[@name = 'refmeta-productrole']/@content"/>
-								<xsl:variable name="title"       select="h:head/h:meta[@name = 'refmeta-title']/@content"/>
-								<xsl:variable name="pre"         select="substring-before($title, ' ')"/>
-								<xsl:variable name="post"        select="substring-after ($title, ' ')"/>
+					<h2>
+						<xsl:apply-templates select="h:head/h:title" mode="body"/>
+					</h2>
+				</header>
 
-								<xsl:choose>
-									<xsl:when test="$productrole and $pre = $productname">
-										<xsl:value-of select="$productrole"/>
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:value-of select="$pre"/>
-									</xsl:otherwise>
-								</xsl:choose>
-
-								<span>
-									<xsl:value-of select="$post"/>
-								</span>
-							</h1>
-
-							<h2>
-								<xsl:apply-templates select="h:head/h:title" mode="body"/>
-							</h2>
-						</header>
-
-						<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
-					</xsl:otherwise>
-				</xsl:choose>
+				<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 			</xsl:with-param>
 		</xsl:call-template>
 
