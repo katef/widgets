@@ -62,6 +62,20 @@
 				</xsl:if>
 
 				<aside class="meta">
+					<nav class="submenu">
+						<ul>
+							<li>
+								<a href="#">Rationalle</a>
+							</li>
+							<li>
+								<a href="#">Download</a>
+							</li>
+						</ul>
+					</nav>
+
+					<hr/>
+
+					<!-- TODO: merge in manindex here. maybe centralise with bp -->
 					<xsl:copy-of select="$meta"/>
 				</aside>
 			</xsl:with-param>
