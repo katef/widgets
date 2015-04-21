@@ -36,14 +36,14 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			grid-container($grid, $l);
 		}
 
-		if ($grid.ncols[$l] == 7) {
+		if (sidebar($l)) {
 			main {
-				grid-column($grid, $l, $grid.ncols[$l] - 2, 2);
+				grid-column($grid, $l, $grid.ncols[$l] - sidebar($l), sidebar($l));
 				float: right;
 			}
 
 			aside.meta {
-				grid-column($grid, $l, 2);
+				grid-column($grid, $l, sidebar($l));
 				float: none;
 background: url('/img/spanner.png');
 background-repeat: no-repeat;
@@ -58,11 +58,22 @@ border-right: solid $edgesize #d44;
 		} else {
 			main,
 			aside.meta {
-				grid-column($grid, $l, $grid.ncols[$l] - 0, 0);
+				grid-column($grid, $l, $grid.ncols[$l]);
 				float: none;
 			}
 		}
+
+		if (indent($l)) {
+			section {
+				margin-left: $indent;
+
+				h2 {
+					margin-left: -($indent);
+				}
+			}
+		}
 	}
+
 }
 
 // XXX: rehouse

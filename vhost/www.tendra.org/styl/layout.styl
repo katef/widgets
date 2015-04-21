@@ -13,8 +13,8 @@ for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l);
 	@media $q {
 		body > header menu {
-			concertina-layout($grid.ncols[$l] <= 3 ? vertical : horizontal);
-if ($grid.ncols[$l] <= 3) {
+			concertina-layout(menustyle($l));
+if (menustyle($l) == vertical) {
 li > ul { display: none; } // XXX: need to have this expand out, too
 }
 		}
@@ -31,16 +31,16 @@ li > ul { display: none; } // XXX: need to have this expand out, too
 		}
 
 		main {
-			if ($grid.ncols[$l] > 6) {
-				grid-column($grid, $l, $grid.ncols[$l] - 3);
+			if (sidebar($l)) {
+				grid-column($grid, $l, $grid.ncols[$l] - sidebar($l));
 			} else {
 				grid-column($grid, $l, $grid.ncols[$l]);
 			}
 		}
 
 		nav#sidebar {
-			if ($grid.ncols[$l] > 6) {
-				grid-column($grid, $l, 3);
+			if (sidebar($l)) {
+				grid-column($grid, $l, sidebar($l));
 			} else {
 				grid-column($grid, $l, $grid.ncols[$l]);
 			}
@@ -82,17 +82,7 @@ li > ul { display: none; } // XXX: need to have this expand out, too
 		}
 
 		header > h1#banner {
-			if ($grid.ncols[$l] == 1) {
-				grid-column($grid, $l, 1, $grid.ncols[$l] - 1);
-			}
-
-			if ($grid.ncols[$l] == 3) {
-				grid-column($grid, $l, 2, $grid.ncols[$l] - 2);
-			}
-
-			if ($grid.ncols[$l] >= 6) {
-				grid-column($grid, $l, 3, $grid.ncols[$l] - 3);
-			}
+			grid-column($grid, $l, banner($l), $grid.ncols[$l] - banner($l));
 		}
 
 		header > form.search {

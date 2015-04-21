@@ -3,6 +3,7 @@
 $fontsize = 14px;
 $baseline = 20px;
 $edgesize = $baseline;
+$indent   = 2em;
 
 $grid = {
 	ncols:    ( 1       4      5      7      )
@@ -17,4 +18,7 @@ $grid = {
 
 	colour: #dbf
 }
+
+sidebar($l) { return $grid.ncols[$l] == 7 ? 2 : 0; }
+indent($l)  { return $grid.ncols[$l] > 1; }
 

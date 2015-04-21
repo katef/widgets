@@ -17,11 +17,18 @@ $grid = {
 	colour: #ccc
 }
 
-$theme = ( );
-for $l in 0 .. length($ncols) - 1 {
-	$theme[$l] = {
-		concertina: $grid.ncols[$l] >= 2 ? horizontal : vertical
-		fish:       $grid.ncols[$l] >= 3 ? horizontal : vertical
+sidebar($l) { return $grid.layouts[$l] != fluid ? 1 : 0; }
+gapless($l) { return $grid.ncols[$l] <= 2; }
+
+menustyle($l) {
+	if ($grid.ncols[$l] == 1) {
+		return collapse;
 	}
+
+	if ($grid.ncols[$l] == 2) {
+		return justify;
+	}
+
+	return center;
 }
 

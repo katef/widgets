@@ -16,7 +16,7 @@ body {
 		for $l in 0 .. length($grid.ncols) - 1 {
 			$q = grid-breakpoint($grid, $l);
 			@media $q {
-				if ($grid.ncols[$l] > 2) {
+				if (!gapless($l)) {
 					padding-top:    ($baseline * 1.5);
 					padding-bottom: ($baseline * 3);
 				}
@@ -67,7 +67,15 @@ header {
 	for $l in 0 .. length($grid.ncols) - 1 {
 		$q = grid-breakpoint($grid, $l);
 		@media $q {
-			if ($grid.ncols[$l] <= 2) {
+			if (menustyle($l) == center) {
+				li {
+					display: inline-block;
+				}
+
+				a {
+					padding: 0 $menu-padding;
+				}
+			} else {
 				position: relative; // for menu
 
 				menu {
@@ -87,23 +95,15 @@ width: 100%;
 					display: inline-block;
 					float: left;
 
-					if ($grid.ncols[$l] > 1) {
-						width: 25%;
-					} else {
+					if (menustyle($l) == collapse) {
 						width: 50%;
+					} else {
+						width: 25%;
 					}
 				}
 
 				a {
 					width: 100%;
-				}
-			} else {
-				li {
-					display: inline-block;
-				}
-
-				a {
-					padding: 0 $menu-padding;
 				}
 			}
 		}
@@ -188,13 +188,7 @@ main {
 	for $l in 0 .. length($grid.ncols) - 1 {
 		$q = grid-breakpoint($grid, $l);
 		@media $q {
-
-			if ($grid.ncols[$l] <= 4) {
-				grid-column($grid, $l, $grid.ncols[$l]);
-			} else {
-				grid-column($grid, $l, $grid.ncols[$l] - 1, 1);
-			}
-
+			grid-column($grid, $l, $grid.ncols[$l] - sidebar($l), sidebar($l));
 		}
 	}
 
