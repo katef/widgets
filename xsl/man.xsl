@@ -39,7 +39,9 @@
 
 		<ul>
 			<xsl:for-each select="set:distinct($manindex/h:html/h:body//h:dd/@data-productname)">
+<!--
 				<xsl:sort select="."/>
+-->
 
 				<li>
 					<xsl:if test=". = $page-productname">
@@ -84,7 +86,9 @@
 		<!-- first, ones with no role, for the currently visible product -->
 		<ul class="small">
 			<xsl:apply-templates select="$links" mode="submenu">
+<!--
 				<xsl:sort select="."/>
+-->
 				<xsl:with-param name="page-title" select="$page-title"/>
 			</xsl:apply-templates>
 
