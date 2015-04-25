@@ -18,21 +18,12 @@
 		<xsl:param name="page-title"/>
 
 		<xsl:variable name="current" select="str:contains-word($page-title, str:trim(.))"/>
-		<xsl:variable name="fileext" select="contains(., '.')"/>
 
 		<li>
-			<!-- TODO: i want a better way to do this; join() on a space-seperated list. make a classlist() function perhaps -->
-			<xsl:if test="$current or $fileext">
+			<!-- TODO: i want a better way to do class lists; join() on a space-seperated list. make a classlist() function perhaps -->
+			<xsl:if test="$current">
 				<xsl:attribute name="class">
-					<xsl:if test="$current">
-						<xsl:text>current</xsl:text>
-					</xsl:if>
-					<xsl:if test="$current and $fileext">
-						<xsl:text> </xsl:text>
-					</xsl:if>
-					<xsl:if test="$fileext">
-						<xsl:text>fileext</xsl:text>
-					</xsl:if>
+					<xsl:text>current</xsl:text>
 				</xsl:attribute>
 			</xsl:if>
 
@@ -92,16 +83,7 @@
 
 		<!-- first, ones with no role, for the currently visible product -->
 		<ul class="small">
-			<xsl:apply-templates select="$links[not(contains(., '.'))]" mode="submenu">
-				<xsl:sort select="."/>
-				<xsl:with-param name="page-title" select="$page-title"/>
-			</xsl:apply-templates>
-
-			<xsl:if test="count($links[contains(., '.')]) and count($links[not(contains(., '.'))])">
-				<hr/>
-			</xsl:if>
-
-			<xsl:apply-templates select="$links[contains(., '.')]" mode="submenu">
+			<xsl:apply-templates select="$links" mode="submenu">
 				<xsl:sort select="."/>
 				<xsl:with-param name="page-title" select="$page-title"/>
 			</xsl:apply-templates>
