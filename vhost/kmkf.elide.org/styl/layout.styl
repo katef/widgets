@@ -93,19 +93,18 @@ margin-bottom: 0;
 			text-decoration: none;
 			display: block;
 			padding: 1ex 1em;
+
 			&:hover {
 				color: #000;
 				background-color: #eee;
 			}
-		}
 
-		&.fileext {
-			span.command[data-manvolnum]:before {
+			span.command[data-refclass]:before {
 				content: "<";
 			}
 
-			span.command[data-manvolnum]:after {
-				content: ">";
+			span.command[data-refclass]:after {
+				content: "." attr(data-refclass) ">";
 			}
 		}
 	}
