@@ -10,8 +10,7 @@
 		<xsl:param name="title"/>
 		<xsl:param name="page" select="false()"/>
 
-		<!-- TODO: remove bp- prefix -->
-		<header id="bp-doctitle">
+		<header id="doctitle">
 			<h1>
 				<xsl:copy-of select="$product"/>
 
