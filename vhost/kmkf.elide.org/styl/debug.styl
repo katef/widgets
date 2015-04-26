@@ -19,19 +19,19 @@ html.debug {
 
 	header {
 		& > h1 {
-			background-color: pink;
+			background-color: $grid.colour;
 		}
 	}
 
 	section {
-		background-color: ivory;
+		background-color: $grid.colour;
 
 		& > * {
-			background-color: aliceblue;
+			background-color: lighten($grid.colour, 20%);
 		}
 
 		& > h2 {
-			background-color: pink;
+			background-color: darken($grid.colour, 20%);
 		}
 	}
 }

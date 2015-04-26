@@ -5,20 +5,26 @@ $baseline = 20px;
 $edgesize = $baseline;
 $indent   = 2em;
 
-$grid = {
-	ncols:    ( 1       4      5      7      )
-	layouts:  ( fluid   fluid  fixed  fixed  )
-	aligns:   ( left    left   left   left   )
+$kmkf = {
+	fg: #7c8 // #7b9
+	bg: #666
+}
 
-	colwidth: $baseline * 6
+$grid = {
+	ncols:    ( 1     2     3     4     5     )
+	layouts:  ( fluid fluid fluid fluid fixed )
+	aligns:   ( left  left  left  left  left  )
+
+	colwidth: $baseline * 7
 	gutter:   $baseline * 1
 
 	fixed-margin: 0
 	fluid-margin: 0
 
-	colour: #dbf
+	colour: lighten(spin($kmkf.fg, 90deg), 70%)
 }
 
-sidebar($l) { return $grid.ncols[$l] == 7 ? 2 : 0; }
+sidebar($l) { return $grid.ncols[$l] >= 4 ? 1 : 0; }
+edge($l)    { return $grid.ncols[$l] == 1 ? top : left; }
 indent($l)  { return $grid.ncols[$l] > 1; }
 

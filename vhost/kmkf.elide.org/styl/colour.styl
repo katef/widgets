@@ -1,11 +1,31 @@
 /* $Id: elide.css 571 2013-07-03 22:32:11Z kate $ */
 
+body {
+	color: #222;
+}
 
 a code, a, a:link, a:visited {
-	color: #e22;
+	color: darken(saturate($kmkf.fg, 20%), 20%);
 	text-decoration: underline;
 	&:hover {
 		color: #000;
+	}
+}
+
+header {
+	border-bottom: solid .5ex $kmkf.fg;
+}
+
+aside.meta {
+	background-color: desaturate(darken($kmkf.fg, 20%), 20%);
+	background-color: $kmkf.bg;
+
+	a code, a, a:link, a:visited {
+		color: #fff;
+
+		&:hover {
+			background-color: darken(desaturate($kmkf.fg, 20%), 10%); // optical correction
+		}
 	}
 }
 
@@ -35,10 +55,10 @@ span.remark {
 }
 
 ::-moz-selection {
-	background-color: #ddd;
+	background-color: lighten(desaturate($kmkf.fg, 60%), 70%);
 }
 
 ::selection {
-	background-color: #ddd;
+	background-color: lighten(desaturate($kmkf.fg, 60%), 70%);
 }
 

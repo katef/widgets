@@ -12,28 +12,62 @@ pre {
 	overflow-y: auto;
 }
 
-header {
-	margin: ($baseline * 2) 0;
+// XXX: confusing
+header,
+html.man body header#bp-doctitle {
+	padding: ($baseline * 2) 0;
+	padding-top: $baseline;
+	padding-bottom: ($baseline * 1.5);
+	margin-bottom:  ($baseline * 2);
+}
+
+// XXX: rehouse
+aside.meta {
+	min-height: 100%; // XXX
+
+	li {
+		list-style-type: none;
+		margin-bottom: 0;
+
+		// TODO: share with bp
+		a {
+			text-decoration: none;
+			display: block;
+
+			padding: 0 $grid.gutter;
+			line-height: ($baseline * 1.5);
+
+			span.command[data-refclass]:before {
+				content: "<";
+			}
+
+			span.command[data-refclass]:after {
+				content: "." attr(data-refclass) ">";
+			}
+		}
+	}
 }
 
 for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
+
 		body, ol.overlay#cols {
-/*
-			if ($grid.layouts[$l] == fluid) {
-				border-top:    solid $edgesize #d44;
-				border-bottom: solid $edgesize #d44;
-				border-left:  none;
-				border-right: none;
-			} else {
-				border-top:    none;
-				border-bottom: none;
-				border-left:  solid $edgesize #d44;
-				border-right: solid $edgesize transparent;
-			}
-*/
 			grid-container($grid, $l);
+		}
+
+		main {
+			if (sidebar($l)) {
+				border-top:  none;
+				border-left: none;
+			} else if (edge($l) == left) {
+				border-top:  none;
+				border-left: solid $edgesize $kmkf.bg;
+			} else {
+// XXX: use aside.meta as a drop-down menu instead. mark it up as <menu>!
+				border-top:  solid $edgesize $kmkf.bg;
+				border-left: none;
+			}
 		}
 
 		if (sidebar($l)) {
@@ -44,16 +78,28 @@ for $l in 0 .. length($grid.ncols) - 1 {
 
 			aside.meta {
 				grid-column($grid, $l, sidebar($l));
-				float: none;
-background: url('/img/spanner.png');
-background-repeat: no-repeat;
-background-size: 60%;
-background-position: center ($baseline * 2);
 
-position: absolute; // XXX: why?
-padding-top:    ($baseline * 9);
-padding-bottom: ($baseline * 1);
-border-right: solid $edgesize #d44;
+				float: none;
+
+				padding-left:  0;
+				padding-right: 0;
+
+				ul {
+					margin-left: 0;
+				}
+
+				hr {
+					display: none;
+				}
+
+				// special case for *(5mk) block
+				hr + nav.submenu li:first-child {
+					margin-bottom: ($baseline / 2);
+				}
+
+				position: absolute; // XXX: why?
+				padding-top:    ($baseline * 2);
+				padding-bottom: ($baseline * 1);
 			}
 		} else {
 			main,
@@ -74,39 +120,5 @@ border-right: solid $edgesize #d44;
 		}
 	}
 
-}
-
-// XXX: rehouse
-aside.meta {
-min-height: 100%;
-
-	ul {
-		margin-left: 0;
-	}
-
-	li {
-		list-style-type: none;
-margin-bottom: 0;
-
-		// TODO: share with bp
-		a {
-			text-decoration: none;
-			display: block;
-			padding: 1ex 1em;
-
-			&:hover {
-				color: #000;
-				background-color: #eee;
-			}
-
-			span.command[data-refclass]:before {
-				content: "<";
-			}
-
-			span.command[data-refclass]:after {
-				content: "." attr(data-refclass) ">";
-			}
-		}
-	}
 }
 
