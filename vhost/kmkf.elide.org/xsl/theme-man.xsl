@@ -14,6 +14,7 @@
 
 	<xsl:import href="../../../xsl/theme.xsl"/>
 	<xsl:import href="../../../xsl/man.xsl"/>
+	<xsl:import href="../../../xsl/doctitle.xsl"/>
 	<xsl:import href="theme.xsl"/>
 
 	<!-- TODO: path from httpd as param -->
@@ -50,14 +51,14 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="main">
-				<header id="bp-doctitle">
-					<h1>
-						<xsl:variable name="productname" select="h:head/h:meta[@name = 'refmeta-productname']/@content"/>
-						<xsl:variable name="productrole" select="h:head/h:meta[@name = 'refmeta-productrole']/@content"/>
-						<xsl:variable name="title"       select="h:head/h:meta[@name = 'refmeta-title']/@content"/>
-						<xsl:variable name="pre"         select="substring-before($title, ' ')"/>
-						<xsl:variable name="post"        select="substring-after ($title, ' ')"/>
+				<xsl:variable name="productname" select="h:head/h:meta[@name = 'refmeta-productname']/@content"/>
+				<xsl:variable name="productrole" select="h:head/h:meta[@name = 'refmeta-productrole']/@content"/>
+				<xsl:variable name="title"       select="h:head/h:meta[@name = 'refmeta-title']/@content"/>
+				<xsl:variable name="pre"         select="substring-before($title, ' ')"/>
+				<xsl:variable name="post"        select="substring-after ($title, ' ')"/>
 
+				<xsl:call-template name="doctitle">
+					<xsl:with-param name="product">
 						<xsl:choose>
 							<xsl:when test="$productrole and $pre = $productname">
 								<xsl:value-of select="$productrole"/>
@@ -66,16 +67,14 @@
 								<xsl:value-of select="$pre"/>
 							</xsl:otherwise>
 						</xsl:choose>
-
-						<span>
-							<xsl:value-of select="$post"/>
-						</span>
-					</h1>
-
-					<h2>
+					</xsl:with-param>
+					<xsl:with-param name="title">
+						<xsl:value-of select="$post"/>
+					</xsl:with-param>
+					<xsl:with-param name="page">
 						<xsl:apply-templates select="h:head/h:title" mode="body"/>
-					</h2>
-				</header>
+					</xsl:with-param>
+				</xsl:call-template>
 
 				<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
 			</xsl:with-param>

@@ -12,7 +12,7 @@
 
 	<xsl:import href="../../../xsl/theme.xsl"/>
 	<xsl:import href="../../../xsl/man.xsl"/>
-	<xsl:import href="../../../xsl/img.xsl"/>
+	<xsl:import href="../../../xsl/doctitle.xsl"/>
 	<xsl:import href="theme.xsl"/>
 
 	<!-- TODO: path from httpd as param -->
@@ -49,16 +49,15 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="main">
-				<!-- TODO: centralise template -->
-				<header id="bp-doctitle">
-					<h1>
+				<xsl:call-template name="doctitle">
+					<xsl:with-param name="product">
+						<!-- TODO: centralise template -->
 						<xsl:text>KMKF</xsl:text>
-
-						<span>
-							<xsl:value-of select="h:head/h:title"/> <!-- XXX -->
-						</span>
-					</h1>
-				</header>
+					</xsl:with-param>
+					<xsl:with-param name="title">
+						<xsl:apply-templates select="h:head/h:title" mode="body"/>
+					</xsl:with-param>
+				</xsl:call-template>
 
 				<xsl:apply-templates mode="copy" select="h:body/*[name() != 'h1']"/>
 			</xsl:with-param>
