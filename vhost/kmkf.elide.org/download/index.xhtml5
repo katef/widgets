@@ -83,17 +83,11 @@
 			<p>See the <a href="TODO">README</a> for build instructions.<br/>
 			You can check out the trunk revision of the source here:</p>
 
-			<pre>$ svn co http://svn.kmkf.org/trunk lx0</pre>
-
+			<pre>$ svn co http://svn.elide.org/kmkf/trunk kmkf0</pre>
 		</section>
 
-<!--
 		<section>
 			<h2>Dependencies</h2>
-
-<div class="grid-container">
-<div class="grid-span-3">
-			<p>Running <code>make</code>:</p>
 
 			<ul class="download-items">
 				<li>
@@ -104,51 +98,7 @@
 					<p>Various POSIX utilities; see <code>mk/base.mk</code></p>
 				</li>
 			</ul>
-</div>
 
-<div class="grid-span-3 grid-last">
-
-			<p>Running <code>make doc</code>:</p>
-
-			<ul class="download-items">
-				<li>
-					<p><code>xsltproc</code> from <a href="http://xmlsoft.org/XSLT/xsltproc2.html">xmlsoft.org</a>
-						(commonly packaged under <code>libxslt</code>)</p>
-				</li>
-			</ul>
-
-			<p>Note that building the documentation is optional.</p>
-</div>
-</div>
-
-			<p>The source is written in
-				portable <abbr>ISO</abbr> standard C90, and hence does not
-				have any implementation-specific requirements (such as
-				a certian operating system,
-				assuming the execution character set is <abbr>ASCII</abbr>,
-				that types are 32/64 bits, or anything regarding endianness).
-				If you find a non-portable construct, please report it as
-				a bug.</p>
-
-			<p>Although the source should be compilable with any C90
-				compiler and BSD-compatible <code>make</code>,
-				explicit support is given for the following
-				C compilers and BSD-compatible <code>make</code>s:</p>
-
-<div class="grid-container">
-<div class="grid-span-3">
-			<ul class="download-items">
-				<li><a href="http://gcc.gnu.org/">GCC</a> for various systems</li>
-				<li><a href="http://www.tendra.org/">TenDRA</a></li>
-				<li><a href="http://bellard.org/tcc/">Tiny CC</a></li>
-				<li><a href="http://pcc.ludd.ltu.se/">pcc</a></li>
-				<li><a href="http://clang.llvm.org/">clang</a></li>
-				<li>HP's <abbr>ANSI</abbr> C compiler for PA-RISC<br/>
-					(Not HP's &ldquo;bundled&rdquo; non-ANSI compiler)</li>
-			</ul>
-</div>
-
-<div class="grid-span-3 grid-last">
 			<ul class="download-items">
 				<li><a href="http://www.openbsd.org/">OpenBSD's</a>
 					<code>make(1)</code></li>
@@ -166,10 +116,7 @@
 
 			<p>Note this does not include
 				<a href="http://www.gnu.org/software/make/">GNU <code>make</code></a>.</p>
-</div>
-</div>
 		</section>
--->
 	</body>
 </html>
 
