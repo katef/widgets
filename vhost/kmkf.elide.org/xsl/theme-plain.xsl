@@ -49,7 +49,18 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="main">
-				<xsl:apply-templates mode="copy" select="h:body"/>
+				<!-- TODO: centralise template -->
+				<header id="bp-doctitle">
+					<h1>
+						<xsl:text>KMKF</xsl:text>
+
+						<span>
+							<xsl:value-of select="h:head/h:title"/> <!-- XXX -->
+						</span>
+					</h1>
+				</header>
+
+				<xsl:apply-templates mode="copy" select="h:body/*[name() != 'h1']"/>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
