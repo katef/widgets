@@ -8,7 +8,7 @@ a code, a, a:link, a:visited {
 	color: darken(saturate($kmkf.fg, 20%), 20%);
 	text-decoration: underline;
 	&:hover {
-		color: #000;
+		color: $kmkf.bold;
 	}
 }
 
@@ -30,8 +30,8 @@ aside.meta {
 	}
 }
 
-pre, code {
-	color: #888;
+pre, code, var, samp {
+	color: $kmkf.code;
 }
 
 pre.synopsis {
@@ -48,15 +48,11 @@ pre.synopsis {
 }
 
 pre.synopsis samp.replaceable {
-	color: #000;
+	color: $kmkf.bold;
 }
 
 span.remark {
-	color: #000;
-}
-
-dfn {
-	color: #000;
+	color: $kmkf.bold;
 }
 
 ::-moz-selection {
