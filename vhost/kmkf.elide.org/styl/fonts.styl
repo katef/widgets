@@ -1,6 +1,6 @@
 
 font-face('Source Sans Pro', 400, normal, '/fonts/SourceSansPro-Regular',  '#SourceSansPro-Regular');
-font-face('Source Sans Pro', 400, italic, '/fonts/SourceSansPro-Italic',   '#SourceSansPro-Italic');
+//font-face('Source Sans Pro', 400, italic, '/fonts/SourceSansPro-Italic',   '#SourceSansPro-Italic');
 font-face('Source Sans Pro', 600, normal, '/fonts/SourceSansPro-SemiBold', '#SourceSansPro-SemiBold');
 
 font-face('Source Code Pro', 400, normal, '/fonts/SourceCodePro-Regular', '#SourceCodePro-Regular');
@@ -12,7 +12,7 @@ body {
 	font-family: Source Sans Pro, DejaVu Sans, Verdana, sans;
 	font-weight: 400;
 
-	code, tt, pre, samp.replaceable {
+	code, tt, pre, samp.replaceable, var {
 		font-family: Source Code Pro, DejaVu Sans Mono, Ubuntu mono, Lucidia Console, monospace;
 	}
 
@@ -30,6 +30,15 @@ body {
 	}
 
 	em {
+		font-weight: inherit;
+		font-style:  normal;
+	}
+
+	var {
+		font-style:  normal;
+	}
+
+	dfn {
 		font-weight: inherit;
 		font-style:  normal;
 	}
@@ -71,7 +80,7 @@ body {
 		line-height: inherit;
 	}
 
-	code, tt, pre, samp.replaceable {
+	code, tt, pre, samp.replaceable, var {
 		font-size: (@font-size - 1);
 		line-height: $baseline - 2px;
 	}
@@ -98,6 +107,10 @@ body {
 /* alignment */
 body {
 	text-align: left;
+}
+
+var, code, samp, tt {
+	white-space: nowrap; // possibly centralise
 }
 
 /* features */
