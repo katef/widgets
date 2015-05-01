@@ -4,3 +4,8 @@ span.command[data-manvolnum]:after {
 	content: "(" attr(data-manvolnum) ")";
 }
 
+p > span.command[data-refclass]:after,
+section.refnamediv span.command[data-refclass]:after {
+	content: "." attr(data-refclass);
+}
+
