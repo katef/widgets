@@ -59,7 +59,7 @@
 					</xsl:with-param>
 				</xsl:call-template>
 
-				<xsl:apply-templates mode="copy" select="h:body/*[name() != 'h1']"/>
+				<xsl:apply-templates mode="copy" select="h:body"/>
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template>
