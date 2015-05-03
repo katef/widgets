@@ -52,12 +52,6 @@
 					<xsl:copy-of select="$main"/>
 				</main>
 
-				<xsl:if test="$notes and count(common:node-set($notes)/*) != 0">
-					<aside class="notes">
-						<xsl:copy-of select="$notes"/>
-					</aside>
-				</xsl:if>
-
 				<aside class="meta">
 					<nav class="submenu">
 						<ul>
