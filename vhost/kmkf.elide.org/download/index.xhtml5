@@ -3,7 +3,8 @@
 	<!ENTITY ldquo "&#8220;">
 	<!ENTITY rdquo "&#8221;">
 
-	<!ENTITY kmkf.url.dl "http://kmkf.elide.org/releases">
+	<!ENTITY kmkf.url.dl  "http://kmkf.elide.org/releases">
+	<!ENTITY kmkf.url.svn "svn://svn.elide.org/kmkf">
 ]>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -83,9 +84,9 @@
 
 			<p>See the <a href="TODO">README</a> for build instructions.<br/>
 -->
-			<p>You can check out the trunk revision of the source here:</p>
+			<p>You can check out the trunk revision here:</p>
 
-			<pre>$ svn co http://svn.elide.org/kmkf/trunk kmkf0</pre>
+			<pre>$ svn co &kmkf.url.svn;/trunk kmkf0</pre>
 <!--
 		</section>
 
