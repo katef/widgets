@@ -3,6 +3,8 @@
 	<!ENTITY ldquo "&#8220;">
 	<!ENTITY rdquo "&#8221;">
 
+	<!ENTITY bsd "<abbr>BSD</abbr>">
+
 	<!ENTITY kmkf.url.dl "http://kmkf.elide.org/releases">
 ]>
 
@@ -21,7 +23,7 @@
 			This is the result of lessons learned from previous work,
 			taking the ideas I liked and addressing the problems I found.</p>
 
-		<p>For most BSD-like <filename>.mk</filename> systems, there's a
+		<p>For most &bsd;-like <filename>.mk</filename> systems, there's a
 			&ldquo;you can only build one kind of thing per
 			Makefile&rdquo; limitation.
 			This is a side effect of using single variables as an interface
@@ -43,7 +45,7 @@
 			Alternately to execute separate instances of make for each
 			&ldquo;sub&rdquo; thing, which worsens the downsides of recursive make.
 			I don't think either of these are show-stopping flaws
-			(indeed large codebases such as the BSD trees seem to get the job done
+			(indeed large codebases such as the &bsd; trees seem to get the job done
 			without too much fuss), but I do think they are indicative of taking
 			a fundamentally wrong approach and then trying to patch that up post-hoc.</p>
 
@@ -55,7 +57,7 @@
 
 			<li>Not to have too many targets.<!--
 				(<a href="http://www.gnu.org/software/automake/">Automake</a> is nuts.
-				BSD's <filename>.mk</filename> files are less nuts, but still nuts.)
+				&bsd;'s <filename>.mk</filename> files are less nuts, but still nuts.)
 			--></li>
 
 			<li>Use list variables as interfaces, allowing multiple items.</li>
