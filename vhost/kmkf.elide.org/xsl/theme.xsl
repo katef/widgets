@@ -62,7 +62,7 @@
 					<nav class="submenu">
 						<ul>
 							<li>
-								<a href="/rationale/">Rationale</a>
+								<a href="/about/">About</a>
 							</li>
 							<li>
 								<a href="/download/">Download</a>
