@@ -26,7 +26,8 @@ $grid = {
 	colour: lighten(spin($kmkf.fg, 90deg), 70%)
 }
 
-sidebar($l) { return $grid.ncols[$l] >= 4 ? 1 : 0; }
-edge($l)    { return $grid.ncols[$l] == 1 ? top : left; }
-indent($l)  { return $grid.ncols[$l] > 1; }
+sidebar($l)  { return $grid.ncols[$l] >= 4 ? 1 : 0; }
+edge($l)     { return $grid.ncols[$l] == 1 ? top : left; }
+indent($l)   { return $grid.ncols[$l] > 1; }
+listcols($l) { return $grid.ncols[$l] > 2 ? 2 : 1; }
 

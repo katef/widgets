@@ -122,6 +122,15 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			}
 		}
 
+		ul.goals {
+			margin-right: $list.gutter;
+
+			column-count: listcols($l);
+			column-fill: balance;
+			column-gap:   0px;
+			column-rule: none;
+		}
+
 	}
 }
 
