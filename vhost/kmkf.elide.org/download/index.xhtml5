@@ -128,7 +128,8 @@
 		<p>Dependencies:
 			A BSD compatible make.
 			This can be any BSD's native &make;.
-			An ancient version of NetBSD's make is sometimes packaged as &ldquo;pmake&rdquo;.
+			An&nbsp;ancient version of NetBSD's make is sometimes
+			packaged as &ldquo;pmake&rdquo;.
 			There's also <a href="http://www.crufty.net/help/sjg/bmake.html">sjg's portable bmake</a>.</p>
 
 		<p><a href="http://www.gnu.org/software/make/">GNU make</a>
