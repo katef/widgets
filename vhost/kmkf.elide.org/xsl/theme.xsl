@@ -16,16 +16,13 @@
 	</xsl:template>
 
 	<xsl:template name="kmkf-output">
-		<xsl:param name="class"/>
 		<xsl:param name="page"/>
-		<xsl:param name="site"/>
 
-		<xsl:param name="meta"  select="/.."/>
 		<xsl:param name="main"  select="/.."/>
 		<xsl:param name="notes" select="/.."/>
 
 		<xsl:call-template name="theme-output">
-			<xsl:with-param name="class" select="$class"/>
+			<xsl:with-param name="class" select="'man'"/>
 			<xsl:with-param name="css"   select="'style.css debug.css'"/>
 
 			<xsl:with-param name="js">
@@ -44,7 +41,7 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="site">
-				<xsl:copy-of select="$site"/>
+				<xsl:text>kmkf</xsl:text>
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
@@ -66,8 +63,15 @@
 
 					<hr/>
 
-					<!-- TODO: merge in manindex here. maybe centralise with bp -->
-					<xsl:copy-of select="$meta"/>
+					<xsl:variable name="manvolnum"   select="'5mk'"/>
+					<xsl:variable name="productname" select="'KMKF'"/>
+
+					<nav class="submenu">
+						<xsl:call-template name="submenu-bottom">
+							<xsl:with-param name="manindex"         select="$manindex"/>
+							<xsl:with-param name="page-productname" select="$productname"/>
+						</xsl:call-template>
+					</nav>
 				</aside>
 			</xsl:with-param>
 		</xsl:call-template>

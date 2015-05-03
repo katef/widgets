@@ -22,32 +22,8 @@
 
 	<xsl:template match="/h:html">
 		<xsl:call-template name="kmkf-output">
-			<xsl:with-param name="class">
-				<xsl:value-of select="concat(@class, ' man')"/>
-			</xsl:with-param>
-
 			<xsl:with-param name="page">
 				<xsl:apply-templates select="h:head/h:title" mode="body"/>
-			</xsl:with-param>
-
-			<xsl:with-param name="site">
-				<xsl:text>kmkf</xsl:text>
-			</xsl:with-param>
-
-			<xsl:with-param name="meta">
-				<xsl:variable name="manvolnum"   select="h:head/h:meta[@name = 'refmeta-manvolnum']"/>
-				<xsl:variable name="productname" select="h:head/h:meta[@name = 'refmeta-productname']"/>
-				<xsl:variable name="refname"     select="h:head/h:meta[@name = 'refmeta-refname']"/>
-
-				<nav class="submenu">
-					<xsl:if test="$manvolnum and $productname and $refname">
-						<xsl:call-template name="submenu-bottom">
-							<xsl:with-param name="manindex"         select="$manindex"/>
-							<xsl:with-param name="page-productname" select="$productname/@content"/>
-							<xsl:with-param name="page-title"       select="$refname/@content"/>
-						</xsl:call-template>
-					</xsl:if>
-				</nav>
 			</xsl:with-param>
 
 			<xsl:with-param name="main">
