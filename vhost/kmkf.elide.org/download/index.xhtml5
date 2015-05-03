@@ -5,6 +5,8 @@
 
 	<!ENTITY kmkf.url.dl  "http://kmkf.elide.org/releases">
 	<!ENTITY kmkf.url.svn "svn://svn.elide.org/kmkf">
+
+	<!ENTITY make "<span class='command donthyphenate' data-manvolnum='1'>make</span>">
 ]>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -122,6 +124,15 @@
 				<a href="http://www.gnu.org/software/make/">GNU <code>make</code></a>.</p>
 		</section>
 -->
+
+		<p>Dependencies:
+			A BSD compatible make.
+			This can be any BSD's native &make;.
+			An ancient version of NetBSD's make is sometimes packaged as &ldquo;pmake&rdquo;.
+			There's also <a href="http://www.crufty.net/help/sjg/bmake.html">sjg's portable bmake</a>.</p>
+
+		<p><a href="http://www.gnu.org/software/make/">GNU make</a>
+			uses a completely different syntax, and is not supported.</p>
 	</body>
 </html>
 
