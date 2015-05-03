@@ -9,19 +9,12 @@
 	</head>
 
 	<body>
-		<p>These makefiles are an attempt to provide a general purpose
-			build system suitable for use in various projects.
-			This is the result of lessons learned from previous work,
-			taking experience from:</p>
-
 		<p>wanted to make something that's: be reusable between all my projects.
 			in particular, practical for the typical kind of things i write
 			(source split into various directories,
 			a couple of binaries, a library or two, and some documentation)</p>
 
 <!--
-		<p>result of lessons learned from previous work:</p>
-
 		<dl>
 			<dt>CherryBuild (<a href="http://www.bubblephone.com/">Bubblephone Ltd.</a>)</dt>
 			<dd>
@@ -81,20 +74,6 @@
 			</dd>
 		</dl>
 -->
-
-		<p>my aims were:</p>
-		<ul>
-		<li>not too many targets (automake is nuts. BSD is less nuts but still nuts)</li>
-		<li>solve the cherrybuild Makefile.multi hack (tendra also suffers this)</li>
-		<li>non-recursive; one top-level makefile
-			side-effect: no include guards</li>
-		<li>seperate build directory
-			effect: read-only source is possible</li>
-		<li>entry point at any directory</li>
-		<li>be convenient for packaging (install to a staging directory).
-			in particular put all the overridable stuff in one place,
-			so it's easily visible to someone making a package (top-level makefile)</li>
-		</ul>
 
 		<p>fundamental implementation idea:
 		xyz:: targets appended to by various .mk files

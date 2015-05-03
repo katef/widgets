@@ -85,24 +85,6 @@
 			a wider variety of things without any fundamental change.</p>
 
 		<p>See <a href="/kmkf.7mk/"><span class="command" data-manvolnum="7mk">kmkf</span></a> for more.</p>
-
-<!--
-		<p>I'm using bmake because I prefer it to GNU make.
-			subset of bmake dialects (sjg's bmake, *BSD make(1), etc)
-			not portable make because it's unrealistic.
-			The dialect of make(1) is not intrinsic to the approach I've taken;
-			you could implement the same idea for GNU make instead.</p>
-
-		<p>fundamental implementation idea:
-		xyz:: targets appended to by various .mk files
-		top-level user makefile which brings in each .mk file, and glues them together with
-		rules for the user's source tree</p>
-
-		<p>i decided to re-use variables between makefiles (CLEAN, LIB etc) rather than naming a distinct one per .mk file. this allows "chaining together" of makefiles, as per cherrybuild.
-		While this suited cherrybuild's BSD-like approach, in practice however I think it's of limited value,
-		and targets' dependencies make a better vehicle for communicating lists between .mk files.
-		</p>
--->
 	</body>
 </html>
 
