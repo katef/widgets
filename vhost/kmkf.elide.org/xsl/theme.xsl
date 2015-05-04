@@ -6,14 +6,21 @@
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:str="http://exslt.org/strings"
 	xmlns:common="http://exslt.org/common"
+	xmlns:c="http://xml.elide.org/elide_contents"
 
 	extension-element-prefixes="str"
 
-	exclude-result-prefixes="h str">
+	exclude-result-prefixes="h c str">
 
 	<xsl:template match="h:title" mode="body">
 		<xsl:apply-templates/>
 	</xsl:template>
+
+	<!-- TODO: rename contents to toc -->
+	<c:contents>
+		<c:category href="/about/"    name="About"/>
+		<c:category href="/download/" name="Download"/>
+	</c:contents>
 
 	<xsl:template name="kmkf-output">
 		<xsl:param name="page"/>
@@ -50,14 +57,16 @@
 				</main>
 
 				<aside class="meta">
+					<!-- TODO: <menu> not <ul> -->
 					<nav class="submenu">
 						<ul>
-							<li>
-								<a href="/about/">About</a>
-							</li>
-							<li>
-								<a href="/download/">Download</a>
-							</li>
+							<xsl:for-each select="document('')//c:contents/c:category">
+								<li>
+									<a href="{@href}">
+										<xsl:value-of select="@name"/>
+									</a>
+								</li>
+							</xsl:for-each>
 						</ul>
 					</nav>
 
