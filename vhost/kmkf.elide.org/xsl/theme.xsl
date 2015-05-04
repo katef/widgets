@@ -72,7 +72,7 @@
 
 					<hr/>
 
-					<xsl:variable name="manvolnum"   select="'5mk'"/>
+					<xsl:variable name="manvolnum"   select="'7mk'"/>
 					<xsl:variable name="productname" select="'KMKF'"/>
 
 					<nav class="submenu">
