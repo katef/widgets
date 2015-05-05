@@ -15,13 +15,15 @@
 	<xsl:import href="string.xsl"/>
 
 	<xsl:template match="h:a" mode="submenu">
-		<xsl:param name="page-title"/>
+		<xsl:param name="current-manvolnum" select="false()"/>
+		<xsl:param name="current-refname"   select="false()"/> <!-- space-separated set -->
 
-		<xsl:variable name="current" select="str:contains-word($page-title, str:trim(.))"/>
+		<xsl:param name="manvolnum" select="h:span/@data-manvolnum"/>
+		<xsl:param name="refname"   select="str:trim(h:span/text())"/>
 
 		<li>
 			<!-- TODO: i want a better way to do class lists; join() on a space-seperated list. make a classlist() function perhaps -->
-			<xsl:if test="$current">
+			<xsl:if test="$current-manvolnum = $manvolnum and str:tokenize($current-refname, ' ')[. = $refname]">
 				<xsl:attribute name="class">
 					<xsl:text>current</xsl:text>
 				</xsl:attribute>
@@ -34,13 +36,13 @@
 
 	<xsl:template name="submenu-top">
 		<xsl:param name="manindex"/>
-		<xsl:param name="page-vol"/>
-		<xsl:param name="page-productname"/>
+
+		<xsl:param name="current-productname"/>
 
 		<ul>
 			<xsl:for-each select="set:distinct($manindex/h:html/h:body//h:dd/@data-productname)">
 				<li>
-					<xsl:if test=". = $page-productname">
+					<xsl:if test=". = $current-productname">
 						<xsl:attribute name="class">
 							<xsl:text>current</xsl:text>
 						</xsl:attribute>
@@ -71,24 +73,27 @@
 
 	<xsl:template name="submenu-bottom">
 		<xsl:param name="manindex"/>
-		<xsl:param name="page-productname"/>
-		<xsl:param name="page-title" select="false()"/>
+
+		<xsl:param name="current-productname"/>
+		<xsl:param name="current-manvolnum"  select="false()"/>
+		<xsl:param name="current-refname"    select="false()"/>
 
 		<xsl:variable name="links" select="$manindex/h:html/h:body
 			/h:section
-			/h:dl/h:dt[@data-productname = $page-productname]
+			/h:dl/h:dt[@data-productname = $current-productname]
 			/h:a"/>
 
 		<!-- first, ones with no role, for the currently visible product -->
 		<ul class="small">
 			<xsl:apply-templates select="$links" mode="submenu">
-				<xsl:with-param name="page-title" select="$page-title"/>
+				<xsl:with-param name="current-manvolnum" select="$current-manvolnum"/>
+				<xsl:with-param name="current-refname"   select="$current-refname"/>
 			</xsl:apply-templates>
 
 			<!-- then iterate over roles, for the currently visible product -->
 			<xsl:for-each select="$manindex/h:html/h:body/h:section
 				/h:section
-				[h:dl/h:dt[@data-productname = $page-productname]]">
+				[h:dl/h:dt[@data-productname = $current-productname]]">
 
 				<xsl:variable name="rolelink-id">
 					<!-- TODO: centralise somehow -->
@@ -100,7 +105,11 @@
 				</xsl:variable>
 
 				<li>
+<!-- XXX:
 					<xsl:if test="str:contains-word($page-title, str:trim(h:dl/h:dt/h:a[generate-id(.) = $rolelink-id]))">
+if current-manvolnum and current-refname
+-->
+<xsl:if test="false()">
 						<xsl:attribute name="class">
 							<xsl:text>current</xsl:text>
 						</xsl:attribute>
@@ -111,9 +120,10 @@
 					<ul class="small">
 						<xsl:apply-templates select="$manindex/h:html/h:body
 							/h:section/h:section[@data-productrole = current()/@data-productrole]
-							/h:dl/h:dt[@data-productname = $page-productname]
+							/h:dl/h:dt[@data-productname = $current-productname]
 							/h:a[generate-id(.) != $rolelink-id]" mode="submenu">
-							<xsl:with-param name="page-title" select="$page-title"/>
+							<xsl:with-param name="current-manvolnum" select="$current-manvolnum"/>
+							<xsl:with-param name="current-refname"   select="$current-refname"/>
 						</xsl:apply-templates>
 					</ul>
 				</li>

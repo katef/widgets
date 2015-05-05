@@ -72,13 +72,16 @@
 
 					<hr/>
 
-					<xsl:variable name="manvolnum"   select="'7mk'"/>
 					<xsl:variable name="productname" select="'KMKF'"/>
+					<xsl:variable name="manvolnum"   select="'7mk'"/>
+					<xsl:variable name="refname"     select="h:head/h:meta[@name = 'refmeta-refname']"/>
 
 					<nav class="submenu">
 						<xsl:call-template name="submenu-bottom">
-							<xsl:with-param name="manindex"         select="$manindex"/>
-							<xsl:with-param name="page-productname" select="$productname"/>
+							<xsl:with-param name="manindex"            select="$manindex"/>
+							<xsl:with-param name="current-productname" select="$productname"/>
+							<xsl:with-param name="current-manvolnum"   select="$manvolnum"/>
+							<xsl:with-param name="current-refname"     select="$refname/@content"/>
 						</xsl:call-template>
 					</nav>
 				</aside>
