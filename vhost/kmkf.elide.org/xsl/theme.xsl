@@ -62,6 +62,12 @@
 						<ul>
 							<xsl:for-each select="document('')//c:contents/c:category">
 								<li>
+									<xsl:if test="$page = @name">
+										<xsl:attribute name="class">
+											<xsl:text>current</xsl:text>
+										</xsl:attribute>
+									</xsl:if>
+
 									<a href="{@href}">
 										<xsl:value-of select="@name"/>
 									</a>
