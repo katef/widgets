@@ -12,6 +12,8 @@
 
 	exclude-result-prefixes="h str">
 
+	<xsl:import href="lib/str.contains-word.xsl"/>
+
 	<xsl:import href="string.xsl"/>
 
 	<xsl:template match="h:a" mode="submenu">
@@ -23,7 +25,7 @@
 
 		<li>
 			<!-- TODO: i want a better way to do class lists; join() on a space-seperated list. make a classlist() function perhaps -->
-			<xsl:if test="$current-manvolnum = $manvolnum and str:tokenize($current-refname, ' ')[. = $refname]">
+			<xsl:if test="$current-manvolnum = $manvolnum and str:contains-word($current-refname, $refname)">
 				<xsl:attribute name="class">
 					<xsl:text>current</xsl:text>
 				</xsl:attribute>

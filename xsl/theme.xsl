@@ -12,6 +12,8 @@
 
 	exclude-result-prefixes="h common func str">
 
+	<xsl:import href="lib/str.contains-word.xsl"/>
+
 	<xsl:import href="copy.xsl"/>
 	<xsl:import href="output.xsl"/>
 
@@ -20,14 +22,6 @@
 		output document. This cannot be done in output.xsl because
 		output.xsl is not aware that the source may be (unthemed) XHTML.
 	-->
-
-	<!-- TODO: centralise -->
-	<func:function name="str:contains-word">
-		<xsl:param name="string"/>
-		<xsl:param name="word"/>
-
-		<func:result select="boolean(str:tokenize($string, ' ')[. = $word])"/>
-	</func:function>
 
 	<xsl:template match="node()" mode="copy">
 		<xsl:apply-templates select="node()|text()|processing-instruction()"/>
