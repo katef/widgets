@@ -26,20 +26,7 @@
 		<xsl:param name="string"/>
 		<xsl:param name="word"/>
 
-		<xsl:variable name="test">
-			<xsl:for-each select="str:tokenize($string, ' ')">
-				<xsl:if test=". = $word">
-					<xsl:text>hack</xsl:text>
-				</xsl:if>
-			</xsl:for-each>
-		</xsl:variable>
-
-		<!--
-			A string comparison is used here just in case $class contains
-			multiple words which match.
-		-->
-
-		<func:result select="$test != ''"/>
+		<func:result select="boolean(str:tokenize($string, ' ')[. = $word])"/>
 	</func:function>
 
 	<xsl:template match="node()" mode="copy">
