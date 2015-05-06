@@ -77,8 +77,8 @@
 		<xsl:param name="manindex"/>
 
 		<xsl:param name="current-productname"/>
-		<xsl:param name="current-manvolnum"  select="false()"/>
-		<xsl:param name="current-refname"    select="false()"/>
+		<xsl:param name="current-manvolnum" select="false()"/>
+		<xsl:param name="current-refname"   select="false()"/> <!-- space-separated set -->
 
 		<xsl:variable name="links" select="$manindex/h:html/h:body
 			/h:section
@@ -107,11 +107,7 @@
 				</xsl:variable>
 
 				<li>
-<!-- XXX:
-					<xsl:if test="str:contains-word($page-title, str:trim(h:dl/h:dt/h:a[generate-id(.) = $rolelink-id]))">
-if current-manvolnum and current-refname
--->
-<xsl:if test="false()">
+					<xsl:if test="$current-manvolnum = h:dl/h:dt/h:a[generate-id(.) = $rolelink-id]/h:span/@data-manvolnum and str:contains-word($current-refname, str:trim(h:dl/h:dt/h:a[generate-id(.) = $rolelink-id]))">
 						<xsl:attribute name="class">
 							<xsl:text>current</xsl:text>
 						</xsl:attribute>
