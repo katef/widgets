@@ -14,6 +14,11 @@ hang($gutter, $padding = 1ex, type = exdent) {
 	&:before {
 		width: $gutter;
 
+		// abuse of border as padding, without contributing to @width
+		box-sizing:   border-box;
+		border-left:  solid $padding transparent;
+		border-right: solid $padding transparent;
+
 		if (type == inline) {
 			display: inline-block;
 			text-align: left;
@@ -24,8 +29,6 @@ hang($gutter, $padding = 1ex, type = exdent) {
 			position: absolute;
 			left: -($gutter);
 		}
-
-		margin-left: -($padding);
 	}
 }
 
