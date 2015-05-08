@@ -33,6 +33,10 @@ ol.overlay {
 			border-left:  solid $grid.gutter $grid.colour - 50%;
 			border-right: solid $grid.gutter $grid.colour - 50%;
 
+			&:before {
+				display: none; // XXX: to be done by catching list-style-type: none, per list.styl
+			}
+
 			&:after {
 				text-align:  center;
 				white-space: pre-wrap;
