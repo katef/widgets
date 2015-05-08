@@ -1,17 +1,19 @@
 /* $Id$ */
 
 $faq ?= {
-	gutter: $list.gutter || 2em
+	padding: $list.padding || 1ex
+	gutter:  $list.gutter  || 2em
+	punct:   $list.punct   || "."
 }
 
 dl.faq {
-	     dd:before { content: "A.";  }
-	     dt:before { content: "Q.";  }
+	     dd:before { content: "A" $faq.punct; }
+	     dt:before { content: "Q" $faq.punct; }
 	dt + dt:before { content: "\A0"; }
 
 	dt,
 	dd {
-		hang($faq.gutter, 1ex, exdent);
+		hang($faq.gutter, $faq.padding, exdent);
 	}
 }
 
