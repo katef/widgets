@@ -12,17 +12,13 @@ $accordion ?= {
 	height:  15em
 	gutter:  2em
 	indent:  4em
-	padding: $menu.padding || 1ex
+	padding: $menu.padding || 1ex // XXX: why not $list.padding?
 	time:    $menu.time    || .25s
 }
 
 accordion-layout() {
-	dt a {
-		hang($accordion.gutter, $accordion.padding, inline);
-
-		&:before {
-			content: "\25B6";
-		}
+	dt a:before {
+		content: "\25B6";
 	}
 
 	dt.current a:before {
@@ -32,6 +28,16 @@ accordion-layout() {
 		 * I would transform:rotate(90deg); here but it looks terrible because
 		 * the triangle is not positioned about its centre.
 		 */
+	}
+
+	dt a {
+		hang($accordion.gutter, $accordion.padding, inline);
+
+		padding-left: 0; // XXX: breaks abstraction?
+
+		&:before {
+			text-align: center; // XXX: not sure
+		}
 	}
 
 	dd {
