@@ -1,30 +1,40 @@
 /* $Id$ */
 
 $list ?= {
-	gutter: 2em
-	bullet: "\2022"
+	padding: 1ex
+	gutter:  2em
+	bullet:  "\2022" // because "list-style-type: disc" is too large
+	punct:   "."
 }
 
+// XXX: want to do this by overriding list-style-type as a mixin instead
 if ($list.bullet != default) {
 	ul li {
-		position: relative;
 		list-style-type: none;
 
-		// because "list-style-type: disc" is too large
 		&:before {
-			content: $list.bullet;
-			position: absolute;
-			text-align: right;
-			display: block;
-			padding-right: .75em;
-			width: 1em;
-			left: -(@width + @padding-right);
+			content: $list.bullet "\A0"; // TODO: as many spaces as $list.punct is wide
 		}
 	}
 }
 
 li {
-	margin-left: $list.gutter;
+	hang($list.gutter, $list.padding, exdent);
+}
+
+/*
+ * we provide our own list counter so that the spacing can be the same
+ * as for other hang()s, e.g. FAQ items
+ * TODO: handle nested lists
+ */
+ol {
+	counter-reset: ol;
+	list-style-type: none;
+
+	li:before {
+		content: counter(ol) $list.punct;
+		counter-increment: ol;
+	}
 }
 
 dl {
