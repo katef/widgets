@@ -94,7 +94,14 @@ var, code, samp, tt {
 	white-space: pre;
 }
 
-p q:first-child:before {
-	margin-left: -1ex; // hanging punctuation
+/* hanging punctuation */
+p {
+	q:first-child:before {
+		margin-left: -1ex;
+	}
+
+	q:last-child:after {
+		margin-right: -1ex;
+	}
 }
 
