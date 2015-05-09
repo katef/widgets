@@ -1,0 +1,43 @@
+/* $Id: debug.less 316 2012-02-22 18:10:48Z kate $ */
+
+html.debug {
+	ol.overlay {
+		&#cols {
+			display: block;
+		}
+
+		&#rows {
+			display: block;
+		}
+
+		li {
+			background-color: lighten($grid.colour, 20%);
+
+			&:before {
+				background-color: darken($grid.colour, 20%);
+			}
+		}
+	}
+
+	header, footer, section, aside, nav {
+		background-color: $grid.colour;
+
+		& > * {
+			background-color: lighten($grid.colour, 20%);
+		}
+
+		& > h2,
+		& > h1 {
+			background-color: darken($grid.colour, 20%);
+		}
+	}
+
+	main > article.entry {
+		& > time.update,
+		& > a[name],
+		& > ul.tags {
+			background-color: lighten($grid.colour, 20%);
+		}
+	}
+}
+

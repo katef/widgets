@@ -5,34 +5,5 @@
 @import "misc.styl";
 @import "grid.styl";
 @import "overlay.styl";
-
-html.debug {
-	ol.overlay {
-		&#cols {
-			display: block;
-		}
-
-		&#rows {
-			display: block;
-		}
-	}
-
-	header {
-		& > h1 {
-			background-color: $grid.colour;
-		}
-	}
-
-	section {
-		background-color: $grid.colour;
-
-		& > * {
-			background-color: lighten($grid.colour, 20%);
-		}
-
-		& > h2 {
-			background-color: darken($grid.colour, 20%);
-		}
-	}
-}
+@import "debug.styl";
 

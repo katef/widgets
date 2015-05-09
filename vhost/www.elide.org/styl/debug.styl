@@ -5,28 +5,5 @@
 @import "misc.styl";
 @import "grid.styl";
 @import "overlay.styl";
-
-html.debug {
-	ol.overlay {
-		&#cols {
-			display: block;
-		}
-
-		&#rows {
-			display: block;
-		}
-	}
-
-	main {
-		background-color: lightgreen;
-	}
-
-	main > article.entry {
-		& > time.update,
-		& > a[name],
-		& > ul.tags {
-			background-color: pink;
-		}
-	}
-}
+@import "debug.styl";
 
