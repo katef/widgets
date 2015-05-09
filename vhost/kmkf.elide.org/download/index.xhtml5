@@ -129,7 +129,7 @@
 -->
 
 		<p>Dependencies:
-			A &bsd; compatible make.
+			A &bsd;-compatible make.
 			This can be any &bsd;'s native &make;.
 			An&nbsp;ancient version of NetBSD's make is sometimes
 			packaged as &ldquo;pmake&rdquo;.
