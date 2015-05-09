@@ -23,7 +23,7 @@
 			This is the result of lessons learned from previous work,
 			taking the ideas I liked and addressing the problems I found.</p>
 
-		<p>For most &bsd;-like <filename>.mk</filename> systems, there's a
+		<p>For most &bsd;-like <filename>.mk</filename> systems, there&rsquo;s a
 			&ldquo;you can only build one kind of thing per
 			Makefile&rdquo; limitation.
 			This is a side effect of using single variables as an interface
@@ -44,7 +44,7 @@
 			which is usually a good idea, but gets in the way for some situations.
 			Alternately to execute separate instances of make for each
 			&ldquo;sub&rdquo; thing, which worsens the downsides of recursive make.
-			I don't think either of these are show-stopping flaws
+			I don&rsquo;t think either of these are show-stopping flaws
 			(indeed large codebases such as the &bsd; trees seem to get the job done
 			without too much fuss), but I do think they are indicative of taking
 			a fundamentally wrong approach and then trying to patch that up post-hoc.</p>
@@ -57,7 +57,7 @@
 
 			<li>Not to have too many targets.<!--
 				(<a href="http://www.gnu.org/software/automake/">Automake</a> is nuts.
-				&bsd;'s <filename>.mk</filename> files are less nuts, but still nuts.)
+				&bsd;&rsquo;s <filename>.mk</filename> files are less nuts, but still nuts.)
 			--></li>
 
 			<li>Use list variables as interfaces, allowing multiple items.</li>
@@ -68,15 +68,15 @@
 			<li>Entry point at any directory.</li>
 
 			<li>Handle dependencies correctly!
-				It's surprising how many things get tricky bits wrong.</li>
+				It&rsquo;s surprising how many things get tricky bits wrong.</li>
 
 			<li>Convenient to package:
-				Put all the overridable settings in one place, so it's easy to see.
+				Put all the overridable settings in one place, so it&rsquo;s easy to see.
 				Build to a seperate directory; this allows for a read-only source tree.
 				Install to a staging directory.</li>
 		</ul>
 
-		<p>Generally I feel these goals have been met, and so I'm making
+		<p>Generally I feel these goals have been met, and so I&rsquo;m making
 		these .mk files available for general use, and converting all my
 		projects to use them.</p>
 
