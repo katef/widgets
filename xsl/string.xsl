@@ -12,9 +12,10 @@
 
 	<func:function name="str:trim">
 		<xsl:param name="string"/>
+		<xsl:param name="space" select="'&#x9;&#xA;&#xD;&#x20;&#x2009;'"/>
 
 		<!-- XXX: this is not really triming; inter-token whitespace needs preservation -->
-		<func:result select="str:concat(str:tokenize($string))"/>
+		<func:result select="str:concat(str:tokenize($string, $space))"/>
 	</func:function>
 
 	<func:function name="str:tolower">
