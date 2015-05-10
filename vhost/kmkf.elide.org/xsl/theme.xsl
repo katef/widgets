@@ -25,6 +25,7 @@
 	<xsl:template name="kmkf-output">
 		<xsl:param name="page"/>
 
+		<xsl:param name="head"  select="/.."/>
 		<xsl:param name="main"  select="/.."/>
 		<xsl:param name="notes" select="/.."/>
 
@@ -49,6 +50,10 @@
 
 			<xsl:with-param name="site">
 				<xsl:text>kmkf</xsl:text>
+			</xsl:with-param>
+
+			<xsl:with-param name="head">
+				<xsl:copy-of select="$head"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="body">

@@ -26,6 +26,11 @@
 				<xsl:apply-templates select="h:head/h:title" mode="body"/>
 			</xsl:with-param>
 
+			<xsl:with-param name="head">
+				<xsl:copy-of select="h:head/h:meta[@name = 'description']"/>
+				<xsl:copy-of select="h:head/h:meta[@name = 'keywords']"/>
+			</xsl:with-param>
+
 			<xsl:with-param name="main">
 				<xsl:variable name="productname" select="h:head/h:meta[@name = 'refmeta-productname']/@content"/>
 				<xsl:variable name="productrole" select="h:head/h:meta[@name = 'refmeta-productrole']/@content"/>

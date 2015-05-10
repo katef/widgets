@@ -116,6 +116,11 @@
 				<xsl:apply-templates select="h:head/h:title" mode="body"/>
 			</xsl:with-param>
 
+			<xsl:with-param name="head">
+				<xsl:copy-of select="h:head/h:meta[@name = 'description']"/>
+				<xsl:copy-of select="h:head/h:meta[@name = 'keywords']"/>
+			</xsl:with-param>
+
 			<xsl:with-param name="body">
 				<header>
 					<h1>

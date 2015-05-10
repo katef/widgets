@@ -92,6 +92,11 @@
 				<xsl:text>TenDRA</xsl:text>
 			</xsl:with-param>
 
+			<xsl:with-param name="head">
+				<xsl:copy-of select="h:head/h:meta[@name = 'description']"/>
+				<xsl:copy-of select="h:head/h:meta[@name = 'keywords']"/>
+			</xsl:with-param>
+
 			<xsl:with-param name="body">
 				<header class="donthyphenate">
 					<xsl:call-template name="t:banner"/>
