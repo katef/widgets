@@ -12,7 +12,7 @@ pre {
 for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l);
 	@media $q {
-		body > header menu {
+		body > header nav {
 			concertina-layout(menustyle($l));
 if (menustyle($l) == vertical) {
 li > ul { display: none; } // XXX: need to have this expand out, too

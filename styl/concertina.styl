@@ -27,7 +27,7 @@ concertina-layout(type) {
 		border-bottom: solid $concertina.border $concertina.colour;
 	}
 
-	& > li {
+	& > ul > li {
 		margin:  0;
 		padding: 0;
 
@@ -39,17 +39,17 @@ concertina-layout(type) {
 	}
 
 	if (type == vertical) {
-		& > li.current a {
+		& > ul > li.current a {
 			trigram();
 		}
 
-		&.expanded li,
+		&.expanded  li,
 		&.collapsed li {
 			transition: max-height $concertina.time ease-in-out;
 			overflow: hidden;
 		}
 
-		&.expanded li,
+		&.expanded  li,
 		&.collapsed li.current {
 			max-height: $concertina.height;
 		}

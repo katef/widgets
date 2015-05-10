@@ -5,7 +5,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l);
 	@media $q {
 		if ($grid.ncols[$l] <= 3) {
-			header menu {
+			header nav {
 				li a {
 					background-color: lighten($menu.colour, 50%);
 				}
@@ -34,8 +34,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 	}
 }
 
-menu a,
-nav.submenu a,
+header nav a,
 aside.notes dl dt a {
 	text-align: left;
 	display: block;
@@ -50,8 +49,8 @@ aside.notes dl dt:before {
 	padding: ($menu.delta / 2) $menu.delta;
 }
 
-menu li a:hover,
-menu li.current > a,
+header nav li a:hover,
+header nav li.current > a,
 nav.submenu li.current > a,
 nav.submenu li a:hover,
 aside.notes dl dt a:hover {
@@ -61,7 +60,7 @@ aside.notes dl dt a:hover {
 
 @media screen {
 
-	menu li a,
+	header nav li a,
 	nav.submenu li a,
 	aside.notes dl dt a {
 		cursor: pointer;
@@ -89,7 +88,7 @@ menu-container() {
 }
 
 ul.menu,
-menu {
+header nav {
 	menu-container();
 }
 
@@ -141,7 +140,7 @@ ul.menu {
 
 /* adapted from http://www.divitodesign.com/2008/09/how-to-dropdown-css-menu/ */
 
-menu {
+header nav {
 	& > li > a {
 		height:  ($baseline * 1.5);
 		padding: 0 $menu.pad-sides;

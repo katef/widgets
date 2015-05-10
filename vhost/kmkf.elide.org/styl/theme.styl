@@ -2,7 +2,6 @@
 
 $fontsize = 14px;
 $baseline = 20px;
-$edgesize = $baseline;
 $indent   = 2em;
 
 $kmkf = {
@@ -16,7 +15,7 @@ $kmkf = {
 
 $grid = {
 	ncols:    ( 1     2     3     4     5     )
-	layouts:  ( fluid fluid fluid fluid fixed )
+	layouts:  ( fluid fluid fixed fixed fixed )
 	aligns:   ( left  left  left  left  left  )
 
 	colwidth: $baseline * 7
@@ -28,8 +27,15 @@ $grid = {
 	colour: lighten(spin($kmkf.fg, 90deg), 70%)
 }
 
-sidebar($l)  { return $grid.ncols[$l] >= 4 ? 1 : 0; }
-edge($l)     { return $grid.ncols[$l] == 1 ? top : left; }
-indent($l)   { return $grid.ncols[$l] > 1; }
-listcols($l) { return $grid.ncols[$l] > 2 ? 2 : 1; }
+$menu = {
+	border: $grid.gutter / 2
+	delta:  $grid.gutter
+	colour: $kmkf.code
+	time:   .25s
+}
+
+sidebar($l)   { return $grid.ncols[$l] >= 4 ? 1 : 0; }
+indent($l)    { return $grid.ncols[$l] > 1; }
+listcols($l)  { return $grid.ncols[$l] > 2 ? 2 : 1; }
+menustyle($l) { return sidebar($l) ? vertical : horizontal; }
 

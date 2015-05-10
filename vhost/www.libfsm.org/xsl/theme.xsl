@@ -62,7 +62,7 @@
 -->
 			<span>menu stuff here</span>
 
-			<menu>
+			<ul>
 				<li>
 					<a id="menu-fsm" href="{$libfsm.url.www}/libfsm">
 						<span class="title">libfsm</span>
@@ -83,7 +83,7 @@
 						<span class="desc">Lexer generator</span>
 					</a>
 				</li>
-			</menu>
+			</ul>
 		</nav>
 	</xsl:template>
 

@@ -131,9 +131,11 @@
 
 	<!-- TODO: rename contents -->
 	<xsl:template name="t:sections-menu">
-		<menu class="expandable collapsed">
-			<xsl:apply-templates select="document('')//t:sections/t:section"/>
-		</menu>
+		<nav role="navigation" class="expandable collapsed">
+			<ul>
+				<xsl:apply-templates select="document('')//t:sections/t:section"/>
+			</ul>
+		</nav>
 	</xsl:template>
 
 </xsl:stylesheet>

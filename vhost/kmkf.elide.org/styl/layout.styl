@@ -3,9 +3,19 @@
 body {
 	margin:  0;
 	padding: 0;
-	padding-bottom: ($baseline * 3);
 
 	clearfix();
+}
+
+main {
+	padding-bottom: ($baseline * 3);
+	min-height: 100%;
+
+//	outline: solid 1px #000;
+}
+
+nav {
+//	border-left:  solid 1px #000;
 }
 
 pre.synopsis {
@@ -14,7 +24,7 @@ pre.synopsis {
 }
 
 // XXX: rehouse
-aside.meta {
+nav {
 	min-height: 100%; // XXX
 
 	li {
@@ -43,7 +53,7 @@ aside.meta {
 }
 
 html.man {
-	aside.meta hr {
+	nav hr {
 		clear: none;
 	}
 
@@ -71,33 +81,40 @@ for $l in 0 .. length($grid.ncols) - 1 {
 	@media $q {
 
 		body, ol.overlay#cols {
-			grid-container($grid, $l);
+//			grid-container($grid, $l);
+		}
+
+		body {
+			width: auto;
+		}
+
+		nav {
+			concertina-layout(menustyle($l));
 		}
 
 		main {
-			if (sidebar($l)) {
-				border-top:  none;
-				border-left: none;
-			} else if (edge($l) == left) {
-				border-top:  none;
-				border-left: solid $edgesize $kmkf.bg;
-			} else {
-// XXX: use aside.meta as a drop-down menu instead. mark it up as <menu>!
-				border-top:  solid $edgesize $kmkf.bg;
-				border-left: none;
-			}
+//			grid-column($grid, $l, $grid.ncols[$l] - sidebar($l), sidebar($l));
 		}
 
 		if (sidebar($l)) {
 			main {
-				grid-column($grid, $l, $grid.ncols[$l] - sidebar($l), sidebar($l));
-				float: right;
+float: none;
+max-width: 42em;
 			}
+		} else {
+main {
+max-width: 100%;
+}
+		}
 
-			aside.meta {
-				grid-column($grid, $l, sidebar($l));
+		if (sidebar($l)) {
 
-				float: none;
+			nav {
+//				grid-column($grid, $l, sidebar($l));
+
+position: absolute;
+top: 0;
+left: @margin-left;
 
 				padding-left:  0;
 				padding-right: 0;
@@ -120,9 +137,8 @@ for $l in 0 .. length($grid.ncols) - 1 {
 				padding-bottom: ($baseline * 1);
 			}
 		} else {
-			main,
-			aside.meta {
-				grid-column($grid, $l, $grid.ncols[$l]);
+			nav {
+//				grid-column($grid, $l, $grid.ncols[$l]);
 				float: none;
 			}
 		}

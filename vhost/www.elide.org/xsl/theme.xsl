@@ -32,21 +32,23 @@
 	<xsl:variable name="date"     select="//h:meta[@name = 'date']    /@content"/>
 
 	<xsl:template name="e:contents">
-		<menu>
-			<xsl:for-each select="document('')//c:contents/c:category">
-				<li>
-					<xsl:if test="$category and starts-with(@href, concat('/', $category))">
-						<xsl:attribute name="class">
-							<xsl:text>current</xsl:text>
-						</xsl:attribute>
-					</xsl:if>
+		<nav role="navigation">
+			<ul>
+				<xsl:for-each select="document('')//c:contents/c:category">
+					<li>
+						<xsl:if test="$category and starts-with(@href, concat('/', $category))">
+							<xsl:attribute name="class">
+								<xsl:text>current</xsl:text>
+							</xsl:attribute>
+						</xsl:if>
 
-					<a href="{@href}">
-						<xsl:value-of select="@name"/>
-					</a>
-				</li>
-			</xsl:for-each>
-		</menu>
+						<a href="{@href}">
+							<xsl:value-of select="@name"/>
+						</a>
+					</li>
+				</xsl:for-each>
+			</ul>
+		</nav>
 	</xsl:template>
 
 	<xsl:template match="h:article[@class = 'entry']/h:h1/h:a">

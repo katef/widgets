@@ -68,7 +68,7 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="onload">
-				<xsl:text>Expander.init(r, "menu", "li", false, true);</xsl:text>
+				<xsl:text>Expander.init(r, "nav", "li", false, true);</xsl:text>
 				<xsl:text>Colalign.init(r);</xsl:text>
 				<xsl:text>Fixup.init(r);</xsl:text>
 				<xsl:text>Table.init(r);</xsl:text>

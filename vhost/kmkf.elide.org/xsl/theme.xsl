@@ -34,10 +34,11 @@
 			<xsl:with-param name="css"   select="'style.css debug.css'"/>
 
 			<xsl:with-param name="js">
-				<xsl:value-of select="'col.js fixup.js overlay.js debug.js'"/>
+				<xsl:value-of select="'col.js fixup.js overlay.js expander.js debug.js'"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="onload">
+				<xsl:text>Expander.init(r, 'nav', 'li', false, true);</xsl:text>
 				<xsl:text>Colalign.init(r);</xsl:text>
 				<xsl:text>Fixup.init(r);</xsl:text>
 				<xsl:text>Overlay.init(r, 'cols', 24);</xsl:text>
@@ -61,25 +62,22 @@
 					<xsl:copy-of select="$main"/>
 				</main>
 
-				<aside class="meta">
-					<!-- TODO: <menu> not <ul> -->
-					<nav class="submenu">
-						<ul>
-							<xsl:for-each select="document('')//c:contents/c:category">
-								<li>
-									<xsl:if test="$page = @name">
-										<xsl:attribute name="class">
-											<xsl:text>current</xsl:text>
-										</xsl:attribute>
-									</xsl:if>
+				<nav role="navigation" class="expandable collapsed">
+					<ul>
+						<xsl:for-each select="document('')//c:contents/c:category">
+							<li>
+								<xsl:if test="$page = @name">
+									<xsl:attribute name="class">
+										<xsl:text>current</xsl:text>
+									</xsl:attribute>
+								</xsl:if>
 
-									<a href="{@href}">
-										<xsl:value-of select="@name"/>
-									</a>
-								</li>
-							</xsl:for-each>
-						</ul>
-					</nav>
+								<a href="{@href}">
+									<xsl:value-of select="@name"/>
+								</a>
+							</li>
+						</xsl:for-each>
+					</ul>
 
 					<hr/>
 
@@ -87,15 +85,13 @@
 					<xsl:variable name="manvolnum"   select="'7mk'"/>
 					<xsl:variable name="refname"     select="h:head/h:meta[@name = 'refmeta-refname']"/>
 
-					<nav class="submenu">
-						<xsl:call-template name="submenu-bottom">
-							<xsl:with-param name="manindex"            select="$manindex"/>
-							<xsl:with-param name="current-productname" select="$productname"/>
-							<xsl:with-param name="current-manvolnum"   select="$manvolnum"/>
-							<xsl:with-param name="current-refname"     select="$refname/@content"/>
-						</xsl:call-template>
-					</nav>
-				</aside>
+					<xsl:call-template name="submenu-bottom">
+						<xsl:with-param name="manindex"            select="$manindex"/>
+						<xsl:with-param name="current-productname" select="$productname"/>
+						<xsl:with-param name="current-manvolnum"   select="$manvolnum"/>
+						<xsl:with-param name="current-refname"     select="$refname/@content"/>
+					</xsl:call-template>
+				</nav>
 			</xsl:with-param>
 		</xsl:call-template>
 
