@@ -17,6 +17,19 @@ $grid = {
 	colour: #ccc
 }
 
+$list ?= {
+	padding: 1ex     // default
+	gutter:  2em     // default
+	bullet:  "\2022" // default
+	punct:   ")"
+}
+
+$faq ?= {
+	padding: $list.padding || 1ex // default
+	gutter:  $list.gutter  || 2em // default
+	punct:   "."
+}
+
 sidebar($l) { return $grid.layouts[$l] != fluid ? 1 : 0; }
 gapless($l) { return $grid.ncols[$l] <= 2; }
 
