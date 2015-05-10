@@ -21,7 +21,14 @@ aside.meta {
 	background-color: desaturate(darken($kmkf.fg, 20%), 20%);
 	background-color: $kmkf.bg;
 
-	a code, a, a:link, a:visited {
+	li.current {
+		a, a:link, a:visited {
+			background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
+			color: #fff;
+		}
+	}
+
+	a, a:link, a:visited {
 		color: #ddd;
 
 		&:hover {
