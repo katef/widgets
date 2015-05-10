@@ -111,10 +111,10 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="site" select="'libfsm'"/>
+
 			<xsl:with-param name="page">
 				<xsl:apply-templates select="h:head/h:title" mode="body"/>
 			</xsl:with-param>
-
 
 			<xsl:with-param name="body">
 				<header>
