@@ -71,12 +71,21 @@ var Expander = new (function () {
 	}
 
 	this.toggle = function (a, accordion, expand) {
-		var dl = a.parentNode.parentNode;
-		var dt = a.parentNode;
+		var dl, dt = a.parentNode;
 		var endclass;
 		var r;
 
+		for (dl = dt; dl != null; dl = dl.parentNode) {
+			if (hasclass(dl, "expandable")) {
+				break;
+			}
+		}
+
 		r = !hasclass(dt, "current");
+
+		if (dl == null) {
+			return r;
+		}
 
 		if (accordion) {
 			var xdt = dl.getElementsByTagName("dt");
