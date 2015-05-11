@@ -136,10 +136,6 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			} else {
 				float: none;
 				max-width: 42em;
-
-				shadow(0, 0, 20px, 0px, rgba(0,0,0,0.4));
-				position: relative; // for z-index
-				z-index: 2; // for shadow over nav menu
 			}
 
 			if (!sidebar($l)) {

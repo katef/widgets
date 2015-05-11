@@ -1,8 +1,28 @@
 /* $Id: elide.css 571 2013-07-03 22:32:11Z kate $ */
 
 body {
-	background-color: #fff;
 	color: #222;
+
+	for $l in 0 .. length($grid.ncols) - 1 {
+		$q = grid-breakpoint($grid, $l);
+		@media $q {
+
+			if (menustyle($l) == vertical) {
+				background-color: #fff;
+			} else {
+				background-color: #222;
+
+				main {
+					background-color: #fff;
+
+					shadow(0, 0, 20px, 0px, rgba(0,0,0,0.4));
+					position: relative; // for z-index
+					z-index: 2; // for shadow over nav
+				}
+			}
+
+		}
+	}
 }
 
 header {
@@ -48,8 +68,9 @@ nav {
 				}
 
 				&.collapsed {
-					border-bottom: solid ($kmkf.line * 1.5) $kmkf.fg;
-					margin-bottom: -($kmkf.line * 1.5); // baseline alignment
+					$line = ceil($kmkf.line * 1.5);
+					border-bottom: solid $line $kmkf.fg;
+					margin-bottom: -($line); // baseline alignment
 				}
 
 				&.expanded {
@@ -58,7 +79,6 @@ nav {
 				}
 
 			} else {
-
 				a {
 					color: #ddd;
 				}
