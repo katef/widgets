@@ -9,13 +9,7 @@ body {
 
 main {
 	padding-bottom: ($baseline * 3);
-	min-height: 100%;
-
-//	outline: solid 1px #000;
-}
-
-nav {
-//	border-left:  solid 1px #000;
+//	min-height: 100%; // XXX: why not?
 }
 
 pre.synopsis {
@@ -25,8 +19,6 @@ pre.synopsis {
 
 // XXX: rehouse
 nav {
-	min-height: 100%; // XXX
-
 	li {
 		list-style-type: none;
 		margin-bottom: 0;
@@ -39,7 +31,7 @@ nav {
 			display: block;
 
 			padding: 0 $grid.gutter;
-			line-height: ($baseline * 1.5);
+			line-height: $menu.height;
 
 			span.command[data-refclass]:before {
 				content: "<";
@@ -77,11 +69,11 @@ html.man {
 }
 
 for $l in 0 .. length($grid.ncols) - 1 {
-	$q = grid-breakpoint($grid, $l, min);
+	$q = grid-breakpoint($grid, $l);
 	@media $q {
 
 		body, ol.overlay#cols {
-//			grid-container($grid, $l);
+			grid-container($grid, $l);
 		}
 
 		body {
@@ -90,41 +82,39 @@ for $l in 0 .. length($grid.ncols) - 1 {
 
 		nav {
 			concertina-layout(menustyle($l));
-		}
 
-		main {
-//			grid-column($grid, $l, $grid.ncols[$l] - sidebar($l), sidebar($l));
-		}
-
-		if (sidebar($l)) {
-			main {
-float: none;
-max-width: 42em;
+			hr {
+				display: none;
 			}
-		} else {
-main {
-max-width: 100%;
-}
-		}
 
-		if (sidebar($l)) {
+			if (!sidebar($l)) {
+				grid-column($grid, $l, $grid.ncols[$l]);
 
-			nav {
-//				grid-column($grid, $l, sidebar($l));
+				width: 100%;
+				padding: 0;
 
-position: absolute;
-top: 0;
-left: @margin-left;
+				ul {
+					margin: 0;
+				}
+
+			} else {
+				grid-column($grid, $l, sidebar($l));
+
+				position: absolute;
+				left: @margin-left;
+				top: 0;
+
+				min-height: 100%; // XXX
 
 				padding-left:  0;
 				padding-right: 0;
 
-				ul {
-					margin-left: 0;
+				ul > li {
+					display: block; // override concertina-layout. TODO: provide type=sidebar
 				}
 
-				hr {
-					display: none;
+				ul {
+					margin-left: 0;
 				}
 
 				// special case for *(5mk) block
@@ -132,14 +122,23 @@ left: @margin-left;
 					margin-bottom: ($baseline / 2);
 				}
 
-				position: absolute; // XXX: why?
 				padding-top:    ($baseline * 2);
 				padding-bottom: ($baseline * 1);
 			}
-		} else {
-			nav {
-//				grid-column($grid, $l, $grid.ncols[$l]);
+		}
+
+		main {
+			grid-column($grid, $l, $grid.ncols[$l] - sidebar($l), sidebar($l));
+
+			if (!sidebar($l)) {
+				width: 100%;
+			} else {
 				float: none;
+				max-width: 42em;
+
+				shadow(0, 0, 20px, 0px, rgba(0,0,0,0.4));
+				position: relative; // for z-index
+				z-index: 2; // for shadow over nav menu
 			}
 		}
 
