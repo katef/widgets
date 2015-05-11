@@ -72,13 +72,13 @@
 
 			<li>Convenient to package:
 				Put all the overridable settings in one place, so it&rsquo;s easy to see.
-				Build to a seperate directory; this allows for a read-only source tree.
+				Build to a separate directory; this allows for a read-only source tree.
 				Install to a staging directory.</li>
 		</ul>
 
 		<p>Generally I feel these goals have been met, and so I&rsquo;m making
-		these .mk files available for general use, and converting all my
-		projects to use them.</p>
+		these <filename>.mk</filename> files available for general use,
+		and converting all my projects to use them.</p>
 
 		<p>Although the current <filename>.mk</filename> files only provide
 			for the minimum required for a proof of concept system&mdash;for example,

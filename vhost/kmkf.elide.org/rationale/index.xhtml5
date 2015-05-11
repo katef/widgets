@@ -23,7 +23,7 @@
 					the BSD Makefiles.
 					It handles dependencies by running <code>cc -MD</code>,
 					executes <code>${MAKE}</code> recursively,
-					and groups functionality into seperate <filename>.mk</filename> files.</p>
+					and groups functionality into separate <filename>.mk</filename> files.</p>
 
 				<p>We added a few concepts based on what we found convenient,
 					such as the idea of &ldquo;chaining&rdquo;
@@ -32,21 +32,21 @@
 					&ldquo;provides&rdquo;.</p>
 
 				<p>One major shortcoming is that each <filename>.mk</filename> file
-					only provides a single iterface.
+					only provides a single interface.
 					For example, if <filename>cthru.lex.mk</filename> is used to
 					generate a lexer, only one <code>${LEX_GEN_C_FILE}</code> may
 					be generated.
-					If you need multiple lexers within one subdirectory, you're out of luck.
+					If you need multiple lexers within one sub-directory, you're out of luck.
 					To work around this, a facility for executing <code>${MAKE} -f ...</code>
 					for &ldquo;multi-part&rdquo; Makefile.* files was added.
-					This is obviously complex, and rather unelegant.
+					This is obviously complex, and rather inelegant.
 					KMKF addresses the same problem by using list variables.</p>
 			</dd>
 
 			<dt>The build system for <a href="http://www.tendra.org/">TenDRA</a></dt>
 			<dd>
 				<p>Building a compiler is complex.
-					This was origionally some very simple makefiles glued together
+					This was originally some very simple makefiles glued together
 					with a large shell script, and ported to one giant Makefile by
 					asmodai and Eirik. Then reworked by Tobias, and finally split
 					into multiple <filename>.mk</filename> files by myself,
@@ -58,7 +58,7 @@
 			<dt>ADT</dt>
 			<dd>
 				<p>An experiment in writing a portable subset of &make;.
-					This targetted both GNU &make; and BSD dialects.</p>
+					This targeted both GNU &make; and BSD dialects.</p>
 			</dd>
 
 			<dt>various ad-hoc stuff</dt>
@@ -85,12 +85,12 @@
 		and targets' dependencies make a better vehicle for communicating lists between .mk files.
 		</p>
 
-		<p>Generally I feel these goals have been met, and so i'm making
+		<p>Generally I feel these goals have been met, and so I'm making
 		these .mk files available for general use, and converting all my
 		projects to use them.
 		See <a href="/kmkf.5mk/"><span class="command" data-manvolnum="5mk">kmkf</span></a> for more.</p>
 
-		<p>i'm using bmake because I prefer it to GNU make.
+		<p>I'm using bmake because I prefer it to GNU make.
 		subset of bmake dialects (sjg's bmake, *BSD make(1), etc)
 		not portable make because it's unrealistic</p>
 
