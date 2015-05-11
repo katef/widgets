@@ -5,35 +5,72 @@ body {
 	color: #222;
 }
 
-a code, a, a:link, a:visited {
-	color: darken(saturate($kmkf.fg, 20%), 20%);
-	&:hover {
-		color: $kmkf.bold;
-	}
-}
-
 header {
 	border-bottom: solid $kmkf.line $kmkf.fg;
 	margin-bottom: -($kmkf.line); // baseline alignment
 }
 
-nav {
-	background-color: desaturate(darken($kmkf.fg, 20%), 20%);
-	background-color: $kmkf.bg;
-
-	li.current {
-		a, a:link, a:visited {
-			background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
-			color: #fff;
+main {
+	a code, a {
+		color: darken(saturate($kmkf.fg, 20%), 20%);
+		&:hover {
+			color: $kmkf.bold;
 		}
 	}
+}
 
-	a, a:link, a:visited {
-		color: #ddd;
+nav {
+	background-color: $kmkf.bg;
 
-		&:hover {
-			background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
-			color: #fff;
+	for $l in 0 .. length($grid.ncols) - 1 {
+		$q = grid-breakpoint($grid, $l);
+		@media $q {
+
+			if (menustyle($l) == vertical) {
+
+				a {
+					background-color: transparent;
+					color: #ddd;
+
+					&:after {
+						color: #777;
+					}
+
+					&:before,
+					&:hover:after {
+						color: #fff;
+					}
+				}
+
+				&.expanded a:hover {
+					background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
+					color: #fff;
+				}
+
+				&.collapsed {
+					border-bottom: solid ($kmkf.line * 1.5) $kmkf.fg;
+					margin-bottom: -($kmkf.line * 1.5); // baseline alignment
+				}
+
+				&.expanded {
+					border-bottom: solid 0px $kmkf.bg;
+					margin-bottom: 0px; // baseline alignment
+				}
+
+			} else {
+
+				a {
+					color: #ddd;
+				}
+
+				li.current a,
+				a:hover {
+					background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
+					color: #fff;
+				}
+
+			}
+
 		}
 	}
 }

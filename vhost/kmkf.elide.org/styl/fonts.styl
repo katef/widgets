@@ -175,3 +175,19 @@ samp.replaceable {
 	}
 }
 
+for $l in 0 .. length($grid.ncols) - 1 {
+	$q = grid-breakpoint($grid, $l);
+	@media $q {
+
+		if (menustyle($l) == vertical) {
+			nav.collapsed {
+				li.current a:before {
+					content: "KMKF";
+					font-weight: 600;
+					padding-right: 1ex;
+				}
+			}
+		}
+	}
+}
+

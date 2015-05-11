@@ -1,5 +1,7 @@
 /* $Id$ */
 
+$overhead = $baseline * 0.75;
+
 body {
 	margin:  0;
 	padding: 0;
@@ -44,28 +46,25 @@ nav {
 	}
 }
 
-html.man {
-	nav hr {
-		clear: none;
+nav hr {
+	clear: none;
+}
+
+header {
+	& + p {
+		margin-top: ($baseline * 1.5);
 	}
 
-	header#doctitle {
-		& + p {
-			margin-top: ($baseline * 1.5);
-		}
-
-		& + section h2 {
-			margin-top: ($baseline * 1.5);
-		}
-
-		h1, h2 {
-			line-height: ($baseline * 1.25);
-		}
-
-		padding-top:    ($baseline * 1.0 + $baseline * 0.25);
-		padding-bottom: ($baseline * 0.0);
+	& + section h2 {
+		margin-top: ($baseline * 1.5);
 	}
 
+	h1, h2 {
+		line-height: ($baseline * 1.25);
+	}
+
+	padding-top:    ($baseline * 1.0 + $baseline * 0.25);
+	padding-bottom: ($baseline * 0.0);
 }
 
 for $l in 0 .. length($grid.ncols) - 1 {
@@ -84,14 +83,20 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			concertina-layout(menustyle($l));
 
 			hr {
-				display: none;
+				display: none; // distracting for a compact menu
 			}
 
-			if (!sidebar($l)) {
+			if (menustyle($l) == vertical) {
 				grid-column($grid, $l, $grid.ncols[$l]);
 
 				width: 100%;
 				padding: 0;
+
+				// cheesy trigram vertical centering
+				a:after {
+					position: relative;
+					top: ($menu.height - ($trigram.size * 8));
+				}
 
 				ul {
 					margin: 0;
@@ -108,10 +113,6 @@ for $l in 0 .. length($grid.ncols) - 1 {
 
 				padding-left:  0;
 				padding-right: 0;
-
-				ul > li {
-					display: block; // override concertina-layout. TODO: provide type=sidebar
-				}
 
 				ul {
 					margin-left: 0;
@@ -139,6 +140,12 @@ for $l in 0 .. length($grid.ncols) - 1 {
 				shadow(0, 0, 20px, 0px, rgba(0,0,0,0.4));
 				position: relative; // for z-index
 				z-index: 2; // for shadow over nav menu
+			}
+
+			if (!sidebar($l)) {
+				header {
+					display: none;
+				}
 			}
 		}
 
