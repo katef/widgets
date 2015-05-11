@@ -5,6 +5,7 @@
  *
  * When operating vertically, this collapses all items except the .current one,
  * leaving just that visible. So it's effectively a sort of makeshift combobox.
+ * The type parameter is one of horizontal, vertical (i.e. collapsed) or sidebar.
  *
  * Use with expander.js for @class updates.
  *
@@ -31,10 +32,10 @@ concertina-layout(type) {
 		margin:  0;
 		padding: 0;
 
-		if (type == vertical) {
-			display: block;
-		} else {
+		if (type == horizontal) {
 			display: inline-block;
+		} else {
+			display: block;
 		}
 	}
 
