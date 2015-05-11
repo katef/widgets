@@ -23,16 +23,16 @@
 			This is the result of lessons learned from previous work,
 			taking the ideas I liked and addressing the problems I found.</p>
 
-		<p>For most &bsd;-like <filename>.mk</filename> systems, there&rsquo;s a
+		<p>For most &bsd;-like <tt class="filename">.mk</tt> systems, there&rsquo;s a
 			&ldquo;you can only build one kind of thing per
 			Makefile&rdquo; limitation.
 			This is a side effect of using single variables as an interface
-			for each <filename>.mk</filename> file, rather than lists.
+			for each <tt class="filename">.mk</tt> file, rather than lists.
 			For example, in
-			<filename>bsd.prog.mk</filename>,
-			<filename>tendra.prog.mk</filename>,
-			<filename>os161.prog.mk</filename>,
-			<filename>cthru.prog.mk</filename> and others,
+			<tt class="filename">bsd.prog.mk</tt>,
+			<tt class="filename">tendra.prog.mk</tt>,
+			<tt class="filename">os161.prog.mk</tt>,
+			<tt class="filename">cthru.prog.mk</tt> and others,
 			only one <var>PROG</var> may be built.
 			This goes hand in hand with executing make recursively,
 			the problems for which are discussed
@@ -40,7 +40,7 @@
 			Make Considered Harmful</a>.</p>
 
 		<p>The typical solution for this is to arrange the source tree such
-			that there is only one <filename>.mk</filename> thing per directory,
+			that there is only one <tt class="filename">.mk</tt> thing per directory,
 			which is usually a good idea, but gets in the way for some situations.
 			Alternately to execute separate instances of make for each
 			&ldquo;sub&rdquo; thing, which worsens the downsides of recursive make.
@@ -52,12 +52,12 @@
 		<p>My aims were:</p>
 
 		<ul class="goals">
-			<li>To provide separate <filename>.mk</filename> files for each type of thing.
+			<li>To provide separate <tt class="filename">.mk</tt> files for each type of thing.
 				Different projects need different things.</li>
 
 			<li>Not to have too many targets.<!--
 				(<a href="http://www.gnu.org/software/automake/">Automake</a> is nuts.
-				&bsd;&rsquo;s <filename>.mk</filename> files are less nuts, but still nuts.)
+				&bsd;&rsquo;s <tt class="filename">.mk</tt> files are less nuts, but still nuts.)
 			--></li>
 
 			<li>Use list variables as interfaces, allowing multiple items.</li>
@@ -77,10 +77,10 @@
 		</ul>
 
 		<p>Generally I feel these goals have been met, and so I&rsquo;m making
-		these <filename>.mk</filename> files available for general use,
+		these <tt class="filename">.mk</tt> files available for general use,
 		and converting all my projects to use them.</p>
 
-		<p>Although the current <filename>.mk</filename> files only provide
+		<p>Although the current <tt class="filename">.mk</tt> files only provide
 			for the minimum required for a proof of concept system&mdash;for example,
 			only C source is supported&mdash;the structure and arrangement
 			of interfaces is in place and this may be extended to provide for
