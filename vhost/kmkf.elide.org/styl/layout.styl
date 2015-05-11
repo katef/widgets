@@ -11,7 +11,21 @@ body {
 
 main {
 	padding-bottom: ($baseline * 3);
-//	min-height: 100%; // XXX: why not?
+
+	min-height: 100%; // XXX: why not?
+	// XXX: great big hack
+	&:after {
+		content: "\A0";
+		display: block;
+
+		position: fixed;
+		width: inherit;
+		z-index: -1;
+		margin-left: -($grid.gutter);
+		bottom: 0;
+		top:    0;
+		background-color: #fff;
+	}
 }
 
 pre.synopsis {
