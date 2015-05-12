@@ -12,7 +12,7 @@
 
 	exclude-result-prefixes="h c e date">
 
-	<xsl:import href="../../../xsl/lib/date.format-date.function.xsl"/>
+	<xsl:import href="../../../xsl/lib/date.format-date.xsl"/>
 
 	<xsl:import href="../../../xsl/theme.xsl"/>
 	<xsl:import href="../../../xsl/img.xsl"/>

@@ -13,8 +13,8 @@
 	exclude-result-prefixes="h str">
 
 	<xsl:import href="lib/str.contains-word.xsl"/>
-
-	<xsl:import href="string.xsl"/>
+	<xsl:import href="lib/str.tolower.xsl"/>
+	<xsl:import href="lib/str.trim.xsl"/>
 
 	<xsl:template match="h:a" mode="submenu">
 		<xsl:param name="current-manvolnum" select="false()"/>

@@ -25,9 +25,10 @@
 		 XXX: clicking on a day goes to the wrong #
 	-->
 
-	<xsl:import href="lib/date.format-date.function.xsl"/>
+	<xsl:import href="lib/date.format-date.xsl"/>
+	<xsl:import href="lib/date.make.xsl"/>
+	<xsl:import href="lib/date.same.xsl"/>
 
-	<xsl:import href="date.xsl"/>
 	<xsl:import href="calendar.xsl"/>
 	<xsl:import href="comment.xsl"/>
 
