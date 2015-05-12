@@ -23,7 +23,7 @@
 			This is the result of lessons learned from previous work,
 			taking the ideas I liked and addressing the problems I found.</p>
 
-		<p>For most &bsd;-like <tt class="filename">.mk</tt> systems, there&rsquo;s a
+		<p>For most <a href="http://www.crufty.net/help/sjg/mk-files.htm">&bsd;-like <tt class="filename">.mk</tt> systems</a>, there&rsquo;s a
 			&ldquo;you can only build one kind of thing per
 			Makefile&rdquo; limitation.
 			This is a side effect of using single variables as an interface
