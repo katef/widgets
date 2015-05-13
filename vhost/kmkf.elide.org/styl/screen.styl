@@ -1,2 +1,137 @@
 /* $Id$ */
 
+@media only screen {
+
+	html {
+		height: 100%;
+	}
+
+	body {
+		min-height: 100%;
+
+		for $l in 0 .. length($grid.ncols) - 1 {
+			$q = grid-breakpoint($grid, $l);
+			@media $q {
+
+				if ($grid.layouts[$l] == fixed) {
+					box-shadow: 0 0 20px 0px rgba(0,0,0,0.4);
+				}
+
+				if (menustyle($l) == sidebar) {
+					display: flex;
+					flex-flow: row nowrap;
+					align-items: stretch;
+				}
+			}
+		}
+	}
+
+	main {
+		position: relative; // for z-index
+		z-index: 2; // for shadow over nav
+		box-shadow: -15px 0px 20px -10px rgba(0,0,0,0.4);
+	}
+
+	nav {
+		order: 0;
+		flex: none;
+
+		li {
+			list-style-type: none;
+			margin-bottom: 0;
+
+			margin:  0;
+
+			// TODO: share with bp
+			a {
+				text-decoration: none;
+				display: block;
+
+				padding: 0 $grid.gutter;
+				line-height: $menu.height;
+
+				span.command[data-refclass]:before {
+					content: "<";
+				}
+
+				span.command[data-refclass]:after {
+					content: "." attr(data-refclass) ">";
+				}
+			}
+		}
+	}
+
+	main {
+		padding-bottom: ($baseline * 3);
+
+		order: 1;
+		flex: 1;
+	}
+
+	for $l in 0 .. length($grid.ncols) - 1 {
+		$q = grid-breakpoint($grid, $l);
+		@media $q {
+
+			body, ol.overlay#cols {
+				grid-container($grid, $l);
+			}
+
+			nav {
+				concertina-layout(menustyle($l));
+
+				hr {
+					display: none; // distracting for a compact menu
+				}
+
+				if (menustyle($l) == vertical) {
+					grid-column($grid, $l, $grid.ncols[$l]);
+
+					padding: 0;
+
+					// cheesy trigram vertical centering
+					a:after {
+						position: relative;
+						top: ($menu.height - ($trigram.size * 8));
+					}
+
+					ul {
+						margin: 0;
+					}
+
+				} else {
+					grid-column($grid, $l, sidebar($l));
+
+					min-height: 100%; // XXX
+
+					padding-left:  0;
+					padding-right: 0;
+
+					ul {
+						margin-left: 0;
+					}
+
+					// special case for *(5mk) block
+					hr + nav.submenu li:first-child {
+						margin-bottom: ($baseline / 2);
+					}
+
+					padding-top:    ($baseline * 2);
+					padding-bottom: ($baseline * 1);
+				}
+			}
+
+			main {
+				grid-column($grid, $l, $grid.ncols[$l] - sidebar($l));
+
+				if (!sidebar($l)) {
+					header {
+						display: none;
+					}
+				}
+			}
+
+		}
+	}
+
+}
+

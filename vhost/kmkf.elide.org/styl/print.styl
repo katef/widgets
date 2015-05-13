@@ -1,0 +1,56 @@
+/* $Id: print.styl 6703 2014-06-28 22:09:50Z tom $ */
+
+/*
+ * Workaround to elide the browser-supplied header and footer for Chrome.
+ * Courtesy of: https://stackoverflow.com/questions/1960939
+ */
+@media print {
+	@page {
+		size:   auto; // auto is the current printer page size
+		margin: 0cm 1cm;
+	}
+
+	body {
+		margin: 0;
+   }
+}
+
+@media print {
+
+	header,
+	header:before {
+		position: fixed; // XXX: doesn't appear on all pages for webkit
+
+		left:  0;
+		right: 0;
+		width: auto;
+
+		margin-right: -(2cm + 1.5cm); // I don't understand this
+	}
+
+	header {
+		top: 0;
+	}
+
+	header:before {
+		content: "\A0";
+		display:  block;
+
+		bottom: $baseline;
+
+		border-top: solid $kmkf.line $kmkf.fg;
+	}
+
+	nav {
+		display: none;
+	}
+
+	main {
+		margin-top: ($baseline * 4.0);
+		margin-bottom: 0;
+		margin-left: 1.5cm; // about the size of "KMKF"
+		margin-right: 2.5cm;
+	}
+
+}
+

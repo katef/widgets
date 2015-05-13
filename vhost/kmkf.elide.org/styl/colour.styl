@@ -11,23 +11,6 @@ html {
 body {
 	background-color: #fff;
 	color: #222;
-
-	for $l in 0 .. length($grid.ncols) - 1 {
-		$q = grid-breakpoint($grid, $l);
-		@media $q {
-
-			if ($grid.layouts[$l] == fixed) {
-				box-shadow: 0 0 20px 0px rgba(0,0,0,0.4);
-			}
-
-		}
-	}
-}
-
-main {
-	position: relative; // for z-index
-	z-index: 2; // for shadow over nav
-	box-shadow: -15px 0px 20px -10px rgba(0,0,0,0.4);
 }
 
 header {
@@ -46,60 +29,64 @@ main {
 	}
 }
 
-nav {
-	background-color: $kmkf.bg;
+@media only screen {
 
-	for $l in 0 .. length($grid.ncols) - 1 {
-		$q = grid-breakpoint($grid, $l);
-		@media $q {
+	nav {
+		background-color: $kmkf.bg;
 
-			if (menustyle($l) == vertical) {
+		for $l in 0 .. length($grid.ncols) - 1 {
+			$q = grid-breakpoint($grid, $l);
+			@media $q {
 
-				a {
-					background-color: transparent;
-					color: #ddd;
+				if (menustyle($l) == vertical) {
 
-					&:after {
-						color: #777;
+					a {
+						background-color: transparent;
+						color: #ddd;
+
+						&:after {
+							color: #777;
+						}
+
+						&:before,
+						&:hover:after {
+							color: #fff;
+						}
 					}
 
-					&:before,
-					&:hover:after {
+					&.expanded a:hover {
+						background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
 						color: #fff;
 					}
-				}
 
-				&.expanded a:hover {
-					background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
-					color: #fff;
-				}
+					&.collapsed {
+						$line = ceil($kmkf.line * 1.5);
+						border-bottom: solid $line $kmkf.fg;
+						margin-bottom: -($line); // baseline alignment
+					}
 
-				&.collapsed {
-					$line = ceil($kmkf.line * 1.5);
-					border-bottom: solid $line $kmkf.fg;
-					margin-bottom: -($line); // baseline alignment
-				}
+					&.expanded {
+						border-bottom: solid 0px $kmkf.bg;
+						margin-bottom: 0px; // baseline alignment
+					}
 
-				&.expanded {
-					border-bottom: solid 0px $kmkf.bg;
-					margin-bottom: 0px; // baseline alignment
-				}
+				} else {
+					a {
+						color: #ddd;
+					}
 
-			} else {
-				a {
-					color: #ddd;
-				}
+					li.current a,
+					a:hover {
+						background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
+						color: #fff;
+					}
 
-				li.current a,
-				a:hover {
-					background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
-					color: #fff;
 				}
 
 			}
-
 		}
 	}
+
 }
 
 pre, code, var, samp {
