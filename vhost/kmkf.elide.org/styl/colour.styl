@@ -33,61 +33,67 @@ main {
 
 	nav {
 		background-color: $kmkf.bg;
-
-		for $l in 0 .. length($grid.ncols) - 1 {
-			$q = grid-breakpoint($grid, $l);
-			@media $q {
-
-				if (menustyle($l) == vertical) {
-
-					a {
-						background-color: transparent;
-						color: #ddd;
-
-						&:after {
-							color: #777;
-						}
-
-						&:before,
-						&:hover:after {
-							color: #fff;
-						}
-					}
-
-					&.expanded a:hover {
-						background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
-						color: #fff;
-					}
-
-					&.collapsed {
-						$line = ceil($kmkf.line * 1.5);
-						border-bottom: solid $line $kmkf.fg;
-						margin-bottom: -($line); // baseline alignment
-					}
-
-					&.expanded {
-						border-bottom: solid 0px $kmkf.bg;
-						margin-bottom: 0px; // baseline alignment
-					}
-
-				} else {
-					a {
-						color: #ddd;
-					}
-
-					li.current a,
-					a:hover {
-						background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
-						color: #fff;
-					}
-
-				}
-
-			}
-		}
 	}
 
 }
+
+for $l in 0 .. length($grid.ncols) - 1 {
+	$q = grid-breakpoint($grid, $l);
+	@media $q {
+
+		if (menustyle($l) == vertical) {
+
+			nav {
+				a {
+					background-color: transparent;
+					color: #ddd;
+
+					&:after {
+						color: #777;
+					}
+
+					&:before,
+					&:hover:after {
+						color: #fff;
+					}
+				}
+
+				&.expanded a:hover {
+					background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
+					color: #fff;
+				}
+
+				&.collapsed {
+					$line = ceil($kmkf.line * 1.5);
+					border-bottom: solid $line $kmkf.fg;
+					margin-bottom: -($line); // baseline alignment
+				}
+
+				&.expanded {
+					border-bottom: solid 0px $kmkf.bg;
+					margin-bottom: 0px; // baseline alignment
+				}
+			}
+
+		} else {
+
+			nav {
+				a {
+					color: #ddd;
+				}
+
+				li.current a,
+				a:hover {
+					background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
+					color: #fff;
+				}
+			}
+
+		}
+
+	}
+}
+
 
 pre, code, var, samp {
 	color: $kmkf.code;
