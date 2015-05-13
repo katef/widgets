@@ -2,39 +2,47 @@
 
 $overhead = $baseline * 0.75;
 
+pre.synopsis {
+	overflow-y: auto;
+}
+
+html {
+	height: 100%;
+}
+
 body {
 	margin:  0;
 	padding: 0;
 
 	clearfix();
+
+	min-height: 100%;
+
+	for $l in 0 .. length($grid.ncols) - 1 {
+		$q = grid-breakpoint($grid, $l);
+		@media $q {
+
+			if (menustyle($l) == sidebar) {
+				display: flex;
+				flex-flow: row nowrap;
+				align-items: stretch;
+			}
+		}
+	}
 }
 
 main {
 	padding-bottom: ($baseline * 3);
 
-	min-height: 100%; // XXX: why not?
-	// XXX: great big hack
-	&:after {
-		content: "\A0";
-		display: block;
-
-		position: fixed;
-		width: inherit;
-		z-index: -1;
-		margin-left: -($grid.gutter);
-		bottom: 0;
-		top:    0;
-		background-color: #fff;
-	}
-}
-
-pre.synopsis {
-	overflow-y: auto;
-	margin-bottom: 0; // XXX: why?
+	order: 1;
+	flex: 1;
 }
 
 // XXX: rehouse
 nav {
+	order: 0;
+	flex: none;
+
 	li {
 		list-style-type: none;
 		margin-bottom: 0;
@@ -89,10 +97,6 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			grid-container($grid, $l);
 		}
 
-		body {
-			width: auto;
-		}
-
 		nav {
 			concertina-layout(menustyle($l));
 
@@ -103,7 +107,6 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			if (menustyle($l) == vertical) {
 				grid-column($grid, $l, $grid.ncols[$l]);
 
-				width: 100%;
 				padding: 0;
 
 				// cheesy trigram vertical centering
@@ -118,10 +121,6 @@ for $l in 0 .. length($grid.ncols) - 1 {
 
 			} else {
 				grid-column($grid, $l, sidebar($l));
-
-				position: absolute;
-				left: @margin-left;
-				top: 0;
 
 				min-height: 100%; // XXX
 
@@ -143,14 +142,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 		}
 
 		main {
-			grid-column($grid, $l, $grid.ncols[$l] - sidebar($l), sidebar($l));
-
-			if (!sidebar($l)) {
-				width: 100%;
-			} else {
-				float: none;
-				max-width: 42em;
-			}
+			grid-column($grid, $l, $grid.ncols[$l] - sidebar($l));
 
 			if (!sidebar($l)) {
 				header {
