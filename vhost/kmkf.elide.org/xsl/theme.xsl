@@ -58,10 +58,6 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
-				<main>
-					<xsl:copy-of select="$main"/>
-				</main>
-
 				<nav role="navigation" class="expandable collapsed">
 					<ul>
 						<xsl:for-each select="document('')//c:contents/c:category">
@@ -92,6 +88,10 @@
 						<xsl:with-param name="current-refname"     select="$refname/@content"/>
 					</xsl:call-template>
 				</nav>
+
+				<main>
+					<xsl:copy-of select="$main"/>
+				</main>
 			</xsl:with-param>
 		</xsl:call-template>
 
