@@ -56,7 +56,18 @@ for $l in 0 .. length($grid.ncols) - 1 {
 					}
 				}
 
-				&.expanded a:hover {
+				&.expanded li.current a {
+					&:after {
+						color: #ddd;
+					}
+
+					&:hover:after {
+						color: #fff;
+					}
+				}
+
+				&.expanded a:hover,
+				&.expanded li.current a {
 					background-color: darken(desaturate($kmkf.fg, 20%), 20%); // optical correction
 					color: #fff;
 				}
