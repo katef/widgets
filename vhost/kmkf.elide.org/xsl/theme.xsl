@@ -30,6 +30,7 @@
 		<xsl:param name="notes" select="/.."/>
 
 		<xsl:call-template name="theme-output">
+			<xsl:with-param name="color" select="'#7c8'"/>
 			<xsl:with-param name="class" select="'man'"/>
 			<xsl:with-param name="css"   select="'style.css debug.css'"/>
 
