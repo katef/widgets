@@ -1,0 +1,22 @@
+
+\startuniqueMPgraphic{cover}
+
+	h := \overlayheight;
+	w := \overlaywidth;
+
+	gw := (1/9) * w;
+	gh := (1/9) * h;
+
+	% Tschichold's golden canon of page construction
+	draw (w, h)   -- (0, 0);
+	draw (w, .5h) -- (0, 0);
+	draw fullcircle scaled w shifted (4.5gw, 4gh);
+
+	% Rosarivo's grid of ninths
+	for i = 0 upto 9:
+		draw (i * gw, 0) -- (i * gw, h) withcolor .8[blue, white];
+		draw (0, i * gh) -- (w, i * gh) withcolor .8[blue, white];
+	endfor;
+
+\stopuniqueMPgraphic
+
