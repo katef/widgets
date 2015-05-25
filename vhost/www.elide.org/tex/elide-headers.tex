@@ -1,0 +1,27 @@
+
+\definelayer[Shelves-banner][
+%	location={left,bottom},
+	x=0mm,
+	y=0mm,
+	width=\paperwidth,
+	height=\headerheight\relax]
+
+\setlayer[Shelves-banner] {%
+	\clip[width=\paperwidth, height=\headerheight, hoffset=0px, voffset=4\bodyfontsize] {%
+		\externalfigure[opt-crop.jpeg][width=\paperwidth]}
+	}
+
+\setupbackgrounds[paper]
+	[background=Shelves-banner]
+
+\setuphead[chapter][
+	style=\tfa\bf\doifmode{manpage}{\WORD}]
+
+\setuphead[section][
+	style=\tfb\bf\doifmode{manpage}{\WORD}]
+
+\setuphead[subsection][
+	style=\tfc\bf\doifmode{manpage}{\WORD}]
+
+\stopmode
+

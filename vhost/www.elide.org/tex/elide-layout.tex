@@ -1,0 +1,65 @@
+
+\startmode[A4]
+	\setuppapersize[A4]
+\stopmode
+
+\definepalet
+	[layout]
+	[grid=kmkf-green,page=kmkf-green]
+
+% default layout
+% 16cm = 8*2cm cols, 1.5cm between each
+\setuplayout[
+	grid=no,
+	margin=3\bodyfontsize,
+	columndistance=1.5\bodyfontsize,
+	columns=7,
+	backspace=55mm,
+	top=0pt,
+	topspace=5\bodyfontsize,
+	headerdistance=2.4\bodyfontsize,
+	header=1.6\bodyfontsize,
+	bottom=0pt,
+	bottomspace=0pt,
+	bottomdistance=0pt,
+	footer=\bodyfontsize,
+	footerdistance=13mm,
+	height=\dimexpr37\lineheight
+		+\headerheight+\headerdistance
+		+\footerheight+\footerdistance\relax,
+	leftedge=0pt,
+	leftmargin=10em,
+	leftmargindistance=0pt,
+	leftedgedistance=0pt,
+	rightedge=0pt,
+	rightedgedistance=0pt,
+	rightmargin=0pt, % \dimexpr2.1cm-.5\bodyfontsize\relax,
+	rightmargindistance=.5\bodyfontsize,
+	width=12.5cm]
+
+\setuplayout[
+	topspace=0pt,
+	header=18\bodyfontsize,
+	leftedgedistance=0pt,
+	rightedgedistance=0pt,
+	leftmargindistance=0pt,
+	rightmargindistance=0pt,
+	leftedge=0pt,
+	rightedge=0pt]
+
+
+\setupinterlinespace[small]
+\setupwhitespace[halfline]
+
+\setupcolumns[
+	distance=1pt,
+	balance=no]
+
+\setupitemgroup[
+	margin=1.5\bodyfontsize]
+
+\setuptyping[
+	margin=3\bodyfontsize]
+
+
+
