@@ -56,14 +56,14 @@
 
 		<figure class="single-narrow">
 			<!-- TODO: svg -->
-			<?img src="torsen-axial.png"?>
+			<img src="torsen-axial.png"/>
 		</figure>
 
 		<p>And here are two attempts to implement that in Lego:</p>
 
 		<figure class="double">
-			<?img src="torsen1.jpeg"?>
-			<?img src="torsen2.jpeg"?>
+			<img src="torsen1.jpeg"/>
+			<img src="torsen2.jpeg"/>
 		</figure>
 
 		<p>These are relatively weak, because the axles going to the wheels are
@@ -86,14 +86,14 @@
 
 		<figure class="single-narrow">
 			<!-- TODO: svg -->
-			<?img src="torsen-epicyclic.png"?>
+			<img src="torsen-epicyclic.png"/>
 		</figure>
 
 		<p>And here's how it looks in Lego:</p>
 
 		<!-- TODO: generate with PI, same as for blog posts -->
 		<figure class="single-wide">
-			<?img src="torsen3-small.jpeg"?>
+			<img src="torsen3-small.jpeg"/>
 		</figure>
 
 		<p>No supporting red bits!</p>
