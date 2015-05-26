@@ -15,18 +15,21 @@
 	\clip[
 		width=\paperwidth,
 		height=\headerheight,
-		hoffset=\dimexpr.5\GW*1/3\relax,
-		voffset=0\bodyfontsize] {%
-		\externalfigure[opt-crop.jpeg][
-			width=\dimexpr\paperwidth+.2\GW\relax % wide enough to meet the header height after clip
-		]}
+		hoffset=0cm,
+		voffset=3\bodyfontsize] {%
+		\externalfigure[opt-crop.jpeg][width=\paperwidth]}
 	}
 
 \setupbackgrounds[paper]
 	[background=Shelves-banner]
 
 \setuphead[title][
-	style=\tfd]
+	style=\tfd,
+	color=darkgray]
+
+\setupstartstop[Body][
+	before={\title{Torsen Differentials in Lego}}, % TODO: and article date
+	after=]
 
 \setuphead[chapter][
 	style=\tfa\bf\doifmode{manpage}{\WORD}]

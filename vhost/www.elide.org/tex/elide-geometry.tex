@@ -2,10 +2,12 @@
 \startuniqueMPgraphic{cover}
 
 	h := \overlayheight;
-	w := \overlaywidth;
+	w := \overlayheight * 2/3; % XXX: set the overlay width propely
 
 	gw := (1/9) * w;
 	gh := (1/9) * h;
+
+	draw (w, h) -- (0, .5h);
 
 	% Tschichold's golden canon of page construction
 	draw (w, h)   -- (0, 0);
