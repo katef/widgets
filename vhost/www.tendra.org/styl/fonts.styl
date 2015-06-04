@@ -1,13 +1,13 @@
 
-//font-face('OFLGoudyStM-Regular', 400, normal, '/fonts/OFLGoudyStM/OFLGoudyStM-Regular', '#OFLGoudyStM-Regular');
+//font-face('Libertine', 300, normal, '/fonts/Libertine-Display', '#Libertine-Display'); // no smcp
+font-face('Libertine', 400, normal, '/fonts/Libertine-Regular', '#Libertine-Regular');
 
 /* faces, weights and styles */
 body {
-	font-family: verdana, tahoma, sans-serif;
+	font-family: verdana, helvetica, arial, sans-serif;
 
 	h1 {
-		//font-family: OFLGoudyStM-Regular, Palatino, serif;
-		font-family: Palatino, georgia, times new roman, Bitstream Vera Serif, serif;
+		font-family: Libertine, Palatino, Pagella, serif;
 		font-weight: 400;
 	}
 
@@ -92,6 +92,8 @@ body {
 //	font-feature-settings: "onum" 1;
 	font-feature-settings: "kern" 1;
 	font-feature-settings: "frac" 1;
+	font-feature-settings: "ss01" 1; // neater Ä Ö Ü
+	font-feature-settings: "dlig" 1; // ij
 
 	// XXX: rename to span.sc
 	span.smallcaps,
