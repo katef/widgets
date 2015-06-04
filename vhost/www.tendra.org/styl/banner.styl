@@ -33,6 +33,13 @@ h1#banner {
 
 		text-transform: none;
 
+		display: inline-block; // for ::first-letter
+		&::first-letter {
+			font-weight: 300;
+			font-size: 1.1em;
+			margin-right: -0.2ex; // kerning
+		}
+
 		margin-left:  -0.3ex; // kerning
 		margin-right: -0.1ex; // kerning
 	}
@@ -40,6 +47,11 @@ h1#banner {
 	// XXX: rename to span.sc
 	span.smallcaps {
 		font-size: 1.2em;
+
+		display: inline-block; // for ::first-letter
+		&:first-letter {
+			margin-right: -0.1ex;
+		}
 	}
 }
 
