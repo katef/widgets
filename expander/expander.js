@@ -70,7 +70,7 @@ var Expander = new (function () {
 		node.setAttribute('class', a.join(' '));
 	}
 
-	this.toggle = function (a, accordion, expand) {
+	this.toggle = function (a, accordion, expand, oneway) {
 		var dl, dt = a.parentNode;
 		var endclass;
 		var r;
@@ -99,10 +99,14 @@ var Expander = new (function () {
 		}
 
 		if (expand) {
-			if (hasclass(dl, "expanded")) {
-				endclass = "collapsed";
+			if (oneway) {
+				endclass = oneway;
 			} else {
-				endclass = "expanded";
+				if (hasclass(dl, "expanded")) {
+					endclass = "collapsed";
+				} else {
+					endclass = "expanded";
+				}
 			}
 
 			removeclass(dl, "expanded");
@@ -136,7 +140,7 @@ var Expander = new (function () {
 				}
 
 				a.onclick = function () {
-						return Expander.toggle(this, accordion, expand);
+						return Expander.toggle(this, accordion, expand, false);
 					};
 			}
 
