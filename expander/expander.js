@@ -71,9 +71,15 @@ var Expander = new (function () {
 	}
 
 	this.toggle = function (a, accordion, expand) {
-		var dl, dt = a.parentNode;
+		var dl, dt;
 		var endclass;
 		var r;
+
+		if (a.nodeName.toLowerCase() == 'thead') {
+			dt = a;
+		} else {
+			dt = a.parentNode;
+		}
 
 		for (dl = dt; dl != null; dl = dl.parentNode) {
 			if (hasclass(dl, "expandable")) {
@@ -124,15 +130,27 @@ var Expander = new (function () {
 
 			var dt = dl[i].getElementsByTagName(dtname);
 			for (var j = 0; j < dt.length; j++) {
-				var a = dt[j].getElementsByTagName("a");
-				if (a.length > 0) {
-					a = a[0];
-				} else {
-					a = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
-					a.innerHTML  = dt[j].innerHTML;
+				var a;
 
-					dt[j].innerHTML = '';
-					dt[j].appendChild(a);
+				if (dt[j].nodeName.toLowerCase() == 'th'
+				 && dt[j].parentNode.nodeName.toLowerCase() == 'tr'
+				 && dt[j].parentNode.parentNode.nodeName.toLowerCase() == 'thead')
+				{
+					/* special case for collapsing thead/tbody within tables;
+					 * use thead for onclick */
+					a = dt[j].parentNode.parentNode;
+				} else {
+
+					a = dt[j].getElementsByTagName("a");
+					if (a.length > 0) {
+						a = a[0];
+					} else {
+						a = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+						a.innerHTML  = dt[j].innerHTML;
+
+						dt[j].innerHTML = '';
+						dt[j].appendChild(a);
+					}
 				}
 
 				a.onclick = function () {
