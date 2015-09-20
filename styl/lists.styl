@@ -7,14 +7,14 @@ $list ?= {
 	punct:   "."
 }
 
-// XXX: want to do this by overriding list-style-type as a mixin instead
-if ($list.bullet != default) {
-	ul li {
-//		list-style-type: none;
-
+list-style-type(type) {
+	if (type == custom) {
+		list-style-type: none;
 		&:before {
-//			content: $list.bullet "\A0"; // TODO: as many spaces as $list.punct is wide
+			content: $list.bullet "\A0"; // TODO: as many spaces as $list.punct is wide
 		}
+	} else {
+		list-style-type: type;
 	}
 }
 
