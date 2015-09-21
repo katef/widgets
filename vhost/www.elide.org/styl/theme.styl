@@ -1,12 +1,12 @@
 /* $Id$ */
 
-$fontsize = 14px;
-$baseline = 19px;
+$fontsize = 15px;
+$baseline = 20px;
 
 $grid = {
 	ncols:    ( 1       2      4      5      6      )
-	layouts:  ( fluid   fluid  fluid  fixed  fixed  )
-	aligns:   ( center  center center center center )
+	layouts:  ( fluid   fluid  fluid  fluid  fixed  )
+	aligns:   ( center  fluid  center center center )
 
 	colwidth: $baseline * 5.8 // wide enough for YYYY-MM-DD
 	gutter:   $baseline / 2
@@ -30,8 +30,8 @@ $faq ?= {
 	punct:   "."
 }
 
-sidebar($l) { return $grid.layouts[$l] != fluid ? 1 : 0; }
-gapless($l) { return $grid.ncols[$l] <= 2; }
+sidebar($l) { return $grid.ncols[$l] >= 5 ? 1 : 0; }
+gapless($l) { return true; }
 
 menustyle($l) {
 	if ($grid.ncols[$l] == 1) {
