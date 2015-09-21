@@ -12,6 +12,15 @@
 	</head>
 
 	<body>
+<style>
+th {
+text-align: left;
+}
+td, th {
+vertical-align: top;
+}
+</style>
+
 <!-- TODO:
 
 style guide:
@@ -30,94 +39,181 @@ probably another "libfsm" in the world, for instance.
 -->
 
 		<p>I don't have any projects.</p>
+
+		<blockquote><code>svn co svn://svn.elide.org/<em>$name</em>/trunk</code></blockquote>
+
+<table>
+	<tbody>
+<tr>
+<th colspan="2">Language processing</th>
+</tr>
+		<tr>
+			<td>TenDRA<br/>
+				<a href="http://www.tendra.org/">http://www.tendra.org/</a></td>
+			<td>A C &amp; C++ compiler</td>
 <!--
-
-tendra
-
-lx, libre, libfsm
-libcl
-rtos
-qs
-libc
-libgreat
-bibfs
-
-kmircd
-evirc
-
-glof
-kye
-gopherd
-
-db stuff: pgtree, ugp, types etc
-
-experiments: kcds
-
-		<p>Some of my programing outside of work.</p>
-
-		<table class="listing">
-			<tr>
-				<td><a href="/libfsm/">libfsm</a></td>
-
-				<td>A library for manipulating Finite State Machines.</td>
-			</tr>
-
-			<tr>
-				<td><a href="/libre/">libre</a></td>
-
-				<td>A library for compiling and executing regular expressions.</td>
-			</tr>
-
-			<tr>
-				<td><a href="/lx/">lx</a></td>
-
-				<td>A lexer generator</td>
-			</tr>
-		</table>
+ which goes to great lengths to
+				assure your code is portable, and conforms to
+				the standardised <abbr>API</abbr>s you claim.</td>
 -->
+		</tr>
+		<tr>
+			<td>lx</td>
+			<td>Lexer generator, regular expressions, finite automata</td>
+<!--
+			<td>A library for manipulating Finite State Machines.</td>
+			<td>A library for compiling and executing regular expressions.</td>
+			<td>A lexer generator</td>
+-->
+		</tr>
+		<tr>
+			<td>kgt</td>
+			<td>Grammar tools</td>
+		</tr>
+	</tbody>
+
+	<tbody>
+<tr>
+<th colspan="2">Standard C library stuff</th>
+</tr>
+		<tr>
+			<td>libc</td>
+			<td>Standard C library</td>
+		</tr>
+		<tr>
+			<td>ivv-stdlib</td>
+			<td>Independent Verification &amp; Validation for
+				the Standard C library</td>
+		</tr>
+		<tr>
+			<td>libgreat</td>
+			<td>Standards-compliant explosions</td>
+		</tr>
+	</tbody>
+
+	<tbody>
+<tr>
+<th colspan="2">User interfaces</th>
+</tr>
+		<tr>
+			<td>qs</td>
+			<td>Shell</td>
+		</tr>
+		<tr>
+			<td>hfwm</td>
+			<td>Window manager</td>
+		</tr>
+		<tr>
+			<td>xwinthing</td>
+			<td>Operations on <abbr>X11</abbr> windows</td>
+		</tr>
+		<tr>
+			<td>libcl</td>
+			<td>Cisco-style <abbr>CLI</abbr></td>
+		</tr>
+	</tbody>
+
+	<tbody>
+<tr>
+<th colspan="2">Format conversion &amp; rendering</th>
+</tr>
+		<tr>
+			<td>minidocbook</td>
+			<td>Document processing</td>
+		</tr>
+		<tr>
+			<td>tapto</td>
+			<td><abbr>TAP</abbr> consumer</td>
+		</tr>
+		<tr>
+			<td>yamlto</td>
+			<td><abbr>YAML</abbr> consumer</td>
+		</tr>
+		<tr>
+			<td>bibfs</td>
+			<td>FUSE filesystem to mount BibTeX <code>.bib</code> files</td>
+		</tr>
+	</tbody>
+
+<!--
+	<tbody>
+<tr>
+<th colspan="2">Server stuff</th>
+</tr>
+		<tr>
+			<td>gopherd</td>
+			<td>Gopher daemon</td>
+		</tr>
+		<tr>
+			<td>kmircd</td>
+			<td><abbr>IRCD</abbr></td>
+		</tr>
+		<tr>
+			<td>orca</td>
+			<td><abbr>HTTPD</abbr></td>
+		</tr>
+	</tbody>
+-->
+
+	<tbody>
+<tr>
+<th colspan="2">Web development</th>
+</tr>
+		<tr>
+			<td>widgets</td>
+			<td>Web widgets</td>
+		</tr>
+		<tr>
+			<td>xslt-blog</td>
+			<td><abbr>XSLT</abbr> blog</td>
+		</tr>
+		<tr>
+			<td>xslt-calendar</td>
+			<td><abbr>XSLT</abbr> calendar</td>
+		</tr>
+<!--
+		<tr>
+			<td>mod_kxslt</td>
+			<td><abbr>XSLT</abbr> Apache module</td>
+		</tr>
+-->
+	</tbody>
+
+	<tbody>
+<tr>
+<th colspan="2">Developer tools</th>
+</tr>
+		<tr>
+			<td>kmkf<br/>
+				<a href="http://kmkf.elide.org/">http://kmkf.elide.org/</a></td>
+			<td>Makefiles</td>
+		</tr>
+	</tbody>
+
+<!--
+	<tbody>
+<tr>
+<th colspan="2">Database stuff</th>
+</tr>
+db stuff: pgtree, ugp, types etc
+			<td>pgtypes</td>
+			<td>Types for PostgreSQL</td>
+-->
+</table>
 
 <!--
 		<p>I keep a couple of things elsewhere:</p>
 
-		<table class="listing">
-			<tr>
-				<td><a href="http://www.tendra.org/">TenDRA</a></td>
+		<p>and some database-related things:</p>
 
-				<td>A compiler which goes to great lengths to
-					assure your code is portable, and conforms to
-					the standardised APIs you claim.</td>
-			</tr>
-
-			<tr>
-				<td><a href="http://water-powered.com/libgreat">libgreat</a></td>
-
-				<td>Standards-compliant explosions.</td>
-			</tr>
-
-			<tr>
-				<td><a href="http://water-powered.com/doctools">Doctools</a></td>
-
-				<td>Documentation processing tools.</td>
-			</tr>
-		</table>
--->
-
-<!-- TODO
-		<p>And some database-related things:</p>
-
-		kmircd, pgTree, UGP, types, et
-
-		<p>I also write a reasonable amount of documents, mainly on the
-			topic of specific bits of software. Here are a few I'm
+		<p>i also write a reasonable amount of documents, mainly on the
+			topic of specific bits of software. here are a few i'm
 			particularly pleased with:</p>
 
--->
-
-<!--
-		<p>These are placed in the
-			<a href="http://creativecommons.org/licenses/publicdomain/">Public Domain</a>.
-			I know I haven't done the legal stuff properly. I'll do it later.
-			If you're using something, please let me know. Everybody likes feedback!</p>
+		<p>these are placed in the
+			<a href="http://creativecommons.org/licenses/publicdomain/">public domain</a>.
+			i know i haven't done the legal stuff properly. i'll do it later.
+			if you're using something, please let me know. everybody likes feedback!</p>
 -->
 
 	</body>
