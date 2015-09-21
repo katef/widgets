@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Photos</title>
+
+		<meta name="description" content="Kate's Photos"/>
+		<meta name="keywords"    content="kate,photos,art,pictures,images,composition,snaps,instagram,jpeg,jpg,png"/>
+		<meta name="category"    content="photos"/>
+		<meta name="rcsid"       content="$Id: index.xhtml5 4497 2015-04-26 22:50:25Z kate $"/>
+
+<!--
+# secret 2845093dbe47462983efce2e2d040e1b
+		clientId: 'a21cb599b33f40159904105c06e625eb',
+accessToken: '1924635740.a21cb59.4ab9664ad7df4afe960fa3fc2d87c7a3'
+		get: 'user',
+		userId: 'katelikesrectangles',
+
+TODO alt=""
+-->
+		<script type="text/javascript"><![CDATA[
+			var feed = new Instafeed ({
+//				userId:   1924635740, /* katelikesrectangles */
+				clientId: 'a21cb599b33f40159904105c06e625eb',
+//				accessToken: '1924635740.a21cb59.4ab9664ad7df4afe960fa3fc2d87c7a3',
+//				get:      'user',
+
+				tagName:  'elidethis',
+				get:      'tagged',
+
+				sortBy: 'most-recent',
+				links: true,
+limit: 9999,
+				resolution: 'standard_resolution',
+				filter: function(image) {
+					if (image.images.standard_resolution.width
+					 != image.images.standard_resolution.height) {
+						return false;
+					}
+
+					/* or: return image.user_has_liked; */
+//					if (image.tags.indexOf('elidethis') == -1) {
+//						return false;
+//					}
+
+					return image.user.username == 'katelikesrectangles';
+				},
+				template: '<li><a href="{{link}}"><img src="{{image}}"/></a></li> ',
+				target:   'instafeed',
+
+				after: function() {
+					if (this.hasNext()) {
+						this.next();
+					}
+				},
+			});
+		]]></script>
+	</head>
+
+	<body>
+		<p>Square photos: <a href="https://www.instagram.com/katelikesrectangles/">@katelikesrectangles</a></p>
+
+		<ul class="square photos" id="instafeed">
+		</ul>
+
+		<!-- TODO: onload -->
+		<script>
+			feed.run();
+		</script>
+<style>
+a img { height: 150px; }
+</style>
+
+		<p>Non-square photos</p>
+
+		<ul class="nonsquare photos">
+			<li><a href="#TODO"><img src="p1110381.jpg" height="170"/></a></li>
+			<li><a href="#TODO"><img src="gmes1.jpeg" height="170"/></a></li>
+			<li><a href="#TODO"><img src="ship.jpeg" height="170"/></a></li>
+			<li><a href="#TODO"><img src="shelves.jpeg" height="170"/></a></li>
+			<li><a href="#TODO"><img src="physics.jpeg" height="170"/></a></li>
+			<li><a href="#TODO"><img src="p1110377.jpg" height="170"/></a></li>
+			<li><a href="#TODO"><img src="sg8.jpeg" height="170"/></a></li>
+			<li><a href="#TODO"><img src="IMG_1585.JPG" height="170"/></a></li>
+			<li><a href="#TODO"><img src="IMG_1685.JPG" height="170"/></a></li>
+			<li><a href="#TODO"><img src="P1160462.JPG" height="170"/></a></li>
+			<li><a href="#TODO"><img src="condensation.jpeg" height="170"/></a></li>
+<!--
+			<li><a href="#TODO"><img src="fire.jpeg" height="170"/></a></li>
+-->
+		</ul>
+	</body>
+</html>
+

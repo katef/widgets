@@ -23,6 +23,7 @@
 	<!-- TODO: rename contents to toc -->
 	<c:contents>
 		<c:category href="/diary/"    name="Diary"/>
+		<c:category href="/photos/"   name="Photos"/>
 		<c:category href="/articles/" name="Articles"/>
 		<c:category href="/code/"     name="Code"/>
 		<c:category href="/about/"    name="About"/>
@@ -104,8 +105,7 @@
 			<xsl:with-param name="js">
 				<xsl:value-of select="'col.js fixup.js hyphenator-min.js overlay.js debug.js'"/>
 
-				<!-- TODO: only where relevant -->
-				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>
+				<xsl:value-of select="' ajax.js valid.js comment.js template.js instafeed.min.js'"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="onload">
