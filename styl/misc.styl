@@ -13,11 +13,15 @@ clearfix() {
 	}
 }
 
-opacity($o = 100%) {
-	/* TODO: */
-//	zoom: 1;
-//	filter: alpha(opacity=30);
-	opacity: 0.3;
+opacity($o = 1.0) {
+	if (unit($o) == '%' || $o < 0 || $o > 1) {
+		error('opacity 0..1');
+	}
+
+	filter: unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round($o * 100) + ')')
+	zoom: 1;
+	filter: unquote('alpha(opacity=' + round($o * 100) + ')');
+	opacity: $o;
 }
 
 font-feature-settings($f, $o) {
