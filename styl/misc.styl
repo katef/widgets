@@ -24,6 +24,45 @@ opacity($o = 1.0) {
 	opacity: $o;
 }
 
+filter($name, $n = 100%) {
+	if ($n < 0% || $n > 100%) {
+		error('filter 0..100%')
+	}
+
+	$u = unit($n, '') / 100;
+
+	if ($name == 'grayscale') {
+		$svg = s(                        \
+		( "<svg xmlns=\'%s\'>"           \
+		+ " <filter id=\'%s\'>"          \
+		+ "  <feColorMatrix type=\'%s\'" \
+		+ "   values=\'%s %s %s 0 0"     \
+		+            " %s %s %s 0 0"     \
+		+            " %s %s %s 0 0"     \
+		+            "  0  0  0 1 0\'/>" \
+		+ " </filter>"                   \
+		+ "</svg>"                       \
+		+ "#%s"),                        \
+			unquote('http://www.w3.org/2000/svg'), \
+			unquote($name),    \
+			unquote('matrix'), \
+			$u, $u, $u,        \
+			$u, $u, $u,        \
+			$u, $u, $u,        \
+			unquote($name));
+		filter: s('url(~"data:image/svg+xml;utf8,%s")', unquote($svg));
+	}
+
+	-webkit-filter: s('%s(%s)', unquote($name), $u);
+	   -moz-filter: s('%s(%s)', unquote($name), $u);
+	    -ms-filter: s('%s(%s)', unquote($name), $u);
+	     -o-filter: s('%s(%s)', unquote($name), $u);
+	if ($name == 'grayscale') {
+	        filter: unquote('gray');
+	}
+	        filter: s('%s(%s)', unquote($name), $u);
+}
+
 font-feature-settings($f, $o) {
 	/*
 	 * Note if @-webkit-font-feature-settings here because
