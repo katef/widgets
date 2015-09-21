@@ -33,6 +33,22 @@ $faq ?= {
 sidebar($l) { return $grid.ncols[$l] >= 5 ? 1 : 0; }
 gapless($l) { return true; }
 
+photosquarecols($l) {
+	if ($grid.ncols[$l] > 3) {
+		return 3;
+	}
+
+	return $grid.ncols[$l];
+}
+
+photonotsquarecols($l) {
+	if (photosquarecols($l) > 2) {
+		return 2;
+	}
+
+	return 1;
+}
+
 menustyle($l) {
 	if ($grid.ncols[$l] == 1) {
 		return collapse;

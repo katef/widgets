@@ -118,7 +118,8 @@ footer {
 	}
 
 	&:after {
-		margin-top: $page-padding;
+//		margin-top: $page-padding;
+		border-top: solid $page-padding #fff;
 	}
 }
 
@@ -388,5 +389,76 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			}
 		}
 	}
+}
+
+main:hover {
+	ul.photos a {
+		background-color: #ffc; // contrast against the header
+	}
+
+	ul.photos img {
+		filter: 'grayscale' 100%;
+		opacity: 0.3;
+	}
+
+	ul.photos a:hover img {
+		filter: none;
+		filter: 'grayscale' 0%;
+		opacity: 1.0;
+	}
+}
+
+ul.photos {
+	list-style-type: none;
+
+	margin-left:  -($grid.gutter);
+	margin-right: -($grid.gutter);
+	margin-top:    0;
+	margin-bottom: 0;
+
+	clearfix(); // for a:hover
+
+	li {
+		display: block;
+		margin:  0;
+		padding: $grid.gutter;
+
+		float: left;
+		box-sizing: border-box;
+
+		a {
+			display: block;
+
+			img {
+				display: block;
+				width:  100%;
+				height: auto;
+			}
+		}
+	}
+
+	for $l in 0 .. length($grid.ncols) - 1 {
+		$q = grid-breakpoint($grid, $l);
+		@media $q {
+
+			if ($grid.layouts[$l] == fixed) {
+				margin-right: 0; // strange special case
+			}
+
+			&.square {
+				li {
+					width: floor(100% / photosquarecols($l));
+				}
+			}
+
+			&.nonsquare {
+				li {
+					width: floor(100% / photonotsquarecols($l));
+				}
+			}
+
+		}
+	}
+
 }
 
