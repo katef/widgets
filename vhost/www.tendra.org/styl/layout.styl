@@ -32,10 +32,16 @@ for $l in 0 .. length($grid.ncols) - 1 {
 		}
 
 		body > header nav {
+			clear: both; // XXX: why?
+
 			concertina-layout(menustyle($l));
-if (menustyle($l) == vertical) {
-li > ul { display: none; } // XXX: need to have this expand out, too
-}
+
+			if (menustyle($l) == vertical) {
+				li > ul { display: none; } // XXX: need to have this expand out, too
+
+				margin: 0 -($grid.gutter * 1); // XXX: hacky
+				margin-bottom: $baseline;
+			}
 		}
 
 	}
@@ -105,7 +111,7 @@ li > ul { display: none; } // XXX: need to have this expand out, too
 			grid-column($grid, $l, banner($l), $grid.ncols[$l] - banner($l));
 			if ($grid.ncols[$l] <= 3) {
 				margin-top:    0.5em;
-				margin-bottom: 1em;
+				margin-bottom: 0.5em;
 			} else {
 				margin-top:    1em;
 				margin-bottom: 1em;
