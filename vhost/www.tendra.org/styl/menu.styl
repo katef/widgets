@@ -141,6 +141,10 @@ ul.menu {
 /* adapted from http://www.divitodesign.com/2008/09/how-to-dropdown-css-menu/ */
 
 header nav {
+	& > ul {
+		margin-bottom: 0; // override baseline
+	}
+
 	& > li > a {
 		height:  ($baseline * 1.5);
 		padding: 0 $menu.pad-sides;
