@@ -38,13 +38,14 @@ table {
 	 */
 	th, td {
 		padding: 0 ($grid-pad-sides - 1px);	/* -1px for the border */
-		line-height: ($baseline * 1.5 - 1px);	/* -1px for the border */
+//		line-height: ($baseline * 1.5 - 1px);	/* -1px for the border */
 		font-size: ($grid-basefont - 1px);
 		vertical-align: top;
 		border-top: solid 1px #ddd;
 		border-right: solid 1px #ddd;
 		border-left: none;
 		border-bottom: none;
+// XXX: not line-height, because this doesn't work for tdftags(3)
 	}
 }
 

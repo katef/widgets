@@ -49,7 +49,7 @@ aside.notes dl dt:before {
 	padding: ($menu.delta / 2) $menu.delta;
 }
 
-header nav li a:hover,
+header nav li ul > li > a:hover,
 header nav li.current > a,
 nav.submenu li.current > a,
 nav.submenu li a:hover,
@@ -92,8 +92,30 @@ header nav {
 	menu-container();
 }
 
-ul li.current a {
-	color: #000;
+header nav ul {
+	span.description {
+		float: right;
+		color: #aaa;
+	}
+
+	& > li:hover {
+		& > a {
+			background-color: #000;
+			color: #fff;
+		}
+	}
+
+	& > li.current > a {
+		font-weight: bold;
+	}
+
+	ul {
+		background-color: #fff;
+
+		li:hover a {
+			color: #000;
+		}
+	}
 }
 
 ul.menu {
@@ -140,58 +162,47 @@ ul.menu {
 
 /* adapted from http://www.divitodesign.com/2008/09/how-to-dropdown-css-menu/ */
 
-header nav {
-	& > ul {
-		margin-bottom: 0; // override baseline
-	}
-
-	& > li > a {
-		height:  ($baseline * 1.5);
-		padding: 0 $menu.pad-sides;
-		margin:  0;
-	}
-
-	& > li.current > a {
-		font-weight: bold;
-	}
+header nav > ul {
+	margin-bottom: 0; // override baseline
 
 	&,
-	& li > ul {
+	li > ul {
 		list-style-type: none;
 		z-index: 1;
 	}
 
-	& li > ul {
+	& > li > a {
+		padding: 0 $menu.pad-sides;
+		margin:  0;
+	}
+
+	li > a {
+		line-height: ($baseline * 1.75);
+	}
+
+	li > ul {
 		border-top:    solid 5px #000;
 		border-bottom: solid 5px #000;
 		display: none;
 		position: absolute;
-		top: 0;
-		left: 0;
-		margin: 0;
-		padding: 0;
 		background-color: #fff;
+		min-width: 18em;
 
-		top: auto;
+		margin:  0;
+		padding: 0;
+
+		top:  auto;
 		left: auto;
 
 		li a {
-			min-width: (15em);
-			height:    ($baseline * 1.5);
-			padding:   0 ($menu.pad-sides - 1px); /* -1px for the border */
-			margin:    0;
+			padding: 0 ($menu.pad-sides - 1px); /* -1px for the border */
+			margin:  0;
 		}
 
 		li {
 			border-left:  solid 1px #ddd;
 			border-right: solid 1px #ddd;
 			margin: 0;
-
-			span.description {
-				float: right;
-				color: #aaa;
-				font-size: .95em;
-			}
 		}
 
 		li.sep {
@@ -199,7 +210,7 @@ header nav {
 		}
 	}
 
-	& li:hover ul {
+	li:hover ul {
 		display: block;
 	}
 }
