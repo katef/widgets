@@ -6,9 +6,8 @@
 
 /* intentionally off-grid */
 h1#banner {
-	margin: 0;
-	padding-top:    1.0em;
-	padding-bottom: 1.5em;
+	margin:  0;
+	padding: 0;
 
 	font-feature-settings: "smcp" 1;
 	font-feature-settings: "size" 1;
@@ -18,11 +17,19 @@ h1#banner {
 	text-align:     center;
 
 	a {
+		display: inline-block;
+		line-height: 0.75em; // for fake underline to be in the right place
+		margin-top:  (1em - @line-height);
+
 		text-decoration: none;
 
+		$ul = 0.2ex; // about the same as text-decoration's underline width
+		border-bottom: solid $ul transparent;
+		margin-bottom: -($ul);
+
 		&:hover {
-			text-decoration: underline;
 			color: inherit;
+			border-bottom-color: inherit;
 		}
 	}
 
