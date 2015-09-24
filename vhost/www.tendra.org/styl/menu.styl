@@ -191,6 +191,22 @@ header nav > ul {
 		li.sep {
 			border-bottom: solid $menu.border #ddd;
 		}
+
+		/*
+		 * This is an overlapping box, to give the cursor something to aim for,
+		 * so the menu doesn't vanish if you go just over the edge of its box.
+		 * It's not clickable; it just holds the menu open by its :hover.
+		 */
+		&:after {
+			content: "\A0";
+			background-color: transparent;
+			position: absolute;
+			width:  100% + 20%;
+			height: 100% + 15%;
+			top:   0;
+			left: -10%;
+			z-index: -1;
+		}
 	}
 
 	li:hover ul {
