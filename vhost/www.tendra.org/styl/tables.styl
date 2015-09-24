@@ -1,10 +1,18 @@
 /* $Id$ */
 
+// TODO: centralise most of this
+
+$table ?= {
+	border: 1px
+	sides:  $grid.gutter || $baseline
+	verts:  0.5em
+}
+
 table {
-	margin: -2px ($grid-indent - $baseline);	/* -2px for the borders */
+	margin: -($table.border);
 	border-collapse: collapse;
-	border-left: solid 1px #ddd;
-	border-bottom: solid 1px #ddd;
+	border-left:   solid $table.border #ddd;
+	border-bottom: solid $table.border #ddd;
 
 	@media screen {
 
@@ -37,15 +45,13 @@ table {
 	 * containing element to restore vertical rythm for following elements.
 	 */
 	th, td {
-		padding: 0 ($grid-pad-sides - 1px);	/* -1px for the border */
-//		line-height: ($baseline * 1.5 - 1px);	/* -1px for the border */
-		font-size: ($grid-basefont - 1px);
+		padding: $table.verts ($table.sides - $table.border);
 		vertical-align: top;
-		border-top: solid 1px #ddd;
-		border-right: solid 1px #ddd;
-		border-left: none;
+
+		border-top:    solid $table.border #ddd;
+		border-right:  solid $table.border #ddd;
+		border-left:   none;
 		border-bottom: none;
-// XXX: not line-height, because this doesn't work for tdftags(3)
 	}
 }
 

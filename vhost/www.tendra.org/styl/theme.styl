@@ -16,12 +16,22 @@ $grid = {
 	colour: aliceblue
 }
 
+$table ?= {
+	border: 1px
+	sides:  $grid.gutter
+	verts:  0.5em
+}
+
 $menu = {
 	bar:    $grid.gutter / 2
 	delta:  $grid.gutter
 	colour: #eee
 	height: $baseline * 1.5
 	time:   .25s
+	sides:  $table.sides
+	border: $table.border
+	sides:  $table.sides
+	verts:  $table.verts
 }
 
 sidebar($l)   { return $grid.ncols[$l] >  9 ? 3 : 0; }

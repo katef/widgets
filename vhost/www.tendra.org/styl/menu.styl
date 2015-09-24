@@ -68,18 +68,12 @@ aside.notes dl dt a:hover {
 
 }
 
-//$menu.pad-sides = ($grid-pad-sides * 0.75);
-$menu.pad-sides = ($baseline * 0.75);
-
 // TODO: centralise
 menu-container() {
 	li a {
 		display: block;
 		text-decoration: none;
-	}
-
-	& > li a {
-		line-height: ($baseline * 1.5);
+		padding: $menu.verts $menu.sides;
 	}
 
 	& li a:hover {
@@ -98,11 +92,9 @@ header nav ul {
 		color: #aaa;
 	}
 
-	& > li:hover {
-		& > a {
-			background-color: #000;
-			color: #fff;
-		}
+	& > li:hover > a {
+		background-color: #000;
+		color: #fff;
 	}
 
 	& > li.current > a {
@@ -124,7 +116,7 @@ ul.menu {
 	padding: 0;
 
 	li {
-		border-top: dotted 1px #ddd;
+		border-top: dotted $menu.border #ddd;
 		margin: 0;
 
 		&:first-child {
@@ -146,7 +138,6 @@ ul.menu {
 		}
 
 		a {
-			line-height: ($baseline * 1.5);
 			color: #666;
 
 			&:hover {
@@ -171,18 +162,9 @@ header nav > ul {
 		z-index: 1;
 	}
 
-	& > li > a {
-		padding: 0 $menu.pad-sides;
-		margin:  0;
-	}
-
-	li > a {
-		line-height: ($baseline * 1.75);
-	}
-
 	li > ul {
-		border-top:    solid 5px #000;
-		border-bottom: solid 5px #000;
+		border-top:    solid $menu.bar #000;
+		border-bottom: solid $menu.bar #000;
 		display: none;
 		position: absolute;
 		background-color: #fff;
@@ -194,19 +176,20 @@ header nav > ul {
 		top:  auto;
 		left: auto;
 
-		li a {
-			padding: 0 ($menu.pad-sides - 1px); /* -1px for the border */
-			margin:  0;
-		}
-
 		li {
-			border-left:  solid 1px #ddd;
-			border-right: solid 1px #ddd;
+			border-left:  solid $menu.border #ddd;
+			border-right: solid $menu.border #ddd;
+
 			margin: 0;
+
+			a {
+				padding-left: ($menu.sides - $menu.border);
+				padding-right: ($menu.sides - $menu.border);
+			}
 		}
 
 		li.sep {
-			border-bottom: solid 1px #ddd;
+			border-bottom: solid $menu.border #ddd;
 		}
 	}
 
