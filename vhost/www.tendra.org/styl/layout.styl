@@ -112,6 +112,9 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			if ($grid.ncols[$l] <= 3) {
 				margin-top:    0.5em;
 				margin-bottom: 0.5em;
+			} else if ($grid.layouts[$l] == fixed) {
+				margin-top:    2em;
+				margin-bottom: 1em;
 			} else {
 				margin-top:    1em;
 				margin-bottom: 1em;
