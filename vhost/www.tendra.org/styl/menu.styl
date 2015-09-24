@@ -1,6 +1,6 @@
 /* $Id$ */
 
-/* XXX: bubblephone-specific concertina stuff */
+/* XXX: tendra-specific concertina stuff */
 for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l);
 	@media $q {
@@ -11,8 +11,6 @@ for $l in 0 .. length($grid.ncols) - 1 {
 				}
 
 				li.current a {
-					transition: color $menu.time ease-in-out;
-
 					/* trigram */
 					&:after {
 						color:        darken($menu.colour, 30%);
@@ -20,12 +18,19 @@ for $l in 0 .. length($grid.ncols) - 1 {
 					}
 
 					&:hover:after {
-						border-color: darken($menu.colour, 50%);
+						border-color: #fff;
 					}
 				}
 
-				&.collapsed li.current a {
-					color: darken($menu.colour, 30%);
+				&.collapsed {
+					& > li.current a {
+						color: darken($menu.colour, 30%);
+					}
+
+					& > li:hover > a {
+						background-color: #000;
+						color: #fff;
+					}
 				}
 
 				border-bottom: solid 0 $menu.colour;
@@ -35,7 +40,8 @@ for $l in 0 .. length($grid.ncols) - 1 {
 }
 
 header nav a,
-aside.notes dl dt a {
+aside.notes dl dt a,
+ul.menu a {
 	text-align: left;
 	display: block;
 	padding: $menu.verts $menu.sides;
