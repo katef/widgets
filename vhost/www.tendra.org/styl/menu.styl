@@ -38,7 +38,7 @@ header nav a,
 aside.notes dl dt a {
 	text-align: left;
 	display: block;
-	padding: ($menu.delta / 2) $menu.delta;
+	padding: $menu.verts $menu.sides;
 
 	&:hover {
 		text-decoration: none;
@@ -46,44 +46,31 @@ aside.notes dl dt a {
 }
 
 aside.notes dl dt:before {
-	padding: ($menu.delta / 2) $menu.delta;
+	padding: $menu.verts $menu.sides;
 }
 
 header nav li ul > li > a:hover,
 header nav li.current > a,
-nav.submenu li.current > a,
-nav.submenu li a:hover,
-aside.notes dl dt a:hover {
+aside.notes dl dt a:hover,
+ul.menu li a:hover {
 	background-color: $menu.colour;
-	text-decoration: none;
 }
 
 @media screen {
 
 	header nav li a,
-	nav.submenu li a,
 	aside.notes dl dt a {
 		cursor: pointer;
 	}
 
 }
 
-// TODO: centralise
-menu-container() {
-	li a {
-		display: block;
-		text-decoration: none;
-		padding: $menu.verts $menu.sides;
-	}
-
-	& li a:hover {
-		background-color: #eee;
-	}
-}
-
+aside.notes dl dt,
 ul.menu,
 header nav {
-	menu-container();
+	a, a:hover {
+		text-decoration: none;
+	}
 }
 
 header nav ul {
