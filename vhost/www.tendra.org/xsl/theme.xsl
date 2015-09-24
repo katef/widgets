@@ -95,6 +95,8 @@
 			<xsl:with-param name="head">
 				<xsl:copy-of select="h:head/h:meta[@name = 'description']"/>
 				<xsl:copy-of select="h:head/h:meta[@name = 'keywords']"/>
+
+				<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
