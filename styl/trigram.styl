@@ -12,10 +12,11 @@
  */
 
 $trigram ?= {
-	size: floor($baseline || 15px) / 5
+	size: floor(($baseline || 15px) / 5)
 }
 
 trigram() {
+p($trigram.size);
 	&:after {
 		content: "";
 		display: inline-block;
