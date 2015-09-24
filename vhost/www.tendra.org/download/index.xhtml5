@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html [
 
-	<!ENTITY tendra.url.dl "http://ftp.tendra.org/pub/TenDRA">
+	<!ENTITY tendra.url.dl  "http://ftp.tendra.org/pub/TenDRA">
+	<!ENTITY tendra.url.svn "svn://svn.tendra.org">
 
 ]>
 
@@ -157,7 +158,7 @@
 
 		<h3>Development</h3>
 		<blockquote>
-			<tt>svn co <a href="http://svn.tendra.org/trunk">http://svn.tendra.org/trunk</a> tendra</tt>
+			<tt>svn co <a href="&tendra.url.svn;/trunk">&tendra.url.svn;/trunk</a> tendra</tt>
 		</blockquote>
   </body>
 </html>

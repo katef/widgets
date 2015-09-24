@@ -3,7 +3,8 @@
 	<!ENTITY ldquo "&#8220;">
 	<!ENTITY rdquo "&#8221;">
 
-	<!ENTITY lx.url.dl "http://svn.libfsm.org/releases">
+	<!ENTITY lx.url.dl  "http://svn.libfsm.org/releases">
+	<!ENTITY lx.url.svn "svn://svn.libfsm.org">
 ]>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -83,7 +84,7 @@
 			<p>See the <a href="TODO">README</a> for build instructions.<br/>
 			You can check out the trunk revision of the source here:</p>
 
-			<pre>$ svn co http://svn.libfsm.org/trunk lx0</pre>
+			<pre>$ svn co <a href="&lx.url.svn;/trunk">&lx.url.svn;/trunk</a> lx0</pre>
 
 		</section>
 
