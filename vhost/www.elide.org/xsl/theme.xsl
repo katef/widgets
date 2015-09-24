@@ -128,6 +128,8 @@
 				<xsl:copy-of select="h:head/h:meta[@name = 'description']"/>
 				<xsl:copy-of select="h:head/h:meta[@name = 'keywords']"/>
 
+				<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+
 				<!-- here to cut loading time -->
 				<style><![CDATA[
 					header,
