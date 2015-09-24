@@ -76,7 +76,7 @@
 				<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
 
 				<!-- TODO: consider vw css units instead -->
-				<xsl:text>window.fitText(document.getElementById("banner"), 1.2);</xsl:text>
+				<xsl:text>window.fitText(document.getElementById("banner"), 1.3);</xsl:text>
 
 				<!-- TODO: only where relevant -->
 <!-- XXX:
