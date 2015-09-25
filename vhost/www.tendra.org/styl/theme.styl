@@ -17,22 +17,23 @@ $grid = {
 }
 
 $table ?= {
-	border: 1px
-	sides:  $grid.gutter
 	verts:  0.5em
+	sides:  $grid.gutter
+	border: 1px
 }
 
 $menu = {
+	verts:  $table.verts
+	sides:  $table.sides
+	border: $table.border
+}
+
+// tendra-specific
+$nav = {
 	bar:    $grid.gutter / 2
 	colour: #eee
 	height: $baseline * 2
 	time:   .25s
-	sides:  $table.sides
-	border: $table.border
-	sides:  $table.sides
-	verts:  $table.verts
-	bullet: "\25b8"
-	gutter: 2em // XXX: $list.gutter
 }
 
 sidebar($l)   { return $grid.ncols[$l] >  9 ? 3 : 0; }

@@ -102,14 +102,14 @@ for $l in 0 .. length($grid.ncols) - 1 {
 		if ($grid.ncols[$l] <= 3) {
 			header nav {
 				li a {
-					background-color: lighten($menu.colour, 50%);
+					background-color: lighten($nav.colour, 50%);
 				}
 
 				li.current a {
 					/* trigram */
 					&:after {
-						color:        darken($menu.colour, 30%);
-						border-color: darken($menu.colour, 30%);
+						color:        darken($nav.colour, 30%);
+						border-color: darken($nav.colour, 30%);
 					}
 
 					&:hover:after {
@@ -119,7 +119,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 
 				&.collapsed {
 					& > li.current a {
-						color: darken($menu.colour, 30%);
+						color: darken($nav.colour, 30%);
 					}
 
 					& > li:hover > a {
@@ -128,7 +128,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 					}
 				}
 
-				border-bottom: solid 0 $menu.colour;
+				border-bottom: solid 0 $nav.colour;
 			}
 		}
 	}
@@ -148,7 +148,7 @@ ul.menu {
 header nav li ul > li > a:hover,
 header nav li.current > a,
 ul.menu li a:hover {
-	background-color: $menu.colour;
+	background-color: $nav.colour;
 }
 
 header nav ul {
@@ -218,8 +218,8 @@ header nav > ul {
 	menu-dropdown();
 
 	li > ul {
-		border-top:    solid $menu.bar #000;
-		border-bottom: solid $menu.bar #000;
+		border-top:    solid $nav.bar #000;
+		border-bottom: solid $nav.bar #000;
 
 		background-color: #fff;
 		min-width: 18em;
@@ -233,8 +233,8 @@ header nav > ul {
 		}
 
 		&:after {
-			padding-top: $menu.bar;
-			top:  -($menu.bar);
+			padding-top: $nav.bar;
+			top:  -($nav.bar);
 		}
 	}
 }
