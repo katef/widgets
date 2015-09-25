@@ -39,39 +39,21 @@ for $l in 0 .. length($grid.ncols) - 1 {
 	}
 }
 
+// TODO: centralise as menu block item
 header nav a,
-aside.notes dl dt a,
 ul.menu a {
 	text-align: left;
 	display: block;
 	padding: $menu.verts $menu.sides;
-
-	&:hover {
-		text-decoration: none;
-	}
 }
 
-aside.notes dl dt:before {
-	padding: $menu.verts $menu.sides;
-}
-
+// TODO: centralise as menu block item
 header nav li ul > li > a:hover,
 header nav li.current > a,
-aside.notes dl dt a:hover,
 ul.menu li a:hover {
 	background-color: $menu.colour;
 }
 
-@media screen {
-
-	header nav li a,
-	aside.notes dl dt a {
-		cursor: pointer;
-	}
-
-}
-
-aside.notes dl dt,
 ul.menu,
 header nav {
 	a, a:hover {
@@ -103,6 +85,7 @@ header nav ul {
 	}
 }
 
+// TODO: centralise as bulleted menu
 ul.menu {
 	list-style-type: none;
 	margin:  0 0 $baseline 0;
@@ -140,12 +123,8 @@ ul.menu {
 	}
 }
 
-
-/* sections menu */
-// TODO: centralise
-
+// TODO: centralise as dropdown menu
 /* adapted from http://www.divitodesign.com/2008/09/how-to-dropdown-css-menu/ */
-
 header nav > ul {
 	margin-bottom: 0; // override baseline
 
