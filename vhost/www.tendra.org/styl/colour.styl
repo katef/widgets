@@ -95,3 +95,137 @@ ol.glossary li {
 	}
 }
 
+/* XXX: tendra-specific concertina stuff */
+for $l in 0 .. length($grid.ncols) - 1 {
+	$q = grid-breakpoint($grid, $l);
+	@media $q {
+		if ($grid.ncols[$l] <= 3) {
+			header nav {
+				li a {
+					background-color: lighten($menu.colour, 50%);
+				}
+
+				li.current a {
+					/* trigram */
+					&:after {
+						color:        darken($menu.colour, 30%);
+						border-color: darken($menu.colour, 30%);
+					}
+
+					&:hover:after {
+						border-color: #fff;
+					}
+				}
+
+				&.collapsed {
+					& > li.current a {
+						color: darken($menu.colour, 30%);
+					}
+
+					& > li:hover > a {
+						background-color: #000;
+						color: #fff;
+					}
+				}
+
+				border-bottom: solid 0 $menu.colour;
+			}
+		}
+	}
+}
+
+header nav > ul > li > a {
+	menu-item();
+}
+
+header nav,
+ul.menu {
+	a, a:hover {
+		text-decoration: none;
+	}
+}
+
+header nav li ul > li > a:hover,
+header nav li.current > a,
+ul.menu li a:hover {
+	background-color: $menu.colour;
+}
+
+header nav ul {
+	span.description {
+		float: right;
+		color: #aaa;
+	}
+
+	& > li:hover > a {
+		background-color: #000;
+		color: #fff;
+	}
+
+	& > li.current > a {
+		font-weight: bold;
+	}
+
+	ul {
+		background-color: #fff;
+
+		li:hover a {
+			color: #000;
+		}
+	}
+}
+
+ul.menu {
+	margin: 0 0 $baseline 0;
+
+	menu-bulleted();
+
+	li {
+		border-top-color: #ddd;
+		border-top-style: dotted;
+
+		&.current a:before {
+			color: #888;
+		}
+
+		a:before {
+			color: #ddd;
+		}
+
+		a {
+			color: #666;
+
+			&:hover {
+				color: #000;
+			}
+		}
+	}
+}
+
+header nav > ul {
+	margin-bottom: 0; // override baseline
+
+	menu-dropdown();
+
+	li > ul {
+		border-top:    solid $menu.bar #000;
+		border-bottom: solid $menu.bar #000;
+
+		background-color: #fff;
+		min-width: 18em;
+
+		li {
+			border-color: #ddd;
+		}
+
+		li.sep {
+			border-bottom-color: #ddd;
+		}
+
+		&:after {
+			padding-top: $menu.bar;
+			top:  -($menu.bar);
+		}
+	}
+}
+

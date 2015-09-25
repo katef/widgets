@@ -31,6 +31,8 @@ $menu = {
 	border: $table.border
 	sides:  $table.sides
 	verts:  $table.verts
+	bullet: "\25b8"
+	gutter: 2em // XXX: $list.gutter
 }
 
 sidebar($l)   { return $grid.ncols[$l] >  9 ? 3 : 0; }
