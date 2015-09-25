@@ -178,19 +178,11 @@ header nav ul {
 ul.menu {
 	margin: 0 0 $baseline 0;
 
-	menu-bulleted();
+	menu-list();
 
 	li {
 		border-top-color: #ddd;
 		border-top-style: dotted;
-
-		&.current a:before {
-			color: #888;
-		}
-
-		a:before {
-			color: #ddd;
-		}
 
 		a {
 			color: #666;
@@ -198,6 +190,24 @@ ul.menu {
 			&:hover {
 				color: #000;
 			}
+
+			&:before {
+				color: #ddd;
+			}
+		}
+
+		a {
+			hang($list.gutter, $list.padding, inline);
+
+			padding-left: 0; // XXX: breaks abstraction?
+
+			&:before {
+				content: "\25B6";
+			}
+		}
+
+		&.current a:before {
+			color: #888;
 		}
 	}
 }

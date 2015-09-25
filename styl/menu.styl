@@ -1,9 +1,15 @@
 /* $Id$ */
 
+/*
+ * Menu items are block-shaped links.
+ *
+ * They do not contain bullets per se (although other styling may add those);
+ * this facility is just concerned with the shape of the box.
+ */
+
 $menu ?= {
 	verts:  $grid.gutter || 0.5em
 	sides:  $grid.gutter || 1.0em
-	bullet: $list.bullet || "\2022"
 	gutter: $list.gutter || 2em
 	border: 1px
 }
@@ -14,7 +20,7 @@ menu-item() {
 	padding: $menu.verts $menu.sides;
 }
 
-menu-bulleted() {
+menu-list() {
 	list-style-type: none;
 	padding: 0;
 
@@ -28,21 +34,6 @@ menu-bulleted() {
 
 		a {
 			menu-item();
-
-			&:before {
-				display: inline-block;
-				content: $menu.bullet;
-				width:   $menu.gutter;
-
-				text-align: center;
-
-				padding: $menu.verts 0;
-
-				margin-top:    -($menu.verts);
-				margin-right:  0;
-				margin-bottom: -($menu.verts);
-				margin-left:   -($menu.sides);
-			}
 		}
 	}
 }
