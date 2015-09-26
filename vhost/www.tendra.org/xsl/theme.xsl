@@ -53,13 +53,13 @@
 
 	<xsl:template match="/h:html">
 		<xsl:call-template name="theme-output">
-			<xsl:with-param name="class" select="concat(@class, ' hyphenate')"/>
+			<xsl:with-param name="class"   select="concat(@class, ' hyphenate')"/>
 
-			<xsl:with-param name="css"   select="'style.css'"/>
+			<xsl:with-param name="css"     select="'style.css'"/>
+			<xsl:with-param name="favicon" select="'/favicon.ico'"/>
 
 			<xsl:with-param name="js">
 				<xsl:value-of select="'col.js fixup.js hyphenator-min.js expander.js table.js overlay.js debug.js'"/>
-
 				<xsl:value-of select="' fittext.js'"/>
 
 				<!-- TODO: only where relevant -->
@@ -93,8 +93,6 @@
 			<xsl:with-param name="head">
 				<xsl:copy-of select="h:head/h:meta[@name = 'description']"/>
 				<xsl:copy-of select="h:head/h:meta[@name = 'keywords']"/>
-
-				<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="body">

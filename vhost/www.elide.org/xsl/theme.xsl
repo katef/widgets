@@ -100,11 +100,11 @@
 
 	<xsl:template match="/h:html">
 		<xsl:call-template name="theme-output">
-			<xsl:with-param name="css"   select="'style.css'"/>
+			<xsl:with-param name="css"     select="'style.css'"/>
+			<xsl:with-param name="favicon" select="'/favicon.ico'"/>
 
 			<xsl:with-param name="js">
 				<xsl:value-of select="'col.js fixup.js hyphenator-min.js overlay.js debug.js'"/>
-
 				<xsl:value-of select="' ajax.js valid.js comment.js template.js instafeed.min.js'"/>
 			</xsl:with-param>
 
@@ -125,8 +125,6 @@
 			<xsl:with-param name="head">
 				<xsl:copy-of select="h:head/h:meta[@name = 'description']"/>
 				<xsl:copy-of select="h:head/h:meta[@name = 'keywords']"/>
-
-				<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 
 				<!-- here to cut loading time -->
 				<style><![CDATA[
