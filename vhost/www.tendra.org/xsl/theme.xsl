@@ -55,7 +55,7 @@
 		<xsl:call-template name="theme-output">
 			<xsl:with-param name="class" select="concat(@class, ' hyphenate')"/>
 
-			<xsl:with-param name="css"   select="'style.css debug.css'"/>
+			<xsl:with-param name="css"   select="'style.css'"/>
 
 			<xsl:with-param name="js">
 				<xsl:value-of select="'col.js fixup.js hyphenator-min.js expander.js table.js overlay.js debug.js'"/>

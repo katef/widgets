@@ -100,7 +100,7 @@
 
 	<xsl:template match="/h:html">
 		<xsl:call-template name="theme-output">
-			<xsl:with-param name="css"   select="'style.css debug.css'"/>
+			<xsl:with-param name="css"   select="'style.css'"/>
 
 			<xsl:with-param name="js">
 				<xsl:value-of select="'col.js fixup.js hyphenator-min.js overlay.js debug.js'"/>

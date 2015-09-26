@@ -71,6 +71,25 @@ document.onkeyup = function (e) {
 		node.setAttribute('class', a.join(' '));
 	}
 
+	function loadstylesheet(doc, href) {
+		var head, link;
+
+		if (doc.getElementById(href)) {
+			return;
+		}
+
+		head = doc.getElementsByTagName('head')[0];
+		link = doc.createElement('link');
+
+		link.id    = href;
+		link.href  = href;
+		link.type  = 'text/css';
+		link.rel   = 'stylesheet';
+		link.media = 'all';
+
+		head.appendChild(link);
+	}
+
 	/* 71 is 'g' */
 	if (e.altKey && e.keyCode == 71) {
 		var html;
@@ -81,6 +100,7 @@ document.onkeyup = function (e) {
 		if (hasclass(html, 'debug')) {
 			removeclass(html, 'debug');
 		} else {
+			loadstylesheet(document, '/css/debug.css');
 			addclass(html, 'debug');
 		}
 	}

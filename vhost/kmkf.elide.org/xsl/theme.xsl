@@ -32,7 +32,7 @@
 		<xsl:call-template name="theme-output">
 			<!-- OTT <xsl:with-param name="color" select="'#7c8'"/> -->
 			<xsl:with-param name="class" select="'man'"/>
-			<xsl:with-param name="css"   select="'style.css debug.css'"/>
+			<xsl:with-param name="css"   select="'style.css'"/>
 
 			<xsl:with-param name="js">
 				<xsl:value-of select="'col.js fixup.js overlay.js expander.js debug.js'"/>
