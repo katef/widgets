@@ -80,14 +80,14 @@ body {
 	}
 }
 
-// to optically match h2, adjusted for c2sc
+// to optically match h2, adjusted for uppercase
 html.minidocbook.refentry main h1 {
-	font-size: 20px;
+	font-size: 16px; /* about the x-height of h2 */
 	line-height: ($baseline * 2);
+	font-weight: 400;
 
 	text-transform: uppercase;
 
-	font-feature-settings: "c2sc" 1;
 	font-feature-settings: "cpsp" 1;
 	font-feature-settings: "lnum" 1;
 	font-feature-settings: "tnum" 1;
