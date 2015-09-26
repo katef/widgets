@@ -108,9 +108,6 @@
 				<xsl:text>Table.init(r);</xsl:text>
 			</xsl:with-param>
 
-			<xsl:with-param name="overlay-cols" select=" 8"/>
-			<xsl:with-param name="overlay-rows" select="26"/>
-
 			<xsl:with-param name="site" select="'libfsm'"/>
 
 			<xsl:with-param name="page">

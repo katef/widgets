@@ -44,9 +44,6 @@
 				<xsl:text>Fixup.init(r);</xsl:text>
 			</xsl:with-param>
 
-			<xsl:with-param name="overlay-cols" select=" 5"/>
-			<xsl:with-param name="overlay-rows" select="26"/>
-
 			<xsl:with-param name="page">
 				<xsl:copy-of select="$page"/>
 			</xsl:with-param>

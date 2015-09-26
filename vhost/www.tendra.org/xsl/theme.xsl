@@ -82,9 +82,6 @@
 -->
 			</xsl:with-param>
 
-			<xsl:with-param name="overlay-cols" select="12"/>
-			<xsl:with-param name="overlay-rows" select="26"/>
-
 			<xsl:with-param name="page">
 				<xsl:apply-templates select="h:head/h:title" mode="body"/>
 			</xsl:with-param>

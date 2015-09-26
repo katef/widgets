@@ -101,12 +101,9 @@ document.onkeyup = function (e) {
 		if (hasclass(html, 'debug')) {
 			removeclass(html, 'debug');
 		} else {
-			if (Overlay && body.dataset.overlayRows) {
-				Overlay.init(body, 'rows', body.dataset.overlayRows);
-			}
-
-			if (Overlay && body.dataset.overlayCols) {
-				Overlay.init(body, 'cols', body.dataset.overlayCols);
+			if (Overlay) {
+				Overlay.init(body, 'rows', 24); /* enough for anyone */
+				Overlay.init(body, 'cols', 32); /* enough for a screenfull */
 			}
 
 			loadstylesheet(document, '/css/debug.css');
