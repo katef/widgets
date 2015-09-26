@@ -111,9 +111,10 @@
 			<xsl:with-param name="onload">
 				<xsl:text>Colalign.init(r);</xsl:text>
 				<xsl:text>Fixup.init(r);</xsl:text>
-				<xsl:text>Overlay.init(r, 'cols',  6);</xsl:text>
-				<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
 			</xsl:with-param>
+
+			<xsl:with-param name="overlay-cols" select=" 6"/>
+			<xsl:with-param name="overlay-rows" select="26"/>
 
 			<xsl:with-param name="page">
 				<xsl:apply-templates select="h:head/h:title" mode="body"/>

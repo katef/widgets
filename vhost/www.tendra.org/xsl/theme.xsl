@@ -72,8 +72,6 @@
 				<xsl:text>Colalign.init(r);</xsl:text>
 				<xsl:text>Fixup.init(r);</xsl:text>
 				<xsl:text>Table.init(r);</xsl:text>
-				<xsl:text>Overlay.init(r, 'cols', 12);</xsl:text>
-				<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
 
 				<!-- TODO: consider vw css units instead -->
 				<xsl:text>window.fitText(document.getElementById("banner"), 1.3);</xsl:text>
@@ -83,6 +81,9 @@
 				<xsl:text>ConvertRowsToLinks('download');</xsl:text>
 -->
 			</xsl:with-param>
+
+			<xsl:with-param name="overlay-cols" select="12"/>
+			<xsl:with-param name="overlay-rows" select="26"/>
 
 			<xsl:with-param name="page">
 				<xsl:apply-templates select="h:head/h:title" mode="body"/>

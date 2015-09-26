@@ -42,9 +42,10 @@
 				<xsl:text>Expander.init(r, 'nav', 'li', false, true);</xsl:text>
 				<xsl:text>Colalign.init(r);</xsl:text>
 				<xsl:text>Fixup.init(r);</xsl:text>
-				<xsl:text>Overlay.init(r, 'cols', 24);</xsl:text>
-				<xsl:text>Overlay.init(r, 'rows', 26);</xsl:text>
 			</xsl:with-param>
+
+			<xsl:with-param name="overlay-cols" select=" 5"/>
+			<xsl:with-param name="overlay-rows" select="26"/>
 
 			<xsl:with-param name="page">
 				<xsl:copy-of select="$page"/>

@@ -106,9 +106,10 @@
 				<xsl:text>Colalign.init(r);</xsl:text>
 				<xsl:text>Fixup.init(r);</xsl:text>
 				<xsl:text>Table.init(r);</xsl:text>
-				<xsl:text>Overlay.init(r, 'cols',  8);</xsl:text>
-				<xsl:text>Overlay.init(r, 'rows', 66);</xsl:text>
 			</xsl:with-param>
+
+			<xsl:with-param name="overlay-cols" select=" 8"/>
+			<xsl:with-param name="overlay-rows" select="26"/>
 
 			<xsl:with-param name="site" select="'libfsm'"/>
 
