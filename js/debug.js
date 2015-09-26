@@ -92,14 +92,23 @@ document.onkeyup = function (e) {
 
 	/* 71 is 'g' */
 	if (e.altKey && e.keyCode == 71) {
-		var html;
+		var html, body, doc;
 
+		body = document.body;
 		html = document.body.parentNode;
 
 /* TODO: store state in cookie */
 		if (hasclass(html, 'debug')) {
 			removeclass(html, 'debug');
 		} else {
+			if (Overlay && body.dataset.overlayRows) {
+				Overlay.init(body, 'rows', body.dataset.overlayRows);
+			}
+
+			if (Overlay && body.dataset.overlayCols) {
+				Overlay.init(body, 'cols', body.dataset.overlayCols);
+			}
+
 			loadstylesheet(document, '/css/debug.css');
 			addclass(html, 'debug');
 		}
