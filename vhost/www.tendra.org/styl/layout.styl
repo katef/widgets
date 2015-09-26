@@ -39,8 +39,20 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			if (menustyle($l) == vertical) {
 				li > ul { display: none; } // XXX: need to have this expand out, too
 
-				margin: 0 -($grid.gutter * 1); // XXX: hacky
 				margin-bottom: $baseline;
+			}
+
+			// XXX: hacky
+			if (menustyle($l) == vertical) {
+				margin-left:  -($grid.gutter * 1);
+				margin-right: -($grid.gutter * 1);
+				margin-bottom: 0;
+/* XXX: I don't like taking this all the way to the edge
+			} else if ($grid.layouts[$l] == 'fluid') {
+				margin-left:  -($grid.gutter * 2);
+				margin-right: -($grid.gutter * 2);
+				& > ul { padding-left: $grid.gutter; }
+*/
 			}
 		}
 
