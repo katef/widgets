@@ -32,8 +32,12 @@ $grid = {
 }
 
 $menu = {
-	bar:    none
-	delta:  $grid.gutter
+	verts:  $grid.gutter / 4
+	sides:  $grid.gutter
+	border: 0
+}
+
+$nav = {
 	colour: $kmkf.code
 	height: $baseline * 1.5
 	time:   .25s

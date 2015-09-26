@@ -14,7 +14,7 @@
 			@media $q {
 
 				if ($grid.layouts[$l] == fixed) {
-					box-shadow: 0 0 20px 0px rgba(0,0,0,0.4);
+					box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.4);
 				}
 
 				if (menustyle($l) == sidebar) {
@@ -28,22 +28,14 @@
 
 	nav {
 		order: 0;
-		flex: none;
+		flex:  none;
 
-		li {
-			list-style-type: none;
-			margin-bottom: 0;
+		ul {
+			menu-list();
 
-			margin:  0;
+			margin: 0;
 
-			// TODO: share with bp
-			a {
-				text-decoration: none;
-				display: block;
-
-				padding: 0 $grid.gutter;
-				line-height: $menu.height;
-
+			li a {
 				span.command[data-refclass]:before {
 					content: "<";
 				}
@@ -59,7 +51,7 @@
 		padding-bottom: ($baseline * 3);
 
 		order: 1;
-		flex: 1;
+		flex:  1;
 	}
 
 	for $l in 0 .. length($grid.ncols) - 1 {
@@ -81,34 +73,18 @@
 					grid-column($grid, $l, $grid.ncols[$l]);
 
 					padding: 0;
-
-					// cheesy trigram vertical centering
-					a:after {
-						position: relative;
-						top: ($menu.height - ($trigram.size * 8));
-					}
-
-					ul {
-						margin: 0;
-					}
-
 				} else {
 					grid-column($grid, $l, sidebar($l));
 
 					min-height: 100%; // XXX
-
-					padding-left:  0;
-					padding-right: 0;
-
-					ul {
-						margin-left: 0;
-					}
 
 					// special case for *(5mk) block
 					hr + nav.submenu li:first-child {
 						margin-bottom: ($baseline / 2);
 					}
 
+					padding-left:   0;
+					padding-right:  0;
 					padding-top:    ($baseline * 2);
 					padding-bottom: ($baseline * 1);
 				}
