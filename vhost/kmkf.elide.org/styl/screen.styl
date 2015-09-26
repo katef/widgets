@@ -65,23 +65,24 @@
 			nav {
 				concertina-layout(menustyle($l));
 
-				hr {
-					display: none; // distracting for a compact menu
-				}
-
 				if (menustyle($l) == vertical) {
 					grid-column($grid, $l, $grid.ncols[$l]);
+
+					hr {
+						display: none; // distracting for a compact menu
+					}
 
 					padding: 0;
 				} else {
 					grid-column($grid, $l, sidebar($l));
 
-					min-height: 100%; // XXX
-
-					// special case for *(5mk) block
-					hr + nav.submenu li:first-child {
-						margin-bottom: ($baseline / 2);
+					hr {
+						height: ($baseline * 0.5);
+						background-color: transparent;
+						margin: 0;
 					}
+
+					min-height: 100%; // XXX
 
 					padding-left:   0;
 					padding-right:  0;
