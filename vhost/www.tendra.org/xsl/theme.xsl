@@ -12,26 +12,6 @@
 
 	<xsl:import href="contents.xsl"/>
 
-	<xsl:param name="www-css"/>
-	<xsl:param name="www-js"/>
-	<xsl:param name="uri"/>
-
-	<xsl:template match="h:article[@class = 'entry']/h:h1/h:a">
-		<xsl:copy-of select="*|text()"/>
-	</xsl:template>
-
-	<xsl:template match="h:article/h:a[@name]"/>
-
-	<xsl:template match="h:article/h:time[@pubdate]">
-		<a href="{$blog-base}/{.}">
-			<xsl:copy-of select="../h:a[@name]/@*"/>
-<!--
-			<xsl:copy-of select="../h:h1/h:a/@href, '/'"/>
--->
-			<xsl:copy-of select="."/>
-		</a>
-	</xsl:template>
-
 	<xsl:template name="t:page-footer">
 <!-- TODO -->
 		<ul class="otherformats pipelist">
@@ -47,14 +27,16 @@
 		</ul>
 	</xsl:template>
 
-	<xsl:template match="/h:html/h:head/h:title" mode="body">
-		<xsl:apply-templates select="node()|text()|processing-instruction()"/>
-	</xsl:template>
+	<xsl:template name="tendra-output">
+		<xsl:param name="class"/>
+		<xsl:param name="page"/>
 
-	<xsl:template match="/h:html">
+		<xsl:param name="head"    select="/.."/>
+		<xsl:param name="main"    select="/.."/>
+		<xsl:param name="sidebar" select="/.."/>
+
 		<xsl:call-template name="theme-output">
-			<xsl:with-param name="class"   select="concat(@class, ' hyphenate')"/>
-
+			<xsl:with-param name="class"   select="$class"/>
 			<xsl:with-param name="css"     select="'style.css'"/>
 			<xsl:with-param name="favicon" select="'/favicon.ico'"/>
 
@@ -83,7 +65,7 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="page">
-				<xsl:apply-templates select="h:head/h:title" mode="body"/>
+				<xsl:copy-of select="$page"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="site">
@@ -91,8 +73,7 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="head">
-				<xsl:copy-of select="h:head/h:meta[@name = 'description']"/>
-				<xsl:copy-of select="h:head/h:meta[@name = 'keywords']"/>
+				<xsl:copy-of select="$head"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
@@ -110,16 +91,14 @@
 				</header>
 
 				<main role="main" class="hyphenate">
-					<h1>
-						<xsl:apply-templates select="h:head/h:title" mode="body"/>
-					</h1>
-
-					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
+					<xsl:copy-of select="$main"/>
 				</main>
 
-				<nav id="sidebar" class="hyphenate">
-					<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>
-				</nav>
+				<xsl:if test="$sidebar">
+					<nav id="sidebar" class="hyphenate">
+						<xsl:copy-of select="$sidebar"/>
+					</nav>
+				</xsl:if>
 
 				<footer>
 					<xsl:call-template name="t:page-footer"/>
