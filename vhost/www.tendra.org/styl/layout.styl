@@ -1,5 +1,10 @@
 /* $Id$ */
 
+body {
+	margin-top:    0;
+	margin-bottom: 0;
+}
+
 blockquote {
 	margin: 0 $grid-indent $baseline $grid-indent;
 	color: #999;
@@ -24,10 +29,9 @@ for $l in 0 .. length($grid.ncols) - 1 {
 
 		body {
 			if ($grid.layouts[$l] == fixed) {
-				padding-left:  ($grid.gutter * 2);
-				padding-right: ($grid.gutter * 2);
-				margin-left:  -($grid.gutter * 2);
-				margin-right: -($grid.gutter * 2);
+				// XXX: causes overlap for media width near the break
+				padding-left:  ($grid.gutter * 4);
+				padding-right: ($grid.gutter * 4);
 			}
 		}
 
@@ -68,6 +72,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			grid-column($grid, $l, $grid.ncols[$l]);
 		}
 
+/*
 		main {
 			if (sidebar($l)) {
 				grid-column($grid, $l, $grid.ncols[$l] - sidebar($l));
@@ -75,6 +80,39 @@ for $l in 0 .. length($grid.ncols) - 1 {
 				grid-column($grid, $l, $grid.ncols[$l]);
 			}
 		}
+*/
+html.refentry main {
+	if ($grid.ncols[$l] == 12) {
+		grid-column($grid, $l, 7, 2);
+	} else if ($grid.ncols[$l] == 9) {
+		grid-column($grid, $l, 6, 0);
+	} else {
+		grid-column($grid, $l, $grid.ncols[$l]);
+	}
+}
+html.refentry nav#sidebar {
+	margin-top: 2em;
+
+	ul {
+		list-style-type: none;
+clearfix();
+	}
+
+	li {
+		float: left;
+		margin: 0;
+		margin-right: 1em;
+	}
+
+	h2 {
+		clear: left;
+		margin-top: 1em;
+	}
+
+	h1 {
+		display: none;
+	}
+}
 
 		nav#sidebar {
 			if (sidebar($l)) {
@@ -116,6 +154,10 @@ for $l in 0 .. length($grid.ncols) - 1 {
 
 			if ($grid.ncols[$l] == 12) {
 				font-size: 2.2em;
+			}
+
+			@media print {
+				text-align: right;
 			}
 		}
 

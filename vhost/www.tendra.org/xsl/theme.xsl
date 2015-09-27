@@ -35,10 +35,22 @@
 		<xsl:param name="main"    select="/.."/>
 		<xsl:param name="sidebar" select="/.."/>
 
+		<xsl:param name="standalone" select="false()"/>
+
 		<xsl:call-template name="theme-output">
 			<xsl:with-param name="class"   select="$class"/>
-			<xsl:with-param name="css"     select="'style.css'"/>
 			<xsl:with-param name="favicon" select="'/favicon.ico'"/>
+
+			<xsl:with-param name="css">
+				<xsl:choose>
+					<xsl:when test="$standalone">
+						<xsl:text>standalone.css</xsl:text>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:text>style.css</xsl:text>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:with-param>
 
 			<xsl:with-param name="js">
 				<xsl:value-of select="'col.js fixup.js hyphenator-min.js expander.js table.js overlay.js debug.js'"/>
@@ -80,14 +92,16 @@
 				<header class="donthyphenate">
 					<xsl:call-template name="t:banner"/>
 
+					<xsl:if test="not($standalone)">
 <!-- search is overkill for now
-					<form class="search">
-						<input type="text"/>
-						<input type="submit" value="Search"/>
-					</form>
+						<form class="search">
+							<input type="text"/>
+							<input type="submit" value="Search"/>
+						</form>
 -->
 
-					<xsl:call-template name="t:sections-menu"/>
+						<xsl:call-template name="t:sections-menu"/>
+					</xsl:if>
 				</header>
 
 				<main role="main" class="hyphenate">
