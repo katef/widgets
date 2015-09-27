@@ -78,7 +78,7 @@
 			<t:subsection href="#" name="Automated&#160;Builds"/>
 		</t:section>
 
-		<t:section href="/download" name="Downloads"/>
+		<t:section href="/download" name="Download"/>
 	</t:sections>
 
 	<xsl:template match="t:subsection/@desc">
