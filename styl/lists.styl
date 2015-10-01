@@ -13,13 +13,13 @@ list-style-type(type) {
 		&:before {
 			content: $list.bullet "\A0"; // TODO: as many spaces as $list.punct is wide
 		}
+
+		li {
+			hang($list.gutter, $list.padding, exdent);
+		}
 	} else {
 		list-style-type: type;
 	}
-}
-
-li {
-	hang($list.gutter, $list.padding, exdent);
 }
 
 /*
@@ -29,11 +29,14 @@ li {
  */
 ol {
 	counter-reset: ol;
-	list-style-type: none;
 
-	li:before {
-		content: counter(ol) $list.punct;
-		counter-increment: ol;
+	li {
+		list-style-type: custom;
+
+		&:before {
+			content: counter(ol) $list.punct;
+			counter-increment: ol;
+		}
 	}
 }
 
