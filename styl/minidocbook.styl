@@ -1,6 +1,10 @@
 /* $Id$ */
 
 html.minidocbook {
+	&.refentry main h1 {
+		float: right;
+	}
+
 	div.navigation {
 		color: #aaa;
 
@@ -8,8 +12,9 @@ html.minidocbook {
 			margin-top: 3em;
 		}
 
-		& div.pages {
+		& ul.pages {
 			float: right;
+			pipelist();
 		}
 	}
 
@@ -17,11 +22,8 @@ html.minidocbook {
 		margin-left: 1em;
 		list-style-type: none;
 
-		ol {
-			margin-left: 2em;
-			margin-top: 1em;
-			margin-bottom: 1em;
-			list-style-type: none;
+		li:before {
+			content: none; // override custom bullet
 		}
 	}
 
@@ -34,13 +36,26 @@ html.minidocbook {
 		margin: 2em;
 	}
 
-	figure img {
-		display: block;
+	table.informal {
+		margin: 0;
 	}
 
-	figure figcaption {
-		margin-top: 1em;
-		display: block;
+	table.revhistory {
+		td.date,
+		td.revnumber {
+			white-space: nowrap;
+		}
+	}
+
+	figure {
+		img {
+			display: block;
+		}
+
+		figcaption {
+			margin-top: 1em;
+			display: block;
+		}
 	}
 
 	blockquote.literallayout {
@@ -48,30 +63,41 @@ html.minidocbook {
 		tab-size: $tabsize;
 	}
 
+	div.warning:before {
+		content: "Warning";
+		font-weight: bold;
+		display: inline-block;
+		margin-bottom: 1ex;
+	}
+
+	blockquote, div.warning {
+		margin: 2em 1em;
+		padding: 0;
+	}
+
 	ol.footnotes {
 		list-style-type: none;
 		margin-left: 3em;
-		margin-top: 3em;
-	}
+		margin-top:  3em;
 
-	ol.footnotes sup.footnote-number {
-		position: absolute;
-		width: 2em;
-		margin-left: -2.5em;
+		sup.footnote-number {
+			position: absolute;
+			width: 2em;
+			margin-left: -2.5em;
+		}
 	}
 
 	figure.table ol.footnotes {
 		margin-top: 2em;
 	}
 
-	pre.screen div.lines {
-		display: none;
-	}
-
 	pre.screen {
 		padding: 1ex 1em;
-	}
 
+		div.lines {
+			display: none;
+		}
+	}
 
 	sup.footnote-number a {
 		text-decoration: none;
@@ -135,7 +161,7 @@ html.minidocbook {
 				content: "; ";
 			}
 
-/* TODO: " and " for penultimate */
+			/* TODO: " and " for penultimate */
 
 			&:last-child:after {
 				content: ".";
