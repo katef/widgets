@@ -35,7 +35,7 @@ or have them all expand out to a db: namespace -->
 			</dd>
 
 			<dt>What makes it different from gcc/pcc/clang, etc?</dt>
-			<dd class="TODO">
+			<dd>
 				<p>TODO C/C++ producers versus gcc/pcc/clang/icc etc etc</p>
 
 				<p>TODO TDF versus llvm, .Net, jvm etc etc</p>
@@ -48,17 +48,17 @@ or have them all expand out to a db: namespace -->
 					You can see exactly what's going on by watching the
 					<a href="TODO">Timeline</a> (which is also available as
 					<a href="TODO">RSS</a>).</p>
-				<p class="TODO">TODO etc etc</p>
+				<p>TODO etc etc</p>
 			</dd>
 
 			<dt>Is it ready for use?</dt>
-			<dd class="TODO">
+			<dd>
 				<p>TODO etc etc</p>
 			</dd>
 
 			<dt>What's been done since the 4.1.2 release in 1998?</dt>
 			<dd>
-				<p class="TODO">TODO etc etc</p>
+				<p>TODO etc etc</p>
 
 				<p>See <a href="#TODO">History</a> and <a href="#TODO">WhoDunnit</a> for details.</p>
 			</dd>
@@ -73,12 +73,12 @@ or have them all expand out to a db: namespace -->
 
 			<dt>How do I install it?</dt>
 			<dd>
-				<p class="TODO">TODO etc etc</p>
+				<p>TODO etc etc</p>
 			</dd>
 
 			<dt>How do I package it?</dt>
 			<dd>
-				<p class="TODO">TODO etc etc</p>
+				<p>TODO etc etc</p>
 			</dd>
 
 			<dt>Why does it depend on OS-specific knowledge?</dt>
@@ -105,12 +105,12 @@ or have them all expand out to a db: namespace -->
 				<p>This is really two questions; which systems does TenDRA
 					build and install on, and what APIs are supported for
 					those systems?
-					<span class="TODO">TODO etc etc</span></p>
+					<span>TODO etc etc</span></p>
 			</dd>
 
 			<dt>What architectures are supported?</dt>
 			<dd>
-				<p class="TODO">TODO etc etc</p>
+				<p>TODO etc etc</p>
 
 				<p>See <a href="#TODO">Status</a> for details.</p>
 			</dd>
@@ -154,21 +154,21 @@ or have them all expand out to a db: namespace -->
 					</tbody>
 				</table>
 
-				<p class="TODO">TODO: plus various internally-specified "little" languages; TNC, TPL etc...</p>
+				<p>TODO: plus various internally-specified "little" languages; TNC, TPL etc...</p>
 
-				<p class="TODO">TODO: mention API coverage.</p>
+				<p>TODO: mention API coverage.</p>
 
 				<p>See <a href="#TODO">Status</a> for details.</p>
 			</dd>
 
 			<dt>What's the plan for C99 and C11 support?</dt>
 			<dd>
-				<p class="TODO">TODO etc etc. see the Roadmap</p>
+				<p>TODO etc etc. see the Roadmap</p>
 			</dd>
 
 			<dt>What's the plan for C++ support?</dt>
 			<dd>
-				<p class="TODO">TODO etc etc</p>
+				<p>TODO etc etc</p>
 			</dd>
 
 			<dt>How many developers are active?</dt>
@@ -179,13 +179,13 @@ or have them all expand out to a db: namespace -->
 
 			<dt>What's the deal with all the forks?</dt>
 			<dd>
-				<p class="TODO">TODO etc etc. See History for merged work</p>
+				<p>TODO etc etc. See History for merged work</p>
 			</dd>
 
 			<dt>What needs doing next?</dt>
 			<dt>How can I help?</dt>
 			<dd>
-				<p class="TODO">TODO etc etc</p>
+				<p>TODO etc etc</p>
 
 				<ul>
 					<li>packaging (also bmake)</li>
@@ -196,12 +196,12 @@ or have them all expand out to a db: namespace -->
 					<li>documentation</li>
 				</ul>
 
-				<p class="TODO">See Roadmap for dependency chains for specific targets</p>
+				<p>See Roadmap for dependency chains for specific targets</p>
 			</dd>
 
 			<dt>Are you going to convert the repository to a DVCS?</dt>
 			<dd>
-				<p class="TODO">TODO Probably.</p>
+				<p>TODO Probably.</p>
 			</dd>
 		</dl>
 

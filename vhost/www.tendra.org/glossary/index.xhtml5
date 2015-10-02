@@ -57,7 +57,7 @@
 				for which TDF was selected.</dd>
 
 			<dt><dfn>API</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 		</dl>
 
 		<a name="B"/>
@@ -79,12 +79,12 @@
 				container types for lists, vectors etc.</dd>
 
 			<dt><dfn>Capsule</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>CRT</dfn></dt>
 
 			<dd class="abbr">C runtime</dd>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 		</dl>
 
 		<a name="D"/>
@@ -95,7 +95,7 @@
 
 			<dd class="abbr">Defence Research and Evaluation Agency
 				<span class="note">(neé DRA, now DSTL and QinetiQ)</span></dd>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 -->
 
 			<dt><dfn>disp</dfn></dt>
@@ -128,7 +128,7 @@
 
 		<dl class="glossary">
 			<dt><dfn>Installer</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 		</dl>
 
 		<a name="L"/>
@@ -141,10 +141,10 @@
 			<!-- TODO: link to wikipedia for things like that -->
 
 			<dt><dfn>Lexer</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>lexi</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>LL(1)</dfn></dt>
 			<dd>Left-to-right, Leftmost-derivation parser with lookahead of 1 token.</dd>
@@ -171,10 +171,10 @@
 
 		<dl class="glossary">
 			<dt><dfn>Machine</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>make_err</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>make_tdf</dfn></dt>
 			<dd>make_tdf is a tool for generating TDF decoders and encoders.
@@ -187,28 +187,28 @@
 
 		<dl class="glossary">
 			<dt><dfn>Object</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>OSF</dfn></dt>
 			<dd class="abbr">Open Software Foundation</dd>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>OSSG</dfn></dt>
 			<dd>Open Source Specialist Group</dd>
-			<dd class="TODO">TODO: http://ossg.bcs.org/</dd>
+			<dd>TODO: http://ossg.bcs.org/</dd>
 		</dl>
 
 		<a name="P"/>
 
 		<dl class="glossary">
 			<dt><dfn>Porting</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>PL_TDF</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>Producer</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 		</dl>
 
 		<a name="R"/>
@@ -233,38 +233,38 @@
 				and for error recovery.</dd>
 
 			<dt><dfn>Sort</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>Start-up File <span class="note">(TCC modes)</span></dfn></dt>
 			<!-- TODO: there are two of these -->
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>Start-up File <span class="note">(C producer arguments)</span></dfn></dt>
 			<!-- TODO: there are two of these -->
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>Structured TDF</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 		</dl>
 
 		<a name="T"/>
 
 		<dl class="glossary">
 			<dt><dfn>tcc</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>TDF</dfn></dt>
 			<dd class="abbr">TenDRA Distribution Format</dd>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>TDF Capsule</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>TDF Notation</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>TDF Notation Compiler</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>Ten15 language, the</dfn></dt>
 			<dd>The Ten15 language (usually called Ten15 Notation) was the main
@@ -295,10 +295,10 @@
 			</dd>
 
 			<dt><dfn>Ten15 <abbr title="Intermediate Representation">IR</abbr>, the</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>ten15.org</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>tendra.org</dfn></dt>
 			<dd>The home for this project.</dd>
@@ -313,7 +313,7 @@
 			</dd>
 
 			<dt><dfn>tnc</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>tpl</dfn></dt>
 			<dd>
@@ -346,10 +346,10 @@
 
 		<dl class="glossary">
 			<dt><dfn>Unstructured TDF</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 
 			<dt><dfn>Unit</dfn></dt>
-			<dd class="TODO">TODO</dd>
+			<dd>TODO</dd>
 		</dl>
 
 
