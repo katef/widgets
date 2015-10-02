@@ -24,6 +24,16 @@ opacity($o = 1.0) {
 	opacity: $o;
 }
 
+/*
+ * Data URIs.
+ * See http://codepen.io/Tigt/post/optimizing-svgs-in-data-uris
+ */
+data-uri($data, $mime = 'image/svg+xml', $charset = 'utf8') {
+	// TODO: I would prefer to do URL encoding here, in Stylus
+	s('url("data:%s;charset=%s,%s")',
+		unquote($mime), unquote($charset), unquote($data));
+}
+
 filter($name, $n = 100%) {
 	if ($n < 0% || $n > 100%) {
 		error('filter 0..100%')
@@ -52,7 +62,7 @@ filter($name, $n = 100%) {
 			unquote($name));
 		// XXX: technically ought to urlencode more here;
 		// see http://codepen.io/Tigt/post/optimizing-svgs-in-data-uris
-		filter: s('url("data:image/svg+xml;charset=utf8,%s")', unquote($svg));
+		filter: data-uri($svg);
 	}
 
 	if ($name == 'none') {
