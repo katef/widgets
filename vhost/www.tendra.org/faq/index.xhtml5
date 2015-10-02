@@ -198,6 +198,11 @@ or have them all expand out to a db: namespace -->
 
 				<p class="TODO">See Roadmap for dependency chains for specific targets</p>
 			</dd>
+
+			<dt>Are you going to convert the repository to a DVCS?</dt>
+			<dd>
+				<p class="TODO">TODO Probably.</p>
+			</dd>
 		</dl>
 
 		<p>If you have a question which is not answered here, please do
