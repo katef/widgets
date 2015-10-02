@@ -50,7 +50,9 @@ filter($name, $n = 100%) {
 			$u, $u, $u,        \
 			$u, $u, $u,        \
 			unquote($name));
-		filter: s('url(~"data:image/svg+xml;utf8,%s")', unquote($svg));
+		// XXX: technically ought to urlencode more here;
+		// see http://codepen.io/Tigt/post/optimizing-svgs-in-data-uris
+		filter: s('url("data:image/svg+xml;charset=utf8,%s")', unquote($svg));
 	}
 
 	if ($name == 'none') {
