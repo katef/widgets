@@ -36,22 +36,22 @@
 		</t:section>
 
 		<t:section href="#" name="Projects">
-			<t:subsection href="#" name="TCC"                 desc="UI"/>
-			<t:subsection href="#" name="Producers"  desc="C/C++&#160;&#x2192;&#160;TDF"/>
-			<t:subsection href="#" name="Installers" desc="TDF&#160;&#x2192;&#160;asm"/>
+			<t:subsection href="#" productname="tcc"      name="TCC"        desc="UI"/>
+			<t:subsection href="#" productname="tdfc2"    name="Producers"  desc="C/C++&#160;&#x2192;&#160;TDF"/>
+			<t:subsection href="#" productname="trans"    name="Installers" desc="TDF&#160;&#x2192;&#160;asm"/>
 			<t:sep/>
-			<t:subsection href="#" name="libtdf"         desc="TDF&#160;Datastructures"/>
-			<t:subsection href="#" name="TLD"            desc="TDF&#160;Linker"/>
-			<t:subsection href="#" name="TNC"            desc="ASCII&#160;&#x2194;&#160;TDF"/>
-			<t:subsection href="#" name="TPL"            desc="PL_TDF&#160;&#x2192;&#160;TDF"/>
-			<t:subsection href="#" name="disp"           desc="TDF&#160;&#x2192;&#160;ASCII"/>
+			<t:subsection href="#" productname="libtdf"   name="libtdf"     desc="TDF&#160;AST"/>
+			<t:subsection href="#" productname="tld"      name="TLD"        desc="TDF&#160;Linker"/>
+			<t:subsection href="#" productname="tnc"      name="TNC"        desc="ASCII&#160;&#x2194;&#160;TDF"/>
+			<t:subsection href="#" productname="tpl"      name="TPL"        desc="PL_TDF&#160;&#x2192;&#160;TDF"/>
+			<t:subsection href="#" productname="disp"     name="disp"       desc="TDF&#160;&#x2192;&#160;ASCII"/>
 			<t:sep/>
-			<t:subsection href="#" name="SID"            desc="Parser&#160;generator"/>
-			<t:subsection href="#" name="Lexi"           desc="Lexer&#160;generator"/>
-			<t:subsection href="#" name="Calculus"       desc="Type&#160;generator"/>
-			<t:subsection href="#" name="Tspec"          desc="API&#160;generator"/>
-			<t:subsection href="#" name="make_err"       desc="Error&#160;generator"/>
-			<t:subsection href="#" name="make_tdf"       desc="TDF&#160;I/O&#160;generator"/>
+			<t:subsection href="#" productname="sid"      name="SID"        desc="Parser&#160;generator"/>
+			<t:subsection href="#" productname="lexi"     name="Lexi"       desc="Lexer&#160;generator"/>
+			<t:subsection href="#" productname="calculus" name="Calculus"   desc="Type&#160;generator"/>
+			<t:subsection href="#" productname="tspec"    name="Tspec"      desc="API&#160;generator"/>
+			<t:subsection href="#" productname="make_err" name="make_err"   desc="Error&#160;generator"/>
+			<t:subsection href="#" productname="make_tdf" name="make_tdf"   desc="TDF&#160;I/O&#160;generator"/>
 		</t:section>
 
 		<t:section href="#" name="Development">
