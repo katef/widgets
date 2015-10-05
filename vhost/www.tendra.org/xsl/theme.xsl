@@ -12,6 +12,21 @@
 
 	<xsl:import href="contents.xsl"/>
 
+	<xsl:template name="t:banner">
+		<h1 id="banner">
+			<a href="/">
+				<xsl:text>The&#160;</xsl:text>
+				<span class="logo">
+					<xsl:text>Ten</xsl:text>
+					<span class="smallcaps">
+						<xsl:text>DRA</xsl:text>
+					</span>
+				</span>
+				<xsl:text>&#160;Project</xsl:text>
+			</a>
+		</h1>
+	</xsl:template>
+
 	<xsl:template name="t:page-footer">
 <!-- TODO -->
 		<ul class="otherformats pipelist">
