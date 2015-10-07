@@ -15,10 +15,6 @@ body {
 html, body {
 }
 
-h1#banner a {
-	width: 100%;
-}
-
 h1#banner {
 	width: 100% !important;
 	margin-left: 0 !important;
