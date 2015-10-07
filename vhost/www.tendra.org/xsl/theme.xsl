@@ -28,7 +28,7 @@
 	</xsl:template>
 
 	<xsl:template name="t:page-footer">
-<!-- TODO -->
+<!-- TODO
 		<ul class="otherformats pipelist">
 			<li>
 				<a rel="nofollow" href="/wiki/Glossary?format=txt">Plain Text</a>
@@ -40,6 +40,7 @@
 				<a rel="nofollow" href="/wiki/Glossary?format=rss xyz.rss">RSS</a>
 			</li>
 		</ul>
+-->
 	</xsl:template>
 
 	<xsl:template name="tendra-output">
