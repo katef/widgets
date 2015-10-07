@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TenDRA</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/standalone.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/holding.css" />
+  </head>
+  <body>
+	<h1 id="banner">
+	  <a href="http://www.tendra.org">The&nbsp;<span class="logo">Ten<span class="smallcaps">DRA</span></span>&nbsp;Project</a>
+	</h1>
+
+    <br/>
+
+    <p>In the meantime:<br/>
+
+    <code>% svn co svn://svn.tendra.org/trunk tendra</code></p>
+
+    <p><a href="http://www.freenode.org">irc.freenode.org</a> #tendra</p>
+
+	<p><br/>Documentation:<br/>
+	<a href="/man">Manpages</a><br/>
+	<a href="/docs">User guides</a></p>
+  </body>
+</html>
+
