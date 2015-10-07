@@ -53,5 +53,14 @@ table {
 		border-left:   none;
 		border-bottom: none;
 	}
+
+	&.informal {
+		margin-left:  -($table.sides) !important;
+		margin-right: -($table.sides) !important;
+
+		th, td {
+			border: none;
+		}
+	}
 }
 
