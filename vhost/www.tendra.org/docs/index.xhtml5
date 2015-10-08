@@ -3,28 +3,32 @@
 	<!ENTITY nbsp "&#160;">
 ]>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	class="docs">
 	<head>
 		<title>Documentation</title>
 
 		<meta name="description" content="Documentation"/>
 		<meta name="keywords"    content="docs, userguide, guides, devguide, overview, manuals, manpages, info"/>
+<!--
 		<meta name="rcsid"       content="$Id$"/>
 		<meta name="layout"      content="docs"/>
 
 		<link rel="stylesheet" type="text/css" media="screen" href="docs.css"/>
+-->
 	</head>
 
 	<nav id="sidebar">
 		<h2>See also</h2>
 		<ul class="menu">
-			<li><a href="#TODO">Manpages</a></li>
+			<li><a href="/man">Manpages</a></li>
+			<li><a href="/papers">Academic Papers</a></li>
 		</ul>
 	</nav>
 
 	<body>
 		<ul class="linklist">
-			<li><a href="#">Orientation</a> (This is the place to start!)</li>
+			<li><a href="#">Orientation</a> &mdash; This is the place to start!</li>
 		</ul>
 
 		<p>If you're looking for references for file formats and syntaxes,
@@ -38,6 +42,13 @@
 				<li><a href="#">A Guide to the TDF Spec.</a></li>
 				<li><a href="#">TDF Diagnostic Spec.</a></li>
 				<li><a href="#">The TDF Token Register</a></li>
+<!--
+tdf/doc/specification
+tdf/doc/diag3
+tdf/doc/diag4
+tdf/doc/guide
+tdf/doc/register
+-->
 			</ul>
 </div>
 

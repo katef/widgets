@@ -23,7 +23,7 @@
 			This is the result of lessons learned from previous work,
 			taking the ideas I liked and addressing the problems I found.</p>
 
-		<p>For most <a href="http://www.crufty.net/help/sjg/mk-files.htm">&bsd;-like <tt class="filename">.mk</tt> systems</a>, there&rsquo;s a
+		<p>For most <a rel="external" href="http://www.crufty.net/help/sjg/mk-files.htm">&bsd;-like <tt class="filename">.mk</tt> systems</a>, there&rsquo;s a
 			&ldquo;you can only build one kind of thing per
 			Makefile&rdquo; limitation.
 			This is a side effect of using single variables as an interface
@@ -36,7 +36,7 @@
 			only one <var>PROG</var> may be built.
 			This goes hand in hand with executing make recursively,
 			the problems for which are discussed
-			by Peter Miller in <a href="http://aegis.sourceforge.net/auug97.pdf">Recursive
+			by Peter Miller in <a rel="external" href="http://aegis.sourceforge.net/auug97.pdf">Recursive
 			Make Considered Harmful</a>.</p>
 
 		<p>The typical solution for this is to arrange the source tree such
@@ -56,7 +56,7 @@
 				Different projects need different things.</li>
 
 			<li>Not to have too many targets.<!--
-				(<a href="http://www.gnu.org/software/automake/">Automake</a> is nuts.
+				(<a rel="external" href="http://www.gnu.org/software/automake/">Automake</a> is nuts.
 				&bsd;&rsquo;s <tt class="filename">.mk</tt> files are less nuts, but still nuts.)
 			--></li>
 

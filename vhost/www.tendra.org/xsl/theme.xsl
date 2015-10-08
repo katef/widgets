@@ -14,7 +14,7 @@
 
 	<xsl:template name="t:banner">
 		<h1 id="banner">
-			<a href="/">
+			<a rel="home" href="/">
 				<xsl:text>The&#160;</xsl:text>
 				<span class="logo">
 					<xsl:text>Ten</xsl:text>

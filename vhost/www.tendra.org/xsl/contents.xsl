@@ -13,8 +13,8 @@
 			<t:subsection href="#" name="Status"/>
 			<t:subsection href="#" name="History"/>
 			<t:subsection href="/people" name="People"/>
-			<t:subsection href="#" name="Contact"/>
-			<t:subsection href="#" name="Licences"/>
+			<t:subsection href="#" name="Contact"  rel="contact"/>
+			<t:subsection href="#" name="Licences" rel="license"/>
 		</t:section>
 
 		<t:section href="#" name="Blog"/>
@@ -22,17 +22,17 @@
 		<t:section href="#" name="Wiki"/>
 
 		<t:section href="/docs" name="Documentation">
-			<t:subsection href="#" name="User/Developer&#160;guides"/>
+			<t:subsection href="#"    name="User/Developer&#160;guides"/>
 			<t:subsection href="/man" name="Manpages"/>
-			<t:subsection href="#" name="Reference"/>
-			<t:subsection href="#" name="Academic&#160;Papers"/>
+			<t:subsection href="#"    name="Reference"/>
+			<t:subsection href="#"    name="Academic&#160;Papers"/>
 			<t:sep/>
-			<t:subsection href="#" name="API&#160;Headers"/>
-			<t:subsection href="#" name="API&#160;Coverage"/>
+			<t:subsection href="#"    name="API&#160;Headers"/>
+			<t:subsection href="#"    name="API&#160;Coverage"/>
 			<t:sep/>
-			<t:subsection href="#" name="Bibliography"/>
-			<t:subsection href="/glossary" name="Glossary"/>
-			<t:subsection href="/faq" name="FAQ"/>
+			<t:subsection href="#"         name="Bibliography" rel="bibliography"/>
+			<t:subsection href="/glossary" name="Glossary"     rel="glossary"/>
+			<t:subsection href="/faq"      name="FAQ"          rel="help"/>
 		</t:section>
 
 		<t:section href="#" name="Projects">
@@ -82,6 +82,12 @@
 			</xsl:if>
 
 			<a class="menu" href="{@href}">
+				<xsl:if test="@rel">
+					<xsl:attribute name="rel">
+						<xsl:value-of select="@rel"/>
+					</xsl:attribute>
+				</xsl:if>
+
 				<xsl:value-of select="@name"/>
 				<xsl:apply-templates select="@desc"/>
 			</a>
@@ -97,6 +103,12 @@
 			</xsl:if>
 
 			<a href="{@href}">
+				<xsl:if test="@rel">
+					<xsl:attribute name="rel">
+						<xsl:value-of select="@rel"/>
+					</xsl:attribute>
+				</xsl:if>
+
 				<xsl:value-of select="@name"/>
 			</a>
 

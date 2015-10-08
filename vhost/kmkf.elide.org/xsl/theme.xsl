@@ -18,7 +18,7 @@
 
 	<!-- TODO: rename contents to toc -->
 	<c:contents>
-		<c:category href="/about/"    name="About"/>
+		<c:category href="/about/"    name="About"    rel="help"/>
 		<c:category href="/download/" name="Download"/>
 	</c:contents>
 
@@ -68,6 +68,12 @@
 								</xsl:if>
 
 								<a href="{@href}">
+									<xsl:if test="@rel">
+										<xsl:attribute name="rel">
+											<xsl:value-of select="@rel"/>
+										</xsl:attribute>
+									</xsl:if>
+
 									<xsl:value-of select="@name"/>
 								</a>
 							</li>

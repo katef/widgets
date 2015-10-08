@@ -20,11 +20,11 @@
 			into finishing off things enough that I can put
 			them here.--></p>
 
-		<p>You can find me on <a href="http://www.freenode.net/">irc.freenode.net</a>
+		<p>You can find me on <a rel="external" href="http://www.freenode.net/">irc.freenode.net</a>
 			as <code>kate</code> and (possibly) email me as
 			<tt>kate@</tt> this domain name.</p>
 
-		<p>I also made an <a href="/faq">&faq;</a> for things people
+		<p>I also made an <a href="/faq" rel="help">&faq;</a> for things people
 			keep asking.</p>
 	</body>
 </html>

@@ -26,7 +26,7 @@
 		<c:category href="/photos/"   name="Photos"/>
 		<c:category href="/articles/" name="Articles"/>
 		<c:category href="/code/"     name="Code"/>
-		<c:category href="/about/"    name="About"/>
+		<c:category href="/about/"    name="About" rel="contact"/>
 	</c:contents>
 
 	<xsl:variable name="category" select="//h:meta[@name = 'category']/@content"/>
@@ -44,6 +44,12 @@
 						</xsl:if>
 
 						<a href="{@href}">
+							<xsl:if test="@rel">
+								<xsl:attribute name="rel">
+									<xsl:value-of select="@rel"/>
+								</xsl:attribute>
+							</xsl:if>
+
 							<xsl:value-of select="@name"/>
 						</a>
 					</li>
