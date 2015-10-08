@@ -8,8 +8,15 @@ $list ?= {
 }
 
 list-style-type(type) {
-	if (type == custom) {
+	if (type == none) {
 		list-style-type: none;
+
+		&:before {
+			content: none;
+		}
+	} else if (type == custom) {
+		list-style-type: none;
+
 		&:before {
 			content: $list.bullet "\A0"; // TODO: as many spaces as $list.punct is wide
 		}
