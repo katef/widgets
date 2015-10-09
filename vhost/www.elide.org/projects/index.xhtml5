@@ -13,11 +13,9 @@
 
 	<body>
 <style>
-th {
-text-align: left;
-}
-td, th {
-vertical-align: top;
+th, td {
+	text-align: left;
+	vertical-align: top;
 	padding-bottom: 1ex;
 }
 table {
