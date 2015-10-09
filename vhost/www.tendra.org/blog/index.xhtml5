@@ -22,7 +22,7 @@
 				</span>
 
 				<span class="author">
-					<a href="{ url || this.ownerElement }"><?js author ?></a>
+					<a rel="author" href="{ url || this.ownerElement }"><?js author ?></a>
 				</span>
 
 				<?js comment ?>
@@ -58,7 +58,7 @@
 		<nav id="monthindex">
 			<?blog-index?>
 
-			<a href="/archive">Archive</a>
+			<a rel="archives" href="/archive">Archive</a>
 		</nav>
 
 		<script>

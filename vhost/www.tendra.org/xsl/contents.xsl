@@ -12,7 +12,7 @@
 			<t:subsection href="#" name="Introduction"/>
 			<t:subsection href="#" name="Status"/>
 			<t:subsection href="#" name="History"/>
-			<t:subsection href="/people" name="People"/>
+			<t:subsection href="/people" name="People" rel="author"/>
 			<t:subsection href="#" name="Contact"  rel="contact"/>
 			<t:subsection href="#" name="Licences" rel="license"/>
 		</t:section>

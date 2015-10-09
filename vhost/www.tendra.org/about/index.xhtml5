@@ -47,8 +47,8 @@ or have them all expand out to a db: namespace -->
 	<body>
 		<p>TenDRA is a compiler framework for <a href="#">architecture neutral</a>
 			representation of compiled programs. It provides a C and C++
-			front-end. Origional development was undertaken under <a href="#">Crown
-			Copyright</a>; current development is <a href="#">BSD licenced</a>.
+			front-end. Origional development was undertaken under <a rel="license" href="#">Crown
+			Copyright</a>; current development is <a rel="license" href="#">BSD licenced</a>.
 			It's mostly written in C.</p>
 
 		<p>TenDRA is based on the following principle:</p>

@@ -9,7 +9,7 @@
   </head>
   <body>
 	<h1 id="banner">
-	  <a href="http://www.tendra.org">The&#160;<span class="logo">Ten<span class="smallcaps">DRA</span></span>&#160;Project</a>
+	  <a rel="home" href="http://www.tendra.org">The&#160;<span class="logo">Ten<span class="smallcaps">DRA</span></span>&#160;Project</a>
 	</h1>
 
     <br/>
@@ -18,7 +18,7 @@
 
     <code>% svn co svn://svn.tendra.org/trunk tendra</code></p>
 
-    <p><a href="http://www.freenode.org">irc.freenode.org</a> #tendra</p>
+    <p><a rel="external" href="http://www.freenode.org">irc.freenode.org</a> #tendra</p>
 
 	<p><br/>Documentation:<br/>
 	<a href="/man">Manpages</a><br/>

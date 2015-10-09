@@ -31,7 +31,7 @@ or have them all expand out to a db: namespace -->
 					encompasses both development of the compiler itself and a handful of
 					compiler-related supporting utilities.</p>
 
-				<p>See <a href="#TODO">About</a> and the <a href="#TODO">orientation guide</a> for more.</p>
+				<p>See <a href="#TODO">About</a> and the <a rel="help" href="#TODO">orientation guide</a> for more.</p>
 			</dd>
 
 			<dt>What makes it different from gcc/pcc/clang, etc?</dt>
@@ -60,7 +60,7 @@ or have them all expand out to a db: namespace -->
 			<dd>
 				<p>TODO etc etc</p>
 
-				<p>See <a href="#TODO">History</a> and <a href="#TODO">WhoDunnit</a> for details.</p>
+				<p>See <a href="#TODO">History</a> and <a rel="author" href="#TODO">WhoDunnit</a> for details.</p>
 			</dd>
 
 			<dt>What's it written in?</dt>
@@ -174,7 +174,7 @@ or have them all expand out to a db: namespace -->
 			<dt>How many developers are active?</dt>
 			<dt>Who did what?</dt>
 			<dd>
-				<p>See <a href="#TODO">People</a> and <a href="#TODO">WhoDunnit</a>.</p>
+				<p>See <a rel="author" href="#TODO">People</a> and <a href="#TODO">WhoDunnit</a>.</p>
 			</dd>
 
 			<dt>What's the deal with all the forks?</dt>
@@ -206,7 +206,7 @@ or have them all expand out to a db: namespace -->
 		</dl>
 
 		<p>If you have a question which is not answered here, please do
-			<a href="#TODO">contact</a> me.</p>
+			<a rel="contact" href="#TODO">contact</a> me.</p>
 	</body>
 </html>
 

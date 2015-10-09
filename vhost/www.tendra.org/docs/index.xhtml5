@@ -28,7 +28,7 @@
 
 	<body>
 		<ul class="linklist">
-			<li><a href="#">Orientation</a> &mdash; This is the place to start!</li>
+			<li><a rel="help" href="#">Orientation</a> &mdash; This is the place to start!</li>
 		</ul>
 
 		<p>If you're looking for references for file formats and syntaxes,
@@ -147,7 +147,7 @@ tdf/doc/register
 
 		<br/>
 
-		<p>If you're looking for PDFs, <a href="#">here's the same page with
+		<p>If you're looking for PDFs, <a rel="alternate" href="#">here's the same page with
 			links to PDF versions instead</a>.</p>
 	</body>
 </html>
