@@ -18,6 +18,18 @@ text-align: left;
 }
 td, th {
 vertical-align: top;
+	padding-bottom: 1ex;
+}
+table {
+	margin-bottom: 2em;
+	margin-left:  20px; /* TODO: move to .styl */
+	margin-right: 20px;
+}
+td:first-child {
+	padding-right: 1em;
+}
+blockquote {
+	margin-left: 20px;
 }
 </style>
 
@@ -38,33 +50,46 @@ probably another "libfsm" in the world, for instance.
 
 -->
 
-		<p>I don't have any projects.</p>
+		<section>
+		<p>Things with their own pages:</p>
+
+		<table>
+			<tbody>
+				<tr>
+					<td><a href="http://www.tendra.org/">http://www.tendra.org/</a></td>
+					<td>A C and C++ compiler which goes to great lengths to
+						assure your code is portable and conformant</td>
+				</tr>
+				<tr>
+					<td><a href="http://kmkf.elide.org/">http://kmkf.elide.org/</a></td>
+					<td>Reusable makefiles</td>
+				</tr>
+			</tbody>
+		</table>
+		</section>
+
+		<section>
+		<p>Things that live here:</p>
 
 		<blockquote><code>svn co svn://svn.elide.org/<em>$name</em>/trunk</code></blockquote>
 
+<!--
 <table>
 	<tbody>
 <tr>
 <th colspan="2">Language processing</th>
 </tr>
 		<tr>
-			<td>TenDRA<br/>
-				<a href="http://www.tendra.org/">http://www.tendra.org/</a></td>
-			<td>A C &amp; C++ compiler</td>
-<!--
  which goes to great lengths to
 				assure your code is portable, and conforms to
 				the standardised <abbr>API</abbr>s you claim.</td>
--->
 		</tr>
 		<tr>
 			<td>lx</td>
 			<td>Lexer generator, regular expressions, finite automata</td>
-<!--
 			<td>A library for manipulating Finite State Machines.</td>
 			<td>A library for compiling and executing regular expressions.</td>
 			<td>A lexer generator</td>
--->
 		</tr>
 		<tr>
 			<td>kgt</td>
@@ -135,7 +160,6 @@ probably another "libfsm" in the world, for instance.
 		</tr>
 	</tbody>
 
-<!--
 	<tbody>
 <tr>
 <th colspan="2">Server stuff</th>
@@ -153,7 +177,6 @@ probably another "libfsm" in the world, for instance.
 			<td><abbr>HTTPD</abbr></td>
 		</tr>
 	</tbody>
--->
 
 	<tbody>
 <tr>
@@ -171,26 +194,12 @@ probably another "libfsm" in the world, for instance.
 			<td>xslt-calendar</td>
 			<td><abbr>XSLT</abbr> calendar</td>
 		</tr>
-<!--
 		<tr>
 			<td>mod_kxslt</td>
 			<td><abbr>XSLT</abbr> Apache module</td>
 		</tr>
--->
 	</tbody>
 
-	<tbody>
-<tr>
-<th colspan="2">Developer tools</th>
-</tr>
-		<tr>
-			<td>kmkf<br/>
-				<a href="http://kmkf.elide.org/">http://kmkf.elide.org/</a></td>
-			<td>Makefiles</td>
-		</tr>
-	</tbody>
-
-<!--
 	<tbody>
 <tr>
 <th colspan="2">Database stuff</th>
@@ -198,10 +207,8 @@ probably another "libfsm" in the world, for instance.
 db stuff: pgtree, ugp, types etc
 			<td>pgtypes</td>
 			<td>Types for PostgreSQL</td>
--->
 </table>
 
-<!--
 		<p>I keep a couple of things elsewhere:</p>
 
 		<p>and some database-related things:</p>
@@ -209,12 +216,13 @@ db stuff: pgtree, ugp, types etc
 		<p>i also write a reasonable amount of documents, mainly on the
 			topic of specific bits of software. here are a few i'm
 			particularly pleased with:</p>
-
-		<p>these are placed in the
-			<a href="http://creativecommons.org/licenses/publicdomain/">public domain</a>.
-			i know i haven't done the legal stuff properly. i'll do it later.
-			if you're using something, please let me know. everybody likes feedback!</p>
 -->
+
+		<p>These are placed in the
+				<a rel="external license" href="http://creativecommons.org/licenses/publicdomain/">public domain</a>.
+			I know I haven't done the legal stuff properly. I'll do it later, I promise.
+			if you're using something, please let me know. Everybody likes feedback!</p>
+		</section>
 
 	</body>
 </html>
