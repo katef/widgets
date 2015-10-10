@@ -16,6 +16,11 @@ html.minidocbook {
 			page-break-before: always;
 		}
 
+		// TODO: centralise for printing any kind of page
+		figure, table, pre {
+			page-break-inside: avoid;
+		}
+
 	}
 
 	&.refentry main h1 {
