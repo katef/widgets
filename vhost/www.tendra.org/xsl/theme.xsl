@@ -13,7 +13,7 @@
 	<xsl:import href="contents.xsl"/>
 
 	<xsl:template name="t:banner">
-		<h1 id="banner">
+		<div id="banner">
 			<a rel="home" href="/">
 				<xsl:text>The&#160;</xsl:text>
 				<span class="logo">
@@ -24,7 +24,7 @@
 				</span>
 				<xsl:text>&#160;Project</xsl:text>
 			</a>
-		</h1>
+		</div>
 	</xsl:template>
 
 	<xsl:template name="t:page-footer">

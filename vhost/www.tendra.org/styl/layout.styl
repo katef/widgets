@@ -134,7 +134,7 @@ clearfix();
 		}
 
 		/* fallbacks for when fittext.js isn't available */
-		header > h1#banner {
+		header > div#banner {
 // TODO: update for all new sizes
 			if ($grid.ncols[$l] == 1) {
 				font-size: 1.3em;
@@ -161,7 +161,7 @@ clearfix();
 			}
 		}
 
-		header > h1#banner {
+		header > div#banner {
 			grid-column($grid, $l, banner($l), $grid.ncols[$l] - banner($l));
 			if ($grid.ncols[$l] <= 3) {
 				margin-top:    0.5em;
