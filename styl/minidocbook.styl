@@ -1,6 +1,23 @@
 /* $Id$ */
 
 html.minidocbook {
+
+	@media print {
+
+		div.navigation {
+			display: none;
+		}
+
+		main > ol.toc {
+			page-break-after: always;
+		}
+
+		main > section {
+			page-break-before: always;
+		}
+
+	}
+
 	&.refentry main h1 {
 		float: right;
 	}
