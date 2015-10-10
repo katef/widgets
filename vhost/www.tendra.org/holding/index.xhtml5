@@ -8,9 +8,9 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/css/holding.css" />
   </head>
   <body>
-	<h1 id="banner">
+	<div id="banner">
 	  <a rel="home" href="http://www.tendra.org">The&#160;<span class="logo">Ten<span class="smallcaps">DRA</span></span>&#160;Project</a>
-	</h1>
+	</div>
 
     <br/>
 
