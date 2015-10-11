@@ -17,37 +17,13 @@
 	<xsl:import href="../../../xsl/theme.xsl"/>
 	<xsl:import href="../../../xsl/img.xsl"/>
 
+	<xsl:import href="contents.xsl"/>
+
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
 
 	<xsl:variable name="category" select="//h:meta[@name = 'category']/@content"/>
 	<xsl:variable name="date"     select="//h:meta[@name = 'date']    /@content"/>
-
-	<xsl:template name="e:contents">
-		<nav role="navigation">
-			<ul>
-				<xsl:for-each select="document('contents.xml')/c:contents/c:category">
-					<li>
-						<xsl:if test="$category and starts-with(@href, concat('/', $category))">
-							<xsl:attribute name="class">
-								<xsl:text>current</xsl:text>
-							</xsl:attribute>
-						</xsl:if>
-
-						<a href="{@href}">
-							<xsl:if test="@rel">
-								<xsl:attribute name="rel">
-									<xsl:value-of select="@rel"/>
-								</xsl:attribute>
-							</xsl:if>
-
-							<xsl:value-of select="@name"/>
-						</a>
-					</li>
-				</xsl:for-each>
-			</ul>
-		</nav>
-	</xsl:template>
 
 	<xsl:template match="h:article[@class = 'entry']/h:h1/h:a">
 		<xsl:copy-of select="*|text()"/>
@@ -150,7 +126,9 @@
 						</xsl:choose>
 					</h1>
 
-					<xsl:call-template name="e:contents"/>
+					<xsl:call-template name="e:contents">
+						<xsl:with-param name="category" select="$category"/>
+					</xsl:call-template>
 				</header>
 
 				<main role="main" class="hyphenate">
