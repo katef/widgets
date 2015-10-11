@@ -127,6 +127,7 @@
 					</h1>
 
 					<xsl:call-template name="e:contents">
+						<xsl:with-param name="doc"      select="document('contents.xml')"/>
 						<xsl:with-param name="category" select="$category"/>
 					</xsl:call-template>
 				</header>

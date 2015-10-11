@@ -116,7 +116,9 @@
 						</form>
 -->
 
-						<xsl:call-template name="t:sections-menu"/>
+						<xsl:call-template name="t:sections-menu">
+							<xsl:with-param name="doc" select="document('contents.xml')"/>
+						</xsl:call-template>
 					</xsl:if>
 				</header>
 

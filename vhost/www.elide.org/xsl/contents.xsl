@@ -10,11 +10,12 @@
 	exclude-result-prefixes="h c e">
 
 	<xsl:template name="e:contents">
+		<xsl:param name="doc" select="/.."/>
 		<xsl:param name="category"/>
 
 		<nav role="navigation">
 			<ul>
-				<xsl:for-each select="document('contents.xml')/c:contents/c:category">
+				<xsl:for-each select="$doc/c:contents/c:category">
 					<li>
 						<xsl:if test="$category and starts-with(@href, concat('/', $category))">
 							<xsl:attribute name="class">

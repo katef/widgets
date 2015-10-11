@@ -69,9 +69,11 @@
 
 	<!-- TODO: rename contents -->
 	<xsl:template name="t:sections-menu">
+		<xsl:param name="doc" select="/.."/>
+
 		<nav role="navigation" class="expandable collapsed">
 			<ul>
-				<xsl:apply-templates select="document('contents.xml')/t:sections/t:section"/>
+				<xsl:apply-templates select="$doc/t:sections/t:section"/>
 			</ul>
 		</nav>
 	</xsl:template>
