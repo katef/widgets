@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<!-- TODO: rename contents to toc -->
+<c:contents xmlns:c="http://xml.elide.org/elide_contents">
+
+	<c:category href="/diary/"    name="Diary"/>
+	<c:category href="/photos/"   name="Photos"/>
+	<c:category href="/articles/" name="Articles"/>
+	<c:category href="/code/"     name="Code"/>
+	<c:category href="/about/"    name="About" rel="contact"/>
+
+</c:contents>
+

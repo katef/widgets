@@ -20,22 +20,13 @@
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
 
-	<!-- TODO: rename contents to toc -->
-	<c:contents>
-		<c:category href="/diary/"    name="Diary"/>
-		<c:category href="/photos/"   name="Photos"/>
-		<c:category href="/articles/" name="Articles"/>
-		<c:category href="/code/"     name="Code"/>
-		<c:category href="/about/"    name="About" rel="contact"/>
-	</c:contents>
-
 	<xsl:variable name="category" select="//h:meta[@name = 'category']/@content"/>
 	<xsl:variable name="date"     select="//h:meta[@name = 'date']    /@content"/>
 
 	<xsl:template name="e:contents">
 		<nav role="navigation">
 			<ul>
-				<xsl:for-each select="document('')//c:contents/c:category">
+				<xsl:for-each select="document('contents.xml')/c:contents/c:category">
 					<li>
 						<xsl:if test="$category and starts-with(@href, concat('/', $category))">
 							<xsl:attribute name="class">
