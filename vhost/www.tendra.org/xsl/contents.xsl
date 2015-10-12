@@ -13,30 +13,14 @@
 		</span>
 	</xsl:template>
 
-	<xsl:template match="c:item/c:item">
+	<xsl:template match="c:item">
 		<li>
-			<!-- TODO: hilight current item -->
 			<xsl:if test="local-name(following-sibling::*[1]) = 'sep'">
 				<xsl:attribute name="class">
 					<xsl:text>sep</xsl:text>
 				</xsl:attribute>
 			</xsl:if>
 
-			<a class="menu" href="{@href}">
-				<xsl:if test="@rel">
-					<xsl:attribute name="rel">
-						<xsl:value-of select="@rel"/>
-					</xsl:attribute>
-				</xsl:if>
-
-				<xsl:value-of select="@name"/>
-				<xsl:apply-templates select="@desc"/>
-			</a>
-		</li>
-	</xsl:template>
-
-	<xsl:template match="c:items/c:item">
-		<li>
 			<xsl:if test="@name = 'Blog'">	<!-- TODO: get from mod_kxslt or somesuch -->
 				<xsl:attribute name="class">
 					<xsl:text>current</xsl:text>
@@ -51,6 +35,7 @@
 				</xsl:if>
 
 				<xsl:value-of select="@name"/>
+				<xsl:apply-templates select="@desc"/>
 			</a>
 
 			<xsl:if test="c:item">
@@ -67,7 +52,6 @@
 		</li>
 	</xsl:template>
 
-	<!-- TODO: rename contents -->
 	<xsl:template name="c:contents">
 		<xsl:param name="doc" select="/.."/>
 
