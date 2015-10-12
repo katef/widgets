@@ -126,10 +126,12 @@
 						</xsl:choose>
 					</h1>
 
-					<xsl:call-template name="e:contents">
-						<xsl:with-param name="doc"      select="document('contents.xml')"/>
-						<xsl:with-param name="category" select="$category"/>
-					</xsl:call-template>
+					<nav role="navigation">
+						<xsl:call-template name="e:contents">
+							<xsl:with-param name="doc"      select="document('contents.xml')"/>
+							<xsl:with-param name="category" select="$category"/>
+						</xsl:call-template>
+					</nav>
 				</header>
 
 				<main role="main" class="hyphenate">

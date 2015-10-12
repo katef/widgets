@@ -116,9 +116,11 @@
 						</form>
 -->
 
-						<xsl:call-template name="t:sections-menu">
-							<xsl:with-param name="doc" select="document('contents.xml')"/>
-						</xsl:call-template>
+						<nav role="navigation" class="expandable collapsed">
+							<xsl:call-template name="t:sections-menu">
+								<xsl:with-param name="doc" select="document('contents.xml')"/>
+							</xsl:call-template>
+						</nav>
 					</xsl:if>
 				</header>
 

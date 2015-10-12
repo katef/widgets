@@ -71,11 +71,9 @@
 	<xsl:template name="t:sections-menu">
 		<xsl:param name="doc" select="/.."/>
 
-		<nav role="navigation" class="expandable collapsed">
-			<ul>
-				<xsl:apply-templates select="$doc/t:sections/t:section"/>
-			</ul>
-		</nav>
+		<ul>
+			<xsl:apply-templates select="$doc/t:sections/t:section"/>
+		</ul>
 	</xsl:template>
 
 </xsl:stylesheet>

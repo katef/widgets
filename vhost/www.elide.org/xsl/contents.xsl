@@ -13,29 +13,27 @@
 		<xsl:param name="doc" select="/.."/>
 		<xsl:param name="category"/>
 
-		<nav role="navigation">
-			<ul>
-				<xsl:for-each select="$doc/c:contents/c:category">
-					<li>
-						<xsl:if test="$category and starts-with(@href, concat('/', $category))">
-							<xsl:attribute name="class">
-								<xsl:text>current</xsl:text>
+		<ul>
+			<xsl:for-each select="$doc/c:contents/c:category">
+				<li>
+					<xsl:if test="$category and starts-with(@href, concat('/', $category))">
+						<xsl:attribute name="class">
+							<xsl:text>current</xsl:text>
+						</xsl:attribute>
+					</xsl:if>
+
+					<a href="{@href}">
+						<xsl:if test="@rel">
+							<xsl:attribute name="rel">
+								<xsl:value-of select="@rel"/>
 							</xsl:attribute>
 						</xsl:if>
 
-						<a href="{@href}">
-							<xsl:if test="@rel">
-								<xsl:attribute name="rel">
-									<xsl:value-of select="@rel"/>
-								</xsl:attribute>
-							</xsl:if>
-
-							<xsl:value-of select="@name"/>
-						</a>
-					</li>
-				</xsl:for-each>
-			</ul>
-		</nav>
+						<xsl:value-of select="@name"/>
+					</a>
+				</li>
+			</xsl:for-each>
+		</ul>
 	</xsl:template>
 
 </xsl:stylesheet>
