@@ -12,15 +12,11 @@
 
 	exclude-result-prefixes="h c str">
 
+	<xsl:import href="contents.xsl"/>
+
 	<xsl:template match="h:title" mode="body">
 		<xsl:apply-templates/>
 	</xsl:template>
-
-	<!-- TODO: rename contents to toc -->
-	<c:contents>
-		<c:category href="/about/"    name="About"    rel="help"/>
-		<c:category href="/download/" name="Download"/>
-	</c:contents>
 
 	<xsl:template name="kmkf-output">
 		<xsl:param name="page"/>
@@ -58,27 +54,10 @@
 
 			<xsl:with-param name="body">
 				<nav role="navigation" class="expandable collapsed">
-					<ul>
-						<xsl:for-each select="document('')//c:contents/c:category">
-							<li>
-								<xsl:if test="$page = @name">
-									<xsl:attribute name="class">
-										<xsl:text>current</xsl:text>
-									</xsl:attribute>
-								</xsl:if>
-
-								<a href="{@href}">
-									<xsl:if test="@rel">
-										<xsl:attribute name="rel">
-											<xsl:value-of select="@rel"/>
-										</xsl:attribute>
-									</xsl:if>
-
-									<xsl:value-of select="@name"/>
-								</a>
-							</li>
-						</xsl:for-each>
-					</ul>
+					<xsl:call-template name="c:contents">
+						<xsl:with-param name="doc"  select="document('contents.xml')"/>
+						<xsl:with-param name="page" select="$page"/>
+					</xsl:call-template>
 
 					<hr/>
 

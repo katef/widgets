@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<xsl:stylesheet version="1.0"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:str="http://exslt.org/strings"
+	xmlns:common="http://exslt.org/common"
+	xmlns:c="http://xml.elide.org/elide_contents"
+
+	extension-element-prefixes="str"
+
+	exclude-result-prefixes="h c str">
+
+	<xsl:template name="c:contents">
+		<xsl:param name="doc" select="/.."/>
+		<xsl:param name="page"/>
+
+		<ul>
+			<xsl:for-each select="$doc/c:contents/c:category">
+				<li>
+					<xsl:if test="$page = @name">
+						<xsl:attribute name="class">
+							<xsl:text>current</xsl:text>
+						</xsl:attribute>
+					</xsl:if>
+
+					<a href="{@href}">
+						<xsl:if test="@rel">
+							<xsl:attribute name="rel">
+								<xsl:value-of select="@rel"/>
+							</xsl:attribute>
+						</xsl:if>
+
+						<xsl:value-of select="@name"/>
+					</a>
+				</li>
+			</xsl:for-each>
+		</ul>
+	</xsl:template>
+
+</xsl:stylesheet>
+
