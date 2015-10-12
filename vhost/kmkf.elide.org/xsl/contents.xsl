@@ -6,7 +6,7 @@
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:str="http://exslt.org/strings"
 	xmlns:common="http://exslt.org/common"
-	xmlns:c="http://xml.elide.org/elide_contents"
+	xmlns:c="http://xml.elide.org/contents"
 
 	extension-element-prefixes="str"
 
@@ -17,7 +17,7 @@
 		<xsl:param name="page"/>
 
 		<ul>
-			<xsl:for-each select="$doc/c:contents/c:category">
+			<xsl:for-each select="$doc/c:items/c:item">
 				<li>
 					<xsl:if test="$page = @name">
 						<xsl:attribute name="class">

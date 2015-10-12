@@ -2,18 +2,18 @@
 
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:t="http://xml.tendra.org/www"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:c="http://xml.elide.org/contents"
 
-	exclude-result-prefixes="t">
+	exclude-result-prefixes="c">
 
-	<xsl:template match="t:subsection/@desc">
+	<xsl:template match="c:item/@desc">
 		<span class="description">
 			<xsl:value-of select="."/>
 		</span>
 	</xsl:template>
 
-	<xsl:template match="t:subsection">
+	<xsl:template match="c:item/c:item">
 		<li>
 			<!-- TODO: hilight current item -->
 			<xsl:if test="local-name(following-sibling::*[1]) = 'sep'">
@@ -35,7 +35,7 @@
 		</li>
 	</xsl:template>
 
-	<xsl:template match="t:section">
+	<xsl:template match="c:items/c:item">
 		<li>
 			<xsl:if test="@name = 'Blog'">	<!-- TODO: get from mod_kxslt or somesuch -->
 				<xsl:attribute name="class">
@@ -53,26 +53,26 @@
 				<xsl:value-of select="@name"/>
 			</a>
 
-			<xsl:if test="t:subsection">
+			<xsl:if test="c:item">
 				<ul>
-					<xsl:if test="t:subsection/@desc">
+					<xsl:if test="c:item/@desc">
 						<xsl:attribute name="style">
 							<xsl:text>width: 18em;</xsl:text>
 						</xsl:attribute>
 					</xsl:if>
 
-					<xsl:apply-templates select="t:subsection"/>
+					<xsl:apply-templates select="c:item"/>
 				</ul>
 			</xsl:if>
 		</li>
 	</xsl:template>
 
 	<!-- TODO: rename contents -->
-	<xsl:template name="t:sections-menu">
+	<xsl:template name="c:contents">
 		<xsl:param name="doc" select="/.."/>
 
 		<ul>
-			<xsl:apply-templates select="$doc/t:sections/t:section"/>
+			<xsl:apply-templates select="$doc/c:items/c:item"/>
 		</ul>
 	</xsl:template>
 

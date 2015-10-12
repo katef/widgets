@@ -5,8 +5,9 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:t="http://xml.tendra.org/www"
+	xmlns:c="http://xml.elide.org/contents"
 
-	exclude-result-prefixes="h t">
+	exclude-result-prefixes="h t c">
 
 	<xsl:import href="../../../xsl/theme.xsl"/>
 
@@ -116,8 +117,8 @@
 						</form>
 -->
 
-						<nav role="navigation" class="expandable collapsed">
-							<xsl:call-template name="t:sections-menu">
+						<nav role="navigation">
+							<xsl:call-template name="c:contents">
 								<xsl:with-param name="doc" select="document('contents.xml')"/>
 							</xsl:call-template>
 						</nav>

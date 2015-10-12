@@ -5,7 +5,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:date="http://exslt.org/dates-and-times"
 	xmlns:h="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://xml.elide.org/elide_contents"
+	xmlns:c="http://xml.elide.org/contents"
 	xmlns:e="http://xml.elide.org/elide_website"
 
 	extension-element-prefixes="date"
@@ -127,7 +127,7 @@
 					</h1>
 
 					<nav role="navigation">
-						<xsl:call-template name="e:contents">
+						<xsl:call-template name="c:contents">
 							<xsl:with-param name="doc"      select="document('contents.xml')"/>
 							<xsl:with-param name="category" select="$category"/>
 						</xsl:call-template>

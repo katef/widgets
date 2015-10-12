@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 
-<c:contents xmlns:c="http://xml.elide.org/elide_contents">
-	<c:category href="/about/"    name="About"    rel="help"/>
-	<c:category href="/download/" name="Download"/>
-</c:contents>
+<c:items xmlns:c="http://xml.elide.org/contents">
+
+	<c:item href="/about/"    name="About" rel="help"/>
+	<c:item href="/download/" name="Download"/>
+
+</c:items>
 
