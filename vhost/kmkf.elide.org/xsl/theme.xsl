@@ -53,7 +53,7 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
-				<nav role="navigation" class="expandable collapsed">
+				<nav role="navigation">
 					<xsl:call-template name="c:contents">
 						<xsl:with-param name="doc"  select="document('contents.xml')"/>
 						<xsl:with-param name="page" select="$page"/>
