@@ -13,6 +13,7 @@
 	exclude-result-prefixes="h c str">
 
 	<xsl:import href="contents.xsl"/>
+	<xsl:import href="../../../xsl/man.xsl"/>
 
 	<xsl:template match="h:title" mode="body">
 		<xsl:apply-templates/>

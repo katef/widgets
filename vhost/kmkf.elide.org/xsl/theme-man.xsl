@@ -13,7 +13,6 @@
 	exclude-result-prefixes="h str">
 
 	<xsl:import href="../../../xsl/theme.xsl"/>
-	<xsl:import href="../../../xsl/man.xsl"/>
 	<xsl:import href="../../../xsl/doctitle.xsl"/>
 	<xsl:import href="theme.xsl"/>
 
