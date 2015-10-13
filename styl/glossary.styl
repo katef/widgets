@@ -7,6 +7,41 @@ $glossary ?= {
 	overlap: 1ex // a:hover vertical overlap relatve to li size
 }
 
+ol.glossary {
+	padding: 0;
+	margin:  0;
+
+	clearfix();
+
+	padding: $glossary.overlap 0;
+
+	li {
+		list-style-type: none;
+		border-left: $glossary.border;
+		padding: 0;
+		cursor: default;
+		float: left;
+
+		&:first-child {
+			border-left: none;
+		}
+
+		a {
+			margin: -($glossary.overlap) 0;
+			padding: ($glossary.overlap) 0;
+		}
+	}
+
+	li,
+	li a {
+		display: inline-block;
+		text-align: center;
+
+		min-width: 2em;
+		max-width: 3em;
+	}
+}
+
 dl.glossary {
 
 	dt {
@@ -20,9 +55,6 @@ dl.glossary {
 			&.alt:after {
 				content: ", ";
 			}
-		}
-
-		span.note {
 		}
 	}
 
@@ -40,44 +72,5 @@ dl.glossary {
 			margin-left: -($glossary.padding); /* to overlap the dt's padding-right */
 		}
 	}
-
-}
-
-ol.glossary {
-	padding: 0;
-	margin:  0;
-	margin-bottom: ($baseline * 0.5);
-
-	display: block;
-	text-align: center;
-	list-style-type: none;
-
-	font-size: 0; /* inline whitespace hack */
-
-	li,
-	li a {
-		margin: $glossary.overlap 0;
-		display: inline-block;
-
-		min-width: 2em;
-		max-width: 4em;
-	}
-
-	li {
-		margin-left: -($glossary.border[1]);
-		border-left: $glossary.border;
-		padding: 0;
-		cursor: default;
-	}
-
-	li:first-child {
-		border-left: none;
-	}
-
-	li a {
-		margin: -($glossary.overlap) 0;
-		padding: ($glossary.overlap) 0;
-	}
-
 }
 
