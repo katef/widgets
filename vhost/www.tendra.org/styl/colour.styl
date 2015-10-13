@@ -173,6 +173,24 @@ header nav ul {
 			color: #000;
 		}
 	}
+
+	a[rel = "external"] span.description:after {
+		content: "\A0";
+		display: inline-block;
+		margin-left: 0.25em;
+		width: ($baseline / 2);
+
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 100%;
+
+		background-image: url('/img/extlink.png');
+
+		// optical correction
+		position: relative;
+		top:   -1px;
+		right: -2px;
+	}
 }
 
 ul.menu {
