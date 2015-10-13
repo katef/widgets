@@ -50,10 +50,13 @@
 
 	<c:item href="#" name="Development">
 		<c:item href="#" name="Roadmap"/>
-		<c:item href="#" name="Tickets"/>
-		<c:item href="#" name="Timeline"/>
+		<c:item href="https://github.com/tendra/tendra/issues"  name="Tickets"  desc="Github"  rel="external"/>
+		<c:item href="https://www.openhub.net/p/tendra/commits" name="Timeline" desc="OpenHub" rel="external"/>
+<!-- XXX: /people is better
+		<c:item href="https://www.openhub.net/p/tendra/contributors/summary" name="Contributors" desc="OpenHub" rel="external"/>
+-->
 		<c:item href="#" name="Revision&#160;Log"/>
-		<c:item href="#" name="Browse&#160;Source"/>
+		<c:item href="http://code.openhub.net/project?pid=&amp;ipid=300082&amp;fp=300082&amp;mp&amp;projSelected=true&amp;filterChecked" name="Browse&#160;Source" desc="OpenHub" rel="external"/>
 		<c:item href="#" name="Automated&#160;Builds"/>
 	</c:item>
 
