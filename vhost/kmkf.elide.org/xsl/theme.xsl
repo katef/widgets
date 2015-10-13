@@ -14,8 +14,7 @@
 
 	<xsl:import href="../../../xsl/lib/str.tolower.xsl"/>
 	<xsl:import href="../../../xsl/man.xsl"/>
-
-	<xsl:import href="contents.xsl"/>
+	<xsl:import href="../../../xsl/contents.xsl"/>
 
 	<xsl:template match="h:title" mode="body">
 		<xsl:apply-templates/>

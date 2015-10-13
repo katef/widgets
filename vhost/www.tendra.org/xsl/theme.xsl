@@ -10,8 +10,7 @@
 	exclude-result-prefixes="h t c">
 
 	<xsl:import href="../../../xsl/theme.xsl"/>
-
-	<xsl:import href="contents.xsl"/>
+	<xsl:import href="../../../xsl/contents.xsl"/>
 
 	<xsl:template name="t:banner">
 		<div id="banner">

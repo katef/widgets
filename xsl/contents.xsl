@@ -10,7 +10,7 @@
 
 	exclude-result-prefixes="c str">
 
-	<xsl:import href="../../../xsl/lib/str.tolower.xsl"/>
+	<xsl:import href="lib/str.tolower.xsl"/>
 
 	<xsl:template match="c:item/@desc">
 		<span class="description">

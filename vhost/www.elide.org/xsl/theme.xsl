@@ -16,8 +16,7 @@
 
 	<xsl:import href="../../../xsl/theme.xsl"/>
 	<xsl:import href="../../../xsl/img.xsl"/>
-
-	<xsl:import href="contents.xsl"/>
+	<xsl:import href="../../../xsl/contents.xsl"/>
 
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
