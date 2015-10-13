@@ -12,6 +12,7 @@ or have them all expand out to a db: namespace -->
 
 		<meta name="description" content="Development roadmap"/>
 		<meta name="keywords"    content="roadmap, status, development, progress, plans, future"/>
+		<meta name="category"    content="about"/>
 		<meta name="rcsid"       content="$Id: index.xhtml5 4126 2013-08-12 22:13:50Z kate $"/>
 		<meta name="layout"      content="docs"/>
 	</head>

@@ -12,14 +12,16 @@
 
 	exclude-result-prefixes="h c str">
 
+	<xsl:import href="../../../xsl/lib/str.tolower.xsl"/>
+
 	<xsl:template name="c:contents">
-		<xsl:param name="doc" select="/.."/>
-		<xsl:param name="page"/>
+		<xsl:param name="doc"      select="/.."/>
+		<xsl:param name="category" select="''"/>
 
 		<ul>
 			<xsl:for-each select="$doc/c:items/c:item">
 				<li>
-					<xsl:if test="$page = @name">
+					<xsl:if test="str:tolower(@name) = $category">
 						<xsl:attribute name="class">
 							<xsl:text>current</xsl:text>
 						</xsl:attribute>

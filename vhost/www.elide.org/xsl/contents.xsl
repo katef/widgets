@@ -3,19 +3,24 @@
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:str="http://exslt.org/strings"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:c="http://xml.elide.org/contents"
 
-	exclude-result-prefixes="h c">
+	extension-element-prefixes="str"
+
+	exclude-result-prefixes="h str c">
+
+	<xsl:import href="../../../xsl/lib/str.tolower.xsl"/>
 
 	<xsl:template name="c:contents">
-		<xsl:param name="doc" select="/.."/>
-		<xsl:param name="category"/>
+		<xsl:param name="doc"      select="/.."/>
+		<xsl:param name="category" select="''"/>
 
 		<ul>
 			<xsl:for-each select="$doc/c:items/c:item">
 				<li>
-					<xsl:if test="$category and starts-with(@href, concat('/', $category))">
+					<xsl:if test="str:tolower(@name) = $category">
 						<xsl:attribute name="class">
 							<xsl:text>current</xsl:text>
 						</xsl:attribute>

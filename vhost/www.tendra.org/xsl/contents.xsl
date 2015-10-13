@@ -3,9 +3,14 @@
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:str="http://exslt.org/strings"
 	xmlns:c="http://xml.elide.org/contents"
 
-	exclude-result-prefixes="c">
+	extension-element-prefixes="str"
+
+	exclude-result-prefixes="c str">
+
+	<xsl:import href="../../../xsl/lib/str.tolower.xsl"/>
 
 	<xsl:template match="c:item/@desc">
 		<span class="description">
@@ -14,6 +19,8 @@
 	</xsl:template>
 
 	<xsl:template match="c:item">
+		<xsl:param name="category"/>
+
 		<li>
 			<xsl:if test="local-name(following-sibling::*[1]) = 'sep'">
 				<xsl:attribute name="class">
@@ -21,7 +28,7 @@
 				</xsl:attribute>
 			</xsl:if>
 
-			<xsl:if test="@name = 'Blog'">	<!-- TODO: get from mod_kxslt or somesuch -->
+			<xsl:if test="str:tolower(@name) = $category">
 				<xsl:attribute name="class">
 					<xsl:text>current</xsl:text>
 				</xsl:attribute>
@@ -54,9 +61,12 @@
 
 	<xsl:template name="c:contents">
 		<xsl:param name="doc" select="/.."/>
+		<xsl:param name="category" select="''"/>
 
 		<ul>
-			<xsl:apply-templates select="$doc/c:items/c:item"/>
+			<xsl:apply-templates select="$doc/c:items/c:item">
+				<xsl:with-param name="category" select="$category"/>
+			</xsl:apply-templates>
 		</ul>
 	</xsl:template>
 

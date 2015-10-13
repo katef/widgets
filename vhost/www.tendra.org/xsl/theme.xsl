@@ -45,6 +45,7 @@
 	</xsl:template>
 
 	<xsl:template name="tendra-output">
+		<xsl:param name="category"/>
 		<xsl:param name="class"/>
 		<xsl:param name="page"/>
 
@@ -52,11 +53,13 @@
 		<xsl:param name="main"    select="/.."/>
 		<xsl:param name="sidebar" select="/.."/>
 
+		<!-- TODO: merge as $category = false() -->
 		<xsl:param name="standalone" select="false()"/>
 
 		<xsl:call-template name="theme-output">
-			<xsl:with-param name="class"   select="$class"/>
-			<xsl:with-param name="favicon" select="'/favicon.ico'"/>
+			<xsl:with-param name="category" select="$category"/>
+			<xsl:with-param name="class"    select="$class"/>
+			<xsl:with-param name="favicon"  select="'/favicon.ico'"/>
 
 			<xsl:with-param name="css">
 				<xsl:choose>
@@ -119,7 +122,8 @@
 
 						<nav role="navigation">
 							<xsl:call-template name="c:contents">
-								<xsl:with-param name="doc" select="document('contents.xml')"/>
+								<xsl:with-param name="category" select="$category"/>
+								<xsl:with-param name="doc"      select="document('contents.xml')"/>
 							</xsl:call-template>
 						</nav>
 					</xsl:if>

@@ -12,6 +12,7 @@
 
 		<meta name="description" content="Downloads"/>
 		<meta name="keywords"    content="download, checkout, source, svn, rcs, cvs, git, packages"/>
+		<meta name="category"    content="download"/>
 		<meta name="rcsid"       content="$Id$"/>
 		<meta name="layout"      content="source"/>
 	</head>

@@ -11,6 +11,7 @@
 
 		<meta name="description" content="Glossary of Terms"/>
 		<meta name="keywords"    content="Glossary, terms, definitions, meanings, acronyms"/>
+		<meta name="category"    content="documentation"/>
 		<meta name="rcsid"       content="$Id$"/>
 		<meta name="layout"      content="docs"/>
 	</head>

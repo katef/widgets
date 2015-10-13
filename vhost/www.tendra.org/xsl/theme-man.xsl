@@ -24,7 +24,8 @@
 
 	<xsl:template match="/h:html">
 		<xsl:call-template name="tendra-output">
-			<xsl:with-param name="class"   select="concat(@class, ' hyphenate')"/>
+			<xsl:with-param name="category" select="'documentation'"/>
+			<xsl:with-param name="class"    select="concat(@class, ' hyphenate')"/>
 
 			<xsl:with-param name="page">
 				<xsl:apply-templates select="h:head/h:title" mode="body"/>

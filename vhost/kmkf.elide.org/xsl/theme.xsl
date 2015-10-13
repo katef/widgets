@@ -12,8 +12,10 @@
 
 	exclude-result-prefixes="h c str">
 
-	<xsl:import href="contents.xsl"/>
+	<xsl:import href="../../../xsl/lib/str.tolower.xsl"/>
 	<xsl:import href="../../../xsl/man.xsl"/>
+
+	<xsl:import href="contents.xsl"/>
 
 	<xsl:template match="h:title" mode="body">
 		<xsl:apply-templates/>
@@ -56,8 +58,8 @@
 			<xsl:with-param name="body">
 				<nav role="navigation">
 					<xsl:call-template name="c:contents">
-						<xsl:with-param name="doc"  select="document('contents.xml')"/>
-						<xsl:with-param name="page" select="$page"/>
+						<xsl:with-param name="doc"      select="document('contents.xml')"/>
+						<xsl:with-param name="category" select="str:tolower($page)"/>
 					</xsl:call-template>
 
 					<hr/>

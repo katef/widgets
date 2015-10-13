@@ -11,6 +11,7 @@
 		<meta name="description" content="Documentation"/>
 		<meta name="keywords"    content="docs, userguide, guides, devguide, overview, manuals, manpages, info"/>
 <!--
+		<meta name="category"    content="documentation"/>
 		<meta name="rcsid"       content="$Id$"/>
 		<meta name="layout"      content="docs"/>
 

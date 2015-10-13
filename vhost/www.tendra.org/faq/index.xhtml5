@@ -12,6 +12,7 @@ or have them all expand out to a db: namespace -->
 
 		<meta name="description" content="Frequently Asked Questions"/>
 		<meta name="keywords"    content="FAQ, FAQS, questions, status, about"/>
+		<meta name="category"    content="documentation"/>
 		<meta name="rcsid"       content="$Id$"/>
 		<meta name="layout"      content="docs"/>
 	</head>

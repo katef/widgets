@@ -3,9 +3,14 @@
 <xsl:stylesheet version="1.0"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:str="http://exslt.org/strings"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 
-	exclude-result-prefixes="h">
+	extension-element-prefixes="str"
+
+	exclude-result-prefixes="h str">
+
+	<xsl:import href="../../../xsl/lib/str.tolower.xsl"/>
 
 	<xsl:import href="theme.xsl"/>
 
@@ -20,11 +25,18 @@
 	</xsl:template>
 
 	<xsl:template match="/h:html">
+		<xsl:variable name="category" select="//h:meta[@name = 'category']/@content"/>
+
+		<xsl:variable name="page">
+			<xsl:apply-templates select="h:head/h:title" mode="body"/>
+		</xsl:variable>
+
 		<xsl:call-template name="tendra-output">
-			<xsl:with-param name="class"   select="concat(@class, ' hyphenate')"/>
+			<xsl:with-param name="category" select="$category"/>
+			<xsl:with-param name="class"    select="concat(@class, ' hyphenate')"/>
 
 			<xsl:with-param name="page">
-				<xsl:apply-templates select="h:head/h:title" mode="body"/>
+				<xsl:copy-of select="$page"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="head">
