@@ -43,7 +43,6 @@ ol.glossary {
 }
 
 dl.glossary {
-
 	dt {
 		display: inline;
 		float: left;
@@ -56,21 +55,21 @@ dl.glossary {
 				content: ", ";
 			}
 		}
+
+		& + dd.abbr {
+			margin-left: 0;
+
+			&:before {
+				content: ": ";
+				margin-left: -($glossary.padding); /* to overlap the dt's padding-right */
+			}
+		}
 	}
 
 	dd {
 		margin-top:    0;
 		margin-left:   $glossary.gutter;
 		margin-bottom: $baseline;
-	}
-
-	dt + dd.abbr {
-		margin-left: 0;
-
-		&:before {
-			content: ": ";
-			margin-left: -($glossary.padding); /* to overlap the dt's padding-right */
-		}
 	}
 }
 
