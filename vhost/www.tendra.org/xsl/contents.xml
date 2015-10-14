@@ -16,13 +16,14 @@
 	<c:item href="#" name="Wiki"/>
 
 	<c:item href="/docs" name="Documentation">
-		<c:item href="#"    name="User/Developer&#160;guides"/>
-		<c:item href="/man" name="Manpages"/>
-		<c:item href="#"    name="Reference"/>
-		<c:item href="#"    name="Academic&#160;Papers"/>
+		<c:item href="#"         name="User/Developer&#160;guides"/>
+		<c:item href="/man"      name="Manpages"/>
+		<c:item href="#"         name="Reference"/>
+		<c:item href="/papers"   name="Academic&#160;Papers"/>
+		<c:item href="/reports"  name="Technical&#160;Reports"/>
 		<c:sep/>
-		<c:item href="#"    name="API&#160;Headers"/>
-		<c:item href="#"    name="API&#160;Coverage"/>
+		<c:item href="#"         name="API&#160;Headers"/>
+		<c:item href="#"         name="API&#160;Coverage"/>
 		<c:sep/>
 		<c:item href="#"         name="Bibliography" rel="bibliography"/>
 		<c:item href="/glossary" name="Glossary"     rel="glossary"/>

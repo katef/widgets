@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Technical Reports</title>
+
+		<meta name="description" content="Technical reports"/>
+		<meta name="keywords"    content="reports, papers, documentation, docs, research, status, stats, statistics, information, info, project, review, facts, figures"/>
+		<meta name="category"    content="documentation"/>
+<!--
+		<meta name="rcsid"       content="$Id: index.xhtml5 4768 2015-10-14 17:02:13Z kate $"/>
+		<meta name="layout"      content="custom"/>
+-->
+	</head>
+
+	<body>
+		<!-- TODO: list using bibtex -->
+		<ul>
+			<li>
+				<a href="/reports-linux-validation">Validation of TenDRA Capability to Implement a Set of Commands for the Linux Operating System</a>
+			</li>
+			<li>
+				<a href="/reports/unix-validation">Validation of TenDRA Capability to Implement a UNIX-like Operating System</a>
+			</li>
+			<li>
+				<a href="/reports-cppporting">C++ and Portability</a>
+			</li>
+			<li>
+				<a href="/reports/andf-gcc-verification.ps">A Conformance Comparison between ANDF and GCC for X/Open Verification of an OSF/1 MK SS Platform</a>
+			</li>
+			<li>
+				<a href="/reports/andf-oracle-rpt1.ps">Porting Oracle with the ANDF Compiler Technology &mdash; A Progress Report</a>
+			</li>
+			<li>
+				<a href="/reports/andf-oracle-rpt2.ps">Porting Oracle with ANDF Using an Extended Common API</a>
+			</li>
+			<li>
+				<a href="/reports/andf-osf1r1.2.ps">ANDFizing OSF/1 R1.2 commands</a>
+			</li>
+			<li>
+				<a href="/reports/tdf-facts.ps">TDF Facts &amp; Figures</a>
+			</li>
+		</ul>
+	</body>
+</html>
+
