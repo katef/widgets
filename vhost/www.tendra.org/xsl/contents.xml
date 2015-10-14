@@ -3,12 +3,12 @@
 <c:items xmlns:c="http://xml.elide.org/contents">
 
 	<c:item href="/about" name="About">
-		<c:item href="#" name="Introduction"/>
-		<c:item href="#" name="Status"/>
-		<c:item href="#" name="History"/>
-		<c:item href="/people" name="People" rel="author"/>
-		<c:item href="#" name="Contact"      rel="contact"/>
-		<c:item href="#" name="Licences"     rel="license"/>
+		<c:item href="#"        name="Introduction"/>
+		<c:item href="#"        name="Status"/>
+		<c:item href="#"        name="History"/>
+		<c:item href="/people"  name="People"   rel="author"/>
+		<c:item href="#"        name="Contact"  rel="contact"/>
+		<c:item href="/licence" name="Licences" rel="license"/>
 	</c:item>
 
 	<c:item href="#" name="Blog"/>
