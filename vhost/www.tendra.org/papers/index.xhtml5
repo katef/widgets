@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Academic Papers</title>
+
+		<meta name="description" content="Academic papers"/>
+		<meta name="keywords"    content="academic, papers, research, investigations, studies, reports, theory, science"/>
+		<meta name="category"    content="documentation"/>
+<!--
+		<meta name="rcsid"       content="$Id: index.xhtml5 4768 2015-10-14 17:02:13Z kate $"/>
+		<meta name="layout"      content="custom"/>
+-->
+	</head>
+
+	<body>
+		<!-- TODO: list using bibtex -->
+
+		<h2>Miscellaneous</h2>
+		<ul>
+			<li>
+				<a href="/Woodward66.pdf">Woodward66</a>
+			</li>
+			<li>
+				<a href="/Foster67.pdf">Foster67</a>
+			</li>
+			<li>
+				<a href="/Foster86.pdf">Foster86</a>
+			</li>
+			<li>
+				<a href="/Sennett89.pdf">Sennett89</a>
+			</li>
+			<li>
+				<a href="/Wiseman90.pdf">Wiseman90</a>
+			</li>
+			<li>
+				<a href="/Smith91.pdf">Smith91</a>
+			</li>
+			<li>
+				<a href="/Mosses92.pdf">Mosses92</a>
+			</li>
+			<li>
+				<a href="/Toyn98.pdf">Toyn98</a>
+			</li>
+		</ul>
+
+		<h2>TDF/ANDF</h2>
+		<ul>
+			<li>
+				<a href="/Macrakis93a.pdf">andf/Macrakis93a</a>
+			</li>
+			<li>
+				<a href="/Macrakis93b.pdf">andf/Macrakis93b</a>
+			</li>
+			<li>
+				<a href="/Macrakis93c.pdf">andf/Macrakis93c</a>
+			</li>
+			<li>
+				<a href="/Macrakis93d.pdf">andf/Macrakis93d</a>
+			</li>
+			<li>
+				<a href="/Macrakis93e.pdf">andf/Macrakis93e</a>
+			</li>
+			<li>
+				<a href="/Macrakis93f.pdf">andf/Macrakis93f</a>
+			</li>
+			<li>
+				<a href="/Macrakis93g.pdf">andf/Macrakis93g</a>
+			</li>
+			<li>
+				<a href="/Macrakis93i.pdf">andf/Macrakis93i</a>
+			</li>
+			<li>
+				<a href="/andf-features.pdf">andf/andf-features</a>
+			</li>
+			<li>
+				<a href="/andf-questions.pdf">andf/andf-questions</a>
+			</li>
+		</ul>
+
+		<h2>Ten15</h2>
+		<ul>
+			<li>
+				<a href="/Bilsby91.pdf">ten15/Bilsby91</a>
+			</li>
+			<li>
+				<a href="/Blanchard92.pdf">ten15/Blanchard92</a>
+			</li>
+			<li>
+				<a href="/Core86.pdf">ten15/Core86</a>
+			</li>
+			<li>
+				<a href="/Core88.pdf">ten15/Core88</a>
+			</li>
+			<li>
+				<a href="/Currie87.pdf">ten15/Currie87</a>
+			</li>
+			<li>
+				<a href="/Edwards92.pdf">ten15/Edwards92</a>
+			</li>
+			<li>
+				<a href="/Foster89.pdf">ten15/Foster89</a>
+			</li>
+			<li>
+				<a href="/Tombs91.pdf">ten15/Tombs91</a>
+			</li>
+		</ul>
+
+		<h2>Flex</h2>
+		<ul>
+			<li>
+				<a href="/Currie82.pdf">flex/Currie82</a>
+			</li>
+		</ul>
+
+		<h2>GANDF</h2>
+		<p>We do not have the source code for GANDF.</p>
+		<ul>
+			<li>
+				<a href="/Ford93a.pdf">gandf/Ford93a</a>
+			</li>
+			<li>
+				<a href="/Ford93b.pdf">gandf/Ford93b</a>
+			</li>
+			<li>
+				<a href="/Ford93c.pdf">gandf/Ford93c</a>
+			</li>
+		</ul>
+	</body>
+</html>
+
