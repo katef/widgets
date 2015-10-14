@@ -112,7 +112,7 @@
 					other than possibly being an end state.</p>
 
 				<p>According to <a href="TODO">[BC07]</a>,
-					mathematically, automaton is a pair A = (Q,&#xA0;E),
+					mathematically, an automaton is a pair A = (Q,&#xA0;E),
 					where Q is a finite set of states, and E is a finite set
 					of edges labelled by letters of a finite alphabet A.
 					Edges are triples of the form (p,&#xA0;a,&#xA0;q), p,
