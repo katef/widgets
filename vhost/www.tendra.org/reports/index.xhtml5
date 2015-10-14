@@ -15,13 +15,19 @@
 	</head>
 
 	<body>
+		<p>These are project status reports, which are of little academic value
+			but document the engineering details involved in various studies.
+			Most of these are of historic interest only, either because of the
+			early versions of TDF, or because of the early versions of the
+			OS software used.</p>
+
 		<!-- TODO: list using bibtex -->
 		<ul>
 			<li>
 				<a href="/reports-linux-validation">Validation of TenDRA Capability to Implement a Set of Commands for the Linux Operating System</a>
 			</li>
 			<li>
-				<a href="/reports/unix-validation">Validation of TenDRA Capability to Implement a UNIX-like Operating System</a>
+				<a href="/reports-unix-validation">Validation of TenDRA Capability to Implement a UNIX-like Operating System</a>
 			</li>
 			<li>
 				<a href="/reports-cppporting">C++ and Portability</a>
