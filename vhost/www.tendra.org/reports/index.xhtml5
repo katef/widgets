@@ -51,6 +51,21 @@
 			</li>
 		</ul>
 
+		<h2>OSF Programs</h2>
+
+		<p>We do not have the source code for these.</p>
+		<!-- TODO: if ever released, these documents will move alongside the
+			other user guides -->
+
+		<ul>
+			<li>
+				<a href="/reports/avs/anc.pdf">ANC: ANDF Notation Compiler</a>
+			</li>
+			<li>
+				<a href="/reports/avs/andf-validation.pdf">Overview of ANDF Validation</a>
+			</li>
+		</ul>
+
 		<h2>OSF Institutional</h2>
 
 		<ul>
