@@ -21,6 +21,8 @@
 			early versions of TDF, or because of the early versions of the
 			OS software used.</p>
 
+		<h2>Using TDF/ANDF</h2>
+
 		<!-- TODO: list using bibtex -->
 		<ul>
 			<li>
@@ -46,6 +48,17 @@
 			</li>
 			<li>
 				<a href="/reports/tdf-facts.pdf">TDF Facts &amp; Figures</a>
+			</li>
+		</ul>
+
+		<h2>OSF Institutional</h2>
+
+		<ul>
+			<li>
+				<a href="/reports/osf/andf-q193.pdf">ANDF Quarterly Report, 1Q93</a>
+			</li>
+			<li>
+				<a href="/reports/osf/andf-program.pdf">The ANDF Tehnology Program at the OSF RI</a>
 			</li>
 		</ul>
 	</body>
