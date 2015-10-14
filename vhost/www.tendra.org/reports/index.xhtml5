@@ -27,19 +27,19 @@
 				<a href="/reports-cppporting">C++ and Portability</a>
 			</li>
 			<li>
-				<a href="/reports/andf-gcc-verification.ps">A Conformance Comparison between ANDF and GCC for X/Open Verification of an OSF/1 MK SS Platform</a>
+				<a href="/reports/andf-gcc-verification.pdf">A Conformance Comparison between ANDF and GCC for X/Open Verification of an OSF/1 MK SS Platform</a>
 			</li>
 			<li>
-				<a href="/reports/andf-oracle-rpt1.ps">Porting Oracle with the ANDF Compiler Technology &mdash; A Progress Report</a>
+				<a href="/reports/andf-oracle-rpt1.pdf">Porting Oracle with the ANDF Compiler Technology &mdash; A Progress Report</a>
 			</li>
 			<li>
-				<a href="/reports/andf-oracle-rpt2.ps">Porting Oracle with ANDF Using an Extended Common API</a>
+				<a href="/reports/andf-oracle-rpt2.pdf">Porting Oracle with ANDF Using an Extended Common API</a>
 			</li>
 			<li>
-				<a href="/reports/andf-osf1r1.2.ps">ANDFizing OSF/1 R1.2 commands</a>
+				<a href="/reports/andf-osf1r1.2.pdf">ANDFizing OSF/1 R1.2 commands</a>
 			</li>
 			<li>
-				<a href="/reports/tdf-facts.ps">TDF Facts &amp; Figures</a>
+				<a href="/reports/tdf-facts.pdf">TDF Facts &amp; Figures</a>
 			</li>
 		</ul>
 	</body>
