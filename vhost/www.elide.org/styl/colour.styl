@@ -24,10 +24,10 @@ footer {
 }
 
 // :before is image background
-// :after is tint for footer image to match menu tint
+// :after is tint for footer image to match nav tint
 footer:before,
 footer:after {
-	content: " ";
+	content: "\A0";
 	display: block;
 	height: $footer-height;
 	position: relative;
@@ -37,7 +37,7 @@ footer:after {
 	top: -($footer-height);
 }
 
-header menu,
+header nav,
 footer:after {
 	background-color: rgba(0, 0, 0, 0.2);
 }
