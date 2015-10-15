@@ -1,29 +1,32 @@
 /* $Id$ */
 
+$bibliography ?= {
+	padding: 0.5em
+	gutter:  5em
+}
+
 dl.bibliography {
-	margin-left: 120px;
+	padding: 0;
+
+	clearfix();
 
 	dt {
-		width: 60px;
-		min-width: @width;
-		display: block;
+		margin-right: $bibliography.padding;
+		min-width:    $bibliography.gutter;
+		font-weight: normal;
+
 		float: left;
 		clear: left;
-		margin-left: -60px;
-		font-weight: normal;
 
 		&:before { content: "["; }
 		&:after  { content: "]"; }
 	}
 
 	dd {
-		margin: 0;
+		margin-top:    0;
+		margin-right:  0;
+		margin-left:   ($bibliography.gutter + $bibliography.padding);
 		margin-bottom: ($baseline / 2);
-		display: block;
-
-		cite {
-			display: inline;
-		}
 
 		cite:before { content: "\201C"; }
 		cite:after  { content: "\201D"; }
