@@ -88,7 +88,7 @@
 			<dd>B.W.&nbsp;Watson, <cite><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.55.8900&amp;rep=rep1&amp;type=pdf">A taxonomy of finite automata minimization</a></cite>, 1994.</dd>
 
 			<dt>Hop71</dt>
-			<dd>J.&nbsp;Hopcroft. <cite>An <i>n log n</i> algorithm for minimizing states in a finite automaton</cite>.
+			<dd>J.&nbsp;Hopcroft. <cite>An <i>n&thinsp;log&thinsp;n</i> algorithm for minimizing states in a finite automaton</cite>.
 				In Proc. Inter. Symp. on the Theory of Machines and Computations, pages 189–196, Haifa, Israel, 1971. AP.</dd>
 
 			<dt>Brz63</dt>
