@@ -5,17 +5,28 @@ dl.bibliography {
 
 	dt {
 		width: 60px;
+		min-width: @width;
 		display: block;
 		float: left;
 		clear: left;
 		margin-left: -60px;
 		font-weight: normal;
+
+		&:before { content: "["; }
+		&:after  { content: "]"; }
 	}
 
 	dd {
 		margin: 0;
-		margin-bottom: 18px;
+		margin-bottom: ($baseline / 2);
 		display: block;
+
+		cite {
+			display: inline;
+		}
+
+		cite:before { content: "\201C"; }
+		cite:after  { content: "\201D"; }
 	}
 }
 
