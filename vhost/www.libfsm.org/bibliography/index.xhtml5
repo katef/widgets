@@ -78,7 +78,7 @@
 			<dd>J.-M.&nbsp;Champarnaud, A.&nbsp;Khorsi, and T.&nbsp;Paranthoën
 				 <cite><a href="http://www.stringology.org/cgi-bin/getfile.cgi?t=pdf&amp;c=-&amp;y=2002&amp;n=11">Split and join for minimizing:
 					Brzozowski&rsquo;s algorithm</a></cite>.
-				In M. Balık and M. Simanek, editors, Proc. of PSC&rsquo;02,
+				In M.&nbsp;Balık and M.&nbsp;Simanek, editors, Proc. of PSC&rsquo;02,
 					Report DC-2002&ndash;03, pp.&nbsp;96–104. Czech Technical University of Prague, <time>2002</time>.</dd>
 
 			<dt>Wat95</dt>
@@ -96,7 +96,7 @@
 			<dt>Brz63</dt>
 			<dd>J.A. Brzozowski. <cite>Canonical regular expressions and minimal state graphs for definite events</cite>.
 				In J.&nbsp;Fox, editor, Proc. of the Sym. on Mathematical Theory of Automata,
-				vol.&nbsp;12 of MRI Symposia Series, pp.&nbsp;529–561, NY, <time>1963</time>.
+				vol.&nbsp;12 of MRI Symposia Series, pp.&nbsp;529&ndash;561, NY, <time>1963</time>.
 				Polytechnic Press of the Polytechnic Institute of Brooklyn.</dd>
 
 			<dt>Tho68</dt>
@@ -109,7 +109,7 @@
 				Theoretical Computer Science, vol.&nbsp;120, <time>1993</time>, pp.&nbsp;87&ndash;98.</dd>
 
 			<dt>BC07</dt>
-			<dd>M.-P. Béal and M. Crochemore, <cite><a href="http://igm.univ-mlv.fr/~beal/Recherche/Publications/aftIEEE.pdf">Minimizing local automata</a></cite>.
+			<dd>M.-P.&nbsp;Béal and M.&nbsp;Crochemore, <cite><a href="http://igm.univ-mlv.fr/~beal/Recherche/Publications/aftIEEE.pdf">Minimizing local automata</a></cite>.
 				Information Theory, ISIT 2007. IEEE International Symposium on, <time>2007</time>, pp.&nbsp;1376&ndash;1380.</dd>
 		</dl>
 
@@ -120,11 +120,13 @@
 			<dd>A.V.&nbsp;Aho, R.&nbsp;Sethi, and J.D.&nbsp;Ullman.
 				<cite><a href="http://www.amazon.co.uk/Compilers-Principles-Techniques-Alfred-Aho/dp/0321486811">Compilers:
 					Principles, Techniques and Tools</a></cite>.
-				Addison Wesley, <time>1986</time>. (Colloquially known as &ldquo;The dragon book&rdquo;).</dd>
+				Addison Wesley, <time>1986</time>.
+				(Colloquially known as &ldquo;The dragon book&rdquo;).</dd>
 
 			<dt>App04</dt>
 			<dd>A.W.&nbsp;Appel, <cite><a href="http://www.amazon.co.uk/Modern-Compiler-Implementation-Andrew-Appel/dp/0521607655/ref=sr_1_3?ie=UTF8&amp;s=books&amp;qid=1221917432&amp;sr=1-3">Modern Compiler Implementation in C</a></cite>.
-				Cambridge University Press, <time>2004</time>. (Colloquially known as &ldquo;The tiger book&rdquo;).</dd>
+				Cambridge University Press, <time>2004</time>.
+				(Colloquially known as &ldquo;The tiger book&rdquo;).</dd>
 		</dl>
 	</body>
 </html>
