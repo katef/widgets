@@ -14,6 +14,7 @@
 
 	<xsl:import href="../../../xsl/lib/date.format-date.xsl"/>
 
+	<xsl:import href="../../../xsl/copy.xsl"/>
 	<xsl:import href="../../../xsl/theme.xsl"/>
 	<xsl:import href="../../../xsl/img.xsl"/>
 	<xsl:import href="../../../xsl/contents.xsl"/>
@@ -25,12 +26,12 @@
 	<xsl:variable name="date"     select="//h:meta[@name = 'date']    /@content"/>
 
 	<xsl:template match="h:article[@class = 'entry']/h:h1/h:a">
-		<xsl:copy-of select="*|text()"/>
+		<xsl:copy-of select="node()"/>
 	</xsl:template>
 
-	<xsl:template match="h:article/h:a[@name]"/>
+	<xsl:template match="h:article/h:a[@name]" mode="copy"/>
 
-	<xsl:template match="h:article/h:time[@pubdate]">
+	<xsl:template match="h:article/h:time[@pubdate]" mode="copy">
 		<a href="{$blog-base}/{.}">
 			<xsl:copy-of select="../h:a[@name]/@*"/>
 <!--
@@ -40,10 +41,10 @@
 		</a>
 	</xsl:template>
 
-	<xsl:template match="h:section[@class = 'archive-year']/h:a[@name]"/>
+	<xsl:template match="h:section[@class = 'archive-year']/h:a[@name]" mode="copy"/>
 
 <!--
-	<xsl:template match="h:section[@class = 'archive-year']/h:h1">
+	<xsl:template match="h:section[@class = 'archive-year']/h:h1" mode="copy">
 		<xsl:copy-of select="h:a"/>
 	</xsl:template>
 -->
@@ -146,7 +147,7 @@
 						</time>
 					</xsl:if>
 
-					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
+					<xsl:apply-templates select="h:body/node()" mode="copy"/>
 				</main>
 
 				<footer>

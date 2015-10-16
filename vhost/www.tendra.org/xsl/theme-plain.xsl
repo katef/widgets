@@ -12,6 +12,8 @@
 
 	<xsl:import href="../../../xsl/lib/str.tolower.xsl"/>
 
+	<xsl:import href="../../../xsl/copy.xsl"/>
+
 	<xsl:import href="theme.xsl"/>
 
 <!--
@@ -21,7 +23,7 @@
 -->
 
 	<xsl:template match="/h:html/h:head/h:title" mode="body">
-		<xsl:apply-templates select="node()|text()|processing-instruction()"/>
+		<xsl:apply-templates select="node()" mode="copy"/>
 	</xsl:template>
 
 	<xsl:template match="/h:html">
@@ -50,11 +52,11 @@
 					<xsl:apply-templates select="h:head/h:title" mode="body"/>
 				</h1>
 
-				<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
+				<xsl:apply-templates select="h:body/node()" mode="copy"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="sidebar">
-				<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>
+				<xsl:apply-templates select="h:nav/node()" mode="copy"/>
 			</xsl:with-param>
 		</xsl:call-template>
 

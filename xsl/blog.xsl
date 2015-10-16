@@ -112,25 +112,30 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template match="processing-instruction('blog-title')">
+	<xsl:template match="processing-instruction('blog-title')" mode="copy">
 		<xsl:call-template name="tl:title"/>
 	</xsl:template>
 
-	<xsl:template match="processing-instruction('blog-index')">
+	<xsl:template match="processing-instruction('blog-index')" mode="copy">
 		<xsl:call-template name="tl:index"/>
 	</xsl:template>
 
-	<xsl:template match="processing-instruction('blog-calendar')">
+	<xsl:template match="processing-instruction('blog-calendar')" mode="copy">
 		<xsl:call-template name="tl:calendar"/>
 		<xsl:call-template name="tl:years"/>
 	</xsl:template>
 
-	<xsl:template match="processing-instruction('blog-body')">
+	<xsl:template match="processing-instruction('blog-body')" mode="copy">
 		<xsl:call-template name="tl:content"/>
 	</xsl:template>
 
-	<xsl:template match="processing-instruction('blog-archive')">
+	<xsl:template match="processing-instruction('blog-archive')" mode="copy">
 		<xsl:call-template name="tl:content-archive"/>
+	</xsl:template>
+
+	<!-- XXX: ought to be done in theme-blog.xsl perhaps, which calls ti: blog templates -->
+	<xsl:template match="/">
+		<xsl:apply-templates mode="copy"/>
 	</xsl:template>
 
 </xsl:stylesheet>

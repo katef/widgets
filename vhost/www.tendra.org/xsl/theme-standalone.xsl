@@ -7,6 +7,8 @@
 
 	exclude-result-prefixes="h">
 
+	<xsl:import href="../../../xsl/copy.xsl"/>
+
 	<xsl:import href="theme.xsl"/>
 
 <!--
@@ -16,7 +18,7 @@
 -->
 
 	<xsl:template match="/h:html/h:head/h:title" mode="body">
-		<xsl:apply-templates select="node()|text()|processing-instruction()"/>
+		<xsl:apply-templates select="node()" mode="copy"/>
 	</xsl:template>
 
 	<xsl:template match="/h:html">
@@ -37,7 +39,7 @@
 			</xsl:with-param>
 
 			<xsl:with-param name="main">
-				<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
+				<xsl:apply-templates select="h:body/node()" mode="copy"/>
 			</xsl:with-param>
 		</xsl:call-template>
 

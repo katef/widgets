@@ -14,17 +14,20 @@
 
 	<xsl:import href="base.xsl"/>
 	<xsl:import href="ordinaldate.xsl"/>
+
+	<xsl:import href="../../../xsl/copy.xsl"/>
 	<xsl:import href="../../../xsl/theme.xsl"/>
 	<xsl:import href="../../../xsl/ordinal.xsl"/>
+
 <!--
 	<xsl:import href="menu.xsl"/>
 -->
 
-	<xsl:template match="h:article[@class = 'entry']/h:h1">
+	<xsl:template match="h:article[@class = 'entry']/h:h1" mode="copy">
 		<xsl:variable name="date" select="../h:time[@pubdate]"/>
 
 		<h1>
-			<xsl:copy-of select="text()|*"/>
+			<xsl:copy-of select="node()"/>
 
 			<xsl:call-template name="ordinaldate">
 				<xsl:with-param name="date" select="$date"/>
@@ -32,7 +35,7 @@
 		</h1>
 	</xsl:template>
 
-	<xsl:template match="h:article[@class = 'entry']/h:time"/>
+	<xsl:template match="h:article[@class = 'entry']/h:time" mode="copy"/>
 
 	<!-- TMI? -->
 <!--
@@ -88,7 +91,7 @@
 	</xsl:template>
 
 	<xsl:template match="/h:html/h:head/h:title" mode="body">
-		<xsl:apply-templates select="node()|text()|processing-instruction()"/>
+		<xsl:apply-templates select="node()" mode="copy"/>
 	</xsl:template>
 
 	<xsl:template match="/h:html">
@@ -134,11 +137,11 @@
 				<main role="main" class="hyphenate">
 					<xsl:call-template name="theme-menu"/>
 
-					<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
+					<xsl:apply-templates select="h:body/node()" mode="copy"/>
 				</main>
 
 				<nav class="sidebar hyphenate">
-					<xsl:apply-templates select="h:nav/node()|h:nav/text()|h:nav/processing-instruction()"/>
+					<xsl:apply-templates select="h:nav/node()" mode="copy"/>
 				</nav>
 
 				<footer>

@@ -7,6 +7,8 @@
 
 	exclude-result-prefixes="h">
 
+	<xsl:import href="../../../xsl/copy.xsl"/>
+
 	<xsl:import href="theme.xsl"/>
 
 <!--
@@ -42,7 +44,7 @@
 					<xsl:apply-templates select="h:head/h:title" mode="body"/>
 				</h1>
 
-				<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
+				<xsl:apply-templates select="h:body/node()" mode="copy"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="sidebar">

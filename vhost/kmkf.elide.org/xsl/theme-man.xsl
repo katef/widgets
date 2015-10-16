@@ -12,6 +12,7 @@
 
 	exclude-result-prefixes="h str">
 
+	<xsl:import href="../../../xsl/copy.xsl"/>
 	<xsl:import href="../../../xsl/theme.xsl"/>
 	<xsl:import href="../../../xsl/doctitle.xsl"/>
 	<xsl:import href="theme.xsl"/>
@@ -56,7 +57,7 @@
 					</xsl:with-param>
 				</xsl:call-template>
 
-				<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
+				<xsl:apply-templates select="h:body/node()" mode="copy"/>
 			</xsl:with-param>
 		</xsl:call-template>
 
