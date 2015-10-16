@@ -10,17 +10,6 @@
 		<xsl:copy-of select="."/>
 	</xsl:template>
 
-	<!-- XXX: for some reason <xsl:copy> would output "<br></br>" -->
-	<xsl:template match="node()[name() = 'br']">
-		<xsl:text disable-output-escaping="yes">&lt;br</xsl:text>
-		<xsl:if test="@class">
-			<xsl:text> class="</xsl:text>
-			<xsl:value-of select="@class"/>
-			<xsl:text>"</xsl:text>
-		</xsl:if>
-		<xsl:text disable-output-escaping="yes">/&gt;&#xA;</xsl:text>
-	</xsl:template>
-
 	<xsl:template match="@*|node()">
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()|processing-instruction()"/>
