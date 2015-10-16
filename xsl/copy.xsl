@@ -22,13 +22,13 @@
 		<xsl:text disable-output-escaping="yes">/&gt;</xsl:text>
 	</xsl:template>
 
-	<xsl:template match="@*|node()">
+	<xsl:template match="node()">
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()|processing-instruction()"/>
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="text()|@*">
+	<xsl:template match="@*|text()">
 		<xsl:copy-of select="."/>
 	</xsl:template>
 
