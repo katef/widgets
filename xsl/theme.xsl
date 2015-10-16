@@ -14,18 +14,7 @@
 
 	<xsl:import href="lib/str.contains-word.xsl"/>
 
-	<xsl:import href="copy.xsl"/>
 	<xsl:import href="output.xsl"/>
-
-	<!--
-		The main purpose of this is to copy through XHTML source to the
-		output document. This cannot be done in output.xsl because
-		output.xsl is not aware that the source may be (unthemed) XHTML.
-	-->
-
-	<xsl:template match="node()" mode="copy">
-		<xsl:apply-templates select="node()|text()|processing-instruction()"/>
-	</xsl:template>
 
 	<xsl:template name="theme-output">
 		<xsl:param name="css"     select="''"/>
