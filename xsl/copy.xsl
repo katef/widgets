@@ -14,11 +14,14 @@
 	<xsl:template match="*[not(node())]">
 		<xsl:text disable-output-escaping="yes">&lt;</xsl:text>
 		<xsl:value-of select="name()"/>
-		<xsl:if test="@class">
-			<xsl:text> class="</xsl:text>
-			<xsl:value-of select="@class"/>
+		<xsl:for-each select="@*">
+			<xsl:text> </xsl:text>
+			<xsl:value-of select="name()"/>
+			<xsl:text>=</xsl:text>
 			<xsl:text>"</xsl:text>
-		</xsl:if>
+			<xsl:value-of select="."/>
+			<xsl:text>"</xsl:text>
+		</xsl:for-each>
 		<xsl:text disable-output-escaping="yes">/&gt;</xsl:text>
 	</xsl:template>
 
