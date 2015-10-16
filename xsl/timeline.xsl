@@ -310,9 +310,7 @@
 		<xsl:variable name="date" select="tl:pubdate(.)"/>
 
 		<article class="entry">
-			<a name="{date:format-date($date, 'yyyy-MM-dd')}"/>
-
-			<h1>
+			<h1 id="{date:format-date($date, 'yyyy-MM-dd')}">
 				<a>
 					<xsl:call-template name="tl:href">
 						<xsl:with-param name="date"  select="$date"/>
@@ -379,8 +377,8 @@
 			select="count($tl:entries/tl:entry[date:year(tl:pubdate(.)) = $year])"/>
 
 		<section class="archive-year" data-count="{$count}">
-			<h1>
-				<a name="{$year}">
+			<h1 id="{$year}">
+				<a>
 					<xsl:call-template name="tl:href">
 						<xsl:with-param name="date"  select="$year"/>
 					</xsl:call-template>

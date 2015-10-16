@@ -430,9 +430,7 @@
 	</xsl:template>
 
 	<xsl:template name="api-summary">
-		<a name="{$coverage.api}"/>
-
-		<table>
+		<table id="{$coverage.api}">
 			<caption>
 				<xsl:value-of select="$coverage.api"/>
 			</caption>
