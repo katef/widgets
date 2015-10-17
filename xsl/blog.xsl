@@ -13,13 +13,11 @@
 
 	exclude-result-prefixes="h tl date cal str">
 
-	<xsl:import href="copy.xsl"/>
 	<xsl:import href="timeline.xsl"/>
 
 	<xsl:param name="blog-date"  select="substring(date:date(), 1, 10)"/>
-	<xsl:param name="blog-data"  select="/.."/>
 	<xsl:param name="blog-short" select="false()"/>
-	<xsl:param name="blog-name" select="'Blog'"/>
+	<xsl:param name="blog-name"  select="'Blog'"/>
 
 	<!-- TODO: keep timeline entries (suitable for SVN, too) seperate from blog specifics;
 	so this file is equivalent to blog-main, and we have a centralised timeline.xsl
@@ -27,12 +25,10 @@
 	of course svn's timeline won't need dates in the URL, since changset IDs are unique
 	(so are the blog entry shorts, but the date in the URL is nice for other reasons,
 	i.e. viewing an entire month, or viewing an entire year) -->
-	<!-- TODO: so this file just glues PIs onto timeline.xsl -->
 
-	<xsl:variable name="tl:entries" select="document($blog-data)/tl:timeline"/>
-	<xsl:variable name="tl:date"    select="$blog-date"/>
-	<xsl:variable name="tl:title"   select="$blog-short"/>
-	<xsl:variable name="tl:short"   select="$blog-short"/>
+	<xsl:variable name="tl:date"  select="$blog-date"/>
+	<xsl:variable name="tl:title" select="$blog-short"/>
+	<xsl:variable name="tl:short" select="$blog-short"/>
 
 	<xsl:template name="tl:title">
 		<xsl:choose>
@@ -110,32 +106,6 @@
 				<xsl:copy-of select="."/>
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:template>
-
-	<xsl:template match="processing-instruction('blog-title')" mode="copy">
-		<xsl:call-template name="tl:title"/>
-	</xsl:template>
-
-	<xsl:template match="processing-instruction('blog-index')" mode="copy">
-		<xsl:call-template name="tl:index"/>
-	</xsl:template>
-
-	<xsl:template match="processing-instruction('blog-calendar')" mode="copy">
-		<xsl:call-template name="tl:calendar"/>
-		<xsl:call-template name="tl:years"/>
-	</xsl:template>
-
-	<xsl:template match="processing-instruction('blog-body')" mode="copy">
-		<xsl:call-template name="tl:content"/>
-	</xsl:template>
-
-	<xsl:template match="processing-instruction('blog-archive')" mode="copy">
-		<xsl:call-template name="tl:content-archive"/>
-	</xsl:template>
-
-	<!-- XXX: ought to be done in theme-blog.xsl perhaps, which calls ti: blog templates -->
-	<xsl:template match="/">
-		<xsl:apply-templates mode="copy"/>
 	</xsl:template>
 
 </xsl:stylesheet>

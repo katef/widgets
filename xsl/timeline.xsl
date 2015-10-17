@@ -31,8 +31,8 @@
 
 	<xsl:import href="calendar.xsl"/>
 	<xsl:import href="comment.xsl"/>
+	<xsl:import href="copy.xsl"/>
 
-	<xsl:param name="tl:entries" select="/.."/>
 	<xsl:param name="tl:limit"   select="20"/>
 	<xsl:param name="tl:date"    select="date:date()"/>
 	<xsl:param name="tl:year"    select="date:year($tl:date)"/>
@@ -40,8 +40,8 @@
 	<xsl:param name="tl:day"     select="date:day-in-month($tl:date)"/>
 	<xsl:param name="tl:short"   select="false()"/>
 
-	<xsl:variable name="tl:min" select="tl:pubdate($tl:entries/tl:entry)[1]"/>
-	<xsl:variable name="tl:max" select="tl:pubdate($tl:entries/tl:entry)[last()]"/>
+	<xsl:variable name="tl:min" select="tl:pubdate(/tl:timeline/tl:entry)[1]"/>
+	<xsl:variable name="tl:max" select="tl:pubdate(/tl:timeline/tl:entry)[last()]"/>
 
 	<func:function name="tl:private">
 		<xsl:param name="entry"/>
@@ -89,7 +89,7 @@
 		<xsl:variable name="ds" select="date:seconds(date:add($date, $delta)) - date:seconds($date)"/>
 
 		<xsl:choose>
-			<xsl:when test="$tl:entries/tl:entry
+			<xsl:when test="tl:entry
 				[date:same-month(tl:pubdate(.), $dest)]">
 
 				<a rel="{$rel}">
@@ -110,9 +110,9 @@
 			</xsl:when>
 
 			<xsl:when test="$ds &gt; 0
-				and $tl:entries/tl:entry
+				and tl:entry
 					[date:seconds(tl:pubdate(.)) &gt; date:seconds($dest)]">
-				<xsl:variable name="date-skip" select="tl:pubdate($tl:entries/tl:entry
+				<xsl:variable name="date-skip" select="tl:pubdate(tl:entry
 					[date:seconds(tl:pubdate(.)) &gt; date:seconds($dest)]
 					[1])"/>
 
@@ -134,9 +134,9 @@
 			</xsl:when>
 
 			<xsl:when test="$ds &lt; 0
-				and $tl:entries/tl:entry
+				and tl:entry
 					[date:seconds(tl:pubdate(.)) &lt; date:seconds($dest)]">
-				<xsl:variable name="date-skip" select="tl:pubdate($tl:entries/tl:entry
+				<xsl:variable name="date-skip" select="tl:pubdate(tl:entry
 					[date:seconds(tl:pubdate(.)) &lt; date:seconds($dest)]
 					[last()])"/>
 
@@ -176,7 +176,7 @@
 		<xsl:param name="text"/>
 
 		<xsl:choose>
-			<xsl:when test="$tl:entries/tl:entry
+			<xsl:when test="tl:entry
 				[date:same-month(tl:pubdate(.), $date)]">
 
 				<a rel="up">
@@ -247,7 +247,7 @@
 		<xsl:param name="date"/>
 
 		<xsl:choose>
-			<xsl:when test="$tl:entries/tl:entry
+			<xsl:when test="tl:entry
 				[date:same-day(tl:pubdate(.), $date)]">
 
 				<a>
@@ -256,7 +256,7 @@
 					</xsl:call-template>
 
 					<xsl:attribute name="title">
-						<xsl:for-each select="$tl:entries/tl:entry
+						<xsl:for-each select="tl:entry
 							[date:same-day(tl:pubdate(.), $date)]">
 
 							<xsl:value-of select="string(tl:entrytitle(.))"/>
@@ -283,11 +283,11 @@
 
 
 	<xsl:template match="tl:entry/h:html/h:head/h:title">
-		<xsl:apply-templates/>
+		<xsl:apply-templates select="node()|@*" mode="copy"/>
 	</xsl:template>
 
 	<xsl:template match="tl:entry/h:html">
-		<xsl:apply-templates select="h:body/node()|h:body/text()|h:body/processing-instruction()"/>
+		<xsl:apply-templates select="h:body/node()" mode="copy"/>
 	</xsl:template>
 
 	<xsl:template match="h:html/h:head/h:meta[@name = 'tags'][count(str:tokenize(@content))]">
@@ -304,6 +304,10 @@
 				</xsl:for-each>
 			</ul>
 		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match="tl:entry[tl:private(.)]">
+		<!-- TODO -->
 	</xsl:template>
 
 	<xsl:template match="tl:entry[not(tl:private(.))]">
@@ -325,6 +329,7 @@
 				<xsl:value-of select="date:format-date($date, &quot;yyyy&#8288;&#x2013;&#8288;MM&#8288;&#x2013;&#8288;dd&quot;)"/>
 			</time>
 
+<!-- TODO: what matches this? -->
 			<xsl:apply-templates select="h:html/h:head/h:meta[@name = 'tags']"/>
 
 			<div class="body">
@@ -374,7 +379,7 @@
 		<xsl:param name="year" select="date:year($tl:max)"/>
 
 		<xsl:variable name="count"
-			select="count($tl:entries/tl:entry[date:year(tl:pubdate(.)) = $year])"/>
+			select="count(tl:entry[date:year(tl:pubdate(.)) = $year])"/>
 
 		<section class="archive-year" data-count="{$count}">
 			<h1 id="{$year}">
@@ -391,7 +396,7 @@
 
 			<xsl:if test="$count &gt; 0">
 				<ol>
-					<xsl:for-each select="$tl:entries/tl:entry
+					<xsl:for-each select="tl:entry
 						[date:year(tl:pubdate(.)) = $year]">
 	
 						<xsl:sort data-type="number" select="date:seconds(tl:pubdate(.))"
@@ -478,7 +483,7 @@
 							</xsl:if>
 
 							<xsl:choose>
-								<xsl:when test="$tl:entries/tl:entry
+								<xsl:when test="tl:entry
 									[date:same-month(tl:pubdate(.), date:make($tl:year, current()))]">
 									<a>
 										<xsl:call-template name="tl:href">
@@ -570,7 +575,7 @@
 		</xsl:variable>
 
 		<ol class="years">
-			<xsl:for-each select="$tl:entries/tl:entry/h:html/h:head/h:meta
+			<xsl:for-each select="tl:entry/h:html/h:head/h:meta
 				[@name = 'date']/@content">
 
 				<xsl:sort data-type="number" select="date:year(.)" order="descending"/>
@@ -633,13 +638,13 @@
 				<xsl:variable name="dummy3" select="kxslt:setheader('Expires',       '-1')"/>
 -->
 
-				<xsl:apply-templates select="$tl:entries/tl:entry
+				<xsl:apply-templates select="tl:entry
 					[date:date($tl:date) = date:date(tl:pubdate(.))
 						and $tl:short = @short]"/>
 			</xsl:when>
 
 			<xsl:when test="$tl:day">
-				<xsl:apply-templates select="$tl:entries/tl:entry
+				<xsl:apply-templates select="tl:entry
 					[date:same-day(tl:pubdate(.), $tl:date)]">
 					<xsl:sort select="date:seconds(tl:pubdate(.))"
 						data-type="number" order="descending"/>
@@ -647,7 +652,7 @@
 			</xsl:when>
 
 			<xsl:when test="$tl:month">
-				<xsl:apply-templates select="$tl:entries/tl:entry
+				<xsl:apply-templates select="tl:entry
 					[date:same-month(tl:pubdate(.), date:make($tl:year, $tl:month))]">
 					<xsl:sort select="date:seconds(tl:pubdate(.))"
 						data-type="number" order="descending"/>
@@ -663,7 +668,7 @@
 			<xsl:otherwise>
 				<!-- TODO: interject with month headings -->
 				<!-- TODO: pagnation -->
-				<xsl:apply-templates select="$tl:entries/tl:entry
+				<xsl:apply-templates select="tl:entry
 					[position() >= last() - $tl:limit]">
 					<xsl:sort select="date:seconds(tl:pubdate(.))"
 						data-type="number" order="descending"/>
