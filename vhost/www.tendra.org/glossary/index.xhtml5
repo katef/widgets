@@ -18,7 +18,7 @@
 
 	<body>
 		<!-- TODO: automatically generate this, from wrapper xslt -->
-		<nav class="glossary">
+		<nav class="letterindex">
 			<ol>
 				<li><a href="#A">A</a></li>
 				<li><a href="#B">B</a></li>
