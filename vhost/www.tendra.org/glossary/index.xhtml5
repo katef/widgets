@@ -49,10 +49,8 @@
 			</ol>
 		</nav>
 
-		<a name="A"/>
-
 		<dl class="glossary">
-			<dt><dfn>ANDF</dfn></dt>
+			<dt id="A"><dfn>ANDF</dfn></dt>
 
 			<dd class="abbr">Architecture Neutral Distribution format</dd>
 			<dd>The format standardised by
@@ -61,20 +59,12 @@
 
 			<dt><dfn>API</dfn></dt>
 			<dd>TODO</dd>
-		</dl>
 
-		<a name="B"/>
-
-		<dl class="glossary">
-			<dt><dfn>bmake</dfn></dt>
+			<dt id="B"><dfn>bmake</dfn></dt>
 			<dd>A portable version of NetBSD's <code>make</code>.
 			See <a rel="external" href="http://www.crufty.net/help/sjg/bmake.htm"> http://www.crufty.net/help/sjg/bmake.html</a>.</dd>
-		</dl>
 
-		<a name="C"/>
-
-		<dl class="glossary">
-			<dt><dfn>Calculus</dfn></dt>
+			<dt id="C"><dfn>Calculus</dfn></dt>
 			<dd>calculus is an algebraic <a href="#TODO">type system</a> tool,
 				for managing complex C type systems.
 				It uses the TenDRA API checking techniques to enforce strong
@@ -88,11 +78,7 @@
 
 			<dd class="abbr">C runtime</dd>
 			<dd>TODO</dd>
-		</dl>
 
-		<a name="D"/>
-
-		<dl class="glossary">
 <!-- TODO: just for /history maybe
 			<dt><dfn>DERA</dfn></dt>
 
@@ -101,7 +87,7 @@
 			<dd>TODO</dd>
 -->
 
-			<dt><dfn>disp</dfn></dt>
+			<dt id="D"><dfn>disp</dfn></dt>
 			<dd>
 				<p>disp is the TDF pretty printer.
 					It translates the bitstream comprising a TDF capsule into a
@@ -110,12 +96,8 @@
 				<p>This functionality is provided by tcc, but disp may be
 					called directly.</p>
 			</dd>
-		</dl>
 
-		<a name="F"/>
-
-		<dl class="glossary">
-			<dt><dfn>Flex</dfn></dt>
+			<dt id="F"><dfn>Flex</dfn></dt>
 			<!-- TODO: link to wikipedia for things like that -->
 			<dd>
 				<p>A <a href="#">capability architecture</a>
@@ -125,19 +107,11 @@
 					<a rel="external" href="http://flex.sourceforge.net/">lexical analyzer of
 						the same name</a>.</p>
 			</dd>
-		</dl>
 
-		<a name="I"/>
-
-		<dl class="glossary">
-			<dt><dfn>Installer</dfn></dt>
+			<dt id="I"><dfn>Installer</dfn></dt>
 			<dd>TODO</dd>
-		</dl>
 
-		<a name="L"/>
-
-		<dl class="glossary">
-			<dt><dfn>LALR</dfn></dt>
+			<dt id="L"><dfn>LALR</dfn></dt>
 
 			<dd class="abbr">Left-Associative Left-to-right, Rightmost-derivation parser</dd>
 			<dd>A subset of LR parsers.</dd>
@@ -168,12 +142,8 @@
 					Ten15 was renamed to TDF (Ten15 Distribution Format), and
 					put forward as a (successful) proposal.</p>
 			</dd>
-		</dl>
 
-		<a name="M"/>
-
-		<dl class="glossary">
-			<dt><dfn>Machine</dfn></dt>
+			<dt id="M"><dfn>Machine</dfn></dt>
 			<dd>TODO</dd>
 
 			<dt><dfn>make_err</dfn></dt>
@@ -184,12 +154,8 @@
 				It takes a compact description of the TDF specification and a
 				template file, and generates code to read, write or transform
 				a TDF capsule.</dd>
-		</dl>
 
-		<a name="O"/>
-
-		<dl class="glossary">
-			<dt><dfn>Object</dfn></dt>
+			<dt id="O"><dfn>Object</dfn></dt>
 			<dd>TODO</dd>
 
 			<dt><dfn>OSF</dfn></dt>
@@ -199,12 +165,8 @@
 			<dt><dfn>OSSG</dfn></dt>
 			<dd>Open Source Specialist Group</dd>
 			<dd>TODO: http://ossg.bcs.org/</dd>
-		</dl>
 
-		<a name="P"/>
-
-		<dl class="glossary">
-			<dt><dfn>Porting</dfn></dt>
+			<dt id="P"><dfn>Porting</dfn></dt>
 			<dd>TODO</dd>
 
 			<dt><dfn>PL_TDF</dfn></dt>
@@ -212,21 +174,13 @@
 
 			<dt><dfn>Producer</dfn></dt>
 			<dd>TODO</dd>
-		</dl>
 
-		<a name="R"/>
-
-		<dl class="glossary">
-			<dt><dfn>RTTI</dfn></dt>
+			<dt id="R"><dfn>RTTI</dfn></dt>
 			<dd class="abbr">Run-Time Type Identification</dd>
 			<dd>The standard C++ mechanism for class objects to identify their
 				dynamic or run-time types.</dd>
-		</dl>
 
-		<a name="S"/>
-
-		<dl class="glossary">
-			<dt><dfn>SID</dfn></dt>
+			<dt id="S"><dfn>SID</dfn></dt>
 			<dd class="abbr">Syntax Improving Device</dd>
 			<dd>SID is an <a href="#TODO">LL(1)</a> <a href="#TODO">parser generator</a>
 				with a long history (the original version dates back to the mid-sixties!).
@@ -248,12 +202,8 @@
 
 			<dt><dfn>Structured TDF</dfn></dt>
 			<dd>TODO</dd>
-		</dl>
 
-		<a name="T"/>
-
-		<dl class="glossary">
-			<dt><dfn>tcc</dfn></dt>
+			<dt id="T"><dfn>tcc</dfn></dt>
 			<dd>TODO</dd>
 
 			<dt><dfn>TDF</dfn></dt>
@@ -343,18 +293,13 @@
 					tspec specification with the implementation given in the
 					system headers.</p>
 			</dd>
-		</dl>
 
-		<a name="U"/>
-
-		<dl class="glossary">
-			<dt><dfn>Unstructured TDF</dfn></dt>
+			<dt id="U"><dfn>Unstructured TDF</dfn></dt>
 			<dd>TODO</dd>
 
 			<dt><dfn>Unit</dfn></dt>
 			<dd>TODO</dd>
 		</dl>
-
 
 		<br/>
 
