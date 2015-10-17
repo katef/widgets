@@ -5,41 +5,15 @@
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:svg="http://www.w3.org/2000/svg"
-	xmlns:tl="http://xml.elide.org/timeline"
-	xmlns:date="http://exslt.org/dates-and-times"
 
-	extension-element-prefixes="date"
-
-	exclude-result-prefixes="h tl date">
+	exclude-result-prefixes="h">
 
 	<xsl:import href="base.xsl"/>
-	<xsl:import href="ordinaldate.xsl"/>
 
-	<xsl:import href="../../../xsl/copy.xsl"/>
 	<xsl:import href="../../../xsl/theme.xsl"/>
-	<xsl:import href="../../../xsl/ordinal.xsl"/>
 
 <!--
 	<xsl:import href="menu.xsl"/>
--->
-
-	<xsl:template match="h:article[@class = 'entry']/h:h1" mode="copy">
-		<xsl:variable name="date" select="../h:time[@pubdate]"/>
-
-		<h1>
-			<xsl:copy-of select="node()"/>
-
-			<xsl:call-template name="ordinaldate">
-				<xsl:with-param name="date" select="$date"/>
-			</xsl:call-template>
-		</h1>
-	</xsl:template>
-
-	<xsl:template match="h:article[@class = 'entry']/h:time" mode="copy"/>
-
-	<!-- TMI? -->
-<!--
-	<xsl:template match="h:table[@class = 'calendar']/h:tr[@class = 'day-heading']"/>
 -->
 
 	<xsl:template name="rcsid">
@@ -94,9 +68,20 @@
 		<xsl:apply-templates select="node()" mode="copy"/>
 	</xsl:template>
 
-	<xsl:template match="/h:html">
+	<xsl:template name="libfsm-output">
+		<xsl:param name="category"/>
+		<xsl:param name="class"/>
+		<xsl:param name="page"/>
+
+		<xsl:param name="head"    select="/.."/>
+		<xsl:param name="main"    select="/.."/>
+		<xsl:param name="sidebar" select="/.."/>
+
 		<xsl:call-template name="theme-output">
-			<xsl:with-param name="css"   select="'style.css'"/>
+			<xsl:with-param name="category" select="$category"/>
+			<xsl:with-param name="class"    select="$category"/>
+
+			<xsl:with-param name="css" select="'style.css'"/>
 
 			<xsl:with-param name="js">
 				<xsl:value-of select="'col.js fixup.js hyphenator-min.js table.js overlay.js debug.js'"/>
@@ -111,15 +96,16 @@
 				<xsl:text>Table.init(r);</xsl:text>
 			</xsl:with-param>
 
-			<xsl:with-param name="site" select="'libfsm'"/>
-
 			<xsl:with-param name="page">
-				<xsl:apply-templates select="h:head/h:title" mode="body"/>
+				<xsl:copy-of select="$page"/>
+			</xsl:with-param>
+
+			<xsl:with-param name="site">
+				<xsl:text>libfsm</xsl:text>
 			</xsl:with-param>
 
 			<xsl:with-param name="head">
-				<xsl:copy-of select="h:head/h:meta[@name = 'description']"/>
-				<xsl:copy-of select="h:head/h:meta[@name = 'keywords']"/>
+				<xsl:copy-of select="$head"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
@@ -135,21 +121,21 @@
 				</header>
 
 				<main role="main" class="hyphenate">
-					<xsl:call-template name="theme-menu"/>
-
-					<xsl:apply-templates select="h:body/node()" mode="copy"/>
+					<xsl:copy-of select="$main"/>
 				</main>
 
-				<nav class="sidebar hyphenate">
-					<xsl:apply-templates select="h:nav/node()" mode="copy"/>
-				</nav>
+				<xsl:if test="$sidebar">
+					<nav class="sidebar hyphenate">
+						<xsl:copy-of select="$sidebar"/>
+					</nav>
+				</xsl:if>
 
 				<footer>
 					<xsl:call-template name="rcsid"/>
 				</footer>
 			</xsl:with-param>
-
 		</xsl:call-template>
+
 	</xsl:template>
 
 </xsl:stylesheet>
