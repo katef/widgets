@@ -16,20 +16,6 @@
 	<xsl:import href="menu.xsl"/>
 -->
 
-	<xsl:template name="rcsid">
-		<tt class="rcsid">
-			<xsl:choose>
-				<xsl:when test="/h:html/h:head/h:meta[@name = 'rcsid']">
-					<xsl:value-of select="/h:html/h:head/h:meta[@name = 'rcsid']/@content"/>
-				</xsl:when>
-
-				<xsl:otherwise>
-					<xsl:text>$Id$</xsl:text>
-				</xsl:otherwise>
-			</xsl:choose>
-		</tt>
-	</xsl:template>
-
 	<xsl:template name="theme-menu">
 		<nav class="menu">
 			<!-- TODO: or: degrade to non-SVG menu inside the <svg> element? -->
@@ -131,7 +117,7 @@
 				</xsl:if>
 
 				<footer>
-					<xsl:call-template name="rcsid"/>
+					<xsl:comment> nothing to see here </xsl:comment>
 				</footer>
 			</xsl:with-param>
 		</xsl:call-template>
