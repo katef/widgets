@@ -21,6 +21,14 @@
 	<xsl:template match="c:item">
 		<xsl:param name="category"/>
 
+		<!--
+			We can't use @href and $uri for reverse lookup, because
+			e.g. /archives and /diary/* both mean "diary". I don't want
+			to use @class list, because it pollutes the html unneccessarily.
+			Therefore we pass $category explicitly. $category can come from
+			<meta> or empirically from theme-*.xsl or from str:tolower(title).
+		-->
+
 		<li>
 			<xsl:if test="local-name(following-sibling::*[1]) = 'sep'">
 				<xsl:attribute name="class">
