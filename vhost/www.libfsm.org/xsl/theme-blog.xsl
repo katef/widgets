@@ -24,13 +24,15 @@
 	<xsl:param name="archive"/>
 
 	<xsl:template match="tl:entry/h:html/h:head/h:title">
-		<xsl:variable name="date" select="../h:time[@pubdate]"/>
+		<xsl:variable name="date" select="../h:meta[@name = 'date']/@content"/>
 
 		<xsl:apply-templates select="node()|@*" mode="copy"/>
 
-		<xsl:call-template name="ordinaldate">
-			<xsl:with-param name="date" select="$date"/>
-		</xsl:call-template>
+		<xsl:if test="$date">
+			<xsl:call-template name="ordinaldate">
+				<xsl:with-param name="date" select="$date"/>
+			</xsl:call-template>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="h:article[@class = 'entry']/h:time" mode="copy"/>
