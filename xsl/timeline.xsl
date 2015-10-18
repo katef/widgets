@@ -395,7 +395,7 @@
 			</h1>
 
 			<xsl:if test="$count &gt; 0">
-				<ol>
+				<ol class="archive">
 					<xsl:for-each select="tl:entry
 						[date:year(tl:pubdate(.)) = $year]">
 	
