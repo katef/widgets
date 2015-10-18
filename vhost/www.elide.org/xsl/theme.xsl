@@ -15,13 +15,6 @@
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
 
-	<!-- TODO: nobody cares; get rid of this -->
-	<xsl:template name="e:page-footer">
-		<tt class="rcsid">
-			<xsl:text>$Id: elide.xsl 549 2010-10-24 20:33:47Z kate $</xsl:text>
-		</tt>
-	</xsl:template>
-
 	<xsl:template name="elide-output">
 		<xsl:param name="category"/>
 		<xsl:param name="class"/>
@@ -107,7 +100,7 @@
 				</main>
 
 				<footer>
-					<xsl:call-template name="e:page-footer"/>
+					<xsl:comment> nothing to see here </xsl:comment>
 				</footer>
 			</xsl:with-param>
 		</xsl:call-template>
