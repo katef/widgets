@@ -67,44 +67,12 @@ header {
 	for $l in 0 .. length($grid.ncols) - 1 {
 		$q = grid-breakpoint($grid, $l);
 		@media $q {
-			if (menustyle($l) == center) {
-				li {
-					display: inline-block;
-				}
+			li {
+				display: inline-block;
+			}
 
-				a {
-					padding: 0 $menu-padding;
-				}
-			} else {
-				position: relative; // for menu
-
-				nav {
-width: 100%;
-					position: absolute;
-					bottom: 0;
-/*
-					left:  20%;
-					right: auto;
-					width: 9em;
-					max-width: ($grid.colwidth * 2);
-*/
-					margin: 0 auto;
-				}
-
-				li {
-					display: inline-block;
-					float: left;
-
-					if (menustyle($l) == collapse) {
-						width: 50%;
-					} else {
-						width: 25%;
-					}
-				}
-
-				a {
-					width: 100%;
-				}
+			a {
+				padding: 0 $menu-padding;
 			}
 		}
 	}
