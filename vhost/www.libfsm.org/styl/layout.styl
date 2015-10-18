@@ -18,6 +18,25 @@ nav.sidebar {
 	display: none;
 }
 
+section.archive-year {
+	h1 {
+		display: none;
+	}
+}
+
+ol.archive {
+	// XXX: hackish; would prefer to render out different markup instead
+	li > time {
+		display: none;
+	}
+
+	li a time {
+		display: inline-block;
+		float: left;
+		width: 6em;
+	}
+}
+
 for $l in 0 .. length($grid.ncols) - 1 {
 	$q = grid-breakpoint($grid, $l, min);
 	@media $q {
