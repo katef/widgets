@@ -99,14 +99,14 @@
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:call-template name="tl:content"/>
+
+						<nav id="monthindex">
+							<xsl:call-template name="tl:index"/>
+
+							<a href="/archive">Archive</a>
+						</nav>
 					</xsl:otherwise>
 				</xsl:choose>
-
-				<nav id="monthindex">
-					<xsl:call-template name="tl:index"/>
-
-					<a href="/archive">Archive</a>
-				</nav>
 			</xsl:with-param>
 		</xsl:call-template>
 
