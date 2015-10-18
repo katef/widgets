@@ -4,10 +4,9 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:h="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://xml.elide.org/contents"
 	xmlns:e="http://xml.elide.org/elide_website"
 
-	exclude-result-prefixes="h c e">
+	exclude-result-prefixes="h e">
 
 	<xsl:import href="../../../xsl/copy.xsl"/>
 
