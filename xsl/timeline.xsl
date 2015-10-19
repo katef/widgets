@@ -259,6 +259,7 @@
 						<xsl:for-each select="tl:entry
 							[date:same-day(tl:pubdate(.), $date)]">
 
+							<!-- TODO: improper serialisation? -->
 							<xsl:value-of select="string(tl:entrytitle(.))"/>
 
 							<xsl:if test="position() != last()">
@@ -415,7 +416,7 @@
 									<xsl:with-param name="short" select="@short"/>
 								</xsl:call-template>
 
-								<xsl:value-of select="tl:entrytitle(.)"/>
+								<xsl:copy-of select="tl:entrytitle(.)"/>
 							</a>
 						</li>
 					</xsl:for-each>
