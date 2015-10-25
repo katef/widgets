@@ -113,10 +113,11 @@
 
 				<p>According to <a href="TODO">[BC07]</a>,
 					mathematically, an automaton is a pair A = (Q,&#xA0;E),
-					where Q is a finite set of states, and E is a finite set
-					of edges labelled by letters of a finite alphabet A.
-					Edges are triples of the form (p,&#xA0;a,&#xA0;q), p,
-					q&#xA0;∈&#xA0;Q, a&#xA0;∈&#xA0;A.</p>
+					where Q&#xA0;is a finite set of states,
+					and E&#xA0;is a finite set
+					of edges labelled by letters of a finite alphabet&#xA0;A.
+					Edges are triples of the form (p,&#xA0;a,&#xA0;q),
+					where p,&#xA0;q&#xA0;∈&#xA0;Q, a&#xA0;∈&#xA0;A.</p>
 
 				<p>Wikipedia has <a rel="external" href="http://en.wikipedia.org/wiki/Finite_State_Machine">a particularly confusing explanation</a>.</p>
 
@@ -151,7 +152,7 @@
 
 				<p>A regular language is defined over an alphabet, &Sigma;:
 					For each a &isin; &Sigma;, {a} is regular.
-					If A and B are regular,
+					If&#xA0;A and&#xA0;B are regular,
 					A&#xA0;&cup;&#xA0;B is regular,
 					A&#xA0;&sdot;&#xA0;B is regular,
 					and A* is regular.</p>
