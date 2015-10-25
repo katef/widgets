@@ -74,12 +74,16 @@
 
 				<!-- TODO: only where relevant -->
 				<xsl:value-of select="' ajax.js valid.js comment.js template.js'"/>
+
+				<!-- TODO: only where texmath nodes are present -->
+				<xsl:value-of select="' texmath.js'"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="onload">
 				<xsl:text>Colalign.init(r);</xsl:text>
 				<xsl:text>Fixup.init(r);</xsl:text>
 				<xsl:text>Table.init(r);</xsl:text>
+				<xsl:text>TexMath.init(r);</xsl:text>
 			</xsl:with-param>
 
 			<xsl:with-param name="page">
@@ -92,6 +96,10 @@
 
 			<xsl:with-param name="head">
 				<xsl:copy-of select="$head"/>
+
+				<!-- TODO: centralise? serve locally? -->
+				<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css"/>
+				<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
 			</xsl:with-param>
 
 			<xsl:with-param name="body">
