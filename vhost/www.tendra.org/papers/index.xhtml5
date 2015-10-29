@@ -15,124 +15,21 @@
 	</head>
 
 	<body>
-		<!-- TODO: list using bibtex -->
-
 		<h2>Miscellaneous</h2>
-		<dl class="bibliography">
-			<dt><a name="Woodward66"/>Woodward66</dt>
-			<dd>P.&nbsp;M. Woodward
-				<cite><a href="/Woodward66.pdf">A note on Foster’s Syntax Improving Device</a></cite>.
-				RRE Memorandum 2352,
-				<time>December 13, 1966</time>.</dd>
 
-			<dt><a name="Foster67"/>Foster67</dt>
-			<dd>J.&nbsp;M. Foster
-				<cite><a href="/Foster67.pdf">A syntax improving program</a></cite>.
-				Computer Journal, vol.&nbsp;11, no.&nbsp;1, pp.&nbsp;31&ndash;34, First received <time>Sept. 1967</time>.</dd>
-		</dl>
-		<ul>
-			<li>
-				<a href="/Foster86.pdf">Foster86</a>
-			</li>
-			<li>
-				<a href="/Sennett89.pdf">Sennett89</a>
-			</li>
-			<li>
-				<a href="/Wiseman90.pdf">Wiseman90</a>
-			</li>
-			<li>
-				<a href="/Smith91.pdf">Smith91</a>
-			</li>
-			<li>
-				<a href="/Mosses92.pdf">Mosses92</a>
-			</li>
-			<li>
-				<a href="/Toyn98.pdf">Toyn98</a>
-			</li>
-		</ul>
+		<?bib tendra-papers.bib?>
 
 		<h2>TDF/ANDF</h2>
-		<ul>
-			<li>
-				<a href="/Macrakis93a.pdf">andf/Macrakis93a</a>
-			</li>
-			<li>
-				<a href="/Macrakis93b.pdf">andf/Macrakis93b</a>
-			</li>
-			<li>
-				<a href="/Macrakis93c.pdf">andf/Macrakis93c</a>
-			</li>
-			<li>
-				<a href="/Macrakis93d.pdf">andf/Macrakis93d</a>
-			</li>
-			<li>
-				<a href="/Macrakis93e.pdf">andf/Macrakis93e</a>
-			</li>
-			<li>
-				<a href="/Macrakis93f.pdf">andf/Macrakis93f</a>
-			</li>
-			<li>
-				<a href="/Macrakis93g.pdf">andf/Macrakis93g</a>
-			</li>
-			<li>
-				<a href="/Macrakis93i.pdf">andf/Macrakis93i</a>
-			</li>
-			<li>
-				<a href="/andf-features.pdf">andf/andf-features</a>
-			</li>
-			<li>
-				<a href="/andf-questions.pdf">andf/andf-questions</a>
-			</li>
-		</ul>
+
+		<?bib tendra-tdf.bib?>
 
 		<h2>Ten15</h2>
-		<ul>
-			<li>
-				<a href="/Bilsby91.pdf">ten15/Bilsby91</a>
-			</li>
-			<li>
-				<a href="/Blanchard92.pdf">ten15/Blanchard92</a>
-			</li>
-			<li>
-				<a href="/Core86.pdf">ten15/Core86</a>
-			</li>
-			<li>
-				<a href="/Core88.pdf">ten15/Core88</a>
-			</li>
-			<li>
-				<a href="/Currie87.pdf">ten15/Currie87</a>
-			</li>
-			<li>
-				<a href="/Edwards92.pdf">ten15/Edwards92</a>
-			</li>
-			<li>
-				<a href="/Foster89.pdf">ten15/Foster89</a>
-			</li>
-			<li>
-				<a href="/Tombs91.pdf">ten15/Tombs91</a>
-			</li>
-		</ul>
+
+		<?bib tendra-ten15.bib?>
 
 		<h2>Flex</h2>
-		<ul>
-			<li>
-				<a href="/Currie82.pdf">flex/Currie82</a>
-			</li>
-		</ul>
 
-		<h2>GANDF</h2>
-		<p>We do not have the source code for GANDF.</p>
-		<ul>
-			<li>
-				<a href="/Ford93a.pdf">gandf/Ford93a</a>
-			</li>
-			<li>
-				<a href="/Ford93b.pdf">gandf/Ford93b</a>
-			</li>
-			<li>
-				<a href="/Ford93c.pdf">gandf/Ford93c</a>
-			</li>
-		</ul>
+		<?bib tendra-flex.bib?>
 	</body>
 </html>
 

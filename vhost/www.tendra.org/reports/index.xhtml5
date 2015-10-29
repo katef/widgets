@@ -23,59 +23,19 @@
 
 		<h2>Using TDF/ANDF</h2>
 
-		<!-- TODO: list using bibtex -->
-		<ul>
-			<li>
-				<a href="/reports-linux-validation">Validation of TenDRA Capability to Implement a Set of Commands for the Linux Operating System</a>
-			</li>
-			<li>
-				<a href="/reports-unix-validation">Validation of TenDRA Capability to Implement a UNIX-like Operating System</a>
-			</li>
-			<li>
-				<a href="/reports-cppporting">C++ and Portability</a>
-			</li>
-			<li>
-				<a href="/reports/andf-gcc-verification.pdf">A Conformance Comparison between ANDF and GCC for X/Open Verification of an OSF/1 MK SS Platform</a>
-			</li>
-			<li>
-				<a href="/reports/andf-oracle-rpt1.pdf">Porting Oracle with the ANDF Compiler Technology &mdash; A Progress Report</a>
-			</li>
-			<li>
-				<a href="/reports/andf-oracle-rpt2.pdf">Porting Oracle with ANDF Using an Extended Common API</a>
-			</li>
-			<li>
-				<a href="/reports/andf-osf1r1.2.pdf">ANDFizing OSF/1 R1.2 commands</a>
-			</li>
-			<li>
-				<a href="/reports/tdf-facts.pdf">TDF Facts &amp; Figures</a>
-			</li>
-		</ul>
+		<?bib tendra-andf.bib?>
 
 		<h2>OSF Programs</h2>
 
-		<p>We do not have the source code for these.</p>
+		<p>We do not have the source code for GANDF, ANC or the AVS suite.</p>
 		<!-- TODO: if ever released, these documents will move alongside the
 			other user guides -->
 
-		<ul>
-			<li>
-				<a href="/reports/avs/anc.pdf">ANC: ANDF Notation Compiler</a>
-			</li>
-			<li>
-				<a href="/reports/avs/andf-validation.pdf">Overview of ANDF Validation</a>
-			</li>
-		</ul>
+		<?bib tendra-osf-programs.bib?>
 
 		<h2>OSF Institutional</h2>
 
-		<ul>
-			<li>
-				<a href="/reports/osf/andf-q193.pdf">ANDF Quarterly Report, 1Q93</a>
-			</li>
-			<li>
-				<a href="/reports/osf/andf-program.pdf">The ANDF Tehnology Program at the OSF RI</a>
-			</li>
-		</ul>
+		<?bib tendra-osf-institutional.bib?>
 	</body>
 </html>
 
