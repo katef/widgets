@@ -5,6 +5,10 @@ body {
 	margin-bottom: 0;
 }
 
+main {
+	clear: both;
+}
+
 blockquote {
 	margin: 0 $grid-indent $baseline $grid-indent;
 	color: #999;
@@ -12,6 +16,10 @@ blockquote {
 
 pre {
 	margin: 0;
+}
+
+dl.bibliography ul.otherformats {
+	margin-top: 0;
 }
 
 for $l in 0 .. length($grid.ncols) - 1 {
@@ -73,6 +81,7 @@ for $l in 0 .. length($grid.ncols) - 1 {
 		}
 
 /*
+XXX: plain styl only
 		main {
 			if (sidebar($l)) {
 				grid-column($grid, $l, $grid.ncols[$l] - sidebar($l));
@@ -81,6 +90,65 @@ for $l in 0 .. length($grid.ncols) - 1 {
 			}
 		}
 */
+
+html.people {
+	section {
+// TODO: subgrid
+		grid-column($grid, $l, 3);
+
+		dl {
+			clearfix();
+		}
+
+		dt {
+			width: $grid.colwidth;
+			float: left;
+			clear: left;
+
+			margin-right: $grid.gutter;
+
+			font-weight: bold;
+			* {
+				font-weight: normal;
+			}
+		}
+
+		dd {
+			clearfix();
+
+			margin-left: $grid.colwidth + $grid.gutter;
+		}
+
+		h2 {
+			margin-top: 2em;
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+	}
+}
+
+html.docs {
+
+		section.docs {
+			grid-column($grid, $l, $grid.ncols[$l] - sidebar($l));
+margin-bottom: 2em;
+//column-count: 3;
+
+			// XXX: hacky effort at a fluid subgrid
+			div {
+				float: left;
+				width: 33%;
+				box-sizing: border-box;
+				padding-left:  $grid.gutter;
+				padding-right: $grid.gutter;
+			}
+
+			margin-left:  -($grid.gutter);
+			margin-right: -($grid.gutter);
+		}
+}
+
 html.refentry main {
 	if ($grid.ncols[$l] == 12) {
 		grid-column($grid, $l, 7, 2);
@@ -90,6 +158,7 @@ html.refentry main {
 		grid-column($grid, $l, $grid.ncols[$l]);
 	}
 }
+
 html.refentry nav#sidebar {
 	margin-top: 2em;
 
@@ -155,10 +224,6 @@ clearfix();
 			if ($grid.ncols[$l] == 12) {
 				font-size: 2.2em;
 			}
-
-			@media print {
-				text-align: right;
-			}
 		}
 
 		header > div#banner {
@@ -195,22 +260,6 @@ clearfix();
 			ul.tags {
 				// TODO: exdent
 			}
-		}
-
-		section.docs {
-			grid-column($grid, $l, 9);
-
-			// XXX: hacky effort at a fluid subgrid
-			div {
-				float: left;
-				width: 33%;
-				box-sizing: border-box;
-				padding-left:  $grid.gutter;
-				padding-right: $grid.gutter;
-			}
-
-			margin-left:  -($grid.gutter);
-			margin-right: -($grid.gutter);
 		}
 	}
 
@@ -260,7 +309,8 @@ ul.otherformats {
 	pipelist();
 }
 
-html.minidocbook.refentry main h1 {
-	float: right;
+// TODO: centralise
+html.minidocbook section h3 {
+	margin-top: ($baseline * 1.5);
 }
 

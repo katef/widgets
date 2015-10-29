@@ -18,13 +18,19 @@
 		<!-- TODO: list using bibtex -->
 
 		<h2>Miscellaneous</h2>
+		<dl class="bibliography">
+			<dt><a name="Woodward66"/>Woodward66</dt>
+			<dd>P.&nbsp;M. Woodward
+				<cite><a href="/Woodward66.pdf">A note on Foster’s Syntax Improving Device</a></cite>.
+				RRE Memorandum 2352,
+				<time>December 13, 1966</time>.</dd>
+
+			<dt><a name="Foster67"/>Foster67</dt>
+			<dd>J.&nbsp;M. Foster
+				<cite><a href="/Foster67.pdf">A syntax improving program</a></cite>.
+				Computer Journal, vol.&nbsp;11, no.&nbsp;1, pp.&nbsp;31&ndash;34, First received <time>Sept. 1967</time>.</dd>
+		</dl>
 		<ul>
-			<li>
-				<a href="/Woodward66.pdf">Woodward66</a>
-			</li>
-			<li>
-				<a href="/Foster67.pdf">Foster67</a>
-			</li>
 			<li>
 				<a href="/Foster86.pdf">Foster86</a>
 			</li>
