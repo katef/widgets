@@ -7,10 +7,11 @@ $bibliography ?= {
 
 dl.bibliography {
 	padding: 0;
+	text-align: left;
 
 	clearfix();
 
-	dt {
+	& > dt {
 		margin-right: $bibliography.padding;
 		min-width:    $bibliography.gutter;
 		font-weight: normal;
@@ -22,14 +23,51 @@ dl.bibliography {
 		&:after  { content: "]"; }
 	}
 
-	dd {
+	& > dd {
 		margin-top:    0;
 		margin-right:  0;
 		margin-left:   ($bibliography.gutter + $bibliography.padding);
 		margin-bottom: ($baseline / 2);
 
-		cite:before { content: "\201C"; }
-		cite:after  { content: "\201D"; }
+		address { display: inline; font-style: inherit; }
+
+		span.pages    { white-space: nowrap; }
+		span.isbn     { white-space: nowrap; }
+		span.issn     { white-space: nowrap; }
+		a.doi         { white-space: nowrap; }
+		span.location { white-space: nowrap; }
+
+		a.url {
+			display: block;
+		}
+
+		dl.isxn {
+			&, dt, dd {
+				margin: 0;
+			}
+
+			dt {
+				display: inline-block;
+				width:   3.5em; /* "ISBN" */
+
+				float: left;
+				clear: left;
+
+				&:after {
+					content: ": ";
+				}
+			}
+		}
+
+		ul.otherformats {
+			pipelist();
+
+			margin-top: 0;
+
+			a {
+				text-decoration: none;
+			}
+		}
 	}
 }
 
