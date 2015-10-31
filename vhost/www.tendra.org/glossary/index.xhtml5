@@ -17,7 +17,7 @@
 	</head>
 
 	<body>
-		<!-- TODO: automatically generate this, from wrapper xslt -->
+		<!-- TODO: automatically generate this, from wrapper xslt (maybe by PI!) -->
 		<nav class="letterindex">
 			<ol>
 				<li><a href="#A">A</a></li>
@@ -180,7 +180,10 @@
 			<dd>The standard C++ mechanism for class objects to identify their
 				dynamic or run-time types.</dd>
 
-			<dt id="S"><dfn>SID</dfn></dt>
+			<dt id="S"><dfn>Shape</dfn></dt>
+			<dd>TODO</dd>
+
+			<dt><dfn>SID</dfn></dt>
 			<dd class="abbr">Syntax Improving Device</dd>
 			<dd>SID is an <a href="#TODO">LL(1)</a> <a href="#TODO">parser generator</a>
 				with a long history (the original version dates back to the mid-sixties!).
@@ -203,7 +206,10 @@
 			<dt><dfn>Structured TDF</dfn></dt>
 			<dd>TODO</dd>
 
-			<dt id="T"><dfn>tcc</dfn></dt>
+			<dt id="T"><dfn>Tag</dfn></dt>
+			<dd>TODO</dd>
+
+			<dt><dfn>tcc</dfn></dt>
 			<dd>TODO</dd>
 
 			<dt><dfn>TDF</dfn></dt>
@@ -278,6 +284,9 @@
 				<p>This functionality is provided by tcc, but tpl may be called
 					directly.</p>
 			</dd>
+
+			<dt><dfn>Token</dfn></dt>
+			<dd>TODO</dd>
 
 			<dt><dfn>tspec</dfn></dt>
 			<dd>
