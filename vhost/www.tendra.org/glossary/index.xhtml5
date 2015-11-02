@@ -17,37 +17,7 @@
 	</head>
 
 	<body>
-		<!-- TODO: automatically generate this, from wrapper xslt (maybe by PI!) -->
-		<nav class="letterindex">
-			<ol>
-				<li><a href="#A">A</a></li>
-				<li><a href="#B">B</a></li>
-				<li><a href="#C">C</a></li>
-				<li><a href="#D">D</a></li>
-				<li>E</li>
-				<li><a href="#F">F</a></li>
-				<li>G</li>
-				<li>H</li>
-				<li><a href="#I">I</a></li>
-				<li>J</li>
-				<li>K</li>
-				<li><a href="#L">L</a></li>
-				<li><a href="#M">M</a></li>
-				<li>N</li>
-				<li><a href="#O">O</a></li>
-				<li><a href="#P">P</a></li>
-				<li>Q</li>
-				<li><a href="#R">R</a></li>
-				<li><a href="#S">S</a></li>
-				<li><a href="#T">T</a></li>
-				<li><a href="#U">U</a></li>
-				<li>V</li>
-				<li>W</li>
-				<li>X</li>
-				<li>Y</li>
-				<li>Z</li>
-			</ol>
-		</nav>
+		<?glossary?>
 
 		<dl class="glossary">
 			<dt id="A"><dfn>ANDF</dfn></dt>
