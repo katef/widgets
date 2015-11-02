@@ -8,89 +8,63 @@
 
 	exclude-result-prefixes="h tl">
 
-	<xsl:import href="../../../xsl/lib/date.format-date.xsl"/>
-
 	<xsl:import href="../../../xsl/theme.xsl"/>
 	<xsl:import href="../../../xsl/img.xsl"/>
 	<xsl:import href="../../../xsl/blog.xsl"/>
+	<xsl:import href="../../../xsl/copy.xsl"/>
 
 	<xsl:import href="theme.xsl"/>
 
 	<xsl:param name="www-css"/>
 	<xsl:param name="www-js"/>
 
-	<xsl:param name="archive"/>
+	<!-- TODO: centralise relative path to root (see also theme-bib.xsl for the same) -->
+	<xsl:param name="blog-file"/>
+	<xsl:param name="blog-data" select="document(concat('../../../', $blog-file))"/>
 
-	<xsl:template match="/tl:timeline">
+	<xsl:template match="/h:html/h:head/h:title" mode="body">
+		<xsl:apply-templates select="node()"/>
+	</xsl:template>
+
+	<xsl:template match="/h:html">
+		<xsl:variable name="category" select="//h:meta[@name = 'category']/@content"/>
+
+		<xsl:variable name="page">
+			<xsl:apply-templates select="h:head/h:title" mode="body"/>
+		</xsl:variable>
+
 		<xsl:call-template name="elide-output">
-			<xsl:with-param name="category" select="'diary'"/>
-
-			<xsl:with-param name="onload">
-				<xsl:text>Valid.init(r);</xsl:text>
-			</xsl:with-param>
+			<xsl:with-param name="class"    select="concat(@class, ' hyphenate')"/>
 
 			<xsl:with-param name="page">
-				<xsl:call-template name="tl:content"/>
+				<xsl:copy-of select="$page"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="head">
-				<!-- TODO: xinclude these; keep centralised somewhere (as comment.xhtml5?)
-					also would prefer them to be optional... -->
-				<script type="text/template" id="tmpl:preview"><![CDATA[
-					<aside style="display: block;">
-						<!-- TODO: do the @id replacement in xreplacechild() in comment.js instead -->
-						<?js void (this.parentNode.id = 'comment-preview'); ?>
-
-						<!-- TODO: use html5's time element for this sort of thing -->
-						<span class="date">
-							<?js date ?>
-						</span>
-
-						<span class="author">
-							<a href="{ url || this.ownerElement }"><?js author ?></a>
-						</span>
-
-						<?js comment ?>
-					</aside>
-				]]></script>
-
-				<script type="text/template" id="tmpl:post"><![CDATA[
-					<?js void (this.parentNode.id = 'comment-post'); ?>
-
-					<!-- TODO: html5 doctype? -->
-					<html xmlns="http://www.w3.org/1999/xhtml">
-						<head>
-							<meta name="author" content="{ author || this.ownerElement }"/>
-							<meta name="email"  content="{ email  || this.ownerElement }"/>
-							<meta name="date"   content="{ date   || this.ownerElement }"/>
-							<meta name="url"    content="{ url    || this.ownerElement }"/>
-						</head>
-
-						<body>
-							<?js comment ?>
-						</body>
-					</html>
-				]]></script>
+				<xsl:copy-of select="h:head/h:meta[@name = 'description']"/>
+				<xsl:copy-of select="h:head/h:meta[@name = 'keywords']"/>
 			</xsl:with-param>
 
 			<xsl:with-param name="main">
-				<xsl:choose>
-					<xsl:when test="$archive">
-						<xsl:call-template name="tl:content-archive"/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:call-template name="tl:content"/>
-
-						<nav id="monthindex">
-							<xsl:call-template name="tl:index"/>
-
-							<a href="/archive">Archive</a>
-						</nav>
-					</xsl:otherwise>
-				</xsl:choose>
+				<xsl:apply-templates select="h:body/node()" mode="copy"/>
 			</xsl:with-param>
 		</xsl:call-template>
 
+	</xsl:template>
+
+
+	<!-- TODO: centralise PIs to pi/*.xsl -->
+
+	<xsl:template match="processing-instruction('blog-archive')" mode="copy">
+		<xsl:apply-templates select="$blog-data/tl:timeline" mode="tl-archive"/>
+	</xsl:template>
+
+	<xsl:template match="processing-instruction('blog-body')" mode="copy">
+		<xsl:apply-templates select="$blog-data/tl:timeline" mode="tl-body"/>
+	</xsl:template>
+
+	<xsl:template match="processing-instruction('blog-index')" mode="copy">
+		<xsl:apply-templates select="$blog-data/tl:timeline" mode="tl-index"/>
 	</xsl:template>
 
 </xsl:stylesheet>

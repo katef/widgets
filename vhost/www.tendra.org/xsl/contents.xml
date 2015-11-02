@@ -11,7 +11,7 @@
 		<c:item href="/licence" name="Licences" rel="license"/>
 	</c:item>
 
-	<c:item href="#" name="Blog"/>
+	<c:item href="/blog" name="Blog"/>
 
 	<c:item href="#" name="Wiki"/>
 
