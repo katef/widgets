@@ -40,9 +40,6 @@
 	<xsl:param name="tl:day"     select="date:day-in-month($tl:date)"/>
 	<xsl:param name="tl:short"   select="false()"/>
 
-	<xsl:variable name="tl:min" select="tl:pubdate(/tl:timeline/tl:entry)[1]"/>
-	<xsl:variable name="tl:max" select="tl:pubdate(/tl:timeline/tl:entry)[last()]"/>
-
 	<func:function name="tl:private">
 		<xsl:param name="entry"/>
 
@@ -377,7 +374,9 @@
 	</xsl:template>
 
 	<xsl:template name="tl:archive-view">
-		<xsl:param name="year" select="date:year($tl:max)"/>
+		<xsl:param name="min"  select="tl:pubdate(tl:entry)[1]"/>
+		<xsl:param name="max"  select="tl:pubdate(tl:entry)[last()]"/>
+		<xsl:param name="year" select="date:year($max)"/>
 
 		<xsl:variable name="count"
 			select="count(tl:entry[date:year(tl:pubdate(.)) = $year])"/>
@@ -424,7 +423,7 @@
 			</xsl:if>
 		</section>
 
-		<xsl:if test="$year &gt; date:year($tl:min)">
+		<xsl:if test="$year &gt; date:year($min)">
 			<xsl:call-template name="tl:archive-view">
 				<xsl:with-param name="year" select="$year - 1"/>
 			</xsl:call-template>
@@ -445,7 +444,7 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template name="tl:index">
+	<xsl:template match="tl:timeline" mode="tl-index">
 		<ol class="pages">
 <!-- TODO: titles for links -->
 <!-- TODO: rel next/prev etc -->
@@ -678,7 +677,7 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template name="tl:content">
+	<xsl:template match="tl:timeline" mode="tl-body">
 		<xsl:variable name="r">
 			<xsl:call-template name="tl:content-body"/>
 		</xsl:variable>
@@ -696,7 +695,7 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template name="tl:content-archive">
+	<xsl:template match="tl:timeline" mode="tl-archive">
 		<section class="archive-view">
 			<xsl:call-template name="tl:archive-view"/>
 		</section>
