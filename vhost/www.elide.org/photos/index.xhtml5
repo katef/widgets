@@ -58,6 +58,7 @@
 -->
 
 		<ul class="nonsquare photos">
+			<li><a href="tree1.jpeg"><img src="tree1.jpeg" height="170"/></a></li>
 			<li><a href="p1110381.jpg"><img src="p1110381.jpg" height="170"/></a></li>
 			<li><a href="gmes1.jpeg"><img src="gmes1.jpeg" height="170"/></a></li>
 			<li><a href="ship.jpeg"><img src="ship.jpeg" height="170"/></a></li>
@@ -73,8 +74,6 @@
 			<li><a href="condensation.jpeg"><img src="condensation.jpeg" height="170"/></a></li>
 			<li><a href="fire.jpeg"><img src="fire.jpeg" height="170"/></a></li>
 			<li><a href="tree0.jpeg"><img src="tree0.jpeg" height="170"/></a></li>
-<!--
--->
 		</ul>
 	</body>
 </html>
