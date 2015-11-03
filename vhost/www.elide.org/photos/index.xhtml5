@@ -62,6 +62,12 @@
 			<li><a href="p1110381.jpg"><img src="p1110381.jpg" height="170"/></a></li>
 			<li><a href="gmes1.jpeg"><img src="gmes1.jpeg" height="170"/></a></li>
 			<li><a href="ship.jpeg"><img src="ship.jpeg" height="170"/></a></li>
+		</ul>
+		<ul class="portrait photos">
+			<li><a href="fire.jpeg"><img src="fire.jpeg" height="170"/></a></li>
+			<li><a href="tree0.jpeg"><img src="tree0.jpeg" height="170"/></a></li>
+		</ul>
+		<ul class="landscape photos">
 			<li><a href="shelves.jpeg"><img src="shelves.jpeg" height="170"/></a></li>
 			<li><a href="physics.jpeg"><img src="physics.jpeg" height="170"/></a></li>
 			<li><a href="p1110377.jpg"><img src="p1110377.jpg" height="170"/></a></li>
@@ -72,10 +78,6 @@
 			<li><a href="IMG_1685.JPG"><img src="IMG_1685.JPG" height="170"/></a></li>
 			<li><a href="P1160462.JPG"><img src="P1160462.JPG" height="170"/></a></li>
 			<li><a href="condensation.jpeg"><img src="condensation.jpeg" height="170"/></a></li>
-		</ul>
-		<ul class="portrait photos">
-			<li><a href="fire.jpeg"><img src="fire.jpeg" height="170"/></a></li>
-			<li><a href="tree0.jpeg"><img src="tree0.jpeg" height="170"/></a></li>
 		</ul>
 	</body>
 </html>
