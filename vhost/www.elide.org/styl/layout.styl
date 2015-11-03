@@ -419,9 +419,15 @@ ul.photos {
 				}
 			}
 
-			&.nonsquare {
+			&.landscape {
 				li {
-					width: floor(100% / photonotsquarecols($l));
+					width: floor(100% / photolandscapecols($l));
+				}
+			}
+
+			&.portrait {
+				li {
+					width: floor(100% / photoportraitcols($l));
 				}
 			}
 
