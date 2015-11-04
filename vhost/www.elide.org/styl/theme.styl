@@ -41,12 +41,16 @@ photosquarecols($l) {
 	return $grid.ncols[$l];
 }
 
-photonotsquarecols($l) {
+photolandscapecols($l) {
 	if (photosquarecols($l) > 2) {
 		return 2;
 	}
 
 	return 1;
+}
+
+photoportraitcols($l) {
+	return photosquarecols($l);
 }
 
 menustyle($l) {
