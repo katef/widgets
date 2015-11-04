@@ -23,18 +23,15 @@
 	<xsl:template match="processing-instruction('blog-title')" mode="copy">
 		<xsl:choose>
 			<xsl:when test="date:day-in-week($tl:date)">
-				<xsl:value-of select="date:format-date($tl:date,
-					&quot;EEEE&quot;)"/>
+				<xsl:value-of select="date:format-date($tl:date, 'EEEE')"/>
 			</xsl:when>
 
 			<xsl:when test="date:month-in-year($tl:date)">
-				<xsl:value-of select="date:format-date($tl:date,
-					&quot;MMMM&quot;)"/>
+				<xsl:value-of select="date:format-date($tl:date, 'MMMM')"/>
 			</xsl:when>
 
 			<xsl:when test="date:year($tl:date)">
-				<xsl:value-of select="date:format-date($tl:date,
-					&quot;yyyy&quot;)"/>
+				<xsl:value-of select="date:format-date($tl:date, 'yyyy')"/>
 			</xsl:when>
 
 			<xsl:otherwise>
