@@ -5,8 +5,9 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:tl="http://xml.elide.org/timeline"
+	xmlns:date="http://exslt.org/dates-and-times"
 
-	exclude-result-prefixes="h tl">
+	exclude-result-prefixes="h tl date">
 
 	<xsl:import href="../../../xsl/lib/date.format-date.xsl"/>
 
@@ -21,8 +22,19 @@
 	<xsl:param name="blog-file"/>
 	<xsl:param name="blog-data" select="document(concat('../../../', $blog-file))"/>
 
+	<xsl:template match="processing-instruction('blog-title')" mode="copy">
+		<xsl:choose>
+			<xsl:when test="date:year($tl:date)">
+				<xsl:call-template name="ordinaldate">
+					<xsl:with-param name="date" select="$tl:date"/>
+				</xsl:call-template>
+			</xsl:when>
 
-	<!-- TODO: centralise PIs to pi/*.xsl -->
+			<xsl:otherwise>
+				<xsl:value-of select="$blog-name"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
 
 	<xsl:template match="processing-instruction('blog-archive')" mode="copy">
 		<xsl:apply-templates select="$blog-data/tl:timeline" mode="tl-archive"/>
