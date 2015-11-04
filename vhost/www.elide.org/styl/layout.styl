@@ -359,20 +359,12 @@ for $l in 0 .. length($grid.ncols) - 1 {
 	}
 }
 
-main:hover {
-	ul.photos a {
-		background-color: #ffc; // contrast against the header
-	}
-
-	ul.photos img {
-		filter: 'grayscale' 100%;
-		opacity: 0.3;
-	}
-
-	ul.photos a:hover img {
-		filter: none;
-		filter: 'grayscale' 0%;
-		opacity: 1.0;
+ul.photos {
+	a:hover {
+		border-top:    solid ($grid.gutter) #ccc;
+		border-bottom: solid ($grid.gutter) #ccc;
+		margin-top:    -($grid.gutter);
+		margin-bottom: -($grid.gutter);
 	}
 }
 
