@@ -11,6 +11,7 @@
 
 	<xsl:import href="../../../xsl/theme.xsl"/>
 	<xsl:import href="../../../xsl/img.xsl"/>
+	<xsl:import href="../../../xsl/timeline.xsl"/>
 	<xsl:import href="../../../xsl/blog.xsl"/>
 
 	<xsl:import href="theme.xsl"/>
@@ -50,6 +51,11 @@
 
 	<xsl:template match="processing-instruction('blog-index')" mode="copy">
 		<xsl:apply-templates select="$blog-data/tl:timeline" mode="tl-index"/>
+	</xsl:template>
+
+	<xsl:template match="processing-instruction('blog-calendar')" mode="copy">
+		<xsl:call-template name="tl:calendar"/>
+		<xsl:call-template name="tl:years"/>
 	</xsl:template>
 
 </xsl:stylesheet>
