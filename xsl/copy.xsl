@@ -7,7 +7,10 @@
 	<xsl:template match="comment()" mode="copy"/>
 
 	<xsl:template match="processing-instruction()" mode="copy">
-		<xsl:copy-of select="."/>
+		<xsl:message terminate="yes">
+			<xsl:text>Unimplemented processing instruction: </xsl:text>
+			<xsl:value-of select="concat('&lt;?', name(), '?&gt;')"/>
+		</xsl:message>
 	</xsl:template>
 
 	<!-- XXX: for some reason <xsl:copy> would output "<br></br>" -->
