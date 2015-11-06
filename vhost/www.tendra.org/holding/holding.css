@@ -24,8 +24,8 @@ body {
 	padding: 2em;
 }
 
-dd,
-dt {
+html.manindex dd,
+html.manindex dt {
 	margin: 0 !important;
 	padding-bottom: 0.25em;
 }
@@ -46,5 +46,10 @@ html.docindex dt {
 html.docindex ul {
 	list-style-type: none;
 	margin-left: 2.5em;
+}
+
+dl.bibliography dd {
+	text-align: left;
+	max-width: 50em;
 }
 
