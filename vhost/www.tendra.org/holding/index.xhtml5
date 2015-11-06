@@ -24,8 +24,8 @@
 
 	<p><br/>Documentation:<br/>
 	<a href="/man">Manpages</a><br/>
-	<a href="/docs">User guides</a></p>
-	<a href="/papers">Academic papers</a></p>
+	<a href="/docs">User guides</a><br/>
+	<a href="/papers">Academic papers<br/>
 	<a href="/reports">Technical reports</a></p>
   </body>
 </html>
