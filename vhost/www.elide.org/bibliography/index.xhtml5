@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Personal bibliography</title>
+
+		<meta name="description" content="Academic papers"/>
+		<meta name="keywords"    content="academic, papers, research, investigations, studies, reports, theory, science"/>
+		<meta name="category"    content="documentation"/>
+	</head>
+
+	<body>
+<!-- TODO:
+		<h2>Academic</h2>
+		<?bib academic.bib?>
+-->
+
+		<h2>Open Source</h2>
+		<p>There are many documents for TenDRA which I've cut up, edited and
+			rearranged; those are not listed here. The documents listed here
+			are those which I started from scratch.</p>
+		<?bib opensource.bib?>
+		<!-- TODO: manpages. how to list these? -->
+
+		<h2>Commercial</h2>
+
+		<!-- TODO: manpages. how to list these? -->
+		<p>Technical reports:</p>
+		<?bib commercial-research.bib?>
+
+		<p>Products:</p>
+		<?bib commercial-products.bib?>
+	</body>
+</html>
+

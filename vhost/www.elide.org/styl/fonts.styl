@@ -25,6 +25,16 @@ body {
 		font-family: 'Deja Vu Sans Mono', monospace;
 		font-weight: 400;
 	}
+
+	cite {
+		font-style: inherit;
+	}
+
+	dl.bibliography {
+		a {
+			text-decoration: none;
+		}
+	}
 }
 
 /* sizes */
@@ -69,6 +79,11 @@ body {
 		font-feature-settings: "c2sc" 1;
 		font-weight: normal;
 		font-style:  normal;
+	}
+
+	dl.bibliography abbr.tex, dl.bibliography abbr.tex sub {
+		font-feature-settings: "c2sc" 0; // terrible with Heros
+		font-size: 0.9em;
 	}
 
 	abbr {
