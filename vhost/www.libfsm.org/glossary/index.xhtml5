@@ -110,22 +110,41 @@
 					By our use, the states themselves contain no information,
 					other than possibly being an end state.</p>
 
-				<p>According to <a href="TODO">[BC07]</a>,
-					mathematically, an automaton is a pair
-					<code class="texmath">A = (Q, E)</code>,
-					where <code class="texmath">Q</code>&#xA0;is a finite set of states,
-					and <code class="texmath">E</code>&#xA0;is a finite set
-					of edges labelled by letters of a finite
-					alphabet&#xA0;<code class="texmath">A</code>.
-					Edges are triples of the form
-					<code class="texmath">(p, a, q)</code>,
-					where <code class="texmath">p, q \in Q, a \in A</code>.</p>
-
-				<p>Wikipedia has <a rel="external" href="http://en.wikipedia.org/wiki/Finite_State_Machine">a particularly confusing explanation</a>.</p>
-
 				<p>These are used all over computer science, in any situation
 					where a program is in one of a set number of states,
 					and input to that program causes it to change state.</p>
+
+				<p>According to Béal &amp; Crochemore,
+					an automaton is a pair
+					<code class="texmath">A = (Q, E)</code>,
+					where <code class="texmath">Q</code>&#xA0;is a finite set
+					of <dfn>states</dfn>,
+					and <code class="texmath">E</code>&#xA0;is a finite set
+					of <dfn>edges</dfn> labelled by letters of a <dfn>finite
+					alphabet</dfn>&#xA0;<code class="texmath">A</code>.
+					Edges are triples of the form
+					<code class="texmath">(p, a, q)</code>,
+					where <code class="texmath">p, q \in Q, a \in A</code>.
+					For their purposes, all states are considered final. <a href="TODO">[BC07]</a></p>
+
+				<p>Hopcroft &amp; Ullman use the more usual definition of
+					a 5-tuple
+					<code class="texmath">(Q, \Sigma, \delta, q_0, F)</code>, where
+					<code class="texmath">\Sigma</code>
+					is a finite <dfn>input alphabet</dfn>,
+					<code class="texmath">q_0 \in Q</code>
+					is the <dfn>initial</dfn> state,
+					<code class="texmath">F \subseteq Q</code>
+					is the set of <dfn>final</dfn> states,
+					and <code class="texmath">\delta</code>
+					is the <dfn>transition function</dfn>
+					mapping <code class="texmath">Q \times \Sigma \mapsto Q</code>.
+					That is, <code class="texmath">\delta(q, a)</code> is a state
+					for each state <code class="texmath">q</code>
+					and input symbol <code class="texmath">a</code>.
+					<a href="TODO">[HU79]</a></p>
+
+				<p>Wikipedia has <a rel="external" href="http://en.wikipedia.org/wiki/Finite_State_Machine">a particularly confusing explanation</a>.</p>
 			</dd>
 
 			<dt><dfn>&nfa;</dfn></dt>
