@@ -65,7 +65,7 @@
 
 		<xsl:call-template name="theme-output">
 			<xsl:with-param name="category" select="$category"/>
-			<xsl:with-param name="class"    select="$category"/>
+			<xsl:with-param name="class"    select="$class"/>
 
 			<xsl:with-param name="css" select="'style.css'"/>
 
