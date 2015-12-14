@@ -1,18 +1,27 @@
 /* $Id$ */
 
-font-face("Quattrocento", 400, normal, '/fonts/Quattrocento-Regular', '#Quattrocento-Regular');
-font-face("Quattrocento", 600, normal, '/fonts/Quattrocento-Bold',    '#Quattrocento-Bold');
+font-face("Crimson", 400, normal, '/fonts/Crimson-Roman',    '#Crimson-Roman');
+font-face("Crimson", 400, italic, '/fonts/Crimson-Italic',   '#Crimson-Italic');
+font-face("Crimson", 600, normal, '/fonts/Crimson-Semibold', '#Crimson-Semibold');
+
+font-face("DejaVuSansMono", 400, normal, '/fonts/DejaVuSansMono-Regular', '#DejaVuSansMono-Regular');
 
 /* faces, weights and styles */
 body {
-	font-family: Quattrocento, serif;
+	font-family: Crimson, serif;
 
-	h1 {
+	// Crimson doesn't have the glyphs for BibTeX
+	abbr.tex {
+		font-family: georgia, serif;
+		font-size: 0.9em; // optical correction
+	}
+
+	h1, h2, h3, h4 {
 		font-weight: 400;
 	}
 
 	th {
-		font-weight: normal;
+		font-weight: bold;
 	}
 
 	em {
@@ -23,17 +32,46 @@ body {
 	cite {
 		font-style:  inherit;
 	}
+
+	code, tt, samp, pre {
+		font-family: DejaVuSansMono, mono;
+		font-size: 14px; // optical correction
+	}
+
+	pre {
+		font-size: 13px; // smaller for tidyness
+	}
+
+	code.texmath .katex {
+		font-size: inherit;
+
+		.mord {
+			font-size: 0.95em; // optical correction
+		}
+
+		.mathit {
+			font-family: Crimson, KaTeX_Math;
+			font-style:  normal;
+			font-size: 1em;
+		}
+	}
 }
 
 /* sizes */
 body {
-	font-size:   14px;
+	font-size:   17px;
 	line-height: $baseline;
+//	line-height: 1.4em;
+//line-height: 1.3em;
 
-	word-spacing: -1px;
+	word-spacing: -1px; // !?
 
 	h1 {
 		font-size: 1.8em;
+	}
+
+	th {
+		font-size: 1em;
 	}
 
 	article.entry h1 time[pubdate] {
@@ -60,8 +98,24 @@ body {
 		overflow-x: auto;
 	}
 
+	font-feature-settings: "zero" 0;
+
+header h1:after {
+	font-feature-settings: "aalt" 1; // fancy ampersand
+}
+
 	ol.archive li time {
 		font-feature-settings: "tnum" 1; /* Quattrocento doesn't have tnum */
 	}
+
+	// XXX: rename to span.sc
+	abbr { // XXX
+//			font-feature-settings: "c2sc" 1;
+	}
+
+	.katex {
+		font-feature-settings: "onum" 0;
+	}
+
 }
 
