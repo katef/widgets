@@ -27,6 +27,9 @@
 	<a href="/docs">User guides</a><br/>
 	<a href="/papers">Academic papers</a><br/>
 	<a href="/reports">Technical reports</a></p>
+
+	<p>Development:<br/>
+	<a href="https://github.com/tendra/tendra/issues">Issues on Github</a></p>
   </body>
 </html>
 
