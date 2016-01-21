@@ -13,31 +13,9 @@
 % 16cm = 8*2cm cols, 1.5cm between each
 \setuplayout[
 	grid=no,
-	columndistance=\dimexpr\GW*1/3\relax,
-	columns=6,
-	backspace=2\GW,
-	top=0pt,
-	headerdistance=\dimexpr\GH*1/3-.4\bodyfontsize\relax,
-	bottom=0pt,
-	bottomspace=0pt,
-	bottomdistance=0pt,
-	footer=\bodyfontsize,
-	footerdistance=\dimexpr\GH*1/3\relax,
-	height=\dimexpr39\lineheight
-		+\headerheight+\headerdistance
-		+\footerheight+\footerdistance\relax,
-	leftmargin=\dimexpr\GW+\GW*1/3\relax,
-	leftmargindistance=0pt,
-	rightmargin=\GW,
-	width=\dimexpr6\GW-\GW*1/3\relax,
-	topspace=0pt,
 	header=\dimexpr2\GH-\GH*1/3\relax,
-	leftedgedistance=0pt,
-	rightedgedistance=0pt,
-	leftmargindistance=\dimexpr\GW*1/3\relax,
-	rightmargindistance=\dimexpr\GW*1/3\relax,
-	edge=\dimexpr.5\PW-.5\paperwidth\relax]
-
+	columndistance=\dimexpr\GW*1/3\relax,
+	columns=6]
 
 \setupinterlinespace[small]
 \setupwhitespace[halfline]
@@ -59,13 +37,4 @@
 
 \setupinmargin[background=color,backgroundcolor=lightgray]
 \def\hyphenatedurlseparator{↩}
-
-\startmode[debug]
-
-	\input elide-geometry.tex
-
-	\defineoverlay[cover] [\uniqueMPgraphic{cover}]
-	\setupbackgrounds[page][background=cover]
-
-\stopmode
 
