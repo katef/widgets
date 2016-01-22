@@ -1,1 +1,0 @@
-../../../wc/libfsm-share/js/col.js

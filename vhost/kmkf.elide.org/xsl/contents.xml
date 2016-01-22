@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-
-<c:items xmlns:c="http://xml.elide.org/contents">
-
-	<c:item href="/about/"    name="About" rel="help"/>
-	<c:item href="/download/" name="Download"/>
-
-</c:items>
-
