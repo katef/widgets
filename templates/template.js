@@ -65,6 +65,20 @@ function Template(e, ctx) {
 		case s === '':
 			return document.createTextNode('');
 
+		case s instanceof NodeList:
+			var f;
+
+			f = document.createDocumentFragment();
+			for (var i = 0; i < s.length; i++) {
+				f.appendChild(s.item(i).cloneNode(true));
+			}
+
+			return f;
+
+		case s instanceof Document:
+			return s.documentElement.cloneNode(true);
+
+		case s instanceof DocumentFragment:
 		case s instanceof Node:
 			return s;
 
@@ -116,11 +130,51 @@ function Template(e, ctx) {
 			var v;
 
 			v = attrvalue(node.attributes[i]);
-			node.attributes[i].nodeValue = v;
+
+			/*
+			 * Here an attribute is requesting its own removal; this will
+			 * produce <a href="...">...</a> when title is undefined:
+			 *
+			 *   <a href="{ url }" title="{ title }"><?js text ?></a>
+			 */
 			if (v === undefined) {
 				node.removeAttribute(node.attributes[i].name);
 				i--;
+				continue;
 			}
+
+			/*
+			 * Here an attribute is requesting we replace its node with its
+			 * own children. This is pretty odd, but permits this:
+			 *
+			 *   <a href="{ url || this.ownerElement }"><?js text ?></a>
+			 *
+			 * which will be equivalent to <?js text ?> when url is null.
+			 *
+			 * A slightly more convoluted case is:
+			 *
+			 *   <meta name="date" content="{ date || this.ownerElement }"/>
+			 *
+			 * Where the node has no children, and so it will be replaced with
+			 * an empty document fragment, which has the effect of simply
+			 * removing the node when date is null.
+			 */
+			if (v == node) {
+				var f;
+
+				f = document.createDocumentFragment();
+
+				for (var i = 0; i < node.childNodes.length; i++) {
+					f.appendChild(node.childNodes[i]);
+				}
+
+				xreplacechild(parent, f, node);
+				node = parent;
+
+				break;
+			}
+
+			node.attributes[i].nodeValue = v;
 		}
 
 		for (var i = 0; i < node.childNodes.length; i++) {
