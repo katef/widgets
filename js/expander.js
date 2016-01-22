@@ -1,1 +1,0 @@
-../wc/widgets/expander/expander.js

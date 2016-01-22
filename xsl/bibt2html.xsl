@@ -1,1 +1,0 @@
-../wc/bibfs-trunk/xsl/bibt2html.xsl
