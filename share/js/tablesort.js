@@ -46,7 +46,7 @@
  */
 
 
-var Table = new (function () {
+var Tablesort = new (function () {
 	/*
 	 * This array determines how to sort each data type. Types are identified by
 	 * regexp applied to each <td>'s .innerHTML in a column. Since empty cells are
@@ -655,7 +655,7 @@ var Table = new (function () {
 
 			addclass(lowest, "table-sortable");
 			lowest.setAttribute("onclick",
-				"Table.sort(this, " + r + ", " + c + "); false");
+				"Tablesort.sort(this, " + r + ", " + c + "); false");
 
 			/* TODO: make this lowest.onclick = function (event) { ... }; instead */
 		}
