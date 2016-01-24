@@ -15,9 +15,9 @@
  * http://bytes.com/topic/javascript/answers/519470-misleading-cellindex-values-rowspan-colspan
  */
 
-var Colalign = new (function () {
+var Col = new (function () {
 
-	function colalign(t) { 
+	function align(t) { 
 		var cells = []; 
 		var cols  = []; 
 
@@ -75,7 +75,7 @@ var Colalign = new (function () {
 
 		a = root.getElementsByTagName('table');
 		for (var i = 0; i < a.length; i++) {
-			colalign(a[i]);
+			align(a[i]);
 		}
 	}
 
