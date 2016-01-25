@@ -50,13 +50,13 @@
 
 	<xsl:template name="output">
 		<xsl:param name="filename"/>
-		<xsl:param name="css"     select="''"/>
-		<xsl:param name="js"      select="''"/>
-		<xsl:param name="onload"  select="''"/>
-		<xsl:param name="lang"    select="'en-gb'"/>
-		<xsl:param name="class"   select="false()"/>
-		<xsl:param name="color"   select="false()"/>
-		<xsl:param name="favicon" select="false()"/>
+		<xsl:param name="css"       select="''"/>
+		<xsl:param name="js"        select="''"/>
+		<xsl:param name="onload"    select="''"/>
+		<xsl:param name="lang"      select="'en-gb'"/>
+		<xsl:param name="class"     select="false()"/>
+		<xsl:param name="color"     select="false()"/>
+		<xsl:param name="favicon"   select="false()"/>
 
 		<xsl:param name="canonical" select="false()"/>
 		<xsl:param name="next"      select="false()"/>
@@ -66,8 +66,8 @@
 		<xsl:param name="up"        select="false()"/>
 
 		<xsl:param name="title"/>
-		<xsl:param name="head"   select="/.."/>
-		<xsl:param name="body"   select="/.."/>
+		<xsl:param name="head"      select="/.."/>
+		<xsl:param name="body"      select="/.."/>
 
 		<xsl:variable name="method">
 			<xsl:choose>
@@ -154,14 +154,14 @@
 -->
 
 			<xsl:call-template name="output-content">
-				<xsl:with-param name="method"  select="$method"/>
-				<xsl:with-param name="css"     select="$css"/>
-				<xsl:with-param name="js"      select="$js"/>
-				<xsl:with-param name="onload"  select="$onload"/>
-				<xsl:with-param name="lang"    select="$lang"/>
-				<xsl:with-param name="class"   select="$class"/>
-				<xsl:with-param name="color"   select="$color"/>
-				<xsl:with-param name="favicon" select="$favicon"/>
+				<xsl:with-param name="method"    select="$method"/>
+				<xsl:with-param name="css"       select="$css"/>
+				<xsl:with-param name="js"        select="$js"/>
+				<xsl:with-param name="onload"    select="$onload"/>
+				<xsl:with-param name="lang"      select="$lang"/>
+				<xsl:with-param name="class"     select="$class"/>
+				<xsl:with-param name="color"     select="$color"/>
+				<xsl:with-param name="favicon"   select="$favicon"/>
 
 				<xsl:with-param name="canonical" select="$canonical"/>
 				<xsl:with-param name="next"      select="$next"/>
@@ -170,23 +170,23 @@
 				<xsl:with-param name="last"      select="$last"/>
 				<xsl:with-param name="up"        select="$up"/>
 
-				<xsl:with-param name="title"   select="$title"/>
-				<xsl:with-param name="head"    select="$head"/>
-				<xsl:with-param name="body"    select="$body"/>
+				<xsl:with-param name="title"     select="$title"/>
+				<xsl:with-param name="head"      select="$head"/>
+				<xsl:with-param name="body"      select="$body"/>
 			</xsl:call-template>
 
 		</common:document>
 	</xsl:template>
 
 	<xsl:template name="output-content">
-		<xsl:param name="method"  select="'xml'"/>
-		<xsl:param name="css"     select="''"/>
-		<xsl:param name="js"      select="''"/>
-		<xsl:param name="onload"  select="''"/>
-		<xsl:param name="lang"    select="'en-gb'"/>
-		<xsl:param name="class"   select="false()"/>
-		<xsl:param name="color"   select="false()"/>
-		<xsl:param name="favicon" select="false()"/>
+		<xsl:param name="method"    select="'xml'"/>
+		<xsl:param name="css"       select="''"/>
+		<xsl:param name="js"        select="''"/>
+		<xsl:param name="onload"    select="''"/>
+		<xsl:param name="lang"      select="'en-gb'"/>
+		<xsl:param name="class"     select="false()"/>
+		<xsl:param name="color"     select="false()"/>
+		<xsl:param name="favicon"   select="false()"/>
 
 		<xsl:param name="canonical" select="false()"/>
 		<xsl:param name="next"      select="false()"/>
@@ -195,9 +195,9 @@
 		<xsl:param name="last"      select="false()"/>
 		<xsl:param name="up"        select="false()"/>
 
-		<xsl:param name="title"   select="/.."/>
-		<xsl:param name="head"    select="/.."/>
-		<xsl:param name="body"    select="/.."/>
+		<xsl:param name="title"     select="/.."/>
+		<xsl:param name="head"      select="/.."/>
+		<xsl:param name="body"      select="/.."/>
 
 		<xsl:if test="$method = 'html'">
 			<xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;&#xA;</xsl:text>
