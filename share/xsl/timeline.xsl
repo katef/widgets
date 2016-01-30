@@ -324,7 +324,7 @@
 			</h1>
 
 			<time pubdate="{tl:pubdate(.)}">
-				<xsl:value-of select="date:format-date($date, &quot;yyyy&#8288;&#x2013;&#8288;MM&#8288;&#x2013;&#8288;dd&quot;)"/>
+				<xsl:value-of select="date:format-date($date, &quot;yyyy&#8288;&#x2012;&#8288;MM&#8288;&#x2012;&#8288;dd&quot;)"/>
 			</time>
 
 <!-- TODO: what matches this? -->
