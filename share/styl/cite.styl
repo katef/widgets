@@ -1,0 +1,17 @@
+
+a[rel~=cite].changeset,
+a[rel~=cite].bib {
+	&:before {
+		content: "[";
+	}
+
+	&:after{
+		content: "]";
+	}
+
+	// Would prefer c2sc, but not all fonts provide that.
+	// This is a harmless default, should onum or lnum not exist.
+	font-feature-settings: "onum" 0;
+	font-feature-settings: "lnum" 1;
+}
+
