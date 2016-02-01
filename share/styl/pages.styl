@@ -14,6 +14,12 @@ ol.pages {
 	display: block;
 	color:   $pages.inact-color;
 
+	// harmless for fonts which don't have them
+	font-feature-settings: "tnum" 0;
+	font-feature-settings: "pnum" 1;
+	font-feature-settings: "onum" 0;
+	font-feature-settings: "lnum" 1;
+
 	li {
 		display: inline;
 		padding: 0;
