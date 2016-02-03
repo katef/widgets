@@ -445,6 +445,8 @@
 	</xsl:template>
 
 	<xsl:template match="tl:timeline" mode="tl-index">
+		<xsl:variable name="timeline" select="."/>
+
 		<ol class="pages">
 <!-- TODO: titles for links -->
 <!-- TODO: rel next/prev etc -->
@@ -483,7 +485,7 @@
 							</xsl:if>
 
 							<xsl:choose>
-								<xsl:when test="tl:entry
+								<xsl:when test="$timeline/tl:entry
 									[date:same-month(tl:pubdate(.), date:make($tl:year, current()))]">
 									<a>
 										<xsl:call-template name="tl:href">
