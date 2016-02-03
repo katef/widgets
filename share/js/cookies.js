@@ -1,7 +1,7 @@
 /* $Id$ */
 
 /* Adapted from http://www.quirksmode.org/js/cookies.html */
-function setCookie(name, value, days) {
+function setCookie(domain, name, value, days) {
 	var date, expires;
 
 	if (days) {
@@ -12,7 +12,7 @@ function setCookie(name, value, days) {
 		expires = "";
 	}
 
-	document.cookie = name + "=" + value + expires + "; path=/; domain=libfsm.org";
+	document.cookie = name + "=" + value + expires + "; path=/; domain=" + domain;
 }
 
 /* Adapted from http://www.quirksmode.org/js/cookies.html */
