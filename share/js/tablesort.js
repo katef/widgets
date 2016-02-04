@@ -156,71 +156,6 @@ var Tablesort = new (function () {
 		return node.table_serialised;
 	}
 
-	function hasclass(node, klass) {
-		var a, c;
-
-		c = node.getAttribute('class');
-		if (c == null) {
-			return;
-		}
-
-		a = c.split(/\s/);
-
-		for (var i in a) {
-			if (a[i] == klass) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	function removeclass(node, klass) {
-		var a, c;
-
-		c = node.getAttribute('class');
-		if (c == null) {
-			return;
-		}
-
-		a = c.split(/\s/);
-
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == klass || a[i] == '') {
-				a.splice(i, 1);
-				i--;
-			}
-		}
-
-		if (a.length == 0) {
-			node.removeAttribute('class');
-		} else {
-			node.setAttribute('class', a.join(' '));
-		}
-	}
-
-	function addclass(node, klass) {
-		var a, c;
-
-		a = [ ];
-
-		c = node.getAttribute('class');
-		if (c != null) {
-			a = c.split(/\s/);
-		}
-
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == klass || a[i] == '') {
-				a.splice(i, 1);
-				i--;
-			}
-		}
-
-		a.push(klass);
-
-		node.setAttribute('class', a.join(' '));
-	}
-
 	/*
 	 * Always returns an array, even if it's empty. The array contains DOM nodes.
 	 * Modifying nodes will change the document.
@@ -426,12 +361,12 @@ var Tablesort = new (function () {
 
 		o = { };
 
-		if (hasclass(th, "table-sorted")) {
+		if (Class.has(th, "table-sorted")) {
 			o.sort = function (t, v) {
 					v.reverse();
 				};
 
-			o.dir = hasclass(th, 'table-ascending')
+			o.dir = Class.has(th, 'table-ascending')
 				? 'table-descending'
 				: 'table-ascending';
 		} else {
@@ -467,21 +402,21 @@ var Tablesort = new (function () {
 		/* TODO: only if this isn't our column; deal with that separately */
 		o = xpath(t, "h:tbody/h:tr/h:td|h:tr/h:td");
 		for (var w in o) {
-			removeclass(o[w], "table-sorted");
+			Class.remove(o[w], "table-sorted");
 		}
 
 		/* Reset direction for all other columns' headers */
 		o = xpath(t, "h:thead/h:tr/h:th|h:tr/h:th");
 		for (var w in o) {
-			removeclass(o[w], "table-ascending");
-			removeclass(o[w], "table-descending");
+			Class.remove(o[w], "table-ascending");
+			Class.remove(o[w], "table-descending");
 			if (o[w] != th) {
-				removeclass(o[w], "table-sorted");
+				Class.remove(o[w], "table-sorted");
 			}
 		}
 
-		addclass(th, dir);
-		addclass(th, "table-sorted");
+		Class.add(th, dir);
+		Class.add(th, "table-sorted");
 	}
 
 	/*
@@ -502,7 +437,7 @@ var Tablesort = new (function () {
 		}
 
 		for (var w in v) {
-			addclass(v[w], "table-sorted");
+			Class.add(v[w], "table-sorted");
 			body.appendChild(v[w].parentNode);
 		}
 	}
@@ -588,7 +523,7 @@ var Tablesort = new (function () {
 			}
 
 			if (th.table_p[b] == -1) {
-				addclass(th, "table-notype");
+				Class.add(th, "table-notype");
 				continue;
 			}
 
@@ -653,7 +588,7 @@ var Tablesort = new (function () {
 			 * TODO: on doubleclick maybe?
 			 */
 
-			addclass(lowest, "table-sortable");
+			Class.add(lowest, "table-sortable");
 			lowest.setAttribute("onclick",
 				"Tablesort.sort(this, " + r + ", " + c + "); false");
 

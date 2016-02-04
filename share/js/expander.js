@@ -2,86 +2,18 @@
 
 var Expander = new (function () {
 
-	/* see http://elide.org/snippets/css.js */
-	function hasclass(node, klass) {
-		var a, c;
-
-		c = node.getAttribute('class');
-		if (c == null) {
-			return;
-		}
-
-		a = c.split(/\s/);
-
-		for (var i in a) {
-			if (a[i] == klass) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/* see http://elide.org/snippets/css.js */
-	function removeclass(node, klass) {
-		var a, c;
-
-		c = node.getAttribute('class');
-		if (c == null) {
-			return;
-		}
-
-		a = c.split(/\s/);
-
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == klass || a[i] == '') {
-				a.splice(i, 1);
-				i--;
-			}
-		}
-
-		if (a.length == 0) {
-			node.removeAttribute('class');
-		} else {
-			node.setAttribute('class', a.join(' '));
-		}
-	}
-
-	/* see http://elide.org/snippets/css.js */
-	function addclass(node, klass) {
-		var a, c;
-
-		a = [ ];
-
-		c = node.getAttribute('class');
-		if (c != null) {
-			a = c.split(/\s/);
-		}
-
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == klass || a[i] == '') {
-				a.splice(i, 1);
-				i--;
-			}
-		}
-
-		a.push(klass);
-
-		node.setAttribute('class', a.join(' '));
-	}
-
 	this.toggle = function (a, accordion, expand, oneway) {
 		var dl, dt = a.parentNode;
 		var endclass;
 		var r;
 
 		for (dl = dt; dl != null; dl = dl.parentNode) {
-			if (hasclass(dl, "expandable")) {
+			if (Class.has(dl, "expandable")) {
 				break;
 			}
 		}
 
-		r = !hasclass(dt, "current");
+		r = !Class.has(dt, "current");
 
 		if (dl == null) {
 			return r;
@@ -90,11 +22,11 @@ var Expander = new (function () {
 		if (accordion) {
 			var xdt = dl.getElementsByTagName("dt");
 			for (var j = 0; j < xdt.length; j++) {
-				removeclass(xdt[j], "current");
+				Class.remove(xdt[j], "current");
 			}
 
 			if (r) {
-				addclass(dt, "current");
+				Class.add(dt, "current");
 			}
 		}
 
@@ -102,17 +34,17 @@ var Expander = new (function () {
 			if (oneway) {
 				endclass = oneway;
 			} else {
-				if (hasclass(dl, "expanded")) {
+				if (Class.has(dl, "expanded")) {
 					endclass = "collapsed";
 				} else {
 					endclass = "expanded";
 				}
 			}
 
-			removeclass(dl, "expanded");
-			removeclass(dl, "collapsed");
+			Class.remove(dl, "expanded");
+			Class.remove(dl, "collapsed");
 
-			addclass(dl, endclass);
+			Class.add(dl, endclass);
 		}
 
 		return r;
@@ -122,7 +54,7 @@ var Expander = new (function () {
 		var dl = root.getElementsByTagName(dlname);
 
 		for (var i = 0; i < dl.length; i++) {
-			if (!hasclass(dl[i], "expandable")) {
+			if (!Class.has(dl[i], "expandable")) {
 				continue;
 			}
 
@@ -144,8 +76,8 @@ var Expander = new (function () {
 					};
 			}
 
-			if (!accordion && !hasclass(dl[i], "expanded")) {
-				addclass(dl[i], "collapsed");
+			if (!accordion && !Class.has(dl[i], "expanded")) {
+				Class.add(dl[i], "collapsed");
 			}
 		}
 	}

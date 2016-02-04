@@ -3,74 +3,6 @@
 document.onkeyup = function (e) {
 	var e = window.event ? event : e;
 
-	/* see http://elide.org/snippets/css.js */
-	function hasclass(node, klass) {
-		var a, c;
-
-		c = node.getAttribute('class');
-		if (c == null) {
-			return;
-		}
-
-		a = c.split(/\s/);
-
-		for (var i in a) {
-			if (a[i] == klass) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/* see http://elide.org/snippets/css.js */
-	function removeclass(node, klass) {
-		var a, c;
-
-		c = node.getAttribute('class');
-		if (c == null) {
-			return;
-		}
-
-		a = c.split(/\s/);
-
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == klass || a[i] == '') {
-				a.splice(i, 1);
-				i--;
-			}
-		}
-
-		if (a.length == 0) {
-			node.removeAttribute('class');
-		} else {
-			node.setAttribute('class', a.join(' '));
-		}
-	}
-
-	/* see http://elide.org/snippets/css.js */
-	function addclass(node, klass) {
-		var a, c;
-
-		a = [ ];
-
-		c = node.getAttribute('class');
-		if (c != null) {
-			a = c.split(/\s/);
-		}
-
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == klass || a[i] == '') {
-				a.splice(i, 1);
-				i--;
-			}
-		}
-
-		a.push(klass);
-
-		node.setAttribute('class', a.join(' '));
-	}
-
 	function loadstylesheet(doc, href) {
 		var head, link;
 
@@ -98,8 +30,8 @@ document.onkeyup = function (e) {
 		html = document.body.parentNode;
 
 /* TODO: store state in cookie */
-		if (hasclass(html, 'debug')) {
-			removeclass(html, 'debug');
+		if (Class.has(html, 'debug')) {
+			Class.remove(html, 'debug');
 		} else {
 			if (Overlay) {
 				Overlay.init(body, 'rows', 24); /* enough for anyone */
@@ -107,7 +39,7 @@ document.onkeyup = function (e) {
 			}
 
 			loadstylesheet(document, '/css/debug.css');
-			addclass(html, 'debug');
+			Class.add(html, 'debug');
 		}
 	}
 }

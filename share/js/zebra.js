@@ -13,31 +13,9 @@ var Zebra = new (function () {
 	function zebra(t, modulus) {
 		var a;
 
-		function addclass(node, klass) {
-			var a, c;
-
-			a = [ ];
-
-			c = node.getAttribute('class');
-			if (c != null) {
-				a = c.split(/\s/);
-			}
-
-			for (var i = 0; i < a.length; i++) {
-				if (a[i] == klass || a[i] == '') {
-					a.splice(i, 1);
-					i--;
-				}
-			}
-
-			a.push(klass);
-
-			node.setAttribute('class', a.join(' '));
-		}
-
 		function stripe(a) {
 			for (var i = 0; i < a.length; i++) {
-				addclass(a[i], "zebra-" + (i % modulus));
+				Class.add(a[i], "zebra-" + (i % modulus));
 			}
 		}
 

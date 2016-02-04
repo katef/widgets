@@ -5,29 +5,6 @@
 
 var Rowlinks = new (function () {
 
-	/* see http://elide.org/snippets/css.js */
-	function addclass(node, klass) {
-		var a, c;
-
-		a = [ ];
-
-		c = node.getAttribute('class');
-		if (c != null) {
-			a = c.split(/\s/);
-		}
-
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == klass || a[i] == '') {
-				a.splice(i, 1);
-				i--;
-			}
-		}
-
-		a.push(klass);
-
-		node.setAttribute('class', a.join(' '));
-	}
-
 	this.convert = function (t) {
 		var rows;
 
@@ -42,7 +19,7 @@ var Rowlinks = new (function () {
 
 			rows[i].onclick = new Function("document.location.href='" + link[0].href + "'");
 
-			addclass(rows[i], "rowlink");
+			Class.add(rows[i], "rowlink");
 		}
 	}
 

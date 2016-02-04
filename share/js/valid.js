@@ -30,79 +30,12 @@ TODO: consider masking for prettification, something like http://zendold.lojcomm
 
 TODO: explain some of the usage intentions
 TODO: all my functions don't need to be prefixed form_*()...
+TODO: switch to data-valid="" instead of v:regex=""
 
 */
 
 var Valid = new (function () {
 	var NS = "http://xml.elide.org/valid";
-
-	/* see http://elide.org/snippets/css.js */
-	function hasclass(node, klass) {
-		var a, c;
-
-		c = node.getAttribute('class');
-		if (c == null) {
-			return;
-		}
-
-		a = c.split(/\s/);
-
-		for (var i in a) {
-			if (a[i] == klass) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/* see http://elide.org/snippets/css.js */
-	function removeclass(node, klass) {
-		var a, c;
-
-		c = node.getAttribute('class');
-		if (c == null) {
-			return;
-		}
-
-		a = c.split(/\s/);
-
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == klass || a[i] == '') {
-				a.splice(i, 1);
-				i--;
-			}
-		}
-
-		if (a.length == 0) {
-			node.removeAttribute('class');
-		} else {
-			node.setAttribute('class', a.join(' '));
-		}
-	}
-
-	/* see http://elide.org/snippets/css.js */
-	function addclass(node, klass) {
-		var a, c;
-
-		a = [ ];
-
-		c = node.getAttribute('class');
-		if (c != null) {
-			a = c.split(/\s/);
-		}
-
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == klass || a[i] == '') {
-				a.splice(i, 1);
-				i--;
-			}
-		}
-
-		a.push(klass);
-
-		node.setAttribute('class', a.join(' '));
-	}
 
 	/* see http://elide.org/snippets/events.js */
 	function fireevent(node, type) {
@@ -132,11 +65,11 @@ var Valid = new (function () {
 		inputs = form.getElementsByTagName('input');
 
 		for (var i = 0; i < inputs.length; i++) {
-			if (hasclass(inputs[i], 'invalid')) {
+			if (Class.has(inputs[i], 'invalid')) {
 				return false;
 			}
 
-			if (hasclass(inputs[i], 'missing')) {
+			if (Class.has(inputs[i], 'missing')) {
 				return false;
 			}
 		}
@@ -150,7 +83,7 @@ var Valid = new (function () {
 		inputs = form.getElementsByTagName('input');
 
 		for (var i = 0; i < inputs.length; i++) {
-			if (hasclass(inputs[i], 'missing')) {
+			if (Class.has(inputs[i], 'missing')) {
 				return true;
 			}
 		}
@@ -159,20 +92,20 @@ var Valid = new (function () {
 	}
 
 	function form_setmissing(form, missing) {
-		removeclass(form, 'missing');
+		Class.remove(form, 'missing');
 
 		if (missing) {
-			addclass(form, 'missing');
+			Class.add(form, 'missing');
 		}
 	}
 
 	function form_setsubmittable(form, valid) {
 		var inputs;
 
-		removeclass(form, 'invalid');
-		removeclass(form, 'valid');
+		Class.remove(form, 'invalid');
+		Class.remove(form, 'valid');
 
-		addclass(form, valid == true ? 'valid' : 'invalid');
+		Class.add(form, valid == true ? 'valid' : 'invalid');
 
 		inputs = form.getElementsByTagName('input');
 
@@ -220,11 +153,11 @@ var Valid = new (function () {
 				continue;
 			}
 
-			removeclass(labels[i], 'valid');
-			removeclass(labels[i], 'invalid');
-			removeclass(labels[i], 'missing');
+			Class.remove(labels[i], 'valid');
+			Class.remove(labels[i], 'invalid');
+			Class.remove(labels[i], 'missing');
 
-			addclass(labels[i], state);
+			Class.add(labels[i], state);
 		}
 	}
 
@@ -239,14 +172,14 @@ var Valid = new (function () {
 				continue;
 			}
 
-			addclass(labels[i], 'required');
+			Class.add(labels[i], 'required');
 		}
 	}
 
 	function initinput(form, input, regex) {
 		var re;
 
-		addclass(input, 'validation');
+		Class.add(input, 'validation');
 
 		re = new RegExp(regex)
 		if (re == null) {
@@ -254,7 +187,7 @@ var Valid = new (function () {
 		}
 
 		if (!re.test('')) {
-			addclass(input, 'required');
+			Class.add(input, 'required');
 
 			form_reqlabels(form, input);
 		}
@@ -271,11 +204,11 @@ var Valid = new (function () {
 				return;
 			}
 
-			removeclass(e.target, 'valid');
-			removeclass(e.target, 'invalid');
-			removeclass(e.target, 'missing');
+			Class.remove(e.target, 'valid');
+			Class.remove(e.target, 'invalid');
+			Class.remove(e.target, 'missing');
 
-			if (e.target.value == '' && hasclass(e.target, 'required')) {
+			if (e.target.value == '' && Class.has(e.target, 'required')) {
 				state = 'missing';
 			} else if (re.test(e.target.value)) {
 				state = 'valid';
@@ -283,7 +216,7 @@ var Valid = new (function () {
 				state = 'invalid';
 			}
 
-			addclass(e.target, state);
+			Class.add(e.target, state);
 
 			form_setmissing(e.target.form, form_hasmissing(e.target.form));
 
@@ -356,7 +289,7 @@ var Valid = new (function () {
 			form_setmissing(e.target, form_hasmissing(e.target));
 			form_setsubmittable(e.target, form_isvalid(e.target));
 
-			return hasclass(e.target, 'valid');
+			return Class.has(e.target, 'valid');
 		}
 	}
 

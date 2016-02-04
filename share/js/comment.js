@@ -24,54 +24,6 @@ var Comment = new (function () {
 		parent.replaceChild(newnode, oldnode);
 	}
 
-	/* see http://elide.org/snippets/css.js */
-	function removeclass(node, klass) {
-		var a, c;
-
-		c = node.getAttribute('class');
-		if (c == null) {
-			return;
-		}
-
-		a = c.split(/\s/);
-
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == klass || a[i] == '') {
-				a.splice(i, 1);
-				i--;
-			}
-		}
-
-		if (a.length == 0) {
-			node.removeAttribute('class');
-		} else {
-			node.setAttribute('class', a.join(' '));
-		}
-	}
-
-	/* see http://elide.org/snippets/css.js */
-	function addclass(node, klass) {
-		var a, c;
-
-		a = [ ];
-
-		c = node.getAttribute('class');
-		if (c != null) {
-			a = c.split(/\s/);
-		}
-
-		for (var i = 0; i < a.length; i++) {
-			if (a[i] == klass || a[i] == '') {
-				a.splice(i, 1);
-				i--;
-			}
-		}
-
-		a.push(klass);
-
-		node.setAttribute('class', a.join(' '));
-	}
-
 	function fieldvalue(id) {
 		var e;
 
@@ -143,17 +95,17 @@ var Comment = new (function () {
 		if (advice) {
 			document.getElementById('comment-advice').textContent = advice;
 
-			addclass(document.getElementById('comment'), 'advice');
+			Class.add(document.getElementById('comment'), 'advice');
 		}
 
-		addclass(document.getElementById('comment'), 'error');
+		Class.add(document.getElementById('comment'), 'error');
 	}
 
 	function post(action, f) {
 		var t;
 
-		removeclass(document.getElementById('comment'), 'error');
-		removeclass(document.getElementById('comment'), 'advice');
+		Class.remove(document.getElementById('comment'), 'error');
+		Class.remove(document.getElementById('comment'), 'advice');
 		document.getElementById('comment-advice').textContent = '';
 
 		var fields = {
