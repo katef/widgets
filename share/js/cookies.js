@@ -4,17 +4,22 @@ var Cookie = new (function () {
 
 	/* Adapted from http://www.quirksmode.org/js/cookies.html */
 	this.set = function (domain, name, value, days) {
-		var date, expires;
+		var date, cookie;
+
+		cookie  = name + "=" + value;
+		cookie += ";path=/";
+
+		if (domain) {
+			cookie += ";domain=" + domain;
+		}
 
 		if (days) {
 			date = new Date();
 			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-			expires = "; expires=" + date.toGMTString();
-		} else {
-			expires = "";
+			cookie += ";expires=" + date.toGMTString();
 		}
 
-		document.cookie = name + "=" + value + expires + "; path=/; domain=" + domain;
+		document.cookie = cookie;
 	}
 
 	/* Adapted from http://www.quirksmode.org/js/cookies.html */
