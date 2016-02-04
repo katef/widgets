@@ -89,8 +89,17 @@ var Comment = new (function () {
 	}
 
 	function error(prefix, message, advice) {
-		document.getElementById('comment-error').textContent
-			= prefix ? (prefix + ': ' + message + '.') : (message + '.');
+		if (prefix) {
+			if (message) {
+				message = prefix + ': ' + message;
+			} else {
+				message = prefix;
+			}
+		}
+
+		if (message) {
+			document.getElementById('comment-error').textContent = message + '.';
+		}
 
 		if (advice) {
 			document.getElementById('comment-advice').textContent = advice;
@@ -127,6 +136,12 @@ var Comment = new (function () {
 		t = Template(document.getElementById('tmpl:post'), fields);
 
 		Ajax.post(action, t, function (status, message) {
+			/* CORS errors are intentionally unidentifiable for security */
+			if (status == 0 && !message) {
+				message = 'Network error. '
+						+ 'The exact reason was not given by your browser';
+			}
+
 			switch (status) {
 			case 200:
 			case 201:
