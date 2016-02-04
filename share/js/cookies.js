@@ -1,40 +1,44 @@
 /* $Id$ */
 
-/* Adapted from http://www.quirksmode.org/js/cookies.html */
-function setCookie(domain, name, value, days) {
-	var date, expires;
+var Cookie = new (function () {
 
-	if (days) {
-		date = new Date();
-		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-		expires = "; expires=" + date.toGMTString();
-	} else {
-		expires = "";
-	}
+	/* Adapted from http://www.quirksmode.org/js/cookies.html */
+	this.set = function (domain, name, value, days) {
+		var date, expires;
 
-	document.cookie = name + "=" + value + expires + "; path=/; domain=" + domain;
-}
-
-/* Adapted from http://www.quirksmode.org/js/cookies.html */
-function getCookie(name) {
-	var ca;
-
-	name += "=";
-	ca = document.cookie.split(';');
-
-	for (var i = 0; i < ca.length; i++) {
-		var c;
-
-		c = ca[i];
-		while (c.charAt(0) == ' ') {
-			c = c.substring(1, c.length);
+		if (days) {
+			date = new Date();
+			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			expires = "; expires=" + date.toGMTString();
+		} else {
+			expires = "";
 		}
 
-		if (c.indexOf(name) == 0) {
-			return c.substring(name.length, c.length);
-		}
+		document.cookie = name + "=" + value + expires + "; path=/; domain=" + domain;
 	}
 
-	return null;
-}
+	/* Adapted from http://www.quirksmode.org/js/cookies.html */
+	this.get = function (name) {
+		var ca;
+
+		name += "=";
+		ca = document.cookie.split(';');
+
+		for (var i = 0; i < ca.length; i++) {
+			var c;
+
+			c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1, c.length);
+			}
+
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+
+		return null;
+	}
+
+});
 
