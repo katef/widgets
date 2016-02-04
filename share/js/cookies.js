@@ -2,6 +2,28 @@
 
 var Cookie = new (function () {
 
+	this.enabled = function () {
+		var name  = 'cookieenabledtest';
+		var value = 'test';
+		var r;
+
+		/*
+		 * navigator.cookieEnabled lies on IE under privacy high,
+		 * so we don't use it. Instead we try setting a test cookie,
+		 * but that throws a SecurityError in some situations,
+		 * hence the try-catch.
+		 */
+
+		try {
+			this.set(null, name, value, false);
+			r = this.get(name) == value;
+			this.set(null, name, value, -1);
+			return r;
+		} catch (e) {
+			return false;
+		}
+	}
+
 	/* Adapted from http://www.quirksmode.org/js/cookies.html */
 	this.set = function (domain, name, value, days) {
 		var date, cookie;
