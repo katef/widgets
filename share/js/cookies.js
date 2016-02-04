@@ -17,7 +17,7 @@ var Cookie = new (function () {
 		try {
 			this.set(null, name, value, false);
 			r = this.get(name) == value;
-			this.set(null, name, value, -1);
+			this.expire(null, name);
 			return r;
 		} catch (e) {
 			return false;
@@ -42,6 +42,10 @@ var Cookie = new (function () {
 		}
 
 		document.cookie = cookie;
+	}
+
+	this.expire = function (domain, name) {
+		this.set(domain, name, '', -1);
 	}
 
 	/* Adapted from http://www.quirksmode.org/js/cookies.html */
