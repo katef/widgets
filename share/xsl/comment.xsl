@@ -59,18 +59,18 @@
 
 			<label>
 <!-- TODO: default to anonymous -->
-				<input id="form-author" type="text" name="author" size="30" data-valid="."/>
+				<input id="form-author" type="text" name="author" size="30" pattern="."/>
 				<xsl:text>Your name (required)</xsl:text>
 			</label>
 
 			<label>
-				<input id="form-email" type="text" name="email" size="30" data-valid="@?"/>	<!-- TODO: regexp -->
+				<input id="form-email" type="text" name="email" size="30" pattern="@?"/>	<!-- TODO: regexp -->
 				<xsl:text>Your email (it won't be shown)</xsl:text>
 			</label>
 
 			<label>
 				<!-- TODO: html5 validation fields -->
-				<input id="form-url" type="text" name="url" size="30" data-valid="^((https?://)?([^.]+\.)+[a-z]+(/.*)?)?$"/>
+				<input id="form-url" type="text" name="url" size="30" pattern="((https?://)?([^.]+\.)+[a-z]+(/.*)?)?"/>
 				<xsl:text>Your website</xsl:text>
 				<span class="example">
 					<xsl:text>(e.g. </xsl:text>
@@ -82,18 +82,18 @@
 			</label>
 
 			<label id="stuff1">
-				<input type="text" name="stuff1" size="30" data-valid=".*"/>
+				<input type="text" name="stuff1" size="30" pattern=".*"/>
 				<xsl:text>The year (to prove you're human)</xsl:text>
 			</label>
 
 			<label id="stuff2">
-				<input type="text" name="stuff2" size="30" data-valid=".*"/>
+				<input type="text" name="stuff2" size="30" pattern=".*"/>
 				<xsl:text>Some more stuff</xsl:text>
 			</label>
 
 			<label>
 <!-- TODO: what's the id for? -->
-				<textarea id="form-comment" name="comment" rows="10" cols="80" data-valid="^.+$"/>
+				<textarea id="form-comment" name="comment" rows="10" cols="80" pattern=".+"/>
 				<aside class="markup">
 					<xsl:text>Markup permitted: </xsl:text>
 					<code>&lt;br/&gt;</code>

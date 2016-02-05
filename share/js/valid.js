@@ -151,12 +151,12 @@ var Valid = new (function () {
 		}
 	}
 
-	function initinput(form, input, regex) {
+	function initinput(form, input, pattern) {
 		var re;
 
 		Class.add(input, 'validation');
 
-		re = new RegExp(regex)
+		re = new RegExp(pattern)
 		if (re == null) {
 			return;
 		}
@@ -224,10 +224,12 @@ var Valid = new (function () {
 		inputs = form.getElementsByTagName('input');
 
 		for (var i = 0; i < inputs.length; i++) {
-			var regex;
+			var pattern;
 
-			regex = inputs[i].dataset.valid;
-			if (regex == null) {
+			/* TODO: fall back to finding the attribute for non-HTML5 browsers.
+			 * or make a .pattern polyfill  */
+			pattern = '^' + inputs[i].pattern + '$';
+			if (pattern == null) {
 				continue;
 			}
 
@@ -235,7 +237,7 @@ var Valid = new (function () {
 				continue;
 			}
 
-			initinput(form, inputs[i], regex);
+			initinput(form, inputs[i], pattern);
 		}
 
 		/* for refresh auto-populating a form, after it was marked invalid.  TODO: explain this reenables the submit button */
