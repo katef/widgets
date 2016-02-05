@@ -5,10 +5,9 @@
 	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:tl="http://xml.elide.org/timeline"
-	xmlns:v="http://xml.elide.org/valid"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 
-	exclude-result-prefixes="h tl v">
+	exclude-result-prefixes="h tl">
 
 	<!--
 		TODO: where to get the comments date from?
@@ -60,18 +59,18 @@
 
 			<label>
 <!-- TODO: default to anonymous -->
-				<input id="form-author" type="text" name="author" size="30" v:regex="."/>
+				<input id="form-author" type="text" name="author" size="30" data-valid="."/>
 				<xsl:text>Your name (required)</xsl:text>
 			</label>
 
 			<label>
-				<input id="form-email" type="text" name="email" size="30" v:regex="@?"/>	<!-- TODO: regexp -->
+				<input id="form-email" type="text" name="email" size="30" data-valid="@?"/>	<!-- TODO: regexp -->
 				<xsl:text>Your email (it won't be shown)</xsl:text>
 			</label>
 
 			<label>
 				<!-- TODO: html5 validation fields -->
-				<input id="form-url" type="text" name="url" size="30" v:regex="^((https?://)?([^.]+\.)+[a-z]+(/.*)?)?$"/>
+				<input id="form-url" type="text" name="url" size="30" data-valid="^((https?://)?([^.]+\.)+[a-z]+(/.*)?)?$"/>
 				<xsl:text>Your website</xsl:text>
 				<span class="example">
 					<xsl:text>(e.g. </xsl:text>
@@ -83,18 +82,18 @@
 			</label>
 
 			<label id="stuff1">
-				<input type="text" name="stuff1" size="30" v:regex=".*"/>
+				<input type="text" name="stuff1" size="30" data-valid=".*"/>
 				<xsl:text>The year (to prove you're human)</xsl:text>
 			</label>
 
 			<label id="stuff2">
-				<input type="text" name="stuff2" size="30" v:regex=".*"/>
+				<input type="text" name="stuff2" size="30" data-valid=".*"/>
 				<xsl:text>Some more stuff</xsl:text>
 			</label>
 
 			<label>
 <!-- TODO: what's the id for? -->
-				<textarea id="form-comment" name="comment" rows="10" cols="80" v:regex="^.+$"/>
+				<textarea id="form-comment" name="comment" rows="10" cols="80" data-valid="^.+$"/>
 				<aside class="markup">
 					<xsl:text>Markup permitted: </xsl:text>
 					<code>&lt;br/&gt;</code>

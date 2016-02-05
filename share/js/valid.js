@@ -2,7 +2,6 @@
 
 /* TODO:
 search document.forms (right?)
-find @valid regexps from our namespace
 add @onchange
 add @onsubmit
 
@@ -16,7 +15,7 @@ submitting an invalid form: need some sort of animation for positive feedback?
 no need; just disable the submit button
 
 TODO: cooperate with the pre-filled form text thingies; make a separate script which does that.
-<input type="text" pre:text="Search..."/> or something
+<input type="text" data-instruction="Search..."/> or something
 
 TODO: set form class onsubmit, and use display: none to hide a warning message
 
@@ -30,12 +29,10 @@ TODO: consider masking for prettification, something like http://zendold.lojcomm
 
 TODO: explain some of the usage intentions
 TODO: all my functions don't need to be prefixed form_*()...
-TODO: switch to data-valid="" instead of v:regex=""
 
 */
 
 var Valid = new (function () {
-	var NS = "http://xml.elide.org/valid";
 
 	function form_isvalid(form, state) {
 		var inputs;
@@ -229,12 +226,7 @@ var Valid = new (function () {
 		for (var i = 0; i < inputs.length; i++) {
 			var regex;
 
-			/*
-			 * Looks like firefox screws up getAttributeNS(), so I'm doing this
-			 * both ways, instead...
-			 */
-			regex = inputs[i].getAttributeNS(NS, 'regex')
-			     || inputs[i].getAttribute('v:regex');
+			regex = inputs[i].dataset.valid;
 			if (regex == null) {
 				continue;
 			}
