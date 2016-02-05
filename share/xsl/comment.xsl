@@ -64,13 +64,13 @@
 			</label>
 
 			<label>
-				<input id="form-email" type="text" name="email" size="30" pattern="@?"/>	<!-- TODO: regexp -->
+				<input id="form-email" type="email" name="email" size="30" pattern="@?"/>	<!-- TODO: regexp -->
 				<xsl:text>Your email (it won't be shown)</xsl:text>
 			</label>
 
 			<label>
 				<!-- TODO: html5 validation fields -->
-				<input id="form-url" type="text" name="url" size="30" pattern="((https?://)?([^.]+\.)+[a-z]+(/.*)?)?"/>
+				<input id="form-url" type="url" name="url" size="30" pattern="((https?://)?([^.]+\.)+[a-z]+(/.*)?)?"/>
 				<xsl:text>Your website</xsl:text>
 				<span class="example">
 					<xsl:text>(e.g. </xsl:text>
