@@ -66,37 +66,3 @@ aside#comment-preview {
 	border-radius:         4px;
 }
 
-// TODO: rework this
-form {
-	aside.feedback {
-		display: none;
-
-		p {
-			display: none;
-			margin: 0;
-		}
-	}
-
-	&.invalid aside.feedback,
-	&.error aside.feedback {
-		display: block;
-		border: solid 2px #f88;
-		color: #f44;
-		background-color: #fee;
-		margin: 40px -10px 20px;
-		padding: 10px;
-	}
-	
-	&.invalid p.invalid {
-		display: block;
-	}
-
-	&.error aside.feedback p#comment-error {
-		display: block;
-	}
-
-	&.advice aside.feedback p#comment-advice {
-		display: block;
-	}
-}
-
