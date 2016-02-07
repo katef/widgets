@@ -59,7 +59,7 @@
 
 			<label>
 <!-- TODO: default to anonymous -->
-				<input id="form-author" type="text" name="author" size="30" pattern="."/>
+				<input id="form-author" type="text" name="author" size="30" pattern=".+"/>
 				<xsl:text>Your name (required)</xsl:text>
 			</label>
 
