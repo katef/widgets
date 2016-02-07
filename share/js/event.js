@@ -22,5 +22,13 @@ var EventThing = new (function () {
 		}
 	}
 
+	this.attach = function (node, name, f) {
+		node.addEventListener(name, f, false);
+	}
+
+	this.detach = function (node, name) {
+		node.removeEventListener(name, f, false);
+	}
+
 });
 
