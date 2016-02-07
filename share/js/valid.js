@@ -283,5 +283,6 @@ var Valid = new (function () {
 			initform(forms[i]);
 		}
 	}
+
 });
 
