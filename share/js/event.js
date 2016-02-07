@@ -2,7 +2,7 @@
 
 var EventThing = new (function () {
 
-	function fire(node, type) {
+	this.fire = function (node, type) {
 		/* IE */
 		if (node.fireEvent) {
 			node.fireEvent('on' + type);
