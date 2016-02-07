@@ -40,11 +40,11 @@ var Valid = new (function () {
 		inputs = form.getElementsByTagName('input');
 
 		for (var i = 0; i < inputs.length; i++) {
-			if (Class.has(inputs[i], 'invalid')) {
+			if (inputs[i].classList.contains('invalid')) {
 				return false;
 			}
 
-			if (Class.has(inputs[i], 'missing')) {
+			if (inputs[i].classList.contains('missing')) {
 				return false;
 			}
 		}
@@ -58,7 +58,7 @@ var Valid = new (function () {
 		inputs = form.getElementsByTagName('input');
 
 		for (var i = 0; i < inputs.length; i++) {
-			if (Class.has(inputs[i], 'missing')) {
+			if (inputs[i].classList.contains('missing')) {
 				return true;
 			}
 		}
@@ -67,20 +67,16 @@ var Valid = new (function () {
 	}
 
 	function form_setmissing(form, missing) {
-		Class.remove(form, 'missing');
-
-		if (missing) {
-			Class.add(form, 'missing');
-		}
+		form.classList.toggle('missing', missing);
 	}
 
 	function form_setsubmittable(form, valid) {
 		var inputs;
 
-		Class.remove(form, 'invalid');
-		Class.remove(form, 'valid');
+		form.classList.remove('invalid');
+		form.classList.remove(form, 'valid');
 
-		Class.add(form, valid == true ? 'valid' : 'invalid');
+		form.classList.add(valid == true ? 'valid' : 'invalid');
 
 		inputs = form.getElementsByTagName('input');
 
@@ -128,11 +124,11 @@ var Valid = new (function () {
 				continue;
 			}
 
-			Class.remove(labels[i], 'valid');
-			Class.remove(labels[i], 'invalid');
-			Class.remove(labels[i], 'missing');
+			labels[i].classList.remove('valid');
+			labels[i].classList.remove('invalid');
+			labels[i].classList.remove('missing');
 
-			Class.add(labels[i], state);
+			labels[i].classList.add(state);
 		}
 	}
 
@@ -147,14 +143,14 @@ var Valid = new (function () {
 				continue;
 			}
 
-			Class.add(labels[i], 'required');
+			labels[i].classList.add('required');
 		}
 	}
 
 	function initinput(form, input, pattern) {
 		var re;
 
-		Class.add(input, 'validation');
+		input.classList.add('validation');
 
 		re = new RegExp(pattern)
 		if (re == null) {
@@ -162,7 +158,7 @@ var Valid = new (function () {
 		}
 
 		if (!re.test('')) {
-			Class.add(input, 'required');
+			input.classList.add('required');
 
 			form_reqlabels(form, input);
 		}
@@ -179,11 +175,11 @@ var Valid = new (function () {
 				return;
 			}
 
-			Class.remove(e.target, 'valid');
-			Class.remove(e.target, 'invalid');
-			Class.remove(e.target, 'missing');
+			e.target.classList.remove('valid');
+			e.target.classList.remove('invalid');
+			e.target.classList.remove('missing');
 
-			if (e.target.value == '' && Class.has(e.target, 'required')) {
+			if (e.target.value == '' && e.target.classList.contains('required')) {
 				state = 'missing';
 			} else if (re.test(e.target.value)) {
 				state = 'valid';
@@ -191,7 +187,7 @@ var Valid = new (function () {
 				state = 'invalid';
 			}
 
-			Class.add(e.target, state);
+			e.target.classList.add(state);
 
 			form_setmissing(e.target.form, form_hasmissing(e.target.form));
 
@@ -261,7 +257,7 @@ var Valid = new (function () {
 			form_setmissing(e.target, form_hasmissing(e.target));
 			form_setsubmittable(e.target, form_isvalid(e.target));
 
-			return Class.has(e.target, 'valid');
+			return e.target.classList.contains('valid');
 		}
 	}
 

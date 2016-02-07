@@ -8,12 +8,12 @@ var Expander = new (function () {
 		var r;
 
 		for (dl = dt; dl != null; dl = dl.parentNode) {
-			if (Class.has(dl, "expandable")) {
+			if (dl.classList.contains("expandable")) {
 				break;
 			}
 		}
 
-		r = !Class.has(dt, "current");
+		r = !dt.classList.contains("current");
 
 		if (dl == null) {
 			return r;
@@ -22,11 +22,11 @@ var Expander = new (function () {
 		if (accordion) {
 			var xdt = dl.getElementsByTagName("dt");
 			for (var j = 0; j < xdt.length; j++) {
-				Class.remove(xdt[j], "current");
+				xdt[j].classList.remove("current");
 			}
 
 			if (r) {
-				Class.add(dt, "current");
+				dt.classList.add("current");
 			}
 		}
 
@@ -34,17 +34,17 @@ var Expander = new (function () {
 			if (oneway) {
 				endclass = oneway;
 			} else {
-				if (Class.has(dl, "expanded")) {
+				if (dl.classList.contains("expanded")) {
 					endclass = "collapsed";
 				} else {
 					endclass = "expanded";
 				}
 			}
 
-			Class.remove(dl, "expanded");
-			Class.remove(dl, "collapsed");
+			dl.classList.remove("expanded");
+			dl.classList.remove("collapsed");
 
-			Class.add(dl, endclass);
+			dl.classList.add(endclass);
 		}
 
 		return r;
@@ -54,7 +54,7 @@ var Expander = new (function () {
 		var dl = root.getElementsByTagName(dlname);
 
 		for (var i = 0; i < dl.length; i++) {
-			if (!Class.has(dl[i], "expandable")) {
+			if (!dl[i].classList.contains("expandable")) {
 				continue;
 			}
 
@@ -76,8 +76,8 @@ var Expander = new (function () {
 					};
 			}
 
-			if (!accordion && !Class.has(dl[i], "expanded")) {
-				Class.add(dl[i], "collapsed");
+			if (!accordion && !dl[i].classList.contains("expanded")) {
+				dl[i].classList.add("collapsed");
 			}
 		}
 	}

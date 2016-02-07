@@ -30,8 +30,8 @@ document.onkeyup = function (e) {
 		html = document.body.parentNode;
 
 /* TODO: store state in cookie */
-		if (Class.has(html, 'debug')) {
-			Class.remove(html, 'debug');
+		if (html.classList.contains('debug')) {
+			html.classList.remove('debug');
 		} else {
 			if (Overlay) {
 				Overlay.init(body, 'rows', 24); /* enough for anyone */
@@ -39,7 +39,7 @@ document.onkeyup = function (e) {
 			}
 
 			loadstylesheet(document, '/css/debug.css');
-			Class.add(html, 'debug');
+			html.classList.add('debug');
 		}
 	}
 }

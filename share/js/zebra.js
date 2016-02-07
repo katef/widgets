@@ -15,7 +15,7 @@ var Zebra = new (function () {
 
 		function stripe(a) {
 			for (var i = 0; i < a.length; i++) {
-				Class.add(a[i], "zebra-" + (i % modulus));
+				a[i].classList.add("zebra-" + (i % modulus));
 			}
 		}
 

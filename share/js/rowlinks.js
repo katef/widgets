@@ -18,8 +18,7 @@ var Rowlinks = new (function () {
 			}
 
 			rows[i].onclick = new Function("document.location.href='" + link[0].href + "'");
-
-			Class.add(rows[i], "rowlink");
+			rows[i].classList.add("rowlink");
 		}
 	}
 

@@ -104,17 +104,17 @@ var Comment = new (function () {
 		if (advice) {
 			document.getElementById('comment-advice').textContent = advice;
 
-			Class.add(document.getElementById('comment'), 'advice');
+			document.getElementById('comment').classList.add('advice');
 		}
 
-		Class.add(document.getElementById('comment'), 'error');
+		document.getElementById('comment').classList.add('error');
 	}
 
 	function post(action, f) {
 		var t;
 
-		Class.remove(document.getElementById('comment'), 'error');
-		Class.remove(document.getElementById('comment'), 'advice');
+		document.getElementById('comment').classList.remove('error');
+		document.getElementById('comment').classList.remove('advice');
 		document.getElementById('comment-advice').textContent = '';
 
 		var fields = {

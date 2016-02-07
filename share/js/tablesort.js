@@ -361,12 +361,12 @@ var Tablesort = new (function () {
 
 		o = { };
 
-		if (Class.has(th, "table-sorted")) {
+		if (th.classList.contains("table-sorted")) {
 			o.sort = function (t, v) {
 					v.reverse();
 				};
 
-			o.dir = Class.has(th, 'table-ascending')
+			o.dir = th.classList.contains('table-ascending')
 				? 'table-descending'
 				: 'table-ascending';
 		} else {
@@ -402,21 +402,21 @@ var Tablesort = new (function () {
 		/* TODO: only if this isn't our column; deal with that separately */
 		o = xpath(t, "h:tbody/h:tr/h:td|h:tr/h:td");
 		for (var w in o) {
-			Class.remove(o[w], "table-sorted");
+			o[w].classList.remove("table-sorted");
 		}
 
 		/* Reset direction for all other columns' headers */
 		o = xpath(t, "h:thead/h:tr/h:th|h:tr/h:th");
 		for (var w in o) {
-			Class.remove(o[w], "table-ascending");
-			Class.remove(o[w], "table-descending");
+			o[w].classList.remove("table-ascending");
+			o[w].classList.remove("table-descending");
 			if (o[w] != th) {
-				Class.remove(o[w], "table-sorted");
+				o[w].classList.remove("table-sorted");
 			}
 		}
 
-		Class.add(th, dir);
-		Class.add(th, "table-sorted");
+		th.classList.add(dir);
+		th.classList.add("table-sorted");
 	}
 
 	/*
@@ -437,7 +437,7 @@ var Tablesort = new (function () {
 		}
 
 		for (var w in v) {
-			Class.add(v[w], "table-sorted");
+			v[w].classList.add("table-sorted");
 			body.appendChild(v[w].parentNode);
 		}
 	}
@@ -523,7 +523,7 @@ var Tablesort = new (function () {
 			}
 
 			if (th.table_p[b] == -1) {
-				Class.add(th, "table-notype");
+				th.classList.add("table-notype");
 				continue;
 			}
 
@@ -588,7 +588,7 @@ var Tablesort = new (function () {
 			 * TODO: on doubleclick maybe?
 			 */
 
-			Class.add(lowest, "table-sortable");
+			lowest.classList.add("table-sortable");
 			lowest.setAttribute("onclick",
 				"Tablesort.sort(this, " + r + ", " + c + "); false");
 
