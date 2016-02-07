@@ -211,7 +211,20 @@ var Valid = new (function () {
 		return type == 'text'
 		    || type == 'textarea'
 		    || type == 'hidden'
-		    || type == 'password';
+		    || type == 'password'
+		    || type == 'color'
+		    || type == 'date'
+		    || type == 'datetime'
+		    || type == 'datetime-local'
+		    || type == 'email'
+		    || type == 'month'
+		    || type == 'number'
+		    || type == 'range'
+		    || type == 'search'
+		    || type == 'tel'
+		    || type == 'time'
+		    || type == 'url'
+		    || type == 'week';
 	}
 
 	function initform(form) {
