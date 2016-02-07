@@ -74,7 +74,7 @@ var Valid = new (function () {
 		var inputs;
 
 		form.classList.remove('invalid');
-		form.classList.remove(form, 'valid');
+		form.classList.remove('valid');
 
 		form.classList.add(valid == true ? 'valid' : 'invalid');
 
