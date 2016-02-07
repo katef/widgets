@@ -274,6 +274,9 @@
 					<link rel="stylesheet" type="text/css" media="all" href="{$www-css}/{.}"/>
 				</xsl:for-each>
 
+				<xsl:text disable-output-escaping="yes">&lt;!--[if IE 8]&gt;</xsl:text>
+					<script type="text/javascript" src="{$www-js}/ie8.js"></script>
+				<xsl:text disable-output-escaping="yes">&lt;![endif]--&gt;</xsl:text>
 				<xsl:text disable-output-escaping="yes">&lt;!--[if lt IE 9]&gt;</xsl:text>
 					<script type="text/javascript" src="{$www-js}/html5shiv-printshiv.min.js"></script>
 				<xsl:text disable-output-escaping="yes">&lt;![endif]--&gt;</xsl:text>
