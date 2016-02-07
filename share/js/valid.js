@@ -251,7 +251,7 @@ var Valid = new (function () {
 
 			/* TODO: go through and re-valid all inputs. this catches empty ones */
 			for (var i = 0; i < inputs.length; i++) {
-				fireevent(inputs[i], 'change');
+				EventThing.fire(inputs[i], 'change');
 			}
 
 			form_setmissing(e.target, form_hasmissing(e.target));
