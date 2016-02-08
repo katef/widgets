@@ -78,12 +78,10 @@
 		because here we have the option of falling back to a .png instead,
 		depending on the Accept header from mod_kxslt.
 	-->
-	<xsl:template match="tl:entry/h:html/h:body//h:img
-		[not(starts-with(@src, 'http://'))]">
-
-		<xsl:variable name="path" select="concat('blog',
-			'/', translate(substring(ancestor::tl:entry/h:html/h:head/h:meta
-				[@name = 'date']/@content, 1, 10), '-', '/'),
+	<xsl:template name="tl:img">
+		<xsl:variable name="path" select="concat($blog-base,
+			'/', substring(ancestor::tl:entry/h:html/h:head/h:meta
+				[@name = 'date']/@content, 1, 10),
 			'/', ancestor::tl:entry/@short)"/>
 
 		<xsl:variable name="file" select="substring-before(@src, '.')"/>
@@ -92,6 +90,13 @@
 		<!-- TODO: could also provide .fsm, perhaps -->
 		<!-- TODO: could also provide data:// URLs -->
 		<xsl:choose>
+			<xsl:when test="$ext = 'png'
+			             or $ext = 'jpeg' or $ext = 'jpg' or $ext = 'JPG'">
+				<img src="{concat($path, '/', $file, '.', $ext)}">
+					<xsl:apply-templates select="@*[name() != 'src']" mode="copy"/>
+				</img>
+			</xsl:when>
+
 			<xsl:when test="$ext = 'dot'">
 				<xsl:copy-of select="document(
 					concat($path, '/', $file, '.svg'))"/>
