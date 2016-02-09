@@ -51,13 +51,7 @@ var Expander = new (function () {
 	}
 
 	this.init = function (root, dlname, dtname, accordion, expand) {
-		var dl;
-
-		if (root.nodeName.toLowerCase() == dlname) {
-			dl = root;
-		} else {
-			dl = root.getElementsByTagName(dlname);
-		}
+		var dl = root.getElementsByTagName(dlname);
 
 		for (var i = 0; i < dl.length; i++) {
 			if (!dl[i].classList.contains("expandable")) {
