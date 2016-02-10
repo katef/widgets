@@ -6,6 +6,46 @@ $comment ?= {
 	aside:    #aaa
 }
 
+form.comment.expandable {
+	h2 {
+		margin-top: 0;
+		padding: 0;
+		height: 2em;
+
+		a {
+			cursor: pointer;
+			padding: 0;
+			display: block;
+		}
+
+		// TODO: use hang() for this
+		&:before {
+			margin-left: -2em;
+			display: block;
+			height: 0;
+			text-align: right;
+			width: 1.5em;
+		}
+	}
+
+	// TODO: centralise with expander widget thingy
+	// that should have the same arrow symbols as for dl/dt expander
+	&.collapsed h2:before { content: "\21D2"; }
+	&.expanding h2:before { content: "\21D8"; }
+	&.expanded  h2:before { content: "\21D3"; }
+
+	&.expanding {
+//		height: 1.5em;
+//		overflow: hidden;
+	}
+
+	&.collapsed {
+		height: 2em;
+		overflow: hidden;
+	}
+
+}
+
 form.comment {
 	input,
 	textarea {
