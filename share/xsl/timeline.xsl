@@ -124,7 +124,7 @@
 						</xsl:attribute>
 					</xsl:if>
 
-					<time datetime="{date:format-date($date-skip, $dtfmt)}">
+					<time datetime="{date:format-date($date-skip, $dtfmt)}" class="skip">
 						<xsl:value-of select="date:format-date($date-skip, $skip)"/>
 					</time>
 				</a>
@@ -148,7 +148,7 @@
 						</xsl:attribute>
 					</xsl:if>
 
-					<time datetime="{date:format-date($date-skip, $dtfmt)}">
+					<time datetime="{date:format-date($date-skip, $dtfmt)}" class="skip">
 						<xsl:value-of select="date:format-date($date-skip, $skip)"/>
 					</time>
 				</a>
