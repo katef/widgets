@@ -285,7 +285,10 @@
 	</xsl:template>
 
 	<xsl:template match="tl:entry/h:html">
-		<xsl:apply-templates select="h:body/node()" mode="copy"/>
+		<xsl:apply-templates select="h:head/h:template" mode="copy"/>
+		<xsl:apply-templates select="h:head/h:script"   mode="copy"/>
+		<xsl:apply-templates select="h:head/h:style"    mode="copy"/>
+		<xsl:apply-templates select="h:body/node()"     mode="copy"/>
 	</xsl:template>
 
 	<xsl:template match="h:html/h:head/h:meta[@name = 'tags'][count(str:tokenize(@content))]">
