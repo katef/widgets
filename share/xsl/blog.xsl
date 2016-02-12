@@ -97,6 +97,13 @@
 				</img>
 			</xsl:when>
 
+			<xsl:when test="$ext = 'html' or $ext = 'html5'
+			             or $ext = 'xhtml' or $ext = 'xhtml5'">
+				<iframe src="{concat($path, '/', $file, '.', $ext)}">
+					<xsl:apply-templates select="@*[name() != 'src']" mode="copy"/>
+				</iframe>
+			</xsl:when>
+
 			<xsl:when test="$ext = 'dot'">
 				<xsl:copy-of select="document(
 					concat($path, '/', $file, '.svg'))"/>
