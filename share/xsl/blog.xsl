@@ -73,6 +73,44 @@
 		</xsl:attribute>
 	</xsl:template>
 
+	<!-- TODO: maybe call minidocbook link template -->
+	<xsl:template name="tl:a">
+		<xsl:variable name="path" select="concat($blog-base,
+			'/', substring(ancestor::tl:entry/h:html/h:head/h:meta
+				[@name = 'date']/@content, 1, 10),
+			'/', ancestor::tl:entry/@short)"/>
+
+		<xsl:choose>
+			<xsl:when test="starts-with(@href, '/')">
+				<a rel="external nofollow">
+					<xsl:apply-templates select="@*" mode="copy"/>
+					<xsl:apply-templates select="node()|text()" mode="copy"/>
+				</a>
+			</xsl:when>
+
+			<xsl:when test="contains(@href, '://')">
+				<a>
+					<xsl:apply-templates select="@*" mode="copy"/>
+					<xsl:apply-templates select="node()|text()" mode="copy"/>
+				</a>
+			</xsl:when>
+
+			<xsl:when test="@href">
+				<a href="{concat($path, '/', @href)}">
+					<xsl:apply-templates select="@*[name() != 'href']" mode="copy"/>
+					<xsl:apply-templates select="node()|text()" mode="copy"/>
+				</a>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<a>
+					<xsl:apply-templates select="@*" mode="copy"/>
+					<xsl:apply-templates select="node()|text()" mode="copy"/>
+				</a>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 	<!--
 		We do this here (rather than when generating the consolidated blog.xml)
 		because here we have the option of falling back to a .png instead,
