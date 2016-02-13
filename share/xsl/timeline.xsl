@@ -34,7 +34,7 @@
 	<xsl:import href="copy.xsl"/>
 
 	<xsl:param name="tl:limit"   select="20"/>
-	<xsl:param name="tl:date"    select="date:date()"/>
+	<xsl:param name="tl:date"    select="substring(date:date(), 1, 10)"/>
 	<xsl:param name="tl:year"    select="date:year($tl:date)"/>
 	<xsl:param name="tl:month"   select="date:month-in-year($tl:date)"/>
 	<xsl:param name="tl:day"     select="date:day-in-month($tl:date)"/>
