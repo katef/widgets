@@ -121,6 +121,10 @@
 			'/', substring(ancestor::tl:entry/h:html/h:head/h:meta
 				[@name = 'date']/@content, 1, 10),
 			'/', ancestor::tl:entry/@short)"/>
+		<xsl:variable name="repo" select="concat($blog-repo,
+			'/', substring(ancestor::tl:entry/h:html/h:head/h:meta
+				[@name = 'date']/@content, 1, 4),
+			'/', ancestor::tl:entry/@short)"/>
 
 		<xsl:variable name="file" select="substring-before(@src, '.')"/>
 		<xsl:variable name="ext"  select="substring-after (@src, '.')"/>
@@ -142,14 +146,19 @@
 				</iframe>
 			</xsl:when>
 
+			<xsl:when test="$ext = 'svg'">
+				<xsl:copy-of select="document(
+					concat($repo, '/', $file, '.svg'))"/>
+			</xsl:when>
+
 			<xsl:when test="$ext = 'dot'">
 				<xsl:copy-of select="document(
-					concat($path, '/', $file, '.svg'))"/>
+					concat($repo, '/', $file, '.svg'))"/>
 			</xsl:when>
 
 			<xsl:when test="$ext = 'txt'">
 				<xsl:copy-of select="document(
-					concat($path, '/', $file, '.xml'))"/>
+					concat($repo, '/', $file, '.xml'))"/>
 			</xsl:when>
 
 			<xsl:otherwise>
