@@ -449,8 +449,6 @@
 
 	<xsl:template match="tl:timeline" mode="tl-index">
 		<xsl:variable name="timeline" select="."/>
-date=<xsl:value-of select="$tl-date"/>
-notdate=<xsl:value-of select="not($tl-date)"/>
 
 		<ol class="pages">
 <!-- TODO: titles for links -->
