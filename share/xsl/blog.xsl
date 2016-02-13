@@ -27,7 +27,6 @@
 	i.e. viewing an entire month, or viewing an entire year) -->
 
 	<xsl:variable name="tl:date"  select="$blog-date"/>
-	<xsl:variable name="tl:title" select="$blog-short"/>
 	<xsl:variable name="tl:short" select="$blog-short"/>
 
 	<xsl:template name="tl:title">
