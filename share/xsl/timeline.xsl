@@ -33,12 +33,12 @@
 	<xsl:import href="comment.xsl"/>
 	<xsl:import href="copy.xsl"/>
 
-	<xsl:param name="tl:limit"   select="20"/>
-	<xsl:param name="tl:date"    select="substring(date:date(), 1, 10)"/>
-	<xsl:param name="tl:year"    select="date:year($tl:date)"/>
-	<xsl:param name="tl:month"   select="date:month-in-year($tl:date)"/>
-	<xsl:param name="tl:day"     select="date:day-in-month($tl:date)"/>
-	<xsl:param name="tl:short"   select="false()"/>
+	<xsl:param name="tl-limit"   select="20"/>
+	<xsl:param name="tl-date"    select="substring(date:date(), 1, 10)"/>
+	<xsl:param name="tl-year"    select="date:year($tl-date)"/>
+	<xsl:param name="tl-month"   select="date:month-in-year($tl-date)"/>
+	<xsl:param name="tl-day"     select="date:day-in-month($tl-date)"/>
+	<xsl:param name="tl-short"   select="false()"/>
 
 	<func:function name="tl:private">
 		<xsl:param name="entry"/>
@@ -198,7 +198,7 @@
 
 		<tr>
 			<xsl:choose>
-				<xsl:when test="$tl:month or date:day-in-month($date)">
+				<xsl:when test="$tl-month or date:day-in-month($date)">
 					<th class="prev">
 						<xsl:call-template name="cal-link">
 							<xsl:with-param name="date"  select="$date"/>
@@ -338,7 +338,7 @@
 			</div>
 
 			<xsl:choose>
-				<xsl:when test="$tl:short">
+				<xsl:when test="$tl-short">
 					<xsl:apply-templates select="tl:comments" mode="details"/>
 
 					<!-- placeholder for javascript to modify -->
@@ -347,11 +347,11 @@
 					<xsl:call-template name="comment-form">
 						<!-- XXX: postpath blog-specific; move this to blog.xsl -->
 						<xsl:with-param name="postpath"
-							select="translate($tl:date, '-', '/')"/>
+							select="translate($tl-date, '-', '/')"/>
 						<xsl:with-param name="date"
-							select="$tl:date"/>
+							select="$tl-date"/>
 						<xsl:with-param name="short"
-							select="$tl:short"/>
+							select="$tl-short"/>
 					</xsl:call-template>
 				</xsl:when>
 
@@ -366,7 +366,7 @@
 		<xsl:param name="month" select="1"/>
 
 		<xsl:call-template name="cal:calendar">
-			<xsl:with-param name="date" select="date:make($tl:year, $month)"/>
+			<xsl:with-param name="date" select="date:make($tl-year, $month)"/>
 		</xsl:call-template>
 
 		<xsl:if test="$month &lt; 12">
@@ -435,9 +435,9 @@
 
 	<xsl:template name="tl:title">
 		<xsl:choose>
-			<xsl:when test="$tl:date">
-				<time datetime="{$tl:date}">
-					<xsl:value-of select="$tl:date"/>
+			<xsl:when test="$tl-date">
+				<time datetime="{$tl-date}">
+					<xsl:value-of select="$tl-date"/>
 				</time>
 			</xsl:when>
 
@@ -449,13 +449,15 @@
 
 	<xsl:template match="tl:timeline" mode="tl-index">
 		<xsl:variable name="timeline" select="."/>
+date=<xsl:value-of select="$tl-date"/>
+notdate=<xsl:value-of select="not($tl-date)"/>
 
 		<ol class="pages">
 <!-- TODO: titles for links -->
 <!-- TODO: rel next/prev etc -->
 			<li>
 				<xsl:call-template name="cal-link">
-					<xsl:with-param name="date"  select="$tl:date"/>
+					<xsl:with-param name="date"  select="$tl-date"/>
 					<xsl:with-param name="delta" select="'-P1Y'"/>
 					<xsl:with-param name="rel"   select="'prev'"/>
 					<xsl:with-param name="next"  select=    "&quot;'&lt;'&quot;"/>
@@ -469,7 +471,7 @@
 				<ol>
 					<li>
 						<xsl:call-template name="cal-link">
-							<xsl:with-param name="date"  select="$tl:date"/>
+							<xsl:with-param name="date"  select="$tl-date"/>
 							<xsl:with-param name="delta" select="'-P1M'"/>
 							<xsl:with-param name="rel"   select="'prev'"/>
 							<xsl:with-param name="next"  select=    "&quot;'&lt;&quot;"/>
@@ -481,7 +483,7 @@
 
 					<xsl:for-each select="str:tokenize('1 2 3 4 5 6 7 8 9 10 11 12')">
 						<li>
-							<xsl:if test="$tl:month and $tl:month = .">
+							<xsl:if test="$tl-month and $tl-month = .">
 								<xsl:attribute name="class">
 									<xsl:text>current</xsl:text>
 								</xsl:attribute>
@@ -489,20 +491,20 @@
 
 							<xsl:choose>
 								<xsl:when test="$timeline/tl:entry
-									[date:same-month(tl:pubdate(.), date:make($tl:year, current()))]">
+									[date:same-month(tl:pubdate(.), date:make($tl-year, current()))]">
 									<a>
 										<xsl:call-template name="tl:href">
-											<xsl:with-param name="date" select="date:make($tl:year, .)"/>
+											<xsl:with-param name="date" select="date:make($tl-year, .)"/>
 										</xsl:call-template>
 
-										<time datetime="{date:make($tl:year, .)}">
+										<time datetime="{date:make($tl-year, .)}">
 											<xsl:value-of select="."/>
 										</time>
 									</a>
 								</xsl:when>
 
 								<xsl:otherwise>
-									<time datetime="{date:make($tl:year, .)}">
+									<time datetime="{date:make($tl-year, .)}">
 										<xsl:value-of select="."/>
 									</time>
 								</xsl:otherwise>
@@ -512,7 +514,7 @@
 
 					<li>
 						<xsl:call-template name="cal-link">
-							<xsl:with-param name="date"  select="$tl:date"/>
+							<xsl:with-param name="date"  select="$tl-date"/>
 							<xsl:with-param name="delta" select="'P1M'"/>
 							<xsl:with-param name="rel"   select="'prev'"/>
 							<xsl:with-param name="next"  select=    "&quot;'&gt;&quot;"/>
@@ -526,7 +528,7 @@
 
 			<li>
 				<xsl:call-template name="cal-link">
-					<xsl:with-param name="date"  select="$tl:date"/>
+					<xsl:with-param name="date"  select="$tl-date"/>
 					<xsl:with-param name="delta" select="'P1Y'"/>
 					<xsl:with-param name="rel"   select="'next'"/>
 					<xsl:with-param name="next"  select=    "&quot;'&gt;'&quot;"/>
@@ -541,18 +543,18 @@
 	<xsl:template name="tl:calendar">
 		<xsl:variable name="date">
 			<xsl:choose>
-				<xsl:when test="$tl:month">
-					<xsl:value-of select="date:make($tl:year, $tl:month)"/>
+				<xsl:when test="$tl-month">
+					<xsl:value-of select="date:make($tl-year, $tl-month)"/>
 				</xsl:when>
 
-				<xsl:when test="$tl:year">
-					<xsl:value-of select="$tl:year"/>
+				<xsl:when test="$tl-year">
+					<xsl:value-of select="$tl-year"/>
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
 
 		<xsl:choose>
-			<xsl:when test="$tl:month">
+			<xsl:when test="$tl-month">
 				<xsl:call-template name="cal:calendar">
 					<xsl:with-param name="date" select="$date"/>
 				</xsl:call-template>
@@ -569,12 +571,12 @@
 	<xsl:template name="tl:years">
 		<xsl:variable name="date">
 			<xsl:choose>
-				<xsl:when test="$tl:month">
-					<xsl:value-of select="date:make($tl:year, $tl:month)"/>
+				<xsl:when test="$tl-month">
+					<xsl:value-of select="date:make($tl-year, $tl-month)"/>
 				</xsl:when>
 
-				<xsl:when test="$tl:year">
-					<xsl:value-of select="$tl:year"/>
+				<xsl:when test="$tl-year">
+					<xsl:value-of select="$tl-year"/>
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
@@ -591,7 +593,7 @@
 					[date:year(tl:pubdate(.)) = $year])">
 
 					<li>
-						<xsl:if test="$tl:year = $year">
+						<xsl:if test="$tl-year = $year">
 							<xsl:attribute name="class">
 								<xsl:text>current</xsl:text>
 							</xsl:attribute>
@@ -599,19 +601,19 @@
 
 						<a>
 							<xsl:choose>
-								<xsl:when test="$tl:month and $tl:year = $year">
+								<xsl:when test="$tl-month and $tl-year = $year">
 									<xsl:attribute name="rel">
 										<xsl:text>directory</xsl:text>
 									</xsl:attribute>
 								</xsl:when>
 
-								<xsl:when test="not($tl:month) and $tl:year = $year - 1">
+								<xsl:when test="not($tl-month) and $tl-year = $year - 1">
 									<xsl:attribute name="rel">
 										<xsl:text>prev</xsl:text>
 									</xsl:attribute>
 								</xsl:when>
 
-								<xsl:when test="not($tl:month) and $tl:year = $year + 1">
+								<xsl:when test="not($tl-month) and $tl-year = $year + 1">
 									<xsl:attribute name="rel">
 										<xsl:text>next</xsl:text>
 									</xsl:attribute>
@@ -634,7 +636,7 @@
 
 	<xsl:template name="tl:content-body">
 		<xsl:choose>
-			<xsl:when test="$tl:short">
+			<xsl:when test="$tl-short">
 				<!-- For submitting comments and window.reload()ing -->
 				<!-- TODO: maybe this should be done by .htaccess instead -->
 <!-- XXX:
@@ -644,27 +646,27 @@
 -->
 
 				<xsl:apply-templates select="tl:entry
-					[date:date($tl:date) = date:date(tl:pubdate(.))
-						and $tl:short = @short]"/>
+					[date:date($tl-date) = date:date(tl:pubdate(.))
+						and $tl-short = @short]"/>
 			</xsl:when>
 
-			<xsl:when test="$tl:day">
+			<xsl:when test="$tl-day">
 				<xsl:apply-templates select="tl:entry
-					[date:same-day(tl:pubdate(.), $tl:date)]">
+					[date:same-day(tl:pubdate(.), $tl-date)]">
 					<xsl:sort select="date:seconds(tl:pubdate(.))"
 						data-type="number" order="descending"/>
 				</xsl:apply-templates>
 			</xsl:when>
 
-			<xsl:when test="$tl:month">
+			<xsl:when test="$tl-month">
 				<xsl:apply-templates select="tl:entry
-					[date:same-month(tl:pubdate(.), date:make($tl:year, $tl:month))]">
+					[date:same-month(tl:pubdate(.), date:make($tl-year, $tl-month))]">
 					<xsl:sort select="date:seconds(tl:pubdate(.))"
 						data-type="number" order="descending"/>
 				</xsl:apply-templates>
 			</xsl:when>
 
-			<xsl:when test="$tl:year">
+			<xsl:when test="$tl-year">
 				<section class="year-view">
 					<xsl:call-template name="tl:year-view"/>
 				</section>
@@ -674,7 +676,7 @@
 				<!-- TODO: interject with month headings -->
 				<!-- TODO: pagnation -->
 				<xsl:apply-templates select="tl:entry
-					[position() >= last() - $tl:limit]">
+					[position() >= last() - $tl-limit]">
 					<xsl:sort select="date:seconds(tl:pubdate(.))"
 						data-type="number" order="descending"/>
 				</xsl:apply-templates>

@@ -26,9 +26,6 @@
 	(so are the blog entry shorts, but the date in the URL is nice for other reasons,
 	i.e. viewing an entire month, or viewing an entire year) -->
 
-	<xsl:variable name="tl:date"  select="$blog-date"/>
-	<xsl:variable name="tl:short" select="$blog-short"/>
-
 	<xsl:template name="tl:title">
 		<xsl:choose>
 			<xsl:when test="$tl:date">
