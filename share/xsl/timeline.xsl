@@ -70,6 +70,23 @@
 		</func:result>
 	</func:function>
 
+	<!--
+		Without specific content to show (i.e. when $tl-year is not set),
+		the timeline content shows most recent entries upto a cutoff point.
+		The cutoff is calculated by selecting entries upto a limited number,
+		and then taking the month for the oldest item there. So this rounds
+		down to the start of that month.
+		Then entries up to the cutoff month are shown.
+		In this way the pages index can navigate to the previous month.
+	-->
+	<func:function name="tl:cutoff">
+		<xsl:param name="timeline"/>
+		<xsl:param name="limit" select="$tl-limit"/>
+
+		<func:result select="tl:entry[position() >= last() - $limit]
+			[1]/h:html/h:head/h:meta[@name = 'date']/@content"/>
+	</func:function>
+
 	<xsl:template name="cal-link">
 		<xsl:param name="date"/>
 		<xsl:param name="delta"/>
@@ -543,12 +560,26 @@
 	</xsl:template>
 
 	<xsl:template match="tl:timeline" mode="tl-index">
-		<xsl:call-template name="tl:pages">
-			<xsl:with-param name="timeline" select="."/>
-			<xsl:with-param name="date"     select="$tl-date"/>
-			<xsl:with-param name="month"    select="$tl-month"/>
-			<xsl:with-param name="year"     select="$tl-year"/>
-		</xsl:call-template>
+		<xsl:choose>
+			<xsl:when test="$tl-year">
+				<xsl:call-template name="tl:pages">
+					<xsl:with-param name="timeline" select="."/>
+					<xsl:with-param name="date"     select="$tl-date"/>
+					<xsl:with-param name="month"    select="$tl-month"/>
+					<xsl:with-param name="year"     select="$tl-year"/>
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:variable name="cutoff" select="tl:cutoff(.)"/>
+
+				<xsl:call-template name="tl:pages">
+					<xsl:with-param name="timeline" select="."/>
+					<xsl:with-param name="date"     select="$cutoff"/>
+					<xsl:with-param name="month"    select="date:month-in-year($cutoff)"/>
+					<xsl:with-param name="year"     select="date:year($cutoff)"/>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 
 	<xsl:template name="tl:calendar">
@@ -684,10 +715,13 @@
 			</xsl:when>
 
 			<xsl:otherwise>
+				<xsl:variable name="cutoff" select="tl:cutoff(.)"/>
+
 				<!-- TODO: interject with month headings -->
-				<!-- TODO: pagnation -->
 				<xsl:apply-templates select="tl:entry
-					[position() >= last() - $tl-limit]">
+					[date:year(tl:pubdate(.)) &gt; date:year($cutoff)
+					 or (date:year(tl:pubdate(.)) = date:year($cutoff)
+						and date:month-in-year(tl:pubdate(.)) &gt;= date:month-in-year($cutoff))]">
 					<xsl:sort select="date:seconds(tl:pubdate(.))"
 						data-type="number" order="descending"/>
 				</xsl:apply-templates>
