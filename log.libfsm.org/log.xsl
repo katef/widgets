@@ -24,8 +24,8 @@
 
 	<xsl:template name="tl:title">
 		<xsl:choose>
-			<xsl:when test="$timeline-shortform">
-				<xsl:value-of select="$timeline-shortform"/>
+			<xsl:when test="$timeline-short">
+				<xsl:value-of select="$timeline-short"/>
 			</xsl:when>
 
 			<xsl:otherwise>
@@ -36,7 +36,7 @@
 
 	<xsl:template name="tl:href">
 		<xsl:param name="date"/>
-		<xsl:param name="shortform" select="false()"/>
+		<xsl:param name="short" select="false()"/>
 
 		<xsl:attribute name="href">
 <!-- TODO -->
