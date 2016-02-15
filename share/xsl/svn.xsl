@@ -3,10 +3,10 @@
 <xsl:stylesheet version="1.0" 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:tl="http://xml.elide.org/timeline"
-	xmlns:h="http://www.w3.org/1999/xhtml"
 	xmlns:str="http://exslt.org/strings"
 	xmlns:svn="http://xml.elide.org/svn"
 	xmlns:common="http://exslt.org/common"
+	xmlns="http://www.w3.org/1999/xhtml"
 
 	extension-element-prefixes="str common">
 
@@ -15,8 +15,8 @@
 	<xsl:template match="path">
 		<xsl:param name="prefix" select="false()"/>
 
-		<h:li class="svn-{@action} svn-{@kind}">
-			<h:a href="#TODO">
+		<li class="svn-{@action} svn-{@kind}">
+			<a href="#TODO">
 				<xsl:choose>
 					<xsl:when test="$prefix">
 						<xsl:value-of select="substring(.,
@@ -28,8 +28,8 @@
 						<xsl:value-of select="."/>
 					</xsl:otherwise>
 				</xsl:choose>
-			</h:a>
-		</h:li>
+			</a>
+		</li>
 	</xsl:template>
 
 	<xsl:template name="prefix">
@@ -41,21 +41,21 @@
 		</xsl:variable>
 
 		<xsl:if test="$paths[starts-with(., $prefix)]">
-			<h:dt>
-				<h:a href="#TODO/{$prefix}">
+			<dt>
+				<a href="#TODO/{$prefix}">
 					<xsl:value-of select="$prefix"/>
-				</h:a>
-			</h:dt>
+				</a>
+			</dt>
 
-			<h:dd>
-				<h:ul class="paths">
+			<dd>
+				<ul class="paths">
 					<xsl:apply-templates select="$paths[starts-with(., $prefix)]">
 						<xsl:sort select="concat(@action, .)"/>
 
 						<xsl:with-param name="prefix" select="$prefix"/>
 					</xsl:apply-templates>
-				</h:ul>
-			</h:dd>
+				</ul>
+			</dd>
 		</xsl:if>
 
 		<xsl:if test="$paths">
@@ -109,14 +109,14 @@
 			</xsl:for-each>
 		</xsl:variable>
 
-		<h:dl class="paths">
+		<dl class="paths">
 			<xsl:call-template name="prefix">
 				<xsl:with-param name="prefixes"
 					select="common:node-set($uniq-prefixes)/svn:prefix"/>
 				<xsl:with-param name="paths"
 					select="path"/>
 			</xsl:call-template>
-		</h:dl>
+		</dl>
 	</xsl:template>
 
 	<xsl:template name="log-summary">
@@ -282,36 +282,36 @@
 
 	<xsl:template match="logentry">
 		<tl:entry short="{@revision}">
-			<h:html>
-				<h:head>
-					<h:meta name="author" content="{author}"/>
-					<h:meta name="date"   content="{date}"/>
+			<html>
+				<head>
+					<meta name="author" content="{author}"/>
+					<meta name="date"   content="{date}"/>
 
-					<h:title>
+					<title>
 						<xsl:call-template name="log-summary"/>
-					</h:title>
-				</h:head>
+					</title>
+				</head>
 
-				<h:body>
+				<body>
 					<!-- TODO: maybe http://log.libfsm.org/$changeset[/path/in/diff] to show a diff? -->
 
 <!-- TODO: i don't think i need any of this
-					<h:ul class="meta">
-						<h:li>
+					<ul class="meta">
+						<li>
 							<xsl:call-template name="log-category"/>
-						</h:li>
+						</li>
 
-						<h:li>
+						<li>
 							<xsl:text>Languages:&#xA0;</xsl:text>
 							<xsl:call-template name="log-languages"/>
-						</h:li>
+						</li>
 
-						<h:li>
+						<li>
 							<xsl:text>By&#xA0;</xsl:text>
 							<xsl:value-of select="author"/>
 							<xsl:text>.</xsl:text>
-						</h:li>
-					</h:ul>
+						</li>
+					</ul>
 -->
 
 					<!-- TODO: wiki syntax: how? surely not in xpath... -->
@@ -320,11 +320,11 @@
 
 					<xsl:apply-templates select="paths"/>
 
-					<h:aside class="msg">
+					<aside class="msg">
 						<xsl:value-of select="msg"/>
-					</h:aside>
-				</h:body>
-			</h:html>
+					</aside>
+				</body>
+			</html>
 
 			<tl:comments/>
 		</tl:entry>
