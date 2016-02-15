@@ -120,13 +120,9 @@
 	</xsl:template>
 
 	<xsl:template name="log-summary">
-		<h:a class="summary" href="#TODO">
-			<h:span class="rev">
-				<xsl:text>[</xsl:text>
-				<xsl:value-of select="@revision"/>
-				<xsl:text>]</xsl:text>
-			</h:span>
-		</h:a>
+		<span class="cite">
+			<xsl:value-of select="@revision"/>
+		</span>
 	</xsl:template>
 
 	<xsl:template name="log-languages">
