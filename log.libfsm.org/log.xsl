@@ -55,22 +55,6 @@
 		<ol class="years">
 			<xsl:call-template name="tl:years"/>
 		</ol>
-
-<!-- TODO:
-		<hr/>
-
-		<form class="log">
-			<label><input type="checkbox"/>&#xA0;Blog entries</label>
-			<label><input type="checkbox"/>&#xA0;Source</label>
-			<label><input type="checkbox"/>&#xA0;Releases</label>
-			<label><input type="checkbox"/>&#xA0;Tickets</label>
-			<label><input type="checkbox"/>&#xA0;Build system</label>
-			<label><input type="checkbox"/>&#xA0;Documentation</label>
-			<label><input type="checkbox"/>&#xA0;Tests</label>
-			<label><input type="checkbox"/>&#xA0;Examples</label>
-			<label><input type="checkbox"/>&#xA0;Website</label>
-		</form>
--->
 	</xsl:template>
 
 	<xsl:template match="processing-instruction('log-body')">
