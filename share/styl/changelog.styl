@@ -1,0 +1,98 @@
+/* $Id$ */
+
+a.summary {
+	color: inherit;
+
+
+	span.rev {
+		color: #1b7;
+		width: 100px;
+		display: inline-block;
+		text-align: right;
+	}
+
+	&:hover {
+		text-decoration: none;
+	}
+
+	&:hover span.rev {
+		color: #000;
+		text-decoration: underline;
+	}
+}
+
+/* XXX: cruft
+ul.meta {
+	margin-top: 9px;
+	padding: 0;
+	list-style-type: none;
+}
+*/
+
+dl.paths {
+	margin: 0;
+
+	dt {
+		font-weight: normal;
+	}
+
+	dd {
+		margin-left: 0;
+	}
+}
+
+ul.paths {
+	list-style-type: none;
+	font-size: 90%;
+	padding-left: 18px;
+
+	ul.paths li,
+	ul.paths li:before {
+		line-height: 10px;
+		margin-bottom: 1px;
+	}
+
+	ul.paths li a:before {
+		content: " ";
+		display: inline-block;
+		height: 9px;
+		width: 9px;
+		border: solid 1px transparent;
+		margin-right: 1ex;
+
+		/*
+		border-radius: 2px;
+		*/
+	}
+}
+
+dl.paths a,
+ul.paths li a {
+	color: #999;
+	display: block;
+
+	&:hover {
+		color: #000;
+	}
+}
+
+ul.paths li {
+	&.svn-M a:before { background-color: #ffd; border-color: #ee9; }
+	&.svn-A a:before { background-color: #dfd; border-color: #9e9; }
+	&.svn-D a:before { background-color: #fdd; border-color: #e99; }
+	&.svn-R a:before { background-color: #ddf; border-color: #99e; }
+
+	&.svn-M a:hover:before { background-color: #ff9; border-color: #ee4; }
+	&.svn-A a:hover:before { background-color: #9f9; border-color: #4e4; }
+	&.svn-D a:hover:before { background-color: #f99; border-color: #e44; }
+	&.svn-R a:hover:before { background-color: #99f; border-color: #44e; }
+}
+
+aside.msg {
+	white-space: pre-wrap;	/* XXX: placeholder until wiki parsing is done */
+}
+
+form.log label {
+	display: block;
+}
+
