@@ -285,10 +285,11 @@
 	</xsl:template>
 
 	<xsl:template match="logentry">
-		<tl:entry date="{date}">
+		<tl:entry short="{@revision}">
 			<h:html>
 				<h:head>
 					<h:meta name="author" content="{author}"/>
+					<h:meta name="date"   content="{date}"/>
 
 					<h:title>
 						<xsl:call-template name="log-summary"/>
@@ -319,6 +320,7 @@
 
 					<!-- TODO: wiki syntax: how? surely not in xpath... -->
 					<!-- TODO: maybe exslt:document them out to .wiki files, and <img/> them in? -->
+					<!-- TODO: maybe client-side in javascript -->
 
 					<xsl:apply-templates select="paths"/>
 
