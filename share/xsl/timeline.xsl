@@ -33,6 +33,8 @@
 	<xsl:import href="comment.xsl"/>
 	<xsl:import href="copy.xsl"/>
 
+	<!-- note timeline entries are expected to be ordered oldest first -->
+
 	<xsl:param name="tl-limit"   select="20"/>
 	<xsl:param name="tl-date"    select="substring(date:date(), 1, 10)"/>
 	<xsl:param name="tl-year"    select="date:year($tl-date)"/>
@@ -83,7 +85,7 @@
 		<xsl:param name="timeline"/>
 		<xsl:param name="limit" select="$tl-limit"/>
 
-		<func:result select="$timeline/tl:entry[position() >= last() - $limit]
+		<func:result select="$timeline/tl:entry[position() &lt;= $limit]
 			[1]/h:html/h:head/h:meta[@name = 'date']/@content"/>
 	</func:function>
 
@@ -419,9 +421,6 @@
 					<xsl:for-each select="tl:entry
 						[date:year(tl:pubdate(.)) = $year]">
 	
-						<xsl:sort data-type="number" select="date:seconds(tl:pubdate(.))"
-							order="descending"/>
-	
 						<li>
 							<xsl:variable name="date" select="date:format-date(tl:pubdate(.), 'yyyy-MM-dd')"/>
 
@@ -694,18 +693,12 @@
 
 			<xsl:when test="$tl-day">
 				<xsl:apply-templates select="tl:entry
-					[date:same-day(tl:pubdate(.), $tl-date)]">
-					<xsl:sort select="date:seconds(tl:pubdate(.))"
-						data-type="number" order="descending"/>
-				</xsl:apply-templates>
+					[date:same-day(tl:pubdate(.), $tl-date)]"/>
 			</xsl:when>
 
 			<xsl:when test="$tl-month">
 				<xsl:apply-templates select="tl:entry
-					[date:same-month(tl:pubdate(.), date:make($tl-year, $tl-month))]">
-					<xsl:sort select="date:seconds(tl:pubdate(.))"
-						data-type="number" order="descending"/>
-				</xsl:apply-templates>
+					[date:same-month(tl:pubdate(.), date:make($tl-year, $tl-month))]"/>
 			</xsl:when>
 
 			<xsl:when test="$tl-year">
@@ -721,10 +714,7 @@
 				<xsl:apply-templates select="tl:entry
 					[date:year(tl:pubdate(.)) &gt; date:year($cutoff)
 					 or (date:year(tl:pubdate(.)) = date:year($cutoff)
-						and date:month-in-year(tl:pubdate(.)) &gt;= date:month-in-year($cutoff))]">
-					<xsl:sort select="date:seconds(tl:pubdate(.))"
-						data-type="number" order="descending"/>
-				</xsl:apply-templates>
+						and date:month-in-year(tl:pubdate(.)) &gt;= date:month-in-year($cutoff))]"/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
