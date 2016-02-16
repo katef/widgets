@@ -83,7 +83,7 @@
 		<xsl:param name="timeline"/>
 		<xsl:param name="limit" select="$tl-limit"/>
 
-		<func:result select="tl:entry[position() >= last() - $limit]
+		<func:result select="$timeline/tl:entry[position() >= last() - $limit]
 			[1]/h:html/h:head/h:meta[@name = 'date']/@content"/>
 	</func:function>
 
