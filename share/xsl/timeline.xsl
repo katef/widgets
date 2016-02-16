@@ -85,8 +85,7 @@
 		<xsl:param name="timeline"/>
 		<xsl:param name="limit" select="$tl-limit"/>
 
-		<func:result select="$timeline/tl:entry[position() &lt;= $limit]
-			[last()]/h:html/h:head/h:meta[@name = 'date']/@content"/>
+		<func:result select="tl:pubdate($timeline/tl:entry[position() &lt;= $limit][last()])"/>
 	</func:function>
 
 	<xsl:template name="cal-link">
