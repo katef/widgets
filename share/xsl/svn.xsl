@@ -4,11 +4,12 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:tl="http://xml.elide.org/timeline"
 	xmlns:str="http://exslt.org/strings"
+	xmlns:date="http://exslt.org/dates-and-times"
 	xmlns:svn="http://xml.elide.org/svn"
 	xmlns:common="http://exslt.org/common"
 	xmlns="http://www.w3.org/1999/xhtml"
 
-	extension-element-prefixes="str common">
+	extension-element-prefixes="str date common">
 
 	<xsl:output indent="yes"/>
 
@@ -335,8 +336,10 @@
 			select where starts-with() the relevant prefix
 			(/www/blog, /www in general, /tags, /trunk/src, /trunk/doc, etc. maybe overkill) -->
 		<tl:timeline>
-			<xsl:apply-templates select="logentry"/>
-<!-- TODO: sort by date! -->
+			<xsl:apply-templates select="logentry">
+				<xsl:sort data-type="number" select="date:seconds(date)"
+					order="descending"/>
+			</xsl:apply-templates>
 		</tl:timeline>
 	</xsl:template>
 
