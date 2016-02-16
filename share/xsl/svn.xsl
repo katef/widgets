@@ -229,58 +229,6 @@
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template name="log-category">
-		<xsl:choose>
-			<xsl:when test="paths/path[starts-with(., '/tags/')]">
-				<xsl:text>Release</xsl:text>
-			</xsl:when>
-
-			<xsl:when test="paths/path[starts-with(., '/trunk/doc/')]">
-				<xsl:text>Documentation</xsl:text>
-			</xsl:when>
-
-			<xsl:when test="paths/path[starts-with(., '/trunk/share/mk/')]">
-				<xsl:text>Build system</xsl:text>
-			</xsl:when>
-
-			<xsl:when test="paths/path[starts-with(., '/trunk/share/')]">
-				<xsl:text>Document processing</xsl:text>
-			</xsl:when>
-
-			<xsl:when test="paths/path[starts-with(., '/trunk/tests/')]">
-				<xsl:text>Tests</xsl:text>
-			</xsl:when>
-
-			<xsl:when test="paths/path[starts-with(., '/trunk/examples/')]">
-				<xsl:text>Examples</xsl:text>
-			</xsl:when>
-
-			<xsl:when test="paths/path[starts-with(., '/trunk/src/include/')
-				or starts-with(., '/libfsm/trunk/src/include/')
-				or starts-with(., '/libre/trunk/src/include/')]">
-				<xsl:text>API</xsl:text>
-			</xsl:when>
-
-			<xsl:when test="paths/path[starts-with(., '/trunk/src/')
-				or starts-with(., '/libfsm/trunk/src/')
-				or starts-with(., '/libre/trunk/src/')]">
-				<xsl:text>Source</xsl:text>
-			</xsl:when>
-
-			<xsl:when test="paths/path[starts-with(., '/www/blog/')]">
-				<xsl:text>Blog entry</xsl:text>
-			</xsl:when>
-
-			<xsl:when test="paths/path[starts-with(., '/www/')]">
-				<xsl:text>Website</xsl:text>
-			</xsl:when>
-
-			<xsl:otherwise>
-				<xsl:text>Miscellaneous</xsl:text>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-
 	<xsl:template match="logentry">
 		<tl:entry class="changelog" short="{@revision}">
 			<html>
@@ -295,26 +243,6 @@
 
 				<body>
 					<!-- TODO: maybe http://log.libfsm.org/$changeset[/path/in/diff] to show a diff? -->
-
-<!-- TODO: i don't think i need any of this
-					<ul class="meta">
-						<li>
-							<xsl:call-template name="log-category"/>
-						</li>
-
-						<li>
-							<xsl:text>Languages:&#xA0;</xsl:text>
-							<xsl:call-template name="log-languages"/>
-						</li>
-
-						<li>
-							<xsl:text>By&#xA0;</xsl:text>
-							<xsl:value-of select="author"/>
-							<xsl:text>.</xsl:text>
-						</li>
-					</ul>
--->
-
 					<!-- TODO: wiki syntax: how? surely not in xpath... -->
 					<!-- TODO: maybe exslt:document them out to .wiki files, and <img/> them in? -->
 					<!-- TODO: maybe client-side in javascript -->
@@ -332,9 +260,6 @@
 	</xsl:template>
 
 	<xsl:template match="/log">
-		<!-- TODO: mod_kxslt to get QUERY_STRING and only show interesting paths;
-			select where starts-with() the relevant prefix
-			(/www/blog, /www in general, /tags, /trunk/src, /trunk/doc, etc. maybe overkill) -->
 		<tl:timeline>
 			<xsl:apply-templates select="logentry">
 				<xsl:sort data-type="number" select="date:seconds(date)"
