@@ -281,7 +281,7 @@
 	</xsl:template>
 
 	<xsl:template match="logentry">
-		<tl:entry short="{@revision}">
+		<tl:entry class="changelog" short="{@revision}">
 			<html>
 				<head>
 					<meta name="author" content="{author}"/>

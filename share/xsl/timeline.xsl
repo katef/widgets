@@ -331,7 +331,7 @@
 	<xsl:template match="tl:entry[not(tl:private(.))]">
 		<xsl:variable name="date" select="tl:pubdate(.)"/>
 
-		<article class="entry">
+		<article class="entry {@class}">
 			<h1 id="{date:format-date($date, 'yyyy-MM-dd')}">
 				<a>
 					<xsl:call-template name="tl:href">
