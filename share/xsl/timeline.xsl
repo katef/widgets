@@ -356,6 +356,10 @@
 			</div>
 
 			<xsl:choose>
+				<xsl:when test="str:tokenize(@class)[. = 'padding']">
+					<!-- no need to permit comments -->
+				</xsl:when>
+
 				<xsl:when test="$tl-short">
 					<xsl:apply-templates select="tl:comments" mode="details"/>
 

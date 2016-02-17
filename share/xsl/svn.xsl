@@ -230,7 +230,17 @@
 	</xsl:template>
 
 	<xsl:template match="logentry">
-		<tl:entry class="changelog" short="{@revision}">
+		<xsl:variable name="padding" select="msg
+			/text() = 'This is an empty revision for padding.'"/>
+
+		<tl:entry short="{@revision}">
+			<xsl:attribute name="class">
+				<xsl:text>changelog</xsl:text>
+				<xsl:if test="$padding">
+					<xsl:text> padding</xsl:text>
+				</xsl:if>
+			</xsl:attribute>
+
 			<html>
 				<head>
 					<meta name="author" content="{author}"/>
@@ -247,15 +257,26 @@
 					<!-- TODO: maybe exslt:document them out to .wiki files, and <img/> them in? -->
 					<!-- TODO: maybe client-side in javascript -->
 
-					<aside class="msg">
-						<xsl:value-of select="msg"/>
-					</aside>
+					<xsl:choose>
+						<xsl:when test="$padding">
+							<span class="emptyrev">
+								<xsl:text>(empty revision for padding)</xsl:text>
+							</span>
+						</xsl:when>
+						<xsl:otherwise>
+							<aside class="msg">
+								<xsl:value-of select="msg"/>
+							</aside>
+						</xsl:otherwise>
+					</xsl:choose>
 
 					<xsl:apply-templates select="paths"/>
 				</body>
 			</html>
 
-			<tl:comments/>
+			<xsl:if test="not($padding)">
+				<tl:comments/>
+			</xsl:if>
 		</tl:entry>
 	</xsl:template>
 
