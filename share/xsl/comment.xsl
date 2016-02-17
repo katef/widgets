@@ -14,13 +14,23 @@
 	-->
 
 	<xsl:template match="tl:comments" mode="summary">
+		<xsl:variable name="author" select="../h:html/h:head/h:meta[@name = 'author']/@content"/>
+		<xsl:variable name="date"   select="../h:html/h:head/h:meta[@name = 'date'  ]/@content"/>
+
 		<footer class="comment-summary">
-<!-- TODO: need to show author for details view, too -->
-<xsl:text>by kate | </xsl:text>
+			<!-- the author can be absent e.g. for svndumpfilter's padding revisions -->
+			<xsl:if test="$author != ''">
+				<xsl:text>by </xsl:text>
+				<xsl:value-of select="$author"/>
+				<!-- TODO: need to show author for details view, too -->
+
+				<!-- XXX: pipelist -->
+				<xsl:text> | </xsl:text>
+			</xsl:if>
 
 			<a>
 				<xsl:call-template name="tl:href">
-					<xsl:with-param name="date"  select="../h:html/h:head/h:meta[@name = 'date']/@content"/>
+					<xsl:with-param name="date"  select="$date"/>
 					<xsl:with-param name="short" select="../@short"/>
 				</xsl:call-template>
 
