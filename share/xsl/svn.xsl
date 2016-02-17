@@ -247,11 +247,11 @@
 					<!-- TODO: maybe exslt:document them out to .wiki files, and <img/> them in? -->
 					<!-- TODO: maybe client-side in javascript -->
 
-					<xsl:apply-templates select="paths"/>
-
 					<aside class="msg">
 						<xsl:value-of select="msg"/>
 					</aside>
+
+					<xsl:apply-templates select="paths"/>
 				</body>
 			</html>
 
