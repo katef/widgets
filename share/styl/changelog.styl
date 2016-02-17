@@ -2,36 +2,12 @@
 
 .changelog {
 
-	a.summary {
-		color: inherit;
-
-
-		span.rev {
-			color: #1b7;
-			width: 100px;
-			display: inline-block;
-			text-align: right;
-		}
-
-		&:hover {
-			text-decoration: none;
-		}
-
-		&:hover span.rev {
-			color: #000;
-			text-decoration: underline;
-		}
+	time[pubdate] {
+		display: none;
 	}
-
-	/* XXX: cruft
-	ul.meta {
-		margin-top: 9px;
-		padding: 0;
-		list-style-type: none;
-	}
-	*/
 
 	dl.paths {
+		font-size: 90%;
 		margin: 0;
 
 		dt {
@@ -45,26 +21,25 @@
 
 	ul.paths {
 		list-style-type: none;
-		font-size: 90%;
-		padding-left: 18px;
+		padding-left: 1em;
 
-		& li,
-		& li:before {
-			line-height: 10px;
-			margin-bottom: 1px;
-		}
+		li {
+			margin: 0;
 
-		& li a:before {
-			content: " ";
-			display: inline-block;
-			height: 9px;
-			width: 9px;
-			border: solid 1px transparent;
-			margin-right: 1ex;
+			&,
+			&:before {
+				line-height: inherit;
+			}
 
-			/*
-			border-radius: 2px;
-			*/
+			& a:before {
+				content: " ";
+				display: inline-block;
+				height: 1.5ex;
+				width:  1.5ex;
+				border: solid 1px transparent;
+				margin-right:   0.5em;
+				margin-bottom: -0.25ex; // centre within the line
+			}
 		}
 	}
 
