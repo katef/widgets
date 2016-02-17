@@ -259,8 +259,8 @@
 
 					<xsl:choose>
 						<xsl:when test="$padding">
-							<span class="emptyrev">
-								<xsl:text>(empty revision for padding)</xsl:text>
+							<span class="filler">
+								<xsl:text>empty revision for padding</xsl:text>
 							</span>
 						</xsl:when>
 						<xsl:otherwise>
