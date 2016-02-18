@@ -102,11 +102,10 @@
 			</dd>
 		</xsl:if>
 
-		<xsl:if test="$paths">
+		<xsl:if test="$paths[not(starts-with(., $prefix))]">
 			<xsl:call-template name="prefix">
 				<xsl:with-param name="paths"
-					select="$paths
-						[not(starts-with(., common:node-set($prefixes)[1]))]"/>
+					select="$paths[not(starts-with(., $prefix))]"/>
 				<xsl:with-param name="prefixes"
 					select="common:node-set($prefixes)
 						[position() &gt; 1]"/>
@@ -121,6 +120,7 @@
 		<!--
 			Here we only want to construct prefixes which are directories,
 			which we do by only selecting tokens which have a preceding sibling.
+TODO: could possibly use @kind instead?
 		-->
 		<xsl:variable name="all-prefixes">
 			<xsl:for-each select="path">
