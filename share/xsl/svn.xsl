@@ -15,6 +15,27 @@
 
 	<xsl:template match="path[../path[@copyfrom-path = current()]]"/>
 
+	<xsl:template name="svn:pathlink">
+		<xsl:param name="prefix"/>
+		<xsl:param name="path"/>
+		<xsl:param name="action"/>
+		<xsl:param name="kind"/>
+
+		<a class="svn-{$action} svn-{$kind}" href="#TODO">
+			<xsl:choose>
+				<xsl:when test="$prefix and starts-with($path, $prefix)">
+					<xsl:value-of select="substring($path,
+						string-length($prefix) + 1,
+						string-length($path))"/>
+				</xsl:when>
+
+				<xsl:otherwise>
+					<xsl:value-of select="$path"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</a>
+	</xsl:template>
+
 	<xsl:template match="path">
 		<xsl:param name="prefix" select="false()"/>
 
@@ -26,6 +47,8 @@
 
 				<xsl:variable name="action">
 					<xsl:choose>
+<!-- TODO: distinguish copy from move? -->
+<!-- TODO: if several copies were made, show the origional being deleted -->
 						<xsl:when test="@action = 'A'">
 							<xsl:value-of select="'R'"/>
 						</xsl:when>
@@ -35,34 +58,20 @@
 					</xsl:choose>
 				</xsl:variable>
 
-				<a class="svn-{$action} svn-{@kind}" href="#TODO">
-					<xsl:choose>
-						<xsl:when test="$prefix and starts-with(@copyfrom-path, $prefix)">
-							<xsl:value-of select="substring(@copyfrom-path,
-								string-length($prefix) + 1,
-								string-length(@copyfrom-path))"/>
-						</xsl:when>
-
-						<xsl:otherwise>
-							<xsl:value-of select="@copyfrom-path"/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</a>
+				<xsl:call-template name="svn:pathlink">
+					<xsl:with-param name="prefix" select="$prefix"/>
+					<xsl:with-param name="path"   select="@copyfrom-path"/>
+					<xsl:with-param name="action" select="$action"/>
+					<xsl:with-param name="kind"   select="@kind"/>
+				</xsl:call-template>
 			</xsl:if>
 
-			<a class="svn-{@action} svn-{@kind}" href="#TODO">
-				<xsl:choose>
-					<xsl:when test="$prefix">
-						<xsl:value-of select="substring(.,
-							string-length($prefix) + 1,
-							string-length(.))"/>
-					</xsl:when>
-
-					<xsl:otherwise>
-						<xsl:value-of select="."/>
-					</xsl:otherwise>
-				</xsl:choose>
-			</a>
+			<xsl:call-template name="svn:pathlink">
+				<xsl:with-param name="prefix" select="$prefix"/>
+				<xsl:with-param name="path"   select="."/>
+				<xsl:with-param name="action" select="@action"/>
+				<xsl:with-param name="kind"   select="@kind"/>
+			</xsl:call-template>
 		</li>
 	</xsl:template>
 
