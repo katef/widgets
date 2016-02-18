@@ -93,7 +93,8 @@
 			<dd>
 				<ul class="paths">
 					<xsl:apply-templates select="$paths[starts-with(., $prefix)]">
-						<xsl:sort select="concat(@action, .)"/>
+						<xsl:sort select="@action"/>
+						<xsl:sort select="."/>
 
 						<xsl:with-param name="prefix" select="$prefix"/>
 					</xsl:apply-templates>
