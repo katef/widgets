@@ -4,12 +4,13 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:tl="http://xml.elide.org/timeline"
 	xmlns:str="http://exslt.org/strings"
+	xmlns:set="http://exslt.org/sets"
 	xmlns:date="http://exslt.org/dates-and-times"
 	xmlns:svn="http://xml.elide.org/svn"
 	xmlns:common="http://exslt.org/common"
 	xmlns="http://www.w3.org/1999/xhtml"
 
-	extension-element-prefixes="str date common">
+	extension-element-prefixes="str set date common">
 
 	<xsl:output indent="yes"/>
 
@@ -120,7 +121,6 @@
 		<!--
 			Here we only want to construct prefixes which are directories,
 			which we do by only selecting tokens which have a preceding sibling.
-TODO: could possibly use @kind instead?
 		-->
 		<xsl:variable name="all-prefixes">
 			<xsl:for-each select="path">
@@ -139,15 +139,11 @@ TODO: could possibly use @kind instead?
 		</xsl:variable>
 
 		<xsl:variable name="uniq-prefixes">
-			<xsl:for-each select="common:node-set($all-prefixes)/svn:prefix
-				[not(preceding-sibling::svn:prefix = .)]">
-
+			<xsl:for-each select="set:distinct(common:node-set($all-prefixes)/svn:prefix)">
 				<xsl:sort select="string-length(.)"
 					data-type="number" order="descending"/>
 
-				<svn:prefix>
-					<xsl:value-of select="."/>
-				</svn:prefix>
+				<xsl:copy-of select="."/>
 			</xsl:for-each>
 		</xsl:variable>
 
