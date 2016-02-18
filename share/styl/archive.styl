@@ -1,11 +1,23 @@
 
-ol.archive {
-	li {
-		list-style-type: none;
+section.archive-year[data-count = "0"] {
+	display: none;
+}
+
+dl.archive {
+	dt {
+		float: left;
+		margin-right: 1em;
+
+		font-feature-settings: "onum" 1;
+		font-feature-settings: "tnum" 1;
 	}
 
-	li time {
-		margin-right: 1em;
+	dd {
+		margin-top: 0;
+	}
+
+	dd, & {
+		margin-bottom: 1ex;
 	}
 }
 
