@@ -297,7 +297,6 @@
 		</xsl:choose>
 	</xsl:template>
 
-
 	<xsl:template match="tl:entry/h:html/h:head/h:title">
 		<xsl:apply-templates select="node()|@*" mode="copy"/>
 	</xsl:template>
@@ -332,56 +331,69 @@
 	<xsl:template match="tl:entry[not(tl:private(.))]">
 		<xsl:variable name="date" select="tl:pubdate(.)"/>
 
-		<article class="entry {@class}">
-			<h1 id="{date:format-date($date, 'yyyy-MM-dd')}">
-				<a>
-					<xsl:call-template name="tl:href">
-						<xsl:with-param name="date"  select="$date"/>
-						<xsl:with-param name="short" select="@short"/>
-					</xsl:call-template>
-
-					<xsl:apply-templates select="h:html/h:head/h:title"/>
-				</a>
-			</h1>
-
-			<time pubdate="{tl:pubdate(.)}">
-				<xsl:value-of select="date:format-date($date, &quot;yyyy&#x2060;&#x2012;&#x2060;MM&#x2060;&#x2012;&#x2060;dd&quot;)"/>
-			</time>
-
-<!-- TODO: what matches this? -->
-			<xsl:apply-templates select="h:html/h:head/h:meta[@name = 'tags']"/>
-
-			<div class="body">
-				<xsl:apply-templates select="h:html"/>
-			</div>
-
+		<dt>
 			<xsl:choose>
-				<xsl:when test="str:tokenize(@class)[. = 'padding']">
-					<!-- no need to permit comments -->
+				<xsl:when test="str:tokenize(@class)[. = 'changelog']">
+					<xsl:apply-templates select="h:html/h:head/h:title"/>
 				</xsl:when>
-
-				<xsl:when test="$tl-short">
-					<xsl:apply-templates select="tl:comments" mode="details"/>
-
-					<!-- placeholder for javascript to modify -->
-					<aside id="ph:preview"/>
-
-					<xsl:call-template name="comment-form">
-						<!-- XXX: postpath blog-specific; move this to blog.xsl -->
-						<xsl:with-param name="postpath"
-							select="translate($tl-date, '-', '/')"/>
-						<xsl:with-param name="date"
-							select="$tl-date"/>
-						<xsl:with-param name="short"
-							select="$tl-short"/>
-					</xsl:call-template>
-				</xsl:when>
-
 				<xsl:otherwise>
-					<xsl:apply-templates select="tl:comments" mode="summary"/>
+					<time pubdate="{tl:pubdate(.)}">
+						<xsl:value-of select="date:format-date($date, &quot;yyyy&#x2060;&#x2012;&#x2060;MM&#x2060;&#x2012;&#x2060;dd&quot;)"/>
+					</time>
 				</xsl:otherwise>
 			</xsl:choose>
-		</article>
+		</dt>
+
+		<dd>
+			<article class="entry {@class}">
+				<xsl:if test="not(str:tokenize(@class)[. = 'changelog'])">
+					<h1 id="{date:format-date($date, 'yyyy-MM-dd')}">
+						<a>
+							<xsl:call-template name="tl:href">
+								<xsl:with-param name="date"  select="$date"/>
+								<xsl:with-param name="short" select="@short"/>
+							</xsl:call-template>
+
+							<xsl:apply-templates select="h:html/h:head/h:title"/>
+						</a>
+					</h1>
+				</xsl:if>
+
+<!-- TODO: what matches this? -->
+				<xsl:apply-templates select="h:html/h:head/h:meta[@name = 'tags']"/>
+
+				<div class="body">
+					<xsl:apply-templates select="h:html"/>
+				</div>
+
+				<xsl:choose>
+					<xsl:when test="str:tokenize(@class)[. = 'padding']">
+						<!-- no need to permit comments -->
+					</xsl:when>
+
+					<xsl:when test="$tl-short">
+						<xsl:apply-templates select="tl:comments" mode="details"/>
+
+						<!-- placeholder for javascript to modify -->
+						<aside id="ph:preview"/>
+
+						<xsl:call-template name="comment-form">
+							<!-- XXX: postpath blog-specific; move this to blog.xsl -->
+							<xsl:with-param name="postpath"
+								select="translate($tl-date, '-', '/')"/>
+							<xsl:with-param name="date"
+								select="$tl-date"/>
+							<xsl:with-param name="short"
+								select="$tl-short"/>
+						</xsl:call-template>
+					</xsl:when>
+
+					<xsl:otherwise>
+						<xsl:apply-templates select="tl:comments" mode="summary"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</article>
+		</dd>
 	</xsl:template>
 
 	<xsl:template name="tl:year-view">
@@ -420,17 +432,18 @@
 			</h1>
 
 			<xsl:if test="$count &gt; 0">
-				<ol class="archive">
+				<dl class="archive">
 					<xsl:for-each select="tl:entry
 						[date:year(tl:pubdate(.)) = $year]">
-	
-						<li>
-							<xsl:variable name="date" select="date:format-date(tl:pubdate(.), 'yyyy-MM-dd')"/>
+						<xsl:variable name="date" select="date:format-date(tl:pubdate(.), 'yyyy-MM-dd')"/>
 
+						<dt>
 							<time pubdate="{tl:pubdate(.)}">
 								<xsl:value-of select="$date"/>
 							</time>
-	
+						</dt>
+
+						<dd>
 							<a>
 								<xsl:call-template name="tl:href">
 									<xsl:with-param name="date"  select="$date"/>
@@ -439,9 +452,9 @@
 
 								<xsl:copy-of select="tl:entrytitle(.)"/>
 							</a>
-						</li>
+						</dd>
 					</xsl:for-each>
-				</ol>
+				</dl>
 			</xsl:if>
 		</section>
 
@@ -735,7 +748,9 @@
 			</xsl:when>
 
 			<xsl:otherwise>
-				<xsl:copy-of select="$r"/>
+				<dl class="entries">
+					<xsl:copy-of select="$r"/>
+				</dl>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
