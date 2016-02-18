@@ -13,11 +13,44 @@
 
 	<xsl:output indent="yes"/>
 
+	<xsl:template match="path[../path[@copyfrom-path = current()]]"/>
+
 	<xsl:template match="path">
 		<xsl:param name="prefix" select="false()"/>
 
-		<li class="svn-{@action} svn-{@kind}">
-			<a href="#TODO">
+		<li>
+			<xsl:if test="@copyfrom-path">
+				<xsl:attribute name="class">
+					<xsl:text>copy</xsl:text>
+				</xsl:attribute>
+
+				<xsl:variable name="action">
+					<xsl:choose>
+						<xsl:when test="@action = 'A'">
+							<xsl:value-of select="'R'"/>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:value-of select="@action"/> <!-- destination -->
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:variable>
+
+				<a class="svn-{$action} svn-{@kind}" href="#TODO">
+					<xsl:choose>
+						<xsl:when test="$prefix and starts-with(@copyfrom-path, $prefix)">
+							<xsl:value-of select="substring(@copyfrom-path,
+								string-length($prefix) + 1,
+								string-length(@copyfrom-path))"/>
+						</xsl:when>
+
+						<xsl:otherwise>
+							<xsl:value-of select="@copyfrom-path"/>
+						</xsl:otherwise>
+					</xsl:choose>
+				</a>
+			</xsl:if>
+
+			<a class="svn-{@action} svn-{@kind}" href="#TODO">
 				<xsl:choose>
 					<xsl:when test="$prefix">
 						<xsl:value-of select="substring(.,
