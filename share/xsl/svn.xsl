@@ -118,8 +118,6 @@
 		<!-- TODO: consider javascript expandy-out fold-down accordion thingy,
 			and only show the first 20 paths -->
 
-		<xsl:variable name="paths" select="path"/>
-
 		<!--
 			Here we only want to construct prefixes which are directories,
 			which we do by only selecting tokens which have a preceding sibling.
