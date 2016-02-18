@@ -297,6 +297,10 @@
 		</xsl:choose>
 	</xsl:template>
 
+	<xsl:template match="tl:entry/h:html/h:head/h:title" mode="entry">
+		<xsl:apply-templates select="node()|@*" mode="copy"/>
+	</xsl:template>
+
 	<xsl:template match="tl:entry/h:html/h:head/h:title">
 		<xsl:apply-templates select="node()|@*" mode="copy"/>
 	</xsl:template>
@@ -334,7 +338,7 @@
 		<dt>
 			<xsl:choose>
 				<xsl:when test="str:tokenize(@class)[. = 'changelog']">
-					<xsl:apply-templates select="h:html/h:head/h:title"/>
+					<xsl:apply-templates select="h:html/h:head/h:title" mode="entry"/>
 				</xsl:when>
 				<xsl:otherwise>
 					<time pubdate="{tl:pubdate(.)}">
@@ -354,7 +358,7 @@
 								<xsl:with-param name="short" select="@short"/>
 							</xsl:call-template>
 
-							<xsl:apply-templates select="h:html/h:head/h:title"/>
+							<xsl:apply-templates select="h:html/h:head/h:title" mode="entry"/>
 						</a>
 					</h1>
 				</xsl:if>
@@ -410,6 +414,14 @@
 		</xsl:if>
 	</xsl:template>
 
+	<xsl:template name="tl:archive-date">
+		<xsl:param name="date"/>
+
+		<time pubdate="{tl:pubdate(.)}">
+			<xsl:value-of select="$date"/>
+		</time>
+	</xsl:template>
+
 	<xsl:template name="tl:archive-view">
 		<xsl:param name="min"  select="tl:pubdate(tl:entry)[1]"/>
 		<xsl:param name="max"  select="tl:pubdate(tl:entry)[last()]"/>
@@ -438,9 +450,9 @@
 						<xsl:variable name="date" select="date:format-date(tl:pubdate(.), 'yyyy-MM-dd')"/>
 
 						<dt>
-							<time pubdate="{tl:pubdate(.)}">
-								<xsl:value-of select="$date"/>
-							</time>
+							<xsl:call-template name="tl:archive-date">
+								<xsl:with-param name="date" select="$date"/>
+							</xsl:call-template>
 						</dt>
 
 						<dd>
