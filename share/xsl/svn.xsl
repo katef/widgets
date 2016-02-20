@@ -145,26 +145,10 @@
 				<xsl:variable name="prefix" select="."/>
 				<xsl:variable name="done"   select="preceding-sibling::svn:prefix"/>
 
-<!-- TODO: rephrase as loop for now -->
-<!--
-				<xsl:variable name="pending" select="$paths
-					[starts-with(., $prefix)]
-					[not($done and starts-with(., $done))]"/>
--->
 				<xsl:variable name="pending">
 					<xsl:for-each select="$paths[starts-with(., $prefix)]">
-						<xsl:variable name="thispath" select="."/>
-
-						<xsl:variable name="donepath">
-							<xsl:for-each select="$done">
-								<xsl:if test="starts-with($thispath, .)">
-									<xsl:copy-of select="$thispath"/>
-								</xsl:if>
-							</xsl:for-each>
-						</xsl:variable>
-
-						<xsl:if test="count(common:node-set($donepath)/path) = 0">
-							<xsl:copy-of select="$thispath"/>
+						<xsl:if test="not($done[starts-with(current(), .)])">
+							<xsl:copy-of select="."/>
 						</xsl:if>
 					</xsl:for-each>
 				</xsl:variable>
