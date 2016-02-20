@@ -98,6 +98,28 @@
 		</dd>
 	</xsl:template>
 
+	<xsl:template match="svn:prefix">
+		<xsl:param name="paths"/>
+
+		<xsl:variable name="prefix" select="."/>
+		<xsl:variable name="done"   select="preceding-sibling::svn:prefix"/>
+
+		<xsl:variable name="pending">
+			<xsl:for-each select="$paths[starts-with(., $prefix)]">
+				<xsl:if test="not($done[starts-with(current(), .)])">
+					<xsl:copy-of select="."/>
+				</xsl:if>
+			</xsl:for-each>
+		</xsl:variable>
+
+		<xsl:if test="count(common:node-set($pending)/path) &gt; 0">
+			<xsl:call-template name="prefix">
+				<xsl:with-param name="prefix" select="$prefix"/>
+				<xsl:with-param name="paths"  select="common:node-set($pending)/path"/>
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+
 	<xsl:template match="paths">
 		<!-- TODO: consider javascript expandy-out fold-down accordion thingy,
 			and only show the first 20 paths -->
@@ -140,28 +162,9 @@
 		</xsl:variable>
 
 		<dl class="paths">
-			<xsl:variable name="paths" select="path"/>
-
-			<!-- TODO: could apply as template, instead of for-each -->
-			<xsl:for-each select="common:node-set($uniq-prefixes)/svn:prefix">
-				<xsl:variable name="prefix" select="."/>
-				<xsl:variable name="done"   select="preceding-sibling::svn:prefix"/>
-
-				<xsl:variable name="pending">
-					<xsl:for-each select="$paths[starts-with(., $prefix)]">
-						<xsl:if test="not($done[starts-with(current(), .)])">
-							<xsl:copy-of select="."/>
-						</xsl:if>
-					</xsl:for-each>
-				</xsl:variable>
-
-				<xsl:if test="count(common:node-set($pending)/path) &gt; 0">
-					<xsl:call-template name="prefix">
-						<xsl:with-param name="prefix" select="$prefix"/>
-						<xsl:with-param name="paths"  select="common:node-set($pending)/path"/>
-					</xsl:call-template>
-				</xsl:if>
-			</xsl:for-each>
+			<xsl:apply-templates select="common:node-set($uniq-prefixes)/svn:prefix">
+				<xsl:with-param name="paths" select="path"/>
+			</xsl:apply-templates>
 		</dl>
 	</xsl:template>
 
