@@ -77,41 +77,25 @@
 	</xsl:template>
 
 	<xsl:template name="prefix">
-		<xsl:param name="prefixes"/>
+		<xsl:param name="prefix"/>
 		<xsl:param name="paths"/>
 
-		<xsl:variable name="prefix">
-			<xsl:value-of select="common:node-set($prefixes)[1]"/>
-		</xsl:variable>
+		<dt>
+			<a href="#TODO/{$prefix}">
+				<xsl:value-of select="$prefix"/>
+			</a>
+		</dt>
 
-		<xsl:if test="$paths[starts-with(., $prefix)]">
-			<dt>
-				<a href="#TODO/{$prefix}">
-					<xsl:value-of select="$prefix"/>
-				</a>
-			</dt>
+		<dd>
+			<ul class="paths">
+				<xsl:apply-templates select="$paths">
+					<xsl:sort select="@action"/>
+					<xsl:sort select="."/>
 
-			<dd>
-				<ul class="paths">
-					<xsl:apply-templates select="$paths[starts-with(., $prefix)]">
-						<xsl:sort select="@action"/>
-						<xsl:sort select="."/>
-
-						<xsl:with-param name="prefix" select="$prefix"/>
-					</xsl:apply-templates>
-				</ul>
-			</dd>
-		</xsl:if>
-
-		<xsl:if test="$paths[not(starts-with(., $prefix))]">
-			<xsl:call-template name="prefix">
-				<xsl:with-param name="paths"
-					select="$paths[not(starts-with(., $prefix))]"/>
-				<xsl:with-param name="prefixes"
-					select="common:node-set($prefixes)
-						[position() &gt; 1]"/>
-			</xsl:call-template>
-		</xsl:if>
+					<xsl:with-param name="prefix" select="$prefix"/>
+				</xsl:apply-templates>
+			</ul>
+		</dd>
 	</xsl:template>
 
 	<xsl:template match="paths">
@@ -126,7 +110,6 @@
 			<xsl:for-each select="path">
 				<xsl:for-each select="str:tokenize(., '/')
 					[position() &lt; 5]">
-					[following-sibling::token]">
 					<svn:prefix>
 						<xsl:text>/</xsl:text>
 						<xsl:for-each select="preceding-sibling::token">
@@ -138,22 +121,61 @@
 			</xsl:for-each>
 		</xsl:variable>
 
+<!-- XXX: leaky
+	the copy-of is a workaround here; the sibling axis would select svn:prefix nodes in their non-unique context, rather than within the distinct set.
+	I am unsure if that is a bug in libxslt's implementation of set:distinct(), or if EXSLT's specification does intend for its result tree fragment
+	to contain nodes which carry their orginal contexts.
+	In any case, taking a copy gives the effect I want for siblings.
+	Likewise sorting is done here for the sake of selecting sibling order.
+-->
 		<xsl:variable name="uniq-prefixes">
 			<xsl:for-each select="set:distinct(common:node-set($all-prefixes)/svn:prefix)">
 				<xsl:sort select="string-length(.)"
 					data-type="number" order="descending"/>
-
 				<xsl:copy-of select="."/>
 			</xsl:for-each>
 		</xsl:variable>
 
 		<dl class="paths">
-			<xsl:call-template name="prefix">
-				<xsl:with-param name="prefixes"
-					select="common:node-set($uniq-prefixes)/svn:prefix"/>
-				<xsl:with-param name="paths"
-					select="path"/>
-			</xsl:call-template>
+			<xsl:variable name="paths" select="path"/>
+
+			<!-- TODO: could apply as template, instead of for-each -->
+			<xsl:for-each select="common:node-set($uniq-prefixes)/svn:prefix">
+
+				<xsl:variable name="prefix" select="."/>
+				<xsl:variable name="done"   select="preceding-sibling::svn:prefix"/>
+
+<!-- TODO: rephrase as loop for now -->
+<!--
+				<xsl:variable name="pending" select="$paths
+					[starts-with(., $prefix)]
+					[not($done and starts-with(., $done))]"/>
+-->
+				<xsl:variable name="pending">
+					<xsl:for-each select="$paths[starts-with(., $prefix)]">
+						<xsl:variable name="thispath" select="."/>
+
+						<xsl:variable name="donepath">
+							<xsl:for-each select="$done">
+								<xsl:if test="starts-with($thispath, .)">
+									<xsl:copy-of select="$thispath"/>
+								</xsl:if>
+							</xsl:for-each>
+						</xsl:variable>
+
+						<xsl:if test="count(common:node-set($donepath)/path) = 0">
+							<xsl:copy-of select="$thispath"/>
+						</xsl:if>
+					</xsl:for-each>
+				</xsl:variable>
+
+				<xsl:if test="count(common:node-set($pending)/path) &gt; 0">
+					<xsl:call-template name="prefix">
+						<xsl:with-param name="prefix" select="$prefix"/>
+						<xsl:with-param name="paths"  select="common:node-set($pending)/path"/>
+					</xsl:call-template>
+				</xsl:if>
+			</xsl:for-each>
 		</dl>
 	</xsl:template>
 
