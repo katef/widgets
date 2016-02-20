@@ -121,13 +121,16 @@
 			</xsl:for-each>
 		</xsl:variable>
 
-<!-- XXX: leaky
-	the copy-of is a workaround here; the sibling axis would select svn:prefix nodes in their non-unique context, rather than within the distinct set.
-	I am unsure if that is a bug in libxslt's implementation of set:distinct(), or if EXSLT's specification does intend for its result tree fragment
-	to contain nodes which carry their orginal contexts.
-	In any case, taking a copy gives the effect I want for siblings.
-	Likewise sorting is done here for the sake of selecting sibling order.
--->
+		<!-- XXX: leaky
+			The copy-of is a workaround here; the sibling axis would
+			select svn:prefix nodes in their non-unique context,
+			rather than within the distinct set.
+			I am unsure if that is a bug in libxslt's implementation of set:distinct(),
+			or if EXSLT's specification does intend for its result tree fragment
+			to contain nodes which carry their orginal contexts.
+			In any case, taking a copy gives the effect I want for siblings.
+			Likewise sorting is done here for the sake of selecting sibling order.
+		-->
 		<xsl:variable name="uniq-prefixes">
 			<xsl:for-each select="set:distinct(common:node-set($all-prefixes)/svn:prefix)">
 				<xsl:sort select="string-length(.)"
@@ -141,7 +144,6 @@
 
 			<!-- TODO: could apply as template, instead of for-each -->
 			<xsl:for-each select="common:node-set($uniq-prefixes)/svn:prefix">
-
 				<xsl:variable name="prefix" select="."/>
 				<xsl:variable name="done"   select="preceding-sibling::svn:prefix"/>
 
