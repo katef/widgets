@@ -52,11 +52,11 @@ logbox($action, $hover = true) {
 
 	&:before {
 		logicon($action, lighten(c, 60%));
+	}
 
-		if ($hover) {
-			&:hover {
-				logicon($action, lighten(desaturate(c, 20%), 20%));
-			}
+	if ($hover) {
+		&:hover:before {
+			logicon($action, lighten(desaturate(c, 20%), 20%));
 		}
 	}
 }
