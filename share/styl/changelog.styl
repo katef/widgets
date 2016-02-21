@@ -1,7 +1,7 @@
 /* $Id$ */
 
 // TODO: centralise
-logbox($action) {
+logbox($action, $hover = true) {
 	$colors = {
 		M: #ff0,
 		A: #0f0,
@@ -28,13 +28,100 @@ logbox($action) {
 		border-color:     darken(desaturate(@background-color, 20%), 25%);
 	}
 
-	&:hover:before {
-		background-color: lighten(desaturate(c, 20%), 20%);
-		border-color:     darken(desaturate(@background-color, 20%), 25%);
+	if ($hover ) {
+		&:hover:before {
+			background-color: lighten(desaturate(c, 20%), 20%);
+			border-color:     darken(desaturate(@background-color, 20%), 25%);
+		}
 	}
 }
 
 .changelog {
+
+	dl.summary.expandable {
+		dt span.filler {
+			display: inline;
+			margin-left: 1ex;
+		}
+
+		dt a:hover {
+			text-decoration: none;
+		}
+
+		&.collapsed > dt,
+		&.expanding > dt,
+		&.expanded  > dt {
+			margin-top: 0;
+			padding: 0;
+
+			a {
+				cursor: pointer;
+				padding: 0;
+				display: block;
+			}
+
+			// TODO: use hang() for this
+			&:before {
+				margin-left: -2em;
+				display: block;
+				height: 0;
+				text-align: right;
+				width: 1.5em;
+			}
+		}
+
+		// TODO: centralise with expander widget thingy
+		// that should have the same arrow symbols as for dl/dt expander
+		&.collapsed > dt:before { content: "\21D2"; }
+		&.expanding > dt:before { content: "\21D8"; }
+		&.expanded  > dt:before { content: "\21D3"; }
+
+		&.expanding > dd {
+//			height: 1.5em;
+//			overflow: hidden;
+		}
+
+		&.collapsed > dd {
+			height: 0em;
+			overflow: hidden;
+		}
+
+		& > dt {
+			ul.summary {
+				margin: 0;
+
+				li {
+					display: inline-block;
+					margin-left: 1em;
+
+					&:first-child {
+						margin-left: 0;
+					}
+
+					text-transform: lowercase;
+					font-feature-settings: "lnum" 0;
+					font-feature-settings: "onum" 1;
+				}
+
+				li.svn-M {
+					logbox('M', false);
+				}
+				li.svn-A {
+					logbox('A', false);
+				}
+				li.svn-D {
+					logbox('D', false);
+				}
+				li.svn-R {
+					logbox('R', false);
+				}
+			}
+		}
+
+		& > dd {
+			margin-left: 0;
+		}
+	}
 
 	dl.paths {
 		font-size: 90%;
@@ -93,16 +180,16 @@ logbox($action) {
 
 	ul.paths li a {
 		&.svn-M:first-child {
-			logbox('M')
+			logbox('M', true);
 		}
 		&.svn-A:first-child {
-			logbox('A')
+			logbox('A', true);
 		}
 		&.svn-D:first-child {
-			logbox('D')
+			logbox('D', true);
 		}
 		&.svn-R:first-child {
-			logbox('R')
+			logbox('R', true);
 		}
 	}
 
