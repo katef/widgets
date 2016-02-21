@@ -34,6 +34,10 @@
 					<xsl:value-of select="$path"/>
 				</xsl:otherwise>
 			</xsl:choose>
+
+			<xsl:if test="$kind = 'dir'">
+				<xsl:text>/</xsl:text>
+			</xsl:if>
 		</a>
 	</xsl:template>
 
