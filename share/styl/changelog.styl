@@ -119,7 +119,7 @@ logbox($action, $hover = true) {
 		}
 
 		& > dd {
-			margin-left: 0;
+			margin: 0;
 		}
 	}
 
@@ -132,13 +132,15 @@ logbox($action, $hover = true) {
 		}
 
 		dd {
-			margin-left: 0;
+			margin: 0;
+			margin-bottom: 1ex;
 		}
 	}
 
 	ul.paths {
 		list-style-type: none;
-		padding-left: 1em;
+		padding-left: 1.5em; // TODO: take from list gutter
+		margin: 0;
 
 		li {
 			margin: 0;
