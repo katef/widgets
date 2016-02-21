@@ -9,7 +9,7 @@ logbox($action, $hover = true) {
 		R: #000
 	}
 
-	c = lighten($colors[$action], 60%);
+	c = lighten($colors[$action], 40%);
 
 	&:before {
 		line-height: inherit;
@@ -25,13 +25,13 @@ logbox($action, $hover = true) {
 
 	&:before {
 		background-color: lighten(c, 60%);
-		border-color:     darken(desaturate(@background-color, 20%), 25%);
+		border-color:     darken(desaturate(@background-color, 20%), 20%);
 	}
 
 	if ($hover ) {
 		&:hover:before {
 			background-color: lighten(desaturate(c, 20%), 20%);
-			border-color:     darken(desaturate(@background-color, 20%), 25%);
+			border-color:     darken(desaturate(@background-color, 20%), 20%);
 		}
 	}
 }
