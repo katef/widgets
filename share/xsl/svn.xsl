@@ -84,11 +84,13 @@
 		<xsl:param name="prefix"/>
 		<xsl:param name="paths"/>
 
-		<dt>
-			<a href="#TODO/{$prefix}">
-				<xsl:value-of select="$prefix"/>
-			</a>
-		</dt>
+		<xsl:if test="$prefix">
+			<dt>
+				<a href="#TODO/{$prefix}">
+					<xsl:value-of select="$prefix"/>
+				</a>
+			</dt>
+		</xsl:if>
 
 		<dd>
 			<ul class="paths">
@@ -212,9 +214,22 @@
 
 			<dd>
 				<dl class="paths">
-					<xsl:apply-templates select="common:node-set($uniq-prefixes)/svn:prefix">
-						<xsl:with-param name="paths" select="path"/>
-					</xsl:apply-templates>
+					<xsl:variable name="count" select="count(path)"/>
+
+					<xsl:choose>
+						<xsl:when test="$count = 1">
+							<xsl:call-template name="prefix">
+								<xsl:with-param name="prefix" select="''"/>
+								<xsl:with-param name="paths"  select="path"/>
+							</xsl:call-template>
+						</xsl:when>
+
+						<xsl:when test="$count &gt; 1">
+							<xsl:apply-templates select="common:node-set($uniq-prefixes)/svn:prefix">
+								<xsl:with-param name="paths" select="path"/>
+							</xsl:apply-templates>
+						</xsl:when>
+					</xsl:choose>
 				</dl>
 			</dd>
 		</dl>
