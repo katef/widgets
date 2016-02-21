@@ -15,13 +15,17 @@ logicon($action, $color) {
 	background-color: $color;
 	border-color:     darken(desaturate(@background-color, 20%), 20%);
 
+	// using rgb() for colours is just to avoid needing urlencoding,
+	// which apparently can't be done with Stylus currently.
+	c = darken(@border-color, 20%);
+
 	$svg = s(                                        \
 	  "<svg xmlns='%s' height='100%' width='100%'"   \
-	+ "     style='stroke-width: 1px; stroke: %s;'>" \
+	+ "     style='stroke-width: 1px; stroke: rgb(%s, %s, %s);'>" \
 	+ " %s"                                          \
 	+ "</svg>",                                      \
 		unquote('http://www.w3.org/2000/svg'),       \
-		darken(@border-color, 20%),                  \
+		red(c), green(c), blue(c),                   \
 		unquote($lines[$action]));
 	background-image: data-uri($svg);
 }
