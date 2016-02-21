@@ -177,27 +177,28 @@
 		<dl class="summary expandable collapsed">
 			<dt>
 				<xsl:variable name="added"    select="count(path[@action = 'A'][not(@copyfrom-path)])"/>
-				<xsl:variable name="modified" select="count(path[@action = 'M'])"/>
 				<xsl:variable name="deleted"  select="count(path[@action = 'D']) - count(path[@action = 'A'][@copyfrom-path = ../path[@action = 'D']])"/>
+				<xsl:variable name="modified" select="count(path[@action = 'M'])"/>
 				<xsl:variable name="moved"    select="count(path[@action = 'A'][@copyfrom-path])"/>
 
 				<ul class="summary">
+					<!-- ordered to match path sorting by @action -->
 					<xsl:if test="$added">
 						<li class="svn-A">
 							<xsl:value-of select="$added"/>
 							<xsl:text>&#xA0;Added</xsl:text>
 						</li>
 					</xsl:if>
-					<xsl:if test="$modified">
-						<li class="svn-M">
-							<xsl:value-of select="$modified"/>
-							<xsl:text>&#xA0;Modified</xsl:text>
-						</li>
-					</xsl:if>
 					<xsl:if test="$deleted">
 						<li class="svn-D">
 							<xsl:value-of select="$deleted"/>
 							<xsl:text>&#xA0;Deleted</xsl:text>
+						</li>
+					</xsl:if>
+					<xsl:if test="$modified">
+						<li class="svn-M">
+							<xsl:value-of select="$modified"/>
+							<xsl:text>&#xA0;Modified</xsl:text>
 						</li>
 					</xsl:if>
 					<xsl:if test="$moved">
