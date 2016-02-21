@@ -9,6 +9,16 @@ logbox($action, $hover = true) {
 		R: #000
 	}
 
+	// These are an attempt to be kinder to colourblind people
+	$lines = {
+		A: "<line x1='50%'  y1='20%' x2='50%'  y2='80%' />" \
+		 + "<line x1='25%'  y1='50%' x2='80%'  y2='50%' />",
+		D: "<line x1='0'    y1='0'   x2='100%' y2='100%'/>" \
+		 + "<line x1='100%' y1='0'   x2='0'    y2='100%'/>",
+		M: "",
+		R: "<line x1='50%' y1='20%'  x2='50%'  y2='80%' />"
+	}
+
 	c = lighten($colors[$action], 40%);
 
 	&:before {
@@ -21,17 +31,38 @@ logbox($action, $hover = true) {
 		border: solid 1px transparent;
 		margin-right:   0.5em;
 		margin-bottom: -0.25ex; // centre within the line
+
 	}
 
 	&:before {
 		background-color: lighten(c, 60%);
 		border-color:     darken(desaturate(@background-color, 20%), 20%);
+
+		$svg = s(                                        \
+		  "<svg xmlns='%s' height='100%' width='100%'"   \
+		+ "     style='stroke-width: 1px; stroke: %s;'>" \
+		+ " %s"                                          \
+		+ "</svg>",                                      \
+			unquote('http://www.w3.org/2000/svg'),       \
+			@border-color,                               \
+			unquote($lines[$action]));
+		background-image: data-uri($svg);
 	}
 
 	if ($hover ) {
 		&:hover:before {
 			background-color: lighten(desaturate(c, 20%), 20%);
 			border-color:     darken(desaturate(@background-color, 20%), 20%);
+
+			$svg = s(                                        \
+			  "<svg xmlns='%s' height='100%' width='100%'"   \
+			+ "     style='stroke-width: 1px; stroke: %s;'>" \
+			+ " %s"                                          \
+			+ "</svg>",                                      \
+				unquote('http://www.w3.org/2000/svg'),       \
+				@border-color,                               \
+				unquote($lines[$action]));
+			background-image: data-uri($svg);
 		}
 	}
 }
