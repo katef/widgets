@@ -1,5 +1,39 @@
 /* $Id$ */
 
+// TODO: centralise
+logbox($action) {
+	$colors = {
+		M: #ff0,
+		A: #0f0,
+		D: #f00,
+		R: #000
+	}
+
+	c = lighten($colors[$action], 60%);
+
+	&:before {
+		line-height: inherit;
+
+		content: " ";
+		display: inline-block;
+		height: 1.5ex;
+		width:  1.5ex;
+		border: solid 1px transparent;
+		margin-right:   0.5em;
+		margin-bottom: -0.25ex; // centre within the line
+	}
+
+	&:before {
+		background-color: lighten(c, 60%);
+		border-color:     darken(desaturate(@background-color, 20%), 25%);
+	}
+
+	&:hover:before {
+		background-color: lighten(desaturate(c, 20%), 20%);
+		border-color:     darken(desaturate(@background-color, 20%), 25%);
+	}
+}
+
 .changelog {
 
 	dl.paths {
@@ -38,19 +72,8 @@
 				}
 			}
 
-			&,
-			a:before {
+			& {
 				line-height: inherit;
-			}
-
-			a:first-child:before {
-				content: " ";
-				display: inline-block;
-				height: 1.5ex;
-				width:  1.5ex;
-				border: solid 1px transparent;
-				margin-right:   0.5em;
-				margin-bottom: -0.25ex; // centre within the line
 			}
 		}
 	}
@@ -69,15 +92,18 @@
 	}
 
 	ul.paths li a {
-		&.svn-M:first-child:before { background-color: #ffd; border-color: #ee9; }
-		&.svn-A:first-child:before { background-color: #dfd; border-color: #9e9; }
-		&.svn-D:first-child:before { background-color: #fdd; border-color: #e99; }
-		&.svn-R:first-child:before { background-color: #ddd; border-color: #999; }
-
-		&.svn-M:first-child:hover:before { background-color: #ff9; border-color: #ee4; }
-		&.svn-A:first-child:hover:before { background-color: #9f9; border-color: #4e4; }
-		&.svn-D:first-child:hover:before { background-color: #f99; border-color: #e44; }
-		&.svn-R:first-child:hover:before { background-color: #999; border-color: #444; }
+		&.svn-M:first-child {
+			logbox('M')
+		}
+		&.svn-A:first-child {
+			logbox('A')
+		}
+		&.svn-D:first-child {
+			logbox('D')
+		}
+		&.svn-R:first-child {
+			logbox('R')
+		}
 	}
 
 	aside.msg {
