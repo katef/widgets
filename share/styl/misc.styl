@@ -43,7 +43,7 @@ filter($name, $n = 100%) {
 
 	if ($name == 'grayscale') {
 		$svg = s(                      \
-		( "<svg xmlns='%s'>"           \
+		  "<svg xmlns='%s'>"           \
 		+ " <filter id='%s'>"          \
 		+ "  <feColorMatrix type='%s'" \
 		+ "   values='%s %s %s 0 0 "   \
@@ -52,7 +52,7 @@ filter($name, $n = 100%) {
 		+            " 0  0  0 1 0'/>" \
 		+ " </filter>"                 \
 		+ "</svg>"                     \
-		+ "#%s"),                      \
+		+ "#%s",                       \
 			unquote('http://www.w3.org/2000/svg'), \
 			unquote($name),    \
 			unquote('matrix'), \
