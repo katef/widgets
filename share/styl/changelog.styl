@@ -21,7 +21,7 @@ logicon($action, $color) {
 	+ " %s"                                          \
 	+ "</svg>",                                      \
 		unquote('http://www.w3.org/2000/svg'),       \
-		@border-color,                               \
+		darken(@border-color, 20%),                  \
 		unquote($lines[$action]));
 	background-image: data-uri($svg);
 }
