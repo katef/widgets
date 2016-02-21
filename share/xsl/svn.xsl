@@ -127,8 +127,7 @@
 		-->
 		<xsl:variable name="all-prefixes">
 			<xsl:for-each select="path">
-				<xsl:for-each select="str:tokenize(., '/')
-					[position() &lt; 5]">
+				<xsl:for-each select="str:tokenize(., '/')">
 					<svn:prefix>
 						<xsl:text>/</xsl:text>
 						<xsl:for-each select="preceding-sibling::token">
@@ -151,10 +150,23 @@
 			Likewise sorting is done here for the sake of selecting sibling order.
 		-->
 		<xsl:variable name="uniq-prefixes">
+			<xsl:variable name="paths" select="path"/>
+
 			<xsl:for-each select="set:distinct(common:node-set($all-prefixes)/svn:prefix)">
 				<xsl:sort select="string-length(.)"
 					data-type="number" order="descending"/>
-				<xsl:copy-of select="."/>
+
+				<xsl:variable name="prefix" select="."/>
+
+				<!--
+					Here we exclude prefixes which contain files. In other words,
+					we only want prefixes which leave files at least one directory deep.
+				-->
+				<xsl:if test="not($paths[@kind = 'file']
+					[starts-with(., $prefix)]
+					[not(contains(substring-after(., $prefix), '/'))])">
+					<xsl:copy-of select="."/>
+				</xsl:if>
 			</xsl:for-each>
 		</xsl:variable>
 
