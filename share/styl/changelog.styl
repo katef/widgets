@@ -164,6 +164,19 @@ logbox($action, $hover = true) {
 			margin: 0;
 			margin-bottom: 1ex;
 		}
+
+		a {
+			display: block;
+			color: #666;
+
+			&, &:hover {
+				text-decoration: none;
+			}
+
+			&:hover {
+				color: #000;
+			}
+		}
 	}
 
 	ul.paths {
@@ -193,20 +206,6 @@ logbox($action, $hover = true) {
 			& {
 				line-height: inherit;
 			}
-		}
-	}
-
-	dl.paths a,
-	ul.paths li a {
-		display: block;
-
-		&, &:before:hover {
-			color: #666;
-			text-decoration: none;
-		}
-
-		&:hover {
-			color: #000;
 		}
 	}
 
