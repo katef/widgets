@@ -152,75 +152,36 @@ logbox($action, $hover = true) {
 		}
 	}
 
-	dl.paths {
-		font-size: 90%;
-		margin: 0;
+	ul.paths li {
+		&.copy {
+			display: table-row;
 
-		dt {
-			font-weight: normal;
-		}
+			a {
+				display: table-cell;
+			}
 
-		dd {
-			margin: 0;
-			margin-bottom: 1ex;
+			a:first-child + a:before {
+				content: " → ";
+				text-align: center;
+				display: inline-block;
+				width: 2em;
+				margin-right: 0;
+			}
 		}
 
 		a {
-			display: block;
-			color: #666;
-
-			&, &:hover {
-				text-decoration: none;
+			&.svn-M:first-child {
+				logbox('M', true);
 			}
-
-			&:hover {
-				color: #000;
+			&.svn-A:first-child {
+				logbox('A', true);
 			}
-		}
-	}
-
-	ul.paths {
-		list-style-type: none;
-		padding-left: 1.5em; // TODO: take from list gutter
-		margin: 0;
-
-		li {
-			margin: 0;
-
-			&.copy {
-				display: table-row;
-
-				a {
-					display: table-cell;
-				}
-
-				a:first-child + a:before {
-					content: " → ";
-					text-align: center;
-					display: inline-block;
-					width: 2em;
-					margin-right: 0;
-				}
+			&.svn-D:first-child {
+				logbox('D', true);
 			}
-
-			& {
-				line-height: inherit;
+			&.svn-R:first-child {
+				logbox('R', true);
 			}
-		}
-	}
-
-	ul.paths li a {
-		&.svn-M:first-child {
-			logbox('M', true);
-		}
-		&.svn-A:first-child {
-			logbox('A', true);
-		}
-		&.svn-D:first-child {
-			logbox('D', true);
-		}
-		&.svn-R:first-child {
-			logbox('R', true);
 		}
 	}
 

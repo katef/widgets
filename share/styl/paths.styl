@@ -1,0 +1,48 @@
+/* $Id$ */
+
+/*
+ * A list of file paths. These may be grouped in a containing dl,
+ * to categorise groups of paths (e.g. by directory prefix).
+ */
+
+dl.paths {
+	font-size: 90%;
+	margin: 0;
+
+	dt {
+		font-weight: normal;
+	}
+
+	dd {
+		margin: 0;
+		margin-bottom: 1ex;
+	}
+
+	a {
+		display: block;
+		color: #666;
+
+		&, &:hover {
+			text-decoration: none;
+		}
+
+		&:hover {
+			color: #000;
+		}
+	}
+}
+
+ul.paths {
+	list-style-type: none;
+	padding-left: 1.5em; // TODO: take from list gutter
+	margin: 0;
+
+	li {
+		margin: 0;
+
+		& {
+			line-height: inherit;
+		}
+	}
+}
+
