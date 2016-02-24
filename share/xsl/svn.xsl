@@ -16,6 +16,24 @@
 
 	<xsl:template match="path[../path[@copyfrom-path = current()]]"/>
 
+	<!-- TODO: centralise -->
+	<xsl:template name="prettypath">
+		<xsl:param name="path"/>
+		<xsl:param name="kind"/>
+
+		<xsl:for-each select="str:tokenize($path, '/')">
+			<xsl:if test="position() &gt; 1">
+				<xsl:text>/&#x200B;</xsl:text>
+			</xsl:if>
+
+			<xsl:value-of select="."/>
+		</xsl:for-each>
+
+		<xsl:if test="$kind = 'dir'">
+			<xsl:text>/</xsl:text>
+		</xsl:if>
+	</xsl:template>
+
 	<xsl:template name="svn:pathlink">
 		<xsl:param name="prefix"/>
 		<xsl:param name="path"/>
@@ -25,19 +43,21 @@
 		<a class="svn-{$action} svn-{$kind}" href="#TODO">
 			<xsl:choose>
 				<xsl:when test="$prefix and starts-with($path, $prefix)">
-					<xsl:value-of select="substring($path,
-						string-length($prefix) + 1,
-						string-length($path))"/>
+					<xsl:call-template name="prettypath">
+						<xsl:with-param name="path" select="substring($path,
+							string-length($prefix) + 1,
+							string-length($path))"/>
+						<xsl:with-param name="kind" select="$kind"/>
+					</xsl:call-template>
 				</xsl:when>
 
 				<xsl:otherwise>
-					<xsl:value-of select="$path"/>
+					<xsl:call-template name="prettypath">
+						<xsl:with-param name="path" select="$path"/>
+						<xsl:with-param name="kind" select="$kind"/>
+					</xsl:call-template>
 				</xsl:otherwise>
 			</xsl:choose>
-
-			<xsl:if test="$kind = 'dir'">
-				<xsl:text>/</xsl:text>
-			</xsl:if>
 		</a>
 	</xsl:template>
 
