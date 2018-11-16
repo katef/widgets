@@ -18,6 +18,11 @@
 	<!-- for HTML5 -->
 	<xsl:output method="html" media-type="text/html" omit-xml-declaration="yes" indent="yes"/>
 
+	<!-- for populating from the command line -->
+	<xsl:param name="w.css"       select="''"/>
+	<xsl:param name="w.js"        select="''"/>
+	<xsl:param name="w.onload"    select="''"/>
+
 	<!-- filenames -->
 	<xsl:param name="file-ext"    select="'xhtml5'"/>
 	<xsl:param name="file-single" select="'single'"/>
@@ -270,7 +275,7 @@
 				</xsl:if>
 
 				<!-- TODO: maybe a node set is better, after all -->
-				<xsl:for-each select="str:tokenize($css)">
+				<xsl:for-each select="str:tokenize($w.css)|str:tokenize($css)">
 					<link rel="stylesheet" type="text/css" media="all" href="{$www-css}/{.}"/>
 				</xsl:for-each>
 
@@ -290,7 +295,7 @@
 					<script src="{$www-js}/Element.details.js"></script>
 				<xsl:text disable-output-escaping="yes">&lt;!--&lt;![endif]--&gt;</xsl:text>
 
-				<xsl:for-each select="str:tokenize($js)">
+				<xsl:for-each select="str:tokenize($w.js)|str:tokenize($js)">
 					<script type="text/javascript" src="{$www-js}/{.}"></script>
 				</xsl:for-each>
 
@@ -310,7 +315,7 @@
 				<xsl:copy-of select="$head"/>
 			</head>
 
-			<body onload="var r = document.documentElement; {$onload}">
+			<body onload="var r = document.documentElement; {$w.onload} {$onload}">
 				<xsl:copy-of select="$body"/>
 			</body>
 		</html>
