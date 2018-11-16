@@ -4,7 +4,7 @@
 
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:mdb="http://xml.elide.org/minidocbook"
+	xmlns:w="http://xml.elide.org/widgets"
 	xmlns="http://www.w3.org/1999/xhtml"
 
 	xmlns:common="http://exslt.org/common"
@@ -13,7 +13,7 @@
 
 	extension-element-prefixes="common str func"
 
-	exclude-result-prefixes="mdb common str">
+	exclude-result-prefixes="common str w">
 
 	<!-- for HTML5 -->
 	<xsl:output method="html" media-type="text/html" omit-xml-declaration="yes" indent="yes"/>
@@ -36,7 +36,7 @@
 	<xsl:param name="www-toc"     select="$file-toc"/>
 	<xsl:param name="www-front"   select="$file-front"/>
 
-	<func:function name="mdb:fileext">
+	<func:function name="w:fileext">
 		<xsl:param name="filename"/>
 		<xsl:param name="ext"/>
 
