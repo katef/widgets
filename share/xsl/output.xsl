@@ -53,6 +53,22 @@
 		</func:result>
 	</func:function>
 
+	<func:function name="w:relative">
+		<xsl:param name="base"/>
+		<xsl:param name="url"/>
+
+		<func:result>
+			<xsl:choose>
+				<xsl:when test="starts-with($url, 'http://') or starts-with($url, 'https://')">
+					<xsl:value-of select="$url"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="concat($base, '/', $url)"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</func:result>
+	</func:function>
+
 	<xsl:template name="output">
 		<xsl:param name="filename"/>
 		<xsl:param name="css"       select="''"/>
@@ -276,7 +292,7 @@
 
 				<!-- TODO: maybe a node set is better, after all -->
 				<xsl:for-each select="str:tokenize($w.css)|str:tokenize($css)">
-					<link rel="stylesheet" type="text/css" media="all" href="{$www-css}/{.}"/>
+					<link rel="stylesheet" type="text/css" media="all" href="{w:relative($www-css, .)}"/>
 				</xsl:for-each>
 
 				<xsl:text disable-output-escaping="yes">&lt;!--[if IE 8]&gt;</xsl:text>
@@ -296,7 +312,7 @@
 				<xsl:text disable-output-escaping="yes">&lt;!--&lt;![endif]--&gt;</xsl:text>
 
 				<xsl:for-each select="str:tokenize($w.js)|str:tokenize($js)">
-					<script type="text/javascript" src="{$www-js}/{.}"></script>
+					<script type="text/javascript" src="{w:relative($www-js, .)}"></script>
 				</xsl:for-each>
 
 				<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
