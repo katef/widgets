@@ -1,5 +1,3 @@
-/* $Id$ */
-
 /*
  * A javascript implementation of align and valign for <col/>.
  *

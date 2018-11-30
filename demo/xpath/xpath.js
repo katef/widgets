@@ -1,5 +1,3 @@
-/* $Id$ */
-
 /*
  * An implementation of DOM3 XPath 1.0 in Javascript.
  * DOM3 XPath 1.0 (version 1.0 of the DOM3 XPath interface) uses the XPath 1.0

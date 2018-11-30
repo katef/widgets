@@ -1,4 +1,3 @@
-/* $Id$ */
 
 var EventThing = new (function () {
 

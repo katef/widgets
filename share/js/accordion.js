@@ -1,4 +1,3 @@
-/* $Id$ */
 
 var Accordion = new (function () {
 

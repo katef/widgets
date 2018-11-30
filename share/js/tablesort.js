@@ -1,5 +1,3 @@
-/* $Id$ */
-
 /*
  * Automatically-identified sortable tables.
  * See http://elide.org/widgets/sorting/ for details.
@@ -44,7 +42,6 @@
  * TODO: when operating in HTML (not XHTML), the namespace needs to change
  * TODO: support <th colspan="2"/>. possibly simply another dimension to the th's arrays
  */
-
 
 var Tablesort = new (function () {
 	/*

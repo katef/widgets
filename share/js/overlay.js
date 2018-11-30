@@ -1,4 +1,3 @@
-/* $Id$ */
 
 var Overlay = new (function () {
 

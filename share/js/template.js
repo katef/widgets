@@ -1,4 +1,3 @@
-/* $Id$ */
 
 /*
  * Apply a template against the given context, substituting out processing

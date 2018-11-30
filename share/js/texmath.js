@@ -1,4 +1,3 @@
-/* $Id$ */
 
 var TexMath = new (function () {
 

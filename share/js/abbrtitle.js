@@ -1,4 +1,3 @@
-/* $Id: abbrtitle.js 317 2012-02-22 18:12:31Z kate $ */
 
 var Abbrtitle = new (function () {
 

@@ -1,4 +1,3 @@
-/* $Id$ */
 
 var Fixup = new (function () {
 

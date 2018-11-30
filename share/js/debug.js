@@ -1,4 +1,3 @@
-/* $Id: debug.js 316 2012-02-22 18:10:48Z kate $ */
 
 document.onkeyup = function (e) {
 	var e = window.event ? event : e;

@@ -66,10 +66,6 @@
 				<table>
 					<xsl:apply-templates select="//@value"/>
 				</table>
-
-				<hr class="footer"/>
-
-				<p><code>$Id: index.xhtml 512 2010-03-23 07:59:10Z kate $</code></p>
 			</body>
 		</html>
 	</xsl:template>

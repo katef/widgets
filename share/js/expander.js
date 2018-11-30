@@ -1,4 +1,3 @@
-/* $Id$ */
 
 var Expander = new (function () {
 

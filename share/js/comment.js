@@ -1,4 +1,3 @@
-/* $Id$ */
 
 var Comment = new (function () {
 

@@ -1,5 +1,3 @@
-/* $Id$ */
-
 /* TODO:
 search document.forms (right?)
 add @onchange

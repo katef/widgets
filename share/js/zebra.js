@@ -1,5 +1,3 @@
-/* $Id$ */
-
 /*
  * A javascript implementation of zebra striping for tables.
  * Numbering is per tbody.

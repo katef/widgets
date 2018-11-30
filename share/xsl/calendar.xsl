@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 
 <!--
-	$Id: calendar.xsl 2 2010-03-23 07:55:50Z kate $
-
 	XSLT-Generated monthly calendars.
 
 	Adapted from:
